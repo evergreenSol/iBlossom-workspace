@@ -1,0 +1,139 @@
+
+/* 글씨체, 폰트 설정 (프리텐다드체) */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+* { font-family: Pretendard; }
+
+/* header div */
+#header-div-wrap{
+    width: 1200px;
+    height: 80px;
+    margin: auto;
+    position: relative;
+}
+
+/* header 일자 정렬로 만들기 위한 속성 */
+#header-div-wrap>div{
+    float: left;
+}
+
+/* 로고 div */
+#header-logo-warp {
+    width: 200px;
+    height: 100%;
+}
+
+/* 로고 */
+#header-logo {
+    width: 200px;
+    margin-top: 20px;
+}
+
+/* 검색창 div */
+#header-search {
+    width: 260px;
+    height: 100%;
+    margin-left: 60px;
+}
+
+/* 검색창 */
+.btn_text {
+    width : 230px;
+    height: 45px;
+    outline: 2px solid black;
+    background-color: white;
+    margin-top: 17px;
+}
+
+/* 검색창 호버 시 */
+.btn_text:hover {
+    background-color: white;
+    outline: 2px solid #ff2393;
+}
+
+/* 검색창 클릭 후 활성화 됐을때 */
+.btn_text:focus {
+    background-color: white;
+    outline: 2px solid #ff2393;
+}
+
+/* 검색창 검색 아이콘 */
+.btn_search{
+    font-weight : 900;
+    font-family: "Font Awesome 5 Free";
+    background-color : transparent;
+    border : none;
+    cursor : pointer;
+    right: 22px;
+    top: 32px;
+}
+
+/* 검색창 검색 아이콘, 서치하기전 기본 상태 */
+.btn_search::before{ 
+    content : "\f002";
+    color: black;
+}
+
+/* 메뉴바 div */
+#header-navi-wrap {
+    margin-left:80px;
+    width: 450px;
+    height: 100%;
+}
+
+/* 메뉴바 ul 속성 */
+#header-navi {
+    list-style-type : none;
+    margin: 0;
+    padding: 0;
+}
+
+/* 메뉴바 ul > li 속성 */
+.header-navi-menu {
+    font-size: 17px;
+    width: 100px;
+    float: left;
+    text-align : center;
+    text-decoration: none;
+    color: black;
+    margin-top: 29px;
+    margin-right: 10px;
+}
+
+/* 메뉴바 ul > li 호버 시 */
+.header-navi-menu:hover {
+    color: black;
+    font-weight: 600;
+}
+
+/* 로그인, 장바구니 아이콘 div */
+#header-login {
+    float: right;
+    width: 100px;
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    margin-top: 25px;
+}
+
+/* 로그인,장바구니 감싸는 a 태그 속성 */
+.header-login-a {
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+/* 로그인 아이콘 속성 */
+.bi-person-fill {
+    width: 27px;
+    height: 27px;
+}
+
+/* 장바구니 아이콘 속성 */
+.bi-bag {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 2.3px
+}
+
+
+
