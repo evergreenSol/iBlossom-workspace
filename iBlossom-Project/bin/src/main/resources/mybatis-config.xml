@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+	<typeAliases>
+		<!-- 예시 -->
+		<!-- 
+			<typeAlias type="com.kh.spring.member.model.vo.Member" alias="member"/>
+			<typeAlias type="com.kh.spring.board.model.vo.Board" alias="board"/>
+			<typeAlias type="com.kh.spring.board.model.vo.Reply" alias="reply"/> 	
+		 -->
+	</typeAliases>
+	<!-- 유의사항: 미리 typeAlias를 등록하길 원한다면 해당 클래스가 실제로 존재한 상태여야한다. 
+					(classNotFoundException 발생)-->	
+	
+	<mappers>
+		<!-- 예시 -->
+		<!-- 
+			<mapper resource="/mappers/member-mapper.xml"/>
+			<mapper resource="/mappers/board-mapper.xml"/>
+		 -->
+	</mappers>
+	<!-- 
+		유의사항: 미리 mapper 파일을 등록해두려면 해당 매퍼파일이 진짜 존재하고 있는 상태여야한다.
+				  (FileNotFoundException 발생)
+				  뿐만 아니라 namespace도 반드시 등록되어 있어야한다.
+	 -->
+	
+	
+</configuration>
