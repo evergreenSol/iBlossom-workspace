@@ -1,0 +1,203 @@
+/* 1. 사용자 정기구독 페이지 (subscribeListView)*/	
+/*-------------------------------------------------------------------------------------------*/
+	/* 맨 위 사진 css */
+    .banner {
+        width : 100%;
+        height : 300px;
+        text-align : center;
+    }
+
+    /* 사진 안 정기구독 세로로 가운데 정렬 css */
+    .banner_title {
+        line-height : 300px;
+    }
+    
+    /* wrap div css */
+    .wrap {
+        width : 1200px;
+        margin : auto;
+    }
+    
+    /* 배경 회색 용 css */
+    .subscription {
+    	margin-top : 50px;
+    	background-color : rgb(241,241,241);
+    }
+
+    /* 이용안내, 구독 가능 상품 목록, 구독기간 설정 css */
+    .info, .sub_period, .sub_product {
+        margin-top : 50px;
+    }
+    
+
+    /* 이용안내, 구독 가능 상품 목록, 구독기간 설정, 구독한 상품 테이블 css */
+    .info table, .sub_list table, .sub_product table { 
+        margin : auto;
+        text-align : center;
+        background-color : white;
+    }
+    
+    /* h3 태그 안쪽으로 30px css */
+    .wrap h3 {
+        margin : 30px;
+    }
+
+    /* info 이미지 4개 속성 css*/
+    #info_img {
+        width : 150px;
+        height : 150px;
+        object-fit: cover;
+    }
+
+    /* 정기구독 리스트 추가될 때 양 옆 마진용 css */
+    .sub_list tr {
+        margin : 30px;
+    }
+    
+    #sub_list_img:hover {
+        border : 3px solid rgb(255,35,147);
+        width : 270px;
+        height : 270px;
+    }
+
+    /* sub_list 테이블 transpose 용 css */
+    .sub_list tr { display: block; float: left; } 
+    .sub_list th, .sub_list td { display: block; }
+
+    /* sub_list 테이블 tbody 용 css */
+    .sub_list table {
+        box-sizing : border-box;
+        background-color : rgb(241,241,241);
+    }
+
+    /* 구독상품 사진 css*/
+    #sub_list_img {
+        border-radius : 50%;
+    }
+
+    /* 구독 기간 선택하는 div css */
+    .sub_period {
+        font-size : 15px;
+        font-weight : bold
+    }
+
+    /* 구독 기간 선택하는 테이블 틀 css */
+    .sub_period table {
+        width : 80%;
+        margin : auto;
+    }
+
+    /* sub_period 안 input용 css */
+    .sub_period input {
+        width : 97.5%;
+        height : 60%;
+    }
+
+    /* sub_period 안 버튼용 css */
+    .sub_period button {
+        margin-left : 2.5%;
+        width : 95%;
+        height : 95%;
+        font-size : 15px;
+        background-color : white;
+        border-color : lightgrey;
+    }
+
+    /* 구독한 상품안에 버튼 css */
+    .sub_product button {
+        margin-left : 2.5%;
+        width : 95%;
+        height : 95%;
+        font-size : 15px;
+        color : white;
+        background-color : black;
+        border-color : lightgrey;
+        margin-top : 40px;
+    }
+	
+	
+	/*datepicker ui */
+	.ui-widget-header { border: 0px solid #dddddd; background: #fff; } 
+	
+	.ui-datepicker-calendar>thead>tr>th { font-size: 14px !important; } 
+	
+	.ui-datepicker .ui-datepicker-header { position: relative; padding: 10px 0; } 
+	
+	.ui-state-default,
+	.ui-widget-content .ui-state-default,
+	.ui-widget-header .ui-state-default,
+	.ui-button,
+	html .ui-button.ui-state-disabled:hover,
+	html .ui-button.ui-state-disabled:active { border: 0px solid #c5c5c5; background-color: transparent; font-weight: normal; color: #454545; text-align: center; } 
+	
+	.ui-datepicker .ui-datepicker-title { margin: 0 0em; line-height: 16px; text-align: center; font-size: 14px; padding: 0px; font-weight: bold; font-family: auto;} 
+	
+	.ui-datepicker { display: none; background-color: #fff; border-radius: 4px; margin-top: 10px; margin-left: 0px; margin-right: 0px; padding: 20px; padding-bottom: 10px; width: 300px; box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.1); } 
+	
+	.ui-widget.ui-widget-content { border: 1px solid #eee; } 
+	
+	#datepicker:focus>.ui-datepicker { display: block; } 
+	
+	.ui-datepicker-prev,
+	.ui-datepicker-next { cursor: pointer; } 
+	
+	.ui-datepicker-next { float: right; } 
+	
+	.ui-datepicker-month{
+	    border: none;
+	    padding-left: 20px;
+	}
+	.ui-datepicker-year{
+	    border: none;
+	}
+	#ui-datepicker-div{
+	    width: 300px;
+	}
+	.ui-state-disabled { cursor: auto; color: hsla(0, 0%, 80%, 1); } 
+	
+	.ui-datepicker-title { text-align: center; padding: 10px; font-weight: 100; font-size: 20px; } 
+	
+	.ui-datepicker-calendar { width: 100%; } 
+	
+	.ui-datepicker-calendar>thead>tr>th { padding: 5px; font-size: 20px; font-weight: 400; } 
+	
+	.ui-datepicker-calendar>tbody>tr>td>a { color: #000; font-size: 12px !important; font-weight: bold !important; text-decoration: none;}
+	
+	.ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover { cursor: auto; background-color: #fff; } 
+	
+	.ui-datepicker-calendar>tbody>tr>td { border-radius: 100%; width: 44px; height: 30px; cursor: pointer; padding: 5px; font-weight: 100; text-align: center; font-size: 12px; } 
+	
+	.ui-datepicker-calendar>tbody>tr>td:hover { background-color: transparent; opacity: 0.6; } 
+	
+	.ui-state-hover,
+	.ui-widget-content .ui-state-hover,
+	.ui-widget-header .ui-state-hover,
+	.ui-state-focus,
+	.ui-widget-content .ui-state-focus,
+	.ui-widget-header .ui-state-focus,
+	.ui-button:hover,
+	.ui-button:focus { border: 0px solid #cccccc; background-color: transparent; font-weight: normal; color: #2b2b2b; } 
+	
+	.ui-widget-header .ui-icon { 
+	   background-image: url('img/btns.png');
+	 }
+	
+	.ui-icon-circle-triangle-e { background-position: -20px 0px; background-size: 36px; } 
+	
+	.ui-icon-circle-triangle-w { background-position: -0px -0px; background-size: 36px; } 
+	
+	.ui-datepicker-calendar>tbody>tr>td:first-child a { color: red !important; } 
+	
+	.ui-datepicker-calendar>tbody>tr>td:last-child a { color: #0099ff !important; } 
+	
+	.ui-datepicker-calendar>thead>tr>th:first-child { color: red !important; } 
+	
+	.ui-datepicker-calendar>thead>tr>th:last-child { color: #0099ff !important; } 
+	
+	.ui-state-highlight,
+	.ui-widget-content .ui-state-highlight,
+	.ui-widget-header .ui-state-highlight { border: 0px; background: #f1f1f1; border-radius: 50%; padding-top: 10px; padding-bottom: 10px; } 
+	
+	.inp { padding: 10px 10px; background-color: #f1f1f1; border-radius: 4px; border: 0px; } 
+	
+	.inp:focus { outline: none; background-color: #eee; } 
