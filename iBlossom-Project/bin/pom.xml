@@ -153,14 +153,7 @@
 		    <version>1.4</version>
 		</dependency>
 		
-		<!-- 2. lombok 쓸거면 추가하기. 추가: 2022-06-29 한솔 -->
-		<dependency>
-		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok</artifactId>
-		    <version>1.18.12</version>
-		    <scope>provided</scope>
-		</dependency>
-		
+		<!-- 2. lombok 쓸거면 추가하기 -->
 		   
 		<!-- 3. Spring Security module 라이브러리들 (core, web, config) 추가 시 셋 버전 맞추기-->
 		<dependency>

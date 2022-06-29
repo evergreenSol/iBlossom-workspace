@@ -8,32 +8,21 @@
 
 	<typeAliases>
 		<!-- 예시 -->
-		<typeAlias type="com.kh.iblossom.member.model.vo.Member" alias="member"/>
-		<typeAlias type="com.kh.iblossom.product.model.vo.Product" alias="product"/>
-		<typeAlias type="com.kh.iblossom.product.model.vo.Review" alias="review"/> 	
-		<typeAlias type="com.kh.iblossom.notice.model.vo.Notice" alias="notice"/> 	
-		<typeAlias type="com.kh.iblossom.subscribe.model.vo.Subscribe" alias="subscribe"/> 	
-		<typeAlias type="com.kh.iblossom.onedayclass.model.vo.OnedayClass" alias="onedayclass"/> 	
-		<typeAlias type="com.kh.iblossom.cart.model.vo.Cart" alias="cart"/> 	
-		<typeAlias type="com.kh.iblossom.qna.model.vo.Qna" alias="qna"/> 	
-		<typeAlias type="com.kh.iblossom.order.model.vo.Order" alias="order"/> 	
-		<typeAlias type="com.kh.iblossom.order.model.vo.DetailOrder" alias="detailorder"/> 	
+		<!-- 
+			<typeAlias type="com.kh.spring.member.model.vo.Member" alias="member"/>
+			<typeAlias type="com.kh.spring.board.model.vo.Board" alias="board"/>
+			<typeAlias type="com.kh.spring.board.model.vo.Reply" alias="reply"/> 	
+		 -->
 	</typeAliases>
 	<!-- 유의사항: 미리 typeAlias를 등록하길 원한다면 해당 클래스가 실제로 존재한 상태여야한다. 
 					(classNotFoundException 발생)-->	
 	
 	<mappers>
 		<!-- 예시 -->
-		<mapper resource="/mappers/member-mapper.xml"/>
-		<mapper resource="/mappers/product-mapper.xml"/>
-		<mapper resource="/mappers/notice-mapper.xml"/>
-		<mapper resource="/mappers/review-mapper.xml"/>
-		<mapper resource="/mappers/subscribe-mapper.xml"/>
-		<mapper resource="/mappers/onedayclass-mapper.xml"/>
-		<mapper resource="/mappers/cart-mapper.xml"/>
-		<mapper resource="/mappers/qna-mapper.xml"/>
-		<mapper resource="/mappers/order-mapper.xml"/>
-		<mapper resource="/mappers/detailorder-mapper.xml"/>
+		<!-- 
+			<mapper resource="/mappers/member-mapper.xml"/>
+			<mapper resource="/mappers/board-mapper.xml"/>
+		 -->
 	</mappers>
 	<!-- 
 		유의사항: 미리 mapper 파일을 등록해두려면 해당 매퍼파일이 진짜 존재하고 있는 상태여야한다.
