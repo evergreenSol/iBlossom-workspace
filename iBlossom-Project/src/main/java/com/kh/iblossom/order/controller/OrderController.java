@@ -1,5 +1,5 @@
 package com.kh.iblossom.order.controller;
 
-public class OredrController {
+public class OrderController {
 
 }
