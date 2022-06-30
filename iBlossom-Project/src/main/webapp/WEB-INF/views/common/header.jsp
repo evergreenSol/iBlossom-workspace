@@ -10,6 +10,7 @@
     <script src="https://kit.fontawesome.com/c8ea39d107.js" crossorigin="anonymous"></script>
     <title>header</title>
     <link href="resources/css/header.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
  	<!-- header 헤더 div -->
@@ -17,8 +18,10 @@
 
         <!-- 로고 -->
         <div id="header-logo-warp">
-            <a href=""><img src="resources/images/iBlossom_logo_black.png" id="header-logo"></a>
+            <a href="mypage.me"><img src="resources/images/iBlossom_logo_black.png" id="header-logo"></a>
         </div>
+
+		<!-- 로그인 완성 전까지 마이페이지 링크 로고에 걸어두겠습니다 : 2022-06-30 한솔 -->
 
         <!-- 검색창 -->
         <div id="header-search" style="position: relative;">
