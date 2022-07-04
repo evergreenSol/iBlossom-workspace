@@ -355,7 +355,7 @@ div { box-sizing: border-box; }
 .signUp-wrap {
     margin: auto;
     width: 1200px;
-    height: 900px;
+    height: 1000px;
     overflow : hidden;
     margin-top: 30px;
     margin-bottom: 25px;
@@ -373,7 +373,7 @@ div { box-sizing: border-box; }
     background-color: white;
     border-radius: 7px;
     width: 400px;
-    height: 720px;
+    height: 800px;
     z-index: 1;
     position: absolute;
     top: 95px;
@@ -406,8 +406,7 @@ div { box-sizing: border-box; }
 }
 
 /* signUp 회원가입 폼 input 속성 */
-#signUp-id-input, #signUp-pwd1-input,
-#signUp-pwd2-input, #signUp-email-input {
+.signUp-input {
     width: 270px;
     height: 32px;
     margin-bottom: 15px;
@@ -416,10 +415,19 @@ div { box-sizing: border-box; }
     outline: 0px;
 }
 
+#signUp-id-checkbutton {
+    width: 65px;
+    height: 36px;
+    outline: 0px;
+    background-color: black;
+    color: white;
+    border-radius: 3px;
+}
+
 /* signUp 회원가입 폼 input 호버 속성 */
-#signUp-id-input:hover, #signUp-pwd1-input:hover,
-#signUp-pwd2-input:hover, #signUp-email-input:hover {
-    border-color: #FFCA29;;
+.signUp-input:hover,
+.signUp-input:focus {
+    border-color: black;;
 }
 
 /* signUp 회원가입 취소, 가입 버튼 속성 */
@@ -700,4 +708,216 @@ div { box-sizing: border-box; }
     border: 0px;
     border-radius: 3px;
 }
+
+
+
+
+
+/* admin 관리자 페이지 */
+
+/* admin 관리자 페이지 메뉴 wrap */
+#admin-menu-wrap {
+    margin: auto;
+    margin-top: 20px;
+    width: 1200px;
+    height: 117px;
+    position: relative;
+}
+
+/* admin 관리자 페이지 메뉴바 첫번째줄 */
+#admin-menu-1 {
+    width: 1200px;
+    height: 35px;
+}
+
+/* admin 관리자 페이지 로고 div */
+#admin-logo-div {
+    position: absolute;
+    width: 200px;
+    height: 34.84px;
+}
+
+/* admin 관리자 페이지 로고 a 태그 */
+#admin-logo-a {
+    width: 0;
+    height: 0;
+    margin: 0px;
+    padding: 0px;
+}
+
+/* admin 관리자 페이지 로고 이미지 속성 */
+#admin-logo-div img {
+    width: 200px;
+    height: 34.84px;
+}
+
+/* admin 관리자 페이지 로그인 div */
+#admin-login-div {
+    width: 110px;
+    height: 34.84px;
+    position: absolute;
+    right: 0px;
+    margin-top: 4px;
+}
+
+/* admin 관리자 페이지 로그인 아이콘 속성 */
+#admin-login-a{
+    text-decoration: none;
+}
+
+/* admin 관리자 페이지 로그인 아이콘 속성 */
+.bi-person-fill {
+    position: absolute;
+    margin-top: 0px;
+    right: 0px;
+    width: 27px;
+    height: 27px;
+}
+
+/* admin 관리자 페이지 로그인 텍스트 속성 (admin) */
+#admin-login-text {
+    font-size: 23px;
+    font-weight: 700;
+    color: black;
+}
+
+/* admin 관리자 페이지 메뉴바 두번째줄 */
+#admin-menu-2 {
+    width: 1200px;
+    height: 82px;
+}
+
+/* admin 관리자 페이지 메뉴바 div */
+#admin-navi-div {
+    background-color: rgb(226, 226, 226);
+    width: 1200px;
+    height: 60px;
+    margin-top: 20px;
+    /* margin-left: 15px; */
+}
+
+/* admin 관리자 페이지 소메뉴 a 태그 속성 */
+.admin-navi-ul a {
+    margin-left: 3.5px;
+    text-decoration : none;
+    color : rgb(0, 0, 0);
+    font-size : 15px;
+    font-weight : 500;
+    width : 120px;
+    height : 30px;
+    display : block;
+    line-height : 35px;
+    transform : scale(1); /* 1배 확대하겠다. */
+}
+
+/* admin 관리자 페이지 메뉴바 속성 */
+#admin-navi {
+    list-style-type : none;
+    margin: 0;
+    padding: 0;
+}
+
+/* admin 관리자 페이지 메인메뉴 li 태그 속성 */
+#admin-navi>li {
+    float: left;
+    width: 130px;
+    text-align: center;
+    height: 60px;
+    margin-left: 15px;
+}
+
+/* admin 관리자 페이지 소메뉴 리스트 속성 */
+.admin-navi-ul>li {
+    float: left;
+    width: 130px;
+    text-align: center;
+    height: 40px;
+    background-color: rgb(226, 226, 226);
+    transform: translateY(-3px);
+}
+
+
+/* admin 관리자 페이지 메뉴바 ul > li 속성 */
+.admin-navi-menu {
+    font-size: 18px;
+    float: left;
+    text-align : center;
+    text-decoration: none;
+    color: black;
+    margin-top: 19px;
+    margin-left: 4px;
+    width: 120px;
+    height: 70%;
+}
+
+/* admin 관리자 페이지 소메뉴 ul 태그 속성 */
+#admin-navi>li>ul {
+    list-style-type : none;
+    padding : 0px;
+    display : none; /* 1단계) 일단은 서브메뉴를 숨겨둠 */
+}
+
+/* admin 관리자 페이지 소메뉴 호버 속성 */
+#admin-navi>li>a:hover+ul {
+    display : block; /* 2단계) 메인메뉴에 마우스 올렸을 때 서브메뉴 보이기 */
+}
+
+/* admin 관리자 페이지 소메뉴 호버 속성 */
+#admin-navi>li>ul:hover {
+    display : block; /* 3단계) 마우스가 서브메뉴에 있을 때에도 서브메뉴 보이기가 유지되야 함 */
+}
+
+/* admin 관리자 페이지 메뉴바 ul > li 호버 시 */
+.admin-navi-menu:hover {
+    color: black;
+    font-weight: 700;
+}
+
+/* admin 관리자 페이지 소메뉴 호버 속성 */
+.admin-navi-ul a:hover {
+    color: black;
+    font-weight: 700;
+}
+
+/* admin 관리자 페이지 메뉴바 ul > li (채팅관리) 호버 시 */
+#admin-navi-chat:hover {
+    color: black;
+    font-weight: 700;
+}
+
+/* admin 관리자 페이지 회원관리 속성 */
+#admin-navi-member {
+    -left: 10px;
+}
+
+/* admin 관리자 페이지 채팅관리 속성 */
+#admin-navi-chat {
+    font-size: 18px;
+    float: left;
+    text-align : center;
+    text-decoration: none;
+    color: black;
+    margin-top: 19px;
+}
+
+/* admin 관리자 페이지 회원관리 wrap */
+#admin-member-wrap {
+    margin: auto;
+    margin-top: 50px;
+    width: 1200px;
+    height: 100%;
+}
+
+/* admin 관리자 페이지 회원관리 타이틀 텍스트 속성 */
+#admin-member-title {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+/* admin 관리자 페이지 타이틀 밑 hr 태그 속성 */
+#admin-member-hr {
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
 
