@@ -5,13 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SubscribeListView</title>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<title>subscribeListView</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"/>
 <link href="resources/css/kdh.css" rel="stylesheet">
-
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
@@ -36,13 +32,13 @@
                     <td width="250px"><img src="resources/images/step4.png" id="info_img"></td>
                 </tr>
                 <tr> <!-- 글씨체 변경 -->
-                    <td>STEP1. 구독할 꽃다발을 선택해주세요</td>
+                    <td>STEP1.<br> 구독할 꽃다발을 선택해주세요</td>
                     <td></td>
-                    <td>STEP2. 구독기간을 선택해주세요</td>
+                    <td>STEP2.<br> 구독기간을 선택해주세요</td>
                     <td></td>
-                    <td>STEP3. 첫 결제를 완료하고 구독을 등록해주세요</td>
+                    <td>STEP3.<br> 첫 결제를 완료하고 구독을 등록해주세요</td>
                     <td></td>
-                    <td>STEP4. 고르신 꽃다발을 받아보세요!</td>
+                    <td>STEP4.<br> 고르신 꽃다발을 받아보세요!</td>
                 </tr>
             </table>
         </div>
@@ -52,7 +48,7 @@
 	            <br>
 	            <h1>정기구독</h1>
 	
-	            <h3>STEP1. 구독할 꽃다발을 선택해주세요</h3>
+	            <h2>STEP1. 구독할 꽃다발을 선택해주세요</h2>
 	            
 	            <!-- 구독 상품 전체 리스트 조회-->
 
@@ -66,10 +62,8 @@
 	               <!-- <c:forEach var="s" items="${ list }">--> <!-- SUB_PRODUCT 테이블로부터 읽어오기-->   
 	                <!-- </c:forEach>-->
 	                <tr id="sub_list_product">
-
 	                    <td height="250px" width="250px" id="sub_list_img"><img src="resources/images/test.png" id="list_img"></td><!--<img src="${ s.subChangeName }"-->
-	                    <td id="subproduct_name"><br><br>정기구독 상품명<!-- ${ s.subProductName }--></td>
-
+	                    <td id="subproduct_name">정기구독 상품명<!-- ${ s.subProductName }--></td>
 	                </tr>
 	            </table>
 	            <br><br>
@@ -79,10 +73,10 @@
 	        
 	        <!-- 구독 기간 설정 -->
 	        <div class="sub_period" hidden>
-	            <h3>STEP2. 구독기간을 선택해주세요</h3>
+	            <h2>STEP2. 구독기간을 선택해주세요</h2>
 	
 
-	            <table class="sub_period">
+	            <table class="sub_period_table">
 	                <tr>
 	                    <td rowspan="6" width="360px;" height="400;"><img src="resources/images/test.png" id="period_img"></td>
 	                    <td colspan="2" height="50"><br><br>첫 수령일을 선택하세요.<br>
@@ -118,15 +112,17 @@
 	        <!-- SUBSCRIBE 테이블로부터 읽어오기-->
 	        <!-- 구독한 상품 정보 -->
 	        <div class="sub_product" hidden>
-	            <h3>내가 고른 상품 정보</h3>
+	            <h2>내가 고른 상품 정보</h2>
 
-	            <table class="sub_product">
+	            <table class="sub_product_table">
 	                <tr>
-	                    <td height="500px" width="500px" colspan="2"><img src="resources/images/test.png" id="product_img"></td>
+	                    <td height="500px" width="500px" colspan="2" style="border-bottom:2px solid black">
+	                    	<img src="resources/images/test.png" id="product_img">
+	                    </td>
 	                </tr>
 	                <tr>
-	                    <th height="50px" style="border-top:2px solid black">구독상품</th>
-	                    <td style="border-top:2px solid black">구독상품<!--${ s.subProductNo }--></td>
+	                    <th height="50px">구독상품</th>
+	                    <td>구독상품<!--${ s.subProductNo }--></td>
 	                </tr>
 	                <tr>
 	                    <th height="50px">첫수령일</th>
@@ -142,7 +138,7 @@
 	                </tr>
 	                <tr>
 	                    <td height="50px"><button onclick="">이전</button></td>
-	                    <td height="50px"><button onclick="">결제</button></td>
+	                    <td height="50px"><button onclick="window.reload();">결제</button></td>
 	                </tr>
 	            </table>
 	        </div>   
@@ -151,11 +147,12 @@
 	    </div>
     </div>
     
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
  
 	<script>
 	// 정기구독 상품 클릭 시
 	$('#sub_list_product').click(function() {
-
         $('#sub_list_img').css("border","2px solid rgb(255,35,147)")
 		$('.sub_period').removeAttr("hidden")
 	});
@@ -180,11 +177,11 @@
 	  showMonthAfterYear: true,
 	  yearSuffix: '년'
 	});
-		
+	
 	$(function () {
 	  $('.datepicker').datepicker();
 	});
-	
+		
 	
 		
 		
