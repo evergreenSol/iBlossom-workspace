@@ -27,16 +27,7 @@
                 <td class="body_r" width="900" style="vertical-align: top;">
                     <div class="delete">
                     
-                    <h2>나의 정기구독</h2>
-                        <!-- <hr color="lightgray"> -->
-                        <!--
-                        <table style="text-align: center">
-                            <tr>
-                                <td height="300" width="900" >주문내역이 없습니다.</td>
-                            </tr>
-                        </table>
-                        -->
-
+                    	<h2>나의 정기구독</h2>
                         <div class="mypage-subscribe" style="text-align: center">
                             <span style="font-size: 16px; font-weight: 600;">
                                 김한솔님은
@@ -150,13 +141,6 @@
                         </div>
 
                         <br><br>
-
-
-
-
-
-
-
 
                     </div>
 			
