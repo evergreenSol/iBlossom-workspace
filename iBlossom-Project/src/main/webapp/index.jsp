@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>iBlossom | Time To Blossom</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
