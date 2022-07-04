@@ -1,0 +1,115 @@
+#modal.modal-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background: rgba(255, 255, 255, 0.25); */
+    background: rgba(0, 0, 0, 0.712);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px); /* 위에 두줄과 함께 블러처리 */
+    /* backdrop-filter: blur(3.5px);
+    -webkit-backdrop-filter: blur(3.5px); */
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+#modal .modal-window {
+    /* background: rgba( 69, 139, 197, 0.70 ); */
+    background: white;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 13.5px );
+    -webkit-backdrop-filter: blur( 13.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 600px;
+    height: 600px;
+    position: relative;
+    top: -100px;
+
+    padding-top: 30px;
+
+}
+#modal .title {
+    padding-left: 10px;
+    display: block;
+    /* text-shadow: 1px 1px 2px gray; */
+    color: black;
+    margin-right: 10%;
+    text-align: center;
+    font-size: 24px;
+    
+}
+#modal .title h2 {
+    display: inline;
+}
+#modal .close-area {
+    display: inline;
+    float: left;
+    padding-right: 10px;
+    padding-left: 40px;
+    cursor: pointer;
+    /* text-shadow: 1px 1px 2px gray; */
+    color: black;
+
+}
+
+#modal .grade-content {
+    margin-top: 20px;
+    padding: 0px 40px;
+    /* text-shadow: 1px 1px 2px gray; */
+    color: black;
+    margin-bottom: 20px;
+}
+
+.modal-button-area button {
+    border-radius: 3px;
+}
+
+/* 등급 모달창 */
+#grade-modal {
+    list-style:none;
+    padding-inline-start: 40px;
+}
+
+.grade-content table {
+    text-align: center;
+}
+
+
+.grade-content img {
+    padding : 20px;
+    height: 100%;
+    width: 50%;
+    
+}
+
+.grade-content table span {
+    font-size: 14px;
+}
+
+#modal-purchase {
+    margin: 0px 35px;
+    font-size: 16px;
+}
+
+#modal-purchase span{
+    font-size: 20px;
+}
+
+#grade-benefit {
+    border-collapse:collapse;
+}
+
+#grade-benefit tr th {
+    border-bottom: 1px solid black;
+    
+}
+
+
+
+/* 등급 모달창 끝 */
