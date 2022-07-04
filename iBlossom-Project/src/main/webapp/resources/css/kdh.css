@@ -2,6 +2,7 @@
 /*-------------------------------------------------------------------------------------------*/
 	/* 맨 위 사진 css */
     .banner {
+    	background-image : url('../images/banner.png');
         width : 100%;
         height : 300px;
         text-align : center;
@@ -10,6 +11,7 @@
     /* 사진 안 정기구독 세로로 가운데 정렬 css */
     .banner_title {
         line-height : 300px;
+        font-size : 30px;
     }
     
     /* wrap div css */
@@ -21,7 +23,7 @@
     /* 배경 회색 용 css */
     .subscription {
     	margin-top : 50px;
-    	background-color : rgb(241,241,241);
+    	background-color : white; /*rgb(241,241,241);*/
     }
 
     /* 이용안내, 구독 가능 상품 목록, 구독기간 설정 css */
@@ -29,11 +31,14 @@
         margin-top : 50px;
     }
     
+    .sub_list table {
+
+    }
 
     /* 이용안내, 구독 가능 상품 목록, 구독기간 설정, 구독한 상품 테이블 css */
-    .info table, .sub_list table, .sub_product table { 
+    /* .info>table, .sub_list>table, .sub_product>table {  */
+    .subscription table {
         margin : auto;
-        text-align : center;
         background-color : white;
     }
     
@@ -47,6 +52,7 @@
         width : 150px;
         height : 150px;
         object-fit: cover;
+        -webkit-user-drag: none;
     }
 
     /* 정기구독 리스트 추가될 때 양 옆 마진용 css */
@@ -64,15 +70,13 @@
     .sub_list tr { display: block; float: left; } 
     .sub_list th, .sub_list td { display: block; }
 
-    /* sub_list 테이블 tbody 용 css */
-    .sub_list table {
-        box-sizing : border-box;
-        background-color : rgb(241,241,241);
-    }
-
     /* 구독상품 사진 css*/
     #sub_list_img {
+    	background-color : white;
         border-radius : 50%;
+        margin : auto;
+        text-align : center;
+        -webkit-user-drag: none;
     }
 
     /* 구독 기간 선택하는 div css */
@@ -89,8 +93,9 @@
 
     /* sub_period 안 input용 css */
     .sub_period input {
+        margin-top : 5px;
         width : 97.5%;
-        height : 60%;
+        height : 45%;
     }
 
     /* sub_period 안 버튼용 css */
@@ -100,7 +105,7 @@
         height : 95%;
         font-size : 15px;
         background-color : white;
-        border-color : lightgrey;
+        border : 1px solid lightgrey;
     }
 
     /* 구독한 상품안에 버튼 css */
@@ -115,6 +120,36 @@
         margin-top : 40px;
     }
 	
+    /* product 이미지 속성 css*/
+    #list_img {
+      margin-top : 10px;
+      width : 230px;
+      height : 230px;
+      object-fit: cover;
+      -webkit-user-drag: none;
+    }
+    
+    #list_img:hover {
+        width : 250px;
+        height : 250px;
+    }
+    
+    #period_img {
+    	width : 300px;
+    	height : 300px;
+    	object-fit : cover;
+    	margin-left : 30px;
+    	-webkit-user-drag: none;
+    }
+    
+    #product_img {
+      margin-top : 25px;
+      margin-left : 25px;
+      width : 450px;
+      height : 450px;
+      object-fit: cover;
+      -webkit-user-drag: none;
+    }
 	
 	/*datepicker ui */
 	.ui-widget-header { border: 0px solid #dddddd; background: #fff; } 
@@ -201,3 +236,255 @@
 	.inp { padding: 10px 10px; background-color: #f1f1f1; border-radius: 4px; border: 0px; } 
 	
 	.inp:focus { outline: none; background-color: #eee; } 
+
+    /* 관리자 페이지 css */
+    /*-------------------------------------------------------------------------------------------*/
+	/* admin 관리자 페이지 */
+
+	/* admin 관리자 페이지 메뉴 wrap */
+	#admin-menu-wrap {
+	    margin: auto;
+	    margin-top: 20px;
+	    width: 1200px;
+	    height: 117px;
+	    position: relative;
+	}
+	
+	/* admin 관리자 페이지 메뉴바 첫번째줄 */
+	#admin-menu-1 {
+	    width: 1200px;
+	    height: 35px;
+	}
+	
+	/* admin 관리자 페이지 로고 div */
+	#admin-logo-div {
+	    position: absolute;
+	    width: 200px;
+	    height: 34.84px;
+	}
+	
+	/* admin 관리자 페이지 로고 a 태그 */
+	#admin-logo-a {
+	    width: 0;
+	    height: 0;
+	    margin: 0px;
+	    padding: 0px;
+	}
+	
+	/* admin 관리자 페이지 로고 이미지 속성 */
+	#admin-logo-div img {
+	    width: 200px;
+	    height: 34.84px;
+	}
+	
+	/* admin 관리자 페이지 로그인 div */
+	#admin-login-div {
+	    width: 110px;
+	    height: 34.84px;
+	    position: absolute;
+	    right: 0px;
+	    margin-top: 4px;
+	}
+	
+	/* admin 관리자 페이지 로그인 아이콘 속성 */
+	#admin-login-a{
+	    text-decoration: none;
+	}
+	
+	/* admin 관리자 페이지 로그인 아이콘 속성 */
+	.bi-person-fill {
+	    position: absolute;
+	    margin-top: 0px;
+	    right: 0px;
+	    width: 27px;
+	    height: 27px;
+	}
+	
+	/* admin 관리자 페이지 로그인 텍스트 속성 (admin) */
+	#admin-login-text {
+	    font-size: 23px;
+	    font-weight: 700;
+	    color: black;
+	}
+	
+	/* admin 관리자 페이지 메뉴바 두번째줄 */
+	#admin-menu-2 {
+	    width: 1200px;
+	    height: 82px;
+	}
+	
+	/* admin 관리자 페이지 메뉴바 div */
+	#admin-navi-div {
+	    background-color: rgb(226, 226, 226);
+	    width: 1200px;
+	    height: 60px;
+	    margin-top: 20px;
+	    /* margin-left: 15px; */
+	}
+	
+	/* admin 관리자 페이지 소메뉴 a 태그 속성 */
+	.admin-navi-ul a {
+	    margin-left: 3.5px;
+	    text-decoration : none;
+	    color : rgb(0, 0, 0);
+	    font-size : 15px;
+	    font-weight : 500;
+	    width : 120px;
+	    height : 30px;
+	    display : block;
+	    line-height : 35px;
+	    transform : scale(1); /* 1배 확대하겠다. */
+	}
+	
+	/* admin 관리자 페이지 메뉴바 속성 */
+	#admin-navi {
+	    list-style-type : none;
+	    margin: 0;
+	    padding: 0;
+	}
+	
+	/* admin 관리자 페이지 메인메뉴 li 태그 속성 */
+	#admin-navi>li {
+	    float: left;
+	    width: 130px;
+	    text-align: center;
+	    height: 60px;
+	    margin-left: 15px;
+	}
+	
+	/* admin 관리자 페이지 소메뉴 리스트 속성 */
+	.admin-navi-ul>li {
+	    float: left;
+	    width: 130px;
+	    text-align: center;
+	    height: 40px;
+	    background-color: rgb(226, 226, 226);
+	    transform: translateY(-3px);
+	}
+	
+	
+	/* admin 관리자 페이지 메뉴바 ul > li 속성 */
+	.admin-navi-menu {
+	    font-size: 18px;
+	    float: left;
+	    text-align : center;
+	    text-decoration: none;
+	    color: black;
+	    margin-top: 19px;
+	    margin-left: 4px;
+	    width: 120px;
+	    height: 70%;
+	}
+	
+	/* admin 관리자 페이지 소메뉴 ul 태그 속성 */
+	#admin-navi>li>ul {
+	    list-style-type : none;
+	    padding : 0px;
+	    display : none; /* 1단계) 일단은 서브메뉴를 숨겨둠 */
+	}
+	
+	/* admin 관리자 페이지 소메뉴 호버 속성 */
+	#admin-navi>li>a:hover+ul {
+	    display : block; /* 2단계) 메인메뉴에 마우스 올렸을 때 서브메뉴 보이기 */
+	}
+	
+	/* admin 관리자 페이지 소메뉴 호버 속성 */
+	#admin-navi>li>ul:hover {
+	    display : block; /* 3단계) 마우스가 서브메뉴에 있을 때에도 서브메뉴 보이기가 유지되야 함 */
+	}
+	
+	/* admin 관리자 페이지 메뉴바 ul > li 호버 시 */
+	.admin-navi-menu:hover {
+	    color: black;
+	    font-weight: 700;
+	}
+	
+	/* admin 관리자 페이지 소메뉴 호버 속성 */
+	.admin-navi-ul a:hover {
+	    color: black;
+	    font-weight: 700;
+	}
+	
+	/* admin 관리자 페이지 메뉴바 ul > li (채팅관리) 호버 시 */
+	#admin-navi-chat:hover {
+	    color: black;
+	    font-weight: 700;
+	}
+	
+	/* admin 관리자 페이지 회원관리 속성 */
+	#admin-navi-member {
+	    -left: 10px;
+	}
+	
+	/* admin 관리자 페이지 채팅관리 속성 */
+	#admin-navi-chat {
+	    font-size: 18px;
+	    float: left;
+	    text-align : center;
+	    text-decoration: none;
+	    color: black;
+	    margin-top: 19px;
+	}
+	
+	/* admin 관리자 페이지 회원관리 wrap */
+	#admin-member-wrap {
+	    margin: auto;
+	    margin-top: 50px;
+	    width: 1200px;
+	    height: 100%;
+	}
+	
+	/* admin 관리자 페이지 회원관리 타이틀 텍스트 속성 */
+	#admin-member-title {
+	    font-size: 25px;
+	    font-weight: 600;
+	}
+	
+	/* admin 관리자 페이지 타이틀 밑 hr 태그 속성 */
+	#admin-member-hr {
+	    margin-top: 15px;
+	    margin-bottom: 20px;
+	}
+
+    /* 3. 관리자 상품 추가 화면 */
+    /*-------------------------------------------------------------------------------------------*/
+    
+    /* 썸네일 + 문구 테이블 css */
+    .product {
+        width : 90%;
+    }
+
+    /* 상품용 input 가격용 input css*/
+    #subproduct_name, #price {
+        height : 30px;
+        margin-left : 60px;
+    }
+
+    /* 상품명 input 용 css*/
+	#subproduct_name {
+		width : 60%;
+	}    
+
+    /*  */
+    #subproduct-img {
+        height : 100%;
+        object-fit : cover;
+        -webkit-user-drag: none;
+    }
+    
+    /* 상품 멘트용 css */
+    #subproduct-description {
+		resize : none;
+		width : 100%;
+		height : 250px;
+        font-size : 20px;
+    }
+    
+    /* wrap 안 버튼용 css */
+    .wrap button {
+		width : 130px;
+		height : 50px;
+		background-color : black;
+		color : white;
+		font-weight : 700;
+	}
