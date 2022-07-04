@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="subscribeMapper">
+	<resultMap id="subProductResultSet" type="subProduct">
+		<result column="SUBPRODUCT_NO" property="subProductNo" />
+		<result column="SUBPRODUCT_NAME" property="subProductName" />
+		<result column="SUB_PRICE" property="subPrice" />
+		<result column="SUBPRODUCT_DESCRIPTION" property="subProductDescription" />
+		<result column="SUBORIGIN_NAME" property="subOriginName" />
+		<result column="SUBCHANGE_NAME" property="subChangeName" />
+	</resultMap>
 
-
+	<select id="selectList" resultMap="subProductResultSet">
+  		SELECT SUBPRODUCT_NO, SUBPRODUCT_NAME, SUB_PRICE, SUBPRODUCT_DESCRIPTION, SUBORIGIN_NAME 
+		FROM SUB_PRODUCT
+  	</select>
+  	
+  	<insert id="insertSubProduct" parameterType="subProduct">
+  		INSERT INTO SUB_PRODUCT(SUBPRODUCT_NO
+		                , SUBPRODUCT_NAME
+		                , SUB_PRICE
+		                , SUBPRODUCT_DESCRIPTION
+		                , SUBORIGIN_NAME
+		                , SUBCHANGE_NAME)
+		VALUES(SEQ_SPNO.NEXTVAL
+		     , #{subProductName}
+		     , #{subPrice}
+		     , #{subProductDescription}
+		     , #{subOriginName}
+		     , #{subChangeName})
+  	</insert>
 </mapper>
