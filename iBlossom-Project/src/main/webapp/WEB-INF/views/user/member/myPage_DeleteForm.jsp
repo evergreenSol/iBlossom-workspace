@@ -47,8 +47,8 @@
                         <br> <br> <br>
 
                         <div class="mypage-delete-wrap" align="center">
-                            <a class="mypage-delete" href="delete.me">취소하기</a>
-                            <a class="mypage-delete" href="" style="margin:px">탈퇴하기</a>
+                            <a class="mypage-delete" href="">취소하기</a>
+                            <a class="mypage-delete" href="delete.me" style="margin:px">탈퇴하기</a>
                         </div>
 
                     </div>

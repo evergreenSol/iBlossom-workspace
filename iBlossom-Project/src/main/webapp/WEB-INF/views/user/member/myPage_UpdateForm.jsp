@@ -65,8 +65,8 @@
 	
 	                        <br><br><br>
 	                        <div class="mypage-revise-wrap" align="center">
-	                            <button class="mypage-revise" href="deleteForm.me" style="margin:px">탈퇴하기</a>
-	                            <button type="submit" class="mypage-revise" >수정하기</a>
+	                            <button type="button" class="mypage-revise" onclick="location.href='deleteForm.me';">탈퇴하기</button>
+	                            <button type="submit" class="mypage-revise" >수정하기</button>
 	                        </div>
                         </form>
 
