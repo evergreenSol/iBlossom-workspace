@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>iBlossom | Time To Blossom</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <link href="resources/css/shj.css" rel="stylesheet">
 <link href="resources/css/main.css" rel="stylesheet">
