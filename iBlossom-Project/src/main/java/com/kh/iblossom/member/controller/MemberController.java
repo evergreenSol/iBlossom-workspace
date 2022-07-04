@@ -1,5 +1,7 @@
 package com.kh.iblossom.member.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,15 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	// 로그아웃
+	@RequestMapping(value="logout.me")
+	public String Logout(HttpSession session) {
+		session.invalidate();
+		
+		return "redirect:/";
+		
+	}
 
 	// 마이페이지 호출 및 응답
 	@RequestMapping(value="mypage.me")
@@ -72,5 +83,7 @@ public class MemberController {
 	public String MyPageQnaListView() {
 		return "user/member/myPage_QnaListView";
 	}
+	
+	
 	
 }
