@@ -37,7 +37,7 @@
                 <li><a href="listView.su" class="header-navi-menu">정기구독</a></li>
                 <li><a href="" class="header-navi-menu">마켓</a></li>
                 <li><a href="" class="header-navi-menu">클래스</a></li>
-                <li><a href="" class="header-navi-menu">고객센터</a></li>
+                <li><a href="listView.no" class="header-navi-menu">고객센터</a></li>
             </ul>
         </div>
 

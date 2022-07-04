@@ -1,12 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="resources/css/khs.css" rel="stylesheet">
+
     <link href="final/resources/css/khs.css" rel="stylesheet">
+
     <title>FAQ</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
@@ -65,7 +73,11 @@
                 <b style="font-size:30px;">고객센터</b>
                 <br><br>
                 <!-- <hr color="black" style="border: 1px solid black"> -->
+
+                <li class="left_menu" id="mp1"><a href="listView.no"><pre>공지사항                 ></pre></a></li><br>
+
                 <li class="left_menu" id="mp1"><a href=""><pre>공지사항                 ></pre></a></li><br>
+
                 <li class="left_menu" id="mp2"><a href=""><pre>Contact Us                   ></pre></a></li><br>
                 <li class="left_menu" id="mp3"><a href=""><pre>1대1 문의               ></pre></a></a></li><br>
                 <li class="left_menu" id="mp4"><a href=""><pre>FAQ                    ></pre></a></li><br>
@@ -145,8 +157,15 @@ TIME TO BLOSSOM
             });
         });
     </script>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+    
+
     
     	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
 
 </body>
 </html>
