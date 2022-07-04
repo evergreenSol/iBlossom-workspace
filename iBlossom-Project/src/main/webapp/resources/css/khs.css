@@ -4,6 +4,7 @@
     /* border: 1px solid black; */
     width: 1200px;
     margin: auto;
+    
 }
 
 /* 마이페이지 등급 부분 */
@@ -36,6 +37,15 @@
 .view-grade {
     text-decoration: none;
     color: black;
+}
+
+.view-grade:hover {
+	cursor:pointer;
+	color: rgb(255 35 147);
+}
+
+.grade-third h3 {
+    color : gray;
 }
 
 .member-period {
@@ -152,7 +162,6 @@ height: 97%;
 
 .moreBtn {
     text-decoration: none;
-    color: black;
 
 }
 /* 주문배송조회 끝*/
@@ -188,6 +197,7 @@ height: 97%;
 
 .mypage-show-order #show-order {
     border-bottom-width: 2px;
+    border-bottom-color: rgb(255 35 147);
     
 }
 
@@ -306,18 +316,15 @@ height: 97%;
 .mypage-revise-wrap {
     width: 31%;
     
-    
 }
 
 .mypage-revise {
-    text-decoration: none;
-    width: 100%;
-    max-width: 375px;
-    height: 52px;
+    width: 30%;
+    height: 100%;
     font-size: 12px;
-    line-height: 22px;
     letter-spacing: normal;
     padding :7px 12px;
+    margin: 0px 10px;
     
     --tw-text-opacity: 1;
     color: rgb(255 255 255/var(--tw-text-opacity));

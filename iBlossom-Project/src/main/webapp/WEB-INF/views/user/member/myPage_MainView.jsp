@@ -103,54 +103,7 @@
 	
 	</div>
 	
-	<!--  
-	<div id="modal" class="modal-overlay">
-        <div class="modal-window">
-            <div class="title">
-                <h2>모달</h2>
-            </div>
-            <div class="close-area">X</div>
-            <div class="content">
-                <p>가나다라마바사 아자차카타파하</p>
-                <p>가나다라마바사 아자차카타파하</p>
-                <p>가나다라마바사 아자차카타파하</p>
-                <p>가나다라마바사 아자차카타파하</p>
-                
-            </div>
-            <div class="modal-button-area" align="center">
-
-                <button>취소</button>
-                <button>확인</button>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-
-        const btnModal = document.querySelector('.view-grade');  
-
-        function modalOn() {
-        modal.style.display = "flex"
-        }
-        
-        function isModalOn() {
-            return modal.style.display === "flex"
-        }
-        
-        function modalOff() {
-            modal.style.display = "none"
-        }
-        
-        btnModal.addEventListener("click", e => {
-            modal.style.display = "flex"
-        });
-
-        const closeBtn = modal.querySelector(".close-area");
-        closeBtn.addEventListener("click", e => {
-            modal.style.display = "none"
-        });
-    </script>
-    -->
+	
 	
 	
 	<br><br><br><br>
