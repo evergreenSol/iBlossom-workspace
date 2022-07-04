@@ -2,7 +2,9 @@
 /*-------------------------------------------------------------------------------------------*/
 	/* 맨 위 사진 css */
     .banner {
+
     	background-image : url('../images/banner.png');
+
         width : 100%;
         height : 300px;
         text-align : center;
@@ -11,7 +13,9 @@
     /* 사진 안 정기구독 세로로 가운데 정렬 css */
     .banner_title {
         line-height : 300px;
+
         font-size : 30px;
+
     }
     
     /* wrap div css */
@@ -23,7 +27,9 @@
     /* 배경 회색 용 css */
     .subscription {
     	margin-top : 50px;
+
     	background-color : white; /*rgb(241,241,241);*/
+
     }
 
     /* 이용안내, 구독 가능 상품 목록, 구독기간 설정 css */
@@ -31,6 +37,7 @@
         margin-top : 50px;
     }
     
+
     .sub_list table {
 
     }
@@ -39,6 +46,7 @@
     /* .info>table, .sub_list>table, .sub_product>table {  */
     .subscription table {
         margin : auto;
+
         background-color : white;
     }
     
@@ -52,7 +60,9 @@
         width : 150px;
         height : 150px;
         object-fit: cover;
+
         -webkit-user-drag: none;
+
     }
 
     /* 정기구독 리스트 추가될 때 양 옆 마진용 css */
@@ -70,6 +80,7 @@
     .sub_list tr { display: block; float: left; } 
     .sub_list th, .sub_list td { display: block; }
 
+
     /* 구독상품 사진 css*/
     #sub_list_img {
     	background-color : white;
@@ -77,6 +88,7 @@
         margin : auto;
         text-align : center;
         -webkit-user-drag: none;
+
     }
 
     /* 구독 기간 선택하는 div css */
@@ -96,6 +108,7 @@
         margin-top : 5px;
         width : 97.5%;
         height : 45%;
+
     }
 
     /* sub_period 안 버튼용 css */
@@ -105,7 +118,9 @@
         height : 95%;
         font-size : 15px;
         background-color : white;
+
         border : 1px solid lightgrey;
+
     }
 
     /* 구독한 상품안에 버튼 css */
@@ -120,6 +135,7 @@
         margin-top : 40px;
     }
 	
+
     /* product 이미지 속성 css*/
     #list_img {
       margin-top : 10px;
@@ -150,6 +166,7 @@
       object-fit: cover;
       -webkit-user-drag: none;
     }
+
 	
 	/*datepicker ui */
 	.ui-widget-header { border: 0px solid #dddddd; background: #fff; } 
@@ -235,6 +252,7 @@
 	
 	.inp { padding: 10px 10px; background-color: #f1f1f1; border-radius: 4px; border: 0px; } 
 	
+
 	.inp:focus { outline: none; background-color: #eee; } 
 
     /* 관리자 페이지 css */
@@ -488,3 +506,4 @@
 		color : white;
 		font-weight : 700;
 	}
+
