@@ -24,4 +24,16 @@ public class QnaServiceImpl implements QnaService {
 		return qnaDao.selectList(sqlSession);
 	}
 
+	@Autowired
+	private QnaDao qnaDao;
+
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	@Override
+	public ArrayList<Qna> selectMyQna(int userNo) {
+		
+		return qnaDao.selectMyQna(sqlSession, userNo);
+	}
+
 }
