@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.iblossom.subscribe.model.dao.SubscribeDao;
 import com.kh.iblossom.subscribe.model.vo.SubProduct;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Service
 public class SubscribeServiceImpl implements SubscribeService {
@@ -32,6 +33,7 @@ public class SubscribeServiceImpl implements SubscribeService {
 		return subscribeDao.insertSubProduct(sqlSession, sp);
 	}
 
+
 	// 정기구독 상품 삭제용 메소드
 	@Override
 	public int deleteSubProduct(int spno) {
@@ -43,6 +45,12 @@ public class SubscribeServiceImpl implements SubscribeService {
 	public SubProduct selectSubProduct(int spno) {
 		
 		return subscribeDao.insertSubProduct(sqlSession, spno);
+
+	@Override
+	public ArrayList<Subscribe> selectMySubscribe(int userNo) {
+		
+		return subscribeDao.selectMySubscribe(sqlSession, userNo);
+
 	}
 
 }

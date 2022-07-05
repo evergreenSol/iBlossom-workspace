@@ -8,7 +8,7 @@ import com.kh.iblossom.notice.model.service.NoticeService;
 
 @Controller
 public class NoticeController {
-
+	
 	@Autowired 
 	private NoticeService noticeService;
 	 
@@ -18,5 +18,21 @@ public class NoticeController {
 		return "user/notice/notice_ListView";
 	}
 
+	
+	// contact us 호출만 함
+	@RequestMapping("contactus.no")
+	public String contactusView() {
 
+		return "user/notice/notice_ContactusView";
+	}
+	
+	// faq 호출만 함
+	@RequestMapping("faq.no")
+	public String faqView() {
+
+		return "user/notice/notice_FaqView";
+	}
 }
+
+
+

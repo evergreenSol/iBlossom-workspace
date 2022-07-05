@@ -1,7 +1,9 @@
 package com.kh.iblossom.subscribe.model.service;
 
 import java.util.ArrayList;
+
 import com.kh.iblossom.subscribe.model.vo.SubProduct;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 
 public interface SubscribeService {
@@ -16,4 +18,7 @@ public interface SubscribeService {
 	int deleteSubProduct(int spno);
 
 	SubProduct selectSubProduct(int spno);
+
+	ArrayList<Subscribe> selectMySubscribe(int userNo);
+
 }

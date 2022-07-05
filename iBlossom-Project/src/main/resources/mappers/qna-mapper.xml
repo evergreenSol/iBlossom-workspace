@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="qnaMapper">
+	<resultMap id="qnaResultSet" type="qna">
+		<result column="QNA_NO" property="qnaNo" />
+		<result column="QNA_TITLE" property="qnaTitle" />
+		<result column="QNA_CONTENT" property="qnaContent" />
+		<result column="QNA_DATE" property="qnaDate" />
+		<result column="ANSWER" property="answer" />
+		<result column="ANSWER_DATE" property="answerDate" />
+		<result column="ANSWER_STATUS" property="answerStatus" />
+		<result column="USER_NO" property="userNo" />
+	</resultMap>
 
+	<select id="selectList" resultMap="qnaResultSet">
+  		SELECT QNA_NO, QNA_TITLE, QNA_DATE
+		FROM QNA
+		ORDER BY QNA_DATE DESC
+  	</select>
 
 </mapper>

@@ -18,31 +18,46 @@ div { box-sizing: border-box; }
 }
 
 .grade-first {
-    padding-left : 10%;
     border: none;
 }
+
+#p_second {
+	font-size: 14px;
+	font-weight: 600;
+	color: gray;
+}
+
+#hello {
+	font-size: 25px;
+	font-weight: 600;
+}
+
 
 .grade-second, .grade-third {
     border: none;
 }
 
-.grade-second h3 {
-    color : gray;
+#p_third {
+    font-size: 14px;
+	font-weight: 600;
+	color: gray;
 }
 
 .member-grade {
     font-weight: 600;
-    font-size: 25pt;
+    font-size: 30px;
 }
 
 .view-grade {
     text-decoration: none;
     color: black;
+    font-size: 14px;
 }
 
 .view-grade:hover {
 	cursor:pointer;
 	color: rgb(255 35 147);
+	font-weight : 700;
 }
 
 .grade-third h3 {
@@ -50,7 +65,8 @@ div { box-sizing: border-box; }
 }
 
 .member-period {
-    font-size: 25pt;
+    font-size: 30px;
+    font-weight: 600;
 }
 
 /* 등급 부분 끝 */
