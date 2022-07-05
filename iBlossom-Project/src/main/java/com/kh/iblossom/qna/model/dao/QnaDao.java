@@ -19,4 +19,11 @@ public class QnaDao {
 		
 	}
 
+
+@Repository
+public class QnaDao {
+		public ArrayList<Qna> selectList(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("qnaMapper.selectList");
+		}
 }

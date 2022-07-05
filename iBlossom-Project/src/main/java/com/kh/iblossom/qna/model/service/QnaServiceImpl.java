@@ -11,6 +11,18 @@ import com.kh.iblossom.qna.model.vo.Qna;
 
 @Service
 public class QnaServiceImpl implements QnaService {
+	
+	@Autowired
+	private QnaDao qnaDao;
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	@Override
+	public ArrayList<Qna> selectList() {
+
+		return qnaDao.selectList(sqlSession);
+	}
 
 	@Autowired
 	private QnaDao qnaDao;
