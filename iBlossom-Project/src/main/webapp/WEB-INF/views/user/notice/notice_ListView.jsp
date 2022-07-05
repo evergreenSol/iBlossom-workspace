@@ -28,14 +28,14 @@
 	            <br><br>
 	            <!-- <hr color="black" style="border: 1px solid black"> -->
 	            <li class="left_menu">
-	                <a href="">
+	                <a href="listView.no">
 	                    <span class="category-content">공지사항</span>
 	                    <span class="category-arrow">></span>
 	                </a>
 	            </li>
 	            <br>
 	            <li class="left_menu" >
-	                <a href="">
+	                <a href="contactus.no">
 	                    <span class="category-content">Contact Us</span>
 	                    <span class="category-arrow">></span>
 	                </a>
@@ -135,7 +135,6 @@ TIME TO BLOSSOM
     </script>
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     
 
     
