@@ -1,5 +1,7 @@
 package com.kh.iblossom.onedayclass.model.Service;
 
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;

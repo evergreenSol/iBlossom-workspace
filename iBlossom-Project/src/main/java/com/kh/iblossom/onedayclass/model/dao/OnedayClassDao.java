@@ -1,5 +1,7 @@
 package com.kh.iblossom.onedayclass.model.dao;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
