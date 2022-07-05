@@ -18,5 +18,9 @@ public class NoticeController {
 		return "user/notice/notice_ListView";
 	}
 
+	@RequestMapping("contactus.no")
+	public String contactusView() {
 
+		return "user/notice/notice_ContactusView";
+	}
 }
