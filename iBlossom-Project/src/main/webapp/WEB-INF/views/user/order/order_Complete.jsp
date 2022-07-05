@@ -13,15 +13,16 @@
     /* 전체 배경 색입히기 */
     .complete-outer { 
         background-color: whitesmoke; 
-        width: 1000px; 
-        height:600px;
+        width: 1200px; 
+        height: 600px;
+        margin: auto;
     }
 
     /* 하얀 네모박스 영역 */
     .complete-whitebox { 
         background-color:white; 
-        width: 750px;
-        height: 300px;
+        width: 900px;
+        height: 430px;
         padding: 50px;
         padding-left: 50px;
         text-align: center;
@@ -81,11 +82,14 @@
     
     <!-- 사용자 결제완료 페이지  -->
 
+	<br>
     <div class="complete-outer">
 
         <br>
 
-        <h1>주문/결제</h1>
+        <div style="margin-left: 150px; margin-top:20px; font-size:x-large; font-weight: 700;">주문/결제</div>
+
+        <br>
 
         <!-- 레이아웃 -->
         <div>
@@ -97,11 +101,10 @@
                     <div class="complete-graybox">
 
                         <div class="complete-graybox-div">
-                            <br><br>
+                            <br>
 
                             <!-- 체크 이미지 -->
-                            <div><img src=""></div>
-                            <br>
+                            <div><img src="resources/images/user_order_complete_check.png" style="width:55px; height:55px;"></div>
 
                             <!-- 멘트 -->
                             <div style="font-weight:bold; font-size:medium;">아무개님의 주문이 완료되었습니다.</div>
@@ -133,7 +136,9 @@
 
             </div>
 
-        </div> 
+        </div>
+        
+        <br><br> 
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
