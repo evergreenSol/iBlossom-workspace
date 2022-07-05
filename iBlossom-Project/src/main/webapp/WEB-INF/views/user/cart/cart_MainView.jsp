@@ -111,6 +111,11 @@
         padding: 5%;
     }
     
+    /* 안내사항 네모박스 div > li */
+    .cart-div>li {
+     	margin: 6px;
+    }
+    
     /* 결제하기 버튼 */
     .cart-btn { 
         width:100%; 
