@@ -40,6 +40,7 @@ public class SubscribeController {
 //		
 //		return "common/payView";
 //	}
+	
 	@RequestMapping("listView.su")
 	public String subscribeListView() {
 
@@ -77,19 +78,12 @@ public class SubscribeController {
 		
 		int result = subscribeService.insertSubProduct(sp);
 		
-		return "redirect:listView.su";
-		
-		/*
-		 * if(result > 0) { // 성공 => 게시글 리스트페이지로 url 재요청
-		 * 
-		 * session.setAttribute("alertMsg", "성공적으로 게시글이 등록되었습니다.");
-		 * 
-		 * return "redirect:listView.bo"; } else { // 실패 => 에러페이지 포워딩
-		 * 
-		 * model.addAttribute("errorMsg", "게시글 등록 실패");
-		 * 
-		 * return "common/errorPage"; // /WEB-INF/views/common/errorPage.jsp }
-		 */
+		if(result > 0) {
+			return "subscribe/subscribeUpdateForm";
+		}
+		else {
+			return "subscribe/subscribeUpdateForm";
+		}
 	}
 	
 	public String saveFile(MultipartFile subfile, HttpSession session) {

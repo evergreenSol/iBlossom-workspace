@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,7 @@
     <title>Document</title>
     <style>
 
-     </style>    
+    </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -50,26 +50,47 @@
 	                </a>
 	            </li>
 	            <br>
-	        </ul>
-	        
-	    </div> 
-	    
+	        </ul>	        
+	    </div> 	    
 	</div>
-    <div id="contact">
-        <h1>Contact Us</h1>
-        <pre>
-법인명(상호) : (주)나블러썸 
-
-대표자(성명) : 김한솔
-
-서울특별시 영등포구 선유동2로 57 이레빌딩
-사업자등록번호 123-456-78900 
-통신판매번호 : 2022-서울당산-3333 
-OPEN HOURS AM 11:00 - PM 5:00 | LUNCH TIME PM 1:00 - PM 2:00 | OFFICE DAY MON - FRI
-        </pre>
+	
+   <div id="list-container">
+        <h2>1대1 문의게시판</h2>
+        <button id="btn-write" href="">작성하기</button>
+        <table id="list-table">
+            <thead>
+                <tr>
+                    <th width="60">글번호</th>
+                    <th width="300">제목</th>
+                    <th width="70">작성자</th>
+                    <th width="110">작성일</th>
+                    <hr width="550" align="left">
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td width="60">3</td>
+                    <td width="300">안녕하세요</td>
+                    <td width="70">user03</td>
+                    <td width="110">2020-12-22</td>
+                </tr>
+                <tr>
+                    <td width="60">2</td>
+                    <td width="300">ㅋㅋㅋ재밌네요</td>
+                    <td width="70">user01</td>
+                    <td width="110">2020-10-02</td>
+                </tr>
+                <tr>
+                    <td width="60">1</td>
+                    <td width="300">자유게시판 서비스를 시작합니다/</td>
+                    <td width="70">admin</td>
+                    <td width="110">2020-03-30</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
+        <br><br><br><br><br><br><br><br><br><br><br>
     
 
     

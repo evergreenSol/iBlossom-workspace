@@ -57,13 +57,13 @@
     }
 
     /* 원데이클래스 주문페이지 스타일 */
-    #full{
+    #pay-full{
     width: 1200px;
     height: 800px;
     background-color: rgb(199, 195, 195);
     margin: auto; /* 중앙 맞춤 */
     }
-    #left{
+    #pay-left{
     width: 500px;
     float: left;
     margin-left: 100px;
@@ -71,21 +71,21 @@
     }
 
     /*주문상품정보*/
-    .info1{
+    .pay-info1{
     background-color: white;
     width: 400px;
     height: 200px;
     }
 
     /*주문자정보*/
-    .info2{
+    .pay-info2{
     background-color: white;
     width: 400px;
     height: 200px;
     margin-top: 30px;
     }
 
-    #right{
+    #pay-right{
     width: 400px;
     float: left;
     margin-top: 163px;
@@ -100,7 +100,7 @@
     }
 
     /*결제하기 버튼*/
-    #btn{
+    #pay-btn{
     margin-left: 0px;
     border-radius : 3px;
     background-color: black;
@@ -112,54 +112,54 @@
     }
 
     /*결제하기 제목*/
-    h2{
+    #payTitle{
     margin-left: -300px;
     font-size: 24px;
     }
 
     /*주문정보 내용*/
-    #content1{
+    #pay-content1{
     font-size: 18px;
     font-weight: 600;
     margin-left: -240px;
     padding-top: 20px;
     }
 
-    #content2{
+    #pay-content2{
     font-size: 18px;
     font-weight: 600;
     margin-left: -260px;
     padding-top: 20px;
     }
 
-    #content3{
+    #pay-content3{
     font-size: 18px;
     font-weight: 600;
     margin-left: -240px;
     padding-top: 20px;
     }
 
-    #content1_1, #content1_2, #content1_3 {
+    #pay-content1_1, #pay-content1_2, #pay-content1_3 {
     font-size: 17px;
     margin-left: 180px;
     padding-top: 15px;
     text-align: left;
     }
 
-    #content2_1, #content2_2, #content2_3 {
+    #pay-content2_1, #pay-content2_2, #pay-content2_3 {
     font-size: 17px;
     margin-left: 30px;
     padding-top: 15px;
     text-align: left;
     }
 
-    #content3_1{
+    #pay-content3_1{
     margin-top: 20px;
     margin-left: -200px;
     font-size: 18px;
     }
 
-    #content3_2{
+    #pay-content3_2{
     margin-top: 240px;
     margin-left: -30px;
     font-size: 18px;
@@ -182,7 +182,7 @@
     }
 
     /*상품이미지*/
-    #image{
+    #pay-image{
     margin-top: 10px;
     margin-left: 20px;
     }
@@ -205,7 +205,7 @@
 width: 550px;
 height: 300px;
       margin: auto;
-      margin-left: 570px;
+      margin-left: 600px;
       margin-top: 170px;
     }
 
@@ -263,19 +263,14 @@ height: 300px;
     #faq{
         position:absolute;
         margin-left: 600px;
-        margin-top: 170px;
+        margin-top: 150px;
     }
 
-    /*카테고리*/
-    #content{
-        margin-left: 200px;
-        margin-top: 170px;
-        position: absolute;
-    }
+
 
    /*문의게시판 리스트*/
     #list-container{
-        position:absolute;
+
         margin-left: 600px;
         margin-top: 170px;
     }
@@ -471,19 +466,19 @@ hr{
 
 /* 고객센터 관리자페이지 스타일 */
 /*admin 문의게시판 리스트*/
-#list-container{
+#admin-list-container{
      position:absolute;
      width: 800px;
      margin-left: 200px;
      margin-top: 10px;
 }
 
-#list-table tr {
+#admin-list-table tr {
      line-height:3;
      text-align: center;
 }
 
-#list-table tbody>tr:hover {
+#admin-list-table tbody>tr:hover {
     cursor: pointer;
 }
 
@@ -548,8 +543,11 @@ height: 97%;
     list-style-type : none;
     margin : 0px;
     padding : 0px;
-    height : 100%;
+   /* height : 100%;*/
     font-size: 16pt;
+    margin-top: 180px;
+    position: absolute;
+    margin-left: 200px;
 }
 
 #leftNavi1 {
@@ -576,7 +574,7 @@ height: 97%;
 }
 
 .category-arrow {
-    padding-left: 15%;
+    padding-left: 10%;
     position: absolute;
 }
 
