@@ -8,7 +8,7 @@ import com.kh.iblossom.notice.model.service.NoticeService;
 
 @Controller
 public class NoticeController {
-	
+
 	@Autowired 
 	private NoticeService noticeService;
 	 
