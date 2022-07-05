@@ -17,19 +17,14 @@ public class NoticeController {
 
 		return "user/notice/notice_ListView";
 	}
-<<<<<<< HEAD
+
 	
 	// contact us 호출만 함
-=======
-
-
->>>>>>> f08051f6463b7d8b1e09579dfb22ec22348853df
 	@RequestMapping("contactus.no")
 	public String contactusView() {
 
 		return "user/notice/notice_ContactusView";
 	}
-<<<<<<< HEAD
 	
 	// faq 호출만 함
 	@RequestMapping("faq.no")
@@ -38,7 +33,6 @@ public class NoticeController {
 		return "user/notice/notice_FaqView";
 	}
 }
-=======
-}
 
->>>>>>> f08051f6463b7d8b1e09579dfb22ec22348853df
+
+
