@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.iblossom.subscribe.model.dao.SubscribeDao;
 import com.kh.iblossom.subscribe.model.vo.SubProduct;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Service
 public class SubscribeServiceImpl implements SubscribeService {
@@ -28,6 +29,12 @@ public class SubscribeServiceImpl implements SubscribeService {
 	public int insertSubProduct(SubProduct sp) {
 		
 		return subscribeDao.insertSubProduct(sqlSession, sp);
+	}
+
+	@Override
+	public ArrayList<Subscribe> selectMySubscribe(int userNo) {
+		
+		return subscribeDao.selectMySubscribe(sqlSession, userNo);
 	}
 
 }
