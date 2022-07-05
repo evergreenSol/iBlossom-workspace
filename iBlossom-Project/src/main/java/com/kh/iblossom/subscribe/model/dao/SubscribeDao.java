@@ -35,8 +35,9 @@ public class SubscribeDao {
 	public SubProduct insertSubProduct(SqlSessionTemplate sqlSession, int spno) {
 		
 		return sqlSession.selectOne("subscribeMapper.selectSubProduct", spno);
+	}
 
-	
+	// 마이페이지 구독조회
 	public ArrayList<Subscribe> selectMySubscribe(SqlSessionTemplate sqlSession, int userNo) {
 		
 		ArrayList<Subscribe> list = new ArrayList<Subscribe>();

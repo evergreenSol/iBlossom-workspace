@@ -45,6 +45,8 @@ public class SubscribeServiceImpl implements SubscribeService {
 	public SubProduct selectSubProduct(int spno) {
 		
 		return subscribeDao.insertSubProduct(sqlSession, spno);
+		
+	}
 
 	@Override
 	public ArrayList<Subscribe> selectMySubscribe(int userNo) {
