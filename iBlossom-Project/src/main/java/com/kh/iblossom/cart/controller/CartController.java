@@ -13,7 +13,7 @@ public class CartController {
 	private CartService cartService;
 	
 	// 장바구니 
-	@RequestMapping("MainView.car")
+	@RequestMapping("mainView.car")
 	public String mainView() {
 	
 		return "user/cart/cart_MainView"; // /WEB-INF/views/user/cart/cart_MainView.jsp
