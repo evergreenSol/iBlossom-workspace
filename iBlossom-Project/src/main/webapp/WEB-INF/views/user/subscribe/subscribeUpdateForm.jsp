@@ -59,7 +59,7 @@
                     <li>
                         <a href="" class="admin-navi-menu" style="font-weight: 700;">정기구독관리</a>
                         <ul class="admin-navi-ul">
-                            <li><a href="">구독회원관리</a></li>
+                            <li><a href="subMemberListView.su">구독회원관리</a></li>
                             <li><a href="">구독상품관리</a></li>
                         </ul>
                     </li>
@@ -103,7 +103,7 @@
                           <table class="admin_product">
                               <tr>
                                   <td width="40%" height="300px">
-                                        <img id="admin_subproduct-img" src="${ sp.subChangeName }">
+                                        <img id="admin_subproduct_img" src="${ sp.subChangeName }">
                                   </td>
                                   <td width="60%">
                                        <textarea id="admin_subproduct_description" readonly>${ sp.subProductDescription }</textarea>
@@ -113,6 +113,8 @@
                          <h3>가격</h3>
                          <input type="text" id="admin_price" value="${ sp.subPrice }" readonly><span>원</span>
                        <br>
+                       <br>     
+           			   <button id="deleteSubProduct" onclick="deleteSubProduct(${ sp.subProductNo });">삭제</button>
                     </div>
                  </c:forEach>
               </c:otherwise>
@@ -129,7 +131,7 @@
                     <table class="admin_product">
                         <tr>
                             <td width="40%" height="300px" id="insertImg">
-                                  <img id="admin_subproduct-img" src="">
+                                  <img id="admin_preview_img">
                             </td>
                             <td width="60%">
                                  <textarea id="admin_subproduct_description" name="subProductDescription">
@@ -146,7 +148,6 @@
               </form>      
            </div>
            <button id="showHidden" onclick="showHidden();">추가</button>
-           <button id="deleteSubProduct" onclick="delteSubProduct();">삭제</button>
         </div>
         
 
@@ -160,8 +161,68 @@
       }
       
       $('#insertImg').click(function() {
-         $('#fileUpload').click()
+         $('#admin_fileUpload').click()
       }); 
+      
+
+      function deleteSubProduct(spno) {
+
+    	  console.log(spno);
+    	  
+    	  $.ajax({
+    		url : "delete.su",
+    		type : "post",
+    		data : { spno : spno },
+    		success : function(result) {
+    			console.log(result);
+    			if(result == "success") {
+    				location.href="listView.su";
+    			}
+    			else{
+    				alert("상품 삭제에 실패했습니다.");	
+    			}
+    		},
+    		error : function(result) {
+    			console.log(result);
+    			console.log("ajax 통신 실패");
+    		}
+    	})  
+      }
+      
+      $(function() {
+          $("#admin_fileUpload").on('change', function(){
+              readURL(this);
+          });
+      });
+      
+      function readURL(input) {
+          if (input.files && input.files[0]) {
+             var reader = new FileReader();
+             reader.onload = function (e) {
+                $('#admin_preview_img').attr('src', e.target.result);
+             }
+             reader.readAsDataURL(input.files[0]);
+          }
+      }
+      
+      // 가격 input 입력제한
+      var regExp = /[^0-9]/gi;
+      
+      $(document).ready(function(){
+          
+          $("#admin_price").on("focusout", function() {
+              var x = $(this).val();
+              if (x.length > 0) {
+                  if (x.match(regExp)) {
+                     x = x.replace(regExp, "");
+                  }
+                  $(this).val(x);
+              }
+          }).on("keyup", function() {
+              $(this).val($(this).val().replace(regExp, ""));
+          });
+   
+      });
       
    </script>
 </body>

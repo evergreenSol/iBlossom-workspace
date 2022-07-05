@@ -29,4 +29,16 @@
 		     , #{subOriginName}
 		     , #{subChangeName})
   	</insert>
+  	
+  	<delete id="deleteSubProduct" parameterType="int">
+  		DELETE
+  		FROM SUB_PRODUCT
+  		WHERE SUBPRODUCT_NO = #{ subProductNo }
+  	</delete>
+  	
+  	<select id="selectSubProduct" resultMap="subProductResultSet">
+  		SELECT *
+  		FROM SUB_PRODUCT
+  		WHERE SUBPRODUCT_NO = #{ subProductNo }
+  	</select>
 </mapper>
