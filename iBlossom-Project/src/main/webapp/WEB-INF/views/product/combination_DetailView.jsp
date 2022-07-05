@@ -1,22 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="resources/css/jsa.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+        integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+        integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="resources/css/jsa.css" rel="stylesheet">
 </head>
 <body>
 
 <jsp:include page="../common/header.jsp" />
 
- <br><br><br>
+    <br><br><br>
 
     <div id="wrap_detail1">
         <div style="width: 1000px;margin: auto;">
             <table>
                 <tr valign="top">
-                    <td rowspan="6"><img src="img/flower3.PNG">
+                    <td rowspan="6"><img src="resources/images/product_images/flower3.PNG">
                         <select id="test5">
                             <option value='' selected disabled style="text-align: center;">
                                 ---------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ---------
@@ -56,46 +70,7 @@
                 <div id="countBox1">
 
                     <form name="form" method="get">
-                        <!-- <div id="countWrite1">
-
-                        
                        
-                            <input type="text" value="장미" name="name"
-                                style="border: none; padding-left: 10px; padding-top: 5px;"><br><br>
-                            <input type=hidden name="sell_price" value="1000">
-                            <input type="button" value=" - " onclick="del();" style="margin-left: 10px;">
-                            <input type="text" name="amount" value="1" size="1" onchange="change();">
-                            <input type="button" value=" + " onclick="add();"><br><br><br>
-                        </div>
-                        <div id="countWrite1">
-
-                        
-                       
-                            <input type="text" value="장미" name="name"
-                                style="border: none; padding-left: 10px; padding-top: 5px;"><br><br>
-                            <input type=hidden name="sell_price" value="1000">
-                            <input type="button" value=" - " onclick="del();" style="margin-left: 10px;">
-                            <input type="text" name="amount" value="1" size="1" onchange="change();">
-                            <input type="button" value=" + " onclick="add();"><br><br><br>
-                        </div>
-                        <div id="countWrite1">
-
-                        
-                       
-                            <input type="text" value="장미" name="name"
-                                style="border: none; padding-left: 10px; padding-top: 5px;"><br><br>
-                            <input type=hidden name="sell_price" value="1000">
-                            <input type="button" value=" - " onclick="del();" style="margin-left: 10px;">
-                            <input type="text" name="amount" value="1" size="1" onchange="change();">
-                            <input type="button" value=" + " onclick="add();"><br><br><br>
-                        </div> -->
-
-
-
-
-
-
-
                 </div>
                 배송비:
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
@@ -137,22 +112,6 @@
 
         <div id="cobinationContent">
             <div id="combinationPhoto" style="overflow : hidden;">
-                <!-- 
-                    <table>
-                    <tr>
-                        <td><img src="img/flower6.PNG"></td>
-                        <td><img src="img/flower6.PNG"></td>
-                        <td><img src="img/flower6.PNG"></td>
-                        <td><img src="img/flower6.PNG"></td>
-                    </tr>
-                    <tr>
-                        <td><p>수국</p></td>
-                        <td><p>수국</p></td>
-                        <td><p>수국</p></td>
-                        <td><p>수국</p></td>
-                    </tr>
-                </table> 
-            -->
                 <br><br><br>
             </div>
 
@@ -172,15 +131,6 @@
     </div>
 
 
-    <!--푸터-->
-    <div id="footer-div">
-        <div id="footer-text">
-            <!-- 로고 -->
-            <img src="img/iBlossom_logo_white.png" id="footer-logo">
-            <p>아이블라썸(iBlossom) | 대표자 김한솔 | 사업자 등록번호 000-00-00000 | 서울특별시 영등포구 선유동2로 57 이레빌딩 19층 iBlossom<br>
-                © iBlossom, Inc. All rights reserved.</p>
-        </div>
-    </div>
     <!-- 수량 올릴 시 가격 변동-->
     <script>
 
@@ -278,17 +228,27 @@
             }
         }
 
-        function change() {
-            hm = $('#amount_' + name).val();
-            sum = document.form.sum;
-
-
-            if (hm < 0) {
-                HTMLDListElement = 0;
-            }
-
-            sum.value = parseInt(hm.value) * sell_price + 3000;
+        function removeItem(name){
+            var delValue = $("#sell_price_"+name).val();
+            var ea = $("#amount_"+name).val();
+            sumAll = sumAll - (parseInt(delValue)*parseInt(ea));
+            $("#sum").val(sumAll);
+            $("#name_"+name).parent().remove();
+        
         }
+
+
+        // function change() {
+        //     hm = $('#amount_' + name).val();
+        //     sum = document.form.sum;
+
+
+        //     if (hm < 0) {
+        //         HTMLDListElement = 0;
+        //     }
+
+        //     sum.value = parseInt(hm.value) * sell_price + 3000;
+        // }
 
 
 
@@ -310,16 +270,16 @@
             combinationContent = '<table>';
             combinationContent += '<tr>';
             combinationContent += '<td>';
-            combinationContent += '<img src="img/flower6.PNG" class="combination_img">';
+            combinationContent += '<img src="resources/images/product_images/flower6.PNG" class="combination_img">';
             combinationContent += '</td>';
             combinationContent += '<td>';
-            combinationContent += '<img src="img/flower6.PNG" class="combination_img">';
+            combinationContent += '<img src="resources/images/product_images/flower6.PNG" class="combination_img">';
             combinationContent += '</td>';
             combinationContent += '<td>';
-            combinationContent += '<img src="img/flower6.PNG" class="combination_img">';
+            combinationContent += '<img src="resources/images/product_images/flower6.PNG" class="combination_img">';
             combinationContent += '</td>';
             combinationContent += '<td>';
-            combinationContent += '<img src="img/flower6.PNG" class="combination_img">';
+            combinationContent += '<img src="resources/images/product_images/flower6.PNG" class="combination_img">';
             combinationContent += '</td>';
             combinationContent += '<tr>';
             combinationContent += '<td>';
@@ -345,7 +305,7 @@
             combinationContent += '</tr>';
             combinationContent += '<tr>';
             combinationContent += '<td>';
-            combinationContent += '<img src="img/flower6.PNG" class="combination_img>';
+            combinationContent += '<img src="resources/images/product_images/flower6.PNG" class="combination_img>';
             combinationContent += '</td>';
             combinationContent += '</table>';
 
@@ -366,17 +326,17 @@
             combinationreview += ' <br><br>';
             combinationreview += ' <hr>';
             combinationreview += '<div class="reviewbb">';
-            combinationreview += '<img class="img2" src="img/flower1.jpg">';
+            combinationreview += '<img class="img2" src="resources/images/product_images/flower1.jpg">';
             combinationreview += '<text class="text1">진짜 마음에 들어요</text>';
             combinationreview += '<span class="span1">우와 이쁘다 진짜 제 마음에 속 들어요</span>';
             combinationreview += '</div>';
             combinationreview += '<div class="reviewbb">';
-            combinationreview += '<img class="img2" src="img/flower1.jpg">';
+            combinationreview += '<img class="img2" src="resources/images/product_images/flower1.jpg">';
             combinationreview += '<text class="text1">진짜 마음에 들어요</text>';
             combinationreview += '<span class="span1">우와 이쁘다 진짜 제 마음에 속 들어요</span>';
             combinationreview += '</div>';
             combinationreview += '<div class="reviewbb">';
-            combinationreview += '<img class="img2" src="img/flower1.jpg">';
+            combinationreview += '<img class="img2" src="resources/images/product_images/flower1.jpg">';
             combinationreview += '<text class="text1">진짜 마음에 들어요</text>';
             combinationreview += '<span class="span1">우와 이쁘다 진짜 제 마음에 속 들어요</span>';
             combinationreview += '</div>';
@@ -394,7 +354,7 @@
             <div class="title">
                 <span style="font-size: 20px; margin-top:10px;">구매평 작성</span>
             </div>
-            <div class="close-area" onclick="modalOff()"><img src="img/x.png" style="width: 15px;"></div>
+            <div class="close-area" onclick="modalOff()"><img src="resources/images/product_images/x.png" style="width: 15px;"></div>
 
             <div class="content">
                 <hr>
@@ -465,7 +425,8 @@
             modal.style.display = "none"
         });
     </script>
- <jsp:include page="../common/footer.jsp" />
-
+    
+    <jsp:include page="../common/footer.jsp" />
 </body>
+
 </html>
