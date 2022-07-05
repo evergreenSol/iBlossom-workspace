@@ -530,6 +530,19 @@ hr{
 
 /* 마이페이지 카테고리 - 카테고리 나누기 끝 */
 
+#notice-wrap {
+	width: 1200px;
+        margin:auto;
+        
+}
+
+#content {
+	
+    width: 20%;
+    vertical-align: top;
+}
+
+
 /* 내용 들어간 부분 */
 .delete{
 margin-left: 10%;
@@ -546,9 +559,11 @@ height: 97%;
     padding : 0px;
    /* height : 100%;*/
     font-size: 16pt;
+
     margin-top: 180px;
     position: absolute;
     margin-left: 200px;
+
 }
 
 #leftNavi1 {
@@ -570,7 +585,7 @@ height: 97%;
 }
 
 .category-content {
-    width: 200px;
+    width: 100px;
     display: inline-block;
 }
 

@@ -213,8 +213,19 @@
 		    <artifactId>httpclient</artifactId>
 		    <version>LATEST</version>
 		</dependency>
-		   
-		   
+		
+		<!--  Email Test -->
+	   <dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.sun.mail</groupId>
+		    <artifactId>javax.mail</artifactId>
+		    <version>1.5.1</version>
+		</dependency>
+	   
 	</dependencies>
 	
 		
