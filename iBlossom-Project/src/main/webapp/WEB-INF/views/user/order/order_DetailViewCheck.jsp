@@ -14,7 +14,7 @@
     /* 전체 배경 색상 */
     #orderMainOuter {
     	width: 100%;
-    	height: 1400px;
+    	height: 1600px;
     	background-color: whitesmoke;
     }
     
@@ -36,10 +36,7 @@
     /* 오른쪽 섹션 */
     .order-right {
         width: 36%;
-
         float: right;
-        box-sizing: border-box;
-        background-color: whitesmoke;
     }
 
 	/* ----------------------------------------------------------- */
@@ -59,7 +56,7 @@
         padding: 35px;
         padding-left: 40px;
         /* margin: 10px; */
-        padding-bottom:30px;
+        padding-bottom: 40px;
     }
     
     /* 1. 주문내역 확인 2. 주문자 정보 3. 발신인 이름 
@@ -122,10 +119,12 @@
     /* 주문내역 확인 - 상품옵션확인 div */                        
     .order-check-list { 
         list-style: none;
+        margin-top: 50px;
     }
     
-    /* 주문자 정보 - 이름, 연락처 */
-    .orderer-name, .orderer-phone { 
+    /* 주문자 정보 - 이름, 연락처 / 발신인 이름 */
+    .orderer-name, .orderer-phone, #SenderBox>p { 
+        width: 620px;
         padding:10px; 
         background-color:rgba(241, 241, 241, 0.707); 
     }
@@ -163,7 +162,7 @@
         border-radius: 10px;
         border: 1px solid rgba( 255, 255, 255, 0.18 );
         width: 550px;
-        height: 560px;
+        height: 570px;
         position: relative;
         top: -100px;
         padding : 30px;
@@ -203,37 +202,49 @@
     .address-table>tr>td {
         width: 50px;
     }
+    
+    /* ----------------------------------------------------------- */
+    /* 슬라이드 업/다운 요소 버튼 */
 
     /* 누를 버튼 */
     #CheckBtn, #OrdererBtn, #SenderBtn {
-        width: 600px;
+        width: 700px;
         display: flex; 
         justify-content: space-between;
         border: none;
         background-color: none;
+        font-size : 16px;
     }
 
-    /* 내용 박스 : 주문내역 확인  */
+    /* 내용 박스 */
     #CheckBox, #OrdererBox, #SenderBox {
         width: 600px;
         margin-top: 20px;
+        display: none;
         /* height: 600px; */
-        /* background-color: yellow; */
-        /* border: 5px solid green; */
     }
+    
+    / *주문 내역 확인 박스 가운데 정렬 */
+    #CheckBox { margin: auto; }
 
     /* ----------------------------------------------------------- */
     /* 사용자 주문 페이지 오른쪽 영역 */
+    
+    /* 전체 옵션 */
+    .order-right-wrap {
+    	background-color:white;
+    	padding: 5px;
+    }
     
     /* 총 주문 금액, 배송비, 등급할인 */
     .order-price, .order-delivery, .order-grade {
         display:flex;
         justify-content: space-between;
         padding: 5px;
-        margin: 15px 15px 15px 15px;
+        margin: 10px 15px 15px 15px;
     }
     
-    /**/
+    /* 총 주문 금액 위에 공간 주기 */
     .order-price>span {
     	margin-top: 20px;
     }
@@ -244,7 +255,7 @@
         justify-content: space-between;
         padding: 10px;
         font-weight: bold;
-        margin: 5px 15px 1px 15px;
+        margin: 25px 15px 1px 15px;
     }
 
     /* 이용약관 네모박스 */
@@ -331,7 +342,7 @@
                         <!-- 타이틀 -->
                         <div class="order-check">
                             <button id="CheckBtn">
-                                <p>&nbsp;주문내역 확인
+                                <p>주문내역 확인
                                     <span>&nbsp;(2)</span>
                                 </p>
                                 <p><span>∨&nbsp;&nbsp;</span></p>
@@ -349,7 +360,8 @@
 
                                 <!-- 상품 이미지 -->
                                 <span>
-                                    <img src="">
+                                    <img src="resources/images/cart_flower_1.png"
+                                    	 style="width:250px; height:250px;">
                                 </span>
 
                                 <!-- 상품 옵션 확인란 -->
@@ -380,7 +392,8 @@
 
                                 <!-- 상품 이미지 -->
                                 <span>
-                                    <img src="">
+                                    <img src="resources/images/order_flower_2.png"
+                                    	 style="width:250px; height:250px;">
                                 </span>
 
                                 <!-- 상품 옵션 확인란 -->
@@ -414,7 +427,7 @@
                         <div class="order-orderer">
                             <button id="OrdererBtn">
 
-                                <p>&nbsp;주문자 정보</p>
+                                <p>주문자 정보</p>
                                 <!-- 입력내용 보여지는 태그-->
                                 <p>
                                     <span>아무개, &nbsp;010-0000-0000</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
@@ -435,7 +448,7 @@
                             <p class="orderer-phone">010-0000-0000</p>
 
                             <!-- 안내문구 -->
-                            <p class="orderer-guide" style="font-size:x-small">
+                            <p class="orderer-guide" style="font-size:small">
                                 * 주문자 정보변경은 마이페이지 > 개인정보수정에서 가능합니다.
                             </p>
                             <br>
@@ -445,7 +458,7 @@
                     <div>
                         <div class="order-sender">
                             <button id="SenderBtn">
-                                <p>&nbsp;발신인 이름</p><p><span>∨</span></p>
+                                <p>발신인 이름</p><p><span>∨</span></p>
                             </button>
                         </div>
 
@@ -459,7 +472,7 @@
                     <!-- 4. 배송지 정보 -->
                     <div>
                         <div class="order-address">
-                            <p>&nbsp;배송지 정보</p>
+                            <p>&nbsp;&nbsp;배송지 정보</p>
                         </div>
                     </div>
 
@@ -503,7 +516,7 @@
                                     <input type="text" name="zipcode" id="zipcode" size="70" readonly placeholder="우편번호 검색"
                                             style="border:none; width:350px; height: 50px; display: inline-block; border:none; width:310px; height: 40px; font-size: 18px;">
                                     <input type="button" value="우편번호찾기" onclick="kakaopost()"
-                                            style="border:none; width:150px; height: 50px; font-size: 15px;"><br>
+                                            style="border:none; width:146px; height: 50px; font-size: 15px;"><br>
                                     <hr>
 
                                     <!-- 주소 -->
@@ -572,7 +585,7 @@
                     <!-- 6. 결제수단 -->
                     <div>
                         <div class="order-payment">
-                            <p>&nbsp;결제수단</p>
+                            <p>&nbsp;&nbsp;결제수단</p>
                         </div>
                     </div>
 
@@ -611,7 +624,7 @@
 
             <br><br>
 
-            <div style="background-color:white; margin:10px;">
+            <div class="order-right-wrap">
 
                 <!-- 총 주문 금액 -->
                 <div class="order-price">
@@ -647,13 +660,13 @@
                     </div>
                 </div>
 
-                <!-- 결제하기 버튼 -->
-                <div>
-                    <button class="order-btn" type="submit" onclick="location.href='complete.ord'">결제하기</button>
-                </div>
-
+			</div>
+			
+            <!-- 결제하기 버튼 -->
+            <div>
+                <button class="order-btn" type="submit" onclick="location.href='complete.ord'">결제하기</button>
             </div>
-
+            
         </div><!-- 1200px 너비 -->
       	</div><!-- 전체 색상 변경 div -->
 

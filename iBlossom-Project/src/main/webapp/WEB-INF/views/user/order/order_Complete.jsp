@@ -14,7 +14,7 @@
     .complete-outer { 
         background-color: whitesmoke; 
         width: 100%; 
-        height: 600px;
+        height: 630px;
         margin: auto;
     }
 
@@ -22,9 +22,9 @@
     .complete-whitebox { 
         background-color:white; 
         width: 900px;
-        height: 430px;
-        padding: 50px;
-        padding-left: 50px;
+        height: 390px;
+        padding: 20px;
+        padding-left: 20px;
         text-align: center;
         margin: auto; /*가운데 정렬*/
     }
@@ -33,10 +33,10 @@
     .complete-graybox { 
         background-color: rgba(231, 231, 231, 0.738);
         display: inline-block;
-        width: 700px;
+        width: 800px;
         height: 200px;
         text-align: center;
-        margin-top: 20px;
+        margin-top: 50px;
     }
     
     /* 회색 네모박스 안에 내용물 감싸는 틀 */
@@ -73,6 +73,15 @@
         border: none;
         background-color: rgb(28, 26, 26); 
     }
+    
+    /* 주문/결제 타이틀 */
+    .order-title {
+    	width: 940px; 
+    	margin: auto; 
+    	margin-top: 15px; 
+    	font-size: x-large; 
+    	font-weight: 700;
+    }
 
 </style>
 </head>
@@ -88,7 +97,7 @@
 
         <br><br>
 
-        <div style="width:900px; margin:auto; margin-top:15px; font-size:x-large; font-weight: 700;">주문/결제</div>
+        <div class="order-title">주문/결제</div>
 
         <br>
 
@@ -105,7 +114,7 @@
                             <br>
 
                             <!-- 체크 이미지 -->
-                            <div><img src="resources/images/user_order_complete_check.png" style="width:54px; height:54px;"></div>
+                            <div><img src="resources/images/order_complete_check.png" style="width:54px; height:54px;"></div>
 
                             <!-- 멘트 -->
                             <div style="font-weight:bold; font-size:medium;">아무개님의 주문이 완료되었습니다.</div>

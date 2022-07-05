@@ -80,7 +80,7 @@
         display: flex; 
         justify-content: space-between; 
         padding: 50px;
-        height: 300px; 
+        height: 340px;
     }
     
     /* 수량 버튼 */
@@ -90,6 +90,12 @@
 	    font-weight: 600; 
 	    width:25px; 
 	    height: 25px;
+    }
+    
+    /* 상세옵션 내용 */
+    .cart-content3 {
+    	margin-top:30px; 
+    	line-height: 20px;
     }
     
     /* 총주문금액 X 마우스 hover */
@@ -188,13 +194,13 @@
 	            <div class="cart-content">
 	
 	                <!-- 장바구니 라디오 버튼 -->
-	                <p class="cart-content1" style="line-height: 150px;">
+	                <p class="cart-content1" style="line-height: 200px;">
 	                    <input type="radio">
 	                </p>
 	
 	                <!-- 장바구니 이미지 -->
 	                <span class="cart-content2">
-	                    <img src="resources/images/user_cart_main_view.png" style="width:200px; height:200px;">
+	                    <img src="resources/images/cart_flower_1.png" style="width:250px; height:250px;">
 	                </span>
 	
 	                <!-- 장바구니 선택항목 상세옵션 -->
@@ -225,7 +231,7 @@
 	                </span>
 	
 	                <!-- 총 주문 금액 span -->
-	                <p class="cart-content4" style="line-height: 150px;">
+	                <p class="cart-content4" style="line-height: 200px;">
 	                	6,900원 
 	                	<a href="">X</a>
 	                </p>
