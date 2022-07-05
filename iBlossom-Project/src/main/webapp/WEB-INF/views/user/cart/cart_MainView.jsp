@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Cart_MainView</title>
+<title>user_Cart_MainView</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link href="resources/css/ldo.css" rel="stylesheet">
+<link href="resources/css/ldo-user.css" rel="stylesheet">
 <style>
     
     /* 사용자 장바구니 페이지 레이아웃 */
@@ -92,7 +92,18 @@
 	    width:25px; 
 	    height: 25px;
     }
+    
+    /* 총주문금액 X 마우스 hover */
+    .cart-content4>a:hover { 
+    	font-weight: 600;
+    	/* color: #ff2393; */ 
+    }
 
+	/* 총주문금액 X a 태그 */
+	.cart-content4>a {
+		 text-decoration: none;
+	}
+	
     /* ----------------------------------------------------------- */
 
     /* 사용자 장바구니 페이지 오른쪽 영역 */
@@ -217,7 +228,7 @@
 	                <!-- 총 주문 금액 span -->
 	                <p class="cart-content4" style="line-height: 150px;">
 	                	6,900원 
-	                	<a href="" style="text-decoration:none;">X</a>
+	                	<a href="">X</a>
 	                </p>
 	            
 	            </div>
@@ -313,7 +324,7 @@
 	
 	        <!-- 결제하기 버튼 -->
 	        <div>
-	            <button class="cart-btn" type="submit" onclick="">결제하기</button>
+	            <button class="cart-btn" type="submit" onclick="location.href='order_DetailViewCheck.jsp'">결제하기</button>
 	        </div>
 	        
 	    </div>

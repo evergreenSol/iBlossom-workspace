@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Order_Complete</title>
+<title>user_Order_Complete</title>
 <link href="resources/css/ldo.css" rel="stylesheet">
 <style>
 
