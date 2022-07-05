@@ -162,12 +162,28 @@
                 $(this).css("color","black").css("border-bottom-width","2px").css("border-bottom-color","rgb(255 35 147)"); // 핑크 치우려면 이 컬러 지우면 댐
                 $("#show-order").css("color","rgb(209 209 209)").css("border-bottom-width","1px").css("border-bottom-color","rgb(209 209 209)");
 
-                console.log("찍")
                 $("#mypage-view-order").hide();
                 $("#mypage-view-cancel").show();
 
             });
 
+            /*
+            
+            $.ajax({
+            	url : "",
+            	data : {},
+            	success : function () {
+            		// 배열로 받아올 것인데, 그 중 첫 번째
+            		// 사진을 주문 사진에 넣어주기.
+            	},
+            	error : function () {
+            		console.log("실패");
+            	}
+            	
+            });
+            
+            */
+            
         });
 
     </script>

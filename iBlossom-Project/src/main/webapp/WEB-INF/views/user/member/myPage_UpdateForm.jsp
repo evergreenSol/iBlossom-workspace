@@ -40,19 +40,24 @@
                         <form id="update-form" action="update.me" method="post">
                         
 	                        <p style="font-size: 14px; font-weight: 600;">이름</p>
-	                        <input type="text" class="mypage-w" name="userName" value="">
+	                        <input type="text" class="mypage-w" name="userName" value="${ loginUser.userName }">
 	
 	                        <p style="font-size: 14px; font-weight: 600;">아이디</p>
-	                        <input type="text" class="mypage-w" name="userId" eadonly value="">
+	                        <input type="text" class="mypage-w" name="userId" readonly value="${ loginUser.userId }">
+	                        
+	                        <input type="hidden" name="userPwd" value="${ loginUserPwd }">
 	
-	                        <p style="font-size: 14px; font-weight: 600;">신규비밀번호</p>
-	                        <input type="password" class="mypage-w" name="userPwd" value="">
+	                        <p style="font-size: 14px; font-weight: 600;">신규 비밀번호</p>
+	                        <input type="password" class="mypage-w" name="newUserPwd" value="">
+	
+							<p style="font-size: 14px; font-weight: 600;">신규 비밀번호 확인</p>
+	                        <input type="password" class="mypage-w" name="chkPwd" value="">
 	
 	                        <p style="font-size: 14px; font-weight: 600;">휴대폰번호</p>
-	                        <input type="phone" class="mypage-w" name="phone" value="">
+	                        <input type="text" class="mypage-w" id="phone" name="phone" value="${ loginUser.phone }" placeholder="-포함하여입력해주세요" maxlength="13">
 	
 	                        <p style="font-size: 14px; font-weight: 600;">우편번호</p>
-	                        <input type="text" class="mypage-w" id="postcode_kakao" name="postcode" readonly value="" >
+	                        <input type="text" class="mypage-w" id="postcode_kakao" name="postcode" readonly value="${ loginUser.postcode }" >
 	
 	                        <p style="font-size: 14px; font-weight: 600;">주소</p>
 	                        <input type="text" class="mypage-w" id="address_kakao" readonly value="" readonly>
@@ -65,8 +70,8 @@
 	
 	                        <br><br><br>
 	                        <div class="mypage-revise-wrap" align="center">
-	                            <button class="mypage-revise" href="deleteForm.me" style="margin:px">탈퇴하기</a>
-	                            <button type="submit" class="mypage-revise" >수정하기</a>
+	                            <button type="button" class="mypage-revise" onclick="location.href='deleteForm.me';">탈퇴하기</button>
+	                            <button type="submit" class="mypage-revise" onclick="return validate();">수정하기</button>
 	                        </div>
                         </form>
 
@@ -105,6 +110,60 @@
 			$("#address").val($("#address_kakao").val() + " " + str);
 
     	}
+        
+        function validate() {
+        	
+        	var phone = document.getElementById("phone").value;
+			console.log(phone);
+			
+			//핸드폰 검사
+			regExp = /^010-[0-9]{4}-[0-9]{4}$/;
+			if(!regExp.test(phone)){ //핸드폰 번호가 유효하지 않을 경우
+				
+				alert("유효한 핸드폰 번호 양식이 아닙니다. - 포함해서 입력해 주세요.");
+			
+				document.getElementById("phone").value = phone;
+				document.getElementById("phone").focus();
+	
+				return false;
+			}
+			
+			
+			// 비밀번호 검사
+			
+			// 새 비번 안쓴 경우 true
+			if($("input[name=newUserPwd]").val() == "" && $("input[name=chkPwd]").val() == "") {
+				
+				// 기존 name이 userPwd인 값이 넘어감.
+				return true;
+			}
+			
+			if($("input[name=newUserPwd]").val() != $("input[name=chkPwd]").val()) {
+				// 새 비번과 새비번(확인)이 같지 않을 경우
+				
+				alert("새 비밀번호가 일치하지 않습니다.");
+				$("input[name=newUserPwd]").focus();
+
+				return false;
+			}
+			
+			if($("input[name=userPwd]").val() == $("input[name=newUserPwd]").val()) {
+				// 현재 비번과 새 비번이 같을 경우
+				
+				alert("기존 비밀번호와 일치합니다.");
+				$("input[name=newUserPwd]").focus();
+
+				return false;
+			}
+			
+			if($("input[name=newUserPwd]").val() == $("input[name=chkPwd]").val()) {
+				
+				// userName 값에 che
+				$("input[name=userPwd]").val($("input[name=chkPwd]").val());
+				return true;
+			}
+        	
+        }
         
         
     </script>
