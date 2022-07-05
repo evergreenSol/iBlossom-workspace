@@ -188,8 +188,8 @@
     }
 
 /* 고객센터 스타일 */
-    /*공지사항 제목 스타일*/
-    .cus-title {     
+   /*공지사항 제목 스타일*/
+ .cus-title {     
         width : 500px;
         height: 30px;
         text-align : left;
@@ -202,15 +202,17 @@
 
     /*공지전체 틀*/       
     #notice-content{
-        position: absolute;
-        margin-top: 160px;
-        margin-left: 600px;
+width: 550px;
+height: 300px;
+      margin: auto;
+      margin-left: 570px;
+      margin-top: 170px;
     }
 
     /*공지 내용*/
     .content1 {
         width : 500px;
-        height : 240px;
+        height : 320px;
         margin-top : 5px;
         padding : 10px;
         box-sizing : border-box;
@@ -221,14 +223,14 @@
     .notice-date{
         position:absolute;
         margin-left: 400px;
-        margin-top: -30px;
+        margin-top: -20px;
     }
-
+    
      /*contact us 내용전체*/
      #contact{
         position:absolute;
         margin-left: 600px;
-        margin-top: 200px;
+        margin-top: 160px;
      }
 
 
@@ -548,7 +550,6 @@ height: 97%;
     padding : 0px;
     height : 100%;
     font-size: 16pt;
-    position: absolute;
 }
 
 #leftNavi1 {
@@ -576,6 +577,7 @@ height: 97%;
 
 .category-arrow {
     padding-left: 15%;
+    position: absolute;
 }
 
 .left_menu a {
