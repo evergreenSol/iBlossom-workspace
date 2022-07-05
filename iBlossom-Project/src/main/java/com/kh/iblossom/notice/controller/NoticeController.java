@@ -18,5 +18,4 @@ public class NoticeController {
 		return "user/notice/notice_ListView";
 	}
 
-
 }
