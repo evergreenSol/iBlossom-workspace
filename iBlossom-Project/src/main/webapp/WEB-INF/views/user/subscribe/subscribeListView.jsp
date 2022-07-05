@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.text.SimpleDateFormat, java.util.Date" %>
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +15,7 @@
 <link href="resources/css/kdh.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="../common/header.jsp" />
+	<jsp:include page="../../common/header.jsp" />
     
     <div class="wrap">
         <!-- 사진 영역 -->
@@ -21,7 +26,10 @@
 
         <!-- 이용 안내 -->
         <div class="info">
-            <table class="info">
+        <br>
+        <h1>이용안내</h1>
+        <br>
+            <table class="info_table">
                 <tr>
                     <td height="150px" width="250px"><img src="resources/images/step1.png" id="info_img"></td>
                     <td width="200/3px"></td>
@@ -58,13 +66,17 @@
             
 
 	            <!-- tr 마다 따로 c:forEach 로 -->
-	            <table class="sub_list"> 
-	               <!-- <c:forEach var="s" items="${ list }">--> <!-- SUB_PRODUCT 테이블로부터 읽어오기-->   
-	                <!-- </c:forEach>-->
-	                <tr id="sub_list_product">
-	                    <td height="250px" width="250px" id="sub_list_img"><img src="resources/images/test.png" id="list_img"></td><!--<img src="${ s.subChangeName }"-->
-	                    <td id="subproduct_name">정기구독 상품명<!-- ${ s.subProductName }--></td>
-	                </tr>
+	            <table class="sub_list_table"> 
+	                <c:forEach var="sp" items="${ list }"> <!-- SUB_PRODUCT 테이블로부터 읽어오기-->   
+		                <tr class="sub_list_product">
+		                	<td class="spno">${ sp.subProductNo }</td>
+		                    <td height="250px" width="250px" class="sub_list_img" id="sub_list_img">
+		                    	<img src="${ sp.subChangeName }" id="list_img">
+		                    </td>
+		                    <td id="subproduct_name" style="margin-top:30px;">${ sp.subProductName }</td>
+		                    <td id="subproduct_description">${ sp.subProductDescription }</td>
+		                </tr>
+	                </c:forEach>
 	            </table>
 	            <br><br>
 	        </div>
@@ -80,8 +92,7 @@
 	                <tr>
 	                    <td rowspan="6" width="360px;" height="400;"><img src="resources/images/test.png" id="period_img"></td>
 	                    <td colspan="2" height="50"><br><br>첫 수령일을 선택하세요.<br>
-
-	                        <input type="text" class="datepicker" id="datepicker" required>
+	                        <input type="text" class="datepicker" id="datepicker" name="deliverAt" required>
 	                    </td>
 	                </tr>
 	
@@ -137,8 +148,8 @@
 	                    <td>구독 상품금액<!--${ s.subPrice * s.subLevel }--></td>
 	                </tr>
 	                <tr>
-	                    <td height="50px"><button onclick="">이전</button></td>
-	                    <td height="50px"><button onclick="window.reload();">결제</button></td>
+	                    <td height="50px"><button onclick="location.reload();">이전</button></td>
+	                    <td height="50px"><button onclick="">결제</button></td>
 	                </tr>
 	            </table>
 	        </div>   
@@ -152,16 +163,41 @@
  
 	<script>
 	// 정기구독 상품 클릭 시
-	$('#sub_list_product').click(function() {
-        $('#sub_list_img').css("border","2px solid rgb(255,35,147)")
-		$('.sub_period').removeAttr("hidden")
+	$('.sub_list_product').click(function() {
+		$('.sub_list_img').css("border","1px solid rgb(243,243,243)")
+		var spno = $(this).children(".spno").text();
+        showSubPeriod(spno);
+		$(this).children('#sub_list_img').css("border","1px solid rgb(255,35,147)")
 	});
+	
+	function showSubPeriod(spno) {
+		$.ajax({
+			url : "getSubProduct.su",
+			type : "post",
+			data : { spno : spno },
+			success : function(response) {
+				$('.sub_period').removeAttr("hidden")
+				$('#period_img').attr('src', response.subChangeName);
+				$('#product_img').attr('src', response.subChangeName);
+			},
+			error : function() {
+				console.log("ajax 통신 실패");
+			}
+		});
+	}
 	
 	// 구독 개월 수 클릭 시
 	$('.sub_level').click(function() {
-		$('.sub_level').css("border","1px solid lightgrey")
-		$(this).css("border","2px solid rgb(255,35,147)")
-		$('.sub_product').removeAttr("hidden")
+		
+		if($('#datepicker').val().length > 1) {
+			$('.sub_level').css("border","1px solid lightgrey")
+			$(this).css("border","2px solid rgb(255,35,147)")
+			$('.sub_product').removeAttr("hidden")
+		}
+		else {
+			alert("첫 수령일을 먼저 선택해주세요");
+		}
+		
 	});
 
 	// datepicker 용 jQuery
@@ -175,18 +211,22 @@
 	  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
 	  dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
 	  showMonthAfterYear: true,
-	  yearSuffix: '년'
+	  yearSuffix: '년',
+	  minDate: "+1D", //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+      maxDate: "+1M"
 	});
 	
 	$(function () {
 	  $('.datepicker').datepicker();
 	});
+	
+	
 		
 	
 		
 		
 	</script>
     
-    <jsp:include page="../common/footer.jsp" />
+    <jsp:include page="../../common/footer.jsp" />
 </body>
 </html>

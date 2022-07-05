@@ -41,23 +41,21 @@
 	            </li>
 	            <br>
 	            <li class="left_menu">
-	                <a href="">
+	                <a href="qnaList.qu">
 	                    <span class="category-content">1대1 문의</span>
 	                    <span class="category-arrow">></span>
 	                </a>
 	            </li>
 	            <br>
 	            <li class="left_menu">
-	                <a href="">
+	                <a href="faq.no">
 	                    <span class="category-content">FAQ</span>
 	                    <span class="category-arrow">></span>
 	                </a>
 	            </li>
 	            <br>
-	        </ul>
-	        
-	    </div> 
-	    
+	        </ul>	        
+	    </div> 	    
 	</div>
 
 
@@ -129,7 +127,7 @@ TIME TO BLOSSOM
         });
     </script>
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br>
     
 
     

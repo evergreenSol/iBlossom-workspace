@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kh.iblossom.member.model.service.MemberService;
 import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.onedayclass.model.Service.OnedayClassService;
-import com.kh.iblossom.onedayclass.model.vo.OnedayClass;
 import com.kh.iblossom.product.model.service.ProductService;
-import com.kh.iblossom.product.model.vo.Review;
+import com.kh.iblossom.qna.model.service.QnaService;
+import com.kh.iblossom.qna.model.vo.Qna;
+import com.kh.iblossom.subscribe.model.service.SubscribeService;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Controller
 public class MemberController {
@@ -28,6 +30,12 @@ public class MemberController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private QnaService qnaService;
+	
+	@Autowired
+	private SubscribeService subscribeService;
 	
 	@Autowired
 	 private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -68,7 +76,17 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="subscribeView.me")
-	public String MyPageSubscribeView() {
+	public String MyPageSubscribeView(HttpSession session, Model model) {
+		
+		/*
+		
+		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		
+		ArrayList<Subscribe> list = subscribeService.selectMySubscribe(userNo);
+		
+		model.addAttribute("list", list);
+		
+		*/
 		
 		return "user/member/myPage_SubscribeView";
 	}
@@ -110,7 +128,7 @@ public class MemberController {
 		return "user/member/myPage_DeleteForm";
 	}
 	
-	@RequestMapping(value="oneDayClass.me")
+	@RequestMapping(value="onedayClass.me")
 	public String MyPageOneDayClass(HttpSession session, Model model) {
 		
 		/*
@@ -123,7 +141,7 @@ public class MemberController {
 		
 		*/
 		
-		return "user/member/myPage_OneDayClass";
+		return "user/member/myPage_OnedayClass";
 	}
 	
 	@RequestMapping(value="reviewListView.me")
@@ -141,7 +159,18 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="qnaListView.me")
-	public String MyPageQnaListView() {
+	public String MyPageQnaListView(HttpSession session, Model model) {
+		
+		/*
+
+		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		
+		ArrayList<Qna> list = qnaService.selectMyQna(userNo);
+		
+		model.addAttribute("list", list);
+		
+		*/
+		
 		return "user/member/myPage_QnaListView";
 	}
 	

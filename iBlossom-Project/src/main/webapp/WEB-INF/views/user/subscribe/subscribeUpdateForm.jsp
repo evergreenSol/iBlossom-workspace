@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="resources/css/jsa.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link href="resources/css/kdh.css" rel="stylesheet">
 </head>
 <body>
 
@@ -19,7 +20,7 @@
             <!-- 로고 -->
             <div id="admin-logo-div">
                 <a href="" id="admin-logo-a">
-                    <img src="resources/images/product_images/iBlossom_logo_black.png">
+                    <img src="resources/images/iBlossom_logo_black.png">
                  </a>
              </div>
 
@@ -56,13 +57,13 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="" class="admin-navi-menu">정기구독관리</a>
+                        <a href="" class="admin-navi-menu" style="font-weight: 700;">정기구독관리</a>
                         <ul class="admin-navi-ul">
-                            <li><a href="">구독회원관리</a></li>
+                            <li><a href="subMemberListView.su">구독회원관리</a></li>
                             <li><a href="">구독상품관리</a></li>
                         </ul>
                     </li>
-                    <li><a href="" class="admin-navi-menu" style="font-weight: 700;">상품관리</a></li>
+                    <li><a href="" class="admin-navi-menu">상품관리</a></li>
                     <li><a href="" class="admin-navi-menu">리뷰관리</a></li>
                     <li><a href="" class="admin-navi-menu">클래스관리</a></li>
                     <li>
@@ -84,39 +85,40 @@
     <!-- admin 관리자페이지 회원관리 -->
     <div id="admin-member-wrap">
 
-        <span id="admin-member-title">상품등록화면</span>
+        <span id="admin-member-title">회원관리</span>
         <hr id="admin-member-hr">
 
         <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
         <div class="wrap">
+           <c:choose>
+              <c:when test="${ empty list }">
+                 <h4>아직 진열된 상품이 없습니다.</h4>
+              </c:when>
+              <c:otherwise>
+                 <c:forEach var="sp" items="${ list }"> <!-- SUB_PRODUCT 테이블로부터 읽어오기 -->   
                     <div class="admin_sub_product">
-                         <h3>카테고리명</h3>
-                         <input type="text" id="admin_category_name" name="admin_category_name" value="" readonly>
-
                          <h3>상품명</h3>
-                         <input type="text" id="admin_product_name" name="admin_product_name" value="" readonly>
-
-                         <h3>태그</h3>
-                         <input type="text" id="admin_tag_name" name="admin_tag_name" value="" readonly>
-
+                         <input type="text" id="admin_subproduct_name" value="${ sp.subProductName }" readonly>
                          <h3>썸네일</h3>
                           <table class="admin_product">
                               <tr>
-                                  <td>
-                                        <img id="admin_product-img" src="resources/images/product_images/flower 2.PNG">
+                                  <td width="40%" height="300px">
+                                        <img id="admin_subproduct_img" src="${ sp.subChangeName }">
                                   </td>
-                                  <td>
-                                    <img id="admin_product-img" src="resources/images/product_images/flower 2.PNG">
-                              </td>
                                   <td width="60%">
-                                       <textarea id="admin_product-description" name="product_description" readonly></textarea>
+                                       <textarea id="admin_subproduct_description" readonly>${ sp.subProductDescription }</textarea>
                                   </td>
                               </tr>
                           </table>
                          <h3>가격</h3>
-                         <input type="text" id="admin_price" name="price" value="" readonly><span>원</span>
+                         <input type="text" id="admin_price" value="${ sp.subPrice }" readonly><span>원</span>
                        <br>
+                       <br>     
+           			   <button id="deleteSubProduct" onclick="deleteSubProduct(${ sp.subProductNo });">삭제</button>
                     </div>
+                 </c:forEach>
+              </c:otherwise>
+           </c:choose>
            <br>
            <hr>
            <br>
@@ -126,34 +128,102 @@
                    <input type="text" id="admin_subproduct_name" name="subProductName">
                    <h3>썸네일</h3>
                    <input id="admin_fileUpload" type="file" name="subfile" hidden>
-                    <table class="product">
+                    <table class="admin_product">
                         <tr>
                             <td width="40%" height="300px" id="insertImg">
-                                  <img id="admin_subproduct-img" src="">
+                                  <img id="admin_preview_img">
                             </td>
                             <td width="60%">
-                                 <textarea id="admin_product-description" name="subProductDescription">
+                                 <textarea id="admin_subproduct_description" name="subProductDescription">
                                  </textarea>
                             </td>
                         </tr>
                     </table>
                    <h3>가격</h3>
-                   <input type="text" id="admin_price" name="price" required><span>원</span>
+                   <input type="text" id="admin_price" name="subPrice" required><span>원</span>
               <br>
               <br>
-             
-              <!-- <button id="insertProduct" type="submit">추가</button> -->
-              <!-- <button id="reload" onclick="location.reload();">이전</button> -->
-              </form>
-                    
+              <button id="insertSubProduct" type="submit">추가</button>
+              <button id="reload" onclick="location.reload();">이전</button>
+              </form>      
            </div>
-           <button type="submit" id="insertProduct" style="margin-left: 1000px;">등록</button>
-           <button id="deleteProduct">삭제</button>
-   
+           <button id="showHidden" onclick="showHidden();">추가</button>
         </div>
         
 
     </div>
     
+    <script>
+      function showHidden() {
+         $('.new_subproduct').removeAttr("hidden")
+         $('#showHidden').attr("hidden","true")
+         $('#deleteSubProduct').attr("hidden","true")
+      }
+      
+      $('#insertImg').click(function() {
+         $('#admin_fileUpload').click()
+      }); 
+      
+
+      function deleteSubProduct(spno) {
+
+    	  console.log(spno);
+    	  
+    	  $.ajax({
+    		url : "delete.su",
+    		type : "post",
+    		data : { spno : spno },
+    		success : function(result) {
+    			console.log(result);
+    			if(result == "success") {
+    				location.href="listView.su";
+    			}
+    			else{
+    				alert("상품 삭제에 실패했습니다.");	
+    			}
+    		},
+    		error : function(result) {
+    			console.log(result);
+    			console.log("ajax 통신 실패");
+    		}
+    	})  
+      }
+      
+      $(function() {
+          $("#admin_fileUpload").on('change', function(){
+              readURL(this);
+          });
+      });
+      
+      function readURL(input) {
+          if (input.files && input.files[0]) {
+             var reader = new FileReader();
+             reader.onload = function (e) {
+                $('#admin_preview_img').attr('src', e.target.result);
+             }
+             reader.readAsDataURL(input.files[0]);
+          }
+      }
+      
+      // 가격 input 입력제한
+      var regExp = /[^0-9]/gi;
+      
+      $(document).ready(function(){
+          
+          $("#admin_price").on("focusout", function() {
+              var x = $(this).val();
+              if (x.length > 0) {
+                  if (x.match(regExp)) {
+                     x = x.replace(regExp, "");
+                  }
+                  $(this).val(x);
+              }
+          }).on("keyup", function() {
+              $(this).val($(this).val().replace(regExp, ""));
+          });
+   
+      });
+      
+   </script>
 </body>
 </html>

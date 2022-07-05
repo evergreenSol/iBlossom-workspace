@@ -6,11 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="resources/css/jsa.css" rel="stylesheet">
+<link href="resources/css/kdh.css" rel="stylesheet">
 </head>
 <body>
 
-    <!-- admin 어드민 관리자 메뉴 wrap -->
+	 <!-- admin 어드민 관리자 메뉴 wrap -->
     <div id="admin-menu-wrap">
 
         <!-- 메뉴 첫번째줄 div -->
@@ -19,7 +19,7 @@
             <!-- 로고 -->
             <div id="admin-logo-div">
                 <a href="" id="admin-logo-a">
-                    <img src="resources/images/product_images/iBlossom_logo_black.png">
+                    <img src="resources/images/iBlossom_logo_black.png">
                  </a>
              </div>
 
@@ -56,14 +56,14 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="" class="admin-navi-menu">정기구독관리</a>
+                        <a href="" class="admin-navi-menu" style="font-weight: 700;">정기구독관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="">구독회원관리</a></li>
                             <li><a href="">구독상품관리</a></li>
                         </ul>
                     </li>
                     <li><a href="" class="admin-navi-menu">상품관리</a></li>
-                    <li><a href="" class="admin-navi-menu"style="font-weight: 700;">리뷰관리</a></li>
+                    <li><a href="" class="admin-navi-menu">리뷰관리</a></li>
                     <li><a href="" class="admin-navi-menu">클래스관리</a></li>
                     <li>
                         <a href="" class="admin-navi-menu">고객센터관리</a>
@@ -84,7 +84,7 @@
     <!-- admin 관리자페이지 리뷰 관리 -->
     <div id="admin-member-wrap">
 
-        <span id="admin-member-title"  style="font-weight: 700;">리뷰관리</span>
+        <span id="admin-member-title">구독회원 관리</span>
         <hr id="admin-member-hr">
 
         <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
@@ -92,57 +92,64 @@
             <form name="form1" method="post" action="">
  
                 <select id="selectReview"name="search_option">
-                    <option value="product_id">상품명</option>
+                    <option value="product_id">꽃명</option>
              
-                    <option value="user_id">아이디</option>
+                    <option value="category_name">카테고리명</option>
              
-                    <option value="title">제목</option>
+                    <option value="price">가격</option>
                 </select>
-                <input id="inputBox" name="keyword" value="">
+                <input id="inputBox" name="keyword">
                 <input type="submit" id="selectbtn" value="검색">
             </form>
         </div>
 
         <div style="padding-top: 100px;">
-            <table id="reviewTable" border="1px solid" align="center">
+            <table id="productTable" border="1px solid" align="center">
                 <thead>
-                    <th>상품명</th>
-                    <th>아이디</th>
-                    <th>제목</th>
-                    <th>작성일</th>
+                	<tr>
+	                    <th>주문번호</th>
+	                    <th>아이디</th>
+	                    <th>주문자명</th>
+	                    <th>주문상품</th>
+	                    <th>배송지</th>
+	                    <th>구독시작일</th>
+	                    <th>구독종료일</th>
+	                    <th>정기구독기간</th>
+	                    <th>회원등급</th>
+	                    <th>결제금액</th>
+	                    <th>배송상태</th>
+                    <tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>장미</td>
-                        <td>user001</td>
-                        <td>테스트</td>
-                        <td>2021-10-01</td>
-                    </tr>
-                    <tr>
-                        <td>장미</td>
-                        <td>user001</td>
-                        <td>테스트</td>
-                        <td>2021-10-01</td>
-                    </tr>
-                    <tr>
-                        <td>장미</td>
-                        <td>user001</td>
-                        <td>테스트</td>
-                        <td>2021-10-01</td>
-                    </tr>
-                    <tr>
-                        <td>장미</td>
-                        <td>user001</td>
-                        <td>테스트</td>
-                        <td>2021-10-01</td>
-                    </tr>
-                    
+                <c:choose>
+		            <c:when test="${ empty list }">
+		                 <h4>아직 진열된 상품이 없습니다.</h4>
+		            </c:when>
+		            <c:otherwise>
+		            	<c:forEach var="s" items="${ list }">
+		                    <tr>
+		                        <td>${ s.subsribeNo }</td>
+		                        <td>${ s.userId }</td>
+		                        <td>${ s.userName }</td>
+		                        <td>${ s.subProductName }</td>
+		                        <td>${ s.deliverTo }</td>
+		                        <td>${ s.subDate }</td>
+		                        <td>구독종료일</td>
+		                        <td>${ s.subLevel }</td>
+		                        <td>${ s.grLevel }</td>
+		                        <td>${ s.subPrice }</td>
+		                        <td>${ s.deliverStatus }</td>
+		                    </tr>
+	                    </c:forEach>                 
+	                </c:otherwise>   
+                </c:choose>
                 </tbody>
             </table>
         </div>
+
+        <div align="center" style="padding-top: 100px;">
+            <input type='button' id="insertBtn" value='등록'>
+        </div>
     </div>
-
-
-    
 </body>
 </html>
