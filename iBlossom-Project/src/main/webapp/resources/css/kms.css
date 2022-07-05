@@ -1,0 +1,517 @@
+
+
+
+/* 원데이클래스 스타일 */
+      /*클래스 전체 틀*/
+      .class-container {
+        width: 1200px;
+        margin:auto;
+        margin-top: 100px;
+        margin-left: 380px;
+
+    }
+
+    /*클래스 상세페이지 이미지*/
+    #image2{
+        margin-left: 300px;
+    }
+
+    /*클래스 날짜 select*/
+    #date{
+        margin-left: 40px;
+    }
+
+    /*클래스 예약일*/
+    #res{
+        margin-left: 40px;
+    }
+
+    /*클래스 예약버튼*/
+    #class-res-btn{
+        margin-left: 40px;
+        border-radius : 3px;
+        background-color: black;
+        color: white;
+        height: 40px;
+        width: 100px;
+        font-size: larger;
+        cursor: pointer;
+    }
+
+    /*sale 마크*/
+    #sale{
+        border-radius : 10px;
+        background-color: red;
+        color: white;
+
+    }
+
+    /*클래스 상품명, 설명*/
+    #title1{
+        transform: translateX(40px);
+    }
+
+    /*가로선*/
+    hr{
+        margin-left : 0;   
+    }
+
+/* 원데이클래스 주문페이지 스타일 */
+#full{
+width: 1200px;
+height: 800px;
+background-color: rgb(199, 195, 195);
+margin: auto; /* 중앙 맞춤 */
+}
+#left{
+width: 500px;
+float: left;
+margin-left: 100px;
+margin-top: 90px;	
+}
+
+/*주문상품정보*/
+.info1{
+background-color: white;
+width: 400px;
+height: 200px;
+}
+
+/*주문자정보*/
+.info2{
+background-color: white;
+width: 400px;
+height: 200px;
+margin-top: 30px;
+}
+
+#right{
+width: 400px;
+float: left;
+margin-top: 163px;
+}
+
+/*결제수단*/
+.pay{
+background-color: white;
+width: 400px;
+height: 380px;
+
+}
+
+/*결제하기 버튼*/
+#btn{
+margin-left: 0px;
+border-radius : 3px;
+background-color: black;
+color: white;
+height: 50px;
+width: 400px;
+font-size: larger;
+cursor: pointer;       
+}
+
+/*결제하기 제목*/
+h2{
+margin-left: -300px;
+font-size: 24px;
+}
+
+/*주문정보 내용*/
+#content1{
+font-size: 18px;
+font-weight: 600;
+margin-left: -240px;
+padding-top: 20px;
+}
+
+#content2{
+font-size: 18px;
+font-weight: 600;
+margin-left: -260px;
+padding-top: 20px;
+}
+
+#content3{
+font-size: 18px;
+font-weight: 600;
+margin-left: -240px;
+padding-top: 20px;
+}
+
+#content1_1, #content1_2, #content1_3 {
+font-size: 17px;
+margin-left: 180px;
+padding-top: 15px;
+text-align: left;
+}
+
+#content2_1, #content2_2, #content2_3 {
+font-size: 17px;
+margin-left: 30px;
+padding-top: 15px;
+text-align: left;
+}
+
+#content3_1{
+margin-top: 20px;
+margin-left: -200px;
+font-size: 18px;
+}
+
+#content3_2{
+margin-top: 240px;
+margin-left: -30px;
+font-size: 18px;
+}
+
+/*수정버튼*/
+#class-update-btn{
+margin-top: -30px;
+left: 30px;
+margin-left: 400px;
+border-radius : 3px;
+border-color: white;
+background-color: rgb(175, 171, 171);
+color: black;
+height: 35px;
+width: 70px;
+font-size: 14px;
+cursor: pointer;
+position: absolute;
+}
+
+/*상품이미지*/
+#image{
+margin-top: 10px;
+margin-left: 20px;
+}
+
+/* 고객센터 스타일 */
+    /*공지사항 제목 스타일*/
+    .cus-title {     
+        width : 500px;
+        height: 30px;
+        text-align : left;
+        line-height : 30px;
+        border-radius : 10px;
+        cursor : pointer;
+        margin-top : 10px;
+        
+    }
+
+    /*공지전체 틀*/       
+    #notice-content{
+        position: absolute;
+        margin-top: 180px;
+        margin-left: 600px;
+    }
+
+    /*공지 내용*/
+    .content1 {
+        width : 500px;
+        height : 240px;
+        margin-top : 5px;
+        padding : 10px;
+        box-sizing : border-box;
+        display : none;
+    }
+
+    /*공지작성일*/
+    .notice-date{
+        position:absolute;
+        margin-left: 400px;
+        margin-top: -30px;
+    }
+
+     /*contact us 내용전체*/
+     #contact{
+        position:absolute;
+        margin-left: 600px;
+        margin-top: 200px;
+     }
+
+
+    /*FAQ 질문 제목*/
+    .q {
+        background-color : rgb(223, 223, 219);
+        width : 450px;
+        height: 35px;
+        text-align:left;
+        line-height : 30px;
+        border-radius : 10px;
+        cursor : pointer;
+        margin-top : 5px;
+        
+    }
+
+    /*FAQ 답변*/
+    .a1 {
+        border : 1px solid lightgray;
+        width : 450px;
+        height : 120px;
+        margin-top : 5px;
+        border-radius : 10px;
+        padding : 10px;
+        box-sizing : border-box;
+        display : none;
+    }
+
+    /*FAQ 전체 틀*/
+    #faq{
+        position:absolute;
+        margin-left: 600px;
+        margin-top: 170px;
+    }
+
+    /*카테고리*/
+    #content{
+        margin-left: 200px;
+        margin-top: 170px;
+        position: absolute;
+    }
+
+   /*문의게시판 리스트*/
+    #list-container{
+        position:absolute;
+        margin-left: 600px;
+        margin-top: 170px;
+    }
+
+    #list-table tr {
+        line-height:2;
+        text-align: center;
+    }
+
+    #list-table tbody>tr:hover {
+        cursor: pointer;
+    }
+
+    /*문의게시판 작성버튼*/
+    #btn-write{
+        margin-left: 450px;
+        width:80px;
+        height: 30px;
+        background-color: black;
+        color: white;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+         /* 1대1 문의 내용 및 답변 content 관련스타일 */
+         #updatebutton{
+            cursor : pointer;
+            margin-left: 630px;
+         }        
+
+         #answerContent:focus, #answerTitle:focus{
+           outline:none;
+         }
+
+         #answerBtn{
+            margin-left: 450px;
+            margin-top: 10px;
+            border-radius: 3px;
+            width: 60px;
+            height: 30px;
+            background-color: black;
+            border-color: black;
+            color: white;
+            cursor: pointer;
+         }
+
+         #answer-container{
+            position:absolute;
+            margin-left: 600px;
+            margin-top: 170px;
+         }
+
+
+/* 클래스 관리자페이지 스타일 */
+/*클래스 전체 틀*/
+.container {
+    width: 1200px;
+    margin:auto;
+    margin-top: 100px;
+
+}
+
+/*클래스 상세페이지 이미지*/
+#image2{
+    margin-left: 300px;
+}
+
+/*클래스 날짜 select*/
+#date{
+    margin-left: 40px;
+}
+
+/*클래스 예약일*/
+#res{
+    margin-left: 40px;
+}
+
+/*클래스 수정/추가 버튼*/
+#admin-class-update-btn{
+    margin-left: 40px;
+    border-radius : 3px;
+    background-color: black;
+    color: white;
+    height: 40px;
+    width: 100px;
+    font-size: larger;
+    cursor: pointer;
+}
+
+/*sale 마크*/
+#sale{
+    border-radius : 10px;
+    background-color: red;
+    color: white;
+
+}
+
+/*클래스 상품명, 설명*/
+#title1{
+    transform: translateX(40px);
+}
+
+/*가로선*/
+hr{
+    margin-left : 0;   
+}
+
+
+
+/* 클래스 관리자페이지 예약조회 스타일 */
+/* admin 관리자 페이지 회원관리 wrap */
+#admin-order-wrap {
+    margin: auto;
+    margin-top: 50px;
+    width: 1200px;
+    height: 100%;
+}
+
+/* admin 관리자 페이지 회원관리 타이틀 텍스트 속성 */
+#admin-order-title {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+/* admin 관리자 페이지 타이틀 밑 hr 태그 속성 */
+#admin-order-hr {
+    margin-top: 15px;
+    margin-bottom: 50px;
+}
+
+/* admin 관리자 페이지 전체주문내역 table */
+.admin-order-list-table {
+    margin: auto; /* 표 중간 */
+    text-align: center; /* 글자 가운데 정렬 */
+    border-collapse: collapse; /* 테두리 사이의 간격을 없애고 싶다면 */
+}
+
+/* admin 관리자 페이지 전체주문내역 thead */
+#admin-order-list-thead {
+    background-color: #444444;
+    color : white;
+}
+
+/* admin 관리자 페이지 전체주문내역 th */
+.admin-order-list-table>thead>tr>th {
+    border: 1px solid black;
+    padding: 15px;
+    font-size: small;
+}
+
+/* admin 관리자 페이지 전체주문내역 td */
+.admin-order-list-table>tbody>tr>td {
+    border: 1px solid rgba(226, 226, 226, 0.982);
+    padding: 10px;
+    font-size: small;
+}
+
+/* admin 관리자 페이지 회원관리 wrap */
+#admin-order-wrap {
+    margin: auto;
+    margin-top: 50px;
+    width: 1200px;
+    height: 100%;
+}
+
+/* admin 관리자 페이지 전체주문내역 table */
+.admin-order-list-table {
+    margin: auto; /* 표 중간 */
+    text-align: center; /* 글자 가운데 정렬 */
+    border-collapse: collapse; /* 테두리 사이의 간격을 없애고 싶다면 */
+}
+
+/* admin 관리자 페이지 전체주문내역 thead */
+#admin-order-list-thead {
+    background-color: #444444;
+    color : white;
+}
+
+/* admin 관리자 페이지 전체주문내역 th */
+.admin-order-list-table>thead>tr>th {
+    border: 1px solid black;
+    padding: 15px;
+    font-size: small;
+}
+
+/* admin 관리자 페이지 전체주문내역 td */
+.admin-order-list-table>tbody>tr>td {
+    border: 1px solid rgba(226, 226, 226, 0.982);
+    padding: 15px;
+    font-size: medium;
+}
+
+
+/* 고객센터 관리자페이지 스타일 */
+/*admin 문의게시판 리스트*/
+#list-container{
+     position:absolute;
+     width: 800px;
+     margin-left: 200px;
+     margin-top: 10px;
+}
+
+#list-table tr {
+     line-height:3;
+     text-align: center;
+}
+
+#list-table tbody>tr:hover {
+    cursor: pointer;
+}
+
+/* 1대1 문의 내용 및 답변 content 관련스타일 */
+#updatebutton{
+     cursor : pointer;
+     margin-left: 630px;
+    }        
+
+#answerContent:focus, #answerTitle:focus{
+    outline:none;
+    }
+
+#adminAnswerBtn{
+    margin-left: 630px;
+    margin-top: 10px;
+    border-radius: 3px;
+    width: 60px;
+    height: 30px;
+    background-color: black;
+    border-color: black;
+    color: white;
+    cursor: pointer;
+    }
+
+    #answer-container{
+    position:absolute;
+    margin-left: 300px;
+    margin-top: 130px;
+    width:1200px;
+    }
+
+

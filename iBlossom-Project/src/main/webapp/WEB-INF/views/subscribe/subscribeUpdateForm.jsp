@@ -90,63 +90,63 @@
 
         <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
         <div class="wrap">
-        	<c:choose>
-        		<c:when test="${ empty list }">
-        			<h4>아직 진열된 상품이 없습니다.</h4>
-        		</c:when>
-        		<c:otherwise>
-		        	<c:forEach var="sp" items="${ list }"> <!-- SUB_PRODUCT 테이블로부터 읽어오기 -->   
-			        	<div class="subproduct">
-					       	<h3>상품명</h3>
-					       	<input type="text" id="subproduct_name" name="subproduct_name" value="${ sp.subProductName }" readonly>
-					       	<h3>썸네일</h3>
-					           <table class="product">
-					               <tr>
-					                   <td width="40%" height="300px">
-					                   		<img id="subproduct-img" src="">
-					                   </td>
-					                   <td width="60%">
-						               		<textarea id="subproduct-description" name="subproduct_description" value="${ sp.subProductDescription }" readonly></textarea>
-					                   </td>
-					               </tr>
-					           </table>
-					       	<h3>가격</h3>
-					       	<input type="text" id="price" name="price" value="${ sp.subPrice }" readonly><span>원</span>
-					        <br>
-				        </div>
-			        </c:forEach>
-	        	</c:otherwise>
-	        </c:choose>
-	        <br>
-	        <hr>
-	        <br>
-	        <div class="new_subproduct" hidden>
-	        	<form method="post" action="insert.su" enctype="multipart/form-data">
-			    	<h3>상품명</h3>
-			       	<input type="text" id="subproduct_name" name="subProductName">
-			       	<h3>썸네일</h3>
-			       	<input id=fileUpload type="file" name="subfile" hidden>
-			           <table class="product">
-			               <tr>
-			                   <td width="40%" height="300px" id="insertImg">
-			                   		<img id="subproduct-img" src="">
-			                   </td>
-			                   <td width="60%">
-				               		<textarea id="subproduct-description" name="subProductDescription">
-				               		</textarea>
-			                   </td>
-			               </tr>
-			           </table>
-			       	<h3>가격</h3>
-			       	<input type="text" id="price" name="subPrice" required><span>원</span>
-		        <br>
-		        <br>
-		        <button type="submit">추가</button>
-		        <button onclick="location.reload();">이전</button>
-		        </form>   	
-	        </div>
-	        <button id="showHidden" onclick="showHidden();">추가</button>
-	        <button id="deleteSubproduct" onclick="delteSubproduct();">삭제</button>
+           <c:choose>
+              <c:when test="${ empty list }">
+                 <h4>아직 진열된 상품이 없습니다.</h4>
+              </c:when>
+              <c:otherwise>
+                 <c:forEach var="sp" items="${ list }"> <!-- SUB_PRODUCT 테이블로부터 읽어오기 -->   
+                    <div class="admin_sub_product">
+                         <h3>상품명</h3>
+                         <input type="text" id="admin_subproduct_name" value="${ sp.subProductName }" readonly>
+                         <h3>썸네일</h3>
+                          <table class="admin_product">
+                              <tr>
+                                  <td width="40%" height="300px">
+                                        <img id="admin_subproduct-img" src="${ sp.subChangeName }">
+                                  </td>
+                                  <td width="60%">
+                                       <textarea id="admin_subproduct_description" readonly>${ sp.subProductDescription }</textarea>
+                                  </td>
+                              </tr>
+                          </table>
+                         <h3>가격</h3>
+                         <input type="text" id="admin_price" value="${ sp.subPrice }" readonly><span>원</span>
+                       <br>
+                    </div>
+                 </c:forEach>
+              </c:otherwise>
+           </c:choose>
+           <br>
+           <hr>
+           <br>
+           <div class="new_subproduct" hidden>
+              <form method="post" action="insert.su" enctype="multipart/form-data">
+                <h3>상품명</h3>
+                   <input type="text" id="admin_subproduct_name" name="subProductName">
+                   <h3>썸네일</h3>
+                   <input id="admin_fileUpload" type="file" name="subfile" hidden>
+                    <table class="admin_product">
+                        <tr>
+                            <td width="40%" height="300px" id="insertImg">
+                                  <img id="admin_subproduct-img" src="">
+                            </td>
+                            <td width="60%">
+                                 <textarea id="admin_subproduct_description" name="subProductDescription">
+                                 </textarea>
+                            </td>
+                        </tr>
+                    </table>
+                   <h3>가격</h3>
+                   <input type="text" id="admin_price" name="subPrice" required><span>원</span>
+              <br>
+              <br>
+              <button id="insertSubProduct" type="submit">추가</button>
+              <button id="reload" onclick="location.reload();">이전</button>
+              </form>      
+           </div>
+           <button id="showHidden" onclick="showHidden();">추가</button>
+           <button id="deleteSubProduct" onclick="delteSubProduct();">삭제</button>
         </div>
         
 
@@ -154,15 +154,15 @@
     
     <script>
       function showHidden() {
-    	  $('.new_subproduct').removeAttr("hidden")
-    	  $('#showHidden').attr("hidden","true")
-    	  $('#deleteSubproduct').attr("hidden","true")
+         $('.new_subproduct').removeAttr("hidden")
+         $('#showHidden').attr("hidden","true")
+         $('#deleteSubProduct').attr("hidden","true")
       }
       
       $('#insertImg').click(function() {
-    	  $('#fileUpload').click()
+         $('#fileUpload').click()
       }); 
       
-	</script>
+   </script>
 </body>
 </html>
