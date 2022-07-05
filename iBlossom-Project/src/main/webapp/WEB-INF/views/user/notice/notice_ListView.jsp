@@ -14,7 +14,6 @@
     <title>FAQ</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
-
   
     </style>
 </head>
@@ -117,14 +116,10 @@ TIME TO BLOSSOM
 </div>
     <script>
         $(function() {
-
             $(".title").click(function() {
-
                 var $pre = $(this).next(); 
                 if($pre.css("display") == "none") {
-
                     $(this).siblings("pre").slideUp(100);
-
                     $pre.slideDown(100);
                 }
                 else { 
