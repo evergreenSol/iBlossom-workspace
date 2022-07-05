@@ -12,6 +12,7 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
+	// 결제완료
 	@RequestMapping("complete.ord")
 	public String complete() {
 		
