@@ -10,80 +10,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="resources/css/khs.css" rel="stylesheet">
-
-    <link href="final/resources/css/khs.css" rel="stylesheet">
-
+    <link href="resources/css/kms.css" rel="stylesheet">
     <title>FAQ</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
 
-        /*공지사항 제목 스타일*/
-        .title {     
-            width : 500px;
-            height: 30px;
-            text-align : left;
-            line-height : 30px;
-            border-radius : 10px;
-            cursor : pointer;
-            margin-top : 10px;
-            
-        }
-
-        /*공지전체 틀*/       
-        #notice-content{
-            position: absolute;
-            margin-top: 180px;
-            margin-left: 600px;
-        }
-
-        /*공지 내용*/
-        .content1 {
-            width : 500px;
-            height : 240px;
-            margin-top : 5px;
-            padding : 10px;
-            box-sizing : border-box;
-            display : none;
-        }
-
-        /*공지작성일*/
-        .notice-date{
-            position:absolute;
-            margin-left: 400px;
-            margin-top: -30px;
-        }
-
-        /*카테고리*/
-        #content{
-            margin-left: 200px;
-            margin-top: 170px;
-            position: absolute;
-        }
-
+  
     </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	
     <div id="content">
-        <div id="content_1" style="padding:10px">
-            <ul id="leftNavi1">
-                <b style="font-size:30px;">고객센터</b>
-                <br><br>
-                <!-- <hr color="black" style="border: 1px solid black"> -->
-
-                <li class="left_menu" id="mp1"><a href="listView.no"><pre>공지사항                 ></pre></a></li><br>
-
-                <li class="left_menu" id="mp1"><a href=""><pre>공지사항                 ></pre></a></li><br>
-
-                <li class="left_menu" id="mp2"><a href=""><pre>Contact Us                   ></pre></a></li><br>
-                <li class="left_menu" id="mp3"><a href=""><pre>1대1 문의               ></pre></a></a></li><br>
-                <li class="left_menu" id="mp4"><a href=""><pre>FAQ                    ></pre></a></li><br>
-            </ul>
-        </div> 
-    </div>
+	    <div id="content_1" style="padding:10px">
+	        <ul id="leftNavi1">
+	            <b style="font-size:30px;">고객센터</b>
+	            <br><br>
+	            <!-- <hr color="black" style="border: 1px solid black"> -->
+	            <li class="left_menu">
+	                <a href="listView.no">
+	                    <span class="category-content">공지사항</span>
+	                    <span class="category-arrow">></span>
+	                </a>
+	            </li>
+	            <br>
+	            <li class="left_menu" >
+	                <a href="contactus.no">
+	                    <span class="category-content">Contact Us</span>
+	                    <span class="category-arrow">></span>
+	                </a>
+	            </li>
+	            <br>
+	            <li class="left_menu">
+	                <a href="">
+	                    <span class="category-content">1대1 문의</span>
+	                    <span class="category-arrow">></span>
+	                </a>
+	            </li>
+	            <br>
+	            <li class="left_menu">
+	                <a href="">
+	                    <span class="category-content">FAQ</span>
+	                    <span class="category-arrow">></span>
+	                </a>
+	            </li>
+	            <br>
+	        </ul>
+	        
+	    </div> 
+	    
+	</div>
 
 
     <div id="notice-content">
@@ -158,9 +134,7 @@ TIME TO BLOSSOM
         });
     </script>
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     
 
     
