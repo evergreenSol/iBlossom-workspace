@@ -12,6 +12,13 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
+	// 주문
+	@RequestMapping("detailView.ord")
+	public String DetailView() {
+
+		return "user/order/order_DetailViewCheck"; // /WEB-INF/views/user/order/order_Complete.jsp
+	}
+	
 	// 결제완료
 	@RequestMapping("complete.ord")
 	public String complete() {

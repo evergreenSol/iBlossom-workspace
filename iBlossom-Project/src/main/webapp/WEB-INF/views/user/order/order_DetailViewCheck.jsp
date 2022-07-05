@@ -11,19 +11,32 @@
 
     /* 사용자 주문 페이지 레이아웃 */
     
+    /* 전체 배경 색상 */
+    #orderMainOuter {
+    	width: 100%;
+    	height: 1400px;
+    	background-color: whitesmoke;
+    }
+    
+    /* 내용 감싸는 전체 레이아웃 */
+    #orderMainWrap {
+    	width: 1200px;
+    	height: 1400px;
+    	margin: auto;
+    }
+    
     /* 왼쪽 섹션 */ 
     .order-left {
-        width: 70%;
+        width: 60%;
         height: 100%;
         float: left;
         box-sizing: border-box;
-        background-color: whitesmoke;
     }
 
     /* 오른쪽 섹션 */
     .order-right {
-        width: 30%;
-        height: 100%;
+        width: 36%;
+
         float: right;
         box-sizing: border-box;
         background-color: whitesmoke;
@@ -34,18 +47,19 @@
     
     /* 주문내역 확인, 주문자 정보, 발신인 이름 펼친 페이지 */
 
-    * { box-sizing: border-box; }
-
     /* 전체 배경 색입히기 */
-    .order-outer { background-color: whitesmoke;
-        width : 100%; }
+    .order-outer { 
+    	background-color: whitesmoke;
+        width : 100%; 
+    }
 
     /* 하얀 네모박스 영역 */
     .order-whitebox { 
         background-color:white; 
         padding: 35px;
         padding-left: 40px;
-        margin:50px;
+        /* margin: 10px; */
+        padding-bottom:30px;
     }
     
     /* 1. 주문내역 확인 2. 주문자 정보 3. 발신인 이름 
@@ -216,7 +230,12 @@
         display:flex;
         justify-content: space-between;
         padding: 5px;
-        margin: 5px 15px 1px 15px;
+        margin: 15px 15px 15px 15px;
+    }
+    
+    /**/
+    .order-price>span {
+    	margin-top: 20px;
     }
 
     /* 총 결제 금액 */
@@ -285,9 +304,18 @@
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
+	<br><br>
+	
+	<!-- 전체 색상 변경 div -->
+	<div id="orderMainOuter">
+	
+	<br>
+		
+	<div id="orderMainWrap">
+		
 	<!-- 사용자 주문 페이지 왼쪽 영역 -->
     <!-- 주문내역 확인, 주문자 정보, 발신인 이름 펼친 페이지 -->
-        <h1 style="margin: 20px;">주문/결제</h1>
+    <h1>주문/결제</h1>
 
         <!-- 왼쪽 섹션 -->
         <div class="order-left">
@@ -497,6 +525,7 @@
                         
                         <!-- Modal script -->
                         <script>
+                        
                             const btnModal = document.querySelector('.address-btn'); // 버튼 class 속성
                         
                             fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
@@ -521,6 +550,7 @@
                             closeBtn.addEventListener("click", e => {
                                 modal.style.display = "none"
                             })
+                            
                         </script>
                         
                         <!-- 우편번호 script -->
@@ -619,14 +649,13 @@
 
                 <!-- 결제하기 버튼 -->
                 <div>
-                    <button class="order-btn" type="submit">결제하기</button>
+                    <button class="order-btn" type="submit" onclick="location.href='complete.ord'">결제하기</button>
                 </div>
 
             </div>
 
-        </div>
-
-    </div>
+        </div><!-- 1200px 너비 -->
+      	</div><!-- 전체 색상 변경 div -->
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 	

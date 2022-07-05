@@ -34,8 +34,7 @@
         box-sizing: border-box;
     }
 
-    /* ----------------------------------------------------------- */
-    
+    /* ----------------------------------------------------------- */   
     /* 사용자 장바구니 페이지 왼쪽 영역 */
 
     /* 전체선택, 선택삭제 div  */
@@ -307,7 +306,7 @@
 	            <span>31,800원</span>
 	        </div>
 	
-	        </div>
+        </div>
 	
 	        <br>
 	
@@ -324,7 +323,7 @@
 	
 	        <!-- 결제하기 버튼 -->
 	        <div>
-	            <button class="cart-btn" type="submit" onclick="location.href='order_DetailViewCheck.jsp'">결제하기</button>
+	            <button class="cart-btn" type="submit" onclick="location.href='detailView.ord'">결제하기</button>
 	        </div>
 	        
 	    </div>
