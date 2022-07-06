@@ -18,7 +18,7 @@
 
         <!-- 로고 -->
         <div id="header-logo-warp">
-            <a href="mypage.me"><img src="resources/images/iBlossom_logo_black.png" id="header-logo"></a>
+            <a href="${ pageContext.request.contextPath }/"><img src="resources/images/iBlossom_logo_black.png" id="header-logo"></a>
         </div>
 
 		<!-- 로그인 완성 전까지 마이페이지 링크 로고에 걸어두겠습니다 : 2022-06-30 한솔 -->
@@ -45,12 +45,21 @@
         <div id="header-login">
 
             <!-- 로그인 아이콘  -->
-            <a href="" class="header-login-a">
-                <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-person-fill" viewBox="0 0 16 16">
+            <c:if test="${loginUser != null}">
+	            <a href="mypage.me" class="header-login-a">
+	                <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-person-fill" viewBox="0 0 16 16" id="header-login-icon">
+	                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+	                </svg>
+	            </a>
+            </c:if>
+            
+            <c:if test="${loginUser == null}">
+              <a href="login.do" class="header-login-b">
+                <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-person-fill" viewBox="0 0 16 16" id="header-login-icon">
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                 </svg>
-            </a>
-            
+            	</a>
+             </c:if>
             <!-- 장바구니 아이콘 -->
             <a href="" class="header-login-a">
                 <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-bag" viewBox="0 0 16 16">
@@ -61,5 +70,14 @@
         </div>
 
     </div>
+    
+    
+	<script>
+	
+
+    
+   </script>
+    
+    
 </body>
 </html>
