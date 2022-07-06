@@ -11,7 +11,7 @@
 	<div id="content">
 	    <div id="content_1" style="padding:10px">
 	        <ul id="leftNavi1">
-	            <b style="font-size:30px;">마이페이지</b>
+	            <b style="font-size:25px;">마이페이지</b>
 	            <br><br>
 	            <!-- <hr color="black" style="border: 1px solid black"> -->
 	            <li class="left_menu">
@@ -29,7 +29,7 @@
 	            </li>
 	            <br>
 	            <li class="left_menu">
-	                <a href="oneDayClass.me">
+	                <a href="onedayClass.me">
 	                    <span class="category-content">나의 클래스</span>
 	                    <span class="category-arrow">></span>
 	                </a>

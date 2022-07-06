@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.iblossom.subscribe.model.service.SubscribeService;
 import com.kh.iblossom.subscribe.model.vo.SubProduct;
 
@@ -22,30 +25,27 @@ public class SubscribeController {
 
 	
 	@Autowired private SubscribeService subscribeService;
-	 
-
-//	// 정기구독 상품 리스트 조회용 메소드
-//	@RequestMapping("listView.su")
-//	public String selectList(Model model) { 
-//		
-//		ArrayList<Subproduct> list = subproductService.selectList();
-//		
-//		model.addAttribute("list", list);
-//		
-//		return "subscribe/subscribeListView";
-//	}
-//	
-//	@RequestMapping("pay.su")
-//	public String paySubProduct() {
-//		
-//		return "common/payView";
-//	}
+	 	
 	@RequestMapping("listView.su")
-	public String subscribeListView() {
+	public String subscribeListView(Model model) {
 
-		return "subscribe/subscribeListView";
+		ArrayList<SubProduct> list = subscribeService.selectList();
+
+		model.addAttribute("list",list);
+		
+		return "user/subscribe/subscribeListView";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value="getSubProduct", produces="application/json; charset=UTF-8")
+	public String ajaxSelectSubProduct(int spno, ModelAndView mv) {
+		
+		SubProduct sp = subscribeService.selectSubProduct(spno);
+		
+		return new Gson().toJson(sp);
+	}
+	
+	
 	@RequestMapping("updateForm.su")
 	public String subscribeUpdateForm(Model model) {
 
@@ -53,7 +53,7 @@ public class SubscribeController {
 
 		model.addAttribute("list",list);
 		
-		return "subscribe/subscribeUpdateForm";
+		return "user/subscribe/subscribeUpdateForm";
 	}
 	
 	@RequestMapping("insert.su")
@@ -61,35 +61,37 @@ public class SubscribeController {
 		
 		if(!subfile.getOriginalFilename().equals("")) {
 		
-			// saveFile 메소드로 위의 코드를 따로 정의함
 			String changeName = saveFile(subfile, session);
-			System.out.println(changeName);
-			
-			// 8. Board b 에 originName, changeName 필드에 값 저장
+	
 			sp.setSubOriginName(subfile.getOriginalFilename());
 			sp.setSubChangeName("resources/uploadFiles/" + changeName);	
 		}
 		
-		// Service 단으로 b 를 넘겨서 insert 요청
-		// 넘어온 첨부파일이 있을 경우 b : 제목, 내용, 작성자, 원본파일명, 수정파일명
-		// 넘어온 첨부파일이 없을 경우 b : 제목, 내용, 작성자
-		System.out.println(sp);
-		
 		int result = subscribeService.insertSubProduct(sp);
 		
-		return "redirect:listView.su";
+		if(result > 0) {
+			return "redirect:listView.su";
+		}
+		else {
+			return "redirect:listView.su";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="delete.su", produces="text/html; charset=UTF-8")
+	public String ajaxDeleteSubProduct(int spno, String filePath, HttpSession session) {
 		
-		/*
-		 * if(result > 0) { // 성공 => 게시글 리스트페이지로 url 재요청
-		 * 
-		 * session.setAttribute("alertMsg", "성공적으로 게시글이 등록되었습니다.");
-		 * 
-		 * return "redirect:listView.bo"; } else { // 실패 => 에러페이지 포워딩
-		 * 
-		 * model.addAttribute("errorMsg", "게시글 등록 실패");
-		 * 
-		 * return "common/errorPage"; // /WEB-INF/views/common/errorPage.jsp }
-		 */
+		int result = subscribeService.deleteSubProduct(spno);
+			
+			// 첨부파일이 있었던 경우 => 파일 삭제
+		
+		    if(!filePath.equals("")) {
+		  
+		    	String realPath = session.getServletContext().getRealPath(filePath); new
+		    	File(realPath).delete(); 
+	    	}
+		 
+		return (result > 0) ? "success" : "fail";
 	}
 	
 	public String saveFile(MultipartFile subfile, HttpSession session) {
@@ -126,4 +128,12 @@ public class SubscribeController {
 		
 		return changeName;
 	}
+	
+	
+	@RequestMapping("subMemberListView.su")
+	public String subMemberListView() {
+
+		return "user/subscribe/subMember_ListView";
+	}
+
 }
