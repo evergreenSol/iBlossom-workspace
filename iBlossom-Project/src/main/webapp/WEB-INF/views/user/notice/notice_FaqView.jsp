@@ -16,46 +16,47 @@
 <body>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	
-    <div id="content">
-	    <div id="content_1" style="padding:10px">
-	        <ul id="leftNavi1">
-	            <b style="font-size:30px;">고객센터</b>
-	            <br><br>
-	            <!-- <hr color="black" style="border: 1px solid black"> -->
-	            <li class="left_menu">
-	                <a href="listView.no">
-	                    <span class="category-content">공지사항</span>
-	                    <span class="category-arrow">></span>
-	                </a>
-	            </li>
-	            <br>
-	            <li class="left_menu" >
-	                <a href="contactus.no">
-	                    <span class="category-content">Contact Us</span>
-	                    <span class="category-arrow">></span>
-	                </a>
-	            </li>
-	            <br>
-	            <li class="left_menu">
-	                <a href="qnaList.qu">
-	                    <span class="category-content">1대1 문의</span>
-	                    <span class="category-arrow">></span>
-	                </a>
-	            </li>
-	            <br>
-	            <li class="left_menu">
-	                <a href="faq.no">
-	                    <span class="category-content">FAQ</span>
-	                    <span class="category-arrow">></span>
-	                </a>
-	            </li>
-	            <br>
-	        </ul>	        
-	    </div> 	    
-	</div>
+    <div id="content-wrap">
+        <div id="content">
+            <div id="content_1" style="padding:10px">
+                <ul id="leftNavi1">
+                    <b style="font-size:25px;">고객센터</b>
+                    <br><br>
+                    <!-- <hr color="black" style="border: 1px solid black"> -->
+                    <li class="left_menu">
+                        <a href="listView.no">
+                            <span class="category-content">공지사항</span>
+                            <span class="category-arrow">></span>
+                        </a>
+                    </li>
+                    <br>
+                    <li class="left_menu" >
+                        <a href="contactus.no">
+                            <span class="category-content">Contact Us</span>
+                            <span class="category-arrow">></span>
+                        </a>
+                    </li>
+                    <br>
+                    <li class="left_menu">
+                        <a href="qnaList.qu">
+                            <span class="category-content">1대1 문의</span>
+                            <span class="category-arrow">></span>
+                        </a>
+                    </li>
+                    <br>
+                    <li class="left_menu">
+                        <a href="faq.no">
+                            <span class="category-content">FAQ</span>
+                            <span class="category-arrow">></span>
+                        </a>
+                    </li>
+                    <br>
+                </ul>               
+            </div>           
+        </div>
 
    <div id="faq">
-        <h1>FAQ</h1>
+        <h2>FAQ</h1>
 
         <!-- FAQ : Frequently Asked Questions, 자주묻는질문 -->
 
@@ -80,6 +81,7 @@
         <p class="a1">주문 취소/변경은 1대1 문의에서 도와드리겠습니다.
             1대1 문의 남겨주세요.</p>
         </div>
+    </div>    
     <script>
         $(function() {
 
@@ -98,8 +100,7 @@
             });
         });
     </script>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 
     
     	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

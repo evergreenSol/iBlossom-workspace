@@ -16,47 +16,47 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	
-    <div id="content">
-	    <div id="content_1" style="padding:10px">
-	        <ul id="leftNavi1">
-	            <b style="font-size:30px;">고객센터</b>
-	            <br><br>
-	            <!-- <hr color="black" style="border: 1px solid black"> -->
-	            <li class="left_menu">
-	                <a href="listView.no">
-	                    <span class="category-content">공지사항</span>
-	                    <span class="category-arrow">></span>
-	                </a>
-	            </li>
-	            <br>
-	            <li class="left_menu" >
-	                <a href="contactus.no">
-	                    <span class="category-content">Contact Us</span>
-	                    <span class="category-arrow">></span>
-	                </a>
-	            </li>
-	            <br>
-	            <li class="left_menu">
-	                <a href="qnaList.qu">
-	                    <span class="category-content">1대1 문의</span>
-	                    <span class="category-arrow">></span>
-	                </a>
-	            </li>
-	            <br>
-	            <li class="left_menu">
-	                <a href="faq.no">
-	                    <span class="category-content">FAQ</span>
-	                    <span class="category-arrow">></span>
-	                </a>
-	            </li>
-	            <br>
-	        </ul>
-	        
-	    </div> 
-	    
-	</div>
+     <div id="content-wrap">
+        <div id="content">
+            <div id="content_1" style="padding:10px">
+                <ul id="leftNavi1">
+                    <b style="font-size:25px;">고객센터</b>
+                    <br><br>
+                    <!-- <hr color="black" style="border: 1px solid black"> -->
+                    <li class="left_menu">
+                        <a href="listView.no">
+                            <span class="category-content">공지사항</span>
+                            <span class="category-arrow">></span>
+                        </a>
+                    </li>
+                    <br>
+                    <li class="left_menu" >
+                        <a href="contactus.no">
+                            <span class="category-content">Contact Us</span>
+                            <span class="category-arrow">></span>
+                        </a>
+                    </li>
+                    <br>
+                    <li class="left_menu">
+                        <a href="qnaList.qu">
+                            <span class="category-content">1대1 문의</span>
+                            <span class="category-arrow">></span>
+                        </a>
+                    </li>
+                    <br>
+                    <li class="left_menu">
+                        <a href="faq.no">
+                            <span class="category-content">FAQ</span>
+                            <span class="category-arrow">></span>
+                        </a>
+                    </li>
+                    <br>
+                </ul>               
+            </div>           
+        </div>
+        
     <div id="contact">
-        <h1>Contact Us</h1>
+        <p style="font-size: 20px; font-weight: 700;">Contact Us</p>
         <pre>
 법인명(상호) : (주)나블러썸 
 
@@ -68,9 +68,8 @@
 OPEN HOURS AM 11:00 - PM 5:00 | LUNCH TIME PM 1:00 - PM 2:00 | OFFICE DAY MON - FRI
         </pre>
     </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    
+</div>    
+
 
     
     	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
