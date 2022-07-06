@@ -24,4 +24,10 @@ public class QnaDao {
 		return list;
 		
 	}
+
+public ArrayList<Qna> selectList(SqlSessionTemplate sqlSession) {
+	
+	return (ArrayList)sqlSession.selectList("qnaMapper.selectList");
+}
+
 }

@@ -56,6 +56,13 @@
         margin-left : 0;   
     }
 
+
+
+
+
+
+
+
     /* 원데이클래스 주문페이지 스타일 */
     #pay-full{
     width: 1200px;
@@ -187,10 +194,24 @@
     margin-left: 20px;
     }
 
+
+
+
+
+
 /* 고객센터 스타일 */
+    /*카테고리+고객센터 전체 틀 감싸기*/
+    #content-wrap {
+        position: relative;
+        width: 1200px;
+        margin: auto;
+       margin-bottom: 250px;
+    }
+
+
    /*공지사항 제목 스타일*/
  .cus-title {     
-        width : 500px;
+        width : 800px;
         height: 30px;
         text-align : left;
         line-height : 30px;
@@ -202,17 +223,17 @@
 
     /*공지전체 틀*/       
     #notice-content{
-width: 550px;
-height: 300px;
-      margin: auto;
-      margin-left: 600px;
-      margin-top: 170px;
+        width: 850px;
+        height: 300px;
+        margin: auto;
+        margin-left: 350px;
+        margin-top: 80px;
     }
 
     /*공지 내용*/
     .content1 {
-        width : 500px;
-        height : 320px;
+        width : 730px;
+        height : 230px;
         margin-top : 5px;
         padding : 10px;
         box-sizing : border-box;
@@ -222,22 +243,22 @@ height: 300px;
     /*공지작성일*/
     .notice-date{
         position:absolute;
-        margin-left: 400px;
+        margin-left: 750px;
         margin-top: -20px;
     }
     
      /*contact us 내용전체*/
      #contact{
-        position:absolute;
-        margin-left: 600px;
-        margin-top: 160px;
+        margin-left: 350px;
+        margin-top: 80px;
+        height: 300px;
      }
 
 
     /*FAQ 질문 제목*/
     .q {
         background-color : rgb(223, 223, 219);
-        width : 450px;
+        width : 550px;
         height: 35px;
         text-align:left;
         line-height : 30px;
@@ -250,7 +271,7 @@ height: 300px;
     /*FAQ 답변*/
     .a1 {
         border : 1px solid lightgray;
-        width : 450px;
+        width : 550px;
         height : 120px;
         margin-top : 5px;
         border-radius : 10px;
@@ -261,18 +282,24 @@ height: 300px;
 
     /*FAQ 전체 틀*/
     #faq{
-        position:absolute;
-        margin-left: 600px;
-        margin-top: 150px;
+        margin-left: 350px;
+        margin-top: 80px;
+        height: 300px;
     }
+
+
+
+
+
+
 
 
 
    /*문의게시판 리스트*/
     #list-container{
-
-        margin-left: 600px;
-        margin-top: 170px;
+		height: 300px;
+        margin-left: 350px;
+        margin-top: 80px;
     }
 
     #list-table tr {
@@ -287,42 +314,50 @@ height: 300px;
     /*문의게시판 작성버튼*/
     #btn-write{
         text-decoration: none;
-        margin-left: 480px;
+   		margin-left: 730px;
         /* width: 80px; */
         /* height: 30px; */
-        padding: 6px 10px;
+        padding: 7px 12px;
         background-color: black;
         color: white;
         border-radius: 3px;
         cursor: pointer;
     }
 
-         /* 1대1 문의 내용 및 답변 content 관련스타일 */
-         #updatebutton{
-            cursor : pointer;
-            margin-left: 630px;
-         }        
+    /* 1대1 문의 내용 및 답변 content 관련스타일 */
+    #updatebutton{
+    cursor : pointer;
+    margin-left: 350px;
+    }        
 
-         #answerContent:focus, #answerTitle:focus{
-           outline:none;
-         }
+    #answerContent:focus, #answerTitle:focus{
+    outline:none;
+    }
 
-         #questionBtn{
-            margin-left: 430px;
-            margin-top: 10px;
-            border-radius: 3px;
-            width: 60px;
-            height: 30px;
-            background-color: black;
-            border-color: black;
-            color: white;
-            cursor: pointer;
-         }
+    #questionBtn{
+    margin-left: 525px;
+    margin-top: 10px;
+    border-radius: 3px;
+    width: 60px;
+    height: 30px;
+    background-color: black;
+    border-color: black;
+    color: white;
+    cursor: pointer;
+    }
 
-         #answer-container{
-            margin-left: 600px;
-            margin-top: 160px;
-         }
+    #answer-container{
+    margin-left: 350px;
+    margin-top: 80px;
+    height: 300px;
+    }
+
+
+
+
+
+
+
 
 
 /* 클래스 관리자페이지 스타일 */
@@ -378,6 +413,14 @@ height: 300px;
 hr{
     margin-left : 0;   
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -465,6 +508,17 @@ hr{
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
 /* 고객센터 관리자페이지 스타일 */
 /*admin 문의게시판 리스트*/
 #admin-list-container{
@@ -532,15 +586,15 @@ hr{
 
 #notice-wrap {
 	width: 1200px;
-        margin:auto;
+    margin:auto;
         
 }
 
 #content {
-	
     width: 20%;
     vertical-align: top;
 }
+
 
 
 /* 내용 들어간 부분 */
@@ -552,6 +606,9 @@ height: 97%;
 }   
 
 
+
+
+
 /* 마이페이지 카테고리 - 마이페이지 카테고리 */
 #leftNavi1{
     list-style-type : none;
@@ -559,16 +616,11 @@ height: 97%;
     padding : 0px;
    /* height : 100%;*/
     font-size: 16pt;
-
-    margin-top: 180px;
+    margin-top: 80px;
     position: absolute;
-    margin-left: 200px;
-
+    left: 0px;
 }
 
-#leftNavi1 {
-    padding : 10px;
-}
 
 #leftNavi1 li {
     width : 100%;
@@ -590,7 +642,7 @@ height: 97%;
 }
 
 .category-arrow {
-    padding-left: 10%;
+    padding-left: 80%;
     position: absolute;
 }
 
