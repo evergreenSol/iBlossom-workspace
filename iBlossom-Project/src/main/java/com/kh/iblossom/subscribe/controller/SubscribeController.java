@@ -33,11 +33,11 @@ public class SubscribeController {
 
 		model.addAttribute("list",list);
 		
-		return "user/subscribe/subscribeListView";
+		return "user/subscribe/subscribe_ListView";
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="getSubProduct", produces="application/json; charset=UTF-8")
+	@RequestMapping(value="getSubProduct.su", produces="application/json; charset=UTF-8")
 	public String ajaxSelectSubProduct(int spno, ModelAndView mv) {
 		
 		SubProduct sp = subscribeService.selectSubProduct(spno);
@@ -46,17 +46,17 @@ public class SubscribeController {
 	}
 	
 	
-	@RequestMapping("updateForm.su")
+	@RequestMapping("listView.sp")
 	public String subscribeUpdateForm(Model model) {
 
 		ArrayList<SubProduct> list = subscribeService.selectList();
 
 		model.addAttribute("list",list);
 		
-		return "user/subscribe/subscribeUpdateForm";
+		return "user/subscribe/subProduct_ListView";
 	}
 	
-	@RequestMapping("insert.su")
+	@RequestMapping("insert.sp")
 	public String insertSubProduct(SubProduct sp, MultipartFile subfile, HttpSession session, Model model) {
 		
 		if(!subfile.getOriginalFilename().equals("")) {
@@ -70,29 +70,41 @@ public class SubscribeController {
 		int result = subscribeService.insertSubProduct(sp);
 		
 		if(result > 0) {
-			return "redirect:listView.su";
+			return "redirect:listView.sp";
 		}
 		else {
-			return "redirect:listView.su";
+			return "redirect:listView.sp";
 		}
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="delete.su", produces="text/html; charset=UTF-8")
-	public String ajaxDeleteSubProduct(int spno, String filePath, HttpSession session) {
+	@RequestMapping(value="delete.sp", produces="text/html; charset=UTF-8")
+	public String ajaxDeleteSubProduct(int subProductNo, String filePath, HttpSession session) {
+		
+		int spno = subProductNo;
 		
 		int result = subscribeService.deleteSubProduct(spno);
 			
 			// 첨부파일이 있었던 경우 => 파일 삭제
 		
-		    if(!filePath.equals("")) {
-		  
-		    	String realPath = session.getServletContext().getRealPath(filePath); new
-		    	File(realPath).delete(); 
-	    	}
-		 
+			/*
+			 * if(!filePath.equals("")) {
+			 * 
+			 * String realPath = session.getServletContext().getRealPath(filePath); new
+			 * File(realPath).delete(); }
+			 */
+
 		return (result > 0) ? "success" : "fail";
-	}
+	}	
+	
+	@ResponseBody
+	@RequestMapping(value="update.sp", produces="text/html; charset=UTF-8")
+	public String ajaxUpdateSubProduct(SubProduct sp) {
+		
+		int result = subscribeService.updateSubProduct(sp);
+
+		return (result > 0) ? "success" : "fail";
+	}	
 	
 	public String saveFile(MultipartFile subfile, HttpSession session) {
 		

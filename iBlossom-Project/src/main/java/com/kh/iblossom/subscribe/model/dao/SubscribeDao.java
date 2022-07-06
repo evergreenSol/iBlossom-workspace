@@ -6,7 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.iblossom.subscribe.model.vo.SubProduct;
-import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Repository
 public class SubscribeDao {
@@ -24,7 +23,6 @@ public class SubscribeDao {
 		return sqlSession.insert("subscribeMapper.insertSubProduct", sp);
 	}
 
-
 	// 정기구독 상품 삭제용 메소드
 	public int deleteSubProduct(SqlSessionTemplate sqlSession, int spno) {
 		
@@ -37,13 +35,8 @@ public class SubscribeDao {
 		return sqlSession.selectOne("subscribeMapper.selectSubProduct", spno);
 	}
 
-	// 마이페이지 구독조회
-	public ArrayList<Subscribe> selectMySubscribe(SqlSessionTemplate sqlSession, int userNo) {
+	public int updateSubProduct(SqlSessionTemplate sqlSession, SubProduct sp) {
 		
-		ArrayList<Subscribe> list = new ArrayList<Subscribe>();
-		
-//		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribe", userNo);
-		return list;
-
+		return sqlSession.update("subscribeMapper.updateSubProduct", sp);
 	}
 }
