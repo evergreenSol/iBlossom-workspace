@@ -36,7 +36,7 @@
             <ul id="header-navi">
                 <li><a href="listView.su" class="header-navi-menu">정기구독</a></li>
                 <li><a href="" class="header-navi-menu">마켓</a></li>
-                <li><a href="" class="header-navi-menu">클래스</a></li>
+                <li><a href="classDetail.cl" class="header-navi-menu">클래스</a></li>
                 <li><a href="listView.no" class="header-navi-menu">고객센터</a></li>
             </ul>
         </div>
@@ -45,7 +45,7 @@
         <div id="header-login">
 
             <!-- 로그인 아이콘  -->
-            <a href="" class="header-login-a">
+            <a href="loginForm.me" class="header-login-a">
                 <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-person-fill" viewBox="0 0 16 16">
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                 </svg>
