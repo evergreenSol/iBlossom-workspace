@@ -508,7 +508,7 @@
     }
     
     /* 해당 페이지 버튼용 css */
-    #insertSubProduct, #reload, #showHidden, #deleteSubProduct {
+    #insertSubProduct, #updateSubProduct, #reload, #showHidden, #deleteSubProduct {
       width : 130px;
       height : 50px;
       background-color : black;
@@ -516,7 +516,12 @@
       font-weight : 700;
    }
    
-    /* 3. 관리자 상품 추가 화면 */
+   #insertCaption {
+   	  margin-top : 250px;
+   	  margin-left : 50px;
+   }
+   
+    /* 4. 관리자 멤버 관리 화면 */
     /*-------------------------------------------------------------------------------------------*/
     
    /* */
