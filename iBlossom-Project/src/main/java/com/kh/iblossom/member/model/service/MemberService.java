@@ -11,7 +11,7 @@ public interface MemberService {
 	
 	int insertMember(Member m);
 	
-	Member updateMember(Member m);
+	int updateMember(Member m);
 	
 	int deleteMember(int userNo);
 	

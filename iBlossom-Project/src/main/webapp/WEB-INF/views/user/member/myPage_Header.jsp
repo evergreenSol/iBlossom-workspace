@@ -14,11 +14,25 @@
             <td class="grade-second" width="375">
                 <div style="margin-left: 20px;">
                     <p id="p_second" style="margin:0;">회원등급</p>
-                    <span class="member-grade">GOLD</span>&nbsp;&nbsp;<a class="view-grade">혜택보기 >></a>
+                    <!--
+                    <c:choose>
+	                    <c:when test="${ loginUser.grLevel eq 1 }">
+	                    	<span class="member-grade">SILVER</span>
+	                    </c:when>
+	                    <c:when test="${ loginUser.grLevel eq 2 }">
+	                    	<span class="member-grade">GOLD</span>
+	                    </c:when>
+	                    <c:otherwise>
+	                    	<span class="member-grade">DIAMOND</span>
+	                    </c:otherwise>
+                    </c:choose>
+                    -->
+                    <span class="member-grade">GOLD</span>
+                    <a class="view-grade">혜택보기 >></a>
                 </div>
             </td>
             <td class="grade-first">
-                <p id="hello" style="margin-left: 10px">안녕하세요. 김한솔님</p>
+                <p id="hello" style="margin-left: 10px">안녕하세요. ${ loginUser.userName }님</p>
             </td>
             
             <td class="grade-third">
@@ -66,7 +80,7 @@
                 <br><br>
 
                 <div id="modal-purchase">
-                    내 구입 금액: &nbsp;&nbsp;&nbsp;<span>0 원</span>
+                    내 구입 금액: &nbsp;&nbsp;&nbsp;<span>${ loginUser.purchase } 원</span>
                 </div>
 
                 <br><br>
@@ -141,6 +155,42 @@
 	    closeBtn.addEventListener("click", e => {
 	        modal.style.display = "none"
 	    });
+	    
+	    
+	    // 날짜 구하기
+	    
+	    var result;
+	    
+	    var now = new Date();
+	    
+	    var year = now.getFullYear();
+	    var month = now.getMonth() + 1;
+	    var day = now.getDate();
+	    
+	    // var date = "${ loginUser.enrollDate }";
+	    var date = "2022-05-23";
+	    var dateArr = date.split("-");
+	    
+	    // var startDate = new Date(2022, 07, 07);
+	    var startDate = new Date(dateArr[0], dateArr[1], dateArr[2]);
+	    
+	    var endDate = new Date(year, month, day);
+	    
+	    var btMs = endDate.getTime() - startDate.getTime();
+	    var btDay = btMs / (1000 * 60 * 60 * 24);
+	    
+	    if(btDay == 0) {
+	    	result = "오늘이 첫 날입니다!";
+	    	console.log(result);
+	    	
+	    }
+	    else {
+	    	result = btDay + "일";
+		    console.log("차이: " + result);
+	    }
+	    
+	    $(".member-period").text(result);
+	    
 	    
     </script>
   
