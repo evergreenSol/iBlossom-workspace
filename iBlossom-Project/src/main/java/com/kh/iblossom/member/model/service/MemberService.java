@@ -7,6 +7,9 @@ import com.kh.iblossom.onedayclass.model.vo.OnedayClass;
 
 public interface MemberService {
 
+	int countUserId(String userId);
+	
+	int insertMember(Member m);
 	
 	Member updateMember(Member m);
 	

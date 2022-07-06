@@ -19,10 +19,12 @@ public class Member {
 	private String userName;
 	private String phone;
 	private String email;
+	private String address1;
+	private String address2;
 	private String address;
 	private String postcode;
 	private Date enrollDate;
-	private String ststus;
+	private String status;
 	private int purchase;
 	private String grLevel;
 	

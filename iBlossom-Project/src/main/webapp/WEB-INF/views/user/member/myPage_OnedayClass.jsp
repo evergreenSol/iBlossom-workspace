@@ -74,16 +74,12 @@
 
                         <br><br>
 
-						<input type="email" id="email">
                         <div class="mypage-to-class-wrap">
                             <button class="mypage-to-class" id="sendEmail">클래스 보러 가기</a>
                         </div>
 
                         <br><br>
                         
-                        <input type="text" id="chkAuthKey">
-                        
-                        <button id="checkKey">확인</button>
 
                     </div>
 			
@@ -95,54 +91,7 @@
     </div>
     
     <br><br>
-    
-    <script>
-    
-    	var key;	
-    
-    	$(function () {
-			
-    		
-    		$("#sendEmail").click(function () {
-    			
-	    		$.ajax({
-	    			url : "sendEmail.do",
-	    			data : {
-	    				recipient : $('#email').val(),
-	    				subject : "테스트이메일임",
-	    				body : "테스트 이메일 내용임"
-	    			},
-	    			success : function (result) {
-	    				alert("메일발송");
-	    				console.log(result);
-	    				
-	    				key = result;
-	    			},
-	    			error: function () {
-	    				console.log("실패");
-	    			}
-	    		});
-    		});
-    		
-    		$("#checkKey").click(function () {
-    			
-    			if(key == $("#chkAuthKey").val()) {
-    				alert("잘썼어~");
-    			}
-    			else {
-    				alert("다시 써");
-    			}
-    			
-    		});
-    		
-    	
-    			
-			
-    		
-    	});
-    </script>
 
-    
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
              
 </body>

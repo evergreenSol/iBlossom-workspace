@@ -27,7 +27,7 @@
             	</td>
                 <td class="body_r" width="900" style="vertical-align: top;">
                     <div class="delete">
-                    <h2>프로필 수정</h2>
+                    <p id="revise-form-p-title">프로필 수정</p>
                         <!-- <hr color="lightgray"> -->
                         <!--
                         <table style="text-align: center">
@@ -39,31 +39,31 @@
                         <br>
                         <form id="update-form" action="update.me" method="post">
                         
-	                        <p style="font-size: 14px; font-weight: 600;">이름</p>
+	                        <p class="revise-form-p">이름</p>
 	                        <input type="text" class="mypage-w" name="userName" value="${ loginUser.userName }">
 	
-	                        <p style="font-size: 14px; font-weight: 600;">아이디</p>
+	                        <p class="revise-form-p">아이디</p>
 	                        <input type="text" class="mypage-w" name="userId" readonly value="${ loginUser.userId }">
 	                        
-	                        <input type="hidden" name="userPwd" value="${ loginUserPwd }">
+	                        <input type="hidden" name="userPwd" value="${ loginUser.userPwd }">
 	
-	                        <p style="font-size: 14px; font-weight: 600;">신규 비밀번호</p>
-	                        <input type="password" class="mypage-w" name="newUserPwd" value="">
+	                        <p class="revise-form-p">신규 비밀번호</p>
+	                        <input type="password" id="newUserPwd" class="mypage-w" name="newUserPwd" value="">
 	
-							<p style="font-size: 14px; font-weight: 600;">신규 비밀번호 확인</p>
+							<p class="revise-form-p">신규 비밀번호 확인</p>
 	                        <input type="password" class="mypage-w" name="chkPwd" value="">
 	
-	                        <p style="font-size: 14px; font-weight: 600;">휴대폰번호</p>
+	                        <p class="revise-form-p">휴대폰번호</p>
 	                        <input type="text" class="mypage-w" id="phone" name="phone" value="${ loginUser.phone }" placeholder="-포함하여입력해주세요" maxlength="13">
 	
-	                        <p style="font-size: 14px; font-weight: 600;">우편번호</p>
+	                        <p class="revise-form-p">우편번호</p>
 	                        <input type="text" class="mypage-w" id="postcode_kakao" name="postcode" readonly value="${ loginUser.postcode }" >
 	
-	                        <p style="font-size: 14px; font-weight: 600;">주소</p>
-	                        <input type="text" class="mypage-w" id="address_kakao" readonly value="" readonly>
+	                        <p class="revise-form-p">주소</p>
+	                        <input type="text" class="mypage-w" id="address_kakao" name="address1" value="" readonly>
 	
-	                        <p style="font-size: 14px; font-weight: 600;">상세주소</p>
-	                        <input type="text" class="mypage-w address_detail" id="address_detail" onkeyup="eventKeyup(this.value)">
+	                        <p class="revise-form-p">상세주소</p>
+	                        <input type="text" class="mypage-w address_detail" name="address2" id="address_detail" onkeyup="eventKeyup(this.value)">
 	                        
 	                        <input type="hidden" name="address" id="address">
 	
@@ -90,6 +90,9 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
     <script>
+    
+    var regExp;
+    
         window.onload = function(){
             document.getElementById("postcode_kakao").addEventListener("click", function(){ // postcode입력칸을 클릭하면
                 //카카오 지도 발생
@@ -114,6 +117,7 @@
         function validate() {
         	
         	var phone = document.getElementById("phone").value;
+        	var newUserPwd = document.getElementById("newUserPwd").value;
 			console.log(phone);
 			
 			//핸드폰 검사
@@ -130,7 +134,6 @@
 			
 			
 			// 비밀번호 검사
-			
 			// 새 비번 안쓴 경우 true
 			if($("input[name=newUserPwd]").val() == "" && $("input[name=chkPwd]").val() == "") {
 				
@@ -138,8 +141,20 @@
 				return true;
 			}
 			
+			if($("input[name=newUserPwd]").val() == "") {
+				
+			}
+			
+			regExp = /^[a-zA-Z0-9`~!@#$%^&*+=_-|₩';:₩"/?]{4,16}$/i;
+			if(!regExp.test(newUserPwd)) {
+				alert("비밀번호는 영문자, 숫자, 특수기호로 총 4~16글자로 입력해주세요.");
+				
+				return false;
+			}
+			
 			if($("input[name=newUserPwd]").val() != $("input[name=chkPwd]").val()) {
 				// 새 비번과 새비번(확인)이 같지 않을 경우
+				
 				
 				alert("새 비밀번호가 일치하지 않습니다.");
 				$("input[name=newUserPwd]").focus();
@@ -158,8 +173,9 @@
 			
 			if($("input[name=newUserPwd]").val() == $("input[name=chkPwd]").val()) {
 				
-				// userName 값에 che
+				// userPwd 값에 대입
 				$("input[name=userPwd]").val($("input[name=chkPwd]").val());
+				console.log($("input[name=userPwd]").val());
 				return true;
 			}
         	

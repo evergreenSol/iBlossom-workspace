@@ -17,9 +17,27 @@ public class MemberServiceImpl implements MemberService{
 	private SqlSessionTemplate sqlSession;
 
 	@Override
+	public int countUserId(String userId) {
+		return memberDao.countUserId(sqlSession, userId);
+	}
+	
+	@Override
+	public int insertMember(Member m) {
+		return memberDao.insertMember(sqlSession, m);
+	}
+	
+	@Override
 	public Member updateMember(Member m) {
 		
 		return memberDao.updateMember(sqlSession, m);
 	}
+
+	@Override
+	public int deleteMember(int userNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
 	
 }

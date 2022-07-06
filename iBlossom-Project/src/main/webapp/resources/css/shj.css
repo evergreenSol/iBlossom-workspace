@@ -438,7 +438,8 @@ div { box-sizing: border-box; }
 }
 
 #mail-check-warn {
-    font-size: 13px;
+	margin:0px;
+    font-size: 11px;
 }
 
 /* signUp 회원가입 폼 input 호버 속성 */

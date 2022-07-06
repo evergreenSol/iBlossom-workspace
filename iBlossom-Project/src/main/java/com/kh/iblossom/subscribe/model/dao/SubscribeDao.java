@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.iblossom.subscribe.model.vo.SubProduct;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Repository
 public class SubscribeDao {
@@ -38,5 +39,15 @@ public class SubscribeDao {
 	public int updateSubProduct(SqlSessionTemplate sqlSession, SubProduct sp) {
 		
 		return sqlSession.update("subscribeMapper.updateSubProduct", sp);
+	}
+	
+	// 마이페이지 구독조회
+	public ArrayList<Subscribe> selectMySubscribe(SqlSessionTemplate sqlSession, int userNo) {
+		
+		ArrayList<Subscribe> list = new ArrayList<Subscribe>();
+		
+//		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribe", userNo);
+		return list;
+
 	}
 }
