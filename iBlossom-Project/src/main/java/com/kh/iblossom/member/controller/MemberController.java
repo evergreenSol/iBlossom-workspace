@@ -40,6 +40,13 @@ public class MemberController {
 	@Autowired
 	 private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
+	// 로그인
+	@RequestMapping(value="loginForm.me")
+	public String LoginForm() {
+		
+		return "common/login";
+	}
+	
 	// 로그아웃
 	@RequestMapping(value="logout.me")
 	public String Logout(HttpSession session) {
@@ -47,6 +54,12 @@ public class MemberController {
 		
 		return "redirect:/";
 		
+	}
+	
+	// 회원가입
+	@RequestMapping(value="join.do")
+	public String EnrollMemberForm() {
+		return "common/join";
 	}
 
 	// 마이페이지 호출 및 응답
