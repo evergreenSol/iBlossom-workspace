@@ -10,5 +10,8 @@ public interface QnaService {
 	ArrayList<Qna> selectList();
 
 	ArrayList<Qna> selectMyQna(int userNo);
+
+	int insertQna(Qna q);
+
 	
 }

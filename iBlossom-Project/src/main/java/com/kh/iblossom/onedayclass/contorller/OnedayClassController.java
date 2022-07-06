@@ -21,4 +21,10 @@ public class OnedayClassController {
 
 		return "user/onedayclass/class_DetailView";
 	}
+	
+	@RequestMapping("ResForm.cl")
+	public String classResForm() {
+
+		return "user/onedayclass/class_ReservationForm";
+	}
 }

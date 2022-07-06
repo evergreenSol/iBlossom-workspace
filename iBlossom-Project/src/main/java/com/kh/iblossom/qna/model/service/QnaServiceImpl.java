@@ -31,4 +31,11 @@ public class QnaServiceImpl implements QnaService {
 		return qnaDao.selectMyQna(sqlSession, userNo);
 	}
 
+
+	@Override
+	public int insertQna(Qna q) {
+		
+		return qnaDao.insertQna(sqlSession, q);
+	}
+
 }
