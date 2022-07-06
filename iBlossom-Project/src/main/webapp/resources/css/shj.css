@@ -395,7 +395,7 @@ div { box-sizing: border-box; }
 .signUp-form {
     margin-top: 80px;
     position: absolute;
-    top : 13%;
+    top : 10%;
     left: 50%;
     transform: translateX(-50%)
 }
@@ -403,6 +403,7 @@ div { box-sizing: border-box; }
 /* signUp 회원가입 폼 label 속성 */
 .signUp-form-label {
     font-size: 13px;
+    
 }
 
 /* signUp 회원가입 폼 input 속성 */
@@ -415,13 +416,29 @@ div { box-sizing: border-box; }
     outline: 0px;
 }
 
-#signUp-id-checkbutton {
+
+#signUp-input-email {
+    width: 200px;
+    height: 32px;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    border: 1px solid lightgray;
+    outline: 0px;
+}
+
+#signUp-signUpbutton {
     width: 65px;
     height: 36px;
     outline: 0px;
     background-color: black;
     color: white;
     border-radius: 3px;
+
+    border: 0px;
+}
+
+#mail-check-warn {
+    font-size: 13px;
 }
 
 /* signUp 회원가입 폼 input 호버 속성 */
@@ -436,7 +453,7 @@ div { box-sizing: border-box; }
     height: 38px;
     border: 0px;
     border-radius: 3px;
-    margin-top: 12px;
+    margin-top: 13px;
 }
 
 /* signUp 회원가입 취소 버튼 속성 */
@@ -463,14 +480,14 @@ div { box-sizing: border-box; }
 
 /* signUp (이미 iBlossom의 회원~) 텍스트 속성 */
 #signUp-logintext {
-    bottom: 160px;
+    bottom: 120px;
     left: 120px;
     font-size: 13px;
 }
 
 /* signUp 로그인 버튼 속성 */
 #signUp-loginbutton {
-    bottom: 100px;
+    bottom: 60px;
     left: 145px;
     width: 110px;
     height: 38px;
