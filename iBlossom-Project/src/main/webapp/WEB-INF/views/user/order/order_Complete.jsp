@@ -14,7 +14,7 @@
     .complete-outer { 
         background-color: whitesmoke; 
         width: 100%; 
-        height: 630px;
+        height: 620px;
         margin: auto;
     }
 
@@ -79,8 +79,9 @@
     	width: 940px; 
     	margin: auto; 
     	margin-top: 15px; 
-    	font-size: x-large; 
-    	font-weight: 700;
+    	font-weight:700; 
+    	font-size:31px; 
+    	margin-bottom:15px;
     }
 
 </style>
@@ -97,9 +98,7 @@
 
         <br><br>
 
-        <div class="order-title">주문/결제</div>
-
-        <br>
+        <p class="order-title">주문/결제</p>
 
         <!-- 레이아웃 -->
         <div>

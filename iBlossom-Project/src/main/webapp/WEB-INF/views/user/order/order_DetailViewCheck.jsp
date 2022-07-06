@@ -6,11 +6,11 @@
 <meta charset="UTF-8">
 <title>user_Order_DetailViewCheck</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet">
 <style>
 
-    /* 사용자 주문 페이지 레이아웃 */
-    
+    /* 사용자 주문 페이지 레이아웃 */    
     /* 전체 배경 색상 */
     #orderMainOuter {
     	width: 100%;
@@ -38,6 +38,8 @@
         width: 36%;
         float: right;
     }
+
+
 
 	/* ----------------------------------------------------------- */
     /* 사용자 주문 페이지 왼쪽 영역 */
@@ -107,8 +109,9 @@
         border-radius: 3px;  
     }
 
-    /* ----------------------------------------- */
 
+
+    /* ----------------------------------------------------------- */
     /* 주문내역 확인 - 내용 */
     .order-check-content { 
         padding: 20px;
@@ -129,8 +132,9 @@
         background-color:rgba(241, 241, 241, 0.707); 
     }
 
-    /* ------------------------------------------ */
 
+
+    /* ----------------------------------------------------------- */
     /* 모달창 */
     #modal.modal-overlay {
         width: 100%;
@@ -203,6 +207,8 @@
         width: 50px;
     }
     
+    
+    
     /* ----------------------------------------------------------- */
     /* 슬라이드 업/다운 요소 버튼 */
 
@@ -224,8 +230,10 @@
         /* height: 600px; */
     }
     
-    / *주문 내역 확인 박스 가운데 정렬 */
+    /* 주문 내역 확인 박스 가운데 정렬 */
     #CheckBox { margin: auto; }
+
+
 
     /* ----------------------------------------------------------- */
     /* 사용자 주문 페이지 오른쪽 영역 */
@@ -278,6 +286,43 @@
     .order-check>button, .order-orderer>button, .order-sender>button {
         background-color: white;
     }
+    
+    
+    
+    /* ----------------------------------------------------------- */
+    /* 모달창 상세 스타일 */
+    
+    /* 이름, 연락처, 주소, 상세주소 */
+    .address-content>#userName, .address-content>#phone, .address-content>#address1, .address-content>#address2 { 
+		border:none; 
+		width:450px; 
+		height: 50px;
+		font-size: 18px; 
+	}
+	
+	/* 주소 p 태그 */
+	.address-content>p { font-weight: 600; }
+	
+	/* 우편번호 */
+	.address-content>#zipcode { 
+		border: none; 
+		width: 350px; 
+		height: 50px; 
+		display: inline-block; 
+		border: none; 
+		width: 310px; 
+		height: 40px; 
+		font-size: 18px;
+	}
+
+	/* 저장하기 버튼 */
+	.address-footer>button {
+		border:none;
+		width:465px; 
+		height: 50px; 
+		font-size: 18px;
+	}
+   
 
 </style>
 
@@ -326,7 +371,7 @@
 		
 	<!-- 사용자 주문 페이지 왼쪽 영역 -->
     <!-- 주문내역 확인, 주문자 정보, 발신인 이름 펼친 페이지 -->
-    <h1>주문/결제</h1>
+    <p style="font-weight:700; font-size:31px; margin-bottom:15px;">&nbsp;주문/결제</p>
 
         <!-- 왼쪽 섹션 -->
         <div class="order-left">
@@ -501,30 +546,24 @@
                                 <div class="address-content">
 
                                     <!-- 이름 -->
-                                    <input type="text" name="userName" id="userName" size="70" placeholder="이름을 입력해주세요." 
-                                            style="border:none; width:450px; height: 50px; font-size: 18px;"><br>
+                                    <input type="text" name="userName" id="userName" size="70" placeholder="이름을 입력해주세요."><br>
                                     <hr>
 
                                     <!-- 연락처 -->
-                                    <input type="tel" name="Phone" id="phone" size="70" placeholder="010-0000-0000"
-                                            style="border:none; width:450px; height: 50px; font-size: 18px;"><br> 
+                                    <input type="tel" name="Phone" id="phone" size="70" placeholder="010-0000-0000"><br> 
                                     <hr>
 
                                     <p>주소</p>
 
                                     <!-- 우편번호 -->
-                                    <input type="text" name="zipcode" id="zipcode" size="70" readonly placeholder="우편번호 검색"
-                                            style="border:none; width:350px; height: 50px; display: inline-block; border:none; width:310px; height: 40px; font-size: 18px;">
-                                    <input type="button" value="우편번호찾기" onclick="kakaopost()"
-                                            style="border:none; width:146px; height: 50px; font-size: 15px;"><br>
+                                    <input type="text" name="zipcode" id="zipcode" size="70" readonly placeholder="우편번호 검색">
+                                    <input type="button" value="우편번호찾기" onclick="kakaopost()" style="border:none; width:146px; height: 50px; font-size: 15px;"><br>
                                     <hr>
 
                                     <!-- 주소 -->
-                                    <input type="text" name="address" id="address" size="70" placeholder="주소"
-                                            style="border:none; width:450px; height: 50px; font-size: 18px;"><br>
+                                    <input type="text" name="address" id="address1" size="70" placeholder="주소"><br>
                                     <hr>
-                                    <input type="text" name="address" id="address" size="70" placeholder="상세주소입력"
-                                            style="border:none; width:450px; height: 50px; font-size: 18px;"><br>
+                                    <input type="text" name="address" id="address2" size="70" placeholder="상세주소입력"><br>
                                     <hr>
 
                                 </div>

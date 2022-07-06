@@ -162,7 +162,7 @@
 	<div id="cartMainOuter">
 	
 	    <!-- 장바구니 타이틀 -->
-	    <h1>쇼핑백</h1>
+	    <p style="font-weight:700; font-size:34px; margin-bottom:15px;">&nbsp;쇼핑백</p>
 	
 	    <div class="cart-left">
 	
