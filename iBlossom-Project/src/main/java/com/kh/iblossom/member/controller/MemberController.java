@@ -1,7 +1,8 @@
 package com.kh.iblossom.member.controller;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +10,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.iblossom.member.model.service.MemberService;
 import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.onedayclass.model.Service.OnedayClassService;
 import com.kh.iblossom.product.model.service.ProductService;
 import com.kh.iblossom.qna.model.service.QnaService;
-import com.kh.iblossom.qna.model.vo.Qna;
 import com.kh.iblossom.subscribe.model.service.SubscribeService;
-import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Controller
 public class MemberController {
@@ -53,14 +53,46 @@ public class MemberController {
 		session.invalidate();
 		
 		return "redirect:/";
-		
 	}
 	
-	// 회원가입
-	@RequestMapping(value="join.do")
+	// 회원가입 폼 이동 메소드
+	@RequestMapping(value="enrollForm.me")
 	public String EnrollMemberForm() {
 		return "common/join";
 	}
+	
+	
+	// 회원가입 - 아이디 중복 체크 메소드
+	@ResponseBody
+	@RequestMapping(value="checkId.me")
+	public void countUserId(String userId, HttpServletResponse response) throws IOException {
+		
+		int result = memberService.countUserId(userId);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().print(result);
+	}
+	
+	// 회원가입 메소드
+	@RequestMapping(value="insert.me")
+	public String insertMember(Member m, Model model, HttpSession session) {
+		
+		String encPwd = bCryptPasswordEncoder.encode(m.getUserPwd());
+		
+		m.setUserPwd(encPwd);
+		
+		int result = memberService.insertMember(m);
+		
+		if(result > 0) {
+			
+			return "common/login";
+		}
+		else {
+			return "redirect:/";
+		}
+		
+	}
+	
 
 	// 마이페이지 호출 및 응답
 	@RequestMapping(value="mypage.me")

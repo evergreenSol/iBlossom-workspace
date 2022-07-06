@@ -22,7 +22,7 @@ public class sendAuthEmail {
 	
 	// 난수 발생 메소드해서 ~ 했다치고 authKey에 대입
 	public void randomKey() {
-		authKey =  (int)(Math.random() * 90000 + 9999);
+		authKey =  (int)(Math.random() * 900000 + 99999);
 	}
 
 	@ResponseBody

@@ -43,7 +43,7 @@
                 <span class="login-id-pwd-search"><a href="" class="login-id-pwd-search">아이디 | 비밀번호 찾기</a></span>
                 <button type="submit" id="login-loginbutton">로그인</button><br>
                 <span id="login-signup-text1">아직 iBlossom 회원이 아니신가요?</span>
-                <a href="join.do" id="login-signup-text2">회원가입</a>
+                <a href="enrollForm.me" id="login-signup-text2">회원가입</a>
             </form>
 
         </div>
@@ -51,10 +51,10 @@
     
     
     <!-- 푸터 -->
-     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
     
     
-        <script>
+    <script>
           
        function checklogin() {
           var form = document.loginForm;
