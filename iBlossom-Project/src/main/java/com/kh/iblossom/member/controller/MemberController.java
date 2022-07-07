@@ -119,6 +119,18 @@ public class MemberController {
 		
 	}
 	
+	// 아이디 찾기
+	@RequestMapping("/findId.me")
+	public String findId() {
+		return "common/findId";
+	}
+	
+	// 비밀번호 찾기
+	@RequestMapping("/findPwd.me")
+	public String findPwd() {
+		return "common/findPwd";
+	}
+	
 
 	// 마이페이지 호출 및 응답
 	@RequestMapping(value="mypage.me")
