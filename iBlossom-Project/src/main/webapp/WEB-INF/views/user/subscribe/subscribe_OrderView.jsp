@@ -8,6 +8,7 @@
 <title>user_Order_DetailViewCheck</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet">
 <link href="resources/css/kdh.css" rel="stylesheet">
 <style>
@@ -49,7 +50,6 @@
 <body>
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<jsp:include page="/WEB-INF/views/common/bootpay.jsp"/>
 
 	<br><br>
 	
@@ -356,7 +356,7 @@
                 <!-- 총 결제 금액 -->    
                 <div class="order-tprice">
                     <span >총 결제 금액</span>
-                    <span>${ subLevel * (sp.subPrice + deliverFee) }원</span><input type="hidden" id="totalPrice" value="${ delieverFee + sp.subPrice }">
+                    <span>${ subLevel * (sp.subPrice + deliverFee) }원</span><input type="hidden" id="totalPrice" value="${ subLevel * (sp.subPrice + deliverFee) }">
                 </div>
 
                 <br>
@@ -380,7 +380,10 @@
         </div><!-- 1200px 너비 -->
       	</div><!-- 전체 색상 변경 div -->
 
-	<script>
+	<script>	
+	// 빌링키 발급
+	
+	
 	function getBillingKey(numOfPay) {
 		BootPay.request({
 			price: 0, // 0으로 해야 한다.
@@ -390,7 +393,7 @@
 			method: 'card_rebill', // 빌링키를 받기 위한 결제 수단
 			show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
 			user_info: {
-				username: '김동현',
+				username: '김동현', 
 				email: 'donghyeonk96@gmail.com',
 				addr: '서울특별시 강서구 강서로7길 69-6',
 				phone: '01046929388',
@@ -406,17 +409,75 @@
 		}).done(function (data) {
 			var totalPrice = $('#totalPrice').val();
 			var subProductName = $('#subProductName').val();
-
-			ajaxInsertSubscribe(data.receipt_id, data.billing_key, totalPrice, subProductName, numOfPay);	
-		
+			if(numOfPay==1) {
+				// 정기결제 - 무한반복
+				subscribe(data.billing_key, totalPrice, subProductName, data.receipt_id, numOfPay);
+			}
+			else {
+				// 일시불 (바로 requestPay 로 점프)
+				requestPay(data.billing_key, data.receipt_id, totalPrice, subProductName, numOfPay);
+			}
 		});
 	}
-
-	function ajaxInsertSubscribe(receiptId, billingKey, totalPrice, subProductName, numOfPay) {
+	
+	// 정기결제 - 무한반복
+	function subscribe(billingKey, totalPrice, subProductName, receiptId, numOfPay) {
+		$.ajax({
+			url : "subscribe.do",
+			type : "post",
+			data : {
+				billingKey : billingKey,
+				executeAt : new Date(),
+				miliperiod : 30,
+				totalPrice : totalPrice,
+				subProductName : subProductName,
+				subProductNo : $('#subProductNo').val(),
+				userNo : 1,
+				subLevel : $('#subLevel').val(),
+				subReceiverUser : $('#subReceiverUser').val(),
+				subReceiverPhone : $('#subReceiverPhone').val(),
+				deliverAt : new Date($('#deliverAt').val()),
+				deliverTo : $('#address1').val() + $('#address2').val(),
+				deliverStatus : "배송준비",
+				receiptId : receiptId,
+				numOfPay : numOfPay
+				},
+			success : function(data) {
+				console.log("구독이 등록되었습니다!");
+				
+			}, error : function() {
+				console.log("구독 등록 실패");
+			}
+		});
+	}
+	
+	// 일시불 (바로 requestPay 로 점프)
+	function requestPay(billingKey, receiptId, totalPrice, subProductName, numOfPay) {
+		
+		$.ajax({
+			url : "requestSubscribe.do",
+			type : "post",
+			data : {
+				billingKey : billingKey,
+				totalPrice : totalPrice,
+				subProductName : subProductName,
+			},
+			success : function(data) {
+				console.log("상품 결제 성공");
+				insertSubscribe(numOfPay, receiptId);
+			}, error : function() {
+				console.log("상품 결제 실패");
+			}
+		});    
+	}
+	
+	// DB에 구독 객체 넣기?
+	function insertSubscribe(numOfPay, receiptId) {
 		$.ajax({
 			url : "insert.su",
 			type : "post",
 			data : {
+				subProductName : $('#subProductName').val(),
 				subProductNo : $('#subProductNo').val(),
 				userNo : 1,
 				subLevel : $('#subLevel').val(),
@@ -428,34 +489,27 @@
 				receiptId : receiptId,
 				numOfPay : numOfPay
 			},
-			success : function() {
-
-					subscribe(billingKey, totalPrice, subProductName);	
-
+			success : function(data) {
+				console.log("DB 넣음")		
+			}, error : function() {
+				console.log("DB 넣음 실패")
 			}
 		});
 	}
 	
-	function subscribe(billingKey, totalPrice, subProductName) {
+	// 구독 취소
+	function cancelSubscribe() {
 		$.ajax({
-			url : "subscribe.do",
+			url : "cancelSubscribe.do",
 			type : "post",
-			data : {
-				billingKey : billingKey,
-				executeAt : new Date(),
-				miliperiod : 30,
-				totalPrice : totalPrice,
-				subProductName : subProductName
-				},
 			success : function(data) {
-				console.log("구독이 등록되었습니다!");
+				console.log("스케줄러 중지");
 				
 			}, error : function() {
-				console.log("구독 등록 실패");
+				console.log("cancelSubscribe fail");
 			}
 		});
 	}
-	
 
 	</script>
 
