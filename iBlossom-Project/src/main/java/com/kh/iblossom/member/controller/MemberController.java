@@ -72,7 +72,13 @@ public class MemberController {
 			session.setAttribute("alertMsg", "로그인에 성공하였습니다.");
 			session.setAttribute("loginUser", loginUser);
 			
-			return "user/member/myPage_MainView";
+			if(loginUser.getUserId().equals("admin0")) {
+				
+				return "redirect:/";
+				
+			} else {
+				
+			return "user/member/myPage_MainView"; }
 		}
 		else {
 			session.setAttribute("alertMsg", "로그인에 실패하였습니다.");
@@ -129,6 +135,14 @@ public class MemberController {
 	@RequestMapping("/findPwd.me")
 	public String findPwd() {
 		return "common/findPwd";
+	}
+	
+
+	// 마이페이지 호출 및 응답
+	@RequestMapping("/memberListView.me")
+	public String memberListView() {
+		
+		return "admin/member/memberListView";
 	}
 	
 
