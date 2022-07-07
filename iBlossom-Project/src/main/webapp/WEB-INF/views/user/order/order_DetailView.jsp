@@ -145,9 +145,9 @@
     #modal.modal-overlay {
         width: 100%;
         height: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
+        /* position: absolute; */
+        /* left: 0; */
+        /* top: 0; */
         display: none;
         flex-direction: column;
         align-items: center;
@@ -161,6 +161,12 @@
         -webkit-backdrop-filter: blur(3.5px); */
         border-radius: 10px;
         border: 1px solid rgba(255, 255, 255, 0.18);
+        
+        /* 모달창 화면 정중앙에 띄우기 */
+        position: fixed;
+ 		top: 50%;
+  		left: 50%;
+  		transform: translate(-50%, -50%);
     }
 
     #modal .modal-window {
@@ -540,99 +546,24 @@
                             </button>
                         
                     </div>
+                     
+                    <!-- 우편번호 script -->
+                    <script>
                     
-                    <!------------------------------------------------------------------->
+                        function kakaopost() {
+                            new daum.Postcode({
+                                oncomplete: function(data) {
+                                	
+                                    document.querySelector("#zipcode").value = data.zonecode;
+                                	// zipcode라는 아이디를 가진 input 태그 value에 가져온 우편번호 값을 저장
 
-                        <!-- Modal -->
-                        <div id="modal" class="modal-overlay">
-                            <div class="modal-window">
-
-                                <!-- Modal Header -->
-                                <h2 class="address-header">배송지 추가</h2>
-                                <div class="close-area">X</div>
-
-                                <!-- Modal body -->
-                                <div class="address-content">
-
-                                    <!-- 이름 -->
-                                    <input type="text" name="userName" id="userName" size="70" placeholder="이름을 입력해주세요." required><br>
-                                    <hr>
-
-                                    <!-- 연락처 -->
-                                    <input type="tel" name="Phone" id="phone" size="70" placeholder="010-0000-0000" required><br> 
-                                    <hr>
-
-                                    <p>주소</p>
-
-                                    <!-- 우편번호 -->
-                                    <input type="text" name="zipcode" id="zipcode" size="70" readonly placeholder="우편번호 검색">
-                                    <input type="button" value="우편번호찾기" onclick="kakaopost()" style="border:none; width:146px; height: 50px; font-size: 15px;"><br>
-                                    <hr>
-
-                                    <!-- 주소 -->
-                                    <input type="text" name="address" id="address1" size="70" placeholder="주소"><br>
-                                    <hr>
-                                    <input type="text" name="address" id="address2" size="70" placeholder="상세주소입력"><br>
-                                    <hr>
-
-                                </div>
-
-                                <!-- Modal footer -->
-                                <div class="address-footer" align="center">
-                                    <button type="submit">저장하기</button>
-                                </div>
-                            </div>
-                        </div>
+                                    document.querySelector("#address").value = data.address
+                                    // address라는 아이디를 가진 input 태그 value에 가져온 주소 값을 저장
+                                }
+                            }).open();
+                        }
                         
-                        <!-- Modal script -->
-                        <script>
-                        
-                            const btnModal = document.querySelector('.address-btn'); // 버튼 class 속성
-                        
-                            fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
-                                .then(response => response.text())
-                                .then(result => loremIpsum.innerHTML = result)
-                    
-                            function modalOn() {
-                            modal.style.display = "flex"
-                            }
-                            function isModalOn() {
-                                return modal.style.display === "flex"
-                            }
-                            function modalOff() {
-                                modal.style.display = "none"
-                            }
-                            
-                            btnModal.addEventListener("click", e => {
-                                modal.style.display = "flex"
-                            })
-                    
-                            const closeBtn = modal.querySelector(".close-area")
-                            closeBtn.addEventListener("click", e => {
-                                modal.style.display = "none"
-                            })
-                            
-                        </script>
-                        
-                        <!------------------------------------------------------------------->
-                        
-                        <!-- 우편번호 script -->
-                        <script>
-                        
-                            function kakaopost() {
-                                new daum.Postcode({
-                                    oncomplete: function(data) {
-                                    	
-                                        document.querySelector("#zipcode").value = data.zonecode;
-                                    	// zipcode라는 아이디를 가진 input 태그 value에 가져온 우편번호 값을 저장
-	
-                                        document.querySelector("#address").value = data.address
-                                        // address라는 아이디를 가진 input 태그 value에 가져온 주소 값을 저장
-                                    }
-                                }).open();
-                            }
-                            
-                        </script>
+                    </script>
 
                     </div>
 
@@ -746,7 +677,82 @@
 				    
 			    });
 	    
-	    	</script> 
+	    	</script>
+	    	
+	    	<!------------------------------------------------------------------->
+
+            <!-- Modal -->
+            <div id="modal" class="modal-overlay">
+                <div class="modal-window">
+
+                    <!-- Modal Header -->
+                    <h2 class="address-header">배송지 추가</h2>
+                    <div class="close-area">X</div>
+
+                    <!-- Modal body -->
+                    <div class="address-content">
+
+                        <!-- 이름 -->
+                        <input type="text" name="userName" id="userName" size="70" placeholder="이름을 입력해주세요." required><br>
+                        <hr>
+
+                        <!-- 연락처 -->
+                        <input type="tel" name="Phone" id="phone" size="70" placeholder="010-0000-0000" required><br> 
+                        <hr>
+
+                        <p>주소</p>
+
+                        <!-- 우편번호 -->
+                        <input type="text" name="zipcode" id="zipcode" size="70" readonly placeholder="우편번호 검색">
+                        <input type="button" value="우편번호찾기" onclick="kakaopost()" style="border:none; width:146px; height: 50px; font-size: 15px;"><br>
+                        <hr>
+
+                        <!-- 주소 -->
+                        <input type="text" name="address" id="address1" size="70" placeholder="주소"><br>
+                        <hr>
+                        <input type="text" name="address" id="address2" size="70" placeholder="상세주소입력"><br>
+                        <hr>
+
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="address-footer" align="center">
+                        <button type="submit">저장하기</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Modal script -->
+            <script>
+            
+                const btnModal = document.querySelector('.address-btn'); // 버튼 class 속성
+            
+                fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
+                    .then(response => response.text())
+                    .then(result => loremIpsum.innerHTML = result)
+        
+                function modalOn() {
+                modal.style.display = "flex"
+                }
+                function isModalOn() {
+                    return modal.style.display === "flex"
+                }
+                function modalOff() {
+                    modal.style.display = "none"
+                }
+                
+                btnModal.addEventListener("click", e => {
+                    modal.style.display = "flex"
+                })
+        
+                const closeBtn = modal.querySelector(".close-area")
+                closeBtn.addEventListener("click", e => {
+                    modal.style.display = "none"
+                })
+                
+            </script>
+            
+            <!-------------------------------------------------------------------> 
  
         </div><!-- 1200px 너비 -->
         
