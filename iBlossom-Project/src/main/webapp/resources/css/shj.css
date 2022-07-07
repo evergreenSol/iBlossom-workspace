@@ -793,7 +793,6 @@ div { box-sizing: border-box; }
 
 /* admin 관리자 페이지 로그인 아이콘 속성 */
 .bi-person-fill {
-    position: absolute;
     margin-top: 0px;
     right: 0px;
     width: 27px;
