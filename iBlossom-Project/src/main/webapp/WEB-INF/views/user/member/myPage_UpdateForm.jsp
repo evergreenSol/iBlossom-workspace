@@ -60,12 +60,12 @@
 	                        <input type="text" class="mypage-w" id="postcode_kakao" name="postcode" readonly value="${ loginUser.postcode }" >
 	
 	                        <p class="revise-form-p">주소</p>
-	                        <input type="text" class="mypage-w" id="address_kakao" name="address1" value="" readonly>
+	                        <input type="text" class="mypage-w" id="address_kakao" name="address1" value="${ loginUser.address1 }" readonly>
 	
 	                        <p class="revise-form-p">상세주소</p>
-	                        <input type="text" class="mypage-w address_detail" name="address2" id="address_detail" onkeyup="eventKeyup(this.value)">
+	                        <input type="text" class="mypage-w address_detail" name="address2" id="address_detail" onkeyup="eventKeyup(this.value)" value="${ loginUser.address2 }">
 	                        
-	                        <input type="hidden" name="address" id="address">
+	                        <input type="hidden" name="address" id="address" value="${ loginUser.address }">
 	
 	
 	                        <br><br><br>
@@ -135,16 +135,54 @@
 			
 			// 비밀번호 검사
 			// 새 비번 안쓴 경우 true
-			if($("input[name=newUserPwd]").val() == "" && $("input[name=chkPwd]").val() == "") {
+			if($("input[name=newUserPwd]").val() == "") {
 				
 				// 기존 name이 userPwd인 값이 넘어감.
 				return true;
 			}
-			
-			if($("input[name=newUserPwd]").val() == "") {
+			else {
+				
+				regExp = /^[a-zA-Z0-9`~!@#$%^&*+=_-|₩';:₩"/?]{4,16}$/i;
+				if(!regExp.test(newUserPwd)) {
+					alert("비밀번호는 영문자, 숫자, 특수기호로 총 4~16글자로 입력해주세요.");
+					
+					return false;
+				}
+				else {
+					
+					if($("input[name=newUserPwd]").val() != $("input[name=chkPwd]").val()) {
+						// 새 비번과 새비번(확인)이 같지 않을 경우
+						
+						
+						alert("새 비밀번호가 일치하지 않습니다.");
+						$("input[name=newUserPwd]").focus();
+
+						return false;
+					}
+					
+					if($("input[name=userPwd]").val() == $("input[name=newUserPwd]").val()) {
+						// 현재 비번과 새 비번이 같을 경우
+						
+						alert("기존 비밀번호와 일치합니다.");
+						$("input[name=newUserPwd]").focus();
+
+						return false;
+					}
+					
+					if($("input[name=newUserPwd]").val() == $("input[name=chkPwd]").val()) {
+						
+						// userPwd 값에 대입
+						$("input[name=userPwd]").val($("input[name=chkPwd]").val());
+						console.log($("input[name=userPwd]").val());
+						return true;
+					}
+					
+				}
 				
 			}
 			
+			
+			/*
 			regExp = /^[a-zA-Z0-9`~!@#$%^&*+=_-|₩';:₩"/?]{4,16}$/i;
 			if(!regExp.test(newUserPwd)) {
 				alert("비밀번호는 영문자, 숫자, 특수기호로 총 4~16글자로 입력해주세요.");
@@ -178,6 +216,7 @@
 				console.log($("input[name=userPwd]").val());
 				return true;
 			}
+			*/
         	
         }
         

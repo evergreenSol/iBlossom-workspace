@@ -25,9 +25,11 @@ public class QnaDao {
 		
 	}
 
-public ArrayList<Qna> selectList(SqlSessionTemplate sqlSession) {
 	
-	return (ArrayList)sqlSession.selectList("qnaMapper.selectList");
-}
+	public int insertQna(SqlSessionTemplate sqlSession, Qna q) {
+		
+		return sqlSession.insert("qnaMapper.insertQna", q);
+	}
+	
 
 }

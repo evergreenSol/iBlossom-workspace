@@ -55,10 +55,10 @@
                         -->
 
                         <table>
-                            <tr >
+                            <tr>
                                 <td colspan="2"><p style="font-size: 18px; font-weight: 600">2022-06-23</p></td>
                                 <td></td>
-                                <td width="650" align="right"><a href="" class="moreBtn" style="padding-right : 10px;">주문상세</a></td>  
+                                <td width="650" align="right"><a href="orderDetailView.me" class="moreBtn" style="padding-right : 10px;">주문상세</a></td>  
  
                             </tr>
                             <tr>
