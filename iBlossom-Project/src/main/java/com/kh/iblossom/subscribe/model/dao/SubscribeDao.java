@@ -11,34 +11,42 @@ import com.kh.iblossom.subscribe.model.vo.Subscribe;
 @Repository
 public class SubscribeDao {
 	
-	// 정기구독 상품 조회용 메소드
+	// 구독용 상품 리스트 조회
 	public ArrayList<SubProduct> selectList(SqlSessionTemplate sqlSession) {
 		
 	
 	  return (ArrayList)sqlSession.selectList("subscribeMapper.selectList"); 
 	 }
 	 
-	// 정기구독 상품 추가용 메소드
+	// 구독용 상품 추가
 	public int insertSubProduct(SqlSessionTemplate sqlSession, SubProduct sp) {
 
 		return sqlSession.insert("subscribeMapper.insertSubProduct", sp);
 	}
 
-	// 정기구독 상품 삭제용 메소드
+	// 구독용 상품 삭제
 	public int deleteSubProduct(SqlSessionTemplate sqlSession, int spno) {
 		
 		return sqlSession.delete("subscribeMapper.deleteSubProduct", spno);
 		
 	}
 
-	public SubProduct insertSubProduct(SqlSessionTemplate sqlSession, int spno) {
+	// 구독용 상품 단일 조회
+	public SubProduct selectSubProduct(SqlSessionTemplate sqlSession, int spno) {
 		
 		return sqlSession.selectOne("subscribeMapper.selectSubProduct", spno);
 	}
 
+	// 구독용 상품 수정
 	public int updateSubProduct(SqlSessionTemplate sqlSession, SubProduct sp) {
 		
 		return sqlSession.update("subscribeMapper.updateSubProduct", sp);
+	}
+
+	// 구독 추가
+	public int insertSubscribe(SqlSessionTemplate sqlSession, Subscribe s) {
+		 
+		return sqlSession.insert("subscribeMapper.insertSubscribe", s);
 	}
 	
 	// 마이페이지 구독조회
@@ -46,8 +54,6 @@ public class SubscribeDao {
 		
 		ArrayList<Subscribe> list = new ArrayList<Subscribe>();
 		
-//		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribe", userNo);
 		return list;
-
 	}
 }

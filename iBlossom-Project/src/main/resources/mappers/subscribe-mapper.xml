@@ -9,6 +9,20 @@
 		<result column="SUBORIGIN_NAME" property="subOriginName" />
 		<result column="SUBCHANGE_NAME" property="subChangeName" />
 	</resultMap>
+	
+	<resultMap id="subscribeResultSet" type="subscribe">
+		<result column="SUBSCRIBE_NO" property="subscribeNo" />
+		<result column="SUBPRODUCT_NO" property="subProductNo" />
+		<result column="USER_NO" property="userNo" />
+		<result column="SUB_LEVEL" property="subLevel" />
+		<result column="SUB_RECEIVER_USER" property="subReceiverUser" />
+		<result column="SUB_RECEIVER_PHONE" property="subReceiverPhone" />
+		<result column="DELIVER_AT" property="deliverAt" />
+		<result column="DELIVER_TO" property="deliverTo" />
+		<result column="DELIVER_STATUS" property="deliverStatus" />
+		<result column="RECEIPT_ID" property="receiptId" />
+		<result column="SUB_DATE" property="subDate" />
+	</resultMap>
 
 	<select id="selectList" resultMap="subProductResultSet">
   		SELECT SUBPRODUCT_NO, SUBPRODUCT_NAME, SUB_PRICE, SUBPRODUCT_DESCRIPTION, SUBORIGIN_NAME, SUBCHANGE_NAME 
@@ -50,5 +64,26 @@
   		 WHERE SUBPRODUCT_NO = #{ subProductNo }
   	</update>
   	
-  	
+  	<insert id="insertSubscribe" parameterType="subscribe">
+  		INSERT INTO SUBSCRIBE(SUBSCRIBE_NO
+		                , SUBPRODUCT_NO
+		                , USER_NO
+		                , SUB_LEVEL
+		                , SUB_RECEIVER_USER
+		                , SUB_RECEIVER_PHONE
+		                , DELIVER_AT
+		                , DELIVER_TO
+		                , DELIVER_STATUS
+		                , RECEIPT_ID)
+		VALUES(SEQ_SNO.NEXTVAL
+		     , #{subProductNo}
+		     , #{userNo}
+		     , #{subLevel}
+		     , #{subReceiverUser}
+		     , #{subReceiverPhone}
+		     , #{deliverAt}
+		     , #{deliverTo}
+		     , #{deliverStatus}
+		     , #{receiptId})
+  	</insert>
 </mapper>

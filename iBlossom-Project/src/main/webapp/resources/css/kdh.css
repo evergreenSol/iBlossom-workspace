@@ -555,3 +555,321 @@
 	    width: 200px;
 	    height: 40px;
 	}
+
+
+	/* 5. 결제창 화면 */
+    /*-------------------------------------------------------------------------------------------*/
+
+	/* 사용자 주문 페이지 레이아웃 */    
+    /* 전체 배경 색상 */
+    #orderMainOuter {
+    	width: 100%;
+    	height: 1600px;
+    	background-color: whitesmoke;
+    }
+    
+    /* 내용 감싸는 전체 레이아웃 */
+    #orderMainWrap {
+    	width: 1200px;
+    	height: 1400px;
+    	margin: auto;
+    }
+    
+    /* 왼쪽 섹션 */ 
+    .order-left {
+        width: 60%;
+        height: 100%;
+        float: left;
+        box-sizing: border-box;
+    }
+
+    /* 오른쪽 섹션 */
+    .order-right {
+        width: 36%;
+        float: right;
+    }
+
+
+
+	/* ----------------------------------------------------------- */
+    /* 사용자 주문 페이지 왼쪽 영역 */
+    
+    /* 주문내역 확인, 주문자 정보, 발신인 이름 펼친 페이지 */
+
+    /* 전체 배경 색입히기 */
+    .order-outer { 
+    	background-color: whitesmoke;
+        width : 100%; 
+    }
+
+    /* 하얀 네모박스 영역 */
+    .order-whitebox { 
+        background-color:white; 
+        padding: 35px;
+        padding-left: 40px;
+        /* margin: 10px; */
+        padding-bottom: 40px;
+    }
+    
+    /* 1. 주문내역 확인 2. 주문자 정보 3. 발신인 이름 
+       4. 배송지 정보 5. 배송지 추가 6. 결제 수단 7. 카카오페이*/
+    .order-check, .order-orderer, .order-sender, 
+    .order-address, .order-address-add,  .order-payment, .order-kakaopay {
+        display: flex; 
+        justify-content: space-between;
+    }
+
+    /* 배송지 추가, 카카오페이 버튼 */
+    .address-btn, .kakao-btn { 
+        padding: 10px; 
+        width: 180px; 
+        border: none; 
+        background-color:whitesmoke; 
+        border-radius: 3px; 
+    }
+
+    /* 버튼 두개 */
+    .order-two-btn { 
+        text-align: center;
+    }
+
+    /* 이전으로 가기 버튼 */
+    .pre-btn { 
+        padding: 10px; 
+        width: 110px; 
+        border: none; 
+        background-color:rgb(210, 207, 207); 
+        border-radius: 3px; 
+        text-decoration: none;
+        color: black;
+    }
+
+    /* 이전으로 가기 버튼 호버시 */
+    .pre-btn:hover { 
+        color: black;
+    }
+    
+    /* 결제하기 버튼 */
+    .pay-btn { 
+        padding: 10px; 
+        width: 100px; 
+        border: none; 
+        background-color:rgb(67, 69, 69); 
+        color:white;
+        border-radius: 3px;  
+    }
+
+
+
+    /* ----------------------------------------------------------- */
+    /* 주문내역 확인 - 내용 */
+    .order-check-content { 
+        padding: 20px;
+        display:flex; 
+        justify-content: space-between;
+    }
+
+    /* 주문내역 확인 - 상품옵션확인 div */                        
+    .order-check-list { 
+        list-style: none;
+        margin-top: 50px;
+    }
+    
+    /* 주문자 정보 - 이름, 연락처 / 발신인 이름 */
+    .orderer-name, .orderer-phone, #SenderBox>p { 
+        width: 620px;
+        padding:10px; 
+        background-color:rgba(241, 241, 241, 0.707); 
+    }
+
+
+
+    /* ----------------------------------------------------------- */
+    /* 모달창 */
+    #modal.modal-overlay {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        /* background: rgba(255, 255, 255, 0.25); */
+        background: rgba(0, 0, 0, 0.712);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(1.5px);
+        -webkit-backdrop-filter: blur(1.5px);
+        /* backdrop-filter: blur(3.5px);
+        -webkit-backdrop-filter: blur(3.5px); */
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    #modal .modal-window {
+        /* background: rgba( 69, 139, 197, 0.70 ); */
+        background: white;
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        backdrop-filter: blur( 13.5px );
+        -webkit-backdrop-filter: blur( 13.5px );
+        border-radius: 10px;
+        border: 1px solid rgba( 255, 255, 255, 0.18 );
+        width: 550px;
+        height: 570px;
+        position: relative;
+        top: -100px;
+        padding : 30px;
+    }
+
+    #modal .address-header {
+        padding-left: 10px;
+        display: inline;
+        /* text-shadow: 1px 1px 2px gray; */
+        color: black;  
+    }
+
+    #modal .address-header h2 {
+        display: inline;
+    }
+
+    #modal .close-area {
+        display: inline;
+        float: right;
+        padding-right: 10px;
+        cursor: pointer;
+        /* text-shadow: 1px 1px 2px gray; */
+        color: black;
+    }
+
+    #modal .address-content {
+        margin-top: 20px;
+        padding: 0px 10px;
+        /* text-shadow: 1px 1px 2px gray; */
+        color: black;
+    }
+
+    .address-footer button {
+        border-radius: 3px;
+    }
+
+    .address-table>tr>td {
+        width: 50px;
+    }
+    
+    
+    
+    /* ----------------------------------------------------------- */
+    /* 슬라이드 업/다운 요소 버튼 */
+
+    /* 누를 버튼 */
+    #CheckBtn, #OrdererBtn, #SenderBtn {
+        width: 700px;
+        display: flex; 
+        justify-content: space-between;
+        border: none;
+        background-color: none;
+        font-size : 16px;
+    }
+
+    /* 내용 박스 */
+    #CheckBox, #OrdererBox, #SenderBox {
+        width: 600px;
+        margin-top: 20px;
+        display: none;
+        /* height: 600px; */
+    }
+    
+    /* 주문 내역 확인 박스 가운데 정렬 */
+    #CheckBox { margin: auto; }
+
+
+
+    /* ----------------------------------------------------------- */
+    /* 사용자 주문 페이지 오른쪽 영역 */
+    
+    /* 전체 옵션 */
+    .order-right-wrap {
+    	background-color:white;
+    	padding: 5px;
+    }
+    
+    /* 총 주문 금액, 배송비, 등급할인 */
+    .order-price, .order-delivery, .order-grade {
+        display:flex;
+        justify-content: space-between;
+        padding: 5px;
+        margin: 10px 15px 15px 15px;
+    }
+    
+    /* 총 주문 금액 위에 공간 주기 */
+    .order-price>span {
+    	margin-top: 20px;
+    }
+
+    /* 총 결제 금액 */
+    .order-tprice {
+        display:flex;
+        justify-content: space-between;
+        padding: 10px;
+        font-weight: bold;
+        margin: 25px 15px 1px 15px;
+    }
+
+    /* 이용약관 네모박스 */
+    .payment-agree { 
+        list-style: none; 
+        padding: 1px;
+        text-align: center;
+        font-size: 0.3cm;
+    }
+    
+    /* 결제하기 버튼 */
+    .order-btn { 
+        width:100%; 
+        height:40px; 
+        background-color: black; 
+        color:white;
+    }
+    
+    /* 누를 슬라이드 헤드 부분 색상 변경 */
+    .order-check>button, .order-orderer>button, .order-sender>button {
+        background-color: white;
+    }
+    
+    
+    
+    /* ----------------------------------------------------------- */
+    /* 모달창 상세 스타일 */
+    
+    /* 이름, 연락처, 주소, 상세주소 */
+    .address-content>#subReceiverUser, .address-content>#subReceiverPhone, .address-content>#address1, .address-content>#address2 { 
+		border:none; 
+		width:450px; 
+		height: 50px;
+		font-size: 18px; 
+	}
+	
+	/* 주소 p 태그 */
+	.address-content>p { font-weight: 600; }
+	
+	/* 우편번호 */
+	.address-content>#zipcode { 
+		border: none; 
+		width: 350px; 
+		height: 50px; 
+		display: inline-block; 
+		border: none; 
+		width: 310px; 
+		height: 40px; 
+		font-size: 18px;
+	}
+
+	/* 저장하기 버튼 */
+	.address-footer>button {
+		border:none;
+		width:465px; 
+		height: 50px; 
+		font-size: 18px;
+	}
+   
