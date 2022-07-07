@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user_Cart_MainView</title>
+<title>user_Cart_ListView</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet">
 <style>
@@ -361,19 +361,17 @@
   
     </div>
     
-    <br><br><br> <!-- 임시 -->
-    
-	    <!-- 장바구니에 담긴 상품이 없을 경우 -->
+    <!-- 
+   
 	    <div style="width: 1200px; height: 800px; margin: auto;">
 	    
-	    	<!-- 장바구니 타이틀 -->
 		    <div style="font-weight:700; font-size:34px; margin-bottom:15px; float:left;">&nbsp;쇼핑백</div>
 		    
 		    	<br><br><br>
+		    	
 		    	<hr>
 				    <div style="padding:160px; text-align: center;">
 				    
-					    <!-- 장바구니 없다 이미지 -->
 		                <div>
 		                    <img src="resources/images/cart_zero_img.png" style="width:50px; height:50px; margin-bottom:14px;">
 		                </div>
@@ -387,9 +385,10 @@
 					    </div>
 				    				    	
 				    </div>
-			    <hr>
-		    
+			   <hr>
 	    </div>
+	    
+	 -->    
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 
