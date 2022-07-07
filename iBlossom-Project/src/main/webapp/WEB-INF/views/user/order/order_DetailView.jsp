@@ -61,10 +61,10 @@
     /* 하얀 네모박스 영역 */
     .order-whitebox { 
         background-color:white; 
-        padding: 35px;
+        padding: 34px;
         padding-left: 40px;
         margin: 10px;
-        padding-bottom: 70px;
+        padding-bottom: 60px;
     }
     
     /* 1. 주문내역 확인 2. 주문자 정보 3. 발신인 이름 
@@ -77,12 +77,18 @@
 
     /* 배송지 추가, 카카오페이 버튼 */
     .address-btn, .kakao-btn { 
-        padding: 10px; 
-        width: 180px; 
+        padding: 15px; 
+        width: 200px; 
         border: none; 
         background-color:whitesmoke; 
         border-radius: 3px; 
     }
+    
+    /* 위 버튼 마우스 호버시 */
+    .address-btn:hover, .kakao-btn:hover {
+    	font-weight: 600;
+    	cursor: pointer;
+    } 
 
     /* 버튼 두개 */
     .order-two-btn { 
@@ -93,7 +99,7 @@
     .pre-btn { 
         width: 65px;
         height: 30px; 
-        border: 1px solid gray;
+        border: none;
         background-color: white;
         border-radius: 3px; 
         color: gray;
@@ -102,7 +108,8 @@
 
     /* 이전으로 가기 버튼 호버시 */
     .pre-btn:hover { 
-        color: black;
+        color: #ff2393;
+        
     }
     
     /* 결제하기 버튼 */
@@ -293,6 +300,10 @@
         background-color: black; 
         color:white;
     }
+          
+    .order-btn:hover {
+    	cursor: pointer;	
+    }
     
     /* 누를 슬라이드 헤드 부분 색상 변경 */
     .order-check>button, .order-orderer>button, .order-sender>button {
@@ -326,6 +337,21 @@
 		height: 40px; 
 		font-size: 18px;
 	}
+	
+	/* 우편번호 찾기 버튼*/
+	.zipcodeBtn {
+		border:none; 
+		width:146px; 
+		height: 50px; 
+		font-size: 15px;
+		border-radius: 3px;
+	}
+	
+	/* 우편번호 찾기 버튼 호버시 */
+	.zipcodeBtn:hover {
+		cursor: pointer;
+		font-weight: 500;
+	}
 
 	/* 저장하기 버튼 */
 	.address-footer>button {
@@ -333,7 +359,15 @@
 		width:465px; 
 		height: 50px; 
 		font-size: 18px;
+		border-radius: 3px;
 	}
+	
+	/* 저장하기 버튼 호버시 */
+	.address-footer>button:hover {
+		cursor: pointer;
+		font-weight: 500;
+	}	
+	
    
 </style>
 
@@ -704,7 +738,7 @@
 
                         <!-- 우편번호 -->
                         <input type="text" name="zipcode" id="zipcode" size="70" readonly placeholder="우편번호 검색">
-                        <input type="button" value="우편번호찾기" onclick="kakaopost()" style="border:none; width:146px; height: 50px; font-size: 15px;"><br>
+                        <input type="button" class="zipcodeBtn" value="우편번호찾기" onclick="kakaopost()"><br>
                         <hr>
 
                         <!-- 주소 -->

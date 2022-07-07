@@ -34,15 +34,16 @@
         background-color: rgba(231, 231, 231, 0.738);
         display: inline-block;
         width: 800px;
-        height: 200px;
+        height: 220px;
         text-align: center;
-        margin-top: 50px;
+        margin-top: 40px;
     }
     
     /* 회색 네모박스 안에 내용물 감싸는 틀 */
     .complete-graybox-div { 
         width: 300px; 
-        margin: auto; 
+        margin: auto;
+        margin-top: 15px; 
     } 
     
     /* 주문번호 div */
@@ -72,6 +73,10 @@
         border-radius: 3px;
         border: none;
         background-color: rgb(28, 26, 26); 
+    }
+    
+    .complete-two-btn1:hover, .complete-two-btn2:hover {
+    	cursor: pointer;
     }
     
     /* 주문/결제 타이틀 */

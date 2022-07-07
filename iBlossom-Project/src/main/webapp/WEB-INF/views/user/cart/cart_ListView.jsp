@@ -50,11 +50,16 @@
     .choice-delete-btn { 
         background-color: whitesmoke; 
         border: none; 
-        padding: 5px; 
+        padding: 6px; 
         width: 70px; 
         font-weight: bold;
         font-size: small;
         margin-bottom: 0.1cm;
+        border-radius: 3px;
+    }
+    
+    .choice-delete-btn:hover {
+    	cursor: pointer;
     }
 
     /* 장바구니 메뉴바 */
@@ -152,6 +157,10 @@
         background-color: black; 
         color:white;
         border-radius: 3px;
+    }
+    
+    .cart-btn:hover {
+    	cursor: pointer;
     }
 
 
@@ -349,10 +358,38 @@
 	        </div>
 	        
 	    </div>
-    
+  
     </div>
     
-    <br>
+    <br><br><br> <!-- 임시 -->
+    
+	    <!-- 장바구니에 담긴 상품이 없을 경우 -->
+	    <div style="width: 1200px; height: 800px; margin: auto;">
+	    
+	    	<!-- 장바구니 타이틀 -->
+		    <div style="font-weight:700; font-size:34px; margin-bottom:15px; float:left;">&nbsp;쇼핑백</div>
+		    
+		    	<br><br><br>
+		    	<hr>
+				    <div style="padding:160px; text-align: center;">
+				    
+					    <!-- 장바구니 없다 이미지 -->
+		                <div>
+		                    <img src="resources/images/cart_zero_img.png" style="width:50px; height:50px; margin-bottom:14px;">
+		                </div>
+					      
+					    <div style="font-size:large; margin-bottom:27px;">쇼핑백에 담긴 상품이 없습니다</div>
+					    
+					    <div>
+					    	<button class="" type="button" onclick="location.href=''" 
+					    	        style="width:320px; height:50px; background-color:black; color:white; border-radius:3px;">
+					    	쇼핑하러가기</button>
+					    </div>
+				    				    	
+				    </div>
+			    <hr>
+		    
+	    </div>
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 
