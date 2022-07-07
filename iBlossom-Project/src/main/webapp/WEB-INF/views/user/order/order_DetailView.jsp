@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user_Order_DetailViewCheck</title>
+<title>user_Order_DetailView</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet">
@@ -14,7 +14,7 @@
     /* 전체 배경 색상 */
     #orderMainOuter {
     	width: 100%;
-    	height: 1600px;
+    	height: 1700px;
     	background-color: whitesmoke;
     }
     
@@ -37,6 +37,12 @@
     .order-right {
         width: 36%;
         float: right;
+        
+        /* sticky*/
+        position: relative;
+        top: -30px;
+        right: 57%; 
+        margin-right:-670px;
     }
 
 
@@ -57,8 +63,8 @@
         background-color:white; 
         padding: 35px;
         padding-left: 40px;
-        /* margin: 10px; */
-        padding-bottom: 40px;
+        margin: 10px;
+        padding-bottom: 70px;
     }
     
     /* 1. 주문내역 확인 2. 주문자 정보 3. 발신인 이름 
@@ -83,15 +89,15 @@
         text-align: center;
     }
 
-    /* 이전으로 가기 버튼 */
+    /* 이전으로  버튼 */
     .pre-btn { 
-        padding: 10px; 
-        width: 110px; 
-        border: none; 
-        background-color:rgb(210, 207, 207); 
+        width: 65px;
+        height: 30px; 
+        border: 1px solid gray;
+        background-color: white;
         border-radius: 3px; 
-        text-decoration: none;
-        color: black;
+        color: gray;
+        float: right;
     }
 
     /* 이전으로 가기 버튼 호버시 */
@@ -254,7 +260,7 @@
     
     /* 총 주문 금액 위에 공간 주기 */
     .order-price>span {
-    	margin-top: 20px;
+    	margin-top: 10px;
     }
 
     /* 총 결제 금액 */
@@ -323,8 +329,8 @@
 		font-size: 18px;
 	}
    
-
 </style>
+
 
 <!-------------------------------------------------------------------->
 <!-- 슬라이드 업/다운 스크립트  -->
@@ -355,6 +361,7 @@
         });
     });
 </script>
+
 </head>
 <body>
 
@@ -464,7 +471,7 @@
                             
                         </div> 
 
-                    <!-------------------------------------------->
+                    <!------------------------------------------------------------------->
 
                     <!-- 2. 주문자 정보 -->
 
@@ -532,7 +539,9 @@
                                 + 배송지 추가
                             </button>
                         
-                        </div>
+                    </div>
+                    
+                    <!------------------------------------------------------------------->
 
                         <!-- Modal -->
                         <div id="modal" class="modal-overlay">
@@ -546,11 +555,11 @@
                                 <div class="address-content">
 
                                     <!-- 이름 -->
-                                    <input type="text" name="userName" id="userName" size="70" placeholder="이름을 입력해주세요."><br>
+                                    <input type="text" name="userName" id="userName" size="70" placeholder="이름을 입력해주세요." required><br>
                                     <hr>
 
                                     <!-- 연락처 -->
-                                    <input type="tel" name="Phone" id="phone" size="70" placeholder="010-0000-0000"><br> 
+                                    <input type="tel" name="Phone" id="phone" size="70" placeholder="010-0000-0000" required><br> 
                                     <hr>
 
                                     <p>주소</p>
@@ -570,7 +579,7 @@
 
                                 <!-- Modal footer -->
                                 <div class="address-footer" align="center">
-                                    <button type="submit" style="border:none; width:465px; height: 50px; font-size: 18px;">저장하기</button>
+                                    <button type="submit">저장하기</button>
                                 </div>
                             </div>
                         </div>
@@ -605,21 +614,29 @@
                             
                         </script>
                         
+                        <!------------------------------------------------------------------->
+                        
                         <!-- 우편번호 script -->
                         <script>
+                        
                             function kakaopost() {
                                 new daum.Postcode({
                                     oncomplete: function(data) {
+                                    	
                                         document.querySelector("#zipcode").value = data.zonecode;
-                                        document.querySelector("#address").value =  data.address
+                                    	// zipcode라는 아이디를 가진 input 태그 value에 가져온 우편번호 값을 저장
+	
+                                        document.querySelector("#address").value = data.address
+                                        // address라는 아이디를 가진 input 태그 value에 가져온 주소 값을 저장
                                     }
                                 }).open();
                             }
+                            
                         </script>
 
                     </div>
 
-                    <hr>
+                    <hr> <!------------------------------------------------------------------->
 
                     <!-- 6. 결제수단 -->
                     <div>
@@ -643,10 +660,12 @@
                     <div class="order-two-btn">
 
                         <!-- 경로 : 장바구니 페이지  -->
-                        <a href="" class="pre-btn" type="button">이전으로 가기</a>
+                        <button class="pre-btn" type="button" onclick="location.href='list.ca'">이전으로</button>
                         
                         <!-- 옆에 결제 하기 있으니까 뺄까 ? -->
-                        <button class="pay-btn" type="submit">결제하기</button>
+                        <!--  
+                        	<button class="pay-btn" type="submit">결제하기</button>
+                        -->
                     
                     </div>
 
@@ -655,7 +674,10 @@
             </div>
 
         </div>
-
+        
+        
+        <!------------------------------------------------------------------->
+        
         <!-- 오른쪽 섹션 -->
         <div class="order-right">
 
@@ -702,12 +724,35 @@
 			</div>
 			
             <!-- 결제하기 버튼 -->
+            <!-- 카카오페이 열리게  -->
             <div>
-                <button class="order-btn" type="submit" onclick="location.href='complete.ord'">결제하기</button>
+                <button class="order-btn" type="submit" onclick="location.href='complete.or'">결제하기</button>
             </div>
             
+	        <!-- follow quick menu -->
+	    	<script>  
+	    
+			    $(window).scroll(function(){
+			    	
+			    	var scrollTop = $(document).scrollTop();
+			    	
+				    if (scrollTop < 180) {
+				     scrollTop = -30; 
+				    }
+				    
+				    $(".order-right").stop();
+				    $(".order-right").animate( { "top" : scrollTop }
+				    );
+				    
+			    });
+	    
+	    	</script> 
+ 
         </div><!-- 1200px 너비 -->
+        
       	</div><!-- 전체 색상 변경 div -->
+      	
+    </div>   
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 	

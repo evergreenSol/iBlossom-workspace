@@ -34,6 +34,8 @@
         box-sizing: border-box;
     }
 
+
+
     /* ----------------------------------------------------------- */   
     /* 사용자 장바구니 페이지 왼쪽 영역 */
 
@@ -109,16 +111,27 @@
 		 text-decoration: none;
 	}
 	
+	
+	
     /* ----------------------------------------------------------- */
-
     /* 사용자 장바구니 페이지 오른쪽 영역 */
 
-    /* 결제금액 div */
-    .cart-right-price>div { 
+    /* 결제금액, 배송비 div */
+    .cart-price1, .cart-price2 { 
         display: flex; 
         justify-content: space-between; 
-        padding: 5px; /* 너비조정 */
+        padding: 5px;
+        margin: 10px 15px 15px 15px;
     }
+      
+    /* 총 결제 금액  div */
+    .total-price {
+    	display: flex; 
+        justify-content: space-between;  
+        padding: 5px;
+        margin: 30px 15px 10px 15px; 
+        font-weight: bold; 
+    } 
 
     /* 안내사항 네모박스 div */
     .cart-div { 
@@ -141,13 +154,6 @@
         border-radius: 3px;
     }
 
-    /* 총 결제 금액 div */
-    .total-price { 
-        padding: 10px; 
-        font-weight: bold; 
-        margin-top: 25px;
-        margin-bottom: 5px;
-    } 
 
 </style>
 </head>
@@ -207,14 +213,14 @@
 	                <span class="cart-content3">
 	                    
 	                        <!-- 제목 -->
-	                        <div>상품 제목</div> <br>
+	                        <div>상품 제목</div> <br> <!-- ${p.flowerName} -->
 	
 	                        <!-- 수령일 -->
 	                        <div>수령일 : 2022-06-21(목)</div><br>
 	
 	                        <!-- 가격 -->
 	                        <!-- <div>가격</div> -->
-	                        <div>6,900원</div><br>
+	                        <div>6,900원</div><br> <!-- <fmt:formatNumber value="${p.price}" pattern="###,###,###"/> -->
 	
 	                        <!-- 수량 -, + 옵션 -->
 	                        <form name="form" method="get">
@@ -241,7 +247,15 @@
 	            <!-- 1개 선택항목 끝난 후 구분선 -->
 	            <hr>
 	
-	        </div>    
+	        </div> 
+	        
+	        <!-- 
+	        	* 로그인이 되지 않은 상태 :  "바구니가 비어있습니다." 페이지
+	        	* 로그인 했는데 상품을 담지 않은 상태라면 : "바구니가 비어있습니다." 페이지 
+				* 로그인 했고 담은 상품이 있다면 담은 상품 보여주기
+	         -->
+	        
+	        <!------------------------------------------------------------------->    
 	
 	        <!-- 수량 증가 함수 -->
 	        <script language="JavaScript">
@@ -285,34 +299,36 @@
 	        </script> 
 	
 	    </div>
+	    
+	    <!------------------------------------------------------------------->
 	
 	    <div class="cart-right">
 	    
-	    <!-- 사용자 장바구니 페이지 오른쪽 영역-->
-	    <div class="cart-right-price">
-	
-	        <!-- 총 주문 금액 -->
-	        <div>
-	            <span>총 주문 금액</span>
-	            <span>31,800원</span>
+		    <!-- 사용자 장바구니 페이지 오른쪽 영역-->
+		    <div class="cart-right-price">
+		
+		        <!-- 총 주문 금액 -->
+		        <div class="cart-price1">
+		            <span>총 주문 금액</span>
+		            <span>31,800원</span>
+		        </div>
+		
+		        <!-- 배송비 -->
+		        <div class="cart-price2">
+		            <span>배송비</span>
+		            <span>+ 0원</span>
+		        </div>
+		
+		        <!-- 구분선 -->
+		        <hr>
+		
+		        <!-- 총 결제 금액 -->
+		        <div class="total-price">
+		            <span>총 결제 금액</span>
+		            <span>31,800원</span>
+		        </div>
+		
 	        </div>
-	
-	        <!-- 배송비 -->
-	        <div>
-	            <span>배송비</span>
-	            <span>+ 0원</span>
-	        </div>
-	
-	        <!-- 구분선 -->
-	        <hr>
-	
-	        <!-- 총 결제 금액 -->
-	        <div  class="total-price">
-	            <span>총 결제 금액</span>
-	            <span>31,800원</span>
-	        </div>
-	
-        </div>
 	
 	        <br>
 	
@@ -329,7 +345,7 @@
 	
 	        <!-- 결제하기 버튼 -->
 	        <div>
-	            <button class="cart-btn" type="submit" onclick="location.href='detailView.ord'">결제하기</button>
+	            <button class="cart-btn" type="submit" onclick="location.href='detailView.or'">결제하기</button>
 	        </div>
 	        
 	    </div>
