@@ -109,7 +109,6 @@
 /* 로그인, 장바구니 아이콘 div */
 #header-login {
     float: right;
-    width: 80px;
     height: 100%;
     position: absolute;
     right: 0px;
