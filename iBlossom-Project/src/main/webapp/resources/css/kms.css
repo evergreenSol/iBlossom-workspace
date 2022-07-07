@@ -1,19 +1,24 @@
 
-
-
 	/* 원데이클래스 스타일 */
+    /*클래스 전체 감싼 틀*/
+    #class-container-wrap{
+        position: relative;
+        width: 1200px;
+        margin: auto;
+    }
+	
       /*클래스 전체 틀*/
       .class-container {
         width: 1200px;
         margin:auto;
         margin-top: 100px;
-        margin-left: 380px;
+        margin-left: 50px;
 
     }
 
     /*클래스 상세페이지 이미지*/
     #image2{
-        margin-left: 300px;
+        margin-left: 50px;
     }
 
     /*클래스 날짜 select*/
@@ -370,7 +375,7 @@
 }
 
 /*클래스 상세페이지 이미지*/
-#image2{
+#admin-image2{
     margin-left: 300px;
 }
 
