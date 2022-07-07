@@ -66,7 +66,11 @@
 	                        <input type="text" class="mypage-w address_detail" name="address2" id="address_detail" onkeyup="eventKeyup(this.value)" value="${ loginUser.address2 }">
 	                        
 	                        <input type="hidden" name="address" id="address" value="${ loginUser.address }">
-	
+	                        <input type="hidden" name="email"  value="${ loginUser.email }">
+	                        <input type="hidden" name="enrollDate"  value="${ loginUser.enrollDate }">
+	                        <input type="hidden" name="status"  value="${ loginUser.status }">
+	                        <input type="hidden" name="purchase"  value="${ loginUser.purchase }">
+	                        <input type="hidden" name="grLevel"  value="${ loginUser.grLevel }">
 	
 	                        <br><br><br>
 	                        <div class="mypage-revise-wrap" align="center">
@@ -101,7 +105,7 @@
 
                         document.getElementById("postcode_kakao").value = data.zonecode; // 우편번호 넣기
                         document.getElementById("address_kakao").value = data.address; // 주소 넣기
-                        document.getElementById("address").value = data.address; // 합치기 위한 주소 넣기
+                        // document.getElementById("address").value = data.address; // 합치기 위한 주소 넣기
                         document.querySelector("input[id=address_detail]").focus(); //상세입력 포커싱
                     }
                 }).open();
@@ -109,7 +113,6 @@
         }
         
         function eventKeyup(str){
-
 			$("#address").val($("#address_kakao").val() + " " + str);
 
     	}
@@ -219,8 +222,6 @@
 			*/
         	
         }
-        
-        
     </script>
 
     
