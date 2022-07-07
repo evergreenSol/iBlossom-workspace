@@ -34,15 +34,16 @@
         background-color: rgba(231, 231, 231, 0.738);
         display: inline-block;
         width: 800px;
-        height: 200px;
+        height: 220px;
         text-align: center;
-        margin-top: 50px;
+        margin-top: 40px;
     }
     
     /* 회색 네모박스 안에 내용물 감싸는 틀 */
     .complete-graybox-div { 
         width: 300px; 
-        margin: auto; 
+        margin: auto;
+        margin-top: 15px; 
     } 
     
     /* 주문번호 div */
@@ -72,6 +73,10 @@
         border-radius: 3px;
         border: none;
         background-color: rgb(28, 26, 26); 
+    }
+    
+    .complete-two-btn1:hover, .complete-two-btn2:hover {
+    	cursor: pointer;
     }
     
     /* 주문/결제 타이틀 */
@@ -116,11 +121,12 @@
                             <div><img src="resources/images/order_complete_check.png" style="width:54px; height:54px;"></div>
 
                             <!-- 멘트 -->
-                            <div style="font-weight:bold; font-size:medium;">아무개님의 주문이 완료되었습니다.</div>
+                            <div style="font-weight:bold; font-size:medium;">아무개님의 주문이 완료되었습니다.</div><!-- ${m.userName} -->
                             <br>
 
                             <!-- 주문번호 -->
-                            <div class="complete-graybox-num">주문번호 : 1</div>
+                            <div class="complete-graybox-num">주문번호 : 1</div> <!-- ${o.orderNo} -->
+	
                         </div> 
 
                     </div>
@@ -134,10 +140,10 @@
                     <div class="complete-two-btn">
 
                         <!-- 경로 : 마이페이지 > 주문 내역 조회 -->
-                        <button class="complete-two-btn1" type="button">주문 내역 조회</button>
+                        <button class="complete-two-btn1" type="button" onclick="location.href=''">주문 내역 조회</button>
                         
                         <!-- 경로 : 마켓 -->
-                        <button class="complete-two-btn2" type="button">쇼핑하러 가기</button>
+                        <button class="complete-two-btn2" type="button" onclick="location.href=''">쇼핑하러 가기</button>
                     
                     </div> 
 

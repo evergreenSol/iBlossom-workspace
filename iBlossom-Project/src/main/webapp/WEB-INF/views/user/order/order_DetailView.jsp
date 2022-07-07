@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user_Order_DetailViewCheck</title>
+<title>user_Order_DetailView</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet">
@@ -14,7 +14,7 @@
     /* 전체 배경 색상 */
     #orderMainOuter {
     	width: 100%;
-    	height: 1600px;
+    	height: 1700px;
     	background-color: whitesmoke;
     }
     
@@ -37,6 +37,12 @@
     .order-right {
         width: 36%;
         float: right;
+        
+        /* sticky*/
+        position: relative;
+        top: -30px;
+        right: 57%; 
+        margin-right:-670px;
     }
 
 
@@ -55,10 +61,10 @@
     /* 하얀 네모박스 영역 */
     .order-whitebox { 
         background-color:white; 
-        padding: 35px;
+        padding: 34px;
         padding-left: 40px;
-        /* margin: 10px; */
-        padding-bottom: 40px;
+        margin: 10px;
+        padding-bottom: 60px;
     }
     
     /* 1. 주문내역 확인 2. 주문자 정보 3. 발신인 이름 
@@ -71,32 +77,39 @@
 
     /* 배송지 추가, 카카오페이 버튼 */
     .address-btn, .kakao-btn { 
-        padding: 10px; 
-        width: 180px; 
+        padding: 15px; 
+        width: 200px; 
         border: none; 
         background-color:whitesmoke; 
         border-radius: 3px; 
     }
+    
+    /* 위 버튼 마우스 호버시 */
+    .address-btn:hover, .kakao-btn:hover {
+    	font-weight: 600;
+    	cursor: pointer;
+    } 
 
     /* 버튼 두개 */
     .order-two-btn { 
         text-align: center;
     }
 
-    /* 이전으로 가기 버튼 */
+    /* 이전으로  버튼 */
     .pre-btn { 
-        padding: 10px; 
-        width: 110px; 
-        border: none; 
-        background-color:rgb(210, 207, 207); 
+        width: 65px;
+        height: 30px; 
+        border: none;
+        background-color: white;
         border-radius: 3px; 
-        text-decoration: none;
-        color: black;
+        color: gray;
+        float: right;
     }
 
     /* 이전으로 가기 버튼 호버시 */
     .pre-btn:hover { 
-        color: black;
+        color: #ff2393;
+        
     }
     
     /* 결제하기 버튼 */
@@ -139,9 +152,9 @@
     #modal.modal-overlay {
         width: 100%;
         height: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
+        /* position: absolute; */
+        /* left: 0; */
+        /* top: 0; */
         display: none;
         flex-direction: column;
         align-items: center;
@@ -155,6 +168,12 @@
         -webkit-backdrop-filter: blur(3.5px); */
         border-radius: 10px;
         border: 1px solid rgba(255, 255, 255, 0.18);
+        
+        /* 모달창 화면 정중앙에 띄우기 */
+        position: fixed;
+ 		top: 50%;
+  		left: 50%;
+  		transform: translate(-50%, -50%);
     }
 
     #modal .modal-window {
@@ -254,7 +273,7 @@
     
     /* 총 주문 금액 위에 공간 주기 */
     .order-price>span {
-    	margin-top: 20px;
+    	margin-top: 10px;
     }
 
     /* 총 결제 금액 */
@@ -280,6 +299,10 @@
         height:40px; 
         background-color: black; 
         color:white;
+    }
+          
+    .order-btn:hover {
+    	cursor: pointer;	
     }
     
     /* 누를 슬라이드 헤드 부분 색상 변경 */
@@ -314,6 +337,21 @@
 		height: 40px; 
 		font-size: 18px;
 	}
+	
+	/* 우편번호 찾기 버튼*/
+	.zipcodeBtn {
+		border:none; 
+		width:146px; 
+		height: 50px; 
+		font-size: 15px;
+		border-radius: 3px;
+	}
+	
+	/* 우편번호 찾기 버튼 호버시 */
+	.zipcodeBtn:hover {
+		cursor: pointer;
+		font-weight: 500;
+	}
 
 	/* 저장하기 버튼 */
 	.address-footer>button {
@@ -321,10 +359,18 @@
 		width:465px; 
 		height: 50px; 
 		font-size: 18px;
+		border-radius: 3px;
 	}
+	
+	/* 저장하기 버튼 호버시 */
+	.address-footer>button:hover {
+		cursor: pointer;
+		font-weight: 500;
+	}	
+	
    
-
 </style>
+
 
 <!-------------------------------------------------------------------->
 <!-- 슬라이드 업/다운 스크립트  -->
@@ -355,6 +401,7 @@
         });
     });
 </script>
+
 </head>
 <body>
 
@@ -464,7 +511,7 @@
                             
                         </div> 
 
-                    <!-------------------------------------------->
+                    <!------------------------------------------------------------------->
 
                     <!-- 2. 주문자 정보 -->
 
@@ -532,94 +579,29 @@
                                 + 배송지 추가
                             </button>
                         
-                        </div>
-
-                        <!-- Modal -->
-                        <div id="modal" class="modal-overlay">
-                            <div class="modal-window">
-
-                                <!-- Modal Header -->
-                                <h2 class="address-header">배송지 추가</h2>
-                                <div class="close-area">X</div>
-
-                                <!-- Modal body -->
-                                <div class="address-content">
-
-                                    <!-- 이름 -->
-                                    <input type="text" name="userName" id="userName" size="70" placeholder="이름을 입력해주세요."><br>
-                                    <hr>
-
-                                    <!-- 연락처 -->
-                                    <input type="tel" name="Phone" id="phone" size="70" placeholder="010-0000-0000"><br> 
-                                    <hr>
-
-                                    <p>주소</p>
-
-                                    <!-- 우편번호 -->
-                                    <input type="text" name="zipcode" id="zipcode" size="70" readonly placeholder="우편번호 검색">
-                                    <input type="button" value="우편번호찾기" onclick="kakaopost()" style="border:none; width:146px; height: 50px; font-size: 15px;"><br>
-                                    <hr>
-
-                                    <!-- 주소 -->
-                                    <input type="text" name="address" id="address1" size="70" placeholder="주소"><br>
-                                    <hr>
-                                    <input type="text" name="address" id="address2" size="70" placeholder="상세주소입력"><br>
-                                    <hr>
-
-                                </div>
-
-                                <!-- Modal footer -->
-                                <div class="address-footer" align="center">
-                                    <button type="submit" style="border:none; width:465px; height: 50px; font-size: 18px;">저장하기</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Modal script -->
-                        <script>
-                        
-                            const btnModal = document.querySelector('.address-btn'); // 버튼 class 속성
-                        
-                            fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
-                                .then(response => response.text())
-                                .then(result => loremIpsum.innerHTML = result)
+                    </div>
+                     
+                    <!-- 우편번호 script -->
+                    <script>
                     
-                            function modalOn() {
-                            modal.style.display = "flex"
-                            }
-                            function isModalOn() {
-                                return modal.style.display === "flex"
-                            }
-                            function modalOff() {
-                                modal.style.display = "none"
-                            }
-                            
-                            btnModal.addEventListener("click", e => {
-                                modal.style.display = "flex"
-                            })
-                    
-                            const closeBtn = modal.querySelector(".close-area")
-                            closeBtn.addEventListener("click", e => {
-                                modal.style.display = "none"
-                            })
-                            
-                        </script>
+                        function kakaopost() {
+                            new daum.Postcode({
+                                oncomplete: function(data) {
+                                	
+                                    document.querySelector("#zipcode").value = data.zonecode;
+                                	// zipcode라는 아이디를 가진 input 태그 value에 가져온 우편번호 값을 저장
+
+                                    document.querySelector("#address").value = data.address
+                                    // address라는 아이디를 가진 input 태그 value에 가져온 주소 값을 저장
+                                }
+                            }).open();
+                        }
                         
-                        <!-- 우편번호 script -->
-                        <script>
-                            function kakaopost() {
-                                new daum.Postcode({
-                                    oncomplete: function(data) {
-                                        document.querySelector("#zipcode").value = data.zonecode;
-                                        document.querySelector("#address").value =  data.address
-                                    }
-                                }).open();
-                            }
-                        </script>
+                    </script>
 
                     </div>
 
-                    <hr>
+                    <hr> <!------------------------------------------------------------------->
 
                     <!-- 6. 결제수단 -->
                     <div>
@@ -643,10 +625,12 @@
                     <div class="order-two-btn">
 
                         <!-- 경로 : 장바구니 페이지  -->
-                        <a href="" class="pre-btn" type="button">이전으로 가기</a>
+                        <button class="pre-btn" type="button" onclick="location.href='list.ca'">이전으로</button>
                         
                         <!-- 옆에 결제 하기 있으니까 뺄까 ? -->
-                        <button class="pay-btn" type="submit">결제하기</button>
+                        <!--  
+                        	<button class="pay-btn" type="submit">결제하기</button>
+                        -->
                     
                     </div>
 
@@ -655,7 +639,10 @@
             </div>
 
         </div>
-
+        
+        
+        <!------------------------------------------------------------------->
+        
         <!-- 오른쪽 섹션 -->
         <div class="order-right">
 
@@ -702,12 +689,110 @@
 			</div>
 			
             <!-- 결제하기 버튼 -->
+            <!-- 카카오페이 열리게  -->
             <div>
-                <button class="order-btn" type="submit" onclick="location.href='complete.ord'">결제하기</button>
+                <button class="order-btn" type="submit" onclick="location.href='complete.or'">결제하기</button>
             </div>
             
+	        <!-- follow quick menu -->
+	    	<script>  
+	    
+			    $(window).scroll(function(){
+			    	
+			    	var scrollTop = $(document).scrollTop();
+			    	
+				    if (scrollTop < 180) {
+				     scrollTop = -30; 
+				    }
+				    
+				    $(".order-right").stop();
+				    $(".order-right").animate( { "top" : scrollTop }
+				    );
+				    
+			    });
+	    
+	    	</script>
+	    	
+	    	<!------------------------------------------------------------------->
+
+            <!-- Modal -->
+            <div id="modal" class="modal-overlay">
+                <div class="modal-window">
+
+                    <!-- Modal Header -->
+                    <h2 class="address-header">배송지 추가</h2>
+                    <div class="close-area">X</div>
+
+                    <!-- Modal body -->
+                    <div class="address-content">
+
+                        <!-- 이름 -->
+                        <input type="text" name="userName" id="userName" size="70" placeholder="이름을 입력해주세요." required><br>
+                        <hr>
+
+                        <!-- 연락처 -->
+                        <input type="tel" name="Phone" id="phone" size="70" placeholder="010-0000-0000" required><br> 
+                        <hr>
+
+                        <p>주소</p>
+
+                        <!-- 우편번호 -->
+                        <input type="text" name="zipcode" id="zipcode" size="70" readonly placeholder="우편번호 검색">
+                        <input type="button" class="zipcodeBtn" value="우편번호찾기" onclick="kakaopost()"><br>
+                        <hr>
+
+                        <!-- 주소 -->
+                        <input type="text" name="address" id="address1" size="70" placeholder="주소"><br>
+                        <hr>
+                        <input type="text" name="address" id="address2" size="70" placeholder="상세주소입력"><br>
+                        <hr>
+
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="address-footer" align="center">
+                        <button type="submit">저장하기</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Modal script -->
+            <script>
+            
+                const btnModal = document.querySelector('.address-btn'); // 버튼 class 속성
+            
+                fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
+                    .then(response => response.text())
+                    .then(result => loremIpsum.innerHTML = result)
+        
+                function modalOn() {
+                modal.style.display = "flex"
+                }
+                function isModalOn() {
+                    return modal.style.display === "flex"
+                }
+                function modalOff() {
+                    modal.style.display = "none"
+                }
+                
+                btnModal.addEventListener("click", e => {
+                    modal.style.display = "flex"
+                })
+        
+                const closeBtn = modal.querySelector(".close-area")
+                closeBtn.addEventListener("click", e => {
+                    modal.style.display = "none"
+                })
+                
+            </script>
+            
+            <!-------------------------------------------------------------------> 
+ 
         </div><!-- 1200px 너비 -->
+        
       	</div><!-- 전체 색상 변경 div -->
+      	
+    </div>   
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 	
