@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kh.iblossom.subscribe.model.service.SubscribeService;
@@ -38,7 +37,7 @@ public class SubscribeController {
 	
 	@ResponseBody
 	@RequestMapping(value="getSubProduct.su", produces="application/json; charset=UTF-8")
-	public String ajaxSelectSubProduct(int spno, ModelAndView mv) {
+	public String ajaxSelectSubProduct(int spno) {
 		
 		SubProduct sp = subscribeService.selectSubProduct(spno);
 		
@@ -59,8 +58,11 @@ public class SubscribeController {
 	@RequestMapping("insert.sp")
 	public String insertSubProduct(SubProduct sp, MultipartFile subfile, HttpSession session, Model model) {
 		
-		if(!subfile.getOriginalFilename().equals("")) {
+		System.out.println(sp);
+		System.out.println(subfile);
 		
+		if(!subfile.getOriginalFilename().equals("")) {
+			
 			String changeName = saveFile(subfile, session);
 	
 			sp.setSubOriginName(subfile.getOriginalFilename());
@@ -147,5 +149,19 @@ public class SubscribeController {
 
 		return "user/subscribe/subMember_ListView";
 	}
+	
+	@RequestMapping("orderView.su")
+	public String subOrderView(int spno, int subLevel, String deliverAt, Model model) {
 
+		SubProduct sp = subscribeService.selectSubProduct(spno);
+		
+		model.addAttribute("sp",sp);
+		
+		model.addAttribute("deliverAt",deliverAt); 
+		model.addAttribute("subLevel",subLevel);
+		model.addAttribute("deliverFee", 200); 
+		
+		return "user/subscribe/subscribe_OrderView";
+	}
+	
 }

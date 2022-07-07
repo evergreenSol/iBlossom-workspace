@@ -114,7 +114,10 @@
                 <div id="pay-content1">주문 상품 정보</div>
                 <div id="pay-image"><img src="resources/images/onedayclass_main.jpg" width="120px" style="float:left;"></div>
                 <div id="pay-content1_1">원데이클래스</div>
-                <div id="pay-content1_2" name="">2022-07-22 14:00</div>
+                <!-- 
+                 <div id="pay-content1_2" name="">2022-07-22 14:00</div>
+                 -->
+                <div id="pay-content1_2" name="">${ date }</div>
                 <div id="pay-content1_3">60,000원</div>
             </div>
             <div class='pay-info2'>
