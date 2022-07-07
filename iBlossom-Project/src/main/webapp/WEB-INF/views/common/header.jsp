@@ -45,14 +45,25 @@
         <div id="header-login">
 
             <!-- 로그인 아이콘  -->
-            <c:if test="${loginUser != null}">
-	            <a href="mypage.me" class="header-login-a">
+            <!-- 로그인을 했다 + 관리자다 -->
+            <c:if test="${loginUser != null && loginUser.userId eq 'admin0'}">
+	            <a href="memberListView.me" class="header-login-a">
+	                <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-person-fill" viewBox="0 0 16 16" id="header-login-icon">
+	                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+	                </svg>
+	            </a>
+	        </c:if>
+            <!-- 로그인을 했다 + 관리자가 아니다-->
+            <c:if test="${loginUser != null && loginUser.userId ne 'admin0'}">
+            	 <a href="mypage.me" class="header-login-a">
 	                <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-person-fill" viewBox="0 0 16 16" id="header-login-icon">
 	                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
 	                </svg>
 	            </a>
             </c:if>
+	            
             
+            <!-- 로그인을 안했다 -->
             <c:if test="${loginUser == null}">
               <a href="loginForm.me" class="header-login-b">
                 <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-person-fill" viewBox="0 0 16 16" id="header-login-icon">
@@ -60,6 +71,7 @@
                 </svg>
             	</a>
              </c:if>
+             
             <!-- 장바구니 아이콘 -->
             <a href="mainView.car" class="header-login-a">
                 <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-bag" viewBox="0 0 16 16">
