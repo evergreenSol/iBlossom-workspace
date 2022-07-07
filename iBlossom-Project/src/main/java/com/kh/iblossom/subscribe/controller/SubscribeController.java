@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
@@ -19,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.kh.iblossom.subscribe.model.service.SubscribeService;
 import com.kh.iblossom.subscribe.model.vo.SubProduct;
-import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Controller
 public class SubscribeController {
@@ -166,23 +164,4 @@ public class SubscribeController {
 		return "user/subscribe/subscribe_OrderView";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="insert.su", produces="text/html; charset=UTF-8")
-	public String ajaxInsertSubscribe(Subscribe s, int numOfPay) {
-        
-		int result = 1;
-	
-	
-		for(int i = 0; i < numOfPay; i++) {
-			
-			subscribeService.insertSubscribe(s);
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(s.getDeliverAt()); // 시간 설정
-			cal.add(Calendar.MONTH, 1); // 월 연산
-			s.setDeliverAt(cal.getTime());
-		}	
-		
-		return (result > 0) ? "success" : "fail";
-		
-	}
 }
