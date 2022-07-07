@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="memberMapper">
 
+	<resultMap id="memberResultSet" type="member">
+		<result column="USER_NO" property="userNo"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="USER_PWD" property="userPwd"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="PHONE" property="phone"/>
+		<result column="EMAIL" property="email"/>
+		<result column="ADDRESS1" property="address1"/>
+		<result column="ADDRESS2" property="address2"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="POSTCODE" property="postcode"/>
+		<result column="ENROLL_DATE" property="enrollDate"/>
+		<result column="STATUS" property="status"/>
+		<result column="PURCHASE" property="purchase"/>
+		<result column="GR_LEVEL" property="grLevel"/>
+	</resultMap>
 
 	<select id="countUserId" parameterType="string" resultType="_int">
 		SELECT COUNT(*)
@@ -23,5 +40,14 @@
 		        #{email}
 		        )
 	</insert>
+	
+	
+	<!-- 로그인 -->
+	<select id="loginMember" resultMap="memberResultSet" parameterType="member">
+		SELECT *
+		FROM MEMBER
+		WHERE USER_ID = #{userId}
+		  AND STATUS = 'Y'
+	</select>
 
 </mapper>

@@ -93,7 +93,7 @@
    				
    				regExp = /^[0-9a-zA-Z]([-_.]?[0-9A-Za-z])*@[0-9a-zA-Z]([-_.]?[0-9A-Za-z])*.[a-zA-Z]{2,3}$/i;
                 
-   				if(!regExp.test($("#signUp-input-email"))){
+   				if(!regExp.test($("#signUp-input-email").val())){
                 	alert("유효한 이메일을 입력해주세요.");
    				}
                 else {

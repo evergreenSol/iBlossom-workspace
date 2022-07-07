@@ -6,13 +6,19 @@ import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.onedayclass.model.vo.OnedayClass;
 
 public interface MemberService {
-
+	
+	// 회원가입
+	Member login(Member m);
+	
 	int countUserId(String userId);
 	
-	int insertMember(Member m);
+	int insertMember(Member member);
 	
-	Member updateMember(Member m);
+	int updateMember(Member member);
 	
 	int deleteMember(int userNo);
+
+
+
 	
 }

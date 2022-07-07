@@ -37,9 +37,9 @@
         <!-- 로그인 폼 -->
         <div class="login-form-background" style="position:absolute;">
             <span id="login-form-login">로그인</span><br>
-            <form class="login-form">
-                <input type="text" id="login-id-input" placeholder="아이디"><br>
-                <input type="password" id="login-pwd-input" placeholder="비밀번호"><br>
+            <form action="login.me" method="post" class="login-form">
+                <input type="text" id="login-id-input" name="userId" placeholder="아이디"><br>
+                <input type="password" id="login-pwd-input" name="userPwd" placeholder="비밀번호"><br>
                 <span class="login-id-pwd-search"><a href="" class="login-id-pwd-search">아이디 | 비밀번호 찾기</a></span>
                 <button type="submit" id="login-loginbutton">로그인</button><br>
                 <span id="login-signup-text1">아직 iBlossom 회원이 아니신가요?</span>
@@ -70,13 +70,7 @@
              }
              form.submit();
        }
-       
-       function enterkey() {
-          if (window.event.keyCode == 13) {
-              // 엔터키가 눌렸을 때
-              checklogin();
-           }
-       }
+
     </script>
 
 </body>
