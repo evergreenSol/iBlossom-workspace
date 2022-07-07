@@ -43,7 +43,7 @@ public class SubscribeServiceImpl implements SubscribeService {
 	@Override
 	public SubProduct selectSubProduct(int spno) {
 		
-		return subscribeDao.insertSubProduct(sqlSession, spno);
+		return subscribeDao.selectSubProduct(sqlSession, spno);
 	}
 
 	@Override
@@ -63,7 +63,6 @@ public class SubscribeServiceImpl implements SubscribeService {
 	@Override
 	public ArrayList<Subscribe> selectMySubscribe(int userNo) {
 		return subscribeDao.selectMySubscribe(sqlSession, userNo);
-	}
 	}
 
 }
