@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -53,6 +54,31 @@ public class MemberController {
 		session.invalidate();
 		
 		return "redirect:/";
+	}
+	
+	// 로그인
+	@RequestMapping("login.me")
+	public String login(Member m,
+						HttpSession session) {
+	
+		// 암호화로 인해 아이디로 조회
+		Member loginUser = memberService.login(m);
+		
+		System.out.println(loginUser.getUserPwd());
+		System.out.println(m.getUserPwd());
+		
+		if(loginUser != null && bCryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
+			
+			session.setAttribute("alertMsg", "로그인에 성공하였습니다.");
+			session.setAttribute("loginUser", loginUser);
+			
+			return "user/member/myPage_MainView";
+		}
+		else {
+			session.setAttribute("alertMsg", "로그인에 실패하였습니다.");
+			return "redirect:login.me";
+		}
+		
 	}
 	
 	// 회원가입 폼 이동 메소드
