@@ -6,8 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.product.model.dao.ProductDao;
-import com.kh.iblossom.product.model.vo.Review;
+import com.kh.iblossom.product.model.vo.Product;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -19,11 +20,38 @@ public class ProductServiceImpl implements ProductService{
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public ArrayList<Review> selectMyReview(int userNo) {
+	public int selectListCount() {
 		
-		return productDao.selectMyReview(sqlSession, userNo);
+		return productDao.selectListCount(sqlSession);
 	}
 	
+	@Override
+	public int insertProduct(Product p) {
+		
+		return productDao.insertProduct(sqlSession,p);
+	}
 	
+	@Override
+	public ArrayList<Product> selectList(PageInfo pi) {
+
+		return productDao.selectList(sqlSession, pi);
+	}
+
+	@Override
+	public Product selectProduct(int productNo) {
+		return productDao.selectProduct(sqlSession, productNo);
+	}
+
+	@Override
+	public int deleteProduct(int productNo) {
+
+		return productDao.deleteProduct(sqlSession, productNo);
+	}
+
+	@Override
+	public int updateProduct(Product p) {
+		return productDao.updateProduct(sqlSession, p);
+	}
+
 
 }
