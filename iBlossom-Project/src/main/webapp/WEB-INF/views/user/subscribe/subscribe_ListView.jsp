@@ -127,8 +127,8 @@
 	                    </td>
 	                </tr>
 	                <tr>
-	                    <th height="50px">구독상품</th>
-	                    <td id="subProductName"></td>
+	                    <th height="50px" width="250px">구독상품</th>
+	                    <td width="250px" id="subProductName"></td>
 	                </tr>
 	                <tr>
 	                    <th height="50px">첫수령일</th>
@@ -143,12 +143,17 @@
 	                    <td id="totalPrice"></td>
 	                </tr>
 	                <tr>
-	                    <td height="50px"><button onclick="location.reload();">이전</button></td>
-	                    <td height="50px"><button onclick="">결제</button></td>
+	                    <td height="50px"><button onclick="location.href='listView.su'">이전</button></td>
+	                    <td height="50px"><button onclick="pay();">결제</button></td>
 	                </tr>
 	            </table>
 	        </div>   
 	        <br><br><br>
+			<form id="payInfo" method="post" action="orderView.su">
+           		<input type="hidden" name="spno" id="spno">
+           		<input type="hidden" name="subLevel" id="subLevel">
+           		<input type="hidden" name="deliverAt" id="deliverAt">
+           	</form>
 	        
 	    </div>
     </div>
@@ -178,6 +183,7 @@
 				$('#subProductName').html(response.subProductName)
 				$('#totalPrice').html("매월	" + (response.subPrice) + "원 씩")
 				$('#spno').attr('value', spno);
+				$('#payInfo>#spno').attr('value', spno);
 			},
 			error : function() {
 				console.log("ajax 통신 실패");
@@ -212,15 +218,23 @@
 				$('#deliverAt').html(deliverAt)
 				if(subLevel!=1){
 					$('#subLevel').html(subLevel + "개월")
+					$('#payInfo>#subLevel').attr('value', subLevel);
+					$('#payInfo>#deliverAt').attr('value', deliverAt);
 				}
 				else {
 					$('#subLevel').html("정기구독")
+					$('#payInfo>#subLevel').attr('value', subLevel);
+					$('#payInfo>#deliverAt').attr('value', deliverAt);
 				}
 			},
 			error : function() {
 				console.log("ajax 통신 실패");
 			}
 		});
+	}
+	
+	function pay() {
+		$('#payInfo').submit();
 	}
 	
 	// datepicker 용 jQuery

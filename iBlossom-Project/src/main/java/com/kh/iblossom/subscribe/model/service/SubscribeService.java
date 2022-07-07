@@ -1,6 +1,8 @@
 package com.kh.iblossom.subscribe.model.service;
 
 import java.util.ArrayList;
+
+
 import com.kh.iblossom.subscribe.model.vo.SubProduct;
 import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
@@ -19,6 +21,10 @@ public interface SubscribeService {
 	SubProduct selectSubProduct(int spno);
 
 	int updateSubProduct(SubProduct sp);
+
+	int insertSubscribe(Subscribe s);
 	
 	ArrayList<Subscribe> selectMySubscribe(int userNo);
+
+
 }
