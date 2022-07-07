@@ -28,7 +28,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public int updateMember(Member member) {
+	public int updateMember(Member m) {
 		
 		return memberDao.updateMember(sqlSession,member);
 	}

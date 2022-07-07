@@ -43,14 +43,14 @@ public class MemberController {
 	
 	// 로그인
 	@RequestMapping(value="loginForm.me")
-	public String LoginForm() {
+	public String loginForm() {
 		
 		return "common/login";
 	}
 	
 	// 로그아웃
 	@RequestMapping(value="logout.me")
-	public String Logout(HttpSession session) {
+	public String logout(HttpSession session) {
 		session.invalidate();
 		
 		return "redirect:/";
@@ -83,7 +83,7 @@ public class MemberController {
 	
 	// 회원가입 폼 이동 메소드
 	@RequestMapping(value="enrollForm.me")
-	public String EnrollMemberForm() {
+	public String enrollMemberForm() {
 		return "common/join";
 	}
 	
@@ -122,13 +122,14 @@ public class MemberController {
 
 	// 마이페이지 호출 및 응답
 	@RequestMapping(value="mypage.me")
-	public String MyPageMainView() {
+	public String myPageMainView() {
 		
 		return "user/member/myPage_MainView";
 	}
 	
+	// 나의 주문정보 보기 메소드
 	@RequestMapping(value="orderListView.me")
-	public String MyPageOrderListView() {
+	public String myPageOrderListView() {
 		
 		
 		// DB에서 주문내역을 ArrayList로 받아오기. 
@@ -137,8 +138,10 @@ public class MemberController {
 		
 	}
 	
+	
+	// 나의 주문내역 상세보기 메소드
 	@RequestMapping(value="orderDetailView.me")
-	public String MyPageOrderDetailView() {
+	public String myPageOrderDetailView() {
 		
 		// 매개변수로 주문 번호 가져오기
 		// DB에서 해당 주문의 상세내역을 ArrayList로 받아오기
@@ -146,8 +149,9 @@ public class MemberController {
 		return "user/member/myPage_OrderDetailView";
 	}
 	
+	// 나의 구독정보 메소드
 	@RequestMapping(value="subscribeView.me")
-	public String MyPageSubscribeView(HttpSession session, Model model) {
+	public String myPageSubscribeView(HttpSession session, Model model) {
 		
 		/*
 		
@@ -162,14 +166,37 @@ public class MemberController {
 		return "user/member/myPage_SubscribeView";
 	}
 	
+	// 프로필 수정 페이지 이동 메소드
 	@RequestMapping(value="updateForm.me")
-	public String MyPageUpdateForm() {
+	public String myPageUpdateForm() {
 		
 		return "user/member/myPage_UpdateForm";
 	}
 	
+	// 프로필 수정 메소드
+	@RequestMapping(value="update.me")
+	public String myPageUpdateMember(Member m, Model model) {
+		
+		int result = memberService.updateMember(m);
+		
+//		if(result > 0) {
+//			Member updateMem = memberService.loginMember(m);
+			return "redirect:updateForm.me";
+//		}
+//		else {
+	}
+	
+	
+	// 회원 탈퇴 페이지 이동 메소드
 	@RequestMapping(value="deleteForm.me")
-	public String MyPageDeleteForm(HttpSession session, String userPwd, Model model) {
+	public String myPageDeleteForm() {
+		
+		return "user/member/myPage_DeleteForm";
+	}
+	
+	// 회원 탈퇴 메소드
+	@RequestMapping(value="delete.me")
+	public String myPageDeleteMember(HttpSession session, String userPwd, Model model) {
 		/*
 		 * 
 		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
@@ -196,11 +223,11 @@ public class MemberController {
 		}
 		
 		*/
-		return "user/member/myPage_DeleteForm";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="onedayClass.me")
-	public String MyPageOneDayClass(HttpSession session, Model model) {
+	public String myPageOneDayClass(HttpSession session, Model model) {
 		
 		/*
 		
@@ -216,7 +243,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="reviewListView.me")
-	public String MyPageReviewListView(HttpSession session, Model model) {
+	public String myPageReviewListView(HttpSession session, Model model) {
 		
 		/*
 		
@@ -230,7 +257,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="qnaListView.me")
-	public String MyPageQnaListView(HttpSession session, Model model) {
+	public String myPageQnaListView(HttpSession session, Model model) {
 		
 		/*
 

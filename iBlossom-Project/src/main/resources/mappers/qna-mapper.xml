@@ -17,5 +17,14 @@
 		FROM QNA
 		ORDER BY QNA_DATE DESC
   	</select>
+  	
+  	<insert id="insertQna" parameterType="qna">
+  		INSERT INTO QNA(QNA_NO
+		                , QNA_TITLE
+		                , QNA_CONTENT)
+		VALUES(SEQ_QNANO.NEXTVAL
+		     , #{qnaTitle}
+		     , #{qnaContent})
+  	</insert>
 
 </mapper>

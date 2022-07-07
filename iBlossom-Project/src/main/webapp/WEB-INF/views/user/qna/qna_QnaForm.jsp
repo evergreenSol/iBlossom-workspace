@@ -54,18 +54,18 @@
             </div>           
         </div>
 	
-		<div id="answer-container">
+		<form id="answer-container" method="post" action="insert.qu">
 			<table id="anwcontent" border="1">
 				<p id="ans" style="font-size: 20px; font-weight: 700;">문의하기</p>
 				<tr>
-					<th width="120" height="40" style="font-size: 16px;">제목</th>
-					<td width="450" ><input type="text" id="answerTitle" style="border:none" style="width:400px;font-size: 15px;" maxlength="50" required></td>
+					<th width="120" height="40" style="font-size: 16px;"><label for="title">제목</label></th>
+					<td width="450" ><input type="text" id="qnaTitle" name="qnaTitle" style="border:none" style="width:400px;font-size: 15px;" maxlength="50" required></td>
 
 				</tr>
 				<tr>
-					<th style="font-size: 16px;">내용</th>
+					<th style="font-size: 16px;"><label for="content">내용</label></th>
 					<td id="anwcontent" colspan="3">
-						<p style="height:200px;"><textarea name="answerContent" id="answerContent" cols="55" rows="13" maxlength="700"
+						<p style="height:200px;"><textarea id="qnaContent" name="qnaContent"  cols="55" rows="13" maxlength="700"
 							style="resize:none; border: none;" style="font-size: 15px;" required></textarea></p>
 					</td>
 				</tr>
@@ -75,7 +75,8 @@
 				</tr>           
 			</table>
 			<button id="questionBtn" type="submit">확인</button>
-		</div>    
+		</div>  
+		</form>  
     </div>
 
     
