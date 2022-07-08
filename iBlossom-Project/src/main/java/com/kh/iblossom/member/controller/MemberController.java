@@ -142,13 +142,6 @@ public class MemberController {
 	}
 	
 	
-//	// 관리자(admin) - 회원관리
-//	@RequestMapping("/memberListView.me")
-//	public String memberListView() {
-//		
-//		return "admin/member/memberListView";
-//	}
-	
 	// 메뉴바의 "상품관리" 클릭해서 요청한 경우 => /list.pr (기본적으로 1 번 페이지를 요청하게끔 처리)
 	   // 페이징바의 "숫자" 를 클릭해서 요청한 경우 => /list.pr?cpage=요청하는페이지수
 
@@ -174,6 +167,9 @@ public class MemberController {
 //	      // 게시판 리스트 화면 포워딩
 	      return "admin/member/memberListView";
 	   }
+
+
+
 	
 
 	// 마이페이지 호출 및 응답
