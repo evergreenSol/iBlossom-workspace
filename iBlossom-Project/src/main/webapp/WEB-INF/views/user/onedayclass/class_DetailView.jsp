@@ -30,18 +30,20 @@
 가볍게 배워보실 수 있도록 핸드타이/바스켓/박스 등 여러 과목이 준비되어 있습니다.
 	            </pre>
 	        </div>
-	        <div >
-            <label for="date" id="res" style="font-size: 15px;">예약일</label><br>
-            	<select name="date" id="date" style="width:170px;height:25px;font-size: 14px;" required >
-	                <option value="2022-07-22 14:00">2022-07-22 14:00</option>
-	                <option value="2022-07-30 14:00">2022-07-30 14:00</option>
-	                <option value="2022-08-06 14:00">2022-08-06 14:00</option>
-	            </select>
-	        </div>
-	        <br><br><br>
-	        <div>
-	            <button type="submit" id="class-res-btn" onclick="location.href='ResForm.cl'">예약하기</button>
-	        </div>
+	        <form action="ResForm.cl" method="post">
+		        <div>		   
+		            <label for="date" id="res" style="font-size: 15px;">예약일</label><br>
+		            	<select name="date" id="date" style="width:170px;height:25px;font-size: 14px;" required >
+			                <option value="2022-07-22 14:00">2022-07-22 14:00</option>
+			                <option value="2022-07-30 14:00">2022-07-30 14:00</option>
+			                <option value="2022-08-06 14:00">2022-08-06 14:00</option>
+			            </select>
+			        </div>
+		        <br><br><br>
+		        <div>
+		            <button type="submit" id="class-res-btn">예약하기</button>
+		        </div>
+	        </form>
 	    </div>
 	    <br><br><br><br><br><br><br><br>
 	    <div id="image2">
