@@ -89,6 +89,7 @@
 			<c:if test="${ loginUser != null }">
 				<button id="questionBtn" type="submit">작성하기</button>
 			</c:if>	
+			<button id="questionBtn" type="submit">확인</button>
 		</form>  
     </div>
 

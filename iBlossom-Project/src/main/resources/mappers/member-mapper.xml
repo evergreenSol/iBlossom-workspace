@@ -29,10 +29,11 @@
 
 	<insert id="insertMember" parameterType="member">
 		INSERT INTO MEMBER (USER_NO,
-                    USER_ID,
-                    USER_PWD,
-                    USER_NAME,
-                    EMAIL)
+		                    USER_ID,
+		                    USER_PWD,
+		                    USER_NAME,
+		                    EMAIL
+		                    )
 		VALUES (SEQ_UNO.NEXTVAL,
 		        #{userId},
 		        #{userPwd},
@@ -44,10 +45,25 @@
 	
 	<!-- 로그인 -->
 	<select id="loginMember" resultMap="memberResultSet" parameterType="member">
-		SELECT *
+		SELECT USER_NO, USER_ID, USER_PWD, USER_NAME, PHONE, EMAIL, ADDRESS1, ADDRESS2, ADDRESS, 
+			   POSTCODE, TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD') "ENROLL_DATE", STATUS, PURCHASE, GR_LEVEL 
 		FROM MEMBER
 		WHERE USER_ID = #{userId}
 		  AND STATUS = 'Y'
 	</select>
+	
+	<!-- 프로필 수정 -->
+	<update id="updateMember" parameterType="member">
+		UPDATE MEMBER
+		   SET USER_NAME = #{userName},
+		   	   USER_PWD = #{userPwd},
+		   	   PHONE = #{phone},
+		   	   POSTCODE = #{postcode},
+		   	   ADDRESS1 = #{address1},
+		   	   ADDRESS2 = #{address2},
+		   	   ADDRESS = #{address}
+		WHERE USER_NO = #{userNo}
+		  AND STATUS = 'Y'
+	</update>
 
 </mapper>

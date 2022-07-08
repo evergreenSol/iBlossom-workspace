@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
+<script src="https://js.bootpay.co.kr/bootpay-4.1.5.min.js" type="application/javascript"></script>
 <title>Insert title here</title>
 </head>
 <body>

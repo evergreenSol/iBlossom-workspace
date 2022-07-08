@@ -2,5 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cartMapper">
 
+	<resultMap id="cartResultSet" type="cart">
+		<result column="CART_NO" property="cartNo" />
+		<result column="USER_NO" property="userNo" />
+		<result column="PRODUCT_NO" property="productNo" />
+		<result column="PRODUCT_COUNT" property="productCount" />
+		<result column="PRODUCT_PRICE" property="productPrice" />
+	</resultMap>
+	
+	<select id="selectCartList" resultMap="cartResultSet">
+		SELECT CART_NO, USER_NO, PRODUCT_NO, PRODUCT_COUNT, PRODUCT_PRICE
+		FROM CART
+	</select>
+	
+	<!-- 
+  	<insert id="insertCartList" parameterType="">
+  		INSERT INTO CART(CART_NO
+		                , USER_NO
+		                , PRODUCT_NO
+		                , PRODUCT_COUNT
+		                , PRODUCT_PRICE)
+		VALUES(SEQ_CARNO.NEXTVAL
+		     , #{userNo}
+		     , #{productNo}
+		     , #{productCount}
+		     , #{productPrice})
+  	</insert>
+	 -->
 
 </mapper>
