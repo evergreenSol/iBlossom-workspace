@@ -12,19 +12,23 @@
 		<result column="USER_NO" property="userNo" />
 	</resultMap>
 
+	<!-- 
 	<select id="selectList" resultMap="qnaResultSet">
   		SELECT QNA_NO, QNA_TITLE, QNA_DATE
 		FROM QNA
 		ORDER BY QNA_DATE DESC
   	</select>
-  	
+  	 -->
+  	 
   	<insert id="insertQna" parameterType="qna">
   		INSERT INTO QNA(QNA_NO
 		                , QNA_TITLE
-		                , QNA_CONTENT)
+		                , QNA_CONTENT
+		                , USER_NO)
 		VALUES(SEQ_QNANO.NEXTVAL
 		     , #{qnaTitle}
-		     , #{qnaContent})
+		     , #{qnaContent}
+		     , 1)
   	</insert>
 
 </mapper>
