@@ -20,11 +20,11 @@ public class QnaController {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	 
-//	@RequestMapping("qnaList.qu")
-//	public String qnaListView() {
-//
-//		return "user/qna/qna_QnaListView";
-//	}
+	@RequestMapping("qnaList.qu")
+	public String qnaListView() {
+
+		return "user/qna/qna_QnaListView";
+	}
 	
 	@RequestMapping("qnaForm.qu")
 	public String qnaForm() {
@@ -35,25 +35,19 @@ public class QnaController {
 	@RequestMapping("insert.qu")
 	public String insertQna(Qna q, HttpSession session, Model model) {
 		
-//		System.out.println(q.getQnaTitle());
-//		System.out.println(q.getQnaContent());
-		
 		int result = qnaService.insertQna(q);
 		
-//		System.out.println(result);
-		
-		
-		if(result > 0) { 
+		if(result > 0) { // 성공 => 게시글 리스트페이지로 url 재요청
 		
 			session.setAttribute("alertMsg", "성공적으로 문의글이 등록되었습니다.");
 			
-			return "redirect:qnaListView.me";
+			return "redirect:qnaList.qu";
 		}
 		else { // 실패 => 에러페이지 포워딩
 			
 			model.addAttribute("errorMsg", "문의글 등록 실패");
 			
-			return "common/errorPage";
+			return "user/qna/qna_QnaListView.jsp"; // /WEB-INF/views/common/errorPage.jsp
 		}
 	}
 	

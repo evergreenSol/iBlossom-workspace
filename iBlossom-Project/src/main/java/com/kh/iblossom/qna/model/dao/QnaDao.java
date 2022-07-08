@@ -10,11 +10,11 @@ import com.kh.iblossom.qna.model.vo.Qna;
 @Repository
 public class QnaDao {
 	
-//	public ArrayList<Qna> selectList(SqlSessionTemplate sqlSession) {
-//		
-//		return (ArrayList)sqlSession.selectList("qnaMapper.selectList");
-//	
-//	}
+	public ArrayList<Qna> selectList(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("qnaMapper.selectList");
+	
+	}
 	
 	public ArrayList<Qna> selectMyQna(SqlSessionTemplate sqlSession, int userNo) {
 		

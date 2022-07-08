@@ -42,7 +42,7 @@
                     </li>
                     <br>
                     <li class="left_menu">
-                        <a href="qnaForm.qu">
+                        <a href="qnaList.qu">
                             <span class="category-content">1대1 문의</span>
                             <span class="category-arrow">></span>
                         </a>
@@ -109,6 +109,7 @@ TIME TO BLOSSOM
     <hr align="left" style="width: 100%;">
     </div>
 </div>
+
     <script>
         $(function() {
 

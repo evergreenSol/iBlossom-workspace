@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-    <!-- header 헤더 div -->
+ 	<!-- header 헤더 div -->
     <div id="header-div-wrap">
 
         <!-- 로고 -->
@@ -21,7 +21,7 @@
             <a href="${ pageContext.request.contextPath }/"><img src="resources/images/iBlossom_logo_black.png" id="header-logo"></a>
         </div>
 
-      <!-- 로그인 완성 전까지 마이페이지 링크 로고에 걸어두겠습니다 : 2022-06-30 한솔 -->
+		<!-- 로그인 완성 전까지 마이페이지 링크 로고에 걸어두겠습니다 : 2022-06-30 한솔 -->
 
         <!-- 검색창 -->
         <div id="header-search" style="position: relative;">
@@ -61,6 +61,7 @@
 	                </svg>
 	            </a>
             </c:if>
+	            
             
             <!-- 로그인을 안했다 -->
             <c:if test="${loginUser == null}">
@@ -68,7 +69,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-person-fill" viewBox="0 0 16 16" id="header-login-icon">
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                 </svg>
-               </a>
+            	</a>
              </c:if>
              
             <!-- 장바구니 아이콘 -->
@@ -83,8 +84,8 @@
     </div>
     
     
-   <script>
-   
+	<script>
+	
 
     
    </script>
