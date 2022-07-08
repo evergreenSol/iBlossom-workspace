@@ -17,5 +17,11 @@ public class Subscribe {
 	private String deliverTo;
 	private String deliverStatus;
 	private String receiptId;
-	private Date subDate;
+	private String subDate;
+	private String userName;
+	private String userId;
+	private String grLevel;
+	private String subProductName;
+	private int subPrice;
+	private int count;
 }
