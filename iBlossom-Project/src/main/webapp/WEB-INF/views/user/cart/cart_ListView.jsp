@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user_Cart_MainView</title>
+<title>user_Cart_ListView</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet">
 <style>
@@ -34,6 +34,8 @@
         box-sizing: border-box;
     }
 
+
+
     /* ----------------------------------------------------------- */   
     /* 사용자 장바구니 페이지 왼쪽 영역 */
 
@@ -48,11 +50,16 @@
     .choice-delete-btn { 
         background-color: whitesmoke; 
         border: none; 
-        padding: 5px; 
+        padding: 6px; 
         width: 70px; 
         font-weight: bold;
         font-size: small;
         margin-bottom: 0.1cm;
+        border-radius: 3px;
+    }
+    
+    .choice-delete-btn:hover {
+    	cursor: pointer;
     }
 
     /* 장바구니 메뉴바 */
@@ -109,16 +116,27 @@
 		 text-decoration: none;
 	}
 	
+	
+	
     /* ----------------------------------------------------------- */
-
     /* 사용자 장바구니 페이지 오른쪽 영역 */
 
-    /* 결제금액 div */
-    .cart-right-price>div { 
+    /* 결제금액, 배송비 div */
+    .cart-price1, .cart-price2 { 
         display: flex; 
         justify-content: space-between; 
-        padding: 5px; /* 너비조정 */
+        padding: 5px;
+        margin: 10px 15px 15px 15px;
     }
+      
+    /* 총 결제 금액  div */
+    .total-price {
+    	display: flex; 
+        justify-content: space-between;  
+        padding: 5px;
+        margin: 30px 15px 10px 15px; 
+        font-weight: bold; 
+    } 
 
     /* 안내사항 네모박스 div */
     .cart-div { 
@@ -140,14 +158,11 @@
         color:white;
         border-radius: 3px;
     }
+    
+    .cart-btn:hover {
+    	cursor: pointer;
+    }
 
-    /* 총 결제 금액 div */
-    .total-price { 
-        padding: 10px; 
-        font-weight: bold; 
-        margin-top: 25px;
-        margin-bottom: 5px;
-    } 
 
 </style>
 </head>
@@ -207,14 +222,14 @@
 	                <span class="cart-content3">
 	                    
 	                        <!-- 제목 -->
-	                        <div>상품 제목</div> <br>
+	                        <div>상품 제목</div> <br> <!-- ${p.flowerName} -->
 	
 	                        <!-- 수령일 -->
 	                        <div>수령일 : 2022-06-21(목)</div><br>
 	
 	                        <!-- 가격 -->
 	                        <!-- <div>가격</div> -->
-	                        <div>6,900원</div><br>
+	                        <div>6,900원</div><br> <!-- <fmt:formatNumber value="${p.price}" pattern="###,###,###"/> -->
 	
 	                        <!-- 수량 -, + 옵션 -->
 	                        <form name="form" method="get">
@@ -241,7 +256,15 @@
 	            <!-- 1개 선택항목 끝난 후 구분선 -->
 	            <hr>
 	
-	        </div>    
+	        </div> 
+	        
+	        <!-- 
+	        	* 로그인이 되지 않은 상태 :  "바구니가 비어있습니다." 페이지
+	        	* 로그인 했는데 상품을 담지 않은 상태라면 : "바구니가 비어있습니다." 페이지 
+				* 로그인 했고 담은 상품이 있다면 담은 상품 보여주기
+	         -->
+	        
+	        <!------------------------------------------------------------------->    
 	
 	        <!-- 수량 증가 함수 -->
 	        <script language="JavaScript">
@@ -285,34 +308,36 @@
 	        </script> 
 	
 	    </div>
+	    
+	    <!------------------------------------------------------------------->
 	
 	    <div class="cart-right">
 	    
-	    <!-- 사용자 장바구니 페이지 오른쪽 영역-->
-	    <div class="cart-right-price">
-	
-	        <!-- 총 주문 금액 -->
-	        <div>
-	            <span>총 주문 금액</span>
-	            <span>31,800원</span>
+		    <!-- 사용자 장바구니 페이지 오른쪽 영역-->
+		    <div class="cart-right-price">
+		
+		        <!-- 총 주문 금액 -->
+		        <div class="cart-price1">
+		            <span>총 주문 금액</span>
+		            <span>31,800원</span>
+		        </div>
+		
+		        <!-- 배송비 -->
+		        <div class="cart-price2">
+		            <span>배송비</span>
+		            <span>+ 0원</span>
+		        </div>
+		
+		        <!-- 구분선 -->
+		        <hr>
+		
+		        <!-- 총 결제 금액 -->
+		        <div class="total-price">
+		            <span>총 결제 금액</span>
+		            <span>31,800원</span>
+		        </div>
+		
 	        </div>
-	
-	        <!-- 배송비 -->
-	        <div>
-	            <span>배송비</span>
-	            <span>+ 0원</span>
-	        </div>
-	
-	        <!-- 구분선 -->
-	        <hr>
-	
-	        <!-- 총 결제 금액 -->
-	        <div  class="total-price">
-	            <span>총 결제 금액</span>
-	            <span>31,800원</span>
-	        </div>
-	
-        </div>
 	
 	        <br>
 	
@@ -329,14 +354,41 @@
 	
 	        <!-- 결제하기 버튼 -->
 	        <div>
-	            <button class="cart-btn" type="submit" onclick="location.href='detailView.ord'">결제하기</button>
+	            <button class="cart-btn" type="submit" onclick="location.href='detailView.or'">결제하기</button>
 	        </div>
 	        
 	    </div>
-    
+  
     </div>
     
-    <br>
+    <!-- 
+   
+	    <div style="width: 1200px; height: 800px; margin: auto;">
+	    
+		    <div style="font-weight:700; font-size:34px; margin-bottom:15px; float:left;">&nbsp;쇼핑백</div>
+		    
+		    	<br><br><br>
+		    	
+		    	<hr>
+				    <div style="padding:160px; text-align: center;">
+				    
+		                <div>
+		                    <img src="resources/images/cart_zero_img.png" style="width:50px; height:50px; margin-bottom:14px;">
+		                </div>
+					      
+					    <div style="font-size:large; margin-bottom:27px;">쇼핑백에 담긴 상품이 없습니다</div>
+					    
+					    <div>
+					    	<button class="" type="button" onclick="location.href=''" 
+					    	        style="width:320px; height:50px; background-color:black; color:white; border-radius:3px;">
+					    	쇼핑하러가기</button>
+					    </div>
+				    				    	
+				    </div>
+			   <hr>
+	    </div>
+	    
+	 -->    
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 

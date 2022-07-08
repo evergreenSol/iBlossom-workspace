@@ -30,7 +30,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int updateMember(Member m) {
 		
-		return memberDao.updateMember(sqlSession,member);
+		return memberDao.updateMember(sqlSession, m);
 	}
 
 	@Override

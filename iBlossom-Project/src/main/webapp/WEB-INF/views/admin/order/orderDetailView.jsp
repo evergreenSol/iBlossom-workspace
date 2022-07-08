@@ -37,6 +37,8 @@
             </div>
 
         </div>
+        
+        <!------------------------------------------------------------------->
 
         <!-- 메뉴 두번째줄 div -->
         <div id="admin-menu-2">
@@ -79,11 +81,14 @@
         </div>
 
     </div>
+    
+    <!------------------------------------------------------------------->
 
-    <!-- admin 관리자페이지 회원관리 -->
+    <!-- admin 관리자페이지 주문정보관리 -->
     <div id="admin-member-wrap">
 
         <span id="admin-member-title">개별 주문 내역</span>
+        
         <hr id="admin-member-hr">
 
         <br>
@@ -92,6 +97,7 @@
          <table class="admin-order-detail-table">
 
             <caption class="table-caption">주문정보</caption>
+            
             <tr>
                 <td class="admin-table-head">주문번호</td>
                 <td class="admin-table-content">20220621001</td>
@@ -106,12 +112,15 @@
                 <td class="admin-table-content">결제완료</td>
             </tr>
 
-        </table><br>
+        </table>
+        
+        <br>
 
         <!-- 배송정보 영역 -->
         <table class="admin-order-detail-table">
 
             <caption class="table-caption">배송정보</caption>
+            
             <tr>
                 <td class="admin-table-head">배송주소</td>
                 <td class="admin-table-content">서울시 영등포구</td>
@@ -119,7 +128,9 @@
                 <td class="admin-table-content">010-0000-0000</td>
             </tr>
 
-        </table><br>
+        </table>
+        
+        <br>
 
         <!-- 결제정보 영역 -->
         <table class="admin-order-detail-table">
@@ -133,10 +144,13 @@
                 <td class="admin-table-content">0원</td>
             </tr>
 
-        </table><br>
+        </table>
+        
+        <br>
 
         <!-- 상세정보 영역 -->
         <table class="admin-order-detail-table">
+            
             <caption class="table-caption">상세정보</caption>
             
             <tr class="admin-table-head detail-th">
@@ -173,13 +187,12 @@
                 <td>1개</td>
                 <td>18,000원</td>
             </tr>
+        
         </table>
 
     </div>
 
-</div>
-
-<br><br><br><br><br>
+	<br><br><br><br><br>
 
 </body>
 </html>

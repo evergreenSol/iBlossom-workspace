@@ -117,7 +117,11 @@ public class MemberController {
 		
 		if(result > 0) {
 			
-			return "common/login";
+			Member loginUser = memberService.login(m);
+			
+			session.setAttribute("loginUser", loginUser);
+			
+			return "user/member/myPage_UpdateForm";
 		}
 		else {
 			return "redirect:/";
@@ -201,15 +205,26 @@ public class MemberController {
 	
 	// 프로필 수정 메소드
 	@RequestMapping(value="update.me")
-	public String myPageUpdateMember(Member m, Model model) {
+	public String myPageUpdateMember(HttpSession session, Member m, Model model) {
+		
+		m.setUserNo(((Member)session.getAttribute("loginUser")).getUserNo());
+		
+		String encPwd = bCryptPasswordEncoder.encode(m.getUserPwd());
+		
+		m.setUserPwd(encPwd);
+		
+		System.out.println(m);
 		
 		int result = memberService.updateMember(m);
 		
-//		if(result > 0) {
-//			Member updateMem = memberService.loginMember(m);
+		if(result > 0) {
+			Member updateMem = memberService.login(m);
+			session.setAttribute("loginUser", updateMem);
 			return "redirect:updateForm.me";
-//		}
-//		else {
+		}
+		else {
+			return "redirect:mypage.me";
+		}
 	}
 	
 	
