@@ -44,7 +44,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int deleteMember(int userNo) {
 
-		return 0;
+		return memberDao.deleteMember(sqlSession, userNo);
 	}
 	
 	@Override

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
+import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.subscribe.model.service.SubscribeService;
 import com.kh.iblossom.subscribe.model.vo.SubProduct;
 
@@ -161,7 +162,8 @@ public class SubscribeController {
 		model.addAttribute("subLevel",subLevel);
 		model.addAttribute("deliverFee", 200); 
 		
-		return "user/subscribe/subscribe_OrderView";
+		return "user/subscribe/subscribe_OrderView";	
+
 	}
 	
 }

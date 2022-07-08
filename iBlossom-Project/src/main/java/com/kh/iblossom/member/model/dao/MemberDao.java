@@ -4,8 +4,6 @@ package com.kh.iblossom.member.model.dao;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
-import org.apache.ibatis.session.SqlSession;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -31,46 +29,30 @@ public class MemberDao {
 	
 	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
 
-
-//		return sqlSession.update("memberMapper.updateMember", m);
-		return 1;
-
-		
-//		System.out.println(m);
-		
-//		int result = sqlSession.update("memberMapper.updateMember", m);
-		
-//		System.out.println(result);
-		
-//		return result;
-		
-		
-
+		return sqlSession.update("memberMapper.updateMember", m);
 	}
 	
 	public int deleteMember(SqlSessionTemplate sqlSession, int userNo) {
 		
-//		return sqlSession.update("memberMapper.deleteMember", userNo);
-		return 1;
+		return sqlSession.update("memberMapper.deleteMember", userNo);
 	}
-	
 	
 	
 	// 회원리스트 조회
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 
-	      return sqlSession.selectOne("memberMapper.selectListCount");
-	   }
+      return sqlSession.selectOne("memberMapper.selectListCount");
+	}
 
-	   public ArrayList<Member> selectList(SqlSessionTemplate sqlSession, PageInfo pi) {
+   public ArrayList<Member> selectList(SqlSessionTemplate sqlSession, PageInfo pi) {
 
-	      int limit = pi.getBoardLimit();
-	      int offset = (pi.getCurrentPage() - 1) * limit;
+      int limit = pi.getBoardLimit();
+      int offset = (pi.getCurrentPage() - 1) * limit;
 
-	      RowBounds rowBounds = new RowBounds(offset, limit);
+      RowBounds rowBounds = new RowBounds(offset, limit);
 
-	      return (ArrayList)sqlSession.selectList("memberMapper.selectList", null, rowBounds);
-	   }
+      return (ArrayList)sqlSession.selectList("memberMapper.selectList", null, rowBounds);
+   }
 	   
 	   // 회원 상세조회
 //	 public Member selectProduct(SqlSessionTemplate sqlSession, int productNo) {

@@ -42,7 +42,6 @@
 		        )
 	</insert>
 	
-	
 	<!-- 로그인 -->
 	<select id="loginMember" resultMap="memberResultSet" parameterType="member">
 		SELECT USER_NO, USER_ID, USER_PWD, USER_NAME, PHONE, EMAIL, ADDRESS1, ADDRESS2, ADDRESS, 
@@ -51,7 +50,6 @@
 		WHERE USER_ID = #{userId}
 		  AND STATUS = 'Y'
 	</select>
-	
 
 	<!-- 회원 리스트 총 인원 조회 -->
 	   <select id="selectListCount" resultType="_int">
@@ -82,6 +80,11 @@
 		WHERE USER_NO = #{userNo}
 		  AND STATUS = 'Y'
 	</update>
-
-
+	
+	<!-- 회원 탈퇴 -->
+	<update id="deleteMember" parameterType="_int">
+		UPDATE MEMBER
+		   SET STATUS = 'N'
+		 WHERE USER_NO = #{userNo}
+	</update>
 </mapper>

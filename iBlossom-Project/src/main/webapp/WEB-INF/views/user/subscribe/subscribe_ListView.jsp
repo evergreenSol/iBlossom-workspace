@@ -144,7 +144,14 @@
 	                </tr>
 	                <tr>
 	                    <td height="50px"><button onclick="location.href='listView.su'">이전</button></td>
-	                    <td height="50px"><button onclick="pay();">결제</button></td>
+	                    <c:choose>
+	                    	<c:when test="${ empty loginUser }">
+		                    	<td height="50px"><button onclick="alert('로그인이 필요한 서비스입니다!');">결제</button></td>
+		                    </c:when>
+		                    <c:otherwise>
+		                    	<td height="50px"><button onclick="pay();">결제</button></td>
+		                    </c:otherwise>
+	                    </c:choose>
 	                </tr>
 	            </table>
 	        </div>   

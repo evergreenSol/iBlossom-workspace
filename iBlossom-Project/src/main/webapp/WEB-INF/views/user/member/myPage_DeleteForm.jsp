@@ -26,7 +26,7 @@
             	</td>
                 <td class="body_r" width="900" style="vertical-align: top;">
                     <div class="delete">
-                    <h2>회원 탈퇴</h2>
+                    	<h2>회원 탈퇴</h2>
                   
                         <table>	
 							<tr>
@@ -41,15 +41,17 @@
 						
 						<br>
 
+						<form id="frm" action="delete.me" method="post">
                         <p style="font-size: 14px; font-weight: 600;">비밀번호</p>
                         <input type="password" class="mypage-w" name="userPwd">
 
                         <br> <br> <br>
 
-                        <div class="mypage-delete-wrap" align="center">
-                            <a class="mypage-delete" href="">취소하기</a>
-                            <a class="mypage-delete" href="delete.me" style="margin:px">탈퇴하기</a>
-                        </div>
+                        <div class="mypage-revise-wrap" align="center">
+	                            <button type="button" class="mypage-revise">취소하기</button>
+	                            <button type="submit" class="mypage-revise">탈퇴하기</button>
+	                    </div>
+						</form>
 
                     </div>
 			

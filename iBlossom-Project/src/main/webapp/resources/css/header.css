@@ -127,6 +127,15 @@
     height: 27px;
 }
 
+
+.bi-person-fill {
+    /* position: absolute; */
+    /* margin-top: 0px; */
+    /* right: 0px; */
+    width: 27px;
+    height: 27px;
+}
+
 /* 장바구니 아이콘 속성 */
 .bi-bag {
     width: 24px;
