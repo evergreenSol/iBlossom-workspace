@@ -19,11 +19,11 @@ public interface MemberService {
 	
 	int deleteMember(int userNo);
 	
-	   // 멤버 리스트 조회 + 페이징 처리
-	   // 멤버 총 개수 조회
-	   int selectListCount();
-	   // 멤버 리스트 조회
-	   ArrayList<Member> selectList(PageInfo pi);
+   // 멤버 리스트 조회 + 페이징 처리
+   // 멤버 총 개수 조회
+   int selectListCount();
+   // 멤버 리스트 조회
+   ArrayList<Member> selectList(PageInfo pi);
 
 
 

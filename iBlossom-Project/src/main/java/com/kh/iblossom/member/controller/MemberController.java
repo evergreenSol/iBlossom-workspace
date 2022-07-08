@@ -68,9 +68,6 @@ public class MemberController {
 		// 암호화로 인해 아이디로 조회
 		Member loginUser = memberService.login(m);
 		
-		System.out.println(loginUser.getUserPwd());
-		System.out.println(m.getUserPwd());
-		
 		if(loginUser != null && bCryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
 			
 			session.setAttribute("alertMsg", "로그인에 성공하였습니다.");
@@ -239,8 +236,6 @@ public class MemberController {
 		
 		m.setUserPwd(encPwd);
 		
-		System.out.println(m);
-		
 		int result = memberService.updateMember(m);
 		
 		if(result > 0) {
@@ -264,15 +259,19 @@ public class MemberController {
 	// 회원 탈퇴 메소드
 	@RequestMapping(value="delete.me")
 	public String myPageDeleteMember(HttpSession session, String userPwd, Model model) {
-		/*
-		 * 
+
 		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
 		
 		String encPwd = ((Member)session.getAttribute("loginUser")).getUserPwd();
+		
+		System.out.println(encPwd);
+		System.out.println(userPwd);
+		
+		
 		if(bCryptPasswordEncoder.matches(userPwd, encPwd)) {
 		
 			int result = memberService.deleteMember(userNo);
-			
+			System.out.println(result);
 			if(result > 0) {
 				// 탈퇴 성공
 				session.removeAttribute("loginUser");
@@ -281,16 +280,17 @@ public class MemberController {
 			}
 			else {
 				// 탈퇴 실패시 어떻게 해줄가?
+				return "user/member/deleteForm";
 			}
 		}
 		else {
 			// 비번이 다름.
 			// alert?
-			return "redirect: deleteForm.me";
+			return "user/member/deleteForm";
 		}
 		
-		*/
-		return "redirect:/";
+
+		
 	}
 	
 	@RequestMapping(value="onedayClass.me")
