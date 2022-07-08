@@ -1,12 +1,8 @@
 package com.kh.iblossom.order.model.vo;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class DetailOrder {
 
 	private int dorderNo; // DORDER_NO NUMBER PRIMARY KEY,
