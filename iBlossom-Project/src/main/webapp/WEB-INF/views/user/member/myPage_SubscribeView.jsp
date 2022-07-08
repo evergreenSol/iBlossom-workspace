@@ -113,7 +113,7 @@
                                 <span>010-5273-5545</span>
                                 <span>보내는 사람 (김한솔)</span>
                             </span>
-                            <p style="font-size: 14px; margin: 0px;">[postcode] 인천광역시 부평구 창휘로 28 605호</p>                            
+                            <p style="font-size: 14px; margin: 0px;">[${ loginUser.postcode }] ${ loginUser.address }</p>                            
                         </div>
 
                         <br><br>
