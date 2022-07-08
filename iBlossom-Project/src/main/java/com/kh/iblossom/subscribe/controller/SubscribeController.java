@@ -12,13 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
-import com.kh.iblossom.member.model.vo.Member;
+import com.kh.iblossom.common.model.vo.PageInfo;
+import com.kh.iblossom.common.template.Pagination;
 import com.kh.iblossom.subscribe.model.service.SubscribeService;
 import com.kh.iblossom.subscribe.model.vo.SubProduct;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Controller
 public class SubscribeController {
@@ -29,7 +32,7 @@ public class SubscribeController {
 	@RequestMapping("listView.su")
 	public String subscribeListView(Model model) {
 
-		ArrayList<SubProduct> list = subscribeService.selectList();
+		ArrayList<SubProduct> list = subscribeService.selectSubProductList();
 
 		model.addAttribute("list",list);
 		
@@ -49,7 +52,7 @@ public class SubscribeController {
 	@RequestMapping("listView.sp")
 	public String subscribeUpdateForm(Model model) {
 
-		ArrayList<SubProduct> list = subscribeService.selectList();
+		ArrayList<SubProduct> list = subscribeService.selectSubProductList();
 
 		model.addAttribute("list",list);
 		
@@ -146,8 +149,20 @@ public class SubscribeController {
 	
 	
 	@RequestMapping("subMemberListView.su")
-	public String subMemberListView() {
-
+	public String subMemberListView(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
+		
+		int listCount = subscribeService.selectListCount();
+		
+		int pageLimit = 10;
+		int boardLimit = 5;
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+		 	
+		ArrayList<Subscribe> list = subscribeService.selectSubMemberList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list",list);
+		
 		return "user/subscribe/subMember_ListView";
 	}
 	
