@@ -108,8 +108,9 @@
 
     /* 이전으로 가기 버튼 호버시 */
     .pre-btn:hover { 
-        color: #ff2393;
-        
+        cursor: pointer;
+		font-weight: 600;
+		color: black;  
     }
     
     /* 결제하기 버튼 */

@@ -44,22 +44,27 @@
         display: flex; 
         justify-content: space-between; 
         margin-bottom: 5px;
+        font-weight: 500; 
     }
  
     /* 선택삭제 버튼 */
     .choice-delete-btn { 
-        background-color: whitesmoke; 
+        background-color: white;
         border: none; 
-        padding: 6px; 
-        width: 70px; 
-        font-weight: bold;
+        padding: 5px; 
+        width: 65px; 
+        font-weight: 500;
         font-size: small;
         margin-bottom: 0.1cm;
         border-radius: 3px;
+        color: gray;
     }
     
+    /* 선택삭제 버튼 호버시 */
     .choice-delete-btn:hover {
     	cursor: pointer;
+		font-weight: 600;
+		color: black;
     }
 
     /* 장바구니 메뉴바 */
@@ -69,14 +74,16 @@
         justify-content: space-between;
         
         /* 스타일 */
-        background-color: lightgray;
-        padding: 10px; 
+        background-color: whitesmoke; /*lightgray*/
+        padding: 10px;
+        font-weight: 500; 
     }
 
     /* 장바구니 메뉴바 두개 항목 비율 */
     .cart-menu1 { 
-	    flex-basis: 20%; 
+	    flex-basis: 38%; 
 	    margin:auto; 
+	    
     }
     .cart-menu2 { 
     	flex-basis: 16%;
@@ -86,10 +93,28 @@
     .cart-content { 
         display: flex; 
         justify-content: space-between; 
-        padding: 50px;
+        padding: 45px;
         height: 340px;
     }
     
+    /* 라디오 버튼 세로 정렬 */
+    .cart-content1 {
+	     line-height: 230px;
+	     margin-left: -30px;
+    }
+    
+    /* 이미지 감싸는 div */
+    .cart-content2 {
+     	margin-left: -40px;
+    }
+    
+    /* 상세옵션 내용 */
+    .cart-content3 {
+    	margin-top:30px; 
+    	line-height: 20px;
+    	margin-left: -40px;
+    }  
+        
     /* 수량 버튼 */
     .cart-num-btn { 
 	    background-color: whitesmoke; 
@@ -97,12 +122,6 @@
 	    font-weight: 600; 
 	    width:25px; 
 	    height: 25px;
-    }
-    
-    /* 상세옵션 내용 */
-    .cart-content3 {
-    	margin-top:30px; 
-    	line-height: 20px;
     }
     
     /* 총주문금액 X 마우스 hover */
@@ -185,10 +204,10 @@
 	        <div class="cart-choice">
 	
 	            <div>
-	                <input type="radio">전체선택(1/2)
+	                <input type="radio">&nbsp;전체선택 <span>(1/2)</span>
 	            </div>
 	            <div>
-	                <button type="button" class="choice-delete-btn" onclick="">선택삭제</button>
+	                <button type="button" class="choice-delete-btn" onclick="location.href='empty.ca'">선택삭제</button>
 	            </div>
 	
 	        </div>
@@ -209,7 +228,7 @@
 	            <div class="cart-content">
 	
 	                <!-- 장바구니 라디오 버튼 -->
-	                <p class="cart-content1" style="line-height: 200px;">
+	                <p class="cart-content1">
 	                    <input type="radio">
 	                </p>
 	

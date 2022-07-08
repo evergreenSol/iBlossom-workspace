@@ -64,5 +64,13 @@ public class CartController {
 			return "redirect:/";
 		}
 	}
+	
+	// 빈 장바구니 조회
+	@RequestMapping("empty.ca")
+	public String emptyCartList() {
+	
+		// 장바구니 페이지만 띄워주는 용도
+		return "user/cart/cart_EmptyList";
+	}	
 
 	}
