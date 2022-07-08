@@ -22,14 +22,16 @@ public class OnedayClassController {
 
 		return "user/onedayclass/class_DetailView";
 	}
-	
-	@RequestMapping("ResForm.cl")
-	public String classResForm(String date, Model model) {
 
-		// System.out.println(date);
-		
-		model.addAttribute("date", date);
-		
-		return "user/onedayclass/class_ReservationForm";
-	}
+
+   @RequestMapping("ResForm.cl")
+   public String classResForm(String date, Model model) {
+
+      // System.out.println(date);
+      
+      model.addAttribute("date", date);
+      
+      return "user/onedayclass/class_ReservationForm";
+   }
+
 }

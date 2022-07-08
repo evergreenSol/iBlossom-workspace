@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.subscribe.model.dao.SubscribeDao;
 import com.kh.iblossom.subscribe.model.vo.SubProduct;
 import com.kh.iblossom.subscribe.model.vo.Subscribe;
@@ -21,9 +22,9 @@ public class SubscribeServiceImpl implements SubscribeService {
 	
 	// 정기구독 상품 조회용 메소드
 	@Override
-	public ArrayList<SubProduct> selectList() {
+	public ArrayList<SubProduct> selectSubProductList() {
 
-		return subscribeDao.selectList(sqlSession);
+		return subscribeDao.selectSubProductList(sqlSession);
 	}
 
 	// 정기구독 상품 추가용 메소드
@@ -65,4 +66,15 @@ public class SubscribeServiceImpl implements SubscribeService {
 		return subscribeDao.selectMySubscribe(sqlSession, userNo);
 	}
 
+	@Override
+	public int selectListCount() {
+		
+		return subscribeDao.selectListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Subscribe> selectSubMemberList(PageInfo pi) {
+		
+		return subscribeDao.selectSubMembertList(sqlSession, pi);
+	}
 }

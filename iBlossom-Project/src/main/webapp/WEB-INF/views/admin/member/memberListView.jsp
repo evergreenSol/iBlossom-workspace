@@ -1,11 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>admin | memberList</title>
 <link href="resources/css/shj.css" rel="stylesheet">
+
+<style>
+#pagingArea {
+	width: fit-content;
+	margin: auto;
+}
+
+.page-link {
+	font-size : 14px;
+	width : 35px;
+	height: 25px;
+	background-color : white;
+	border : 1px solid lightgray;
+	color : black;
+	display: inline-block;
+	margin-left : 10px;
+	text-decoration : none;
+	text-align : center;
+	border-radius : 3px;
+	padding-top: 5px;
+}
+
+.page-link:hover {
+	color : #ff2393;
+	font-weight:700;
+}
+
+.pagination {
+	list-style-type : none;
+}
+
+.pagination li {
+	float : left;
+}
+
+#admin-member-table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    border-spacing: 0;
+    align: center;
+    margin-bottom : 50px;
+}
+
+
+</style>
+
 </head>
 <body>
 
@@ -46,7 +94,7 @@
 
                 <!-- 메뉴 -->
                 <ul id="admin-navi">
-                    <li><a href="" class="admin-navi-menu" style="font-weight: 700;">회원관리</a></li>
+                    <li><a href="list.me" class="admin-navi-menu" style="font-weight: 700;">회원관리</a></li>
                     <li>
                         <a href="" class="admin-navi-menu">주문정보관리</a>
                         <ul class="admin-navi-ul">
@@ -86,13 +134,91 @@
         <span id="admin-member-title">회원관리</span>
         <hr id="admin-member-hr">
 
-        <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
-        <div>
+        <div id="admin-memberList-wrap">
+
+            <table id="admin-member-table" border="1">
+            	<thead style="background-color : lightgray; height : 50px; font-weight : 700;">
+            
+                    <th style="width:60px;">회원번호</th>
+                    <th style="width:100px;">아이디</th>
+                    <td style="width:80px;">이름</th>
+                    <th style="width:135px;">전화번호</th>
+                    <th style="width:200px;">이메일</th>
+                    <th>주소</th>
+                    <th style="width:110px;">가입일</th>
+                    <th style="width:40px;">상태</th>
+                    <th style="width:80px;">구매액</th>
+                    <th style="width:40px;">등급</th>
+                
+                </thead>
+                <tbody>
+                <c:forEach var="me" items="${list}">	
+                    <tr style="height : 40px;">
+                        <td class="mno">${me.userNo}</td>
+                        <td>${me.userId}</td>
+                        <td>${me.userName}</td>
+                        <td>${me.phone}</td>
+                        <td>${me.email}</td>
+                        <td>${me.address}</td>
+                        <td>${me.enrollDate}</td>
+                        <td>${me.status}</td>
+                        <td>${me.purchase}</td>
+                        <td>${me.grLevel}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
 
         </div>
-        
+            <div id="pagingArea">
+	         <ul class="pagination">
+	
+	            <c:choose>
+	               <c:when test="${ pi.currentPage eq 1 }">
+	                  <li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
+	               </c:when>
+	               <c:otherwise>
+	                  <li class="page-item"><a class="page-link"
+	                     href="list.me?cpage=${ pi.currentPage - 1 }">◀</a></li>
+	               </c:otherwise>
+	            </c:choose>
+	
+<%-- 	            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	               <li class="page-item"><a class="page-link"
+	                  href="list.me?cpage=${ p }">${ p }</a></li>
+	            </c:forEach> --%>
+	            
+	             <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+		        <c:choose>
+		         <c:when test="${ pi.currentPage eq p }">
+		          
+		                <li class="page-item"><a class="page-link"  style="color : #ff2393; font-weight:700;"
+		             href="list.me?cpage=${ p }">${ p }</a></li>
+		            </c:when>
+		            <c:otherwise>
 
-    </div>
+		                <li class="page-item"><a class="page-link"
+		                    href="list.me?cpage=${ p }">${ p }</a></li>
+		          </c:otherwise>
+		          </c:choose>
+		       </c:forEach>
+	
+	            <c:choose>
+	               <c:when test="${ pi.currentPage eq pi.maxPage }">
+	                  <li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
+	               </c:when>
+	               <c:otherwise>
+	                  <li class="page-item"><a class="page-link"
+	                     href="list.me?cpage=${ pi.currentPage + 1 }">▶</a></li>
+	               </c:otherwise>
+	            </c:choose>
+	
+	         </ul>
+
+   		 </div>
+           
+      </div>
+
 
 </body>
 </html>

@@ -9,7 +9,7 @@
 <link href="resources/css/jsa.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="../common/header.jsp" />
+<jsp:include page="../../common/header.jsp" />
     <!-- 지승아 만들기 -->
     <div align="center" id="wrap" style="overflow:hidden;">
         <img src="resources/images/flower1.jpg" height="300px" width="1200px"  style="margin-top: 30px; object-fit: cover;">

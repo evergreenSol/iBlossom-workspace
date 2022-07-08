@@ -2,7 +2,7 @@ package com.kh.iblossom.subscribe.model.service;
 
 import java.util.ArrayList;
 
-
+import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.subscribe.model.vo.SubProduct;
 import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
@@ -10,7 +10,7 @@ import com.kh.iblossom.subscribe.model.vo.Subscribe;
 public interface SubscribeService {
 	
 	// 정기구독 상품 조회용 메소드
-	ArrayList<SubProduct> selectList();
+	ArrayList<SubProduct> selectSubProductList();
 
 	// 정기구독 상품 추가용 메소드
 	int insertSubProduct(SubProduct sp);
@@ -26,5 +26,8 @@ public interface SubscribeService {
 	
 	ArrayList<Subscribe> selectMySubscribe(int userNo);
 
+	int selectListCount();
+	
+	ArrayList<Subscribe> selectSubMemberList(PageInfo pi);
 
 }

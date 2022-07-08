@@ -1,16 +1,10 @@
 package com.kh.iblossom.member.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 public class Member {
 	
 	private int userNo;
