@@ -31,18 +31,18 @@
 	            </pre>
 	        </div>
 	        <form action="ResForm.cl" method="post">
-	        <div>
-	            <label for="date" id="res" style="font-size: 15px;">예약일</label><br>
-	            	<select name="date" id="date" style="width:170px;height:25px;font-size: 14px;" required >
-		                <option value="2022-07-22 14:00" selected>2022-07-22 14:00</option>
-		                <option value="2022-07-30 14:00">2022-07-30 14:00</option>
-		                <option value="2022-08-06 14:00">2022-08-06 14:00</option>
-		            </select>
+		        <div>		   
+		            <label for="date" id="res" style="font-size: 15px;">예약일</label><br>
+		            	<select name="date" id="date" style="width:170px;height:25px;font-size: 14px;" required >
+			                <option value="2022-07-22 14:00">2022-07-22 14:00</option>
+			                <option value="2022-07-30 14:00">2022-07-30 14:00</option>
+			                <option value="2022-08-06 14:00">2022-08-06 14:00</option>
+			            </select>
+			        </div>
+		        <br><br><br>
+		        <div>
+		            <button type="submit" id="class-res-btn">예약하기</button>
 		        </div>
-	        <br><br><br>
-	        <div>
-	            <button type="submit" id="class-res-btn">예약하기</button>
-	        </div>
 	        </form>
 	    </div>
 	    <br><br><br><br><br><br><br><br>
@@ -54,28 +54,5 @@
      <br><br>
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-    
-    
-    <script>
-    /*
-    	$(function() {
-    		var classDate = $("#date option:selected").val();
-    		$("#date").on("change", function () {
-    			var classDate = $("#date option:selected").val();
-    			console.log(classDate);
-    		});
-    		
-
-    		console.log(classDate);
-    		
-    		function reserve() {
-    			
-    		}
-    		
-    		location.href='ResForm.cl'
-    		
-    	});
-    */
-    </script>
 </body>
 </html>
