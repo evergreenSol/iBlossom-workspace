@@ -13,8 +13,9 @@
 	/* 전체 */
 	.cartEmptyOuter {
 		width: 1200px; 
-		height: 800px; 
+		height: 760px; 
 		margin: auto;
+		margin-top: 53px;
 	}
 	
 	/* 장바구니 타이틀 : 쇼핑백 */
@@ -27,15 +28,15 @@
 	
 	/* 감싸주는 div */
 	.emptyWrap {
-		padding:160px; 
+		padding:210px; 
 		text-align: center;
 	}
 	
 	/* 이미지 */
-	.emptyWrqp img {
+	.emptyWrap img {
 		width:50px; 
 		height:50px; 
-		margin-bottom:14px;
+		margin-bottom: 15px;
 	}
 	
 	/* 쇼핑하러가기 버튼 */
@@ -45,6 +46,11 @@
 		background-color:black; 
 		color:white; 
 		border-radius:3px;
+	}
+	
+	/* 쇼핑하러가기 버튼 hover */
+	.emptyWrap button:hover {
+		cursor: pointer;
 	}
 
 </style>
