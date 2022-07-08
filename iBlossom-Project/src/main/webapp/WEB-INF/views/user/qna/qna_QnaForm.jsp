@@ -55,8 +55,8 @@
         </div>
 	
 		<form id="answer-container" method="post" action="insert.qu">
+			<p id="ans" style="font-size: 20px; font-weight: 700;">문의하기</p>
 			<table id="anwcontent" border="1">
-				<p id="ans" style="font-size: 20px; font-weight: 700;">문의하기</p>
 				<tr>
 					<th width="120" height="40" style="font-size: 16px;"><label for="title">제목</label></th>
 					<td width="450" ><input type="text" id="qnaTitle" name="qnaTitle" style="border:none" style="width:400px;font-size: 15px;" maxlength="50" required></td>
@@ -75,7 +75,6 @@
 				</tr>           
 			</table>
 			<button id="questionBtn" type="submit">확인</button>
-		</div>  
 		</form>  
     </div>
 

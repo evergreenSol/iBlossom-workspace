@@ -17,7 +17,7 @@ public class Member {
 	private String address2;
 	private String address;
 	private String postcode;
-	private Date enrollDate;
+	private String enrollDate;
 	private String status;
 	private int purchase;
 	private String grLevel;

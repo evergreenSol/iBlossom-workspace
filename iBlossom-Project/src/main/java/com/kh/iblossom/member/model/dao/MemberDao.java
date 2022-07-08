@@ -1,11 +1,12 @@
 package com.kh.iblossom.member.model.dao;
 
+
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.iblossom.common.model.vo.PageInfo;
@@ -30,8 +31,21 @@ public class MemberDao {
 	
 	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
 
+
 //		return sqlSession.update("memberMapper.updateMember", m);
 		return 1;
+
+		
+//		System.out.println(m);
+		
+//		int result = sqlSession.update("memberMapper.updateMember", m);
+		
+//		System.out.println(result);
+		
+//		return result;
+		
+		
+
 	}
 	
 	public int deleteMember(SqlSessionTemplate sqlSession, int userNo) {

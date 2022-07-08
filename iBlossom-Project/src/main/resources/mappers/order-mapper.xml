@@ -3,4 +3,25 @@
 <mapper namespace="orderMapper">
 
 
+	<resultMap id="orderResultSet" type="order">
+		<result column="ORDER_NO" property="orderNo" />
+		<result column="USER_NO" property="userNo" />
+		<result column="TOTAL_PRICE" property="totalPrice" />
+		<result column="ORDER_DATE" property="orderDate" />
+		<result column="RECEIVE_DATE" property="receiveDate" />
+		<result column="RECEIVE_USER" property="receiveUser" />
+		<result column="RECEIVE_PHONE" property="receivePhone" />
+		<result column="ORDER_ADDRESS" property="orderAddress" />
+		<result column="POSTCODE" property="postcode" />
+		<result column="ORDER_STATUS" property="orderStatus" />
+		<result column="DELIVERY_STATUS" property="deliveryStatus" />
+		<result column="RECEIPT_ID" property="receiptId" />
+	</resultMap>
+	
+	<!-- 조회 -->
+	<select id="selectOrderList" resultMap="orderResultSet">
+		
+	</select>
+
+
 </mapper>
