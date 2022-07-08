@@ -29,13 +29,9 @@
 	padding-top: 5px;
 }
 
-.page-link:active:focus 
-.page-item:active {
-	color : #ff2393;
-}
-
 .page-link:hover {
 	color : #ff2393;
+	font-weight:700;
 }
 
 .pagination {
@@ -187,10 +183,25 @@
 	               </c:otherwise>
 	            </c:choose>
 	
-	            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+<%-- 	            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 	               <li class="page-item"><a class="page-link"
 	                  href="list.me?cpage=${ p }">${ p }</a></li>
-	            </c:forEach>
+	            </c:forEach> --%>
+	            
+	             <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+		        <c:choose>
+		         <c:when test="${ pi.currentPage eq p }">
+		          
+		                <li class="page-item"><a class="page-link"  style="color : #ff2393; font-weight:700;"
+		             href="list.me?cpage=${ p }">${ p }</a></li>
+		            </c:when>
+		            <c:otherwise>
+
+		                <li class="page-item"><a class="page-link"
+		                    href="list.me?cpage=${ p }">${ p }</a></li>
+		          </c:otherwise>
+		          </c:choose>
+		       </c:forEach>
 	
 	            <c:choose>
 	               <c:when test="${ pi.currentPage eq pi.maxPage }">
