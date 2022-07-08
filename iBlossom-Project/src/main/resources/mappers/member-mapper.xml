@@ -52,6 +52,23 @@
 		  AND STATUS = 'Y'
 	</select>
 	
+
+	<!-- 회원 리스트 총 인원 조회 -->
+	   <select id="selectListCount" resultType="_int">
+      SELECT COUNT(*)
+      FROM MEMBER
+      WHERE STATUS = 'Y'
+   </select>
+
+	<!-- 회원 리스트 조회 -->
+     <select id="selectList" resultMap="memberResultSet">
+       SELECT USER_NO, USER_ID, USER_NAME, PHONE, EMAIL, ADDRESS, POSTCODE,
+             TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD') "ENROLL_DATE", STATUS, PURCHASE, GR_LEVEL
+      FROM MEMBER
+      WHERE STATUS = 'Y'
+      ORDER BY USER_NO ASC
+     </select>
+
 	<!-- 프로필 수정 -->
 	<update id="updateMember" parameterType="member">
 		UPDATE MEMBER
