@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,7 +21,9 @@ import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.onedayclass.model.Service.OnedayClassService;
 import com.kh.iblossom.product.model.service.ProductService;
 import com.kh.iblossom.qna.model.service.QnaService;
+import com.kh.iblossom.qna.model.vo.Qna;
 import com.kh.iblossom.subscribe.model.service.SubscribeService;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Controller
 public class MemberController {
@@ -55,7 +56,9 @@ public class MemberController {
 	// 로그아웃
 	@RequestMapping(value="logout.me")
 	public String logout(HttpSession session) {
-		session.invalidate();
+		session.removeAttribute("loginUser");
+		
+		session.setAttribute("alertMsg", "로그아웃 성공했습니다.");
 		
 		return "redirect:/";
 	}
@@ -70,20 +73,22 @@ public class MemberController {
 		
 		if(loginUser != null && bCryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
 			
-			session.setAttribute("alertMsg", "로그인에 성공하였습니다.");
+			
 			session.setAttribute("loginUser", loginUser);
 			
 			if(loginUser.getUserId().equals("admin0")) {
 				
 				return "redirect:/";
 				
-			} else {
-				
-			return "user/member/myPage_MainView"; }
+			} 
+			else {
+				session.setAttribute("alertMsg", "로그인에 성공하였습니다.");	
+				return "redirect:/"; 
+				}
 		}
-		else {
+		else { 	
 			session.setAttribute("alertMsg", "로그인에 실패하였습니다.");
-			return "redirect:login.me";
+			return "redirect:loginForm.me";
 		}
 		
 	}
@@ -202,15 +207,13 @@ public class MemberController {
    @RequestMapping(value="subscribeView.me")
    public String myPageSubscribeView(HttpSession session, Model model) {
       
-      /*
-      
       int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
       
       ArrayList<Subscribe> list = subscribeService.selectMySubscribe(userNo);
       
       model.addAttribute("list", list);
       
-      */
+      System.out.println(list);
       
       return "user/member/myPage_SubscribeView";
    }
@@ -226,11 +229,17 @@ public class MemberController {
 	@RequestMapping(value="update.me")
 	public String myPageUpdateMember(HttpSession session, Member m, Model model) {
 		
+		System.out.println((Member)session.getAttribute("loginUser"));
+		System.out.println(m);
+		
 		m.setUserNo(((Member)session.getAttribute("loginUser")).getUserNo());
-		
-		String encPwd = bCryptPasswordEncoder.encode(m.getUserPwd());
-		
-		m.setUserPwd(encPwd);
+		   
+		if(!m.getUserPwd().equals(((Member)session.getAttribute("loginUser")).getUserPwd())) {
+			
+			String encPwd = bCryptPasswordEncoder.encode(m.getUserPwd());
+			
+			m.setUserPwd(encPwd);
+		}
 		
 		System.out.println(m);
 		
@@ -270,17 +279,20 @@ public class MemberController {
 			if(result > 0) {
 				// 탈퇴 성공
 				session.removeAttribute("loginUser");
+				session.setAttribute("alertMsg", "회원 탈퇴 되었습니다.");
 				
 				return "redirect:/";
 			}
 			else {
 				// 탈퇴 실패시 어떻게 해줄가?
+				session.setAttribute("alertMsg", "회원 탈퇴에 실패했습니다.");
 				return "user/member/deleteForm";
 			}
 		}
 		else {
 			// 비번이 다름.
 			// alert?
+			session.setAttribute("alertMsg", "비밀번호가 다릅니다.");
 			return "user/member/deleteForm";
 		}
 
@@ -320,17 +332,14 @@ public class MemberController {
    @RequestMapping(value="qnaListView.me")
    public String myPageQnaListView(HttpSession session, Model model) {
       
-      /*
-
-
       int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
       
       ArrayList<Qna> list = qnaService.selectMyQna(userNo);
       
+      System.out.println(list);
+      
       model.addAttribute("list", list);
-      
-      */
-      
+
       return "user/member/myPage_QnaListView";
    }
    

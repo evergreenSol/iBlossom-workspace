@@ -37,7 +37,7 @@ public class QnaController {
 		
 //		System.out.println(q.getQnaTitle());
 //		System.out.println(q.getQnaContent());
-		
+
 		int result = qnaService.insertQna(q);
 		
 //		System.out.println(result);

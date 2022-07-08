@@ -195,9 +195,9 @@
 	    // console.log(endDate);
 	    
 	    var btMs = endDate.getTime() - startDate.getTime();
-	    var btDay = btMs / (1000 * 60 * 60 * 24);
+	    var btDay = btMs / (1000 * 60 * 60 * 24) + 1;
 	    
-	    if(btDay == 0) {
+	    if(btDay == 1) {
 	    	result = "오늘이 첫 날입니다!";
 	    	//console.log(result);
 	    	

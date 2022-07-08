@@ -124,7 +124,7 @@
 			console.log(phone);
 			
 			//핸드폰 검사
-			if(phone != null) {
+			if(phone != "") {
 				
 				regExp = /^010-[0-9]{4}-[0-9]{4}$/;
 				if(!regExp.test(phone)){ //핸드폰 번호가 유효하지 않을 경우

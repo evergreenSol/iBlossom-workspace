@@ -148,7 +148,7 @@
 
             $("#show-order").click(function () {
 
-                $(this).css("color","black").css("border-bottom-width","2px").css("border-bottom-color","rgb(255 35 147)"); // 핑크 치우려면 이 컬러 지우면 댐
+                $(this).css("color","black").css("border-bottom-width","2px").css("border-bottom-color","rgb(0 0 0)"); // 핑크 치우려면 이 컬러 지우면 댐
                 // $("#show-cancel").css("color","rgb(209 209 209)").css("border-bottom-width","1px").css("border-bottom-color","rgb(209 209 209)");
                 $("#show-cancel").css("color","rgb(209 209 209)").css("border-bottom-width","1px").css("border-bottom-color","rgb(209 209 209)");
 
@@ -159,7 +159,7 @@
 
             $("#show-cancel").click(function () {
 
-                $(this).css("color","black").css("border-bottom-width","2px").css("border-bottom-color","rgb(255 35 147)"); // 핑크 치우려면 이 컬러 지우면 댐
+                $(this).css("color","black").css("border-bottom-width","2px").css("border-bottom-color","rgb(0 0 0)"); // 핑크 치우려면 이 컬러 지우면 댐
                 $("#show-order").css("color","rgb(209 209 209)").css("border-bottom-width","1px").css("border-bottom-color","rgb(209 209 209)");
 
                 $("#mypage-view-order").hide();

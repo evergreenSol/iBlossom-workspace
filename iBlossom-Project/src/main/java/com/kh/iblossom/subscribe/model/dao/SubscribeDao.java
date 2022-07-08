@@ -14,7 +14,6 @@ public class SubscribeDao {
 	
 	// 구독용 상품 리스트 조회
 	public ArrayList<SubProduct> selectSubProductList(SqlSessionTemplate sqlSession) {
-		
 	
 	  return (ArrayList)sqlSession.selectList("subscribeMapper.selectSubProductList"); 
 	 }
@@ -53,9 +52,7 @@ public class SubscribeDao {
 	// 마이페이지 구독조회
 	public ArrayList<Subscribe> selectMySubscribe(SqlSessionTemplate sqlSession, int userNo) {
 		
-		ArrayList<Subscribe> list = new ArrayList<Subscribe>();
-		
-		return list;
+		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribe", userNo);
 	}
 
 	public int selectListCount(SqlSessionTemplate sqlSession) {
