@@ -147,7 +147,7 @@
                                 <p>주문자 정보</p>
                                 <!-- 입력내용 보여지는 태그-->
                                 <p>
-                                    <span>아무개, &nbsp;010-0000-0000</span>&nbsp;&nbsp;&nbsp;∨&nbsp; 
+                                    <span>${ loginUser.userName } &nbsp;&nbsp; ${ loginUser.phone }</span>&nbsp;&nbsp;&nbsp;∨&nbsp; 
                                 </p>
 
                             </button>
@@ -159,10 +159,10 @@
                         <div id="OrdererBox" class="order-orderer-content" >
 
                             <p>&nbsp;이름</p>
-                            <p class="orderer-name">아무개<p> <!-- ${ sessionScope.userName } -->
+                            <p class="orderer-name">${ loginUser.userName }<p>
 
                             <p>&nbsp;연락처</p>
-                            <p class="orderer-phone">010-xxxx-xxxx</p> <!-- ${ sessionScope.phone } -->
+                            <p class="orderer-phone">${ loginUser.phone }</p>
 
                             <!-- 안내문구 -->
                             <p class="orderer-guide" style="font-size:small">
@@ -175,15 +175,14 @@
                     <div>
                         <div class="order-sender">
                             <button id="SenderBtn">
-                                <p>수신자 이름</p><p><span>∨</span></p>
+                                <p>발신인 이름</p><p><span>∨</span></p>
                             </button>
                         </div>
 
                         <hr>
 
                         <div id="SenderBox">
-                        <!-- placeholder를 나중에 value="${ sessionScope.XXXX }" 으로 변경 수신인 default는 로긴한 사람-->
-                         	<p>&nbsp;아무개</p>   
+                         	<p>&nbsp;${ loginUser.userName }</p>   
                         </div>
                     </div>     
                     
@@ -201,6 +200,10 @@
                         <div class="order-address-add">
 
                             <!-- 모달의 원리 : 이 버튼 클릭시 data-target에 제시되어있는 해당 아이디의 div요소를 띄워줌 -->
+                            <div class="userAddress"><br>
+                            	<span id="postalAddress"></span>
+                            	<span id="detailAddress"></span>
+                            </div>
                             <button type="button" class="address-btn" data-toggle="modal" data-target="#modal-overlay">
                                 + 배송지 추가
                             </button>
@@ -217,32 +220,58 @@
 
                                 <!-- Modal body -->
                                 <div class="address-content">
-									<!-- placeholder를 나중에 value="${ sessionScope.XXXX }" 으로 변경 수신인 default는 로긴한 사람-->
+									<!-- placeholder를 나중에 loginUser.XXXX 으로 변경 수신인 default는 로긴한 사람-->
                                     <!-- 이름 -->
-                                    <input type="text" id="subReceiverUser" size="70" placeholder="이름을 입력해주세요." required><br>
+                                    <input type="text" id="subReceiverUser" size="70" value="${ loginUser.userName }" onfocus="this.value=''" required><br>
+                                    
                                     <hr>
                                     <!-- 연락처 -->
-                                    <input type="tel" id="subReceiverPhone" size="70" placeholder="010-0000-0000" required><br> 
+                                    <input type="tel" id="subReceiverPhone" size="70" value="${ loginUser.phone }" onfocus="this.value=''" required><br> 
                                     <hr>
 
                                     <p>주소</p>
 
                                     <!-- 우편번호 -->
-                                    <input type="text" name="zipcode" id="zipcode" size="70" readonly placeholder="우편번호 검색">
-                                    <input type="button" value="우편번호찾기" onclick="kakaopost()" style="border:none; width:146px; height: 50px; font-size: 15px;" ><br>
-                                    <hr>
-
-                                    <!-- 주소 -->
-                                    <input type="text" name="address" id="address1" size="70" placeholder="주소" required><br>
-                                    <hr>
-                                    <input type="text" name="address" id="address2" size="70" placeholder="상세주소입력" required><br>
-                                    <hr>
+                                    <c:choose>
+	                                    <c:when test="${ (empty loginUser.postcode) || (empty loginUser.address1) }">
+		                                    <!-- 우편번호 -->
+		                                    <input type="text" name="zipcode" id="zipcode" size="70" readonly placeholder="우편번호 검색">
+		                                    <input type="button" value="우편번호찾기" onclick="kakaopost()" style="border:none; width:146px; height: 50px; font-size: 15px;"><br>
+		                                    <hr>
+		
+		                                    <!-- 주소 -->
+		                                    <input type="text" name="address" id="address1" size="70" placeholder="주소"><br>
+		                                    <hr>
+		                                    <input type="text" name="address" id="address2" size="70" placeholder="상세주소입력"><br>
+		                                    <hr>
+	                                    </c:when>
+	                                    <c:otherwise>
+	                                    	<c:choose>
+	                                    		<c:when test="${ fn.length(loginUser.postcode) < 5 }">
+	                                    			<input type="text" name="zipcode" id="zipcode" size="70" value="0${ loginUser.postcode }" onfocus="this.value='우편번호검색'" readonly>
+	                                    		</c:when>
+	                                    		<c:otherwise>
+	                                    			<input type="text" name="zipcode" id="zipcode" size="70" value="${ loginUser.postcode }" onfocus="this.value='우편번호검색'" readonly>
+	                                    		</c:otherwise>
+	                                    	</c:choose>
+		                                    <input type="button" value="우편번호찾기" onclick="kakaopost()" style="border:none; width:146px; height: 50px; font-size: 15px;" ><br>
+		                                    <hr>
+		
+		                                    <!-- 주소 -->
+		                                    <input type="text" name="address" id="address1" size="70" value="${ loginUser.address1 }" onfocus="this.value=''" required><br>
+		                                    <hr>
+		                                    <input type="text" name="address" id="address2" size="70" value="${ loginUser.address2 }" onfocus="this.value=''" required><br>
+		                                    <hr>
+	                                    </c:otherwise>
+                                    </c:choose>
+                  
+                                    
 
                                 </div>
 
                                 <!-- Modal footer -->
                                 <div class="address-footer" align="center">
-                                    <button class="save-address" onclick="saveAddress();" style="border:none; width:465px; height: 50px; font-size: 18px;">저장하기</button>
+                                    <button class="save-address"  style="border:none; width:465px; height: 50px; font-size: 18px;">저장하기</button>
                                 </div>
                             </div>
                         </div>
@@ -270,11 +299,17 @@
                                 modal.style.display = "flex"
                             })
                     
-                            const closeBtn = modal.querySelector(".close-area")
+                            var closeBtn = modal.querySelector(".close-area")
                             closeBtn.addEventListener("click", e => {
                                 modal.style.display = "none"
                             })
                            
+                            var closeBtn = modal.querySelector(".save-address")
+                            closeBtn.addEventListener("click", e => {
+                                modal.style.display = "none"
+                                $('#postalAddress').text($('#address1').val())
+                                $('#detailAddress').text($('#address2').val())
+                            })
                         </script>
                         
                         <!-- 우편번호 script -->
@@ -292,25 +327,9 @@
                     </div>
 
                     <hr>
-
-                    <!-- 6. 결제수단 -->
-                    <div>
-                        <div class="order-payment">
-                            <p>&nbsp;&nbsp;결제수단</p>
-                        </div>
-                    </div>
-
-                    <hr>
-                    
-                    <!-- 7. 카카오페이 -->
-                    <div>
-                        <div class="order-kakaopay">
-                            <button class="kakao-btn" type="button">카카오페이</button>
-                        </div>
-                    </div>
-
-                    <br><br>
-
+					
+					<br><br>
+					
                     <!-- 버튼 두개 -->
                     <div class="order-two-btn">
 
@@ -367,23 +386,25 @@
                     <p>이용약관 및 개인정보 처리방침에 대해 확인하였으며 결제에 동의합니다.</p>
                     </div>
                 </div>
-
+				
 			</div>
 			
             <!-- 결제하기 버튼 -->
             <div>
                 <button class="order-btn" onclick="getBillingKey(${ subLevel });">결제하기</button>
-                 <button class="order-btn" onclick="cancelSubscribe();">취소하기</button>
-                 <button class="order-btn" onclick="location.href='update.su';">새로고침</button>
+                <button class="order-btn" onclick="cancelSubscribe();">취소하기</button>
             </div>
-            
+            <input type="hidden" id="userNo" value="${ loginUser.userNo }">
+            <input type="hidden" id="userName" value="${ loginUser.userName }">
+            <input type="hidden" id="email" value="${ loginUser.email }">
+            <input type="hidden" id="address" value="${ loginUser.address }">
+            <input type="hidden" id="phone" value="${ loginUser.phone }">
         </div><!-- 1200px 너비 -->
       	</div><!-- 전체 색상 변경 div -->
 
 	<script>	
+	
 	// 빌링키 발급
-	
-	
 	function getBillingKey(numOfPay) {
 		BootPay.request({
 			price: 0, // 0으로 해야 한다.
@@ -393,10 +414,10 @@
 			method: 'card_rebill', // 빌링키를 받기 위한 결제 수단
 			show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
 			user_info: {
-				username: '김동현', 
-				email: 'donghyeonk96@gmail.com',
-				addr: '서울특별시 강서구 강서로7길 69-6',
-				phone: '01046929388',
+				username: $('#userName').val(), 
+				email: $('#email').val(),
+				addr: $('#address').val(),
+				phone: $('#phone').val(),
 			},
 			order_id: '고유order_id_1234', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
 			async : true
@@ -432,7 +453,7 @@
 				totalPrice : totalPrice,
 				subProductName : subProductName,
 				subProductNo : $('#subProductNo').val(),
-				userNo : 1,
+				userNo : $('#userNo').val(),
 				subLevel : $('#subLevel').val(),
 				subReceiverUser : $('#subReceiverUser').val(),
 				subReceiverPhone : $('#subReceiverPhone').val(),
