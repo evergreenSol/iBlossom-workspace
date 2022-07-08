@@ -124,16 +124,21 @@
 			console.log(phone);
 			
 			//핸드폰 검사
-			regExp = /^010-[0-9]{4}-[0-9]{4}$/;
-			if(!regExp.test(phone)){ //핸드폰 번호가 유효하지 않을 경우
+			if(phone != null) {
 				
-				alert("유효한 핸드폰 번호 양식이 아닙니다. - 포함해서 입력해 주세요.");
-			
-				document.getElementById("phone").value = phone;
-				document.getElementById("phone").focus();
-	
-				return false;
+				regExp = /^010-[0-9]{4}-[0-9]{4}$/;
+				if(!regExp.test(phone)){ //핸드폰 번호가 유효하지 않을 경우
+					
+					alert("유효한 핸드폰 번호 양식이 아닙니다. - 포함해서 입력해 주세요.");
+				
+					document.getElementById("phone").value = phone;
+					document.getElementById("phone").focus();
+		
+					return false;
+				}
 			}
+			
+			
 			
 			
 			// 비밀번호 검사

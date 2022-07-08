@@ -355,7 +355,7 @@ div { box-sizing: border-box; }
 .signUp-wrap {
     margin: auto;
     width: 1200px;
-    height: 1000px;
+    height: 1050px;
     overflow : hidden;
     margin-top: 30px;
     margin-bottom: 25px;
@@ -373,7 +373,7 @@ div { box-sizing: border-box; }
     background-color: white;
     border-radius: 7px;
     width: 400px;
-    height: 800px;
+    height: 850px;
     z-index: 1;
     position: absolute;
     top: 95px;
@@ -439,8 +439,13 @@ div { box-sizing: border-box; }
 }
 
 #mail-check-warn {
-    font-size: 13px;
+     height: 15px;
+     font-size: 11px;
+     display: inline-block;
+	 color:red;   
+	 width: 250px;
 }
+
 
 /* signUp 회원가입 폼 input 호버 속성 */
 .signUp-input:hover,

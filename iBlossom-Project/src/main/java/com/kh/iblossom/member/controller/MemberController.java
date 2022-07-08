@@ -223,17 +223,28 @@ public class MemberController {
    }
    
    // 프로필 수정 메소드
-   @RequestMapping(value="update.me")
-   public String myPageUpdateMember(Member m, Model model) {
-      
-      int result = memberService.updateMember(m);
-      
-//      if(result > 0) {
-//         Member updateMem = memberService.loginMember(m);
-         return "redirect:updateForm.me";
-//      }
-//      else {
-   }
+	@RequestMapping(value="update.me")
+	public String myPageUpdateMember(HttpSession session, Member m, Model model) {
+		
+		m.setUserNo(((Member)session.getAttribute("loginUser")).getUserNo());
+		
+		String encPwd = bCryptPasswordEncoder.encode(m.getUserPwd());
+		
+		m.setUserPwd(encPwd);
+		
+		System.out.println(m);
+		
+		int result = memberService.updateMember(m);
+		
+		if(result > 0) {
+			Member updateMem = memberService.login(m);
+			session.setAttribute("loginUser", updateMem);
+			return "redirect:updateForm.me";
+		}
+		else {
+			return "redirect:mypage.me";
+		}
+	}
    
    
    // 회원 탈퇴 페이지 이동 메소드
@@ -243,37 +254,38 @@ public class MemberController {
       return "user/member/myPage_DeleteForm";
    }
    
-   // 회원 탈퇴 메소드
-   @RequestMapping(value="delete.me")
-   public String myPageDeleteMember(HttpSession session, String userPwd, Model model) {
-      /*
-       * 
-      int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
-      
-      String encPwd = ((Member)session.getAttribute("loginUser")).getUserPwd();
-      if(bCryptPasswordEncoder.matches(userPwd, encPwd)) {
-      
-         int result = memberService.deleteMember(userNo);
-         
-         if(result > 0) {
-            // 탈퇴 성공
-            session.removeAttribute("loginUser");
-            
-            return "redirect:/";
-         }
-         else {
-            // 탈퇴 실패시 어떻게 해줄가?
-         }
-      }
-      else {
-         // 비번이 다름.
-         // alert?
-         return "redirect: deleteForm.me";
-      }
-      
-      */
-      return "redirect:/";
-   }
+	// 회원 탈퇴 메소드
+	@RequestMapping(value="delete.me")
+	public String myPageDeleteMember(HttpSession session, String userPwd, Model model) {
+
+		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		
+		String encPwd = ((Member)session.getAttribute("loginUser")).getUserPwd();
+		
+		if(bCryptPasswordEncoder.matches(userPwd, encPwd)) {
+		
+			int result = memberService.deleteMember(userNo);
+			
+			System.out.println(result);
+			if(result > 0) {
+				// 탈퇴 성공
+				session.removeAttribute("loginUser");
+				
+				return "redirect:/";
+			}
+			else {
+				// 탈퇴 실패시 어떻게 해줄가?
+				return "user/member/deleteForm";
+			}
+		}
+		else {
+			// 비번이 다름.
+			// alert?
+			return "user/member/deleteForm";
+		}
+
+		
+	}
    
    @RequestMapping(value="onedayClass.me")
    public String myPageOneDayClass(HttpSession session, Model model) {

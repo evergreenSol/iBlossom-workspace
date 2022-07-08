@@ -37,34 +37,34 @@
 
             <form action="insert.me" method="post" class="signUp-form">
 
-            <label class="signUp-form-label">이름</label>
-            <input type="text" class="signUp-input" id="customer_name" name="userName" placeholder="이름 입력" required><br>
-
-            <label class="signUp-form-label">아이디</label>
-            <input type="text" class="signUp-input" id="customer_id" name="userId" placeholder="아이디 입력" required><br>
-            <p id="duplicate-check"></p>
-
-            <label class="signUp-form-label">비밀번호</label>
-            <input type="password" class="signUp-input" id="customer_pwd" name="userPwd" placeholder="비밀번호 입력" required><br>
-
-            <label class="signUp-form-label">비밀번호 확인</label>
-            <input type="password" class="signUp-input" id="customer_chkpwd" placeholder="비밀번호 확인" required><br>
-
-            <label class="signUp-form-label">이메일</label><br>
-            <input type="email" id="signUp-input-email" name="email" placeholder="이메일 입력" required>
-            <button type="button" id="signUp-signUpbutton">전송</button>
-            
-            <label class="signUp-form-label">이메일 인증</label>
-            <input type="text" class="signUp-input" id="chkAuthKey" placeholder="인증번호 6자리를 입력해주세요." maxlength="6"><br>
-            <p id="mail-check-warn"></p>
-
-            <button type="button" id="signUp-cancelbutton">취소</button>
-            <button type="submit" id="signUp-signupbutton" disabled onclick="return validate();">가입</button>
-
+	            <label class="signUp-form-label">이름</label>
+	            <input type="text" class="signUp-input" id="customer_name" name="userName" placeholder="이름 입력" required><br>
+	
+	            <label class="signUp-form-label">아이디</label>
+	            <input type="text" class="signUp-input" id="customer_id" name="userId" placeholder="아이디 입력" required><br>
+	            <p id="duplicate-check"></p>
+	
+	            <label class="signUp-form-label">비밀번호</label>
+	            <input type="password" class="signUp-input" id="customer_pwd" name="userPwd" placeholder="비밀번호 입력" required><br>
+	
+	            <label class="signUp-form-label">비밀번호 확인</label>
+	            <input type="password" class="signUp-input" id="customer_chkpwd" placeholder="비밀번호 확인" required><br>
+	
+	            <label class="signUp-form-label">이메일</label><br>
+	            <input type="email" id="signUp-input-email" name="email" placeholder="이메일 입력" required>
+	            <button type="button" id="signUp-signUpbutton">전송</button><br>
+	            
+	            <label class="signUp-form-label">이메일 인증</label>
+	            <input type="text" class="signUp-input" id="chkAuthKey" placeholder="인증번호 6자리를 입력해주세요." maxlength="6"><br>
+	            <span id="mail-check-warn"></span>
+	
+	            <button type="button" id="signUp-cancelbutton">취소</button>
+	            <button type="submit" id="signUp-signupbutton" disabled onclick="return validate();">가입</button>
+	
+	
+	            <span id="signUp-logintext">이미 iBlossom의 회원이신가요?</span><br>
+	            <button type="button" id="signUp-loginbutton">로그인</button>
             </form>
-
-            <span id="signUp-logintext">이미 iBlossom의 회원이신가요?</span><br>
-            <button type="button" id="signUp-loginbutton">로그인</button>
 
         </div>
     </div>
@@ -82,6 +82,12 @@
     var nameChk = 0;
     
     $(function () {
+    	
+    	$("#signUp-loginbutton").click(function () {
+    		location.href="loginForm.me";
+    	});
+    	
+    	
        $("#duplicate-check").hide();
        
        $("#mail-check-warn").hide();

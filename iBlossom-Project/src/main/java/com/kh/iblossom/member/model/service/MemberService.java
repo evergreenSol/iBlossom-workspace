@@ -13,7 +13,7 @@ public interface MemberService {
 	
 	int countUserId(String userId);
 	
-	int insertMember(Member member);
+	int insertMember(Member m);
 
 	int updateMember(Member m);
 	
