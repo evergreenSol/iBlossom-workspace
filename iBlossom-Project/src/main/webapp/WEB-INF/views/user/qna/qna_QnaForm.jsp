@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>       
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +38,7 @@
                     </li>
                     <br>
                     <li class="left_menu">
-                        <a href="qnaList.qu">
+                        <a href="qnaForm.qu">
                             <span class="category-content">1대1 문의</span>
                             <span class="category-arrow">></span>
                         </a>
@@ -63,18 +64,31 @@
 
 				</tr>
 				<tr>
-					<th style="font-size: 16px;"><label for="content">내용</label></th>
-					<td id="anwcontent" colspan="3">
-						<p style="height:200px;"><textarea id="qnaContent" name="qnaContent"  cols="55" rows="13" maxlength="700"
-							style="resize:none; border: none;" style="font-size: 15px;" required></textarea></p>
-					</td>
+				<c:choose>
+                    <c:when test="${ empty loginUser }">
+		            	<th style="font-size: 16px;"><label for="content">내용</label></th>
+							<td id="anwcontent" colspan="3">
+								<p style="height:200px;"><textarea id="qnaContent" name="qnaContent"  cols="55" rows="13" maxlength="700"
+									style="resize:none; border: none;" style="font-size: 15px;" readonly>로그인한 사용자만 이용 가능한 서비스입니다. 로그인 후 이용 바랍니다.</textarea></p>
+							</td>
+                  		</c:when>
+             		<c:otherwise>
+						<th style="font-size: 16px;"><label for="content">내용</label></th>
+							<td id="anwcontent" colspan="3">
+								<p style="height:200px;"><textarea id="qnaContent" name="qnaContent"  cols="55" rows="13" maxlength="700"
+									style="resize:none; border: none;" style="font-size: 15px;" required></textarea></p>
+							</td>	
+               		</c:otherwise>
+               	</c:choose>
 				</tr>
 				<tr>
 					<th height="30">답변</th>
 					<td colspan="3"></td>               
 				</tr>           
 			</table>
-			<button id="questionBtn" type="submit">확인</button>
+			<c:if test="${ loginUser != null }">
+				<button id="questionBtn" type="submit">작성하기</button>
+			</c:if>	
 		</form>  
     </div>
 
