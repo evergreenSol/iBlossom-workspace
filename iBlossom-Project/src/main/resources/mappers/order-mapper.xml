@@ -18,21 +18,51 @@
 		<result column="RECEIPT_ID" property="receiptId"/><!-- 결제번호 -->
 	</resultMap>
 	
-	<!-- 조회 -->
+	<!--
 	<select id="selectOrderListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM ORDER_TBL
 		WHERE ORDER_STATUS = 'Y'
 	</select>
+	-->
 	
+	<!-- 조회 -->
 	<select id="selectOrderList" resultMap="orderResultSet">
 		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, PRICE, 
 		       TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE",
-		       TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", TAG, ORDER_STATUS
+		       TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", ORDER_STATUS
 		FROM ORDER_TBL
 		WHERE ORDER_STATUS = 'Y'
 		ORDER BY ORDER_DATE DESC, ORDER_NO DESC
 	</select>
+	
+	<!-- 추가 -->
+	<insert id="insertOrder" parameterType="Order">
+  		INSERT INTO ORDER_TBL(ORDER_NO
+		                    , USER_NO
+		                    , TOTAL_PRICE
+		                    , ORDER_DATE
+		                    , RECEIVE_DATE
+		                    , RECEIVE_USER
+		                    , RECEIVE_PHONE
+		                    , ORDER_ADDRESS
+		                    , POSTCODE
+		                    , ORDER_STATUS
+		                    , DELIVERY_STATUS
+		                    , RECEIPT_ID)
+		VALUES(SEQ_PNO.NEXTVAL
+		     , #{userNo}
+		     , #{totalPrice}
+		     , #{orderDate}
+		     , #{receiveDate}
+   		     , #{receiveUser}
+		     , #{receivePhone}
+   		     , #{orderAddress}
+		     , #{postcode}
+		     , #{orderStatus}
+		     , #{deliveryStatus}
+		     , #{receiptId)
+  	</insert>
 
 
 </mapper>

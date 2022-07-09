@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,9 +65,9 @@
 	}
 	
 	.page-link {
-	   font-size : 14px;
-	   width : 35px;
-	   height: 25px;
+	   font-size : 10px;
+	   width : 30px;
+	   height: 20px;
 	   background-color : white;
 	   border : 1px solid lightgray;
 	   color : black;
@@ -74,10 +76,10 @@
 	   text-decoration : none;
 	   text-align : center;
 	   border-radius : 3px;
-	   padding-top: 5px;
+	   padding-top: 7px;
 	}
 	
-	.page-link:active:focus, 
+	.page-link:active:focus 
 	.page-item:active {
 	   color : #ff2393;
 	}
@@ -141,15 +143,15 @@
                     <li>
                         <a href="" class="admin-navi-menu" style="font-weight: 700;" >주문정보관리</a>
                         <ul class="admin-navi-ul">
-                            <li><a href="">전체주문내역</a></li>
-                            <li><a href="">개별주문내역</a></li>
+                            <li><a href="adminList.or">전체주문내역</a></li>
+                            <li><a href="adminDetail.or">개별주문내역</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="" class="admin-navi-menu">정기구독관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="">구독회원관리</a></li>
-                            <li><a href="">구독상품관리</a></li>
+                            <li><a href="listView.sp">구독상품관리</a></li>
                         </ul>
                     </li>
                     <li><a href="" class="admin-navi-menu">상품관리</a></li>
@@ -253,23 +255,32 @@
                     </tr>
 
                     <!-- 3 -->
-                    <tr>
-                        <td>
-                        	<button type="button" class="admin-table-btn" onclick="location.href=''">3</button>
-                        </td>
-                        <td>002</td>
-                        <td>고영희</td>
-                        <td>20220622</td>
-                        <td>고영희</td>
-                        <td>20220624</td>
-                        <td>010-0000-0000</td>
-                        <td>서울시 양천구</td>
-                        <td>00456</td>
-                        <td>22,900원</td>
-                        <td>3</td>
-                        <td>결제완료</td>
-                        <td>배송완료</td>                       
-                    </tr>
+		            <c:choose>
+			            <c:when test="${ empty list }">
+			                 <p style="text-align:center; font-size:20px;">존재하는 주문 내역이 없습니다.</p>
+			            </c:when>
+			            <c:otherwise>
+			            	<c:forEach var="o" items="${ list }">
+			                    <tr>
+			                        <td>
+			                        	<button type="button" class="admin-table-btn" onclick="location.href=''">${ o.orderNo }</button>
+			                        </td>
+			                        <td>002</td>
+			                        <td>고영희</td>
+			                        <td>20220622</td>
+			                        <td>고영희</td>
+			                        <td>20220624</td>
+			                        <td>010-0000-0000</td>
+			                        <td>서울시 양천구</td>
+			                        <td>00456</td>
+			                        <td>22,900원</td>
+			                        <td>3</td>
+			                        <td>결제완료</td>
+			                        <td>배송완료</td>                       
+			                    </tr>
+				             </c:forEach>                 
+				        </c:otherwise>   
+		                </c:choose>
                 </tbody>
 
             </table>
@@ -297,14 +308,14 @@
 				</c:when>
 				<c:otherwise>
 					<li class="page-item"><a class="page-link"
-						href="list.pr?cpage=${ pi.currentPage - 1 }">◀</a></li>
+						href="adminList.or?cpage=${ pi.currentPage - 1 }">◀</a></li>
 				</c:otherwise>
 			</c:choose>
 
 			
 			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 				<li class="page-item"><a class="page-link"
-					href="list.pr?cpage=${ p }">${ p }</a></li>
+					href="adminList.or?cpage=${ p }">${ p }</a></li>
 			</c:forEach>
 
 
@@ -314,7 +325,7 @@
 				</c:when>
 				<c:otherwise>
 					<li class="page-item"><a class="page-link"
-						href="list.pr?cpage=${ pi.currentPage + 1 }">▶</a></li>
+						href="adminList.or?cpage=${ pi.currentPage + 1 }">▶</a></li>
 				</c:otherwise>
 			</c:choose>
 

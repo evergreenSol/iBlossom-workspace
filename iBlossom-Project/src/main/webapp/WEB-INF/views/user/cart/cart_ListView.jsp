@@ -379,36 +379,7 @@
 	        
 	    </div>
   
-    </div>
-    
-    <!-- 
-   
-	    <div style="width: 1200px; height: 800px; margin: auto;">
-	    
-		    <div style="font-weight:700; font-size:34px; margin-bottom:15px; float:left;">&nbsp;쇼핑백</div>
-		    
-		    	<br><br><br>
-		    	
-		    	<hr>
-				    <div style="padding:160px; text-align: center;">
-				    
-		                <div>
-		                    <img src="resources/images/cart_zero_img.png" style="width:50px; height:50px; margin-bottom:14px;">
-		                </div>
-					      
-					    <div style="font-size:large; margin-bottom:27px;">쇼핑백에 담긴 상품이 없습니다</div>
-					    
-					    <div>
-					    	<button class="" type="button" onclick="location.href=''" 
-					    	        style="width:320px; height:50px; background-color:black; color:white; border-radius:3px;">
-					    	쇼핑하러가기</button>
-					    </div>
-				    				    	
-				    </div>
-			   <hr>
-	    </div>
-	    
-	 -->    
+    </div>    
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 
