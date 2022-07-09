@@ -1,6 +1,7 @@
 package com.kh.iblossom.subscribe.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.subscribe.model.vo.SubProduct;
@@ -29,5 +30,9 @@ public interface SubscribeService {
 	int selectListCount();
 	
 	ArrayList<Subscribe> selectSubMemberList(PageInfo pi);
+
+	int selectSearchCount(HashMap<String, String> map);
+
+	ArrayList<Subscribe> selectSearchList(PageInfo pi, HashMap<String, String> map);
 
 }

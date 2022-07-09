@@ -1,6 +1,7 @@
 package com.kh.iblossom.subscribe.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,5 +77,17 @@ public class SubscribeServiceImpl implements SubscribeService {
 	public ArrayList<Subscribe> selectSubMemberList(PageInfo pi) {
 		
 		return subscribeDao.selectSubMembertList(sqlSession, pi);
+	}
+
+	@Override
+	public int selectSearchCount(HashMap<String, String> map) {
+		 
+		return subscribeDao.selectSearchCount(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Subscribe> selectSearchList(PageInfo pi, HashMap<String, String> map) {
+
+		return subscribeDao.selectSearchList(sqlSession, pi, map);
 	}
 }
