@@ -57,7 +57,7 @@ public class SubscribeController {
 
 		model.addAttribute("list",list);
 		
-		return "user/subscribe/subProduct_ListView";
+		return "admin/subscribe/subProduct_ListView";
 	}
 	
 	@RequestMapping("insert.sp")
@@ -164,7 +164,7 @@ public class SubscribeController {
 		model.addAttribute("pi", pi);
 		model.addAttribute("list",list);
 		
-		return "user/subscribe/subMember_ListView";
+		return "admin/subscribe/subMember_ListView";
 	}
 	
 	@RequestMapping("search.su")
@@ -196,7 +196,7 @@ public class SubscribeController {
 		model.addAttribute("condition", condition);
 		model.addAttribute("keyword", keyword);
 		
-		return "user/subscribe/subMember_ListView";
+		return "admin/subscribe/subMember_ListView";
 	}
 	
 	

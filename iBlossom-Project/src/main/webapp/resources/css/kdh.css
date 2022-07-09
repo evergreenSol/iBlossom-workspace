@@ -1,28 +1,28 @@
 /* 1. 사용자 정기구독 페이지 (subscribeListView)*/	
 /*-------------------------------------------------------------------------------------------*/
-	/* 맨 위 사진 css */
+    /* wrap div css */
+    .wrap {
+        width : 1200px;
+        margin : auto;
+    }
+    
     .banner {
-
-    	background-image : url('../images/banner.png');
+		margin-top : 30px;
+    	background-image : url('../images/subBanner.jpg');
 		background-repeat : no-repeat;
 		background-size : cover;
         width : 100%;
         height : 300px;
         text-align : center;
     }
-
+    
     /* 사진 안 정기구독 세로로 가운데 정렬 css */
     .banner_title {
         line-height : 300px;
         font-size : 50px;
         font-weight : 700;
+        color : white;
 
-    }
-    
-    /* wrap div css */
-    .wrap {
-        width : 1200px;
-        margin : auto;
     }
     
     /* 배경 회색 용 css */

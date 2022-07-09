@@ -13,11 +13,9 @@
     
     <div class="wrap">
         <!-- 사진 영역 -->
-        <div class="banner">
-            <span class="banner_title">정기구독</span>
-        </div>
-
-
+        <div align="center" class="banner">
+	       <span class="banner_title">SUBSCRIBE</span>
+	    </div>
         <!-- 이용 안내 -->
         <div class="info">
         <br>
