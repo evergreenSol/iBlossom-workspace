@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>admin_Order_Individual order details</title>
+<title>iBlossom | 개별주문내역</title>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link href="resources/css/ldo-admin.css" rel="stylesheet">
 <style>
