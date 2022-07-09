@@ -11,15 +11,15 @@
 
 </head>
 <body onload="init();">
-<jsp:include page="../common/header.jsp" />
+<jsp:include page="../../common/header.jsp" />
    
     <br><br><br>
 
     <div id="wrap_detail">
         <div style="width: 1000px;margin: auto;">
         <br>
-          <form name="form" method="get">
-          <input type="hidden" name="productNo" value="${ p.pno }">
+          <form name="form" method="get" action="insert.ca">
+          <input type="hidden" name="productNo" value="${ p.productNo }">
           <input type="hidden" name="userNo" value="${ loginUser.userNo }">
             <table>
     		
@@ -31,14 +31,14 @@
                 </tr>
 				
                 <tr>
-                    <td class="pp"><input type="hidden" name="price"><c:out value="${p.price}"></c:out>원
+                    <td class="pp"><input type="hidden" value="${ p.price }">원
                     
                         <hr>
                         
                     </td>
                 </tr>
                 <tr>
-                    <td class="pp" style="font-size:15px; font-weight:700px;"><c:out value="${p.flowerInfo}"></c:out>
+                    <td class="pp" style="font-size:15px; font-weight:700px;">"${p.flowerInfo}"
                       <br>
                         <br>
                         <hr style="margin-bottom:10px;">
@@ -63,7 +63,7 @@
                       
                             <input type="text" value="${p.flowerName }"
                                 style="border: none; padding-left: 10px; padding-top: 5px;"><br><br>
-                            <input type=hidden value="${p.price }">
+                            <input type=hidden id="sell_price" value="${ p.price }">
                             <input type="button" value=" - " onclick="del();" style="margin-left: 10px;">
                             <input type="text" name="productCount" value="1" size="1" onchange="change();">
                             <input type="button" value=" + " onclick="add();"><br><br><br>
@@ -126,40 +126,40 @@
     <!-- 수량 올릴 시 가격 변동-->
     <script>
         var sell_price;
-        var amount;
+        var productCount;
 
         function init() {
-            sell_price = document.form.sell_price.value;
-            amount = document.form.amount.value;
-            document.form.sum.value = sell_price;
+        	sell_price = document.form.sell_price.value;
+            productCount = document.form.productCount.value;
+            document.form.productPrice.value = sell_price;
             change();
         }
 
         function add() {
-            hm = document.form.amount;
-            sum = document.form.sum;
+            hm = document.form.productCount;
+            productPrice = document.form.productPrice;
             hm.value++;
 
-            sum.value = (parseInt(hm.value) * sell_price) + 3000;
+            productPrice.value = (parseInt(hm.value) * sell_price);
         }
 
         function del() {
-            hm = document.form.amount;
-            sum = document.form.sum;
+            hm = document.form.productCount;
+            productPrice = document.form.productPrice;
             if (hm.value > 1) {
                 hm.value--;
-                sum.value = parseInt(hm.value) * sell_price + 3000;
+                productPrice.value = parseInt(hm.value) * sell_price;
             }
         }
 
         function change() {
-            hm = document.form.amount;
-            sum = document.form.sum;
+            hm = document.form.productCount;
+            productPrice = document.form.productPrice;
 
             if (hm.value < 0) {
                 hm.value = 0;
             }
-            sum.value = parseInt(hm.value) * sell_price + 3000;
+            productPrice.value = parseInt(hm.value) * sell_price;
         }  
     </script>
     <script>
@@ -337,7 +337,7 @@
     const loremIpsum = document.querySelector('.modal');
     const btnModal = document.querySelector('.view-grade');
 
-    fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
+    fetch("https://baconipproductPrice.com/api/?type=all-meat&paras=200&format=html")
         .then(response => response.text())
         .then(result => loremIpsum.innerHTML = result)
 
@@ -361,6 +361,6 @@
     })
 </script>
 
-  <jsp:include page="../common/footer.jsp" />
+  <jsp:include page="../../common/footer.jsp" />
 </body>
 </html>

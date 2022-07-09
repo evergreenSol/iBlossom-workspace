@@ -50,7 +50,7 @@ public class ProductController {
 		model.addAttribute("list", list);
 
 		// 게시판 리스트 화면 포워딩
-		return "product/admin_product_ListView";
+		return "admin/product/admin_product_ListView";
 	}
 	
 	//꽃마켓 main
@@ -62,7 +62,7 @@ public class ProductController {
 		model.addAttribute("list", list);
 
 		//		// 게시판 리스트 화면 포워딩
-		return "product/product_ListView";
+		return "user/product/product_ListView";
 	}
 
 	/*
@@ -88,7 +88,7 @@ public class ProductController {
 	public String productEnrollForm() {
 
 		// 단순히 작성폼을 띄우주는 역할
-		return "product/product_EnrollForm";
+		return "admin/product/product_EnrollForm";
 	}
 
 	@RequestMapping("insert.pr")
@@ -132,7 +132,7 @@ public class ProductController {
 		// 한번에 setViewName 메소드까지 메소드체이닝으로 호출 가능하다.
 
 		Product p = productService.selectProduct(pno);
-		mv.addObject("p", p).setViewName("product/admin_productDetailView");
+		mv.addObject("p", p).setViewName("admin/product/admin_productDetailView");
 
 		return mv;
 	}
@@ -146,7 +146,8 @@ public class ProductController {
 		// 한번에 setViewName 메소드까지 메소드체이닝으로 호출 가능하다.
 
 		Product p = productService.selectProduct(pno);
-		mv.addObject("p", p).setViewName("product/product_DetailView");
+		System.out.println(p);
+		mv.addObject("p", p).setViewName("user/product/product_DetailView");
 
 		return mv;
 	}
@@ -214,7 +215,7 @@ public class ProductController {
 		//Model에 데이터 담기
 		model.addAttribute("p",p);
 
-		return "product/product_UpdateForm";
+		return "admin/product/product_UpdateForm";
 
 	}
 
@@ -243,7 +244,7 @@ public class ProductController {
 	@RequestMapping("reviewList.pr")
 	public String reviewListView() {
 
-		return "product/review_ListView";
+		return "admin/product/review_ListView";
 	}
 	
 	// 조합형  
