@@ -7,30 +7,39 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="resources/css/jsa.css" rel="stylesheet">
+
+
 </head>
 <body onload="init();">
-<jsp:include page="../common/header.jsp" />
+<jsp:include page="../../common/header.jsp" />
    
     <br><br><br>
 
     <div id="wrap_detail">
         <div style="width: 1000px;margin: auto;">
+        <br>
+          <form name="form" method="get" action="insert.ca">
+          <input type="hidden" name="productNo" value="${ p.productNo }">
+          <input type="hidden" name="userNo" value="${ loginUser.userNo }">
             <table>
-            
+    		
                 <tr>
-                    <td rowspan="6"><img src="resources/images/flower2.PNG" width="500px"></td>
-                    <td class="pp" style="padding-top: 20px;"><b style="font-size:25px;">버닝, 푸에고 </b></td>
+                    <td rowspan="6"><img src="${p.thumbNail }" width="500px"></td>
+                    <td class="pp" style="padding-top: 20px;"><b style="font-size:25px;"><c:out value="${p.flowerName}">
+                    </c:out></b></td>
+                
                 </tr>
-
+				
                 <tr>
-                    <td class="pp">15,900원
+                    <td class="pp"><input type="hidden" value="${ p.price }">원
+                    
                         <hr>
+                        
                     </td>
                 </tr>
                 <tr>
-                    <td class="pp">Pompom은 영어로 털 모자의 방울을 뜻합니다. 폼포니 거베라는 이 단어를 닮아 복슬복슬한 겹꽃잎이 따듯하고 안정감 있는 모습을 보여주고, 생생한
-                        컬러로
-                        당신의 일상을 더욱 활기 있게해줍니다.
+                    <td class="pp" style="font-size:15px; font-weight:700px;">"${p.flowerInfo}"
+                      <br>
                         <br>
                         <hr style="margin-bottom:10px;">
                     </td>
@@ -51,12 +60,12 @@
                     <div id="countWrite">
 
 
-                        <form name="form" method="get">
-                            <input type="text" value="버닝,푸에고" name="name"
+                      
+                            <input type="text" value="${p.flowerName }"
                                 style="border: none; padding-left: 10px; padding-top: 5px;"><br><br>
-                            <input type=hidden name="sell_price" value="15900">
+                            <input type=hidden id="sell_price" value="${ p.price }">
                             <input type="button" value=" - " onclick="del();" style="margin-left: 10px;">
-                            <input type="text" name="amount" value="1" size="1" onchange="change();">
+                            <input type="text" name="productCount" value="1" size="1" onchange="change();">
                             <input type="button" value=" + " onclick="add();"><br><br><br>
 
                             
@@ -66,26 +75,28 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             3,000 원<br><br>
                             총 주문금액 : <input type="text"
-                                style="border:none; background-color: rgba(224, 224, 224, 0.001); padding-left: 60px; width: 40px;"
-                                name="sum" size="11" readonly>원
+                                style="border:none; background-color: rgba(224, 224, 224, 0.001); padding-left: 50px; width: 60px;"
+                                name="productPrice" size="11" readonly>원
 
-
+					
                     </div>
 
-                    </form>
+                  
                 </div>
 
             </td>
+           
         </tr>
 
         <tr>
             <td>
                 <input type="submit" value="장바구니" id="btn1">
             </td>
+           
         </tr>
 
         </table>
-
+  </form>
         <!--상세 정보 버튼 시작-->
         <div class="categorize review-box" style="height: 100px; margin-top: 30px;">
             <div class="reviewBox" id="detail_content" onclick="test();">상세정보</div>
@@ -115,47 +126,47 @@
     <!-- 수량 올릴 시 가격 변동-->
     <script>
         var sell_price;
-        var amount;
+        var productCount;
 
         function init() {
-            sell_price = document.form.sell_price.value;
-            amount = document.form.amount.value;
-            document.form.sum.value = sell_price;
+        	sell_price = document.form.sell_price.value;
+            productCount = document.form.productCount.value;
+            document.form.productPrice.value = sell_price;
             change();
         }
 
         function add() {
-            hm = document.form.amount;
-            sum = document.form.sum;
+            hm = document.form.productCount;
+            productPrice = document.form.productPrice;
             hm.value++;
 
-            sum.value = (parseInt(hm.value) * sell_price) + 3000;
+            productPrice.value = (parseInt(hm.value) * sell_price);
         }
 
         function del() {
-            hm = document.form.amount;
-            sum = document.form.sum;
+            hm = document.form.productCount;
+            productPrice = document.form.productPrice;
             if (hm.value > 1) {
                 hm.value--;
-                sum.value = parseInt(hm.value) * sell_price + 3000;
+                productPrice.value = parseInt(hm.value) * sell_price;
             }
         }
 
         function change() {
-            hm = document.form.amount;
-            sum = document.form.sum;
+            hm = document.form.productCount;
+            productPrice = document.form.productPrice;
 
             if (hm.value < 0) {
                 hm.value = 0;
             }
-            sum.value = parseInt(hm.value) * sell_price + 3000;
+            productPrice.value = parseInt(hm.value) * sell_price;
         }  
     </script>
     <script>
         $.datepicker.setDefaults({
             dateFormat: 'yy-mm-dd',
-            prevText: '이전 달',
-            nextText: '다음 달',
+            prevText: '<',
+            nextText: '>',
             monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
             monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
             dayNames: ['일', '월', '화', '수', '목', '금', '토'],
@@ -190,11 +201,7 @@
             var html;
           $('#detailContent').children().remove();
          
-          html = '<img src="resources/images/flower2.PNG" class="detail_img">';
-          html += ' <text>꾸며 내려온 동력은 바로 이것이다 이성은 투명하되 얼음과 같으며 지혜는 날카로우나 갑 속에 든 칼이다 청춘의 끓는 피가 아니더면 인간이 얼마나 쓸쓸하랴? 얼음에 싸인 만물은 얼음이있을 뿐이다 그들에게 생명을 불어 넣는</text>';
-          html += '<img src="resources/images/flower2.PNG" class="detail_img">';
-          html += '<img src="resources/images/flower2.PNG" class="detail_img">';
-          html += '<img src="resources/images/flower2.PNG" class="detail_img">';
+          html = '<img src="'+'${p.contentPhoto}'+'" style="width:970px;">';
           html += '<div id="exchange_info" style="height: 1000px;">';
           html +=  '<b>유의사항</b>';
           html +=     '<div>';
@@ -233,6 +240,9 @@
           $('#detailContent').append(html);
         }
     </script>
+
+
+
     
     <script>
         function test1(){
@@ -285,7 +295,7 @@
             <hr>
             
             <div style="height: 50px; border: 1px solid gainsboro; margin-top:40px; text-align: center;">
-                <p>버닝, 푸에고</p>
+                <p>${p.flowerName}</p>
             </div>
             <br>
                 <textarea rows="2" cols="10" onkeyup="counter(this,100)" name="contents"
@@ -327,7 +337,7 @@
     const loremIpsum = document.querySelector('.modal');
     const btnModal = document.querySelector('.view-grade');
 
-    fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
+    fetch("https://baconipproductPrice.com/api/?type=all-meat&paras=200&format=html")
         .then(response => response.text())
         .then(result => loremIpsum.innerHTML = result)
 
@@ -351,6 +361,6 @@
     })
 </script>
 
-  <jsp:include page="../common/footer.jsp" />
+  <jsp:include page="../../common/footer.jsp" />
 </body>
 </html>

@@ -12,11 +12,7 @@
 	
 	<!-- 장바구니에서는 select 와 delete 생성 -->
 	
-	<select id="selectCartList" resultMap="cartResultSet">
-		SELECT CART_NO, USER_NO, PRODUCT_NO, PRODUCT_COUNT, PRODUCT_PRICE
-		FROM CART
-	</select>
-	
+
   	<select id="selectCart" resultMap="cartResultSet">
   		SELECT *
   		FROM CART
@@ -30,19 +26,7 @@
   		WHERE CART_NO = #{cartNo}
   	</delete>
 
-	<!-- 
-  	<insert id="insertCartList" parameterType="">
-  		INSERT INTO CART(CART_NO
-		                , USER_NO
-		                , PRODUCT_NO
-		                , PRODUCT_COUNT
-		                , PRODUCT_PRICE)
-		VALUES(SEQ_CARNO.NEXTVAL
-		     , #{userNo}
-		     , #{productNo}
-		     , #{productCount}
-		     , #{productPrice})
-  	</insert>
-	 -->
-	 
+	
+	
+
 </mapper>

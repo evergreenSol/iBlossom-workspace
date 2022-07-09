@@ -17,7 +17,7 @@ public interface ProductService {
 	// 상품 등록하기 서비스
 	int insertProduct(Product p);
 	
-	//상품 상세 조회 서비스
+	//상품 상세 조회 서비스(admin)
 	Product selectProduct(int productNo);
 	
 	//상품 삭제 서비스
@@ -25,4 +25,11 @@ public interface ProductService {
 	
 	// 상품 수정 서비스
 	int updateProduct(Product p);
+	
+	//상품 마켓 전체조회(꽃다발/꽃대)
+	ArrayList<Product> selectflowerList();
+	
+	//상품 상세 조회서비스(flower)
+	Product selectListProduct(int productNo);
+	
 }
