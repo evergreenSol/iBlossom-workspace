@@ -69,15 +69,23 @@
     
     /* 1. 주문내역 확인 2. 주문자 정보 3. 발신인 이름 
        4. 배송지 정보 5. 배송지 추가 6. 결제 수단 7. 카카오페이*/
+       
+    /* 결제 수단과 카카오페이는 삭제 했지만 결제수단을 주소 데이터값 뽑는 용도로 사용할 것임 */
     .order-check, .order-orderer, .order-sender, 
     .order-address, .order-address-add,  .order-payment, .order-kakaopay {
         display: flex; 
         justify-content: space-between;
     }
+    
+    /* 결제수단 클래스에 주소 데이터값 뽑는 용도로 사용 */
+    .order-payment {
+    	padding: 10px; 
+    }
 
     /* 배송지 추가, 카카오페이 버튼 */
+    /* 카카오페이 버튼 삭제 */
     .address-btn, .kakao-btn { 
-        padding: 15px; 
+        padding: 18px; 
         width: 200px; 
         border: none; 
         background-color:whitesmoke; 
@@ -141,8 +149,8 @@
     
     /* 주문자 정보 - 이름, 연락처 / 발신인 이름 */
     .orderer-name, .orderer-phone, #SenderBox>p { 
-        width: 620px;
-        padding:10px; 
+        width: 660px;
+        padding: 10px; 
         background-color:rgba(241, 241, 241, 0.707); 
     }
 
@@ -604,22 +612,31 @@
 
                     <hr> <!------------------------------------------------------------------->
 
-                    <!-- 6. 결제수단 -->
-                    <div>
-                        <div class="order-payment">
-                            <p>&nbsp;&nbsp;결제수단</p>
-                        </div>
-                    </div>
-
-                    <hr>
-                    
-                    <!-- 7. 카카오페이 -->
-                    <div>
-                        <div class="order-kakaopay">
-                            <button class="kakao-btn" type="button">카카오페이</button>
-                        </div>
-                    </div>
-
+						<div>
+	                        <div class="order-payment">
+	                            <p></p>
+	                        </div>
+	                    </div>
+	                    
+	                <hr>   
+					
+					<!-- 결제수단 & 카카오페이 프론트 삭제 (220709) -->
+                    <!--  
+	                    <div>
+	                        <div class="order-payment">
+	                            <p>&nbsp;&nbsp;결제수단</p>
+	                        </div>
+	                    </div>
+	
+	                    <hr>
+	                    
+	                    <div>
+	                        <div class="order-kakaopay">
+	                            <button class="kakao-btn" type="button">카카오페이</button>
+	                        </div>
+	                    </div>
+					-->
+					
                     <br><br>
 
                     <!-- 버튼 두개 -->
@@ -662,7 +679,7 @@
                 <!-- 배송비 -->
                 <div class="order-delivery">
                     <span>배송비</span>
-                    <span>+ 3000원</span>
+                    <span>+ 3,000원</span>
                 </div>
 
                 <!-- 등급 할인 -->

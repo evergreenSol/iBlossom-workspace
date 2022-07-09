@@ -140,13 +140,17 @@
                 <!-- 메뉴 -->
                 <ul id="admin-navi">
                     <li><a href="" class="admin-navi-menu">회원관리</a></li>
+                    
                     <li>
-                        <a href="" class="admin-navi-menu" style="font-weight: 700;" >주문정보관리</a>
-                        <ul class="admin-navi-ul">
-                            <li><a href="adminList.or">전체주문내역</a></li>
-                            <li><a href="adminDetail.or">개별주문내역</a></li>
-                        </ul>
+                        <a href="adminList.or" class="admin-navi-menu" style="font-weight: 700;">주문정보관리</a>
+						<!--  회원번호로 정보를 받아야 하기 때문에 필요 없음 ! 
+	                       <ul class="admin-navi-ul">
+	                           <li><a href="adminList.or">전체주문내역</a></li>
+	                           <li><a href="adminDetail.or">개별주문내역</a></li>
+	                       </ul>
+                        -->
                     </li>
+                    
                     <li>
                         <a href="" class="admin-navi-menu">정기구독관리</a>
                         <ul class="admin-navi-ul">

@@ -3,18 +3,33 @@
 <mapper namespace="cartMapper">
 
 	<resultMap id="cartResultSet" type="cart">
-		<result column="CART_NO" property="cartNo" />
-		<result column="USER_NO" property="userNo" />
-		<result column="PRODUCT_NO" property="productNo" />
-		<result column="PRODUCT_COUNT" property="productCount" />
-		<result column="PRODUCT_PRICE" property="productPrice" />
+		<result column="CART_NO" property="cartNo" /><!-- 장바구니 번호 -->
+		<result column="USER_NO" property="userNo" /><!-- 회원 번호 -->
+		<result column="PRODUCT_NO" property="productNo" /><!-- 상품 번호 -->
+		<result column="PRODUCT_COUNT" property="productCount" /><!-- 상품 수량 -->
+		<result column="PRODUCT_PRICE" property="productPrice" /><!-- 상품 가격 -->
 	</resultMap>
+	
+	<!-- 장바구니에서는 select 와 delete 생성 -->
 	
 	<select id="selectCartList" resultMap="cartResultSet">
 		SELECT CART_NO, USER_NO, PRODUCT_NO, PRODUCT_COUNT, PRODUCT_PRICE
 		FROM CART
 	</select>
 	
+  	<select id="selectCart" resultMap="cartResultSet">
+  		SELECT *
+  		FROM CART
+  		WHERE CART_NO = #{cartNo}
+  	</select>
+  	
+  	<!-- 장바구니 행 삭제 -->
+  	<delete id="deleteCartList" parameterType="_int">
+  		DELETE
+  		FROM CART
+  		WHERE CART_NO = #{cartNo}
+  	</delete>
+
 	<!-- 
   	<insert id="insertCartList" parameterType="">
   		INSERT INTO CART(CART_NO
@@ -29,5 +44,5 @@
 		     , #{productPrice})
   	</insert>
 	 -->
-
+	 
 </mapper>
