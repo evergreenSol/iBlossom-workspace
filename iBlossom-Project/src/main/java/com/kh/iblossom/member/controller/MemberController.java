@@ -209,11 +209,20 @@ public class MemberController {
       
       int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
       
-      ArrayList<Subscribe> list = subscribeService.selectMySubscribe(userNo);
+      ArrayList<Subscribe> list3m = subscribeService.selectMySubscribeThree(userNo);
+      ArrayList<Subscribe> list6m = subscribeService.selectMySubscribeSix(userNo);
+      ArrayList<Subscribe> list12m = subscribeService.selectMySubscribeTwelve(userNo);
+      ArrayList<Subscribe> listReg = subscribeService.selectMySubscribeRegular(userNo);
       
-      model.addAttribute("list", list);
+      model.addAttribute("list3m", list3m);
+      model.addAttribute("list6m", list6m);
+      model.addAttribute("list12m", list12m);
+      model.addAttribute("listReg", listReg);
       
-      System.out.println(list);
+      System.out.println(list3m);
+      System.out.println(list6m);
+      System.out.println(list12m);
+      System.out.println(listReg);
       
       return "user/member/myPage_SubscribeView";
    }
