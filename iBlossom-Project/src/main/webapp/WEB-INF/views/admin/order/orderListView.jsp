@@ -5,7 +5,96 @@
 <head>
 <meta charset="UTF-8">
 <title>admin_Order_Full order details</title>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link href="resources/css/ldo-admin.css" rel="stylesheet">
+<style>
+
+	/* 전체 주문 내역 */
+	
+	/* 전체주문내역 - table */
+	.admin-order-list-table {
+	    margin: auto; /* 표 중간 */
+	    text-align: center; /* 글자 가운데 정렬 */
+	    border-collapse: collapse; /* 테두리 사이의 간격을 없애고 싶다면 */
+	}
+	
+	/* 전체주문내역 - thead */
+	#admin-order-list-thead {
+	    background-color: #444444;
+	    color : white;
+	}
+	
+	/* 전체주문내역 - th */
+	.admin-order-list-table>thead>tr>th {
+	    border: 1px solid black;
+	    padding: 15px;
+	    font-size: smaller;
+	}
+	
+	/* 전체주문내역 - td */
+	.admin-order-list-table>tbody>tr>td {
+	    border: 1px solid rgba(226, 226, 226, 0.982);
+	    padding: 15px;
+	    font-size: smaller;
+	}
+	
+	/* 상세보기 버튼 */
+	.admin-table-btn {
+		background-color: white;
+		color: black;
+		border: 1px solid gray;
+		font-weight: 600;
+		border-radius: 3px;
+	}
+	
+	/* 상세보기 버튼  호버시 */
+	.admin-table-btn:hover {
+		cursor: pointer;
+	}
+	
+	
+	/* ------------------------------------------------ */
+
+	/* 페이징 처리 */
+		
+	#pagingArea {
+	   width: fit-content;
+	   margin: auto;
+	}
+	
+	.page-link {
+	   font-size : 14px;
+	   width : 35px;
+	   height: 25px;
+	   background-color : white;
+	   border : 1px solid lightgray;
+	   color : black;
+	   display: inline-block;
+	   margin-left : 10px;
+	   text-decoration : none;
+	   text-align : center;
+	   border-radius : 3px;
+	   padding-top: 5px;
+	}
+	
+	.page-link:active:focus, 
+	.page-item:active {
+	   color : #ff2393;
+	}
+	
+	.page-link:hover {
+	   color : #ff2393;
+	}
+	
+	.pagination {
+	   list-style-type : none;
+	}
+	
+	.pagination li {
+	   float : left;
+	}
+	
+</style>
 </head>
 <body>
 
@@ -17,8 +106,8 @@
 
             <!-- 로고 -->
             <div id="admin-logo-div">
-                <a href="" id="admin-logo-a">
-                    <img src="img/iBlossom_logo_black.png">
+                <a href="${ pageContext.request.contextPath }/" id="admin-logo-a">
+                    <img src="resources/images/iBlossom_logo_black.png">
                  </a>
              </div>
 
@@ -91,33 +180,32 @@
         
         <hr id="admin-member-hr">
 
-        <br>
+        <br>   
 
         <!-- 전체 주문 내역 메뉴바 항목 14개 -->
         <!-- 주문번호, 회원번호, 주문자, 주문일, 수령자, 수령일, 수령자 전화번호, 
         	  배송지, 우편번호, 총결제금액, 결제번호, 주문상태, 배송상태, 상세보기 -->
-        <div>
+        <div class="admin-list-wrap">
             
             <table class="admin-order-list-table">
             
                 <!-- 메뉴바 -->
                 <thead id="admin-order-list-thead">
 
-                    <tr >
-                        <th>주문번호</th>
-                        <th>회원번호</th>
-                        <th>주문자</th>
-                        <th>주문일</th>
-                        <th>수령자</th>
-                        <th>수령일</th>
-                        <th>수령자 전화번호</th>
-                        <th>배송지</th>
-                        <th>우편번호</th>
-                        <th>총결제금액</th>
-                        <th>결제번호</th>
-                        <th>주문상태</th>
-                        <th>배송상태</th>
-                        <th>상세보기</th>
+                    <tr>
+                        <th style="width:47px;">주문번호</th>
+                        <th style="width:47px;">회원번호</th>
+                        <th style="width:35px;">주문자</th>
+                        <th style="width:35px;">주문일</th>
+                        <th style="width:35px;">수령자</th>
+                        <th style="width:35px;">수령일</th>
+                        <th>수령자 연락처</th>
+                        <th style="width:155px;">배송지</th>
+                        <th style="width:47px;">우편번호</th>
+                        <th style="width:58px;">총결제금액</th>
+                        <th style="width:47px;">결제번호</th>
+                        <th style="width:47px;">주문상태</th>
+                        <th style="width:47px;">배송상태</th>
                     </tr>
 
                 </thead>
@@ -125,9 +213,11 @@
                 <!-- 전체 주문 내역 내용 -->
                 <tbody>
 
-                    <!-- 1 -->
+                    <!-- <c:forEach var="o" items="${ list }">  -->  
                     <tr>
-                        <td>20220621001</td>
+                        <td>
+                        	<button type="button" class="admin-table-btn" onclick="location.href=''">1</button>
+                        </td>
                         <td>001</td>
                         <td>아무개</td>
                         <td>20220621</td>
@@ -140,12 +230,14 @@
                         <td>1</td>
                         <td>결제완료</td>
                         <td>배송중</td>
-                        <td><button type="button">V</button></td>
                     </tr>
+                    <!-- </c:forEach>  -->
 
                     <!-- 2 -->
                     <tr>
-                        <td>20220622002</td>
+                        <td>
+                        	<button type="button" class="admin-table-btn" onclick="location.href=''">2</button>
+                        </td>
                         <td>002</td>
                         <td>박말똥</td>
                         <td>20220622</td>
@@ -158,12 +250,13 @@
                         <td>2</td>
                         <td>결제완료</td>
                         <td>배송완료</td>
-                        <td><button type="button">V</button></td>
                     </tr>
 
                     <!-- 3 -->
                     <tr>
-                        <td>20220622002</td>
+                        <td>
+                        	<button type="button" class="admin-table-btn" onclick="location.href=''">3</button>
+                        </td>
                         <td>002</td>
                         <td>고영희</td>
                         <td>20220622</td>
@@ -175,8 +268,7 @@
                         <td>22,900원</td>
                         <td>3</td>
                         <td>결제완료</td>
-                        <td>배송완료</td>
-                        <td><button type="button">V</button></td>
+                        <td>배송완료</td>                       
                     </tr>
                 </tbody>
 
@@ -184,42 +276,51 @@
             
         </div>
 
-    </div>
-
-    <div>
-        <span><a></a></span>
-    </div>
-    
-    <!------------------------------------------------------------------->
+	    <div>
+	        <span><a></a></span>
+	    </div>
+	    
+	</div>
+	
+	<br><br><br>
+		
+	<!------------------------------------------------------------------->
 
     <!-- 페이징 처리 -->
-    <!-- 
-    <div class="admin-order-paging">
+    
+    <div id="pagingArea">
+		<ul class="pagination">
 
-        <ul class="admin-order-paging-ul">
+			<c:choose>
+				<c:when test="${ pi.currentPage eq 1 }">
+					<li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item"><a class="page-link"
+						href="list.pr?cpage=${ pi.currentPage - 1 }">◀</a></li>
+				</c:otherwise>
+			</c:choose>
 
-            <li class="admin-order-page-item">
-                <a class="admin-order-page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
+			
+			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				<li class="page-item"><a class="page-link"
+					href="list.pr?cpage=${ p }">${ p }</a></li>
+			</c:forEach>
 
-            <li class="admin-order-page-item"><a class="admin-order-page-link" href="#">1</a></li>
-            <li class="admin-order-page-item"><a class="admin-order-page-link" href="#">2</a></li>
-            <li class="admin-order-page-item"><a class="admin-order-page-link" href="#">3</a></li>
-            <li class="admin-order-page-item"><a class="admin-order-page-link" href="#">4</a></li>
-            <li class="admin-order-page-item"><a class="admin-order-page-link" href="#">5</a></li>
-            
-            <li class="admin-order-page-item">
-                <a class="admin-order-page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
 
-        </ul>
+			<c:choose>
+				<c:when test="${ pi.currentPage eq pi.maxPage }">
+					<li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item"><a class="page-link"
+						href="list.pr?cpage=${ pi.currentPage + 1 }">▶</a></li>
+				</c:otherwise>
+			</c:choose>
 
+		</ul>
+	       
     </div>
-    -->
     
 </body>
 </html>
