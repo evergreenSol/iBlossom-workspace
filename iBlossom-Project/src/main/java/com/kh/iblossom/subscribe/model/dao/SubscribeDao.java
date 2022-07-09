@@ -1,7 +1,9 @@
 package com.kh.iblossom.subscribe.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -62,7 +64,28 @@ public class SubscribeDao {
 	
 	public ArrayList<Subscribe> selectSubMembertList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		
-		return (ArrayList)sqlSession.selectList("subscribeMapper.selectSubMemberList", pi); 
+		int limit = pi.getBoardLimit();
+		int offset = (pi.getCurrentPage() - 1) * limit;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("subscribeMapper.selectSubMemberList", null, rowBounds); 
+	}
+
+	public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		
+		return sqlSession.selectOne("subscribeMapper.selectSearchCount", map);
+	}
+
+	public ArrayList<Subscribe> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi,
+			HashMap<String, String> map) {
+		
+		int limit = pi.getBoardLimit();
+		int offset = (pi.getCurrentPage() - 1) * limit;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("subscribeMapper.selectSearchList", map, rowBounds);
 	}
 
 }

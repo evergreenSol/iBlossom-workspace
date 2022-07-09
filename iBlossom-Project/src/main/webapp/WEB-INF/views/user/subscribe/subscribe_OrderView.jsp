@@ -500,7 +500,7 @@
 			data : {
 				subProductName : $('#subProductName').val(),
 				subProductNo : $('#subProductNo').val(),
-				userNo : 1,
+				userNo : $('#userNo').val(),
 				subLevel : $('#subLevel').val(),
 				subReceiverUser : $('#subReceiverUser').val(),
 				subReceiverPhone : $('#subReceiverPhone').val(),
