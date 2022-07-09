@@ -6,6 +6,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+#btnPrimary{
+	background-color: black;
+	width: 130px;
+    height: 50px;
+    color: white;
+    font-weight: 700;
+}
+
+#btnDanger{
+	width: 130px;
+    height: 50px;
+    background-color:#ff2393;
+    color: white;
+    font-weight: 700;
+    border: #ff2393;
+    margin-right: 900px;
+}
+</style>
+<!-- jQuery 라이브러리 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="resources/css/jsa.css" rel="stylesheet">
 </head>
 <body>
@@ -81,62 +103,80 @@
 	<!-- admin 관리자페이지 회원관리 -->
 	<div id="admin-member-wrap">
 
-		<span id="admin-member-title">상품수정화면</span>
+		<span id="admin-member-title">상품상세화면</span>
 		<hr id="admin-member-hr">
 
 		<!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
 		<div class="wrap">
 			<div class="admin_sub_product">
-			
-				<form id="updateForm" method="post" action="update.pr" enctype="multipart/form-data">
-					<input type="hidden" name="productNo" value="${ p.productNo }">
-					<h3>카테고리명</h3>
-					<input type="text" id="admin_category_name"
-						name="categoryName" value="${p.categoryName}">
+				<h3>카테고리명</h3>
+				<input type="text" id="admin_category_name"
+					name="category_name" value="${p.categoryName}" readonly>
 
-					<h3>상품명</h3>
-					<input type="text" id="admin_product_name"
-						name="flowerName" value="${p.flowerName}">
+				<h3>상품명</h3>
+				<input type="text" id="admin_product_name" name="flowerName"
+					value="${p.flowerName}" readonly>
 
-					<h3>태그</h3>
-					<input type="text" id="admin_tag_name" name="tag"
-						value="${p.tag}">
+				<h3>태그</h3>
+				<input type="text" id="admin_tag_name" name="tag"
+					value="${p.tag}" readonly>
 
-					<br><br><br>
-					<table class="admin_product">
-						<tr>
-							<h3 style="display:inline-block;">썸네일</h3>
-							<td><lable for="thumbnail"></lable> 
-							<input type="file" name="reThumbNail" id="admin_product-img"></td>
+				
+				<table class="admin_product">
+					<tr>
+						<td>
+						<h3>썸네일</h3>
+						<img src="${p.thumbNail}" name="thumbNail" style="width:300px"></td>
 							
-							<h3 style="display:inline-block;margin-left:200px">상세사진</h3>
-							<td>
-							<lable for="contentPhoto"></lable>
-							<input type="file" name="reContentPhoto" id="admin_product-img"></td> 
-						
+						<td>
+						<h3>상세사진</h3>
+						<img src="${p.contentPhoto}" style="border:none;width:130px" name="contentPhoto"></td>
 							
-							
-							<td width="60%"><textarea id="admin_product-description"
-									name="product_description">${p.flowerInfo }</textarea></td>
-						</tr>
-					</table>
-					<h3>가격</h3>
-					<input type="text" id="admin_price" name="price" value="${p.price}">
-					<span>원</span> <br> <br>
-					<hr>
-					<br>
-					<button type="submit" id="insertProduct"
-						style="margin-left: 1000px;">등록</button>
-				</form>
+						<td width="60%">
+						<textarea id="admin_product-description"
+								name="flowerInfo" readonly>${p.flowerInfo}</textarea></td>
+					</tr>
+				</table>
+				<h3>가격</h3>
+				<input type="text" id="admin_price" name="price" value="${p.price}" readonly><span>원</span>
+				<br>
 			</div>
+			<br>
+			<hr>
+			<br>
+			
+
+				<div align="center">
+	                <!-- 수정하기, 삭제하기 버튼은 이 글이 본인이 작성한 글일 경우에만 보여져야 함 -->
+	                <button id="btnDanger" onclick="postFormSubmit(2);">삭제하기</button>
+	                <button id="btnPrimary"   onclick="postFormSubmit(1);">수정하기</button>
+	                
+	            </div>
+	            <br><br>
+	            
+	            <form id="postForm" action="" method="post">
+	            	<input type="hidden" name="pno" value="${ p.productNo }">
+	         
+	            </form>
+	            
+	            <script>
+	            	function postFormSubmit(num) {
+	            		
+	            		if(num == 1) { // 수정 요청으로 action 속성값 바꾸기
+	            			
+	            			$("#postForm").attr("action", "productUpdate.pr").submit();
+	            		}
+	            		else { // 삭제 요청으로 action 속성값 바꾸기
+	            			$("#postForm").attr("action", "delete.pr").submit();
+	            		}
+	            	}
+	            </script>
+			
 
 		</div>
 
 
 	</div>
-
-
-
 
 </body>
 </html>
