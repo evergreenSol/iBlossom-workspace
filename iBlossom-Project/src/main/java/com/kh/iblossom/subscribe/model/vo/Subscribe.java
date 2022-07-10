@@ -25,4 +25,5 @@ public class Subscribe {
 	private String subProductName;
 	private int subPrice;
 	private int count;
+	private String subChangeName;
 }

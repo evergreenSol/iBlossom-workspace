@@ -44,7 +44,6 @@ public class CartController {
 	}
 		*/
 	// 장바구니 상품 추가
-	@ResponseBody
 	@RequestMapping("insert.ca")
 	public String insertCartList(Cart c, HttpSession session, Model model) {
 		
@@ -57,7 +56,7 @@ public class CartController {
 			
 			// 성공시 ~~~ 페이지로 url 재요청
 			// session.setAttribute("alertMsg", "성공적으로 장바구니가 추가되었습니다.");
-			return "redirect:/";
+			return "user/cart/cart_ListView";
 			
 		} else {
 			

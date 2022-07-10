@@ -26,7 +26,7 @@ public class CartServiceImpl implements CartService {
 		return cartDao.selectCartList(sqlSession);
 	}
 
-	// 장바구니 상품 추가용 메소드
+	// 장바구니 상품 추가용 메소드(승아)
 	@Override
 	public int insertCartList(Cart c) {
 
