@@ -17,6 +17,7 @@
 		<result column="SUB_LEVEL" property="subLevel" />
 		<result column="SUB_RECEIVER_USER" property="subReceiverUser" />
 		<result column="SUB_RECEIVER_PHONE" property="subReceiverPhone" />
+		<result column="SUB_RECEIVER_POSTCODE" property="subReceiverPostcode"/>
 		<result column="DELIVER_AT" property="deliverAt" />
 		<result column="DELIVER_TO" property="deliverTo" />
 		<result column="DELIVER_STATUS" property="deliverStatus" />
@@ -77,6 +78,7 @@
 		                , SUB_LEVEL
 		                , SUB_RECEIVER_USER
 		                , SUB_RECEIVER_PHONE
+		                , SUB_RECEIVER_POSTCODE
 		                , DELIVER_AT
 		                , DELIVER_TO
 		                , DELIVER_STATUS
@@ -87,6 +89,7 @@
 		     , #{subLevel}
 		     , #{subReceiverUser}
 		     , #{subReceiverPhone}
+		     , #{subReceiverPostcode}
 		     , #{deliverAt}
 		     , #{deliverTo}
 		     , #{deliverStatus}

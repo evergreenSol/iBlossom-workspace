@@ -18,37 +18,38 @@
 	    </div>
         <!-- 이용 안내 -->
         <div class="info">
-        <br>
-        <h1>이용안내</h1>
-        <br>
-            <table class="info_table">
-                <tr>
-                    <td height="150px" width="250px"><img src="resources/images/step1.png" id="info_img"></td>
-                    <td width="200/3px"></td>
-                    <td width="250px"><img src="resources/images/step2.png" id="info_img"></td>
-                    <td width="200/3px"></td>
-                    <td width="250px"><img src="resources/images/step3.png" id="info_img"></td>
-                    <td width="200/px%"></td>
-                    <td width="250px"><img src="resources/images/step4.png" id="info_img"></td>
-                </tr>
-                <tr> <!-- 글씨체 변경 -->
-                    <td>STEP1.<br> 구독할 꽃다발을 선택해주세요</td>
-                    <td></td>
-                    <td>STEP2.<br> 구독기간을 선택해주세요</td>
-                    <td></td>
-                    <td>STEP3.<br> 첫 결제를 완료하고 구독을 등록해주세요</td>
-                    <td></td>
-                    <td>STEP4.<br> 고르신 꽃다발을 받아보세요!</td>
-                </tr>
-            </table>
+	        <br>
+	        <h1 style="text-align: center; ">이용안내</h1>
+	        <br>
+	            <table class="info_table">
+	                <tr>
+	                    <td height="150px" width="250px"><img src="resources/images/step1.png" id="info_img"></td>
+	                    <td width="200/3px"></td>
+	                    <td width="250px"><img src="resources/images/step2.png" id="info_img"></td>
+	                    <td width="200/3px"></td>
+	                    <td width="250px"><img src="resources/images/step3.png" id="info_img"></td>
+	                    <td width="200/px%"></td>
+	                    <td width="250px"><img src="resources/images/step4.png" id="info_img"></td>
+	                </tr>
+	                <tr> <!-- 글씨체 변경 -->
+	                    <td><b>STEP1.</b><br> 구독할 꽃다발을<br> 선택해주세요.</td>
+	                    <td></td>
+	                    <td><b>STEP2.</b><br> 구독기간을<br> 선택해주세요.</td>
+	                    <td></td>
+	                    <td><b>STEP3.</b><br> 첫 결제를 완료하고<br> 구독을 등록해주세요.</td>
+	                    <td></td>
+	                    <td><b>STEP4.</b><br> 고르신 꽃다발을<br> 받아보세요!</td>
+	                </tr>
+	            </table>
         </div>
+        <hr style="width:1200px; margin-bottom : 30px; border-width: 1px 0px 0px 0px;" >
 		<div class="subscription">
 	        <!-- 구독 상품 목록 -->
 	        <div class="sub_list">
 	            <br>
-	            <h1>정기구독</h1>
+	            <h1 style="text-align: center; margin-bottom : 50px;">정기구독</h1>
 	
-	            <h2>STEP1. 구독할 꽃다발을 선택해주세요</h2>
+	            <h2 style="text-align: center;">STEP1. 구독할 꽃다발을 선택해주세요.</h2>
 	            
 	            <!-- 구독 상품 전체 리스트 조회-->
 
@@ -77,7 +78,7 @@
 	        
 	        <!-- 구독 기간 설정 -->
 	        <div class="sub_period" hidden>
-	            <h2>STEP2. 구독기간을 선택해주세요</h2>
+	            <h2 style="text-align: center; margin-top : 120px; margin-bottom : 60px;">STEP2. 구독기간을 선택해주세요.</h2>
 	
 
 	            <table class="sub_period_table">
@@ -115,7 +116,7 @@
 	        <!-- SUBSCRIBE 테이블로부터 읽어오기-->
 	        <!-- 구독한 상품 정보 -->
 	        <div class="sub_product" hidden>
-	            <h2>내가 고른 상품 정보</h2>
+	            <h2 style="text-align: center; margin-top : 100px;">내가 고른 상품 정보</h2>
 
 	            <table class="sub_product_table">
 	                <tr>
@@ -143,7 +144,7 @@
 	                    <td height="50px"><button onclick="location.href='listView.su'">이전</button></td>
 	                    <c:choose>
 	                    	<c:when test="${ empty loginUser }">
-		                    	<td height="50px"><button onclick="alert('로그인이 필요한 서비스입니다!');">결제</button></td>
+		                    	<td height="50px"><button onclick="alert('로그인이 필요한 서비스입니다!'); location.href='loginForm.me';">결제</button></td>
 		                    </c:when>
 		                    <c:otherwise>
 		                    	<td height="50px"><button onclick="pay();">결제</button></td>
