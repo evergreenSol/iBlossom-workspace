@@ -43,17 +43,17 @@
            <div id="main-images-wrap">
 
                <div class="main-imagelist-div">
-                   <img src="resources/images/main-images-market.png" class="sa sa-up main-images" data-sa-delay="500">
+                   <img src="resources/images/main-images-market.png" class="sa sa-up main-images" data-sa-delay="500"  onclick="location.href='flowerList.pr'";>
                    <span class="main-images-text">마켓</span>
                </div>
 
                <div class="main-imagelist-div">
-                   <img src="resources/images/main-images-subscription.png" class="sa sa-up main-images" data-sa-delay="750">
+                   <img src="resources/images/main-images-subscription.png" class="sa sa-up main-images" data-sa-delay="750"  onclick="location.href='listView.su'";>
                    <span class="main-images-text">정기구독</span>
                </div>
 
                <div class="main-imagelist-div">
-                   <img src="resources/images/main-images-class.png" class="sa sa-up main-images" data-sa-delay="1000">
+                   <img src="resources/images/main-images-class.png" class="sa sa-up main-images" data-sa-delay="1000"  onclick="location.href='classDetail.cl'";>
                    <span class="main-images-text">클래스</span>
                </div>
 
