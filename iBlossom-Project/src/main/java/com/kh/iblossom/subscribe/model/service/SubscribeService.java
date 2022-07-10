@@ -25,7 +25,10 @@ public interface SubscribeService {
 
 	int insertSubscribe(Subscribe s);
 	
-	ArrayList<Subscribe> selectMySubscribe(int userNo);
+	ArrayList<Subscribe> selectMySubscribeThree(int userNo);
+	ArrayList<Subscribe> selectMySubscribeSix(int userNo);
+	ArrayList<Subscribe> selectMySubscribeTwelve(int userNo);
+	ArrayList<Subscribe> selectMySubscribeRegular(int userNo);
 
 	int selectListCount();
 	

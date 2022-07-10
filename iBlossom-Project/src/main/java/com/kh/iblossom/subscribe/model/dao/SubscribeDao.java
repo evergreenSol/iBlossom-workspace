@@ -51,12 +51,6 @@ public class SubscribeDao {
 		return sqlSession.insert("subscribeMapper.insertSubscribe", s);
 	}
 	
-	// 마이페이지 구독조회
-	public ArrayList<Subscribe> selectMySubscribe(SqlSessionTemplate sqlSession, int userNo) {
-		
-		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribe", userNo);
-	}
-
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("subscribeMapper.selectListCount");
@@ -87,5 +81,25 @@ public class SubscribeDao {
 		
 		return (ArrayList)sqlSession.selectList("subscribeMapper.selectSearchList", map, rowBounds);
 	}
+	
+	// 마이페이지 구독조회
+	public ArrayList<Subscribe> selectMySubscribeThree(SqlSessionTemplate sqlSession, int userNo) {
+		
+		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribeTree", userNo);
+	}
 
+	public ArrayList<Subscribe> selectMySubscribeSix(SqlSessionTemplate sqlSession, int userNo) {
+			
+			return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribeSix", userNo);
+		}
+	
+	public ArrayList<Subscribe> selectMySubscribeTwelve(SqlSessionTemplate sqlSession, int userNo) {
+		
+		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribeTwelve", userNo);
+	}
+	
+	public ArrayList<Subscribe> selectMySubscribeRegular(SqlSessionTemplate sqlSession, int userNo) {
+		
+		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribeRegular", userNo);
+	}
 }
