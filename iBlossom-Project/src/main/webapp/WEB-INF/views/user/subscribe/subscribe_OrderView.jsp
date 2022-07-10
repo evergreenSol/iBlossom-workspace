@@ -333,8 +333,7 @@
                     <!-- 버튼 두개 -->
                     <div class="order-two-btn">
 
-                        <!-- 경로 : 장바구니 페이지  -->
-                        <a href="" class="pre-btn" type="button">이전으로 가기</a>
+                        <a href="listView.su" class="pre-btn" type="button">이전으로 가기</a>
                     
                     </div>
 
@@ -500,7 +499,7 @@
 			data : {
 				subProductName : $('#subProductName').val(),
 				subProductNo : $('#subProductNo').val(),
-				userNo : 1,
+				userNo : $('#userNo').val(),
 				subLevel : $('#subLevel').val(),
 				subReceiverUser : $('#subReceiverUser').val(),
 				subReceiverPhone : $('#subReceiverPhone').val(),

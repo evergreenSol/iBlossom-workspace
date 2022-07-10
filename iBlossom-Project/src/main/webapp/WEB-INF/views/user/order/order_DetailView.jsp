@@ -27,7 +27,7 @@
     
     /* 왼쪽 섹션 */ 
     .order-left {
-        width: 60%;
+        width: 65%;
         height: 100%;
         float: left;
         box-sizing: border-box;
@@ -35,7 +35,7 @@
 
     /* 오른쪽 섹션 */
     .order-right {
-        width: 36%;
+        width: 33%;
         float: right;
         
         /* sticky*/
@@ -496,7 +496,7 @@
                                         <br>
 
                                         <!-- 수령일 : YYYY-MM-DD(D) -->
-                                        <li>수령일 : 2022-06-21(목)</li>
+                                        <li>수령일 : 2022-06-21(목)</li><!-- <fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd(D)"/> -->
                                         <br>
 
                                         <!-- 가격(원) / 수량(개) -->
@@ -662,7 +662,7 @@
                 <!-- 배송비 -->
                 <div class="order-delivery">
                     <span>배송비</span>
-                    <span>+ 0원</span>
+                    <span>+ 3000원</span>
                 </div>
 
                 <!-- 등급 할인 -->
@@ -675,7 +675,7 @@
                 <!-- 총 결제 금액 -->    
                 <div class="order-tprice">
                     <span >총 결제 금액</span>
-                    <span>31,800원</span>
+                    <span>34,800원</span>
                 </div>
 
                 <br>

@@ -139,16 +139,16 @@
 
         <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
         <div style="padding-top:40px;" align="center">
-            <form name="form1" method="post" action="">
- 
-                <select id="selectReview"name="search_option">
-                    <option value="product_id">꽃명</option>
+            <form method="post" action="search.su">
+ 				<input type="hidden" name="currentPage" value="1">
+                <select name="condition">
+                    <option value="USER_ID">아이디</option>
              
-                    <option value="category_name">카테고리명</option>
+                    <option value="USER_NAME">이름</option>
              
-                    <option value="price">가격</option>
+                    <option value="SUBPRODUCT_NAME">상품 이름</option>
                 </select>
-                <input id="inputBox" name="keyword">
+                <input type="text" name="keyword" value="${ keyword }">
                 <input type="submit" id="selectbtn" value="검색">
             </form>
         </div>
@@ -203,8 +203,14 @@
 	                  <li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
 	               </c:when>
 	               <c:otherwise>
-	                  <li class="page-item"><a class="page-link"
-	                     href="subMemberListView.su?cpage=${ pi.currentPage - 1 }">◀</a></li>
+	               <c:choose>
+	            	   <c:when test="${ empty condition }">
+		                	<li class="page-item"><a class="page-link" href="subMemberListView.su?currentPage=${ pi.currentPage - 1 }">◀</a></li>
+		               </c:when>
+		               <c:otherwise>
+		                	<li class="page-item"><a class="page-link" href="search.su?currentPage=${ pi.currentPage - 1 }&condition=${ condition }&keyword=${ keyword }">◀</a></li>
+		               </c:otherwise>
+            	   </c:choose>
 	               </c:otherwise>
 	            </c:choose>
 	
@@ -218,11 +224,17 @@
 	                  <li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
 	               </c:when>
 	               <c:otherwise>
-	                  <li class="page-item"><a class="page-link"
-	                     href="subMemberListView.su?cpage=${ pi.currentPage + 1 }">▶</a></li>
-	               </c:otherwise>
+		               <c:choose>
+		            	   <c:when test="${ empty condition }">
+			                   <li class="page-item"><a class="page-link"
+			                   href="subMemberListView.su?cpage=${ pi.currentPage + 1 }">▶</a></li>
+		            	   </c:when>
+		            	   <c:otherwise>
+		            	   	   <li class="page-item"><a class="page-link" href="search.su?currentPage=${ pi.currentPage + 1 }&condition=${ condition }&keyword=${ keyword }">▶</a></li>
+		           		   </c:otherwise>
+			           </c:choose>
+		           </c:otherwise>
 	            </c:choose>
-	
 	         </ul>
 	    </div>
        	

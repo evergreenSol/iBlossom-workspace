@@ -21,7 +21,7 @@
     /* 하얀 네모박스 영역 */
     .complete-whitebox { 
         background-color:white; 
-        width: 900px;
+        width: 1200px;
         height: 390px;
         padding: 20px;
         padding-left: 20px;
@@ -33,7 +33,7 @@
     .complete-graybox { 
         background-color: rgba(231, 231, 231, 0.738);
         display: inline-block;
-        width: 800px;
+        width: 1100px;
         height: 220px;
         text-align: center;
         margin-top: 40px;
@@ -81,11 +81,11 @@
     
     /* 주문/결제 타이틀 */
     .order-title {
-    	width: 940px; 
+    	width: 1200px; 
     	margin: auto; 
     	margin-top: 15px; 
     	font-weight:700; 
-    	font-size:31px; 
+    	font-size: 31px; 
     	margin-bottom:15px;
     }
 
@@ -140,10 +140,10 @@
                     <div class="complete-two-btn">
 
                         <!-- 경로 : 마이페이지 > 주문 내역 조회 -->
-                        <button class="complete-two-btn1" type="button" onclick="location.href=''">주문 내역 조회</button>
+                        <button class="complete-two-btn1" type="button" onclick="location.href='adminList.or'">주문 내역 조회</button>
                         
                         <!-- 경로 : 마켓 -->
-                        <button class="complete-two-btn2" type="button" onclick="location.href=''">쇼핑하러 가기</button>
+                        <button class="complete-two-btn2" type="button" onclick="location.href='adminDetail.or'">쇼핑하러 가기</button>
                     
                     </div> 
 

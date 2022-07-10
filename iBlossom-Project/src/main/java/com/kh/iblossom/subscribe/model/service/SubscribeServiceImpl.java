@@ -1,6 +1,7 @@
 package com.kh.iblossom.subscribe.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,13 +60,6 @@ public class SubscribeServiceImpl implements SubscribeService {
 		return subscribeDao.insertSubscribe(sqlSession, s);
 	}
 	
-	
-	// 마이페이지 구독 조회 메소드
-	@Override
-	public ArrayList<Subscribe> selectMySubscribe(int userNo) {
-		return subscribeDao.selectMySubscribe(sqlSession, userNo);
-	}
-
 	@Override
 	public int selectListCount() {
 		
@@ -76,5 +70,39 @@ public class SubscribeServiceImpl implements SubscribeService {
 	public ArrayList<Subscribe> selectSubMemberList(PageInfo pi) {
 		
 		return subscribeDao.selectSubMembertList(sqlSession, pi);
+	}
+
+	@Override
+	public int selectSearchCount(HashMap<String, String> map) {
+		 
+		return subscribeDao.selectSearchCount(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Subscribe> selectSearchList(PageInfo pi, HashMap<String, String> map) {
+
+		return subscribeDao.selectSearchList(sqlSession, pi, map);
+	}
+
+	
+	// 마이페이지 구독 조회 메소드
+	@Override
+	public ArrayList<Subscribe> selectMySubscribeThree(int userNo) {
+		return subscribeDao.selectMySubscribeThree(sqlSession, userNo);
+	}
+
+	@Override
+	public ArrayList<Subscribe> selectMySubscribeSix(int userNo) {
+		return subscribeDao.selectMySubscribeSix(sqlSession, userNo);
+	}
+
+	@Override
+	public ArrayList<Subscribe> selectMySubscribeTwelve(int userNo) {
+		return subscribeDao.selectMySubscribeTwelve(sqlSession, userNo);
+	}
+
+	@Override
+	public ArrayList<Subscribe> selectMySubscribeRegular(int userNo) {
+		return subscribeDao.selectMySubscribeRegular(sqlSession, userNo);
 	}
 }

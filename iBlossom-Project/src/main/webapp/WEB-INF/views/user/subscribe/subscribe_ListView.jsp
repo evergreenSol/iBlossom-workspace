@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>subscribeListView</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"/>
 <link href="resources/css/kdh.css" rel="stylesheet">
 </head>
 <body>
@@ -14,11 +13,9 @@
     
     <div class="wrap">
         <!-- 사진 영역 -->
-        <div class="banner">
-            <span class="banner_title">정기구독</span>
-        </div>
-
-
+        <div align="center" class="banner">
+	       <span class="banner_title">SUBSCRIBE</span>
+	    </div>
         <!-- 이용 안내 -->
         <div class="info">
         <br>
@@ -247,8 +244,8 @@
 	// datepicker 용 jQuery
 	$.datepicker.setDefaults({
 	  dateFormat: 'yy-mm-dd',
-	  prevText: '이전 달',
-	  nextText: '다음 달',
+	  prevText: '<',
+	  nextText: '>',
 	  monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
 	  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
 	  dayNames: ['일', '월', '화', '수', '목', '금', '토'],

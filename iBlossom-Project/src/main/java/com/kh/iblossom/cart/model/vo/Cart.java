@@ -1,12 +1,8 @@
 package com.kh.iblossom.cart.model.vo;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Cart {
 
 	private int cartNo; // CART_NO NUMBER PRIMARY KEY,

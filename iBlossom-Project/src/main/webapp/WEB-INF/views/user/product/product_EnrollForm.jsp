@@ -104,17 +104,16 @@
 					<table class="admin_product">
 						<tr>
 							<td><lable for="thumbnail">썸네일</lable> <input type="file"
-								name="thumbnail" id="admin_product-img"></td>
+								name="upThumbNail" id="admin_product-img"></td>
 
-							<!-- 		<td>
-							<lable for="contentPhoto" style="font-size:20px; font-weight:700px">상세사진</lable>
-							<input type="file" name="contentPhoto" id="admin_product-img"></td> -->
-
+							<td><lable for="contentPhoto"
+									style="font-size:20px; font-weight:700px">상세사진</lable> <input
+								type="file" name="upContentPhoto" id="admin_product-img"></td>
 							<td width="60%"><textarea id="admin_product-description"
 									name="flowerInfo"></textarea></td>
 						</tr>
 					</table>
-
+	
 
 
 					<h3>가격</h3>

@@ -28,6 +28,7 @@
 		<result column="SUBPRODUCT_NAME" property="subProductName"/>
 		<result column="SUB_PRICE" property="subPrice"/>
 		<result column="COUNT" property="count"/>
+		<result column="SUBCHANGE_NAME" property="subChangeName" />
 	</resultMap>
 
 	<select id="selectSubProductList" resultMap="subProductResultSet">
@@ -103,6 +104,66 @@
 		FROM SUBSCRIBE S, MEMBER M, SUB_PRODUCT SP
         WHERE S.USER_NO = M.USER_NO(+)
           AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
+  	</select>
+  	
+  	<select id="selectSearchCount" parameterType="hashmap" resultType="_int">
+		SELECT COUNT(*)
+		FROM SUBSCRIBE S, MEMBER M, SUB_PRODUCT SP
+        WHERE S.USER_NO = M.USER_NO(+)
+          AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
+		  AND ${condition} LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="selectSearchList" parameterType="hashmap" resultMap="subscribeResultSet">
+		SELECT SUBSCRIBE_NO, M.USER_ID, M.USER_NAME, SP.SUBPRODUCT_NAME, DELIVER_TO, TO_CHAR(SUB_DATE,'YYYY-MM-DD') "SUB_DATE", SUB_LEVEL, M.GR_LEVEL, SP.SUB_PRICE, DELIVER_STATUS
+		FROM SUBSCRIBE S, MEMBER M, SUB_PRODUCT SP
+        WHERE S.USER_NO = M.USER_NO(+)
+          AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
+		  AND ${condition} LIKE '%' || #{keyword} || '%'
+	</select>
+  	
+  	<select id="selectMySubscribeThree" parameterType="_int" resultMap="subscribeResultSet">
+		SELECT SUBSCRIBE_NO, SP.SUBPRODUCT_NAME, TO_CHAR(SUB_DATE,'YYYY-MM-DD') "SUB_DATE", 
+			   SUB_LEVEL, SUB_RECEIVER_USER, SUB_RECEIVER_PHONE, DELIVER_AT, DELIVER_AT, DELIVER_TO, 
+			   RECEIPT_ID, SP.SUB_PRICE, DELIVER_STATUS, SUBPRODUCT_NAME, SUBCHANGE_NAME
+		FROM SUBSCRIBE S, SUB_PRODUCT SP
+		WHERE USER_NO = #{userNo}
+		AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
+		AND SUB_LEVEL = 3
+		ORDER BY S.SUBSCRIBE_NO ASC
+  	</select>
+  	
+  	  	<select id="selectMySubscribeSix" parameterType="_int" resultMap="subscribeResultSet">
+		SELECT SUBSCRIBE_NO, SP.SUBPRODUCT_NAME, TO_CHAR(SUB_DATE,'YYYY-MM-DD') "SUB_DATE", 
+			   SUB_LEVEL, SUB_RECEIVER_USER, SUB_RECEIVER_PHONE, DELIVER_AT, DELIVER_AT, DELIVER_TO, 
+			   RECEIPT_ID, SP.SUB_PRICE, DELIVER_STATUS, SUBPRODUCT_NAME, SUBCHANGE_NAME
+		FROM SUBSCRIBE S, SUB_PRODUCT SP
+		WHERE USER_NO = #{userNo}
+		AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
+		AND SUB_LEVEL = 6
+		ORDER BY S.SUBSCRIBE_NO ASC
+  	</select>
+  	
+  	  	<select id="selectMySubscribeTwelve" parameterType="_int" resultMap="subscribeResultSet">
+		SELECT SUBSCRIBE_NO, SP.SUBPRODUCT_NAME, TO_CHAR(SUB_DATE,'YYYY-MM-DD') "SUB_DATE", 
+			   SUB_LEVEL, SUB_RECEIVER_USER, SUB_RECEIVER_PHONE, DELIVER_AT, DELIVER_AT, DELIVER_TO, 
+			   RECEIPT_ID, SP.SUB_PRICE, DELIVER_STATUS, SUBPRODUCT_NAME, SUBCHANGE_NAME
+		FROM SUBSCRIBE S, SUB_PRODUCT SP
+		WHERE USER_NO = #{userNo}
+		AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
+		AND SUB_LEVEL = 12		
+		ORDER BY S.SUBSCRIBE_NO ASC
+  	</select>
+  	
+  	  	<select id="selectMySubscribeRegular" parameterType="_int" resultMap="subscribeResultSet">
+		SELECT SUBSCRIBE_NO, SP.SUBPRODUCT_NAME, TO_CHAR(SUB_DATE,'YYYY-MM-DD') "SUB_DATE", 
+			   SUB_LEVEL, SUB_RECEIVER_USER, SUB_RECEIVER_PHONE, DELIVER_AT, DELIVER_AT, DELIVER_TO, 
+			   RECEIPT_ID, SP.SUB_PRICE, DELIVER_STATUS, SUBPRODUCT_NAME, SUBCHANGE_NAME
+		FROM SUBSCRIBE S, SUB_PRODUCT SP
+		WHERE USER_NO = #{userNo}
+		AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
+		AND SUB_LEVEL = 1
+		ORDER BY S.SUBSCRIBE_NO ASC
   	</select>
   	
 </mapper>

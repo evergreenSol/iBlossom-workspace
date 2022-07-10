@@ -20,7 +20,7 @@
      
     /* 왼쪽 섹션 */ 
     .cart-left {
-        width: 60%;
+        width: 65%;
         height: 100%;
         float: left;
         box-sizing: border-box;
@@ -28,7 +28,7 @@
 
     /* 오른쪽 섹션 */
     .cart-right {
-        width: 36%;
+        width: 33%;
         height: 100%;
         float: right;
         box-sizing: border-box;
@@ -75,7 +75,7 @@
         
         /* 스타일 */
         background-color: whitesmoke; /*lightgray*/
-        padding: 10px;
+        padding: 15px;
         font-weight: 500; 
     }
 
@@ -122,6 +122,7 @@
 	    font-weight: 600; 
 	    width:25px; 
 	    height: 25px;
+	    border-radius: 3px;
     }
     
     /* 총주문금액 X 마우스 hover */
@@ -257,7 +258,7 @@
 	                              <input type= "hidden" name="sell_price" value="6900">
 	                              <input type="button" value=" - " onclick="del();" class="cart-num-btn">
 	                              <input type="text" name="amount" value="1" onchange="change();" 
-	                              	     style="width:25px; height:20px;">
+	                              	     style="width:25px; height:20px; border-radius:3px; border:1px solid; text-align:center;">
 	                              <input type="button" value=" + " onclick="add();" class="cart-num-btn">
 	  
 	                        </form>
@@ -344,7 +345,7 @@
 		        <!-- 배송비 -->
 		        <div class="cart-price2">
 		            <span>배송비</span>
-		            <span>+ 0원</span>
+		            <span>+ 3000원</span>
 		        </div>
 		
 		        <!-- 구분선 -->
@@ -353,7 +354,7 @@
 		        <!-- 총 결제 금액 -->
 		        <div class="total-price">
 		            <span>총 결제 금액</span>
-		            <span>31,800원</span>
+		            <span>34,800원</span>
 		        </div>
 		
 	        </div>
@@ -365,7 +366,7 @@
 	
 	            <div class="cart-div">
 	            <li>- 장바구니에 담긴 상품이 품절되거나, 수령일에 구매가 불가능한 상태가 되면 장바구니에 상품은 삭제됩니다.</li>
-	            <li>- 구매 금액 합산 30,000원 이상일 경우, 배송비는 무료입니다. (단, [정기구독], [무료배송] 상품은 구매금액 합산에 포함되지 않습니다.)</li>
+	            <li>- 구매 금액 합산 100,000,000원 이상일 경우, 배송비는 무료입니다. (단, [정기구독], [무료배송] 상품은 구매금액 합산에 포함되지 않습니다.)</li>
 	            <li>- [정기구독] 상품의 첫 번째 발송일에 일반 택배 상품을 함께 구매하실 경우, 중복 배송비는 부분 환불 처리해 드립니다.</li>
 	            </div>
 	

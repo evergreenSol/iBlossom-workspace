@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -56,7 +57,7 @@ public class SubscribeController {
 
 		model.addAttribute("list",list);
 		
-		return "user/subscribe/subProduct_ListView";
+		return "admin/subscribe/subProduct_ListView";
 	}
 	
 	@RequestMapping("insert.sp")
@@ -163,8 +164,41 @@ public class SubscribeController {
 		model.addAttribute("pi", pi);
 		model.addAttribute("list",list);
 		
-		return "user/subscribe/subMember_ListView";
+		return "admin/subscribe/subMember_ListView";
 	}
+	
+	@RequestMapping("search.su")
+	public String subMemberSearch(@RequestParam(value="cpage", defaultValue="1") int currentPage, String condition, String keyword, Model model) {
+		
+		HashMap<String, String> map = new HashMap<>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		
+		// 페이징 처리를 위한 pi 객체 만들기
+		// => Pagination 클래스에 getPageInfo(listCount, currentPage, pageLimit, boardLimit) 메소드를 호출
+		int searchCount = subscribeService.selectSearchCount(map); // 현재 검색결과에 맞는 게시글의 총 갯수
+		
+		int pageLimit = 10;
+		int boardLimit = 5;
+		
+		PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, pageLimit, boardLimit);
+		
+		// 조회 요청
+		ArrayList<Subscribe> list = subscribeService.selectSearchList(pi, map);
+		
+		// System.out.println(list);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+		// 이슈 : 검색이 진행된 후 검색 조건과 검색어가 유지되지 않음
+		//		 페이징바를 눌러서 이동시 list.bo 로 요청이 들어가는 이슈
+		model.addAttribute("condition", condition);
+		model.addAttribute("keyword", keyword);
+		
+		return "admin/subscribe/subMember_ListView";
+	}
+	
 	
 	@RequestMapping("orderView.su")
 	public String subOrderView(int spno, int subLevel, String deliverAt, Model model) {
