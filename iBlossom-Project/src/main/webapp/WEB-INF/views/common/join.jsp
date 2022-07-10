@@ -102,25 +102,50 @@
                if(!regExp.test($("#signUp-input-email").val())){
                    alert("유효한 이메일을 입력해주세요.");
                }
-                else {
+               else {
+                	
+                	// 이메일 중복 확인
+                	$.ajax({
+                		url : "checkEmail.me",
+                		data : {
+                			email : $("#signUp-input-email").val()
+                		},
+                		success : function (result) {
+                			var count = result;
+                			
+                			if(count > 0) {
+                				alert("중복된 이메일 입니다. 다시 입력해주세요.");
+                				$("#signUp-input-email").focus();
+                				$("#signUp-input-email").val("");
+                			}
+                			else {
+                				
+                				 $.ajax({
+              	                   url : "sendEmail.do",
+              	                   data : {
+              	                      recipient : $('#signUp-input-email').val(),
+              	                      subject : "iBlossom 이메일 인증 메일입니다.",
+              	                      body : "이메일 인증 코드 : "
+              	                   },
+              	                   success : function (result) {
+              	                      alert("메일이 발송되었습니다. 확인해주세요.");
+              	                      console.log(result);
+              	                      
+              	                      key = result;
+              	                   },
+              	                   error: function () {
+              	                      console.log("실패");
+              	                   }
+              	                });
+                				
+                			}
+                			
+                		},
+                		error : function () {
+                			
+                		}
+                	});
                    
-                $.ajax({
-                   url : "sendEmail.do",
-                   data : {
-                      recipient : $('#signUp-input-email').val(),
-                      subject : "iBlossom 이메일 인증 메일입니다.",
-                      body : "이메일 인증 코드 : "
-                   },
-                   success : function (result) {
-                      alert("메일이 발송되었습니다. 확인해주세요.");
-                      console.log(result);
-                      
-                      key = result;
-                   },
-                   error: function () {
-                      console.log("실패");
-                   }
-                });
                 }
             }
             else {

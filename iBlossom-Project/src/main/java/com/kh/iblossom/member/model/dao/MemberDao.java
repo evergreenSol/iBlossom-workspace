@@ -18,6 +18,10 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.loginMember", m);
 	}	
 	
+	public int countEmail(SqlSessionTemplate sqlSession, String email) {
+		return sqlSession.selectOne("memberMapper.countEmail", email);
+	}
+
 	public int countUserId(SqlSessionTemplate sqlSession, String userId) {
 		return sqlSession.selectOne("memberMapper.countUserId", userId);
 	}
@@ -52,6 +56,11 @@ public class MemberDao {
       RowBounds rowBounds = new RowBounds(offset, limit);
 
       return (ArrayList)sqlSession.selectList("memberMapper.selectList", null, rowBounds);
+   }
+   
+   // 등급 업데이트 메소드
+   public int updateGrLevel(SqlSessionTemplate sqlSession) {
+	   return sqlSession.update("memberMapper.updateGrLevel", null);
    }
 	   
 	   // 회원 상세조회

@@ -11,6 +11,8 @@ public interface MemberService {
 	// 회원가입
 	Member login(Member m);
 	
+	int countEmail(String email);
+	
 	int countUserId(String userId);
 	
 	int insertMember(Member m);
@@ -25,7 +27,7 @@ public interface MemberService {
    // 멤버 리스트 조회
    ArrayList<Member> selectList(PageInfo pi);
 
-
+   int updateGrLevel();
 
 	
 }

@@ -20,6 +20,14 @@
 		<result column="GR_LEVEL" property="grLevel"/>
 	</resultMap>
 
+
+	<select id="countEmail" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE EMAIL = #{email}
+	</select>
+
+	
 	<select id="countUserId" parameterType="string" resultType="_int">
 		SELECT COUNT(*)
 		FROM MEMBER
@@ -86,5 +94,16 @@
 		UPDATE MEMBER
 		   SET STATUS = 'N'
 		 WHERE USER_NO = #{userNo}
+	</update>
+	
+	<update id="updateGrLevel">
+	UPDATE MEMBER
+		SET GR_LEVEL = 
+		    CASE
+		        WHEN PURCHASE BETWEEN 0 AND 199999 THEN 1
+		        WHEN PURCHASE BETWEEN 200000 AND 299999 THEN 2
+		        WHEN PURCHASE BETWEEN 300000 AND 399999 THEN 3
+		        ELSE 4
+		    END
 	</update>
 </mapper>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kh.iblossom.common.bootpay.Bootpay;
+import com.kh.iblossom.common.bootpay.model.vo.request.Cancel;
 import com.kh.iblossom.common.bootpay.model.vo.request.SubscribePayload;
 import com.kh.iblossom.common.bootpay.model.vo.response.ResDefault;
 import com.kh.iblossom.subscribe.model.service.SubscribeService;
@@ -126,6 +127,34 @@ public class BootPayController {
 
 		
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="cancelRequest.do", produces="application/json; charset=UTF-8")
+	public static String receiptCancel(String receiptId, Double price) {
+        Cancel cancel = new Cancel();
+        cancel.receiptId = receiptId;
+        cancel.name = "관리자";
+        cancel.reason = "고객 변심";
+        cancel.price = price; //부분취소 요청시
+//        cancel.cancelId = "12342134"; //부분취소 요청시, 중복 부분취소 요청하는 실수를 방지하고자 할때 지정
+//        RefundData refund = new RefundData(); // 가상계좌 환불 요청시, 단 CMS 특약이 되어있어야만 환불요청이 가능하다.
+//        refund.account = "675601012341234"; //환불계좌
+//        refund.accountholder = "홍길동"; //환불계좌주
+//        refund.bankcode = BankCode.getCode("국민은행");//은행코드
+//        cancel.refund = refund;
+        
+	    ResDefault<HashMap<String, Object>> res = null;
+
+        try {
+            res = bootpay.receiptCancel(cancel);
+            System.out.println(res.toJson());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return new Gson().toJson(res);
+    }
 	
 	
 
