@@ -7,6 +7,7 @@
 <title>iBlossom | 주문/결제</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet">
 <style>
 
@@ -468,15 +469,18 @@
                                 <!-- 상품 옵션 확인란 -->
                                 <div class="order-check-list"><br>
                                         <!-- 상품 제목 -->
-                                        <li>상품 제목</li>
+                                        <li>${ p.productName }</li>
+                                        <input type="hidden" id="productNo" value="${ p.productNo }">
+                                        <input type="hidden" id="productName" value="${ p.productName }">
                                         <br>
 
                                         <!-- 수령일 : YYYY-MM-DD(D) -->
-                                        <li>수령일 : 2022-06-21(목)</li>
+                                        <li>수령일 : ${ }</li>
+                                        <input type="hidden" id="" value="${ }">
                                         <br>
 
                                         <!-- 가격(원) / 수량(개) -->
-                                        <li>6,900원 / 1개</li>
+                                        <li>${  }원 / ${  }개</li>
                                         <br>
                                 </div>
 
@@ -531,7 +535,7 @@
                                 <p>주문자 정보</p>
                                 <!-- 입력내용 보여지는 태그-->
                                 <p>
-                                    <span>아무개, &nbsp;010-0000-0000</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
+                                    <span>${ loginUser.userName }, &nbsp;&nbsp;${ loginUser.phone }</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
                                 </p>
 
                             </button>
@@ -543,10 +547,10 @@
                         <div id="OrdererBox" class="order-orderer-content" >
 
                             <p>&nbsp;이름</p>
-                            <p class="orderer-name">아무개</p>
+                            <p class="orderer-name">${ loginUser.userName }</p>
 
                             <p>&nbsp;연락처</p>
-                            <p class="orderer-phone">010-0000-0000</p>
+                            <p class="orderer-phone">${ loginUser.phone }</p>
 
                             <!-- 안내문구 -->
                             <p class="orderer-guide" style="font-size:small">
@@ -566,7 +570,7 @@
                         <hr>
 
                         <div id="SenderBox">
-                            <p>&nbsp;아무개</p>
+                            <p>&nbsp;${ loginUser.userName }</p>
                         </div>
                     </div>     
                     
@@ -584,29 +588,19 @@
                         <div class="order-address-add">
 
                             <!-- 모달의 원리 : 이 버튼 클릭시 data-target에 제시되어있는 해당 아이디의 div요소를 띄워줌 -->
+                            <!--
+                            	<div class="userAddress"><br>
+	                            	<span id="postalAddress"></span>
+	                            	<span id="detailAddress"></span>
+                            	</div>
+                            --> 
                             <button type="button" class="address-btn" data-toggle="modal" data-target="#modal-overlay">
                                 + 배송지 추가
                             </button>
                         
                     </div>
                      
-                    <!-- 우편번호 script -->
-                    <script>
                     
-                        function kakaopost() {
-                            new daum.Postcode({
-                                oncomplete: function(data) {
-                                	
-                                    document.querySelector("#zipcode").value = data.zonecode;
-                                	// zipcode라는 아이디를 가진 input 태그 value에 가져온 우편번호 값을 저장
-
-                                    document.querySelector("#address").value = data.address
-                                    // address라는 아이디를 가진 input 태그 value에 가져온 주소 값을 저장
-                                }
-                            }).open();
-                        }
-                        
-                    </script>
 
                     </div>
 
@@ -636,6 +630,26 @@
 	                        </div>
 	                    </div>
 					-->
+					
+					<!------------------------------------------------------------------->
+					
+					<!-- 우편번호 script -->
+                    <script>
+                    
+                        function kakaopost() {
+                            new daum.Postcode({
+                                oncomplete: function(data) {
+                                	
+                                    document.querySelector("#zipcode").value = data.zonecode;
+                                	// zipcode라는 아이디를 가진 input 태그 value에 가져온 우편번호 값을 저장
+
+                                    document.querySelector("#address").value = data.address
+                                    // address라는 아이디를 가진 input 태그 value에 가져온 주소 값을 저장
+                                }
+                            }).open();
+                        }
+                        
+                    </script>
 					
                     <br><br>
 
@@ -743,7 +757,9 @@
 
                     <!-- Modal body -->
                     <div class="address-content">
-
+					
+						<!-- placeholder를 나중에 loginUser.XXXX 으로 변경 수신인 default는 로긴한 사람-->
+                        
                         <!-- 이름 -->
                         <input type="text" name="userName" id="userName" size="70" placeholder="이름을 입력해주세요." required><br>
                         <hr>

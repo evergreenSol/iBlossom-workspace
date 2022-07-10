@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user_Order_Complete</title>
+<title>iBlossom | 결제완료</title>
 <link href="resources/css/ldo.css" rel="stylesheet">
 <style>
 

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user_Cart_EmptyList</title>
+<title>iBlossom | 장바구니</title>
 <link href="resources/css/ldo.css" rel="stylesheet">
 <style>
 

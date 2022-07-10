@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user_Cart_ListView</title>
+<title>iBlossom | 장바구니</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet">
 <style>
