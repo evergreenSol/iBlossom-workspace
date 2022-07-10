@@ -137,10 +137,12 @@ public class MemberController {
 	}
 	
 	// 비밀번호 찾기
-	@RequestMapping("/findPwd.me")
-	public String findPwd() {
+	@RequestMapping("/findPwdForm.me")
+	public String findPwdForm() {
 		return "common/findPwd";
 	}
+	
+	
 	
 	
 	// 메뉴바의 "상품관리" 클릭해서 요청한 경우 => /list.pr (기본적으로 1 번 페이지를 요청하게끔 처리)
