@@ -1,6 +1,7 @@
 package com.kh.iblossom.member.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,11 +74,26 @@ public class MemberServiceImpl implements MemberService{
 
 
 
+	@Override
+	public String sendEmail(HashMap<String, String> map) throws Exception {
+		
+		
+		return memberDao.selectEmail(sqlSession, map);
+	}
+
+	@Override
+	public String selectId(String email) {
+
+		return memberDao.selectId(sqlSession, email);
+	}
+
 	// 회원 상세조회
 //	   @Override
 //	   public Member selectMember(int userNo) {
 //	      return memberDao.selectMember(sqlSession, userNo);
 //	   }
+	
+
 
 	
 }

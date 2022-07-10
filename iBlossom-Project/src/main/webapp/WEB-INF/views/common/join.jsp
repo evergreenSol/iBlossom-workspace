@@ -149,7 +149,7 @@
                 }
             }
             else {
-               alert("이메일을 먼저 입력해주세요.");
+               alert("이메일을 입력해주세요.");
             }
             
           
@@ -208,7 +208,7 @@
                         } else {
                            /*$("#customer_id").next().removeClass("green");
                             $("#customer_id").next().addClass("red");*/
-                            $("#customer_id").next().next().text("유효하지않은 아이디입니다. (영문,숫자포함 6~12자리로 입력해주세요)");
+                            $("#customer_id").next().next().text("유효하지않은 아이디입니다. (영문, 숫자 포함 6~12자리로 입력해주세요.)");
                             $("#customer_id").next().next().show();
                             $("#signUp-signupbutton").attr("disabled", true);
                             idChk = 0;
@@ -353,5 +353,6 @@
 
     */
     </script>
+    
 </body>
 </html>
