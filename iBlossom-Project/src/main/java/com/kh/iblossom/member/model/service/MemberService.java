@@ -14,6 +14,8 @@ public interface MemberService {
 	// 회원가입
 	Member login(Member m);
 	
+	int countEmail(String email);
+	
 	int countUserId(String userId);
 	
 	int insertMember(Member m);
@@ -36,7 +38,7 @@ public interface MemberService {
 	
 
 
-
+   int updateGrLevel();
 
 	
 }

@@ -19,6 +19,10 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.loginMember", m);
 	}	
 	
+	public int countEmail(SqlSessionTemplate sqlSession, String email) {
+		return sqlSession.selectOne("memberMapper.countEmail", email);
+	}
+
 	public int countUserId(SqlSessionTemplate sqlSession, String userId) {
 		return sqlSession.selectOne("memberMapper.countUserId", userId);
 	}
@@ -55,11 +59,19 @@ public class MemberDao {
       return (ArrayList)sqlSession.selectList("memberMapper.selectList", null, rowBounds);
    }
    
+// 비밀번호 찾기 - 이메일 찾기 메소드
    public String selectEmail(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
 	   	sqlSession.update("memberMapper.updatePwd",map);
 	
 	      return sqlSession.selectOne("memberMapper.selectEmail",map);
 	   }
+
+   // 등급 업데이트 메소드
+   public int updateGrLevel(SqlSessionTemplate sqlSession) {
+	   return sqlSession.update("memberMapper.updateGrLevel", null);
+   }
+	   
+
 	   // 회원 상세조회
 //	 public Member selectProduct(SqlSessionTemplate sqlSession, int productNo) {
 //

@@ -98,7 +98,46 @@
         </div>
 
     </div>
+        <script>
+    	$(function () {
+    		
+    		$.ajax({
+    			url : "checkDate.me",
+    			success : function (result) {
+    				if(result == "1") {
+    					console.log("있음");
+    				}
+    				else {
+    					console.log("없음");
+    				}
+    			},
+    			error : function () {
+    				console.log("땡");
+    			}
+    			
+    		});
+    		
+    		$.ajax({
+    			url : "checkPurchase.me",
+    			success : function () {
+    				if(result == "1") {
+    					console.log("있음");
+    				}
+    				else {
+    					console.log("없음");
+    				}
+    			},
+    			error : function () {
+    				console.log("땡");
+    			}
+    			
+    		});
+    		
+    		
+    		
+    	});
     
+    </script>
    
     
     

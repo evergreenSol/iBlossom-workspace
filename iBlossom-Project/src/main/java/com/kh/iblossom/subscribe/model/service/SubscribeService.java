@@ -25,11 +25,15 @@ public interface SubscribeService {
 
 	int insertSubscribe(Subscribe s);
 	
+	// 마이페이지 구독 조회용 메소드
 	ArrayList<Subscribe> selectMySubscribeThree(int userNo);
 	ArrayList<Subscribe> selectMySubscribeSix(int userNo);
 	ArrayList<Subscribe> selectMySubscribeTwelve(int userNo);
 	ArrayList<Subscribe> selectMySubscribeRegular(int userNo);
 
+	// 마이페이지 구독 취소 메소드
+	int cancelMySubList(String receiptId);
+	
 	int selectListCount();
 	
 	ArrayList<Subscribe> selectSubMemberList(PageInfo pi);
@@ -38,4 +42,7 @@ public interface SubscribeService {
 
 	ArrayList<Subscribe> selectSearchList(PageInfo pi, HashMap<String, String> map);
 
+	// 배송상태 변경 메소드
+	int updateDeliverStatus();
+	
 }
