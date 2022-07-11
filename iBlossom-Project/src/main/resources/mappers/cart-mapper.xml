@@ -8,19 +8,18 @@
 		<result column="PRODUCT_NO" property="productNo" /><!-- 상품 번호 -->
 		<result column="PRODUCT_COUNT" property="productCount" /><!-- 상품 수량 -->
 		<result column="PRODUCT_PRICE" property="productPrice" /><!-- 상품 가격 -->
+		<result column="FLOWER_NAME" property="flowerName" /><!-- 상품 가격 -->
+		<result column="THUMBNAIL" property="thumbnail" /><!-- 상품 가격 -->
 	</resultMap>
 	
 	<!-- 장바구니에서는 select 와 delete 생성 -->
 	
-	<select id="selectCartList" resultMap="cartResultSet">
-		SELECT CART_NO, USER_NO, PRODUCT_NO, PRODUCT_COUNT, PRODUCT_PRICE
-		FROM CART
-	</select>
-	
+	<!-- 상품이 담겨져있는 장바 구니 조회용 -->
   	<select id="selectCart" resultMap="cartResultSet">
-  		SELECT *
+  		SELECT CART_NO, USER_NO, PRODUCT_NO, FLOWER_NAME, PRODUCT_PRICE, PRODUCT_COUNT, THUMBNAIL
   		FROM CART
-  		WHERE CART_NO = #{cartNo}
+		JOIN PRODUCT USING (PRODUCT_NO)
+		WHERE USER_NO = #{userNo}
   	</select>
   	
   	<!-- 장바구니 행 삭제 -->
@@ -30,6 +29,10 @@
   		WHERE CART_NO = #{cartNo}
   	</delete>
 
+
+	<!-- 상세페이지 -> cart 연결용 -->
+	
+	<!-- 장바구니 상품 추가용 메소드 -->
 	<insert id="insertCartList" parameterType="cart">
         INSERT INTO CART(CART_NO
                       , USER_NO

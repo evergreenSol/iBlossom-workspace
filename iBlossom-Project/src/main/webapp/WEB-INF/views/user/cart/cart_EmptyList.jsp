@@ -82,8 +82,9 @@
 				    <div style="font-size:large; margin-bottom:27px;">쇼핑백에 담긴 상품이 없습니다</div>
 				    
 				    <!-- 버튼 -->  
+				    <!-- 220710 : 쇼핑백 구현을 위해 임시로 경로를 쇼핑백으로 정함, 구현이 완료된 후에는 마켓 경로를 연결해줄 예정 -->
 				    <div>
-				    	<button class="" type="button" onclick="location.href=''">쇼핑하러가기</button>
+				    	<button class="" type="button" onclick="location.href='listView.ca'">쇼핑하러가기</button>
 				    </div>
 			    				    	
 			    </div>

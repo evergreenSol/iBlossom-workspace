@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -208,7 +209,7 @@
 	                <input type="radio">&nbsp;전체선택 <span>(1/2)</span>
 	            </div>
 	            <div>
-	                <button type="button" class="choice-delete-btn" onclick="location.href='empty.ca'">선택삭제</button>
+	                <button type="button" class="choice-delete-btn" onclick="location.href=''">선택삭제</button>
 	            </div>
 	
 	        </div>
@@ -242,14 +243,14 @@
 	                <span class="cart-content3">
 	                    
 	                        <!-- 제목 -->
-	                        <div>상품 제목</div> <br> <!-- ${p.flowerName} -->
+	                        <div> ${p.flowerName}</div> <br>
 	
 	                        <!-- 수령일 -->
 	                        <div>수령일 : 2022-06-21(목)</div><br>
 	
 	                        <!-- 가격 -->
 	                        <!-- <div>가격</div> -->
-	                        <div>6,900원</div><br> <!-- <fmt:formatNumber value="${p.price}" pattern="###,###,###"/> -->
+	                        <div><fmt:formatNumber value="${p.price}" pattern="###,###,###"/>원</div><br>
 	
 	                        <!-- 수량 -, + 옵션 -->
 	                        <form name="form" method="get">

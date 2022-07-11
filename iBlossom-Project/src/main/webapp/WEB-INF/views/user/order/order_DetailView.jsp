@@ -242,7 +242,7 @@
     /* 슬라이드 업/다운 요소 버튼 */
 
     /* 누를 버튼 */
-    #CheckBtn, #OrdererBtn, #SenderBtn {
+    #CheckBtn, #OrdererBtn, #SenderBtn, #SenderBtn {
         width: 700px;
         display: flex; 
         justify-content: space-between;
@@ -468,19 +468,22 @@
 
                                 <!-- 상품 옵션 확인란 -->
                                 <div class="order-check-list"><br>
+                                
+                                		<input type="hidden" id="cartNo" value="">
+                                		<input type="hidden" id="userNo" value="">
+                                		
                                         <!-- 상품 제목 -->
-                                        <li>${ p.productName }</li>
-                                        <input type="hidden" id="productNo" value="${ p.productNo }">
-                                        <input type="hidden" id="productName" value="${ p.productName }">
+                                        <li></li> <!--  -->
+                                        <input type="hidden" id="productNo" value="">
                                         <br>
 
                                         <!-- 수령일 : YYYY-MM-DD(D) -->
-                                        <li>수령일 : ${ }</li>
-                                        <input type="hidden" id="" value="${ }">
+                                        <li>수령일 : </li>
+                                        <!-- <input type="hidden" id="" value=""> -->
                                         <br>
 
                                         <!-- 가격(원) / 수량(개) -->
-                                        <li>${  }원 / ${  }개</li>
+                                        <li> 원 / 개</li>
                                         <br>
                                 </div>
 
@@ -508,7 +511,7 @@
                                         <br>
 
                                         <!-- 수령일 : YYYY-MM-DD(D) -->
-                                        <li>수령일 : 2022-06-21(목)</li><!-- <fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd(D)"/> -->
+                                        <li>수령일 : 2022-06-21(목)</li><!-- <fmt:formatDate value="" pattern="yyyy-MM-dd(D)"/> -->
                                         <br>
 
                                         <!-- 가격(원) / 수량(개) -->
@@ -535,7 +538,7 @@
                                 <p>주문자 정보</p>
                                 <!-- 입력내용 보여지는 태그-->
                                 <p>
-                                    <span>${ loginUser.userName }, &nbsp;&nbsp;${ loginUser.phone }</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
+                                    <span>, &nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
                                 </p>
 
                             </button>
@@ -547,10 +550,10 @@
                         <div id="OrdererBox" class="order-orderer-content" >
 
                             <p>&nbsp;이름</p>
-                            <p class="orderer-name">${ loginUser.userName }</p>
+                            <p class="orderer-name"></p>
 
                             <p>&nbsp;연락처</p>
-                            <p class="orderer-phone">${ loginUser.phone }</p>
+                            <p class="orderer-phone"></p>
 
                             <!-- 안내문구 -->
                             <p class="orderer-guide" style="font-size:small">
@@ -570,9 +573,26 @@
                         <hr>
 
                         <div id="SenderBox">
-                            <p>&nbsp;${ loginUser.userName }</p>
+                            <p>&nbsp;</p>
                         </div>
-                    </div>     
+                    </div>
+                    
+                    <!-- 수령일 (220711 추가) -->
+                    <div>
+                         <div class="order-receive">
+                            <button id="SenderBtn">
+                                <p>수령일</p>
+                            </button>
+                        </div>
+
+                        <hr>
+
+                        <div class="order-receiveDate">
+                        	<input type="text" id="receiveDate" name="deliverAt" required>
+                        </div>
+                    </div>
+                    
+                    <hr>     
                     
                     <!-- 4. 배송지 정보 -->
                     <div>
@@ -820,11 +840,10 @@
                 
             </script>
             
-            <!-------------------------------------------------------------------> 
  
         </div><!-- 1200px 너비 -->
         
-      	</div><!-- 전체 색상 변경 div -->
+      	</div>
       	
     </div>   
 
