@@ -55,7 +55,7 @@ public class OrderController {
 	// 관리자 페이지에서 쓰일 < 페이징 처리 >
 	
 	// 페이징처리를 위한 변수들 셋팅 => PageInfo 객체
-	@RequestMapping("list.or")
+	@RequestMapping("list.or") /**/
 	public String selectOrderList(
 			@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model) {
 

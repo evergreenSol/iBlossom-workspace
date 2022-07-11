@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user_Cart_ListView</title>
+<title>iBlossom | 장바구니</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet">
 <style>
@@ -208,7 +209,7 @@
 	                <input type="radio">&nbsp;전체선택 <span>(1/2)</span>
 	            </div>
 	            <div>
-	                <button type="button" class="choice-delete-btn" onclick="location.href='empty.ca'">선택삭제</button>
+	                <button type="button" class="choice-delete-btn" onclick="location.href=''">선택삭제</button>
 	            </div>
 	
 	        </div>
@@ -242,14 +243,14 @@
 	                <span class="cart-content3">
 	                    
 	                        <!-- 제목 -->
-	                        <div>상품 제목</div> <br> <!-- ${p.flowerName} -->
+	                        <div> ${p.flowerName}</div> <br>
 	
 	                        <!-- 수령일 -->
 	                        <div>수령일 : 2022-06-21(목)</div><br>
 	
 	                        <!-- 가격 -->
 	                        <!-- <div>가격</div> -->
-	                        <div>6,900원</div><br> <!-- <fmt:formatNumber value="${p.price}" pattern="###,###,###"/> -->
+	                        <div><fmt:formatNumber value="${p.price}" pattern="###,###,###"/>원</div><br>
 	
 	                        <!-- 수량 -, + 옵션 -->
 	                        <form name="form" method="get">
@@ -379,36 +380,7 @@
 	        
 	    </div>
   
-    </div>
-    
-    <!-- 
-   
-	    <div style="width: 1200px; height: 800px; margin: auto;">
-	    
-		    <div style="font-weight:700; font-size:34px; margin-bottom:15px; float:left;">&nbsp;쇼핑백</div>
-		    
-		    	<br><br><br>
-		    	
-		    	<hr>
-				    <div style="padding:160px; text-align: center;">
-				    
-		                <div>
-		                    <img src="resources/images/cart_zero_img.png" style="width:50px; height:50px; margin-bottom:14px;">
-		                </div>
-					      
-					    <div style="font-size:large; margin-bottom:27px;">쇼핑백에 담긴 상품이 없습니다</div>
-					    
-					    <div>
-					    	<button class="" type="button" onclick="location.href=''" 
-					    	        style="width:320px; height:50px; background-color:black; color:white; border-radius:3px;">
-					    	쇼핑하러가기</button>
-					    </div>
-				    				    	
-				    </div>
-			   <hr>
-	    </div>
-	    
-	 -->    
+    </div>    
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 

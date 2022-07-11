@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user_Order_DetailView</title>
+<title>iBlossom | 주문/결제</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet">
 <style>
 
@@ -69,15 +70,23 @@
     
     /* 1. 주문내역 확인 2. 주문자 정보 3. 발신인 이름 
        4. 배송지 정보 5. 배송지 추가 6. 결제 수단 7. 카카오페이*/
-    .order-check, .order-orderer, .order-sender, 
-    .order-address, .order-address-add,  .order-payment, .order-kakaopay {
+       
+    /* 결제 수단과 카카오페이는 삭제 했지만 결제수단을 주소 데이터값 뽑는 용도로 사용할 것임 */
+    .order-check, .order-orderer, .order-sender, .order-receiveDate,
+    .order-address, .order-address-add, .order-payment, .order-kakaopay {
         display: flex; 
         justify-content: space-between;
     }
+    
+    /* 결제수단 클래스에 주소 데이터값 뽑는 용도로 사용 */
+    .order-payment {
+    	padding: 10px; 
+    }
 
     /* 배송지 추가, 카카오페이 버튼 */
+    /* 카카오페이 버튼 삭제 */
     .address-btn, .kakao-btn { 
-        padding: 15px; 
+        padding: 18px; 
         width: 200px; 
         border: none; 
         background-color:whitesmoke; 
@@ -140,9 +149,9 @@
     }
     
     /* 주문자 정보 - 이름, 연락처 / 발신인 이름 */
-    .orderer-name, .orderer-phone, #SenderBox>p { 
-        width: 620px;
-        padding:10px; 
+    .orderer-name, .orderer-phone, #SenderBox>p, #receiveBox>p { 
+        width: 660px;
+        padding: 10px; 
         background-color:rgba(241, 241, 241, 0.707); 
     }
 
@@ -233,7 +242,7 @@
     /* 슬라이드 업/다운 요소 버튼 */
 
     /* 누를 버튼 */
-    #CheckBtn, #OrdererBtn, #SenderBtn {
+    #CheckBtn, #OrdererBtn, #SenderBtn, #ReceiveBtn {
         width: 700px;
         display: flex; 
         justify-content: space-between;
@@ -243,7 +252,7 @@
     }
 
     /* 내용 박스 */
-    #CheckBox, #OrdererBox, #SenderBox {
+    #CheckBox, #OrdererBox, #SenderBox, #ReceiveBox {
         width: 600px;
         margin-top: 20px;
         display: none;
@@ -307,7 +316,7 @@
     }
     
     /* 누를 슬라이드 헤드 부분 색상 변경 */
-    .order-check>button, .order-orderer>button, .order-sender>button {
+    .order-check>button, .order-orderer>button, .order-sender>button, .order-receive>button {
         background-color: white;
     }
     
@@ -459,16 +468,22 @@
 
                                 <!-- 상품 옵션 확인란 -->
                                 <div class="order-check-list"><br>
+                                
+                                		<input type="hidden" id="cartNo" value="">
+                                		<input type="hidden" id="userNo" value="">
+                                		
                                         <!-- 상품 제목 -->
-                                        <li>상품 제목</li>
+                                        <li></li> <!--  -->
+                                        <input type="hidden" id="productNo" value="">
                                         <br>
 
                                         <!-- 수령일 : YYYY-MM-DD(D) -->
-                                        <li>수령일 : 2022-06-21(목)</li>
+                                        <li>수령일 : </li>
+                                        <!-- <input type="hidden" id="" value=""> -->
                                         <br>
 
                                         <!-- 가격(원) / 수량(개) -->
-                                        <li>6,900원 / 1개</li>
+                                        <li> 원 / 개</li>
                                         <br>
                                 </div>
 
@@ -496,7 +511,7 @@
                                         <br>
 
                                         <!-- 수령일 : YYYY-MM-DD(D) -->
-                                        <li>수령일 : 2022-06-21(목)</li><!-- <fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd(D)"/> -->
+                                        <li>수령일 : 2022-06-21(목)</li><!-- <fmt:formatDate value="" pattern="yyyy-MM-dd(D)"/> -->
                                         <br>
 
                                         <!-- 가격(원) / 수량(개) -->
@@ -523,7 +538,7 @@
                                 <p>주문자 정보</p>
                                 <!-- 입력내용 보여지는 태그-->
                                 <p>
-                                    <span>아무개, &nbsp;010-0000-0000</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
+                                    <span>ㅇㅇㅇ, &nbsp;&nbsp;010-0000-0000</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
                                 </p>
 
                             </button>
@@ -535,10 +550,10 @@
                         <div id="OrdererBox" class="order-orderer-content" >
 
                             <p>&nbsp;이름</p>
-                            <p class="orderer-name">아무개</p>
+                            <p class="orderer-name"></p>
 
                             <p>&nbsp;연락처</p>
-                            <p class="orderer-phone">010-0000-0000</p>
+                            <p class="orderer-phone"></p>
 
                             <!-- 안내문구 -->
                             <p class="orderer-guide" style="font-size:small">
@@ -558,9 +573,26 @@
                         <hr>
 
                         <div id="SenderBox">
-                            <p>&nbsp;아무개</p>
+                            <p>&nbsp;</p>
                         </div>
-                    </div>     
+                    </div>
+                    
+                    <!-- 수령일 (220711 추가) -->
+                    <div>
+                         <div class="order-receive">
+                            <button id="ReceiveBtn">
+                                <p>수령일</p>
+                            </button>
+                        </div>
+
+                        <hr>
+
+                        <div id="ReceiveBox">
+                        	<input type="text" id="receiveDate" name="deliverAt" required>
+                        </div>
+                    </div>
+                    
+                    <hr>     
                     
                     <!-- 4. 배송지 정보 -->
                     <div>
@@ -576,13 +608,52 @@
                         <div class="order-address-add">
 
                             <!-- 모달의 원리 : 이 버튼 클릭시 data-target에 제시되어있는 해당 아이디의 div요소를 띄워줌 -->
+                            <!--
+                            	<div class="userAddress"><br>
+	                            	<span id="postalAddress"></span>
+	                            	<span id="detailAddress"></span>
+                            	</div>
+                            --> 
                             <button type="button" class="address-btn" data-toggle="modal" data-target="#modal-overlay">
                                 + 배송지 추가
                             </button>
                         
                     </div>
                      
-                    <!-- 우편번호 script -->
+                    
+
+                    </div>
+
+                    <hr> <!------------------------------------------------------------------->
+
+						<div>
+	                        <div class="order-payment">
+	                            <p></p>
+	                        </div>
+	                    </div>
+	                    
+	                <hr>   
+					
+					<!-- 결제수단 & 카카오페이 프론트 삭제 (220709) -->
+                    <!--  
+	                    <div>
+	                        <div class="order-payment">
+	                            <p>&nbsp;&nbsp;결제수단</p>
+	                        </div>
+	                    </div>
+	
+	                    <hr>
+	                    
+	                    <div>
+	                        <div class="order-kakaopay">
+	                            <button class="kakao-btn" type="button">카카오페이</button>
+	                        </div>
+	                    </div>
+					-->
+					
+					<!------------------------------------------------------------------->
+					
+					<!-- 우편번호 script -->
                     <script>
                     
                         function kakaopost() {
@@ -599,27 +670,7 @@
                         }
                         
                     </script>
-
-                    </div>
-
-                    <hr> <!------------------------------------------------------------------->
-
-                    <!-- 6. 결제수단 -->
-                    <div>
-                        <div class="order-payment">
-                            <p>&nbsp;&nbsp;결제수단</p>
-                        </div>
-                    </div>
-
-                    <hr>
-                    
-                    <!-- 7. 카카오페이 -->
-                    <div>
-                        <div class="order-kakaopay">
-                            <button class="kakao-btn" type="button">카카오페이</button>
-                        </div>
-                    </div>
-
+					
                     <br><br>
 
                     <!-- 버튼 두개 -->
@@ -662,7 +713,7 @@
                 <!-- 배송비 -->
                 <div class="order-delivery">
                     <span>배송비</span>
-                    <span>+ 3000원</span>
+                    <span>+ 3,000원</span>
                 </div>
 
                 <!-- 등급 할인 -->
@@ -726,7 +777,9 @@
 
                     <!-- Modal body -->
                     <div class="address-content">
-
+					
+						<!-- placeholder를 나중에 loginUser.XXXX 으로 변경 수신인 default는 로긴한 사람-->
+                        
                         <!-- 이름 -->
                         <input type="text" name="userName" id="userName" size="70" placeholder="이름을 입력해주세요." required><br>
                         <hr>
@@ -787,11 +840,10 @@
                 
             </script>
             
-            <!-------------------------------------------------------------------> 
  
         </div><!-- 1200px 너비 -->
         
-      	</div><!-- 전체 색상 변경 div -->
+      	</div>
       	
     </div>   
 

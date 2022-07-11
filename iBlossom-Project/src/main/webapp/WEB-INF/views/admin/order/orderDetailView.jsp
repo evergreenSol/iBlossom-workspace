@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>admin_Order_Individual order details</title>
+<title>iBlossom | 개별주문내역</title>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link href="resources/css/ldo-admin.css" rel="stylesheet">
 <style>
@@ -68,48 +68,20 @@
 		width: 100%;
 	}
 	
-	
-	/* ------------------------------------------------ */
-
-	/* 페이징 처리 */
-	
-	.pagingArea {
-	   width: fit-content;
-	   margin: auto;
+	/* 이전으로 버튼 */
+	#admin-order-pre-btn {
+		text-decoration: none;
+		color: dimgray;
+		font-size: larger;
+		float: right;
+		margin-right: 100px;
 	}
 	
-	.page-link {
-	   font-size : 14px;
-	   width : 30px;
-	   height: 23px;
-	   background-color : white;
-	   border : 1px solid lightgray;
-	   color : black;
-	   display: inline-block;
-	   margin-left : 10px;
-	   text-decoration : none;
-	   text-align : center;
-	   border-radius : 3px;
-	   padding-top: 5px;
+	/* 이전으로 버튼 호버시 */
+	#admin-order-pre-btn:hover {
+		color: black;
+		font-weight: 600;
 	}
-	
-	.page-link:active:focus, 
-	.page-item:active {
-	   color : #ff2393;
-	}
-	
-	.page-link:hover {
-	   color : #ff2393;
-	}
-	
-	.pagination {
-	   list-style-type : none;
-	}
-	
-	.pagination li {
-	   float : left;
-	}
-	
 
 </style>
 </head>
@@ -155,13 +127,17 @@
                 <!-- 메뉴 -->
                 <ul id="admin-navi">
                     <li><a href="" class="admin-navi-menu">회원관리</a></li>
+                    
                     <li>
-                        <a href="" class="admin-navi-menu" style="font-weight: 700;" >주문정보관리</a>
-                        <ul class="admin-navi-ul">
-                            <li><a href="">전체주문내역</a></li>
-                            <li><a href="">개별주문내역</a></li>
-                        </ul>
+                        <a href="adminList.or" class="admin-navi-menu" style="font-weight: 700;">주문정보관리</a>
+						<!--  회원번호로 정보를 받아야 하기 때문에 필요 없음 ! 
+	                       <ul class="admin-navi-ul">
+	                           <li><a href="adminList.or">전체주문내역</a></li>
+	                           <li><a href="adminDetail.or">개별주문내역</a></li>
+	                       </ul>
+                        -->
                     </li>
+                    
                     <li>
                         <a href="" class="admin-navi-menu">정기구독관리</a>
                         <ul class="admin-navi-ul">
@@ -298,51 +274,17 @@
 	        
 	        </table>
         
+            <br><br><br>
+    
+		    <div>
+		    	<a href="adminList.or" id="admin-order-pre-btn">&lt; 이전으로</a>    	
+		    </div>
+		    
         </div>
 
     </div>
     
-    <br><br><br>
-    
-    	<!------------------------------------------------------------------->
-	
-	    <!-- 페이징 처리 -->
-	        
-	    <div class="pagingArea">
-			<ul class="pagination">
-	
-				<c:choose>
-					<c:when test="${ pi.currentPage eq 1 }">
-						<li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link"
-							href="list.pr?cpage=${ pi.currentPage - 1 }">◀</a></li>
-					</c:otherwise>
-				</c:choose>
-	
-				
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-					<li class="page-item"><a class="page-link"
-						href="list.pr?cpage=${ p }">${ p }</a></li>
-				</c:forEach>
-	
-	
-				<c:choose>
-					<c:when test="${ pi.currentPage eq pi.maxPage }">
-						<li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link"
-							href="list.pr?cpage=${ pi.currentPage + 1 }">▶</a></li>
-					</c:otherwise>
-				</c:choose>
-	
-			</ul>
-			
-		</div>
-		
-		<!-- 여기까지가 페이징 처리 -->
+
 
 	<br><br><br><br><br>
 

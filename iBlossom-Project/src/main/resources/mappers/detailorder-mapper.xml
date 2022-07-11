@@ -4,11 +4,11 @@
 	
 	
 	<resultMap id="dorderResultSet" type="detailorder">
-		<result column="DORDER_NO" property="dorderNo" />
-		<result column="ORDER_NO" property="orderNo" />
-		<result column="PRODUCT_NO" property="productNo" />
-		<result column="ONE_PRICE" property="onePrice" />
-		<result column="ONE_QUANTITY" property="oneQuantity" />
+		<result column="DORDER_NO" property="dorderNo" /><!-- 상세 주문 번호 -->
+		<result column="ORDER_NO" property="orderNo" /><!-- 주문 번호 -->
+		<result column="PRODUCT_NO" property="productNo" /><!-- 상품 번호 -->
+		<result column="ONE_PRICE" property="onePrice" /><!-- 상품 하나 가격 -->
+		<result column="ONE_QUANTITY" property="oneQuantity" /><!-- 상품 하나 수량 -->
 	</resultMap>
 	
 	

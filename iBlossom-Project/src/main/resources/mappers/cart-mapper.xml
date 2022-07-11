@@ -3,31 +3,51 @@
 <mapper namespace="cartMapper">
 
 	<resultMap id="cartResultSet" type="cart">
-		<result column="CART_NO" property="cartNo" />
-		<result column="USER_NO" property="userNo" />
-		<result column="PRODUCT_NO" property="productNo" />
-		<result column="PRODUCT_COUNT" property="productCount" />
-		<result column="PRODUCT_PRICE" property="productPrice" />
+		<result column="CART_NO" property="cartNo" /><!-- 장바구니 번호 -->
+		<result column="USER_NO" property="userNo" /><!-- 회원 번호 -->
+		<result column="PRODUCT_NO" property="productNo" /><!-- 상품 번호 -->
+		<result column="PRODUCT_COUNT" property="productCount" /><!-- 상품 수량 -->
+		<result column="PRODUCT_PRICE" property="productPrice" /><!-- 상품 가격 -->
+		
+		<result column="FLOWER_NAME" property="flowerName" /><!-- 상품 제목 -->
+		<result column="THUMBNAIL" property="thumbnail" /><!-- 썸네일 -->
 	</resultMap>
 	
-	<select id="selectCartList" resultMap="cartResultSet">
-		SELECT CART_NO, USER_NO, PRODUCT_NO, PRODUCT_COUNT, PRODUCT_PRICE
-		FROM CART
-	</select>
 	
+	<!-- 장바구니에서는 select 와 delete 생성 -->
 	
-  	<insert id="insertCartList" parameterType="cart">
-  		INSERT INTO CART(CART_NO
-		                , USER_NO
-		                , PRODUCT_NO
-		                , PRODUCT_COUNT
-		                , PRODUCT_PRICE)
-		VALUES(SEQ_CARNO.NEXTVAL
-		     , #{userNo}
-		     , #{productNo}
-		     , #{productCount}
-		     , #{productPrice})
-  	</insert>
-	
+	<!-- 상품이 담겨져있는 장바 구니 조회용 -->
+  	<select id="selectCart" resultMap="cartResultSet">
+  		SELECT CART_NO, USER_NO, PRODUCT_NO, FLOWER_NAME, PRODUCT_PRICE, PRODUCT_COUNT, THUMBNAIL
+  		FROM CART
+		JOIN PRODUCT USING (PRODUCT_NO)
+		WHERE USER_NO = #{userNo}
+  	</select>
+  	
+  	<!-- 장바구니 행 삭제 -->
+  	<delete id="deleteCartList" parameterType="_int">
+  		DELETE
+  		FROM CART
+  		WHERE CART_NO = #{cartNo}
+  	</delete>
 
+
+
+
+	<!-- 상세페이지 -> cart 연결용 -->
+	
+	<!-- 장바구니 상품 추가용 메소드 -->
+	<insert id="insertCartList" parameterType="cart">
+        INSERT INTO CART(CART_NO
+                      , USER_NO
+                      , PRODUCT_NO
+                      , PRODUCT_COUNT
+                      , PRODUCT_PRICE)
+        VALUES(SEQ_CARNO.NEXTVAL
+              , #{userNo}
+              , #{productNo}
+              , #{productCount}
+              , #{productPrice})
+     </insert>
+	 
 </mapper>
