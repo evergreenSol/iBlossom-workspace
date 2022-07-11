@@ -7,8 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style>
 #pagingArea {
    width: fit-content;
@@ -60,6 +58,7 @@
 </style>
 
 <link href="resources/css/jsa.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 
@@ -154,7 +153,7 @@
 
 		<div style="padding-top: 100px;">
 			<table id="productTable" border="1px solid " align="center">
-				<thead>
+				<thead style="height:50px; font-weight:700;">
 					<th>상품번호</th>
 					<th>카테고리명</th>
 					<th>상품명</th>
@@ -164,7 +163,7 @@
 					<th>상태값</th>
 
 				</thead>
-				<tbody>
+				<tbody style="height:40px;">
 					<c:forEach var="p" items="${ list }">
 						<tr>
 							<td class="pno">${p.productNo}</td>
@@ -185,8 +184,7 @@
 		<script>
             	$(function() {
             		
-            		$("#productTable>tbody>tr").click(function(){
-            			
+            		$("#productTable>tbody tr").on("click", function() {
             			location.href = "detail.pr?pno=" + $(this).children(".pno").text();
             		});
             	});

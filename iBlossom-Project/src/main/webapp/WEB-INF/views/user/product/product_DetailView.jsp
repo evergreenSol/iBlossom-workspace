@@ -7,7 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="resources/css/jsa.css" rel="stylesheet">
-
+<style>
+#price:focus {outline:none;}
+</style>
 
 </head>
 <body onload="init();">
@@ -31,7 +33,7 @@
                 </tr>
 				
                 <tr>
-                    <td class="pp"><input type="hidden" value="${ p.price }">원
+                    <td class="pp"><input type="text"id="price" style="border: none" size="1" readonly value="${ p.price }">원
                     
                         <hr>
                         
@@ -47,8 +49,8 @@
                 <tr>
                     <td class="pp">
 
-                        <p>수령일 : <input type="text" class="datepicker" id="datepicker"></p>
-
+                        <!-- <p>수령일 : <input type="text" class="datepicker" id="datepicker"></p>
+ -->
 
         </div>
         </td>
@@ -162,7 +164,7 @@
             productPrice.value = parseInt(hm.value) * sell_price;
         }  
     </script>
-    <script>
+    <!-- <script>
         $.datepicker.setDefaults({
             dateFormat: 'yy-mm-dd',
             prevText: '<',
@@ -181,7 +183,7 @@
         $(function () {
             $('.datepicker').datepicker();
         });
-    </script>
+    </script> -->
 
     <script>
         $(document).ready(function(){
