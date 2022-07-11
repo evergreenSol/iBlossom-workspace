@@ -1,9 +1,12 @@
 package com.kh.iblossom.member.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.member.model.dao.MemberDao;
 import com.kh.iblossom.member.model.vo.Member;
 
@@ -30,7 +33,12 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int updateMember(Member m) {
 		
-		return memberDao.updateMember(sqlSession, m);
+
+//		return memberDao.updateMember(sqlSession,member);
+		return 0;
+
+//		return memberDao.updateMember(sqlSession, m);
+
 	}
 
 	@Override
@@ -44,8 +52,24 @@ public class MemberServiceImpl implements MemberService{
 		
 		return memberDao.login(sqlSession, m);
 	}
+	
+	@Override
+	   public int selectListCount() {
+	      
+	      return memberDao.selectListCount(sqlSession);
+	   }
 
+	@Override
+	   public ArrayList<Member> selectList(PageInfo pi) {
 
+	      return memberDao.selectList(sqlSession, pi);
+	   }
+
+	// 회원 상세조회
+//	   @Override
+//	   public Member selectMember(int userNo) {
+//	      return memberDao.selectMember(sqlSession, userNo);
+//	   }
 
 	
 }

@@ -842,6 +842,10 @@ div { box-sizing: border-box; }
     transform : scale(1); /* 1배 확대하겠다. */
 }
 
+.admin-navi-ul>a {
+    text-decoration : none;
+}
+
 /* admin 관리자 페이지 메뉴바 속성 */
 #admin-navi {
     list-style-type : none;
