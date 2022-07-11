@@ -395,6 +395,27 @@
                 <button class="order-btn" onclick="getBillingKey(${ subLevel });">결제하기</button>
                 <button class="order-btn" onclick="cancelSubscribe();">취소하기</button>
             </div>
+            
+                       <!-- follow quick menu -->
+            <script>  
+       
+             $(window).scroll(function(){
+                
+                var scrollTop = $(document).scrollTop();
+                
+                if (scrollTop < 180) {
+                 scrollTop = -30; 
+                }
+                
+                $(".order-right").stop();
+                $(".order-right").animate( { "top" : scrollTop }
+                );
+                
+             });
+       
+            </script>
+            
+            
             <input type="hidden" id="userNo" value="${ loginUser.userNo }">
             <input type="hidden" id="userName" value="${ loginUser.userName }">
             <input type="hidden" id="email" value="${ loginUser.email }">

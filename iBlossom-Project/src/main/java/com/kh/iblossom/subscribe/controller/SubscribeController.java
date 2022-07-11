@@ -70,9 +70,6 @@ public class SubscribeController {
 	@RequestMapping("insert.sp")
 	public String insertSubProduct(SubProduct sp, MultipartFile subfile, HttpSession session, Model model) {
 		
-		System.out.println(sp);
-		System.out.println(subfile);
-		
 		if(!subfile.getOriginalFilename().equals("")) {
 			
 			String changeName = saveFile(subfile, session);
@@ -113,7 +110,7 @@ public class SubscribeController {
 	
 	@ResponseBody
 	@RequestMapping(value="update.sp", produces="text/html; charset=UTF-8")
-	public String ajaxUpdateSubProduct(SubProduct sp) {
+	public String updateSubProduct(SubProduct sp) {
 		
 		int result = subscribeService.updateSubProduct(sp);
 
@@ -192,9 +189,7 @@ public class SubscribeController {
 		
 		// 조회 요청
 		ArrayList<Subscribe> list = subscribeService.selectSearchList(pi, map);
-		
-		// System.out.println(list);
-		
+
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
 		
@@ -216,7 +211,7 @@ public class SubscribeController {
 		
 		model.addAttribute("deliverAt",deliverAt); 
 		model.addAttribute("subLevel",subLevel);
-		model.addAttribute("deliverFee", 200); 
+		model.addAttribute("deliverFee", 0); 
 		
 		return "user/subscribe/subscribe_OrderView";	
 
