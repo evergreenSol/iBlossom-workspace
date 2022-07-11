@@ -13,9 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.common.template.Pagination;
 import com.kh.iblossom.product.model.service.ProductService;
@@ -26,7 +28,7 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
-	
+
 	// 메뉴바의 "상품관리" 클릭해서 요청한 경우 => /list.pr (기본적으로 1 번 페이지를 요청하게끔 처리)
 	// 페이징바의 "숫자" 를 클릭해서 요청한 경우 => /list.pr?cpage=요청하는페이지수
 
@@ -52,17 +54,28 @@ public class ProductController {
 		// 게시판 리스트 화면 포워딩
 		return "admin/product/admin_product_ListView";
 	}
-	
-	//꽃마켓 main
+
+	//꽃마켓 main(꽃다발)
 	@RequestMapping("flowerList.pr")
-	public String selectList(Model model) {
+	public String selectflowerList(Model model) {
 
 		ArrayList<Product> list = productService.selectflowerList();
 
-		model.addAttribute("list", list);
+		model.addAttribute("flowerList", list);
 
 		//		// 게시판 리스트 화면 포워딩
 		return "user/product/product_ListView";
+	}
+	
+	//꽃마켓 main(꽃병)
+	@RequestMapping(value="baseList.pr")
+	public String selectListBase(Model model) {
+
+		ArrayList<Product> list = productService.selectListBase();
+		
+		model.addAttribute("baseList", list);
+		return "user/product/product_ListView";
+		
 	}
 
 	/*
@@ -74,14 +87,14 @@ public class ProductController {
 	 */
 
 
-	 // 꽃대/꽃다발 꽃 상세조회
-	 
-		/*
-		 * @RequestMapping("productDetailView.pr") public String productDetailView() {
-		 * 
-		 * return "product/product_DetailView"; }
-		 */
-	
+	// 꽃대/꽃다발 꽃 상세조회
+
+	/*
+	 * @RequestMapping("productDetailView.pr") public String productDetailView() {
+	 * 
+	 * return "product/product_DetailView"; }
+	 */
+
 
 	// 상품 관리(상품 등록) - admin -
 	@RequestMapping("productEnroll.pr")
@@ -136,7 +149,7 @@ public class ProductController {
 
 		return mv;
 	}
-	
+
 	//flower상세보기
 	@RequestMapping("detailList.pr")
 	public ModelAndView selectListProduct(int pno, ModelAndView mv) {
@@ -151,28 +164,20 @@ public class ProductController {
 
 		return mv;
 	}
+
+
 	
-	/*
-	 * // 조합형 꽃 상세조회
-	 * 
-	 * @RequestMapping("combinationDetailList.pr") public String
-	 * combinationLDetailView(int pno, ModelAndView mv) {
-	 * 
-	 * Product p = productService.selectDetailList(pno); mv.addObject("p",
-	 * p).setViewName("product/combination_DetailView");
-	 * 
-	 * return mv; }
-	 */
-	/*
-	 * // 조합형 꽃 상세조회
-	 * 
-	 * @RequestMapping("combinationdetailList.pr") public String
-	 * combinationLDetailView(int pno, ModelAndView mv) {
-	 * 
-	 * return "product/combination_DetailView"; }
-	 */
-	
-	
+	  // 조합형
+	  @RequestMapping("combinationDetailList.pr") 
+	  public String selectDetailList(Model model) {
+	  
+	  ArrayList<Product> list = productService.selectDetailList();
+	  model.addAttribute("list", list);
+	  
+	  return "user/product/combination_DetailView";
+	  
+	  }
+
 
 
 	// 상품관리 (상품 삭제) -admin
@@ -193,7 +198,7 @@ public class ProductController {
 
 			// 상품 리스트 페이지로 url 재요청
 			return "redirect:list.pr";
-			
+
 		} else { // 실패 => 에러문구 담아서 에러페이지로 포워딩
 
 			model.addAttribute("errorMsg", "게시글 삭제 실패");
@@ -247,7 +252,14 @@ public class ProductController {
 		return "admin/product/review_ListView";
 	}
 	
-	// 조합형  
+	/*
+	 * // 조합형
+	 * 
+	 * @RequestMapping("combinationDetailList.pr") public String selectDetailList()
+	 * { return "user/product/combination_DetailView"; }
+	 */
+
+
 
 	/*
 	 * //상품관리 - admin
