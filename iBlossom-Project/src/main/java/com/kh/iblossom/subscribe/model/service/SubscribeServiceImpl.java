@@ -2,6 +2,7 @@ package com.kh.iblossom.subscribe.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,27 +85,6 @@ public class SubscribeServiceImpl implements SubscribeService {
 		return subscribeDao.selectSearchList(sqlSession, pi, map);
 	}
 
-	
-	// 마이페이지 구독 조회 메소드
-	@Override
-	public ArrayList<Subscribe> selectMySubscribeThree(int userNo) {
-		return subscribeDao.selectMySubscribeThree(sqlSession, userNo);
-	}
-
-	@Override
-	public ArrayList<Subscribe> selectMySubscribeSix(int userNo) {
-		return subscribeDao.selectMySubscribeSix(sqlSession, userNo);
-	}
-
-	@Override
-	public ArrayList<Subscribe> selectMySubscribeTwelve(int userNo) {
-		return subscribeDao.selectMySubscribeTwelve(sqlSession, userNo);
-	}
-
-	@Override
-	public ArrayList<Subscribe> selectMySubscribeRegular(int userNo) {
-		return subscribeDao.selectMySubscribeRegular(sqlSession, userNo);
-	}
 
 	// 마이페이지 구독 취소 메소드
 	@Override
@@ -117,5 +97,16 @@ public class SubscribeServiceImpl implements SubscribeService {
 	public int updateDeliverStatus() {
 		
 		return subscribeDao.updateDeliverStatus(sqlSession);
+	}
+	
+	// 마이페이지 구독 조회 메소드
+	@Override
+	public ArrayList<Map<String,String>> selectMySubReceiptId(int userNo) {
+		return subscribeDao.selectMySubReceiptId(sqlSession, userNo);
+	}
+
+	@Override
+	public ArrayList<Subscribe> selectMySubscribe(String receiptId) {
+		return subscribeDao.selectMySubscribe(sqlSession, receiptId);
 	}
 }
