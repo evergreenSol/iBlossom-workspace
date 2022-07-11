@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>admin | 구독회원</title>
 <link href="resources/css/kdh.css" rel="stylesheet">
 <style>
 #pagingArea {
@@ -152,7 +152,7 @@
                 <input type="submit" id="selectbtn" value="검색">
             </form>
         </div>
-
+		<a href="review.do">테스트</a>
         <div style="padding-top: 100px;">
             <table id="productTable" border="1px solid" align="center">
                 <thead>
@@ -239,5 +239,20 @@
 	    </div>
        	
     </div>
+    
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/62caa404b0d10b6f3e7b9fdb/1g7jp1cp0';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+    
 </body>
 </html>

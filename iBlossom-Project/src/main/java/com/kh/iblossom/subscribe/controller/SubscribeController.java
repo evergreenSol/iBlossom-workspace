@@ -30,6 +30,11 @@ public class SubscribeController {
 	
 	@Autowired private SubscribeService subscribeService;
 	 	
+	@RequestMapping("review.do")
+	public String review() {
+		return "admin/subscribe/test";
+	}
+	
 	@RequestMapping("listView.su")
 	public String subscribeListView(Model model) {
 
@@ -39,6 +44,8 @@ public class SubscribeController {
 		
 		return "user/subscribe/subscribe_ListView";
 	}
+	
+
 	
 	@ResponseBody
 	@RequestMapping(value="getSubProduct.su", produces="application/json; charset=UTF-8")
