@@ -18,7 +18,7 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
+
 	@Override
 	public int selectListCount() {
 		
@@ -58,11 +58,19 @@ public class ProductServiceImpl implements ProductService{
 		return productDao.updateProduct(sqlSession, p);
 	}
 
-
 	@Override
 	public ArrayList<Product> selectflowerList() {
 		return productDao.selectflowerList(sqlSession);
 	}
 
+	@Override
+	public ArrayList<Product> selectListBase() {
+		return productDao.selectListBase(sqlSession);
+	}
+	
+	@Override
+	public ArrayList<Product> selectDetailList() {
+		return productDao.selectDetailList(sqlSession);
+	}
 
 }

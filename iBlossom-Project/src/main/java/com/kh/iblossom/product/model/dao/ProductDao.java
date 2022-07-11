@@ -47,7 +47,6 @@ public class ProductDao {
 
 	public int updateProduct(SqlSessionTemplate sqlSession, Product p) {
 
-		System.out.println(p);
 		return sqlSession.update("productMapper.updateProduct", p);
 	}
 
@@ -57,12 +56,23 @@ public class ProductDao {
 		return sqlSession.selectOne("productMapper.selectListProduct", productNo);
 	}
 
-	//상품마켓전체조회(꽃다발/꽃대)
+	//상품마켓전체조회(꽃다발)
 	public ArrayList<Product> selectflowerList(SqlSessionTemplate sqlSession){
 
-		return (ArrayList)sqlSession.selectList("productMapper.selectList");
+		return (ArrayList)sqlSession.selectList("productMapper.selectflowerList");
 	}
 	
-	//
+	//상품조회(조합형)
+	public ArrayList<Product> selectDetailList(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("productMapper.selectDetailList");
+	}
 
+	//상품마켓전체조회(꽃병)
+	public ArrayList<Product> selectListBase(SqlSessionTemplate sqlSession){
+
+		return (ArrayList)sqlSession.selectList("productMapper.selectListBase");
+	}
+	
+	
 }

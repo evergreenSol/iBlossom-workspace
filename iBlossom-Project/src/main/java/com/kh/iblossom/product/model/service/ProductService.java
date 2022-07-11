@@ -26,10 +26,16 @@ public interface ProductService {
 	// 상품 수정 서비스
 	int updateProduct(Product p);
 	
-	//상품 마켓 전체조회(꽃다발/꽃대)
+	//상품 마켓 전체조회(꽃다발)
 	ArrayList<Product> selectflowerList();
 	
-	//상품 상세 조회서비스(flower)
+	//상품 상세 조회서비스(꽃대/꽃병)
 	Product selectListProduct(int productNo);
+	
+	//상품 상세 조회서비스(조합형)
+	ArrayList<Product> selectDetailList();
+	
+	//상품 마켓 전체 조회(꽃병)
+	ArrayList<Product> selectListBase();
 	
 }

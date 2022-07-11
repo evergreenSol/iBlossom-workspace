@@ -12,27 +12,31 @@
 </head>
 <body>
 
-<jsp:include page="../common/header.jsp" />
+<jsp:include page="../../common/header.jsp" />
 
     <br><br><br>
 
     <div id="wrap_detail1">
         <div style="width: 1000px;margin: auto;">
             <table>
+            
                 <tr valign="top">
                     <td rowspan="6"><img src="resources/images/flower3.PNG">
+                   
                         <select id="test5">
+                        
                             <option value='' selected disabled style="text-align: center;">
                                 ---------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ---------
                             </option>
-                            <option value="rose">장미</option>
-                            <option value="sunflower">해바라기</option>
-                            <option value="su">수국</option>
+                        <c:forEach var="v" items ="${list}">
+                            <option value="${v.flowerName }">${v.flowerName }</option>
+                              </c:forEach>
                         </select>
+                      
                     </td>
                     <td class="pp" style="padding-top: 20px;"><b style="font-size:25px;">조합형</b></td>
                 </tr>
-
+				
                 <tr>
                     <td class="pp">
                         <hr>
@@ -47,13 +51,13 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="pp">
+                    <!-- <td class="pp">
 
-                        <p>수령일 : <input type="text" class="datepicker" id="datepicker"></p>
+                        <p>수령일 : <input type="text" class="datepicker" id="datepicker"></p> -->
 
 
         </div>
-        </td>
+        <!-- </td> -->
         </tr>
         <tr>
             <td>
@@ -62,27 +66,40 @@
                     <form name="form" method="get">
                        
                 </div>
+                <br>
+                <div style="margin-left: 20px">
                 배송비:
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 3,000 원<br><br>
-                총 주문금액 : <input type="text"
-                    style="border:none; background-color: rgba(224, 224, 224, 0.001); padding-left: 60px; width: 40px;"
-                    name="sum" size="11" id="sum" readonly value="0">원
+                총 주문금액 :
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              
+                
+                 <input type="text"
+                    style="border:none; font-weight:700; font-size:15px; background-color: rgba(224, 224, 224, 0.001); padding-left: 60px; width: 50px;"
+                    name="sum" size="11" id="sum" readonly value="0">&nbsp;&nbsp;원
+                </div>
                 </form>
             </td>
         </tr>
 
         <tr>
+        
             <td>
+            <br><br>
                 <input type="submit" value="장바구니" id="btn1">
 
             </td>
 
         </tr>
-
+		
         </table>
 
         <!-- <select name="job">
@@ -131,27 +148,7 @@
     <script>
 
     </script>
-    <script>
-        $.datepicker.setDefaults({
-            dateFormat: 'yy-mm-dd',
-            prevText: '<',
-            nextText: '>',
-            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-            showMonthAfterYear: true,
-            yearSuffix: '년',
-            minDate: "+1D", //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-            maxDate: "+1M"
-        });
-
-        $(function () {
-            $('.datepicker').datepicker();
-        });
-    </script>
-
+          
     <script>
         var height = 0;
         var sell_price;
@@ -175,7 +172,7 @@
             }
             height = height + 80;
             shtml = '<div id="countWrite1">'
-            shtml += '<div onclick="removeItem(\'' + name + '\')" id="removeItem"><img src="resources/images/x.png" style="width: 15px;"></div>'
+            shtml += '<div onclick="removeItem(\'' + name + '\')" id="removeItem"><img src="resources/images/x.png" style="width: 15px; float:right"></div>'
             shtml += '<input type="text" id="name_' + name + '" value="' + text + '"  style="border: none; padding-left: 10px; padding-top: 5px;"><br><br>';
             shtml += '<input type=hidden id="sell_price_' + name + '"value="1000">'
             shtml += '<input type="button" value=" - " onclick="del(\'' + name + '\')"style="margin-left: 10px;">'
@@ -312,37 +309,35 @@
         }
     </script>
 
+	
     <script>
-        function test4() {
-            $('#combination_review').css("background-color", "rgba(224, 224, 224, 0.29)");
-            $('#combination_review').css("color", "black");
-            $('#combination_content').css("background-color", "white");
-            $('#combination_content').css("color", "rgb(190, 190, 190)");
-            var combinationreview;
+        function test3() {
+
+            $('#combination_content').css("background-color", "rgba(224, 224, 224, 0.29)");
+            $('#combination_content').css("color", "black");
+            $('#combination_review').css("background-color", "white");
+            $('#combination_review').css("color", "rgb(190, 190, 190)");
+            var combinationContent;
             $('#combinationPhoto').children().remove();
 
-            combinationreview = '<input type="button" id="btn_rv" value="구매평 작성" onclick="modalOn();">';
-            combinationreview += ' <br><br>';
-            combinationreview += ' <hr>';
-            combinationreview += '<div class="reviewbb">';
-            combinationreview += '<img class="img2" src="resources/images/flower1.jpg">';
-            combinationreview += '<text class="text1">진짜 마음에 들어요</text>';
-            combinationreview += '<span class="span1">우와 이쁘다 진짜 제 마음에 속 들어요</span>';
-            combinationreview += '</div>';
-            combinationreview += '<div class="reviewbb">';
-            combinationreview += '<img class="img2" src="resources/images/flower1.jpg">';
-            combinationreview += '<text class="text1">진짜 마음에 들어요</text>';
-            combinationreview += '<span class="span1">우와 이쁘다 진짜 제 마음에 속 들어요</span>';
-            combinationreview += '</div>';
-            combinationreview += '<div class="reviewbb">';
-            combinationreview += '<img class="img2" src="resources/images/flower1.jpg">';
-            combinationreview += '<text class="text1">진짜 마음에 들어요</text>';
-            combinationreview += '<span class="span1">우와 이쁘다 진짜 제 마음에 속 들어요</span>';
-            combinationreview += '</div>';
-            combinationreview += '<br><br><br><br><br>';
+            combinationContent = '<table>';
+            combinationContent += '<c:forEach var="v" items ="${list}">;'
+            combinationContent += '<tr>';
+            combinationContent += '<td>';
+            combinationContent += '<c:forEach var="v" items ="${list}">'
+            combinationContent += '<img src="'${v.}'" class="combination_img">';
+            combinationContent += '</td>';
+            combinationContent += '<tr>';
+            combinationContent += '<td>';
+            combinationContent += '<p>';
+            combinationContent += '수국';
+            combinationContent += '</p>';
+            combinationContent += '</td>';
+            combinationContent += '</tr>';
+            combinationContent += '</c:forEach>';
+            combinationContent += '</table>';
 
-
-            $('#combinationPhoto').append(combinationreview);
+            $('#combinationPhoto').append(combinationContent);
         }
     </script>
 
@@ -425,7 +420,7 @@
         });
     </script>
     
-    <jsp:include page="../common/footer.jsp" />
+    <jsp:include page="../../common/footer.jsp" />
 </body>
 
 </html>
