@@ -1,10 +1,10 @@
 package com.kh.iblossom.product.controller;
 
-import java.util.Date;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -170,14 +170,28 @@ public class ProductController {
 	  // 조합형
 	  @RequestMapping("combinationDetailList.pr") 
 	  public String selectDetailList(Model model) {
-	  
-	  ArrayList<Product> list = productService.selectDetailList();
-	  model.addAttribute("list", list);
-	  
+		  
+		  ArrayList<Product>  list = productService.selectDetailList();
+		  model.addAttribute("list",list);
+		  
 	  return "user/product/combination_DetailView";
 	  
 	  }
-
+	  @ResponseBody
+	  @RequestMapping(value="combinationDetailList", produces="application/json; charset=UTF-8")
+	  public String combinationDetailList(ModelAndView mv) {
+		  System.out.println("a");
+		 // ModelAndView mv = new ModelAndView();
+		  //mv.setView(jsonView);
+		  ArrayList<Product>  list = productService.selectDetailList();
+		  System.out.println(list);
+		  //model.addAttribute("list", list);
+//		  mv.addObject("list1", list[0]);
+//		  mv.addObject("list2", list[2]);
+		  
+		  return new Gson().toJson(list);
+		  
+	  }
 
 
 	// 상품관리 (상품 삭제) -admin
@@ -226,8 +240,35 @@ public class ProductController {
 
 	// 상품관리(상품 수정) -admin
 	@RequestMapping("update.pr")
-	public String updateProduct(Product p, HttpSession session, Model model) {
+	public String updateProduct(Product p, MultipartFile reThumbNail, MultipartFile reContentPhoto, HttpSession session, Model model) {
 
+		// 넘어온 첨부파일이 없을 경우 : filename이 속성값이 빈 문자열
+		// 넘어온 첨부파일이 있을 경우 : filename 속성값에 원본파일명이 들어있음
+		
+		if(!reThumbNail.getOriginalFilename().equals("") && !reContentPhoto.getOriginalFilename().equals("")) { //새로운 첨부파일이 있을경우
+			
+			// 새롭게 첨부된 파일 O, 기존 첨부파일 O
+			if(p.getThumbNail() != null && p.getContentPhoto() != null ) { //기존의 썸네일, 기존의 상세페이지
+				String savePath = session.getServletContext().getRealPath(p.getThumbNail());
+				String savePath1 = session.getServletContext().getRealPath(p.getContentPhoto());
+				new File(savePath).delete();
+				new File(savePath1).delete();
+			}
+			
+			//이 시점에서 서버에 파일 업로드 가능
+			String changeName = saveFile(reThumbNail, session);
+			String changeName1 = saveFile(reContentPhoto, session);
+			
+			// p 에 새로 넘어온 첨부파일에 대한 원본명, 수정명을 필드값으로 수정
+			p.setThumbNail(reThumbNail.getOriginalFilename());
+			p.setContentPhoto(reContentPhoto.getOriginalFilename());
+			
+
+			p.setThumbNail("resources/uploadFiles/" + changeName);
+			p.setContentPhoto("resources/uploadFiles/" + changeName1);
+		}
+		
+		
 		int result = productService.updateProduct(p);
 
 		if(result > 0) { // 성공
