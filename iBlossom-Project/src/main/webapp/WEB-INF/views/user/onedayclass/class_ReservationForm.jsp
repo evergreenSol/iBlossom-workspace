@@ -26,11 +26,11 @@
             <div class='pay-info2'>
                 <div id="pay-content2">주문자 정보</div>
                 <div id="pay-content2_1" name="user_name">${ loginUser.userName }</div>
-                <div id="pay-content2_2" name="phone">${ loginUser.Phone }</div>
-                <div id="pay-content2_3" name="email">${ loginUser.Email }</div>                
+                <div id="pay-content2_2" name="phone">${ loginUser.phone }</div>
+                <div id="pay-content2_3" name="email">${ loginUser.email }</div>                
             </div>            
         </div>
-        
+        <!-- 
         <div id='pay-right'>
             <div class='pay'>
                 <div id="pay-content3">결제수단</div>
@@ -40,10 +40,52 @@
             
             <button type="submit" id="pay-btn" class="">결제하기</button>
         </div>
+         -->
+         
+    <div>
+	    <div id='pay-right'>
+	        <form id='pay-right' class="pay" action="">
+        		<div id="pay-content3">결제수단</div>
+				<div id="pay-content3_1"><input type="radio" style="width:15px;height:15px;border:1px;" checked> 카드결제</div>
+                <div id="pay-content3_2"><input type="checkbox" id="check_1"  name="" />구매조건 확인 및 결제 진행에 동의</div>
+                <br><br>
+                <input type="submit" id="pay-btn"  value="결제하기"/>
+	        </form>
+	    </div>    
+    </div>  
+
+
     </div>
 </div>
         
+     <script type="text/javascript">
+        $(document).ready(function(){
     
+            $("#pay-btn").click(function(){    
+                if($("#check_1").is(":checked") == false){
+                    alert("구매조건에 동의 하셔야 다음 단계로 진행 가능합니다.");
+                    return;
+                }else{
+                    $("#pay-right").submit();
+                }
+            });    
+        });
+    </script>
+
+        
+<!-- 
+        <script type="text/javascript">
+        function CheckForm(Join){
+            
+            //체크박스 체크여부 확인 [하나]
+            var chk1=document.frmJoin.U_checkAgreement1.checked;
+            
+            if(!chk1){
+                alert('약관1에 동의해 주세요');
+                return false;
+            } 
+    	</script>
+ -->    	
         <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

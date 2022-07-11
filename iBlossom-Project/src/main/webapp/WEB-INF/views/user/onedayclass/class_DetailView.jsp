@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,10 +41,12 @@
 			            </select>
 			        </div>
 		        <br><br><br>
-		        <div>
-		            <button type="submit" id="class-res-btn">예약하기</button>
+	        	<div>
+		            <button type="submit" id="class-res-btn" onclick="reservation()">예약하기</button>
 		        </div>
 	        </form>
+
+	        
 	    </div>
 	    <br><br><br><br><br><br><br><br>
 	    <div id="image2">
@@ -52,6 +55,21 @@
 	    </div>     
      </div>
      <br><br>
+     
+     <script>
+     	function reservation(){
+     		let loginUser = "${loginUser}";
+     		if (loginUser == "") {
+     				alert("예약페이지는 로그인 후 사용하실 수 있습니다.");
+     				location.herf="/loginForm.me";
+     		} else {
+     				location.herf="/classDetail.cl";
+     		}
+     	}
+     </script>
+      
+
+
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
