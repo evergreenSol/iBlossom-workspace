@@ -32,6 +32,7 @@
 		     , #{userNo})
   	</insert>
   	
+
   	
   	<insert id="insertAnswer" parameterType="qna">
   		INSERT INTO QNA(ANSWER
@@ -51,5 +52,12 @@
 		FROM QNA
 		WHERE ANSWER_STATUS = 'Y'
 	</select>
+
+  	<select id="selectMyQna" parameterType="_int" resultMap="qnaResultSet">
+  		SELECT QNA_NO, QNA_TITLE, QNA_CONTENT, QNA_DATE, ANSWER, ANSWER_DATE, ANSWER_STATUS
+  		  FROM QNA
+  		 WHERE USER_NO = #{userNo}
+  	</select>
+
 
 </mapper>

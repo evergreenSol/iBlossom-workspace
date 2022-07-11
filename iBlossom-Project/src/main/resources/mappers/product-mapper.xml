@@ -16,66 +16,87 @@
 		<result column="TAG" property="tag" />
 		<result column="STATUS" property="status" />
 	</resultMap>
-	
+
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*)
-		FROM PRODUCT
+		FROM
+		PRODUCT
 		WHERE STATUS = 'Y'
 	</select>
 
-  	<select id="selectList" resultMap="productResultSet">
-  		SELECT PRODUCT_NO, CATEGORY_NAME, FLOWER_NAME, PRICE, 
-		       TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD') "ENROLL_DATE", TAG,STATUS
-		FROM PRODUCT
-		WHERE STATUS = 'Y' 
+	<select id="selectList" resultMap="productResultSet">
+		SELECT PRODUCT_NO, CATEGORY_NAME, FLOWER_NAME, PRICE, THUMBNAIL,
+		TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD') "ENROLL_DATE", TAG,STATUS
+		FROM
+		PRODUCT
+		 WHERE STATUS = 'Y'
 		ORDER BY ENROLL_DATE DESC, PRODUCT_NO DESC
-  	</select>
+	</select>
 
-<!-- 상품 추가  -->
-  	<insert id="insertProduct" parameterType="Product">
-  		INSERT INTO PRODUCT(PRODUCT_NO
-		                , CATEGORY_NAME
-		                , FLOWER_NAME
-		                , PRICE
-		                , SALES_AMOUNT
-		                , THUMBNAIL
-		                , CONTENT_PHOTO
-		                , FLOWER_INFO
-		                , TAG)
+	<!-- 상품 추가 -->
+	<insert id="insertProduct" parameterType="Product">
+		INSERT INTO PRODUCT(PRODUCT_NO
+		, CATEGORY_NAME
+		, FLOWER_NAME
+		, PRICE
+		, SALES_AMOUNT
+		, THUMBNAIL
+		, CONTENT_PHOTO
+		, FLOWER_INFO
+		, TAG)
 		VALUES(SEQ_PNO.NEXTVAL
-			 , #{categoryName}
-		     , #{flowerName}
-		     , #{price}
-		     , #{salesAmount}
-		     , 'path'
-		     , 'path'
-		     , #{flowerInfo}
-		     , #{tag})
-  	</insert>
-  	
-  	<!-- 상품 상세보기 -->
-  	  	<select id="selectProduct" parameterType="_int" resultMap="productResultSet">
-		SELECT PRODUCT_NO, CATEGORY_NAME,FLOWER_NAME,THUMBNAIL,CONTENT_PHOTO,FLOWER_INFO,PRICE, TAG
+		, #{categoryName}
+		, #{flowerName}
+		, #{price}
+		, #{salesAmount}
+		, #{thumbNail}
+		, #{contentPhoto}
+		, #{flowerInfo}
+		, #{tag})
+	</insert>
+
+	<!-- 상품 상세보기(admin,꽃다발/꽃대)-->
+	<select id="selectProduct" parameterType="_int"
+		resultMap="productResultSet">
+		SELECT PRODUCT_NO,
+		CATEGORY_NAME,FLOWER_NAME,THUMBNAIL,CONTENT_PHOTO,FLOWER_INFO,PRICE,TAG
 		FROM PRODUCT
 		WHERE PRODUCT_NO = #{productNo}
-  	</select>
-  	
-  	<!-- 상품 삭제 -->
-  	  	<update id="deleteProduct" parameterType="_int">
-  		UPDATE PRODUCT
-  		   SET STATUS ='N'
-  		 WHERE PRODUCT_NO = #{productNo}
-  	</update>
-  	
-  	<!-- 상품 수정 -->
-  	  	<update id="updateProduct" parameterType="product">
-  		UPDATE PRODUCT
-  		   SET CATEGORY_NAME = #{categoryName}
-  		     , FLOWER_NAME = #{flowerName}
-  		     , THUMBNAIL = 'path'
-  		     , CONTENT_PHOTO = 'path'
-  		     , PRICE = #{price}
-  		     , TAG = #{tag}
-  		  WHERE PRODUCT_NO = #{productNo}
-  	</update>
+	</select>
+
+	<!-- 상품 삭제 -->
+	<update id="deleteProduct" parameterType="_int">
+		UPDATE PRODUCT
+		SET STATUS ='N'
+		WHERE PRODUCT_NO = #{productNo}
+	</update>
+
+	<!-- 상품 수정 -->
+	<update id="updateProduct" parameterType="product">
+		UPDATE PRODUCT
+		SET CATEGORY_NAME = #{categoryName}
+			, FLOWER_NAME = #{flowerName}
+			, THUMBNAIL = #{thumbNail}
+			, CONTENT_PHOTO = #{contentPhoto}
+			, FLOWER_INFO = #{flowerInfo}
+			, PRICE = #{price}
+			, TAG = #{tag}
+		WHERE PRODUCT_NO = #{productNo}
+	</update>
+
+	<!--상품 상세보기(꽃다발/꽃대)-->
+	<select id="selectflowerProduct" parameterType="_int" resultMap="productResultSet">
+		SELECT PRODUCT_NO,
+		CATEGORY_NAME,FLOWER_NAME,THUMBNAIL,CONTENT_PHOTO,FLOWER_INFO,PRICE, TAG
+		FROM PRODUCT
+		WHERE PRODUCT_NO = #{productNo}
+	</select>
+	
+	<!-- 상품 상세보기(조합형)-->
+	<select id="selectDetailList" parameterType="_int" resultMap="productResultSet">
+		SELECT PRODUCT_NO,
+		CATEGORY_NAME,FLOWER_NAME,THUMBNAIL,CONTENT_PHOTO,FLOWER_INFO,PRICE,TAG
+		FROM PRODUCT
+		WHERE PRODUCT_NO = #{productNo}
+	</select>
 </mapper>

@@ -102,19 +102,26 @@
 					<input type="text" id="admin_tag_name" name="tag"
 						value="${p.tag}">
 
-					<h3>썸네일</h3>
+					<br><br><br>
 					<table class="admin_product">
 						<tr>
-							<td><img id="admin_product-img"
-								src="resources/images/flower 2.PNG"></td>
-							<td><img id="admin_product-img"
-								src="resources/images/flower 2.PNG"></td>
+							<h3 style="display:inline-block;">썸네일</h3>
+							<td><lable for="thumbnail"></lable> 
+							<input type="file" name="reThumbNail" id="admin_product-img"></td>
+							
+							<h3 style="display:inline-block;margin-left:200px">상세사진</h3>
+							<td>
+							<lable for="contentPhoto"></lable>
+							<input type="file" name="reContentPhoto" id="admin_product-img"></td> 
+						
+							
+							
 							<td width="60%"><textarea id="admin_product-description"
-									name="product_description" ></textarea></td>
+									name="product_description">${p.flowerInfo }</textarea></td>
 						</tr>
 					</table>
 					<h3>가격</h3>
-					<input type="text" id="admin_price" name="price" value="${p.price}" >
+					<input type="text" id="admin_price" name="price" value="${p.price}">
 					<span>원</span> <br> <br>
 					<hr>
 					<br>

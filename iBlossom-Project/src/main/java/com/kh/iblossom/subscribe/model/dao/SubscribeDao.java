@@ -1,10 +1,14 @@
 package com.kh.iblossom.subscribe.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.subscribe.model.vo.SubProduct;
 import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
@@ -12,10 +16,9 @@ import com.kh.iblossom.subscribe.model.vo.Subscribe;
 public class SubscribeDao {
 	
 	// 구독용 상품 리스트 조회
-	public ArrayList<SubProduct> selectList(SqlSessionTemplate sqlSession) {
-		
+	public ArrayList<SubProduct> selectSubProductList(SqlSessionTemplate sqlSession) {
 	
-	  return (ArrayList)sqlSession.selectList("subscribeMapper.selectList"); 
+	  return (ArrayList)sqlSession.selectList("subscribeMapper.selectSubProductList"); 
 	 }
 	 
 	// 구독용 상품 추가
@@ -49,11 +52,66 @@ public class SubscribeDao {
 		return sqlSession.insert("subscribeMapper.insertSubscribe", s);
 	}
 	
+	public int selectListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("subscribeMapper.selectListCount");
+	}
+	
+	public ArrayList<Subscribe> selectSubMembertList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int limit = pi.getBoardLimit();
+		int offset = (pi.getCurrentPage() - 1) * limit;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("subscribeMapper.selectSubMemberList", null, rowBounds); 
+	}
+
+	public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		
+		return sqlSession.selectOne("subscribeMapper.selectSearchCount", map);
+	}
+
+	public ArrayList<Subscribe> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi,
+			HashMap<String, String> map) {
+		
+		int limit = pi.getBoardLimit();
+		int offset = (pi.getCurrentPage() - 1) * limit;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("subscribeMapper.selectSearchList", map, rowBounds);
+	}
+	
 	// 마이페이지 구독조회
-	public ArrayList<Subscribe> selectMySubscribe(SqlSessionTemplate sqlSession, int userNo) {
+	public ArrayList<Subscribe> selectMySubscribeThree(SqlSessionTemplate sqlSession, int userNo) {
 		
-		ArrayList<Subscribe> list = new ArrayList<Subscribe>();
+		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribeThree", userNo);
+	}
+
+	public ArrayList<Subscribe> selectMySubscribeSix(SqlSessionTemplate sqlSession, int userNo) {
+			
+			return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribeSix", userNo);
+		}
+	
+	public ArrayList<Subscribe> selectMySubscribeTwelve(SqlSessionTemplate sqlSession, int userNo) {
 		
-		return list;
+		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribeTwelve", userNo);
+	}
+	
+	public ArrayList<Subscribe> selectMySubscribeRegular(SqlSessionTemplate sqlSession, int userNo) {
+		
+		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribeRegular", userNo);
+	}
+	
+	// 마이페이지 구독 취소
+	public int cancelMySubList(SqlSessionTemplate sqlSession, String receiptId) {
+		
+		return sqlSession.update("subscribeMapper.cancelMySubList", receiptId);
+	}
+	
+	public int updateDeliverStatus(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.update("subscribeMapper.updateDeliverStatus", null);
 	}
 }

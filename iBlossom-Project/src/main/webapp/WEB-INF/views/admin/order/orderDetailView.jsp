@@ -5,7 +5,113 @@
 <head>
 <meta charset="UTF-8">
 <title>admin_Order_Individual order details</title>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link href="resources/css/ldo-admin.css" rel="stylesheet">
+<style>
+
+	/* 개별 주문 내역 */
+	
+	/* 개별주문내역 - table */
+	.admin-order-detail-table {
+	    margin: auto; /* 표 중간 */
+	    text-align: center; /* 글자 가운데 정렬 */
+	    border-collapse: collapse; /* 테두리 사이의 간격을 없애고 싶다면 */
+	    width: 1000px;
+	}
+	
+	/* 개별주문내역 - td 전체 */
+	.admin-order-detail-table>tbody>tr>td {
+	    border: 1px solid rgba(226, 226, 226, 0.982);
+	    padding: 18px;
+	    font-size: small;
+	}
+	
+	/* 개별주문내역 - table > 머리 */
+	.admin-table-head {
+	    /*
+	    background-color: #86848481;
+	    color : black;
+	    */
+	    background-color: #444444;
+	    color : white;
+	    width : 70px;
+	    font-weight: bold;
+	}
+	
+	/* 개별주문내역 - table > 내용 */
+	.admin-table-content {
+	    width: 300px;
+	}
+	
+	/* 개별주문내역 - table 머리말 */
+	.table-caption { 
+	    text-align: left;
+	    margin-bottom: 10px;
+	    font-weight: bold;
+	    font-size: large;
+	}
+	
+	/* 개별주문내역 - 상세정보 table 헤드 */
+	.detail-th>th {
+	    padding: 18px;
+	    font-size: small;
+	}
+	
+	/* 개별주문내역 - 상세정보 너비 조정 */
+	.detail-th-1 { width: 80px; }
+	.detail-th-2 { width: 130px; }
+	.detail-th-4 { width: 60px; }
+	.detail-th-5 { width: 100px; }
+	
+	/* 테이블 감싸는 div */
+	.detail-wrap {
+		width: 100%;
+	}
+	
+	
+	/* ------------------------------------------------ */
+
+	/* 페이징 처리 */
+	
+	.pagingArea {
+	   width: fit-content;
+	   margin: auto;
+	}
+	
+	.page-link {
+	   font-size : 14px;
+	   width : 30px;
+	   height: 23px;
+	   background-color : white;
+	   border : 1px solid lightgray;
+	   color : black;
+	   display: inline-block;
+	   margin-left : 10px;
+	   text-decoration : none;
+	   text-align : center;
+	   border-radius : 3px;
+	   padding-top: 5px;
+	}
+	
+	.page-link:active:focus, 
+	.page-item:active {
+	   color : #ff2393;
+	}
+	
+	.page-link:hover {
+	   color : #ff2393;
+	}
+	
+	.pagination {
+	   list-style-type : none;
+	}
+	
+	.pagination li {
+	   float : left;
+	}
+	
+
+</style>
 </head>
 <body>
 
@@ -17,8 +123,8 @@
 
             <!-- 로고 -->
             <div id="admin-logo-div">
-                <a href="" id="admin-logo-a">
-                    <img src="img/iBlossom_logo_black.png">
+                <a href="${ pageContext.request.contextPath }/" id="admin-logo-a">
+                    <img src="resources/images/iBlossom_logo_black.png">
                  </a>
              </div>
 
@@ -93,104 +199,150 @@
 
         <br>
 
-         <!-- 주문정보 영역 -->
-         <table class="admin-order-detail-table">
-
-            <caption class="table-caption">주문정보</caption>
-            
-            <tr>
-                <td class="admin-table-head">주문번호</td>
-                <td class="admin-table-content">20220621001</td>
-                <td class="admin-table-head">주문자</td>
-                <td class="admin-table-content">아무개</td>
-            </tr>
-
-            <tr>
-                <td class="admin-table-head">주문일자</td>
-                <td class="admin-table-content">2022-06-21</td>
-                <td class="admin-table-head">주문상태</td>
-                <td class="admin-table-content">결제완료</td>
-            </tr>
-
-        </table>
+		<div class="detail-wrap">
+				
+	         <!-- 주문정보 영역 -->
+	         <table class="admin-order-detail-table">
+	
+	            <caption class="table-caption">주문정보</caption>
+	            
+	            <tr>
+	                <td class="admin-table-head">주문번호</td>
+	                <td class="admin-table-content">1</td>
+	                <td class="admin-table-head">주문자</td>
+	                <td class="admin-table-content">아무개</td>
+	            </tr>
+	
+	            <tr>
+	                <td class="admin-table-head">주문일자</td>
+	                <td class="admin-table-content">2022-06-21</td>
+	                <td class="admin-table-head">주문상태</td>
+	                <td class="admin-table-content">결제완료</td>
+	            </tr>
+	
+	        </table>
+	        
+	        <br><br>
+	
+	        <!-- 배송정보 영역 -->
+	        <table class="admin-order-detail-table">
+	
+	            <caption class="table-caption">배송정보</caption>
+	            
+	            <tr>
+	                <td class="admin-table-head">배송주소</td>
+	                <td class="admin-table-content">서울시 영등포구</td>
+	                <td class="admin-table-head">연락처</td>
+	                <td class="admin-table-content">010-0000-0000</td>
+	            </tr>
+	
+	        </table>
+	        
+	        <br><br>
+	
+	        <!-- 결제정보 영역 -->
+	        <table class="admin-order-detail-table">
+	
+	            <caption class="table-caption">결제정보</caption>
+	            
+	            <tr>
+	                <td class="admin-table-head">주문금액</td>
+	                <td class="admin-table-content">31,800원</td>
+	                <td class="admin-table-head">배송비</td>
+	                <td class="admin-table-content">0원</td>
+	            </tr>
+	
+	        </table>
+	        
+	        <br><br>
+	
+	        <!-- 상세정보 영역 -->
+	        <table class="admin-order-detail-table">
+	            
+	            <caption class="table-caption">상세정보</caption>
+	            
+	            <tr class="admin-table-head detail-th">
+	                <th class="detail-th-1">상품번호</th>
+	                <th class="detail-th-2">카테고리</th>
+	                <th class="detail-th-3">상품명</th>
+	                <th class="detail-th-4">수량</th>
+	                <th class="detail-th-5">가격</th>
+	            </tr>
+	
+	            <!-- 1 -->
+	            <tr class="admin-table-content">
+	                <td>001</td>
+	                <td>꽃다발</td>
+	                <td>프리지아</td>
+	                <td>1개</td>
+	                <td>18,000원</td>
+	            </tr>
+	
+	            <!-- 2 -->
+	            <tr class="admin-table-content">
+	                <td>001</td>
+	                <td>꽃다발</td>
+	                <td>프리지아</td>
+	                <td>1개</td>
+	                <td>18,000원</td>
+	            </tr>
+	
+	            <!-- 3 -->
+	            <tr class="admin-table-content">
+	                <td>001</td>
+	                <td>꽃다발</td>
+	                <td>프리지아</td>
+	                <td>1개</td>
+	                <td>18,000원</td>
+	            </tr>
+	        
+	        </table>
         
-        <br>
-
-        <!-- 배송정보 영역 -->
-        <table class="admin-order-detail-table">
-
-            <caption class="table-caption">배송정보</caption>
-            
-            <tr>
-                <td class="admin-table-head">배송주소</td>
-                <td class="admin-table-content">서울시 영등포구</td>
-                <td class="admin-table-head">연락처</td>
-                <td class="admin-table-content">010-0000-0000</td>
-            </tr>
-
-        </table>
-        
-        <br>
-
-        <!-- 결제정보 영역 -->
-        <table class="admin-order-detail-table">
-
-            <caption class="table-caption">결제정보</caption>
-            
-            <tr>
-                <td class="admin-table-head">주문금액</td>
-                <td class="admin-table-content">31,800원</td>
-                <td class="admin-table-head">배송비</td>
-                <td class="admin-table-content">0원</td>
-            </tr>
-
-        </table>
-        
-        <br>
-
-        <!-- 상세정보 영역 -->
-        <table class="admin-order-detail-table">
-            
-            <caption class="table-caption">상세정보</caption>
-            
-            <tr class="admin-table-head detail-th">
-                <th class="detail-th-1">상품번호</th>
-                <th class="detail-th-2">카테고리</th>
-                <th class="detail-th-3">상품명</th>
-                <th class="detail-th-4">수량</th>
-                <th class="detail-th-5">가격</th>
-            </tr>
-
-            <!-- 1 -->
-            <tr class="admin-table-content">
-                <td>001</td>
-                <td>꽃다발</td>
-                <td>프리지아</td>
-                <td>1개</td>
-                <td>18,000원</td>
-            </tr>
-
-            <!-- 2 -->
-            <tr class="admin-table-content">
-                <td>001</td>
-                <td>꽃다발</td>
-                <td>프리지아</td>
-                <td>1개</td>
-                <td>18,000원</td>
-            </tr>
-
-            <!-- 3 -->
-            <tr class="admin-table-content">
-                <td>001</td>
-                <td>꽃다발</td>
-                <td>프리지아</td>
-                <td>1개</td>
-                <td>18,000원</td>
-            </tr>
-        
-        </table>
+        </div>
 
     </div>
+    
+    <br><br><br>
+    
+    	<!------------------------------------------------------------------->
+	
+	    <!-- 페이징 처리 -->
+	        
+	    <div class="pagingArea">
+			<ul class="pagination">
+	
+				<c:choose>
+					<c:when test="${ pi.currentPage eq 1 }">
+						<li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link"
+							href="list.pr?cpage=${ pi.currentPage - 1 }">◀</a></li>
+					</c:otherwise>
+				</c:choose>
+	
+				
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<li class="page-item"><a class="page-link"
+						href="list.pr?cpage=${ p }">${ p }</a></li>
+				</c:forEach>
+	
+	
+				<c:choose>
+					<c:when test="${ pi.currentPage eq pi.maxPage }">
+						<li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link"
+							href="list.pr?cpage=${ pi.currentPage + 1 }">▶</a></li>
+					</c:otherwise>
+				</c:choose>
+	
+			</ul>
+			
+		</div>
+		
+		<!-- 여기까지가 페이징 처리 -->
 
 	<br><br><br><br><br>
 

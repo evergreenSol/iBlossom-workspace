@@ -15,8 +15,8 @@
 		FROM CART
 	</select>
 	
-	<!-- 
-  	<insert id="insertCartList" parameterType="">
+	
+  	<insert id="insertCartList" parameterType="cart">
   		INSERT INTO CART(CART_NO
 		                , USER_NO
 		                , PRODUCT_NO
@@ -28,6 +28,6 @@
 		     , #{productCount}
 		     , #{productPrice})
   	</insert>
-	 -->
+	
 
 </mapper>

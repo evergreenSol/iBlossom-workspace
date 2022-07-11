@@ -20,7 +20,7 @@
      
     /* 왼쪽 섹션 */ 
     .cart-left {
-        width: 60%;
+        width: 65%;
         height: 100%;
         float: left;
         box-sizing: border-box;
@@ -28,7 +28,7 @@
 
     /* 오른쪽 섹션 */
     .cart-right {
-        width: 36%;
+        width: 33%;
         height: 100%;
         float: right;
         box-sizing: border-box;
@@ -44,22 +44,27 @@
         display: flex; 
         justify-content: space-between; 
         margin-bottom: 5px;
+        font-weight: 500; 
     }
  
     /* 선택삭제 버튼 */
     .choice-delete-btn { 
-        background-color: whitesmoke; 
+        background-color: white;
         border: none; 
-        padding: 6px; 
-        width: 70px; 
-        font-weight: bold;
+        padding: 5px; 
+        width: 65px; 
+        font-weight: 500;
         font-size: small;
         margin-bottom: 0.1cm;
         border-radius: 3px;
+        color: gray;
     }
     
+    /* 선택삭제 버튼 호버시 */
     .choice-delete-btn:hover {
     	cursor: pointer;
+		font-weight: 600;
+		color: black;
     }
 
     /* 장바구니 메뉴바 */
@@ -69,14 +74,16 @@
         justify-content: space-between;
         
         /* 스타일 */
-        background-color: lightgray;
-        padding: 10px; 
+        background-color: whitesmoke; /*lightgray*/
+        padding: 15px;
+        font-weight: 500; 
     }
 
     /* 장바구니 메뉴바 두개 항목 비율 */
     .cart-menu1 { 
-	    flex-basis: 20%; 
+	    flex-basis: 38%; 
 	    margin:auto; 
+	    
     }
     .cart-menu2 { 
     	flex-basis: 16%;
@@ -86,10 +93,28 @@
     .cart-content { 
         display: flex; 
         justify-content: space-between; 
-        padding: 50px;
+        padding: 45px;
         height: 340px;
     }
     
+    /* 라디오 버튼 세로 정렬 */
+    .cart-content1 {
+	     line-height: 230px;
+	     margin-left: -30px;
+    }
+    
+    /* 이미지 감싸는 div */
+    .cart-content2 {
+     	margin-left: -40px;
+    }
+    
+    /* 상세옵션 내용 */
+    .cart-content3 {
+    	margin-top:30px; 
+    	line-height: 20px;
+    	margin-left: -40px;
+    }  
+        
     /* 수량 버튼 */
     .cart-num-btn { 
 	    background-color: whitesmoke; 
@@ -97,12 +122,7 @@
 	    font-weight: 600; 
 	    width:25px; 
 	    height: 25px;
-    }
-    
-    /* 상세옵션 내용 */
-    .cart-content3 {
-    	margin-top:30px; 
-    	line-height: 20px;
+	    border-radius: 3px;
     }
     
     /* 총주문금액 X 마우스 hover */
@@ -185,10 +205,10 @@
 	        <div class="cart-choice">
 	
 	            <div>
-	                <input type="radio">전체선택(1/2)
+	                <input type="radio">&nbsp;전체선택 <span>(1/2)</span>
 	            </div>
 	            <div>
-	                <button type="button" class="choice-delete-btn" onclick="">선택삭제</button>
+	                <button type="button" class="choice-delete-btn" onclick="location.href='empty.ca'">선택삭제</button>
 	            </div>
 	
 	        </div>
@@ -209,7 +229,7 @@
 	            <div class="cart-content">
 	
 	                <!-- 장바구니 라디오 버튼 -->
-	                <p class="cart-content1" style="line-height: 200px;">
+	                <p class="cart-content1">
 	                    <input type="radio">
 	                </p>
 	
@@ -238,7 +258,7 @@
 	                              <input type= "hidden" name="sell_price" value="6900">
 	                              <input type="button" value=" - " onclick="del();" class="cart-num-btn">
 	                              <input type="text" name="amount" value="1" onchange="change();" 
-	                              	     style="width:25px; height:20px;">
+	                              	     style="width:25px; height:20px; border-radius:3px; border:1px solid; text-align:center;">
 	                              <input type="button" value=" + " onclick="add();" class="cart-num-btn">
 	  
 	                        </form>
@@ -325,7 +345,7 @@
 		        <!-- 배송비 -->
 		        <div class="cart-price2">
 		            <span>배송비</span>
-		            <span>+ 0원</span>
+		            <span>+ 3000원</span>
 		        </div>
 		
 		        <!-- 구분선 -->
@@ -334,7 +354,7 @@
 		        <!-- 총 결제 금액 -->
 		        <div class="total-price">
 		            <span>총 결제 금액</span>
-		            <span>31,800원</span>
+		            <span>34,800원</span>
 		        </div>
 		
 	        </div>
@@ -346,7 +366,7 @@
 	
 	            <div class="cart-div">
 	            <li>- 장바구니에 담긴 상품이 품절되거나, 수령일에 구매가 불가능한 상태가 되면 장바구니에 상품은 삭제됩니다.</li>
-	            <li>- 구매 금액 합산 30,000원 이상일 경우, 배송비는 무료입니다. (단, [정기구독], [무료배송] 상품은 구매금액 합산에 포함되지 않습니다.)</li>
+	            <li>- 구매 금액 합산 100,000,000원 이상일 경우, 배송비는 무료입니다. (단, [정기구독], [무료배송] 상품은 구매금액 합산에 포함되지 않습니다.)</li>
 	            <li>- [정기구독] 상품의 첫 번째 발송일에 일반 택배 상품을 함께 구매하실 경우, 중복 배송비는 부분 환불 처리해 드립니다.</li>
 	            </div>
 	

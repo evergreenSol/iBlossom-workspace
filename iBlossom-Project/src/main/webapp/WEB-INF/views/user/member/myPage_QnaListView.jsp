@@ -38,11 +38,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <c:forEach var="q" items="${ list }">
                                     <tr height="40">
-                                        <td>2022-05-10</td>
-                                        <td>꽃은 언제 오난용</td>
-                                        <td>답변완료</td>
+                                        <td>${ q.qnaDate }</td>
+                                        <td>${ q.qnaTitle }</td>
+                                        
+                                        <c:choose>
+                                        	<c:when test="${ q.answerStatus eq 'Y'}">
+                                        		<td>답변완료</td>
+                                        	</c:when>
+                                        	<c:otherwise>
+                                        		<td>답변대기</td>
+                                        	</c:otherwise>
+                                        </c:choose>
                                     </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>

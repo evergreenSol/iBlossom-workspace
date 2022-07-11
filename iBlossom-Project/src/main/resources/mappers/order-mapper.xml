@@ -4,23 +4,34 @@
 
 
 	<resultMap id="orderResultSet" type="order">
-		<result column="ORDER_NO" property="orderNo" />
-		<result column="USER_NO" property="userNo" />
-		<result column="TOTAL_PRICE" property="totalPrice" />
-		<result column="ORDER_DATE" property="orderDate" />
-		<result column="RECEIVE_DATE" property="receiveDate" />
-		<result column="RECEIVE_USER" property="receiveUser" />
-		<result column="RECEIVE_PHONE" property="receivePhone" />
-		<result column="ORDER_ADDRESS" property="orderAddress" />
-		<result column="POSTCODE" property="postcode" />
-		<result column="ORDER_STATUS" property="orderStatus" />
-		<result column="DELIVERY_STATUS" property="deliveryStatus" />
-		<result column="RECEIPT_ID" property="receiptId" />
+		<result column="ORDER_NO" property="orderNo"/><!-- 주문번호 -->
+		<result column="USER_NO" property="userNo"/><!-- 회원번호 -->
+		<result column="TOTAL_PRICE" property="totalPrice"/><!-- 총결제금액 -->
+		<result column="ORDER_DATE" property="orderDate"/><!-- 주문일 -->
+		<result column="RECEIVE_DATE" property="receiveDate"/><!-- 수령일 -->
+		<result column="RECEIVE_USER" property="receiveUser"/><!-- 수령자 -->
+		<result column="RECEIVE_PHONE" property="receivePhone"/><!-- 수령자 전화번호 -->
+		<result column="ORDER_ADDRESS" property="orderAddress"/><!-- 배송지 -->
+		<result column="POSTCODE" property="postcode"/><!-- 우편번호 -->
+		<result column="ORDER_STATUS" property="orderStatus"/><!-- 주문상태 -->
+		<result column="DELIVERY_STATUS" property="deliveryStatus"/><!-- 배송상태 -->
+		<result column="RECEIPT_ID" property="receiptId"/><!-- 결제번호 -->
 	</resultMap>
 	
 	<!-- 조회 -->
+	<select id="selectOrderListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM ORDER_TBL
+		WHERE ORDER_STATUS = 'Y'
+	</select>
+	
 	<select id="selectOrderList" resultMap="orderResultSet">
-		
+		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, PRICE, 
+		       TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE",
+		       TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", TAG, ORDER_STATUS
+		FROM ORDER_TBL
+		WHERE ORDER_STATUS = 'Y'
+		ORDER BY ORDER_DATE DESC, ORDER_NO DESC
 	</select>
 
 

@@ -41,6 +41,11 @@ public class ProductServiceImpl implements ProductService{
 	public Product selectProduct(int productNo) {
 		return productDao.selectProduct(sqlSession, productNo);
 	}
+	
+	@Override
+	public Product selectListProduct(int productNo) {
+		return productDao.selectListProduct(sqlSession, productNo);
+	}
 
 	@Override
 	public int deleteProduct(int productNo) {
@@ -51,6 +56,12 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public int updateProduct(Product p) {
 		return productDao.updateProduct(sqlSession, p);
+	}
+
+
+	@Override
+	public ArrayList<Product> selectflowerList() {
+		return productDao.selectflowerList(sqlSession);
 	}
 
 

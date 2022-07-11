@@ -17,6 +17,7 @@ public class ProductDao {
 		return sqlSession.selectOne("productMapper.selectListCount");
 	}
 
+
 	public ArrayList<Product> selectList(SqlSessionTemplate sqlSession, PageInfo pi) {
 
 		int limit = pi.getBoardLimit();
@@ -27,29 +28,41 @@ public class ProductDao {
 		return (ArrayList)sqlSession.selectList("productMapper.selectList", null, rowBounds);
 	}
 
-
 	public int insertProduct(SqlSessionTemplate sqlSession, Product p) {
 
 		return sqlSession.insert("productMapper.insertProduct", p);
 	}
 
-	//상품상세조회
+	//상품상세조회(admin)
 	public Product selectProduct(SqlSessionTemplate sqlSession, int productNo) {
 
 		return sqlSession.selectOne("productMapper.selectProduct", productNo);
 	}
-	
+
 	public int deleteProduct(SqlSessionTemplate sqlSession, int productNo) {
 
 		return sqlSession.update("productMapper.deleteProduct", productNo);
 	}
 
-	
+
 	public int updateProduct(SqlSessionTemplate sqlSession, Product p) {
 
 		System.out.println(p);
 		return sqlSession.update("productMapper.updateProduct", p);
 	}
 
+	//상품상세조회(꽃다발/꽃대)
+	public Product selectListProduct(SqlSessionTemplate sqlSession, int productNo) {
+
+		return sqlSession.selectOne("productMapper.selectListProduct", productNo);
+	}
+
+	//상품마켓전체조회(꽃다발/꽃대)
+	public ArrayList<Product> selectflowerList(SqlSessionTemplate sqlSession){
+
+		return (ArrayList)sqlSession.selectList("productMapper.selectList");
+	}
+	
+	//
 
 }

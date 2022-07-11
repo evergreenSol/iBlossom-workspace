@@ -39,12 +39,14 @@ public class QnaController {
 		
 //		System.out.println(q.getQnaTitle());
 //		System.out.println(q.getQnaContent());
+
 		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
 		
 		q.setUserNo(userNo);
 		
 		System.out.println(q);
 		
+
 		int result = qnaService.insertQna(q);
 		
 //		System.out.println(result);

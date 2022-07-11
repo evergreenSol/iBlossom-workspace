@@ -1,11 +1,13 @@
 package com.kh.iblossom.subscribe.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.subscribe.model.dao.SubscribeDao;
 import com.kh.iblossom.subscribe.model.vo.SubProduct;
 import com.kh.iblossom.subscribe.model.vo.Subscribe;
@@ -21,9 +23,9 @@ public class SubscribeServiceImpl implements SubscribeService {
 	
 	// 정기구독 상품 조회용 메소드
 	@Override
-	public ArrayList<SubProduct> selectList() {
+	public ArrayList<SubProduct> selectSubProductList() {
 
-		return subscribeDao.selectList(sqlSession);
+		return subscribeDao.selectSubProductList(sqlSession);
 	}
 
 	// 정기구독 상품 추가용 메소드
@@ -58,11 +60,62 @@ public class SubscribeServiceImpl implements SubscribeService {
 		return subscribeDao.insertSubscribe(sqlSession, s);
 	}
 	
+	@Override
+	public int selectListCount() {
+		
+		return subscribeDao.selectListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Subscribe> selectSubMemberList(PageInfo pi) {
+		
+		return subscribeDao.selectSubMembertList(sqlSession, pi);
+	}
+
+	@Override
+	public int selectSearchCount(HashMap<String, String> map) {
+		 
+		return subscribeDao.selectSearchCount(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Subscribe> selectSearchList(PageInfo pi, HashMap<String, String> map) {
+
+		return subscribeDao.selectSearchList(sqlSession, pi, map);
+	}
+
 	
 	// 마이페이지 구독 조회 메소드
 	@Override
-	public ArrayList<Subscribe> selectMySubscribe(int userNo) {
-		return subscribeDao.selectMySubscribe(sqlSession, userNo);
+	public ArrayList<Subscribe> selectMySubscribeThree(int userNo) {
+		return subscribeDao.selectMySubscribeThree(sqlSession, userNo);
 	}
 
+	@Override
+	public ArrayList<Subscribe> selectMySubscribeSix(int userNo) {
+		return subscribeDao.selectMySubscribeSix(sqlSession, userNo);
+	}
+
+	@Override
+	public ArrayList<Subscribe> selectMySubscribeTwelve(int userNo) {
+		return subscribeDao.selectMySubscribeTwelve(sqlSession, userNo);
+	}
+
+	@Override
+	public ArrayList<Subscribe> selectMySubscribeRegular(int userNo) {
+		return subscribeDao.selectMySubscribeRegular(sqlSession, userNo);
+	}
+
+	// 마이페이지 구독 취소 메소드
+	@Override
+	public int cancelMySubList(String receiptId) {
+		return  subscribeDao.cancelMySubList(sqlSession, receiptId);
+	}
+
+	// 배송상태 변경 메소드
+	@Override
+	public int updateDeliverStatus() {
+		
+		return subscribeDao.updateDeliverStatus(sqlSession);
+	}
 }

@@ -17,10 +17,13 @@
                     <p id="p_second" style="margin:0;">회원등급</p>
 
                     <c:choose>
-	                    <c:when test="${ loginUser.grLevel eq '1'}">
+                   		<c:when test="${ loginUser.grLevel eq '1'}">
+	                    	<span class="member-grade">일반</span>
+	                    </c:when>
+	                    <c:when test="${ loginUser.grLevel eq '2'}">
 	                    	<span class="member-grade">SILVER</span>
 	                    </c:when>
-	                    <c:when test="${ loginUser.grLevel eq '2' }">
+	                    <c:when test="${ loginUser.grLevel eq '3' }">
 	                    	<span class="member-grade">GOLD</span>
 	                    </c:when>
 	                    <c:otherwise>
@@ -195,9 +198,9 @@
 	    // console.log(endDate);
 	    
 	    var btMs = endDate.getTime() - startDate.getTime();
-	    var btDay = btMs / (1000 * 60 * 60 * 24);
+	    var btDay = btMs / (1000 * 60 * 60 * 24) + 1;
 	    
-	    if(btDay == 0) {
+	    if(btDay == 1) {
 	    	result = "오늘이 첫 날입니다!";
 	    	//console.log(result);
 	    	

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,7 +21,9 @@ import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.onedayclass.model.Service.OnedayClassService;
 import com.kh.iblossom.product.model.service.ProductService;
 import com.kh.iblossom.qna.model.service.QnaService;
+import com.kh.iblossom.qna.model.vo.Qna;
 import com.kh.iblossom.subscribe.model.service.SubscribeService;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Controller
 public class MemberController {
@@ -55,7 +56,9 @@ public class MemberController {
 	// 로그아웃
 	@RequestMapping(value="logout.me")
 	public String logout(HttpSession session) {
-		session.invalidate();
+		session.removeAttribute("loginUser");
+		
+		session.setAttribute("alertMsg", "로그아웃 성공했습니다.");
 		
 		return "redirect:/";
 	}
@@ -68,25 +71,24 @@ public class MemberController {
 		// 암호화로 인해 아이디로 조회
 		Member loginUser = memberService.login(m);
 		
-		System.out.println(loginUser.getUserPwd());
-		System.out.println(m.getUserPwd());
-		
 		if(loginUser != null && bCryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
 			
-			session.setAttribute("alertMsg", "로그인에 성공하였습니다.");
+			
 			session.setAttribute("loginUser", loginUser);
 			
 			if(loginUser.getUserId().equals("admin0")) {
 				
 				return "redirect:/";
 				
-			} else {
-				
-			return "user/member/myPage_MainView"; }
+			} 
+			else {
+				session.setAttribute("alertMsg", "로그인에 성공하였습니다.");	
+				return "redirect:/"; 
+				}
 		}
-		else {
+		else { 	
 			session.setAttribute("alertMsg", "로그인에 실패하였습니다.");
-			return "redirect:login.me";
+			return "redirect:loginForm.me";
 		}
 		
 	}
@@ -96,6 +98,18 @@ public class MemberController {
 	public String enrollMemberForm() {
 		return "common/join";
 	}
+	
+	// 회원가입 - 이메일 중복 체크 메소드
+	@ResponseBody
+	@RequestMapping(value="checkEmail.me")
+	public void countEmail(String email, HttpServletResponse response) throws IOException {
+		
+		int result = memberService.countEmail(email);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().print(result);
+	}
+	 
 	
 	
 	// 회원가입 - 아이디 중복 체크 메소드
@@ -140,10 +154,12 @@ public class MemberController {
 	}
 	
 	// 비밀번호 찾기
-	@RequestMapping("/findPwd.me")
-	public String findPwd() {
+	@RequestMapping("/findPwdForm.me")
+	public String findPwdForm() {
 		return "common/findPwd";
 	}
+	
+	
 	
 	
 	// 메뉴바의 "상품관리" 클릭해서 요청한 경우 => /list.pr (기본적으로 1 번 페이지를 요청하게끔 처리)
@@ -205,17 +221,50 @@ public class MemberController {
    @RequestMapping(value="subscribeView.me")
    public String myPageSubscribeView(HttpSession session, Model model) {
       
-      /*
-      
       int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+      // 최근 3개만, 최근 6개만 최근 12개만...
+      ArrayList<Subscribe> list3m = subscribeService.selectMySubscribeThree(userNo);
+      ArrayList<Subscribe> list6m = subscribeService.selectMySubscribeSix(userNo);
+      ArrayList<Subscribe> list12m = subscribeService.selectMySubscribeTwelve(userNo);
+      ArrayList<Subscribe> listReg = subscribeService.selectMySubscribeRegular(userNo);
       
-      ArrayList<Subscribe> list = subscribeService.selectMySubscribe(userNo);
+      model.addAttribute("list3m", list3m);
+      model.addAttribute("list6m", list6m);
+      model.addAttribute("list12m", list12m);
+      model.addAttribute("listReg", listReg);
       
-      model.addAttribute("list", list);
-      
+      /*
+      System.out.println(list3m);
+      System.out.println(list6m);
+      System.out.println(list12m);
+      System.out.println(listReg);
       */
       
       return "user/member/myPage_SubscribeView";
+   }
+   
+   // 구독 삭제 메소드
+   @ResponseBody
+   @RequestMapping(value="cancelSubscribe.me", produces="html/text; charset=UTF-8")
+   public String cancelSubscribe(String receiptId) {
+	   
+	   System.out.println(receiptId);
+	   
+	   /*
+	    * 1. 몇 개 구독 취소할 수 있는지 보기(배송준비중인 친구들)
+	    * 1-1 생각해보니까 update 하면 그 update 한 만큼의 수가 나오잖아?
+	    * 2. 그 수만큼 결제 된거 취소하기
+	    * 3.  
+	    * 
+	    */
+	   
+	   int result = subscribeService.cancelMySubList(receiptId);
+	   
+	   System.out.println(result);
+	   
+	   String value = Integer.toString(result);
+	   
+	   return value;
    }
    
    // 프로필 수정 페이지 이동 메소드
@@ -226,17 +275,34 @@ public class MemberController {
    }
    
    // 프로필 수정 메소드
-   @RequestMapping(value="update.me")
-   public String myPageUpdateMember(Member m, Model model) {
-      
-      int result = memberService.updateMember(m);
-      
-//      if(result > 0) {
-//         Member updateMem = memberService.loginMember(m);
-         return "redirect:updateForm.me";
-//      }
-//      else {
-   }
+	@RequestMapping(value="update.me")
+	public String myPageUpdateMember(HttpSession session, Member m, Model model) {
+		
+		System.out.println((Member)session.getAttribute("loginUser"));
+		System.out.println(m);
+		
+		m.setUserNo(((Member)session.getAttribute("loginUser")).getUserNo());
+		   
+		if(!m.getUserPwd().equals(((Member)session.getAttribute("loginUser")).getUserPwd())) {
+			
+			String encPwd = bCryptPasswordEncoder.encode(m.getUserPwd());
+			
+			m.setUserPwd(encPwd);
+		}
+		
+		System.out.println(m);
+		
+		int result = memberService.updateMember(m);
+		
+		if(result > 0) {
+			Member updateMem = memberService.login(m);
+			session.setAttribute("loginUser", updateMem);
+			return "redirect:updateForm.me";
+		}
+		else {
+			return "redirect:mypage.me";
+		}
+	}
    
    
    // 회원 탈퇴 페이지 이동 메소드
@@ -246,37 +312,41 @@ public class MemberController {
       return "user/member/myPage_DeleteForm";
    }
    
-   // 회원 탈퇴 메소드
-   @RequestMapping(value="delete.me")
-   public String myPageDeleteMember(HttpSession session, String userPwd, Model model) {
-      /*
-       * 
-      int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
-      
-      String encPwd = ((Member)session.getAttribute("loginUser")).getUserPwd();
-      if(bCryptPasswordEncoder.matches(userPwd, encPwd)) {
-      
-         int result = memberService.deleteMember(userNo);
-         
-         if(result > 0) {
-            // 탈퇴 성공
-            session.removeAttribute("loginUser");
-            
-            return "redirect:/";
-         }
-         else {
-            // 탈퇴 실패시 어떻게 해줄가?
-         }
-      }
-      else {
-         // 비번이 다름.
-         // alert?
-         return "redirect: deleteForm.me";
-      }
-      
-      */
-      return "redirect:/";
-   }
+	// 회원 탈퇴 메소드
+	@RequestMapping(value="delete.me")
+	public String myPageDeleteMember(HttpSession session, String userPwd, Model model) {
+
+		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		
+		String encPwd = ((Member)session.getAttribute("loginUser")).getUserPwd();
+		
+		if(bCryptPasswordEncoder.matches(userPwd, encPwd)) {
+		
+			int result = memberService.deleteMember(userNo);
+			
+			System.out.println(result);
+			if(result > 0) {
+				// 탈퇴 성공
+				session.removeAttribute("loginUser");
+				session.setAttribute("alertMsg", "회원 탈퇴 되었습니다.");
+				
+				return "redirect:/";
+			}
+			else {
+				// 탈퇴 실패시 어떻게 해줄가?
+				session.setAttribute("alertMsg", "회원 탈퇴에 실패했습니다.");
+				return "user/member/deleteForm";
+			}
+		}
+		else {
+			// 비번이 다름.
+			// alert?
+			session.setAttribute("alertMsg", "비밀번호가 다릅니다.");
+			return "user/member/deleteForm";
+		}
+
+		
+	}
    
    @RequestMapping(value="onedayClass.me")
    public String myPageOneDayClass(HttpSession session, Model model) {
@@ -311,19 +381,47 @@ public class MemberController {
    @RequestMapping(value="qnaListView.me")
    public String myPageQnaListView(HttpSession session, Model model) {
       
-      /*
-
       int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
       
       ArrayList<Qna> list = qnaService.selectMyQna(userNo);
       
+      System.out.println(list);
+      
       model.addAttribute("list", list);
-      
-      */
-      
+
       return "user/member/myPage_QnaListView";
    }
    
+   
+   // 날짜에 따른 배송상태 변경하기
+   @ResponseBody
+   @RequestMapping(value="checkDate.me")
+   public String updateDeliverStatus() {
+	   
+	   int result = subscribeService.updateDeliverStatus();
+	   
+	   if(result > 0) {
+		   return "1";
+	   }
+	   else {
+		   return "0";
+	   }
+   }
+   
+   // 누적금에 따른 회원 등급 변경하기
+   @ResponseBody
+   @RequestMapping(value="checkPurchase.me")
+   public String updateGrLevel() {
+	   
+	   int result = memberService.updateGrLevel();
+	   
+	   if(result > 0) {
+		   return "1";
+	   }
+	   else {
+		   return "0";
+	   }
+   }
  
    
 }

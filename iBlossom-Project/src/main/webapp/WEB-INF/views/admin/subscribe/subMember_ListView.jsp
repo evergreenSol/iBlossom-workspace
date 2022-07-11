@@ -1,12 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="resources/css/kdh.css" rel="stylesheet">
+<style>
+#pagingArea {
+	width: fit-content;
+	margin: auto;
+}
+
+.page-link {
+	font-size : 14px;
+	width : 35px;
+	height: 25px;
+	background-color : white;
+	border : 1px solid lightgray;
+	color : black;
+	display: inline-block;
+	margin-left : 10px;
+	text-decoration : none;
+	text-align : center;
+	border-radius : 3px;
+	padding-top: 5px;
+}
+
+.page-link:active:focus 
+.page-item:active {
+	color : #ff2393;
+}
+
+.page-link:hover {
+	color : #ff2393;
+}
+
+.pagination {
+	list-style-type : none;
+}
+
+.pagination li {
+	float : left;
+}
+
+#admin-member-table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    border-spacing: 0;
+    align: center;
+    margin-bottom : 50px;
+}
+
+
+</style>
 </head>
 <body>
 
@@ -89,16 +139,16 @@
 
         <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
         <div style="padding-top:40px;" align="center">
-            <form name="form1" method="post" action="">
- 
-                <select id="selectReview"name="search_option">
-                    <option value="product_id">꽃명</option>
+            <form method="post" action="search.su">
+ 				<input type="hidden" name="currentPage" value="1">
+                <select name="condition">
+                    <option value="USER_ID">아이디</option>
              
-                    <option value="category_name">카테고리명</option>
+                    <option value="USER_NAME">이름</option>
              
-                    <option value="price">가격</option>
+                    <option value="SUBPRODUCT_NAME">상품 이름</option>
                 </select>
-                <input id="inputBox" name="keyword">
+                <input type="text" name="keyword" value="${ keyword }">
                 <input type="submit" id="selectbtn" value="검색">
             </form>
         </div>
@@ -113,7 +163,6 @@
 	                    <th>주문상품</th>
 	                    <th>배송지</th>
 	                    <th>구독시작일</th>
-	                    <th>구독종료일</th>
 	                    <th>정기구독기간</th>
 	                    <th>회원등급</th>
 	                    <th>결제금액</th>
@@ -128,14 +177,13 @@
 		            <c:otherwise>
 		            	<c:forEach var="s" items="${ list }">
 		                    <tr>
-		                        <td>${ s.subsribeNo }</td>
+		                        <td>${ s.subscribeNo }</td>
 		                        <td>${ s.userId }</td>
 		                        <td>${ s.userName }</td>
 		                        <td>${ s.subProductName }</td>
 		                        <td>${ s.deliverTo }</td>
 		                        <td>${ s.subDate }</td>
-		                        <td>구독종료일</td>
-		                        <td>${ s.subLevel }</td>
+		                        <td>${ s.subLevel }개월</td>
 		                        <td>${ s.grLevel }</td>
 		                        <td>${ s.subPrice }</td>
 		                        <td>${ s.deliverStatus }</td>
@@ -147,9 +195,49 @@
             </table>
         </div>
 
-        <div align="center" style="padding-top: 100px;">
-            <input type='button' id="insertBtn" value='등록'>
-        </div>
+       	<div id="pagingArea">
+	         <ul class="pagination">
+	
+	            <c:choose>
+	               <c:when test="${ pi.currentPage eq 1 }">
+	                  <li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
+	               </c:when>
+	               <c:otherwise>
+	               <c:choose>
+	            	   <c:when test="${ empty condition }">
+		                	<li class="page-item"><a class="page-link" href="subMemberListView.su?currentPage=${ pi.currentPage - 1 }">◀</a></li>
+		               </c:when>
+		               <c:otherwise>
+		                	<li class="page-item"><a class="page-link" href="search.su?currentPage=${ pi.currentPage - 1 }&condition=${ condition }&keyword=${ keyword }">◀</a></li>
+		               </c:otherwise>
+            	   </c:choose>
+	               </c:otherwise>
+	            </c:choose>
+	
+	            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	               <li class="page-item"><a class="page-link"
+	                  href="subMemberListView.su?cpage=${ p }">${ p }</a></li>
+	            </c:forEach>
+	
+	            <c:choose>
+	               <c:when test="${ pi.currentPage eq pi.maxPage }">
+	                  <li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
+	               </c:when>
+	               <c:otherwise>
+		               <c:choose>
+		            	   <c:when test="${ empty condition }">
+			                   <li class="page-item"><a class="page-link"
+			                   href="subMemberListView.su?cpage=${ pi.currentPage + 1 }">▶</a></li>
+		            	   </c:when>
+		            	   <c:otherwise>
+		            	   	   <li class="page-item"><a class="page-link" href="search.su?currentPage=${ pi.currentPage + 1 }&condition=${ condition }&keyword=${ keyword }">▶</a></li>
+		           		   </c:otherwise>
+			           </c:choose>
+		           </c:otherwise>
+	            </c:choose>
+	         </ul>
+	    </div>
+       	
     </div>
 </body>
 </html>
