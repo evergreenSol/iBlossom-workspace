@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -85,7 +86,7 @@ public class SubscribeDao {
 	// 마이페이지 구독조회
 	public ArrayList<Subscribe> selectMySubscribeThree(SqlSessionTemplate sqlSession, int userNo) {
 		
-		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribeTree", userNo);
+		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribeThree", userNo);
 	}
 
 	public ArrayList<Subscribe> selectMySubscribeSix(SqlSessionTemplate sqlSession, int userNo) {
@@ -101,5 +102,16 @@ public class SubscribeDao {
 	public ArrayList<Subscribe> selectMySubscribeRegular(SqlSessionTemplate sqlSession, int userNo) {
 		
 		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribeRegular", userNo);
+	}
+	
+	// 마이페이지 구독 취소
+	public int cancelMySubList(SqlSessionTemplate sqlSession, String receiptId) {
+		
+		return sqlSession.update("subscribeMapper.cancelMySubList", receiptId);
+	}
+	
+	public int updateDeliverStatus(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.update("subscribeMapper.updateDeliverStatus", null);
 	}
 }
