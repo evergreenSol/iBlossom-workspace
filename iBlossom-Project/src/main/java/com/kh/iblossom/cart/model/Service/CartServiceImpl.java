@@ -18,19 +18,15 @@ public class CartServiceImpl implements CartService {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	// 장바구니 두가지 경로 조회용
+	
+	// 장바구니 조회용
 	@Override
 	public ArrayList<Cart> selectCart(int userNo) {
 
 		return cartDao.selectCart(sqlSession, userNo);
 	}
 	
-	// 상품이 담겨져있는 장바구니 조회용
-	@Override
-	public ArrayList<Cart> selectCartList() {
 
-		return cartDao.selectCartList(sqlSession);
-	}
 
 	
 	/*--------------------------------------------------------*/
@@ -45,11 +41,14 @@ public class CartServiceImpl implements CartService {
 
 
 
+	/*@Override
+	public ArrayList<Cart> selectCartList() {
+
+		return cartDao.selectCartList(sqlSession);
+	}
+	*/
 	
 	
-	
-	
-	
-	
+
 	
 }

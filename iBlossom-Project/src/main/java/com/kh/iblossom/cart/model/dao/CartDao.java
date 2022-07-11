@@ -10,18 +10,13 @@ import com.kh.iblossom.cart.model.vo.Cart;
 @Repository
 public class CartDao {
 	
-	// 장바구니 두가지 경로 조회용
+	// 상품이 담겨져있는 장바구니 조회용
 	public ArrayList<Cart> selectCart(SqlSessionTemplate sqlSession, int userNo) {
 		
 		 return (ArrayList)sqlSession.selectList("cartMapper.selectCart", userNo); 
 	}
 	
-	// 상품이 담겨져있는 장바구니 조회용
-	public ArrayList<Cart> selectCartList(SqlSessionTemplate sqlSession) {
 
-		return (ArrayList)sqlSession.selectList("cartMapper.selectCartList"); 
-	}
-	
 	
 	/*--------------------------------------------------------*/
 	// 상세페이지 -> cart 연결용
@@ -32,7 +27,12 @@ public class CartDao {
 		 return sqlSession.insert("cartMapper.insertCartList", c);
 	}
 
+	
+	
+	/*
+	public ArrayList<Cart> selectCartList(SqlSessionTemplate sqlSession) {
 
-
+		return (ArrayList)sqlSession.selectList("cartMapper.selectCartList"); 
+	}*/
 
 }

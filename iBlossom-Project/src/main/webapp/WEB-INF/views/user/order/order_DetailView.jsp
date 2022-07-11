@@ -72,8 +72,8 @@
        4. 배송지 정보 5. 배송지 추가 6. 결제 수단 7. 카카오페이*/
        
     /* 결제 수단과 카카오페이는 삭제 했지만 결제수단을 주소 데이터값 뽑는 용도로 사용할 것임 */
-    .order-check, .order-orderer, .order-sender, 
-    .order-address, .order-address-add,  .order-payment, .order-kakaopay {
+    .order-check, .order-orderer, .order-sender, .order-receiveDate,
+    .order-address, .order-address-add, .order-payment, .order-kakaopay {
         display: flex; 
         justify-content: space-between;
     }
@@ -149,7 +149,7 @@
     }
     
     /* 주문자 정보 - 이름, 연락처 / 발신인 이름 */
-    .orderer-name, .orderer-phone, #SenderBox>p { 
+    .orderer-name, .orderer-phone, #SenderBox>p, #receiveBox>p { 
         width: 660px;
         padding: 10px; 
         background-color:rgba(241, 241, 241, 0.707); 
@@ -242,7 +242,7 @@
     /* 슬라이드 업/다운 요소 버튼 */
 
     /* 누를 버튼 */
-    #CheckBtn, #OrdererBtn, #SenderBtn, #SenderBtn {
+    #CheckBtn, #OrdererBtn, #SenderBtn, #ReceiveBtn {
         width: 700px;
         display: flex; 
         justify-content: space-between;
@@ -252,7 +252,7 @@
     }
 
     /* 내용 박스 */
-    #CheckBox, #OrdererBox, #SenderBox {
+    #CheckBox, #OrdererBox, #SenderBox, #ReceiveBox {
         width: 600px;
         margin-top: 20px;
         display: none;
@@ -316,7 +316,7 @@
     }
     
     /* 누를 슬라이드 헤드 부분 색상 변경 */
-    .order-check>button, .order-orderer>button, .order-sender>button {
+    .order-check>button, .order-orderer>button, .order-sender>button, .order-receive>button {
         background-color: white;
     }
     
@@ -538,7 +538,7 @@
                                 <p>주문자 정보</p>
                                 <!-- 입력내용 보여지는 태그-->
                                 <p>
-                                    <span>, &nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
+                                    <span>ㅇㅇㅇ, &nbsp;&nbsp;010-0000-0000</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
                                 </p>
 
                             </button>
@@ -580,14 +580,14 @@
                     <!-- 수령일 (220711 추가) -->
                     <div>
                          <div class="order-receive">
-                            <button id="SenderBtn">
+                            <button id="ReceiveBtn">
                                 <p>수령일</p>
                             </button>
                         </div>
 
                         <hr>
 
-                        <div class="order-receiveDate">
+                        <div id="ReceiveBox">
                         	<input type="text" id="receiveDate" name="deliverAt" required>
                         </div>
                     </div>

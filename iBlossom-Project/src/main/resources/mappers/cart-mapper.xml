@@ -8,9 +8,11 @@
 		<result column="PRODUCT_NO" property="productNo" /><!-- 상품 번호 -->
 		<result column="PRODUCT_COUNT" property="productCount" /><!-- 상품 수량 -->
 		<result column="PRODUCT_PRICE" property="productPrice" /><!-- 상품 가격 -->
-		<result column="FLOWER_NAME" property="flowerName" /><!-- 상품 가격 -->
-		<result column="THUMBNAIL" property="thumbnail" /><!-- 상품 가격 -->
+		
+		<result column="FLOWER_NAME" property="flowerName" /><!-- 상품 제목 -->
+		<result column="THUMBNAIL" property="thumbnail" /><!-- 썸네일 -->
 	</resultMap>
+	
 	
 	<!-- 장바구니에서는 select 와 delete 생성 -->
 	
@@ -28,6 +30,8 @@
   		FROM CART
   		WHERE CART_NO = #{cartNo}
   	</delete>
+
+
 
 
 	<!-- 상세페이지 -> cart 연결용 -->
