@@ -1,6 +1,9 @@
 package com.kh.iblossom.member.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletResponse;
 
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.member.model.vo.Member;
@@ -10,6 +13,8 @@ public interface MemberService {
 	
 	// 회원가입
 	Member login(Member m);
+	
+	int countEmail(String email);
 	
 	int countUserId(String userId);
 	
@@ -24,8 +29,16 @@ public interface MemberService {
    int selectListCount();
    // 멤버 리스트 조회
    ArrayList<Member> selectList(PageInfo pi);
+   
+	
+	// 이메일 발송
+	public String sendEmail(HashMap<String, String> map) throws Exception;
+
+	String selectId(String email);
+	
 
 
+   int updateGrLevel();
 
 	
 }

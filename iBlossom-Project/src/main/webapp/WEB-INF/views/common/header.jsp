@@ -13,6 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
+
 	<!-- 알람 -->
 	<c:if test="${ not empty alertMsg}">
 	   <script>
@@ -21,7 +22,6 @@
 	   </script>
 	   		<c:remove var="alertMsg" scope="session"/>	
    </c:if>
-
 
     <!-- header 헤더 div -->
     <div id="header-div-wrap">
@@ -98,7 +98,46 @@
         </div>
 
     </div>
+        <script>
+    	$(function () {
+    		
+    		$.ajax({
+    			url : "checkDate.me",
+    			success : function (result) {
+    				if(result == "1") {
+    					console.log("있음");
+    				}
+    				else {
+    					console.log("없음");
+    				}
+    			},
+    			error : function () {
+    				console.log("땡");
+    			}
+    			
+    		});
+    		
+    		$.ajax({
+    			url : "checkPurchase.me",
+    			success : function () {
+    				if(result == "1") {
+    					console.log("있음");
+    				}
+    				else {
+    					console.log("없음");
+    				}
+    			},
+    			error : function () {
+    				console.log("땡");
+    			}
+    			
+    		});
+    		
+    		
+    		
+    	});
     
+    </script>
    
     
     

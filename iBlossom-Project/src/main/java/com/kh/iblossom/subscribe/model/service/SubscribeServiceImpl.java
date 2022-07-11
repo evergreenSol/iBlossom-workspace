@@ -105,4 +105,17 @@ public class SubscribeServiceImpl implements SubscribeService {
 	public ArrayList<Subscribe> selectMySubscribeRegular(int userNo) {
 		return subscribeDao.selectMySubscribeRegular(sqlSession, userNo);
 	}
+
+	// 마이페이지 구독 취소 메소드
+	@Override
+	public int cancelMySubList(String receiptId) {
+		return  subscribeDao.cancelMySubList(sqlSession, receiptId);
+	}
+
+	// 배송상태 변경 메소드
+	@Override
+	public int updateDeliverStatus() {
+		
+		return subscribeDao.updateDeliverStatus(sqlSession);
+	}
 }

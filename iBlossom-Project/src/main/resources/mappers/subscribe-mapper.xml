@@ -133,10 +133,11 @@
 		WHERE USER_NO = #{userNo}
 		AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
 		AND SUB_LEVEL = 3
+		AND DELIVER_STATUS IN ('배송준비', '배송중', '배송완료')
 		ORDER BY S.SUBSCRIBE_NO ASC
   	</select>
   	
-  	  	<select id="selectMySubscribeSix" parameterType="_int" resultMap="subscribeResultSet">
+	<select id="selectMySubscribeSix" parameterType="_int" resultMap="subscribeResultSet">
 		SELECT SUBSCRIBE_NO, SP.SUBPRODUCT_NAME, TO_CHAR(SUB_DATE,'YYYY-MM-DD') "SUB_DATE", 
 			   SUB_LEVEL, SUB_RECEIVER_USER, SUB_RECEIVER_PHONE, DELIVER_AT, DELIVER_AT, DELIVER_TO, 
 			   RECEIPT_ID, SP.SUB_PRICE, DELIVER_STATUS, SUBPRODUCT_NAME, SUBCHANGE_NAME
@@ -144,10 +145,11 @@
 		WHERE USER_NO = #{userNo}
 		AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
 		AND SUB_LEVEL = 6
+		AND DELIVER_STATUS IN ('배송준비', '배송중', '배송완료')
 		ORDER BY S.SUBSCRIBE_NO ASC
   	</select>
   	
-  	  	<select id="selectMySubscribeTwelve" parameterType="_int" resultMap="subscribeResultSet">
+	<select id="selectMySubscribeTwelve" parameterType="_int" resultMap="subscribeResultSet">
 		SELECT SUBSCRIBE_NO, SP.SUBPRODUCT_NAME, TO_CHAR(SUB_DATE,'YYYY-MM-DD') "SUB_DATE", 
 			   SUB_LEVEL, SUB_RECEIVER_USER, SUB_RECEIVER_PHONE, DELIVER_AT, DELIVER_AT, DELIVER_TO, 
 			   RECEIPT_ID, SP.SUB_PRICE, DELIVER_STATUS, SUBPRODUCT_NAME, SUBCHANGE_NAME
@@ -155,18 +157,42 @@
 		WHERE USER_NO = #{userNo}
 		AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
 		AND SUB_LEVEL = 12		
+		AND DELIVER_STATUS IN ('배송준비', '배송중', '배송완료')
 		ORDER BY S.SUBSCRIBE_NO ASC
   	</select>
   	
-  	  	<select id="selectMySubscribeRegular" parameterType="_int" resultMap="subscribeResultSet">
+	<select id="selectMySubscribeRegular" parameterType="_int" resultMap="subscribeResultSet">
 		SELECT SUBSCRIBE_NO, SP.SUBPRODUCT_NAME, TO_CHAR(SUB_DATE,'YYYY-MM-DD') "SUB_DATE", 
 			   SUB_LEVEL, SUB_RECEIVER_USER, SUB_RECEIVER_PHONE, DELIVER_AT, DELIVER_AT, DELIVER_TO, 
 			   RECEIPT_ID, SP.SUB_PRICE, DELIVER_STATUS, SUBPRODUCT_NAME, SUBCHANGE_NAME
-		FROM SUBSCRIBE S, SUB_PRODUCT SP
-		WHERE USER_NO = #{userNo}
-		AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
-		AND SUB_LEVEL = 1
+		  FROM SUBSCRIBE S, SUB_PRODUCT SP
+		 WHERE USER_NO = #{userNo}
+		   AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
+		   AND SUB_LEVEL = 1
+		   AND DELIVER_STATUS IN ('배송준비', '배송중', '배송완료')
 		ORDER BY S.SUBSCRIBE_NO ASC
   	</select>
+  	
+  	<select id="cancelMySubList" parameterType="string">
+		UPDATE SUBSCRIBE
+		   SET DELIVER_STATUS = '결제취소'
+		 WHERE RECEIPT_ID = #{receiptId}
+		   AND DELIVER_STATUS = '배송준비'
+  	</select>
+  	
+  	<update id="updateDeliverStatus">
+  		UPDATE SUBSCRIBE
+		SET DELIVER_STATUS = 
+		    CASE 
+		    <![CDATA[
+		        WHEN TO_DATE(DELIVER_AT, 'YYYY-MM-DD') - TO_DATE(SYSDATE, 'YYYY-MM-DD') <= 0 THEN '배송완료'
+		        WHEN TO_DATE(DELIVER_AT, 'YYYY-MM-DD') - TO_DATE(SYSDATE, 'YYYY-MM-DD') <= 1 THEN '배송중'
+		        ELSE '배송준비'
+		    ]]>
+		    END
+		WHERE NOT DELIVER_STATUS IN('결제취소')
+		
+  	</update>
+  	
   	
 </mapper>
