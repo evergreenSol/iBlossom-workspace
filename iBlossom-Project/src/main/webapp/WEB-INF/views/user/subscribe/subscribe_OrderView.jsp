@@ -468,6 +468,7 @@
 			console.log(data);
 		}).done(function (data) {
 			var totalPrice = $('#totalPrice').val();
+			console.log(totalPrice);
 			var subProductName = $('#subProductName').val();
 			if(numOfPay==1) {
 				// 정기결제 - 무한반복
@@ -482,6 +483,7 @@
 	
 	// 정기결제 - 무한반복
 	function subscribe(billingKey, totalPrice, subProductName, receiptId, numOfPay) {
+		console.log(totalPrice);
 		$.ajax({
 			url : "subscribe.do",
 			type : "post",
@@ -514,6 +516,7 @@
 	
 	// 일시불 (바로 requestPay 로 점프)
 	function requestPay(billingKey, receiptId, totalPrice, subProductName, numOfPay) {
+		console.log(totalPrice);
 		
 		$.ajax({
 			url : "requestSubscribe.do",
@@ -522,10 +525,11 @@
 				billingKey : billingKey,
 				totalPrice : totalPrice,
 				subProductName : subProductName,
+				totalPrice : totalPrice
 			},
 			success : function(data) {
 				console.log("상품 결제 성공");
-				insertSubscribe(numOfPay, receiptId);
+				insertSubscribe(numOfPay, receiptId, totalPrice);
 			}, error : function() {
 				console.log("상품 결제 실패");
 			}
@@ -533,7 +537,8 @@
 	}
 	
 	// DB에 구독 객체 넣기?
-	function insertSubscribe(numOfPay, receiptId) {
+	function insertSubscribe(numOfPay, receiptId, totalPrice) {
+		console.log(totalPrice);
 		$.ajax({
 			url : "insert.su",
 			type : "post",
@@ -549,7 +554,8 @@
 				deliverTo : $('#address1').val() + " " + $('#address2').val(),
 				deliverStatus : "배송준비",
 				receiptId : receiptId,
-				numOfPay : numOfPay
+				numOfPay : numOfPay,
+				totalPrice : totalPrice
 			},
 			success : function(data) {
 				console.log("DB 넣음")		

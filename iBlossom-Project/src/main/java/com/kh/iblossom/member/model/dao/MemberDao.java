@@ -92,5 +92,11 @@ public class MemberDao {
 		System.out.println(email);
 		return sqlSession.selectOne("memberMapper.selectId", email);
 	}
-	
+
+	public int updateSubPurchase(SqlSessionTemplate sqlSession, HashMap<String, Integer> map) {
+		
+		return sqlSession.update("memberMapper.updateSubPurchase", map);
+	}
+
+
 }
