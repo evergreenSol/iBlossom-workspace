@@ -58,7 +58,13 @@
 	                   <th>회차</th>
 	                   <td></td>
 	                   <!-- 만약에 구독개월스 컬럼이 0이면,  아래처럼 arraylist의 사이즈 뽑으면 될듯?-->
-	                   <td>${i+1}회 / ${ list.size() }회</td>
+	                   <c:if test="${list[0].subLevel eq 1}">
+	                   	<td>${i+1}회 / 정기구독</td>
+	                   </c:if>
+	                   <c:if test="${list[0].subLevel ne 1}">
+	                   	<td>${i+1}회 / ${ list[0].subLevel }회</td>
+	                   
+	                   </c:if>
 	                   <!-- 만약에  구독개월수 컬럼이 0이 아니면, 
 	                   
 	                       <td> 4회(배송전인 컬럼 중 가장 작은 컬럼) / 12(arrayList의 사이즈)회
@@ -150,18 +156,95 @@
 	
 	<script>
 		$(function () {
-			
-			
 
 			$(".mypage-subscribe").on("click", function() {
-				
-                $(this).next().slideDown("1500");
-                
+				/*
+				if($(".subscribe-content").css("display") == "none") {
+					
+				}
+				else {
+					$(this).next("div").slideUp("1500");
+				}
+				console.log("클릭");
+				*/
+				$(this).next("div").slideDown("1500");
             });
 			
+			var refundPrice;
+			
+			var subPrice = ${ list[0].subPrice }
+			
+			
+			$(".mypage-subscribe-cancel").click(function () { 
+				
+				console.log("클릭됨");
+		
+				$.ajax({
+					url : "cancelSubscribe.do",
+					type : "post",
+					success : function(data) {
+						console.log("스케줄러 중지");
+						
+					}, error : function() {
+						console.log("cancelSubscribe fail");
+					}
+				});
+				
+				$.ajax({
+					url : "cancelSubscribe.me",
+					data : {
+						receiptId : $(this).next().val()
+					},
+					type : "POST",
+					success : function (result) {
+						
+							console.log("수정이 되었음");
+							console.log(result);
+							
+							refundPrice = result * subPrice;
+							console.log(refundPrice);
+						
+						$.ajax({
+							url : "goGetToken.do",
+							type : "post",
+							success : function(token) {
+								
+								console.log("token 생성됨 : " + token);
+								
+								$.ajax({
+									url : "cancelRequest.do",
+									data : {
+										receiptId : $(this).next().val(),
+										price : refundPrice
+										},
+									type : "post",
+									success : function(result) {
+
+										// alert("구독 취소되었습니다.");
+										
+										location.reload();
+									
+									}, error : function() {
+										console.log("안되면 집ㄱ");
+									}
+								});
+								
+								
+							}, error : function() {
+								console.log("토큰 생성 실패");
+							}
+						});
+						
+					},
+					error : function () {
+						console.log("실패");
+					}
+					
+				});
+			});
 			
 		});
-	
+		
 	</script>
     
 	

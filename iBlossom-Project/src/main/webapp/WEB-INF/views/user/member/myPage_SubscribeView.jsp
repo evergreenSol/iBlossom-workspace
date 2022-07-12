@@ -147,67 +147,11 @@
    		}
    		
 			
-			var refundPrice;
-			
-			var subPrice = ${ list[0].subPrice }
 			
 			
-			$(".mypage-subscribe-cancel").click(function () { 
-				
-				console.log();
-		
-				$.ajax({
-					url : "cancelSubscribe.me",
-					data : {
-						receiptId : $(this).next().val()
-					},
-					type : "POST",
-					success : function (result) {
-						
-							console.log("수정이 되었음");
-							console.log(result);
-							
-							refundPrice = result * subPrice;
-							console.log(refundPrice);
-						
-						$.ajax({
-							url : "goGetToken.do",
-							type : "post",
-							success : function(token) {
-								
-								console.log("token 생성됨 : " + token);
-								
-								$.ajax({
-									url : "cancelRequest.do",
-									data : {
-										receiptId : $(this).next().val(),
-										price : refundPrice
-										},
-									type : "post",
-									success : function(result) {
-
-										alert("구독 취소되었습니다.");
-										
-										location.reload();
-									
-									}, error : function() {
-										console.log("안되면 집ㄱ");
-									}
-								});
-								
-								
-							}, error : function() {
-								console.log("토큰 생성 실패");
-							}
-						});
-						
-					},
-					error : function () {
-						console.log("실패");
-					}
-					
-				});
-			});
+			
+			
+			
 			
 			
 			
