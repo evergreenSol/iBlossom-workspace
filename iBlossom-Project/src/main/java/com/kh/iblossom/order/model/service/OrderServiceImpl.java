@@ -43,4 +43,11 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 
+	@Override
+	public int insertOrder() {
+		
+		return orderDao.selectOrder(sqlSession);
+	}
+
+
 }

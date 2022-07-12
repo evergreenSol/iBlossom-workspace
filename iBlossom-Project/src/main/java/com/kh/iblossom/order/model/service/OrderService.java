@@ -19,4 +19,7 @@ public interface OrderService {
 	ArrayList<Order> selectOrderList(PageInfo pi);
 
 
+	int insertOrder();
+
+
 }
