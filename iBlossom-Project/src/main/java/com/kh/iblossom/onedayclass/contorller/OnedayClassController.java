@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kh.iblossom.cart.model.vo.Cart;
 import com.kh.iblossom.onedayclass.model.Service.OnedayClassService;
 import com.kh.iblossom.onedayclass.model.vo.OnedayClass;
@@ -24,55 +26,52 @@ public class OnedayClassController {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	 
-	@RequestMapping("classDetail.cl")
-	public String classDetailView() {
-
-		return "user/onedayclass/class_DetailView";
-	}
 
 
    @RequestMapping("ResForm.cl")
-   public String classResForm(String classNo, Model model) {
-
-	  ArrayList<Onedayclass> list = OnedayclassService.selectOnedayclassList(); 
+   public String classResForm(int classNo, Model model) {
 	   
-      System.out.println(classNo);
+      // System.out.println(classNo);
       
-      model.addAttribute("classNo", classNo); // date -> classNo
+      OnedayClass oc = onedayClassService.selectOnedayClass(classNo);
+      
+      // System.out.println(oc);
+      
+      model.addAttribute("oc", oc); // date -> classNo
       
       return "user/onedayclass/class_ReservationForm";
    }
    
-//	@RequestMapping("listView.cl")
-//	public String classListView(Model model) {
-//
-//		ArrayList<Onedayclass> list = OnedayclassService.selectOnedayclassList();
-//
-//		model.addAttribute("list",list);
-//		
-//		return "user/subscribe/subscribe_ListView";
-//	}
+
+	@RequestMapping("classDetail.cl")
+	public String classListView(Model model) {
+
+		ArrayList<OnedayClass> list = onedayClassService.selectClassList();
+		
+		// System.out.println(list);
+		
+		model.addAttribute("list", list);
+		
+		return "user/onedayclass/class_DetailView";
+	}
    
    // 예약 정보
-	@RequestMapping("resInsert.cl")
+	@ResponseBody
+	@RequestMapping(value="resInsert.cl", produces="text/html; charset=UTF-8")
 	public String insertClassRes(OnedayClassAdmin oa, HttpSession session, Model model) {
 		
 		System.out.println(oa);
-			
+		int classNo = oa.getClassNo();	
 		int result = onedayClassService.insertClassRes(oa);
 		
-		if(result > 0) { 
-			
-			// 성공시 ~~~ 페이지로 url 재요청
-			// session.setAttribute("alertMsg", "성공적으로 장바구니가 추가되었습니다.");
-			return "user/onedayclass/class_ReservationForm";
+		if(result >0) {
+			onedayClassService.updateClassCap(classNo);
 			
 		} else {
-			
-			return "redirect:/";
+			return "예약실패";
 		}
-
+		
+		return (result > 0) ? "예약이 완료되었습니다." : "예약에 실패하였습니다.";
 	}
 	
 }	
