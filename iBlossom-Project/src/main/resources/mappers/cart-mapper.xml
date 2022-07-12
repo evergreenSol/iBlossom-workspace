@@ -16,6 +16,34 @@
 	
 	<!-- 장바구니에서는 select 와 delete 생성 -->
 	
+
+  	<insert id="insertCartList" parameterType="cart">
+  		INSERT INTO CART(CART_NO
+		                , USER_NO
+		                , PRODUCT_NO
+		                , PRODUCT_COUNT
+		                , PRODUCT_PRICE)
+		VALUES(SEQ_CARNO.NEXTVAL
+		     , #{userNo}
+		     , #{productNo}
+		     , #{productCount}
+		     , #{productPrice})
+  	</insert>
+	
+	
+  	<insert id="inserCommandCartList" parameterType="cart">
+  		INSERT INTO CART(CART_NO
+		                , USER_NO
+		                , PRODUCT_NO
+		                , PRODUCT_COUNT
+		                , PRODUCT_PRICE)
+		VALUES(SEQ_CARNO.NEXTVAL
+		     , #{userNo}
+		     , #{productNo}
+		     , #{productCount}
+		     , #{productPrice})
+  	</insert>
+
 	<!-- 상품이 담겨져있는 장바구니 조회용 -->
   	<select id="selectCart" resultMap="cartResultSet">
   		SELECT CART_NO, USER_NO, PRODUCT_NO, FLOWER_NAME, PRODUCT_PRICE, PRODUCT_COUNT, THUMBNAIL
@@ -30,6 +58,7 @@
   		FROM CART
   		WHERE CART_NO = #{cartNo}
   	</delete>
+
 
 
 
