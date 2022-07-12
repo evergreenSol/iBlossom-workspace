@@ -14,7 +14,8 @@
 		<typeAlias type="com.kh.iblossom.notice.model.vo.Notice" alias="notice"/> 	
 		<typeAlias type="com.kh.iblossom.subscribe.model.vo.Subscribe" alias="subscribe"/>
 		<typeAlias type="com.kh.iblossom.subscribe.model.vo.SubProduct" alias="subProduct"/>  	
-		<typeAlias type="com.kh.iblossom.onedayclass.model.vo.OnedayClass" alias="onedayclass"/> 	
+		<typeAlias type="com.kh.iblossom.onedayclass.model.vo.OnedayClass" alias="onedayclass"/>
+		<typeAlias type="com.kh.iblossom.onedayclass.model.vo.OnedayClassAdmin" alias="onedayclassadmin"/> 	
 		<typeAlias type="com.kh.iblossom.cart.model.vo.Cart" alias="cart"/> 	
 		<typeAlias type="com.kh.iblossom.qna.model.vo.Qna" alias="qna"/> 	
 		<typeAlias type="com.kh.iblossom.order.model.vo.Order" alias="order"/> 	
