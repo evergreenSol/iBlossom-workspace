@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.kh.iblossom.cart.model.dao.CartDao;
 import com.kh.iblossom.cart.model.vo.Cart;
-import com.kh.iblossom.cart.model.vo.CartCommand;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -20,13 +19,19 @@ public class CartServiceImpl implements CartService {
 	private SqlSessionTemplate sqlSession;
 
 	
-	// 장바구니 상품 조회용 메소드
+	// 장바구니 조회용
 	@Override
-	public ArrayList<Cart> selectCartList() {
+	public ArrayList<Cart> selectCart(int userNo) {
 
-		return cartDao.selectCartList(sqlSession);
+		return cartDao.selectCart(sqlSession, userNo);
 	}
+	
 
+
+	
+	/*--------------------------------------------------------*/
+	// 상세페이지 -> cart 연결용
+	
 	// 장바구니 상품 추가용 메소드(승아)
 	@Override
 	public int insertCartList(Cart c) {
@@ -34,18 +39,16 @@ public class CartServiceImpl implements CartService {
 		return cartDao.insertCartList(sqlSession, c);
 	}
 
-	@Override
-	public int inserCommandCartList(CartCommand cartCommand) {
-		
-		return cartDao.inserCommandCartList(sqlSession, cartCommand);
+
+
+	/*@Override
+	public ArrayList<Cart> selectCartList() {
+
+		return cartDao.selectCartList(sqlSession);
 	}
+	*/
 	
 	
-	
-	
-	
-	
-	
-	
+
 	
 }

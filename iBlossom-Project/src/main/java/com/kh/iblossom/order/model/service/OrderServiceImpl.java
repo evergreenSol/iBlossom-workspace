@@ -18,17 +18,36 @@ public class OrderServiceImpl implements OrderService{
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-		
+	
+	/*----------------------------------------------------*/
+	
+	// 주문/결제 조회용	
+	@Override
+	public ArrayList<Order> detailOrder(int userNo) {
+
+		return orderDao.detailOrder(sqlSession, userNo);
+	}
+
+	
 	@Override
 	public int selectOrderListCount() {
 
 		return orderDao.selectOrderListCount(sqlSession);
 	}
 
+	
 	@Override
 	public ArrayList<Order> selectOrderList(PageInfo pi) {
 		
 		return orderDao.selectOrderList(sqlSession, pi);
 	}
+
+
+	@Override
+	public int insertOrder() {
+		
+		return orderDao.selectOrder(sqlSession);
+	}
+
 
 }

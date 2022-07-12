@@ -4,114 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>admin_Order_Individual order details</title>
+<title>iBlossom | 개별주문내역</title>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link href="resources/css/ldo-admin.css" rel="stylesheet">
-<style>
-
-	/* 개별 주문 내역 */
-	
-	/* 개별주문내역 - table */
-	.admin-order-detail-table {
-	    margin: auto; /* 표 중간 */
-	    text-align: center; /* 글자 가운데 정렬 */
-	    border-collapse: collapse; /* 테두리 사이의 간격을 없애고 싶다면 */
-	    width: 1000px;
-	}
-	
-	/* 개별주문내역 - td 전체 */
-	.admin-order-detail-table>tbody>tr>td {
-	    border: 1px solid rgba(226, 226, 226, 0.982);
-	    padding: 18px;
-	    font-size: small;
-	}
-	
-	/* 개별주문내역 - table > 머리 */
-	.admin-table-head {
-	    /*
-	    background-color: #86848481;
-	    color : black;
-	    */
-	    background-color: #444444;
-	    color : white;
-	    width : 70px;
-	    font-weight: bold;
-	}
-	
-	/* 개별주문내역 - table > 내용 */
-	.admin-table-content {
-	    width: 300px;
-	}
-	
-	/* 개별주문내역 - table 머리말 */
-	.table-caption { 
-	    text-align: left;
-	    margin-bottom: 10px;
-	    font-weight: bold;
-	    font-size: large;
-	}
-	
-	/* 개별주문내역 - 상세정보 table 헤드 */
-	.detail-th>th {
-	    padding: 18px;
-	    font-size: small;
-	}
-	
-	/* 개별주문내역 - 상세정보 너비 조정 */
-	.detail-th-1 { width: 80px; }
-	.detail-th-2 { width: 130px; }
-	.detail-th-4 { width: 60px; }
-	.detail-th-5 { width: 100px; }
-	
-	/* 테이블 감싸는 div */
-	.detail-wrap {
-		width: 100%;
-	}
-	
-	
-	/* ------------------------------------------------ */
-
-	/* 페이징 처리 */
-	
-	.pagingArea {
-	   width: fit-content;
-	   margin: auto;
-	}
-	
-	.page-link {
-	   font-size : 14px;
-	   width : 30px;
-	   height: 23px;
-	   background-color : white;
-	   border : 1px solid lightgray;
-	   color : black;
-	   display: inline-block;
-	   margin-left : 10px;
-	   text-decoration : none;
-	   text-align : center;
-	   border-radius : 3px;
-	   padding-top: 5px;
-	}
-	
-	.page-link:active:focus, 
-	.page-item:active {
-	   color : #ff2393;
-	}
-	
-	.page-link:hover {
-	   color : #ff2393;
-	}
-	
-	.pagination {
-	   list-style-type : none;
-	}
-	
-	.pagination li {
-	   float : left;
-	}
-	
-
-</style>
 </head>
 <body>
 
@@ -155,13 +50,17 @@
                 <!-- 메뉴 -->
                 <ul id="admin-navi">
                     <li><a href="" class="admin-navi-menu">회원관리</a></li>
+                    
                     <li>
-                        <a href="" class="admin-navi-menu" style="font-weight: 700;" >주문정보관리</a>
-                        <ul class="admin-navi-ul">
-                            <li><a href="">전체주문내역</a></li>
-                            <li><a href="">개별주문내역</a></li>
-                        </ul>
+                        <a href="adminList.or" class="admin-navi-menu" style="font-weight: 700;">주문정보관리</a>
+						<!--  회원번호로 정보를 받아야 하기 때문에 필요 없음 ! 
+	                       <ul class="admin-navi-ul">
+	                           <li><a href="adminList.or">전체주문내역</a></li>
+	                           <li><a href="adminDetail.or">개별주문내역</a></li>
+	                       </ul>
+                        -->
                     </li>
+                    
                     <li>
                         <a href="" class="admin-navi-menu">정기구독관리</a>
                         <ul class="admin-navi-ul">
@@ -298,51 +197,17 @@
 	        
 	        </table>
         
+            <br><br><br>
+    
+		    <div>
+		    	<a href="adminList.or" id="admin-order-pre-btn">&lt; 이전으로</a>    	
+		    </div>
+		    
         </div>
 
     </div>
     
-    <br><br><br>
-    
-    	<!------------------------------------------------------------------->
-	
-	    <!-- 페이징 처리 -->
-	        
-	    <div class="pagingArea">
-			<ul class="pagination">
-	
-				<c:choose>
-					<c:when test="${ pi.currentPage eq 1 }">
-						<li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link"
-							href="list.pr?cpage=${ pi.currentPage - 1 }">◀</a></li>
-					</c:otherwise>
-				</c:choose>
-	
-				
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-					<li class="page-item"><a class="page-link"
-						href="list.pr?cpage=${ p }">${ p }</a></li>
-				</c:forEach>
-	
-	
-				<c:choose>
-					<c:when test="${ pi.currentPage eq pi.maxPage }">
-						<li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link"
-							href="list.pr?cpage=${ pi.currentPage + 1 }">▶</a></li>
-					</c:otherwise>
-				</c:choose>
-	
-			</ul>
-			
-		</div>
-		
-		<!-- 여기까지가 페이징 처리 -->
+
 
 	<br><br><br><br><br>
 

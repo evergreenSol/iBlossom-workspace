@@ -17,6 +17,7 @@
 		<result column="SUB_LEVEL" property="subLevel" />
 		<result column="SUB_RECEIVER_USER" property="subReceiverUser" />
 		<result column="SUB_RECEIVER_PHONE" property="subReceiverPhone" />
+		<result column="SUB_RECEIVER_POSTCODE" property="subReceiverPostcode"/>
 		<result column="DELIVER_AT" property="deliverAt" />
 		<result column="DELIVER_TO" property="deliverTo" />
 		<result column="DELIVER_STATUS" property="deliverStatus" />
@@ -28,6 +29,7 @@
 		<result column="SUBPRODUCT_NAME" property="subProductName"/>
 		<result column="SUB_PRICE" property="subPrice"/>
 		<result column="COUNT" property="count"/>
+		<result column="SUBCHANGE_NAME" property="subChangeName" />
 	</resultMap>
 
 	<select id="selectSubProductList" resultMap="subProductResultSet">
@@ -77,6 +79,7 @@
 		                , SUB_LEVEL
 		                , SUB_RECEIVER_USER
 		                , SUB_RECEIVER_PHONE
+		                , SUB_RECEIVER_POSTCODE
 		                , DELIVER_AT
 		                , DELIVER_TO
 		                , DELIVER_STATUS
@@ -87,6 +90,7 @@
 		     , #{subLevel}
 		     , #{subReceiverUser}
 		     , #{subReceiverPhone}
+		     , #{subReceiverPostcode}
 		     , #{deliverAt}
 		     , #{deliverTo}
 		     , #{deliverStatus}
@@ -121,11 +125,49 @@
 		  AND ${condition} LIKE '%' || #{keyword} || '%'
 	</select>
   	
-  	<select id="selectMySubscribe" parameterType="_int" resultMap="subscribeResultSet">
-		SELECT SUBSCRIBE_NO, SP.SUBPRODUCT_NAME, DELIVER_TO, TO_CHAR(SUB_DATE,'YYYY-MM-DD') "SUB_DATE", SUB_LEVEL, SP.SUB_PRICE, DELIVER_STATUS
-		FROM SUBSCRIBE S, SUB_PRODUCT SP
-		WHERE USER_NO = #{userNo}
-		AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
+  	<select id="cancelMySubList" parameterType="string">
+		UPDATE SUBSCRIBE
+		   SET DELIVER_STATUS = '결제취소'
+		 WHERE RECEIPT_ID = #{receiptId}
+		   AND DELIVER_STATUS = '배송준비'
+  	</select>
+  	
+  	<update id="updateDeliverStatus">
+  		UPDATE SUBSCRIBE
+		SET DELIVER_STATUS = 
+		    CASE 
+		    <![CDATA[
+		        WHEN TO_DATE(DELIVER_AT, 'YYYY-MM-DD') - TO_DATE(SYSDATE, 'YYYY-MM-DD') <= 0 THEN '배송완료'
+		        WHEN TO_DATE(DELIVER_AT, 'YYYY-MM-DD') - TO_DATE(SYSDATE, 'YYYY-MM-DD') <= 1 THEN '배송중'
+		        ELSE '배송준비'
+		    ]]>
+		    END
+		WHERE NOT DELIVER_STATUS IN('결제취소')
+  	</update>
+  	
+  	<select id="countMySubReceiptId" parameterType="_int" resultType="_int">
+  		SELECT COUNT(DISTINCT RECEIPT_ID)
+  		FROM SUBSCRIBE
+  		WHERE USER_NO = #{userNo}
+  	</select>
+  	
+  	<select id="selectMySubReceiptId" parameterType="_int" resultType="map">
+  		SELECT DISTINCT RECEIPT_ID
+  		FROM SUBSCRIBE
+  		WHERE USER_NO = #{userNo}
+  		AND NOT DELIVER_STATUS IN('결제취소')
+  	</select>
+  	
+  	
+  	<select id="selectMySubscribe" parameterType="string" resultMap="subscribeResultSet">
+  		SELECT SUBSCRIBE_NO, SP.SUBPRODUCT_NAME, TO_CHAR(SUB_DATE,'YYYY-MM-DD') "SUB_DATE", 
+			   SUB_LEVEL, SUB_RECEIVER_USER, SUB_RECEIVER_PHONE, DELIVER_AT, DELIVER_AT, DELIVER_TO, SUB_RECEIVER_POSTCODE,
+			   RECEIPT_ID, SP.SUB_PRICE, DELIVER_STATUS, SUBPRODUCT_NAME, SUBCHANGE_NAME
+		  FROM SUBSCRIBE S, SUB_PRODUCT SP
+		 WHERE RECEIPT_ID = #{receiptId}
+		   AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
+		   AND DELIVER_STATUS IN ('배송준비', '배송중', '배송완료')
+		ORDER BY S.SUBSCRIBE_NO ASC
   	</select>
   	
 </mapper>

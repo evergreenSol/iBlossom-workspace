@@ -2,6 +2,7 @@ package com.kh.iblossom.subscribe.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.subscribe.model.vo.SubProduct;
@@ -25,8 +26,10 @@ public interface SubscribeService {
 
 	int insertSubscribe(Subscribe s);
 	
-	ArrayList<Subscribe> selectMySubscribe(int userNo);
 
+	// 마이페이지 구독 취소 메소드
+	int cancelMySubList(String receiptId);
+	
 	int selectListCount();
 	
 	ArrayList<Subscribe> selectSubMemberList(PageInfo pi);
@@ -35,4 +38,13 @@ public interface SubscribeService {
 
 	ArrayList<Subscribe> selectSearchList(PageInfo pi, HashMap<String, String> map);
 
+	// 배송상태 변경 메소드
+	int updateDeliverStatus();
+	
+
+	// 마이페이지 구독 조회용 메소드
+	ArrayList<Map<String,String>> selectMySubReceiptId(int userNo);
+	
+	ArrayList<Subscribe> selectMySubscribe(String receiptId);
+	
 }

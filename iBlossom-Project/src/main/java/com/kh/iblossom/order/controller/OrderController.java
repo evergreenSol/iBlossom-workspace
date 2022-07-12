@@ -2,17 +2,24 @@ package com.kh.iblossom.order.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.iblossom.cart.model.Service.CartService;
+import com.kh.iblossom.cart.model.vo.Cart;
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.common.template.Pagination;
+import com.kh.iblossom.member.model.service.MemberService;
+import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.order.model.service.OrderService;
 import com.kh.iblossom.order.model.vo.Order;
-import com.kh.iblossom.product.model.vo.Product;
+import com.kh.iblossom.subscribe.model.vo.SubProduct;
 
 @Controller
 public class OrderController {
@@ -20,17 +27,55 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
+	@Autowired
+	private CartService cartService;
+	
+	@Autowired
+	private MemberService memberService;
+	
+	/*------------------------------------------------------------*/
+	
+	/*
+	// 기존에 연결을 위해 쓴거 
 	// 주문
 	@RequestMapping("detailView.or")
 	public String DetailOrderList() {
 		return "user/order/order_DetailView";
 		// /WEB-INF/views/user/order/order_DetailView.jsp
+	}*/
+	
+	// 주문/결제 조회용
+	@RequestMapping("detail.or")
+	public String DetailOrder(HttpSession session, Model model) {
+		
+		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		
+		ArrayList<Cart> list = cartService.selectCart(userNo);
+			
+		model.addAttribute("list", list);
+		
+		return "user/order/order_DetailView";
 	}
 	
-	// 결제완료
+	
+	// 결제완료 페이지 이동
 	@RequestMapping("complete.or")
 	public String orderComplete() {
 		return "user/order/order_Complete";
+	}
+	
+	// 주문결제 페이지에서 데이터 추가
+	@RequestMapping("insert.or")
+	public String insertOrder(HttpSession session, Model model) {
+		
+		int result = orderService.insertOrder();
+		
+		if(result > 0) {
+			return "redirect:/";
+		}
+		else {
+			return "redirect:/";
+		}
 	}
 	
 	
@@ -55,7 +100,7 @@ public class OrderController {
 	// 관리자 페이지에서 쓰일 < 페이징 처리 >
 	
 	// 페이징처리를 위한 변수들 셋팅 => PageInfo 객체
-	@RequestMapping("list.or")
+	@RequestMapping("list.or") /**/
 	public String selectOrderList(
 			@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model) {
 

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>admin | 구독 상품</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link href="resources/css/kdh.css" rel="stylesheet">
 </head>
@@ -98,7 +98,7 @@
                  <c:forEach var="sp" items="${ list }"> <!-- SUB_PRODUCT 테이블로부터 읽어오기 -->   
                     <div class="admin_sub_product">
                          <h3>상품명</h3>
-                         <input type="text" id="admin_subproduct_name" value="${ sp.subProductName }">
+                         <input type="text" class="admin_subproduct_name" value="${ sp.subProductName }">
                          <h3>썸네일</h3>
                          <input id="admin_fileUpdate" type="file" name="subfile" hidden>
                           <table class="admin_product">
@@ -107,16 +107,16 @@
                                         <img id="admin_subproduct_img" src="${ sp.subChangeName }">
                                   </td>
                                   <td width="60%">
-                                       <textarea id="admin_subproduct_description">${ sp.subProductDescription }</textarea>
+                                       <textarea class="admin_subproduct_description">${ sp.subProductDescription }</textarea>
                                   </td>
                               </tr>
                           </table>
                          <h3>가격</h3>
-                         <input type="text" id="admin_price" value="${ sp.subPrice }"><span>원</span>
+                         <input type="text" class="admin_price" value="${ sp.subPrice }"><span>원</span>
                        <br>
                        <br>     
            			   <button id="deleteSubProduct" onclick="postFormSubmit(${ sp.subProductNo }, 1);">삭제</button>
-           			   <button id="updateSubProduct" onclick="postFormSubmit(${ sp.subProductNo }, 2);">수정</button>
+           			   <button id="updateSubProduct" onclick="postFormSubmit(${ sp.subProductNo }, 2, this);">수정</button>
                     </div>
                  </c:forEach>
               </c:otherwise>
@@ -127,7 +127,7 @@
            <div class="new_subproduct" hidden>
               <form method="post" action="insert.sp" enctype="multipart/form-data">
                 <h3>상품명</h3>
-                   <input type="text" id="admin_subproduct_name" name="subProductName">
+                   <input type="text" class="admin_subproduct_name" name="subProductName">
                    <h3>썸네일</h3>
                    <input id="admin_fileUpload" type="file" name="subfile" hidden>
                     <table class="admin_product">
@@ -137,12 +137,12 @@
                                   <img id="admin_preview_img">
                             </td>
                             <td width="60%">
-                                 <textarea id="admin_subproduct_description" name="subProductDescription"></textarea>
+                                 <textarea class="admin_subproduct_description" name="subProductDescription"></textarea>
                             </td>
                         </tr>
                     </table>
                    <h3>가격</h3>
-                   <input type="text" id="admin_price" name="subPrice" required><span>원</span>
+                   <input type="text" class="admin_price" name="subPrice" required><span>원</span>
               <br>
               <br>
               <button id="insertSubProduct" type="submit">추가</button>
@@ -162,8 +162,12 @@
          $('#deleteSubProduct').attr("hidden","true")
       }
 
-      function postFormSubmit(spno, num) {
-    	  
+      function postFormSubmit(spno, num, value) {
+    	
+    	var spName = $(value).siblings(".admin_subproduct_name").val();
+    	var spDes = $(value).siblings(".admin_product").find(".admin_subproduct_description").val();
+    	var price = $(value).siblings(".admin_price").val()
+    	
     	if(num == 1) {
   			var url = "delete.sp"
   		}
@@ -175,9 +179,9 @@
     		type : "post",
     		data : { 
     			subProductNo : spno,
-    			subProductName : $('#admin_subproduct_name').val(),
-    			subProductDescription : $('#admin_subproduct_description').val(),
-    			subPrice : $('#admin_price').val()
+    			subProductName : spName,
+    			subProductDescription : spDes,
+    			subPrice : price
     		},
     		success : function(result) {
     			if(num == 1) {
@@ -186,7 +190,7 @@
     	  		}
     			else if(num == 2) {
     	  			alert("상품 정보 수정에 성공 했습니다.");
-    	  			location.href="listView.sp"
+    	  			location.href="listView.sp" 
     	  		}
     	  		else {
     	  			alert("상품에 반영되지 않았습니다");
@@ -196,7 +200,7 @@
     		error : function() {
     			console.log("ajax 통신 실패");
     		}
-    	})  
+    	})   
       }
 
       $('#insertImg').click(function() {

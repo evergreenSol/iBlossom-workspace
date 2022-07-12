@@ -24,7 +24,7 @@ public class OnedayClass {
 	private int classNo;
 	private String className;
 	private int price;
-	private Date classDate;
+	private String classDate;
 	private int capNo;
 	private int resNum;
 	private String classStatus;
