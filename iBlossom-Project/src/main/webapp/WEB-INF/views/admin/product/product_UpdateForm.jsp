@@ -117,7 +117,7 @@
 							
 							
 							<td width="60%"><textarea id="admin_product-description"
-									name="product_description">${p.flowerInfo }</textarea></td>
+									name="flowerInfo">${p.flowerInfo }</textarea></td>
 						</tr>
 					</table>
 					<h3>가격</h3>
