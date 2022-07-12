@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>subscribeListView</title>
+<title>iBlossom | Subscription</title>
 <link href="resources/css/kdh.css" rel="stylesheet">
 </head>
 <body>

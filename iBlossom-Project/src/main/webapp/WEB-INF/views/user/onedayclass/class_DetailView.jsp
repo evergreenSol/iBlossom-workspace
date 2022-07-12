@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,17 +34,21 @@
 	        <form action="ResForm.cl" method="post">
 		        <div>		   
 		            <label for="date" id="res" style="font-size: 15px;">예약일</label><br>
-		            	<select name="date" id="date" style="width:170px;height:25px;font-size: 14px;" required >
-			                <option value="2022-07-22 14:00">2022-07-22 14:00</option>
-			                <option value="2022-07-30 14:00">2022-07-30 14:00</option>
-			                <option value="2022-08-06 14:00">2022-08-06 14:00</option>
+		            	<select name="classNo" id="date" style="width:170px;height:25px;font-size: 14px;" required >
+			                <option value="1">2022-07-22 14:00</option>
+			                <option value="2">2022-07-30 14:00</option>
+			                <option value="3">2022-08-06 14:00</option>
+			                <!-- 리스트에 클래스 정보 담아서 (게시판 내용과 같음) 반복문으로 돌리기(?) -->
+			                 
 			            </select>
 			        </div>
 		        <br><br><br>
-		        <div>
-		            <button type="submit" id="class-res-btn">예약하기</button>
+	        	<div>
+		            <button type="submit" id="class-res-btn" onclick="reservation()">예약하기</button>
 		        </div>
 	        </form>
+
+	        
 	    </div>
 	    <br><br><br><br><br><br><br><br>
 	    <div id="image2">
@@ -52,6 +57,21 @@
 	    </div>     
      </div>
      <br><br>
+     
+     <script>
+     	function reservation(){
+     		let loginUser = "${loginUser}";
+     		if (loginUser == "") {
+     				alert("예약페이지는 로그인 후 사용하실 수 있습니다.");
+     				location.herf="/loginForm.me";
+     		} else {
+     				location.herf="/classDetail.cl";
+     		}
+     	}
+     </script>
+      
+
+
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

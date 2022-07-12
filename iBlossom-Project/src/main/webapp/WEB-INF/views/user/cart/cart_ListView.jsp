@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user_Cart_ListView</title>
+<title>iBlossom | 장바구니</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet">
 <style>
@@ -14,7 +16,7 @@
     /* 전체 */
     #cartMainOuter {
     	width: 1200px;
-    	height: 800px;
+    	height: 3000px;
     	margin: auto;
     }
      
@@ -94,7 +96,7 @@
         display: flex; 
         justify-content: space-between; 
         padding: 45px;
-        height: 340px;
+        height: 400px;
     }
     
     /* 라디오 버튼 세로 정렬 */
@@ -110,9 +112,10 @@
     
     /* 상세옵션 내용 */
     .cart-content3 {
-    	margin-top:30px; 
+    	margin-top: 120px; 
     	line-height: 20px;
     	margin-left: -40px;
+    	font-size: 19px;
     }  
         
     /* 수량 버튼 */
@@ -182,6 +185,84 @@
     .cart-btn:hover {
     	cursor: pointer;
     }
+    
+    /*-------------------------------------------------------*/
+    
+    /* 일단 임시 */
+    
+    /* 레이아웃 외곽 너비 400px 제한*/
+
+	.wrap{
+    max-width: 480px;
+    margin: 0 auto; /* 화면 가운데로 */
+    background-color: #fff;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+	}
+
+	.reviewform textarea{
+	    width: 100%;
+	    padding: 10px;
+	    box-sizing: border-box;
+	}
+	
+	.rating .rate_radio {	
+	    position: relative;	
+	    display: inline-block;	
+	    z-index: 20;	
+	    opacity: 0.001;	
+	    width: 60px;	
+	    height: 60px;	
+	    background-color: #fff;	
+	    cursor: pointer;	
+	    vertical-align: top;	
+	    display: none;
+	}
+	
+	.rating .rate_radio + label {	
+	    position: relative;	
+	    display: inline-block;	
+	    margin-left: -4px;
+	    z-index: 10;	
+	    width: 60px;	
+	    height: 60px;	
+	    background-image: url('./img/starrate.png');	
+	    background-repeat: no-repeat;	
+	    background-size: 60px 60px;	
+	    cursor: pointer;	
+	    background-color: #f0f0f0;	
+	}
+	
+	.rating .rate_radio:checked + label {	
+	    background-color: #ff8;	
+	}
+	
+	.cmd {	
+	    margin-top: 20px;	
+	    text-align: right;	
+	}
+	
+	.cmd input[type="button"]{
+	    padding: 10px 20px;	
+	    border: 1px solid #e8e8e8;	
+	    background-color: #fff;	
+	    background-color:#000;  	
+	    color: #fff;	
+	}
+		
+	.warning_msg {	
+	    display: none;	
+	    position: relative;	
+	    text-align: center;	
+	    background: #ffffff;	
+	    line-height: 26px;	
+	    width: 100%;	
+	    color: red;	
+	    padding: 10px;	
+	    box-sizing: border-box;	
+	    border: 1px solid #e0e0e0;
+	}
 
 
 </style>
@@ -208,7 +289,7 @@
 	                <input type="radio">&nbsp;전체선택 <span>(1/2)</span>
 	            </div>
 	            <div>
-	                <button type="button" class="choice-delete-btn" onclick="location.href='empty.ca'">선택삭제</button>
+	                <button type="button" class="choice-delete-btn" onclick="location.href=''">선택삭제</button>
 	            </div>
 	
 	        </div>
@@ -225,55 +306,58 @@
 	
 	        <!-- 장바구니 내용 -->
 	        <div> 
-	
-	            <div class="cart-content">
-	
-	                <!-- 장바구니 라디오 버튼 -->
-	                <p class="cart-content1">
-	                    <input type="radio">
-	                </p>
-	
-	                <!-- 장바구니 이미지 -->
-	                <span class="cart-content2">
-	                    <img src="resources/images/cart_flower_1.png" style="width:250px; height:250px;">
-	                </span>
-	
-	                <!-- 장바구니 선택항목 상세옵션 -->
-	                <span class="cart-content3">
-	                    
-	                        <!-- 제목 -->
-	                        <div>상품 제목</div> <br> <!-- ${p.flowerName} -->
-	
-	                        <!-- 수령일 -->
-	                        <div>수령일 : 2022-06-21(목)</div><br>
-	
-	                        <!-- 가격 -->
-	                        <!-- <div>가격</div> -->
-	                        <div>6,900원</div><br> <!-- <fmt:formatNumber value="${p.price}" pattern="###,###,###"/> -->
-	
-	                        <!-- 수량 -, + 옵션 -->
-	                        <form name="form" method="get">
-	
-	                                                      금액 : <input type="text" name="sum" size="5" readonly>원 <br><br>
-	                              <input type= "hidden" name="sell_price" value="6900">
-	                              <input type="button" value=" - " onclick="del();" class="cart-num-btn">
-	                              <input type="text" name="amount" value="1" onchange="change();" 
-	                              	     style="width:25px; height:20px; border-radius:3px; border:1px solid; text-align:center;">
-	                              <input type="button" value=" + " onclick="add();" class="cart-num-btn">
-	  
-	                        </form>
-	                        
-	                </span>
-	
-	                <!-- 총 주문 금액 span -->
-	                <p class="cart-content4" style="line-height: 200px;">
-	                	6,900원 
-	                	<a href="">X</a>
-	                </p>
+				<c:forEach var="p" items="${list}">
+				
+		            <div class="cart-content">
+						
+		                <!-- 장바구니 라디오 버튼 -->
+		                <p class="cart-content1">
+		                    <input type="radio">
+		                </p>
+		
+		                <!-- 장바구니 이미지 -->
+		                <span class="cart-content2">
+		                    <img src="${p.thumbnail }" style="width:330px; height:350px;">
+		                </span>
+		
+		                <!-- 장바구니 선택항목 상세옵션 -->
+		                <span class="cart-content3">
+		                    
+		                        <!-- 제목 -->
+		                        <div> ${p.flowerName}</div><br>
+		                        
+		                        <div class="num">
+
+					                <!-- 장바구니 수량 변경 -->
+					
+					                <div class="updown">
+					
+					                    <input type="text" name="p_num1" id="p_num1" size="2" maxlength="4" class="p_num" value="2">
+					
+					                    <span><i class="fas fa-arrow-alt-circle-up up"></i></span>
+					
+					                    <span><i class="fas fa-arrow-alt-circle-down down"></i></span>
+					
+					                </div>
+					
+					            </div>
+		                       
+		                </span>
+
+		                <!-- 장바구니 상품 합계 -->
+
+			            <div class="sum cart-content4"
+			             	 class="bigtext right-align box blue summoney" id="sum_p_price" 
+			            	 style="line-height: 280px; font-size:19px;">40,000원</div>
+						<!-- <fmt:formatNumber type="number" maxFractionDigits="3" value="${p.productPrice}" />원 -->
+			            <div class="basketcmd"><a href="#" class="abutton">X</a></div>
+		            
+		            </div>
 	            
-	            </div>
+	            </c:forEach>
 	
-	            <!-- 1개 선택항목 끝난 후 구분선 -->
+				<br>
+				
 	            <hr>
 	
 	        </div> 
@@ -374,41 +458,12 @@
 	
 	        <!-- 결제하기 버튼 -->
 	        <div>
-	            <button class="cart-btn" type="submit" onclick="location.href='detailView.or'">결제하기</button>
+	            <button class="cart-btn" type="submit" onclick="location.href='detail.or'">결제하기</button>
 	        </div>
 	        
 	    </div>
   
-    </div>
-    
-    <!-- 
-   
-	    <div style="width: 1200px; height: 800px; margin: auto;">
-	    
-		    <div style="font-weight:700; font-size:34px; margin-bottom:15px; float:left;">&nbsp;쇼핑백</div>
-		    
-		    	<br><br><br>
-		    	
-		    	<hr>
-				    <div style="padding:160px; text-align: center;">
-				    
-		                <div>
-		                    <img src="resources/images/cart_zero_img.png" style="width:50px; height:50px; margin-bottom:14px;">
-		                </div>
-					      
-					    <div style="font-size:large; margin-bottom:27px;">쇼핑백에 담긴 상품이 없습니다</div>
-					    
-					    <div>
-					    	<button class="" type="button" onclick="location.href=''" 
-					    	        style="width:320px; height:50px; background-color:black; color:white; border-radius:3px;">
-					    	쇼핑하러가기</button>
-					    </div>
-				    				    	
-				    </div>
-			   <hr>
-	    </div>
-	    
-	 -->    
+    </div>    
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 

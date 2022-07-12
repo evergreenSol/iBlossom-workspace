@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user_Order_Complete</title>
+<title>iBlossom | 결제완료</title>
 <link href="resources/css/ldo.css" rel="stylesheet">
 <style>
 
@@ -121,7 +121,7 @@
                             <div><img src="resources/images/order_complete_check.png" style="width:54px; height:54px;"></div>
 
                             <!-- 멘트 -->
-                            <div style="font-weight:bold; font-size:medium;">아무개님의 주문이 완료되었습니다.</div><!-- ${m.userName} -->
+                            <div style="font-weight:bold; font-size:medium;">${ m.userName } 님의 주문이 완료되었습니다.</div><!-- ${m.userName} -->
                             <br>
 
                             <!-- 주문번호 -->

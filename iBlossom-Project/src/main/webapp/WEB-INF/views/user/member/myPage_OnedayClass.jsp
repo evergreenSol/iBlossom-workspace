@@ -75,7 +75,7 @@
                         <br><br>
 
                         <div class="mypage-to-class-wrap">
-                            <button class="mypage-to-class" id="sendEmail">클래스 보러 가기</a>
+                            <button class="mypage-to-class" id="mypage-to-class">클래스 보러 가기</button>
                         </div>
 
                         <br><br>
@@ -93,6 +93,14 @@
     <br><br>
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+    
+    <script>
+    	$(function () {
+    		$("#mypage-to-class").click(function() {
+    			location.href="classDetail.cl";
+    		});
+    	});
+    </script>
              
 </body>
 </html>
