@@ -48,7 +48,7 @@
 	<update id="updateClassCap" parameterType="onedayclass">
   		UPDATE ONECLASS
   		   SET RES_NUM = RES_NUM+1
-  		 WHERE CLASS_NO = #{ classNo }
+  		 WHERE CLASS_NO = #{classNo}
   	</update>
 
 </mapper>

@@ -167,8 +167,6 @@ public class MemberController {
 	}
 	
 	
-	
-	
 	// 메뉴바의 "상품관리" 클릭해서 요청한 경우 => /list.pr (기본적으로 1 번 페이지를 요청하게끔 처리)
 	   // 페이징바의 "숫자" 를 클릭해서 요청한 경우 => /list.pr?cpage=요청하는페이지수
 
@@ -326,6 +324,7 @@ public class MemberController {
 		if(result > 0) {
 			Member updateMem = memberService.login(m);
 			session.setAttribute("loginUser", updateMem);
+			session.setAttribute("alertMsg", "수정이 완료되었습니다.");
 			return "redirect:updateForm.me";
 		}
 		else {
@@ -407,18 +406,33 @@ public class MemberController {
       return "user/member/myPage_ReviewListView";
    }
    
+   // 마이페이지 1대1문의
    @RequestMapping(value="qnaListView.me")
    public String myPageQnaListView(HttpSession session, Model model) {
       
       int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
       
-      ArrayList<Qna> list = qnaService.selectMyQna(userNo);
+      ArrayList<Qna> list = qnaService.selectMyQnaList(userNo);
       
-      System.out.println(list);
+      // System.out.println(list);
       
       model.addAttribute("list", list);
 
       return "user/member/myPage_QnaListView";
+   }
+   
+   // 1대1문의 상세보기
+   @RequestMapping(value="qnaDetailView.me")
+   public String myPageQnaDetailView(int qnaNo, Model model) {
+	   
+	   // System.out.println(qnaNo);
+	   
+	   Qna q = qnaService.selectQna(qnaNo);
+	   
+	   model.addAttribute("q", q);
+	   
+	   return "user/member/myPage_QnaDetailView";
+	   
    }
    
    
