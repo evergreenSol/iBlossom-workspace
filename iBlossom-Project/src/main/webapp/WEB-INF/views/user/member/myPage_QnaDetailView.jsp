@@ -21,6 +21,7 @@
         border-style: solid;
         border-radius: 20px;
         width : 500px;
+        text-align:left;
         
     }
  
