@@ -87,6 +87,13 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.selectId(sqlSession, email);
 	}
 
+	@Override
+	public int updateSubPurchase(HashMap<String, Integer> map) {
+		
+		return memberDao.updateSubPurchase(sqlSession, map);
+	}
+
+
 	// 회원 상세조회
 //	   @Override
 //	   public Member selectMember(int userNo) {
