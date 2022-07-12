@@ -11,12 +11,21 @@ import com.kh.iblossom.order.model.vo.Order;
 
 @Repository
 public class OrderDao {
+	
+	// 주문/결제 조회용
+	public ArrayList<Order> detailOrder(SqlSessionTemplate sqlSession, int userNo) {
 
+		 return (ArrayList)sqlSession.selectList("orderMapper.detailOrder", userNo); 
+	}
+
+	
 	public int selectOrderListCount(SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("orderMapper.selectOrderListCount");
 	}
 
+	
+	// 페이징처리
 	public ArrayList<Order> selectOrderList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		
 		int limit = pi.getBoardLimit();
@@ -26,5 +35,7 @@ public class OrderDao {
 
 		return (ArrayList)sqlSession.selectList("orderMapper.selectOrderList", null, rowBounds);
 	}
+
+
 
 }

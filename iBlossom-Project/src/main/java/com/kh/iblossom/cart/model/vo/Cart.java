@@ -10,6 +10,7 @@ public class Cart {
 	private int productNo; // PRODUCT_NO NUMBER NOT NULL,	
 	private int productCount; // PRODUCT_COUNT NUMBER NOT NULL,
 	private int productPrice; // PRODUCT_PRICE NUMBER NOT NULL,
+	
 	private String flowerName; 
 	private String thumbnail; 
 	

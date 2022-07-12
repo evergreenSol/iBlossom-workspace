@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,8 +70,8 @@
         padding-bottom: 60px;
     }
     
-    /* 1. 주문내역 확인 2. 주문자 정보 3. 발신인 이름 
-       4. 배송지 정보 5. 배송지 추가 6. 결제 수단 7. 카카오페이*/
+    /* 1. 주문내역 확인 2. 주문자 정보 3. 발신인 이름  (220711 수령일추가)
+       4. 배송지 정보  5. 배송지 추가  6. 결제 수단 7. 카카오페이*/
        
     /* 결제 수단과 카카오페이는 삭제 했지만 결제수단을 주소 데이터값 뽑는 용도로 사용할 것임 */
     .order-check, .order-orderer, .order-sender, .order-receiveDate,
@@ -132,7 +134,12 @@
         border-radius: 3px;  
     }
 
-
+	/* 수령일 input 태그 */
+	#ReceiveBox>input {
+		padding: 18px; 
+        width: 160px;
+        border-radius: 3px;   
+	}
 
     /* ----------------------------------------------------------- */
     /* 주문내역 확인 - 내용 */
@@ -310,7 +317,8 @@
         background-color: black; 
         color:white;
     }
-          
+    
+    /* 결제하기 버튼 호버시 */   
     .order-btn:hover {
     	cursor: pointer;	
     }
@@ -376,9 +384,89 @@
 	.address-footer>button:hover {
 		cursor: pointer;
 		font-weight: 500;
-	}	
+	}
 	
-   
+	
+	
+	/* ----------------------------------------------------------- */
+	/* 수령일 css */
+	
+	/*datepicker ui */
+	 .ui-widget-header { border: 0px solid #dddddd; background: #fff; } 
+	
+	 .ui-datepicker-calendar>thead>tr>th { font-size: 14px !important; } 
+	
+	 .ui-datepicker .ui-datepicker-header { position: relative; padding: 10px 0; } 
+	
+	 .ui-state-default,
+	 .ui-widget-content .ui-state-default,
+	 .ui-widget-header .ui-state-default,
+	 .ui-button,
+	 html .ui-button.ui-state-disabled:hover,
+	 html .ui-button.ui-state-disabled:active { border: 0px solid #c5c5c5; background-color: transparent; font-weight: normal; color: #454545; text-align: center; } 
+	
+	 .ui-datepicker .ui-datepicker-title { margin: 0 0em; line-height: 16px; text-align: center; font-size: 14px; padding: 0px; font-weight: bold; } 
+	
+	 .ui-datepicker { display: none; background-color: #fff; border-radius: 4px; margin-top: 10px; margin-left: 0px; margin-right: 0px; padding: 20px; padding-bottom: 10px; width: 300px; box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.1); } 
+	
+	 .ui-widget.ui-widget-content { border: 1px solid #eee; } 
+	
+	.ui-datepicker-prev ui-corner-all { font-family : auto; }
+	
+	 #datepicker:focus>.ui-datepicker { display: block; } 
+	
+	 .ui-datepicker-prev,
+	 .ui-datepicker-next { cursor: pointer; } 
+	
+	 .ui-datepicker-next { float: right; } 
+	
+	 .ui-state-disabled { cursor: auto; color: hsla(0, 0%, 80%, 1); } 
+	
+	 .ui-datepicker-title { text-align: center; padding: 10px; font-weight: 100; font-size: 20px; } 
+	
+	 .ui-datepicker-calendar { width: 100%; } 
+	
+	 .ui-datepicker-calendar>thead>tr>th { padding: 5px; font-size: 20px; font-weight: 400; } 
+	
+	 .ui-datepicker-calendar>tbody>tr>td>a { color: #000; font-size: 12px !important; font-weight: bold !important; text-decoration: none;}
+	
+	 .ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover { cursor: auto; background-color: #fff; } 
+	
+	 .ui-datepicker-calendar>tbody>tr>td { border-radius: 100%; width: 44px; height: 30px; cursor: pointer; padding: 5px; font-weight: 100; text-align: center; font-size: 12px; } 
+	
+	 .ui-datepicker-calendar>tbody>tr>td:hover { background-color: transparent; opacity: 0.6; } 
+	
+	 .ui-state-hover,
+	 .ui-widget-content .ui-state-hover,
+	 .ui-widget-header .ui-state-hover,
+	 .ui-state-focus,
+	 .ui-widget-content .ui-state-focus,
+	 .ui-widget-header .ui-state-focus,
+	 .ui-button:hover,
+	 .ui-button:focus { border: 0px solid #cccccc; background-color: transparent; font-weight: normal; color: #2b2b2b; } 
+	
+	 .ui-widget-header .ui-icon { background-image: url('./btns.png'); } 
+	
+	 .ui-icon-circle-triangle-e { background-position: -20px 0px; background-size: 36px; } 
+	
+	 .ui-icon-circle-triangle-w { background-position: -0px -0px; background-size: 36px; } 
+	
+	 .ui-datepicker-calendar>tbody>tr>td:first-child a { color: red !important; } 
+	
+	 .ui-datepicker-calendar>tbody>tr>td:last-child a { color: #0099ff !important; } 
+	
+	 .ui-datepicker-calendar>thead>tr>th:first-child { color: red !important; } 
+	
+	 .ui-datepicker-calendar>thead>tr>th:last-child { color: #0099ff !important; } 
+	
+	 .ui-state-highlight,
+	 .ui-widget-content .ui-state-highlight,
+	 .ui-widget-header .ui-state-highlight { border: 0px; background: #f1f1f1; border-radius: 50%; padding-top: 10px; padding-bottom: 10px; } 
+	
+	 .inp { padding: 10px 10px; background-color: #f1f1f1; border-radius: 4px; border: 0px; } 
+	
+	 .inp:focus { outline: none; background-color: #eee; }  	
+	   
 </style>
 
 
@@ -408,6 +496,15 @@
         $("#SenderBtn").on("click", function() {
             // id가 "SenderBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
             $("#SenderBox").slideToggle("1500");
+        });
+    });
+</script>
+
+<script>
+    $(function() {
+        $("#ReceiveBtn").on("click", function() {
+            // id가 "ReceiveBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
+            $("#ReceiveBox").slideToggle("1500");
         });
     });
 </script>
@@ -507,11 +604,7 @@
                                 <!-- 상품 옵션 확인란 -->
                                 <div class="order-check-list"><br>
                                         <!-- 상품 제목 -->
-                                        <li>상품 제목</li>
-                                        <br>
-
-                                        <!-- 수령일 : YYYY-MM-DD(D) -->
-                                        <li>수령일 : 2022-06-21(목)</li><!-- <fmt:formatDate value="" pattern="yyyy-MM-dd(D)"/> -->
+                                        <li>${p.flowerName}</li>
                                         <br>
 
                                         <!-- 가격(원) / 수량(개) -->
@@ -585,14 +678,37 @@
                             </button>
                         </div>
 
-                        <hr>
-
-                        <div id="ReceiveBox">
-                        	<input type="text" id="receiveDate" name="deliverAt" required>
+                        <div id="ReceiveBox" style="margin-top:0px;">
+                        	<input type="text" class="datepicker" id="datepicker" name="deliverAt" required>
                         </div>
                     </div>
                     
-                    <hr>     
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+					<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+                                
+		            <!-- 수령일 script -->
+		            <script>
+		        		$.datepicker.setDefaults({
+		        		  dateFormat: 'yy-mm-dd',
+		        		  prevText: '<',
+		        		  nextText: '>',
+		        		  monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		        		  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		        		  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+		        		  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+		        		  dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+		        		  showMonthAfterYear: true,
+		        		  yearSuffix: '년',
+		        		  minDate: "+1D", //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+		        	      maxDate: "+1M"
+		        		});
+		        		
+		        		$(function () {
+		        		  $('.datepicker').datepicker();
+		        		});
+					</script>
+                    
+                    <hr> 
                     
                     <!-- 4. 배송지 정보 -->
                     <div>
@@ -839,7 +955,6 @@
                 })
                 
             </script>
-            
  
         </div><!-- 1200px 너비 -->
         

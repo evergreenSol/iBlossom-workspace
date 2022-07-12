@@ -2,6 +2,8 @@ package com.kh.iblossom.order.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.common.template.Pagination;
+import com.kh.iblossom.member.model.service.MemberService;
+import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.order.model.service.OrderService;
 import com.kh.iblossom.order.model.vo.Order;
-import com.kh.iblossom.product.model.vo.Product;
 
 @Controller
 public class OrderController {
@@ -20,12 +23,33 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
+	@Autowired
+	private MemberService memberService;
+	
+	/*------------------------------------------------------------*/
+	
+	/*
+	// 기존에 연결을 위해 쓴거 
 	// 주문
 	@RequestMapping("detailView.or")
 	public String DetailOrderList() {
 		return "user/order/order_DetailView";
 		// /WEB-INF/views/user/order/order_DetailView.jsp
+	}*/
+	
+	// 주문/결제 조회용
+	@RequestMapping("detail.or")
+	public String DetailOrder(HttpSession session, Model model) {
+		
+		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		
+		ArrayList<Order> list = orderService.detailOrder(userNo);
+			
+		model.addAttribute("list", list);
+		
+		return "user/order/order_DetailView";
 	}
+	
 	
 	// 결제완료
 	@RequestMapping("complete.or")
