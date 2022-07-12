@@ -22,7 +22,7 @@
         <br>
           <form name="form" method="get" action="insert.ca">
           <input type="hidden" name="productNo" value="${ p.productNo }">
-          <input type="hidden" name="userNo" value="${ loginUser.userNo }">
+          <!-- <input type="hidden" name="userNo" value="${ loginUser.userNo }"> -->
             <table>
     		
                 <tr>
