@@ -2,6 +2,8 @@ package com.kh.iblossom.cart.controller;
 
 import java.util.ArrayList;
 
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,17 +83,20 @@ public class CartController {
 
 	// 조합형 장바구니
 	@RequestMapping("insertCo.ca")
-	public void inserCommandCartList(CartCommand cartCommand, HttpSession session, Model model) {
+	public void inserCommandCartList(CartCommand cartCommand, HttpServletRequest request, HttpSession session, Model model) {
 
 		//Member loginUser = (Member) session.getAttribute("loginUser");
-
-		System.out.println(cartCommand);
+		
+		//request.getParameter("0");
+		System.out.println(request.getParameter("sum"));
+		System.out.println(request.getParameter("1"));
 		//System.out.println(loginUser);
 		ArrayList<Cart> list = (ArrayList<Cart>) cartCommand.getCartList();
 		
-		System.out.println(list);
-		System.out.println(list.get(0).getProductNo());
-		System.out.println(list.get(1).getProductNo());
+		/*
+		 * System.out.println(list); System.out.println(list.get(0).getProductNo());
+		 * System.out.println(list.get(1).getProductNo());
+		 */
 		/*
 		 * if(loginUser == null) { return "common/login"; } else { // Service 단으로 cart 를
 		 * 넘겨서 insert 요청 cartCommand.setUserNo(loginUser.getUserNo()); int result =
