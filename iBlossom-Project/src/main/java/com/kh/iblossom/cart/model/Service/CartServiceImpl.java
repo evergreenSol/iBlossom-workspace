@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.kh.iblossom.cart.model.dao.CartDao;
 import com.kh.iblossom.cart.model.vo.Cart;
-import com.kh.iblossom.cart.model.vo.CartCommand;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -41,15 +40,6 @@ public class CartServiceImpl implements CartService {
 	}
 
 
-	@Override
-	public int inserCommandCartList(CartCommand cartCommand) {
-		
-		return cartDao.inserCommandCartList(sqlSession, cartCommand);
-	}
-	
-	
-
-
 
 	/*@Override
 	public ArrayList<Cart> selectCartList() {
@@ -57,7 +47,6 @@ public class CartServiceImpl implements CartService {
 		return cartDao.selectCartList(sqlSession);
 	}
 	*/
-
 	
 	
 
