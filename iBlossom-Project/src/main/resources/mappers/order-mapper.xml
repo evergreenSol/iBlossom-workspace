@@ -16,23 +16,97 @@
 		<result column="ORDER_STATUS" property="orderStatus"/><!-- 주문상태 -->
 		<result column="DELIVERY_STATUS" property="deliveryStatus"/><!-- 배송상태 -->
 		<result column="RECEIPT_ID" property="receiptId"/><!-- 결제번호 -->
+		
+		<result column="FLOWER_NAME" property="flowerName" /><!-- 상품 제목 -->
+		<result column="THUMBNAIL" property="thumbnail" /><!-- 썸네일 -->
 	</resultMap>
 	
-	<!-- 조회 -->
+	<!--
 	<select id="selectOrderListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM ORDER_TBL
 		WHERE ORDER_STATUS = 'Y'
 	</select>
+	-->
 	
+	<!--
 	<select id="selectOrderList" resultMap="orderResultSet">
 		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, PRICE, 
 		       TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE",
-		       TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", TAG, ORDER_STATUS
+		       TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", ORDER_STATUS
 		FROM ORDER_TBL
 		WHERE ORDER_STATUS = 'Y'
 		ORDER BY ORDER_DATE DESC, ORDER_NO DESC
 	</select>
+	-->
+	<!-- 
+  	<select id="selectCart" resultMap="cartResultSet">
+  		SELECT CART_NO, USER_NO, PRODUCT_NO, FLOWER_NAME, PRODUCT_PRICE, PRODUCT_COUNT, THUMBNAIL
+  		FROM CART
+		JOIN PRODUCT USING (PRODUCT_NO)
+		WHERE USER_NO = #{userNo}
+  	</select>
+  	 -->
+  	<!--  
+  	<insert id="insertCart" resultMap="orderResultSet">
+  		INSERT INTO ORDER_TBL (CART_NO
+  							 , USER_NO
+  							 , PRODUCT_NO
+  							 , FLOWER_NAME
+  							 , PRODUCT_PRICE
+  							 , PRODUCT_COUNT
+  							 , THUMBNAIL)
+  		VALUES(SEQ_PNO.NEXTVAL
+		     , #{userNo}
+		     , #{productNo}
+		     , #{flowerName}
+		     , #{productPrice}
+		     , #{productCount}
+		     , #{thumbnail}
+		JOIN PRODUCT USING (PRODUCT_NO)
+		WHERE USER_NO = #{userNo}
+  	</insert>
+  	-->
+	
+	<!-- 조회 
+	<select id="detailOrder" resultMap="orderResultSet">
+		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, PRICE, 
+		       TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE",
+		       TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", ORDER_STATUS
+		FROM ORDER_TBL
+		WHERE ORDER_STATUS = 'Y'
+		ORDER BY ORDER_DATE DESC, ORDER_NO DESC
+	</select>
+	-->
+	
+	<!-- 추가 
+	<insert id="insertOrder" parameterType="Order">
+  		INSERT INTO ORDER_TBL(ORDER_NO
+		                    , USER_NO
+		                    , TOTAL_PRICE
+		                    , ORDER_DATE
+		                    , RECEIVE_DATE
+		                    , RECEIVE_USER
+		                    , RECEIVE_PHONE
+		                    , ORDER_ADDRESS
+		                    , POSTCODE
+		                    , ORDER_STATUS
+		                    , DELIVERY_STATUS
+		                    , RECEIPT_ID)
+		VALUES(SEQ_PNO.NEXTVAL
+		     , #{userNo}
+		     , #{totalPrice}
+		     , #{orderDate}
+		     , #{receiveDate}
+   		     , #{receiveUser}
+		     , #{receivePhone}
+   		     , #{orderAddress}
+		     , #{postcode}
+		     , #{orderStatus}
+		     , #{deliveryStatus}
+		     , #{receiptId)
+  	</insert>
+  	-->
 
 
 </mapper>

@@ -11,21 +11,36 @@ import com.kh.iblossom.cart.model.vo.CartCommand;
 @Repository
 public class CartDao {
 	
-	// 장바구니 상품 조회용 메소드
-	public ArrayList<Cart> selectCartList(SqlSessionTemplate sqlSession) {
+	// 상품이 담겨져있는 장바구니 조회용
+	public ArrayList<Cart> selectCart(SqlSessionTemplate sqlSession, int userNo) {
 		
-		 return (ArrayList)sqlSession.selectList("cartMapper.selectCartList"); 
+		 return (ArrayList)sqlSession.selectList("cartMapper.selectCart", userNo); 
 	}
+	
+
+	
+	/*--------------------------------------------------------*/
+	// 상세페이지 -> cart 연결용
 	
 	// 장바구니 상품 추가용 메소드
 	public int insertCartList(SqlSessionTemplate sqlSession, Cart c) {
 
 		 return sqlSession.insert("cartMapper.insertCartList", c);
 	}
+
 	
-	// 장바구니 상품 추가용(조합형) 메소드
+  // 장바구니 상품 추가용(조합형) 메소드
 	public int inserCommandCartList(SqlSessionTemplate sqlSession, CartCommand cartCommand) {
 
 		 return sqlSession.insert("cartMapper.inserCommandCartList", cartCommand);
 	}
+
+	
+	/*
+	public ArrayList<Cart> selectCartList(SqlSessionTemplate sqlSession) {
+
+		return (ArrayList)sqlSession.selectList("cartMapper.selectCartList"); 
+	}*/
+
+
 }

@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user_Order_DetailViewCheck</title>
+<title>iBlossom | Subscription</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
@@ -200,10 +201,6 @@
                         <div class="order-address-add">
 
                             <!-- 모달의 원리 : 이 버튼 클릭시 data-target에 제시되어있는 해당 아이디의 div요소를 띄워줌 -->
-                            <div class="userAddress"><br>
-                            	<span id="postalAddress"></span>
-                            	<span id="detailAddress"></span>
-                            </div>
                             <button type="button" class="address-btn" data-toggle="modal" data-target="#modal-overlay">
                                 + 배송지 추가
                             </button>
@@ -222,11 +219,11 @@
                                 <div class="address-content">
 									<!-- placeholder를 나중에 loginUser.XXXX 으로 변경 수신인 default는 로긴한 사람-->
                                     <!-- 이름 -->
-                                    <input type="text" id="subReceiverUser" size="70" value="${ loginUser.userName }" onfocus="this.value=''" required><br>
+                                    <input type="text" id="subReceiverUser" size="70" value="${ loginUser.userName }" onfocus="this.value=''" onblur="this.placeholder='이름을 입력해주세요.'" required><br>
                                     
                                     <hr>
                                     <!-- 연락처 -->
-                                    <input type="tel" id="subReceiverPhone" size="70" value="${ loginUser.phone }" onfocus="this.value=''" required><br> 
+                                    <input type="tel" id="subReceiverPhone" size="70" placeholder="010-0000-0000" value="${ loginUser.phone }" onfocus="this.value=''" onblur="this.placeholder='010-0000-0000'" required><br> 
                                     <hr>
 
                                     <p>주소</p>
@@ -247,7 +244,7 @@
 	                                    </c:when>
 	                                    <c:otherwise>
 	                                    	<c:choose>
-	                                    		<c:when test="${ fn.length(loginUser.postcode) < 5 }">
+	                                    		<c:when test="${ fn:length(loginUser.postcode) < 5 }">
 	                                    			<input type="text" name="zipcode" id="zipcode" size="70" value="0${ loginUser.postcode }" onfocus="this.value='우편번호검색'" readonly>
 	                                    		</c:when>
 	                                    		<c:otherwise>
@@ -327,14 +324,18 @@
                     </div>
 
                     <hr>
-					
+
+					<div class="userAddress"><br>
+                            	<span id="postalAddress"></span>
+                            	<span id="detailAddress"></span>
+                    </div>
+                    
 					<br><br>
 					
                     <!-- 버튼 두개 -->
                     <div class="order-two-btn">
 
-                        <!-- 경로 : 장바구니 페이지  -->
-                        <a href="" class="pre-btn" type="button">이전으로 가기</a>
+                       <button class="pre-btn" type="button" onclick="location.href='list.ca'">이전으로</button>
                     
                     </div>
 
@@ -391,9 +392,30 @@
 			
             <!-- 결제하기 버튼 -->
             <div>
-                <button class="order-btn" onclick="getBillingKey(${ subLevel });">결제하기</button>
+                <button class="order-btn" onclick="pay();">결제하기</button>
                 <button class="order-btn" onclick="cancelSubscribe();">취소하기</button>
             </div>
+            
+                       <!-- follow quick menu -->
+            <script>  
+       
+             $(window).scroll(function(){
+                
+                var scrollTop = $(document).scrollTop();
+                
+                if (scrollTop < 180) {
+                 scrollTop = -30; 
+                }
+                
+                $(".order-right").stop();
+                $(".order-right").animate( { "top" : scrollTop }
+                );
+                
+             });
+       
+            </script>
+            
+            
             <input type="hidden" id="userNo" value="${ loginUser.userNo }">
             <input type="hidden" id="userName" value="${ loginUser.userName }">
             <input type="hidden" id="email" value="${ loginUser.email }">
@@ -403,6 +425,23 @@
       	</div><!-- 전체 색상 변경 div -->
 
 	<script>	
+	function pay() {
+		var subReceiverUser = $('#subReceiverUser').val()
+		var subReceiverPhone = $('#subReceiverPhone').val()
+		var subReceiverPostcode = $('#zipcode').val()
+		var deliverTo1 = $('#address1').val() 
+		var deliverTo2 = $('#address2').val()
+		
+		if (subReceiverPhone=="" || subReceiverUser=="" || subReceiverPostcode=="" || deliverTo1=="" || deliverTo2==""){
+			alert("모든 양식을 기입해야 결제가 가능합니다!");
+		}
+		else {
+			
+			var subLevel = $('#subLevel').val()
+			getBillingKey(subLevel)
+		}
+	}
+	
 	
 	// 빌링키 발급
 	function getBillingKey(numOfPay) {
@@ -429,6 +468,7 @@
 			console.log(data);
 		}).done(function (data) {
 			var totalPrice = $('#totalPrice').val();
+			console.log(totalPrice);
 			var subProductName = $('#subProductName').val();
 			if(numOfPay==1) {
 				// 정기결제 - 무한반복
@@ -443,6 +483,7 @@
 	
 	// 정기결제 - 무한반복
 	function subscribe(billingKey, totalPrice, subProductName, receiptId, numOfPay) {
+		console.log(totalPrice);
 		$.ajax({
 			url : "subscribe.do",
 			type : "post",
@@ -457,6 +498,7 @@
 				subLevel : $('#subLevel').val(),
 				subReceiverUser : $('#subReceiverUser').val(),
 				subReceiverPhone : $('#subReceiverPhone').val(),
+				subReceiverPostcode : $('#zipcode').val(),
 				deliverAt : new Date($('#deliverAt').val()),
 				deliverTo : $('#address1').val() + $('#address2').val(),
 				deliverStatus : "배송준비",
@@ -474,6 +516,7 @@
 	
 	// 일시불 (바로 requestPay 로 점프)
 	function requestPay(billingKey, receiptId, totalPrice, subProductName, numOfPay) {
+		console.log(totalPrice);
 		
 		$.ajax({
 			url : "requestSubscribe.do",
@@ -482,10 +525,11 @@
 				billingKey : billingKey,
 				totalPrice : totalPrice,
 				subProductName : subProductName,
+				totalPrice : totalPrice
 			},
 			success : function(data) {
 				console.log("상품 결제 성공");
-				insertSubscribe(numOfPay, receiptId);
+				insertSubscribe(numOfPay, receiptId, totalPrice);
 			}, error : function() {
 				console.log("상품 결제 실패");
 			}
@@ -493,7 +537,8 @@
 	}
 	
 	// DB에 구독 객체 넣기?
-	function insertSubscribe(numOfPay, receiptId) {
+	function insertSubscribe(numOfPay, receiptId, totalPrice) {
+		console.log(totalPrice);
 		$.ajax({
 			url : "insert.su",
 			type : "post",
@@ -504,11 +549,13 @@
 				subLevel : $('#subLevel').val(),
 				subReceiverUser : $('#subReceiverUser').val(),
 				subReceiverPhone : $('#subReceiverPhone').val(),
+				subReceiverPostcode : $('#zipcode').val(),
 				deliverAt : new Date($('#deliverAt').val()),
-				deliverTo : $('#address1').val() + $('#address2').val(),
+				deliverTo : $('#address1').val() + " " + $('#address2').val(),
 				deliverStatus : "배송준비",
 				receiptId : receiptId,
-				numOfPay : numOfPay
+				numOfPay : numOfPay,
+				totalPrice : totalPrice
 			},
 			success : function(data) {
 				console.log("DB 넣음")		

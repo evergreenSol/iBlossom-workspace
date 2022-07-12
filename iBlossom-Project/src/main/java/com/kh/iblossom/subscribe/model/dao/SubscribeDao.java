@@ -2,8 +2,10 @@ package com.kh.iblossom.subscribe.model.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -51,12 +53,6 @@ public class SubscribeDao {
 		return sqlSession.insert("subscribeMapper.insertSubscribe", s);
 	}
 	
-	// 마이페이지 구독조회
-	public ArrayList<Subscribe> selectMySubscribe(SqlSessionTemplate sqlSession, int userNo) {
-		
-		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribe", userNo);
-	}
-
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("subscribeMapper.selectListCount");
@@ -88,4 +84,28 @@ public class SubscribeDao {
 		return (ArrayList)sqlSession.selectList("subscribeMapper.selectSearchList", map, rowBounds);
 	}
 
+	
+	// 마이페이지 구독 취소
+	public int cancelMySubList(SqlSessionTemplate sqlSession, String receiptId) {
+		
+		return sqlSession.update("subscribeMapper.cancelMySubList", receiptId);
+	}
+	
+	public int updateDeliverStatus(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.update("subscribeMapper.updateDeliverStatus", null);
+	}
+	
+	
+	
+	// 마이페이지 구독조회
+	public ArrayList<Map<String,String>> selectMySubReceiptId(SqlSessionTemplate sqlSession, int userNo) {
+		
+		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubReceiptId", userNo);
+	}
+	
+	public ArrayList<Subscribe> selectMySubscribe(SqlSessionTemplate sqlSession, String receiptId) {
+		
+		return (ArrayList)sqlSession.selectList("subscribeMapper.selectMySubscribe", receiptId);
+	}
 }

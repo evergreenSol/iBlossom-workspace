@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>admin | 구독회원</title>
 <link href="resources/css/kdh.css" rel="stylesheet">
 <style>
 #pagingArea {
@@ -152,7 +152,7 @@
                 <input type="submit" id="selectbtn" value="검색">
             </form>
         </div>
-
+		<a href="review.do">테스트</a>
         <div style="padding-top: 100px;">
             <table id="productTable" border="1px solid" align="center">
                 <thead>
@@ -239,5 +239,8 @@
 	    </div>
        	
     </div>
+    
+
+    
 </body>
 </html>

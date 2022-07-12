@@ -13,6 +13,7 @@ public class Subscribe {
 	private int subLevel;
 	private String subReceiverUser;
 	private String subReceiverPhone;
+	private int subReceiverPostcode;
 	private Date deliverAt;
 	private String deliverTo;
 	private String deliverStatus;
@@ -24,4 +25,5 @@ public class Subscribe {
 	private String subProductName;
 	private int subPrice;
 	private int count;
+	private String subChangeName;
 }

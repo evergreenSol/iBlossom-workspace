@@ -30,6 +30,11 @@ public class SubscribeController {
 	
 	@Autowired private SubscribeService subscribeService;
 	 	
+	@RequestMapping("review.do")
+	public String review() {
+		return "admin/subscribe/test";
+	}
+	
 	@RequestMapping("listView.su")
 	public String subscribeListView(Model model) {
 
@@ -39,6 +44,8 @@ public class SubscribeController {
 		
 		return "user/subscribe/subscribe_ListView";
 	}
+	
+
 	
 	@ResponseBody
 	@RequestMapping(value="getSubProduct.su", produces="application/json; charset=UTF-8")
@@ -57,14 +64,11 @@ public class SubscribeController {
 
 		model.addAttribute("list",list);
 		
-		return "user/subscribe/subProduct_ListView";
+		return "admin/subscribe/subProduct_ListView";
 	}
 	
 	@RequestMapping("insert.sp")
 	public String insertSubProduct(SubProduct sp, MultipartFile subfile, HttpSession session, Model model) {
-		
-		System.out.println(sp);
-		System.out.println(subfile);
 		
 		if(!subfile.getOriginalFilename().equals("")) {
 			
@@ -106,7 +110,7 @@ public class SubscribeController {
 	
 	@ResponseBody
 	@RequestMapping(value="update.sp", produces="text/html; charset=UTF-8")
-	public String ajaxUpdateSubProduct(SubProduct sp) {
+	public String updateSubProduct(SubProduct sp) {
 		
 		int result = subscribeService.updateSubProduct(sp);
 
@@ -164,7 +168,7 @@ public class SubscribeController {
 		model.addAttribute("pi", pi);
 		model.addAttribute("list",list);
 		
-		return "user/subscribe/subMember_ListView";
+		return "admin/subscribe/subMember_ListView";
 	}
 	
 	@RequestMapping("search.su")
@@ -185,9 +189,7 @@ public class SubscribeController {
 		
 		// 조회 요청
 		ArrayList<Subscribe> list = subscribeService.selectSearchList(pi, map);
-		
-		// System.out.println(list);
-		
+
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
 		
@@ -196,7 +198,7 @@ public class SubscribeController {
 		model.addAttribute("condition", condition);
 		model.addAttribute("keyword", keyword);
 		
-		return "user/subscribe/subMember_ListView";
+		return "admin/subscribe/subMember_ListView";
 	}
 	
 	
@@ -209,7 +211,7 @@ public class SubscribeController {
 		
 		model.addAttribute("deliverAt",deliverAt); 
 		model.addAttribute("subLevel",subLevel);
-		model.addAttribute("deliverFee", 200); 
+		model.addAttribute("deliverFee", 0); 
 		
 		return "user/subscribe/subscribe_OrderView";	
 

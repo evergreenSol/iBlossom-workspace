@@ -2,6 +2,7 @@ package com.kh.iblossom.member.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -99,6 +100,18 @@ public class MemberController {
 		return "common/join";
 	}
 	
+	// 회원가입 - 이메일 중복 체크 메소드
+	@ResponseBody
+	@RequestMapping(value="checkEmail.me")
+	public void countEmail(String email, HttpServletResponse response) throws IOException {
+		
+		int result = memberService.countEmail(email);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().print(result);
+	}
+	 
+	
 	
 	// 회원가입 - 아이디 중복 체크 메소드
 	@ResponseBody
@@ -142,10 +155,12 @@ public class MemberController {
 	}
 	
 	// 비밀번호 찾기
-	@RequestMapping("/findPwd.me")
-	public String findPwd() {
+	@RequestMapping("/findPwdForm.me")
+	public String findPwdForm() {
 		return "common/findPwd";
 	}
+	
+	
 	
 	
 	// 메뉴바의 "상품관리" 클릭해서 요청한 경우 => /list.pr (기본적으로 1 번 페이지를 요청하게끔 처리)
@@ -208,14 +223,71 @@ public class MemberController {
    public String myPageSubscribeView(HttpSession session, Model model) {
       
       int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+      // 최근 3개만, 최근 6개만 최근 12개만...
       
-      ArrayList<Subscribe> list = subscribeService.selectMySubscribe(userNo);
+      ArrayList<Map<String,String>> list = subscribeService.selectMySubReceiptId(userNo);
       
-      model.addAttribute("list", list);
+      ArrayList<String> receiptIdList = new ArrayList<>();
       
-      System.out.println(list);
+      for(int i = 0; i < list.size(); i++) {
+    	  
+    	  receiptIdList.add(list.get(i).get("RECEIPT_ID"));
+      }
+      
+      model.addAttribute("receiptIdList", receiptIdList);
+      
+//      
+//      ArrayList<Subscribe> list3m = subscribeService.selectMySubscribeThree(userNo);
+//      ArrayList<Subscribe> list6m = subscribeService.selectMySubscribeSix(userNo);
+//      ArrayList<Subscribe> list12m = subscribeService.selectMySubscribeTwelve(userNo);
+//      ArrayList<Subscribe> listReg = subscribeService.selectMySubscribeRegular(userNo);
+//      
+//      model.addAttribute("list3m", list3m);
+//      model.addAttribute("list6m", list6m);
+//      model.addAttribute("list12m", list12m);
+//      model.addAttribute("listReg", listReg);
+      
+      /*
+      System.out.println(list3m);
+      System.out.println(list6m);
+      System.out.println(list12m);
+      System.out.println(listReg);
+      */
       
       return "user/member/myPage_SubscribeView";
+   }
+   
+   
+   @RequestMapping(value="subscribeRealView.me")
+   public String selectMySubscribe(String receiptId, Model model) {
+	   System.out.println(receiptId);
+	   
+	   ArrayList<Subscribe> list = subscribeService.selectMySubscribe(receiptId);
+	   
+	   System.out.println("멤버 컨트롤러 list: " + list);
+	   
+	   model.addAttribute("list", list);
+	   
+	   return "user/member/myPage_SubscribeView_Content";
+   }
+   
+   
+   
+   
+   // 구독 삭제 메소드
+   @ResponseBody
+   @RequestMapping(value="cancelSubscribe.me", produces="html/text; charset=UTF-8")
+   public String cancelSubscribe(String receiptId) {
+	   
+	   System.out.println(receiptId);
+	   
+	   int result = subscribeService.cancelMySubList(receiptId);
+	   
+	   System.out.println(result);
+	   
+	   String value = Integer.toString(result);
+	   
+	   return value;
    }
    
    // 프로필 수정 페이지 이동 메소드
@@ -343,6 +415,36 @@ public class MemberController {
       return "user/member/myPage_QnaListView";
    }
    
+   
+   // 날짜에 따른 배송상태 변경하기
+   @ResponseBody
+   @RequestMapping(value="checkDate.me")
+   public String updateDeliverStatus() {
+	   
+	   int result = subscribeService.updateDeliverStatus();
+	   
+	   if(result > 0) {
+		   return "1";
+	   }
+	   else {
+		   return "0";
+	   }
+   }
+   
+   // 누적금에 따른 회원 등급 변경하기
+   @ResponseBody
+   @RequestMapping(value="checkPurchase.me")
+   public String updateGrLevel() {
+	   
+	   int result = memberService.updateGrLevel();
+	   
+	   if(result > 0) {
+		   return "1";
+	   }
+	   else {
+		   return "0";
+	   }
+   }
  
    
 }
