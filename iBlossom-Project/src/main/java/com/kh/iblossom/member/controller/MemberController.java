@@ -94,6 +94,12 @@ public class MemberController {
 		
 	}
 	
+	// 회원가입 이용약관 이동 메소드
+		@RequestMapping(value="enrollAgree.me")
+		public String enrollAgree() {
+			return "common/enrollAgree";
+		}
+	
 	// 회원가입 폼 이동 메소드
 	@RequestMapping(value="enrollForm.me")
 	public String enrollMemberForm() {
