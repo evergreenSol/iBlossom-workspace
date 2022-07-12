@@ -219,11 +219,11 @@
                                 <div class="address-content">
 									<!-- placeholder를 나중에 loginUser.XXXX 으로 변경 수신인 default는 로긴한 사람-->
                                     <!-- 이름 -->
-                                    <input type="text" id="subReceiverUser" size="70" value="${ loginUser.userName }" onfocus="this.value=''" required><br>
+                                    <input type="text" id="subReceiverUser" size="70" value="${ loginUser.userName }" onfocus="this.value=''" onblur="this.placeholder='이름을 입력해주세요.'" required><br>
                                     
                                     <hr>
                                     <!-- 연락처 -->
-                                    <input type="tel" id="subReceiverPhone" size="70" value="${ loginUser.phone }" onfocus="this.value=''" required><br> 
+                                    <input type="tel" id="subReceiverPhone" size="70" placeholder="010-0000-0000" value="${ loginUser.phone }" onfocus="this.value=''" onblur="this.placeholder='010-0000-0000'" required><br> 
                                     <hr>
 
                                     <p>주소</p>
@@ -392,7 +392,7 @@
 			
             <!-- 결제하기 버튼 -->
             <div>
-                <button class="order-btn" onclick="getBillingKey(${ subLevel });">결제하기</button>
+                <button class="order-btn" onclick="pay();">결제하기</button>
                 <button class="order-btn" onclick="cancelSubscribe();">취소하기</button>
             </div>
             
@@ -425,6 +425,23 @@
       	</div><!-- 전체 색상 변경 div -->
 
 	<script>	
+	function pay() {
+		var subReceiverUser = $('#subReceiverUser').val()
+		var subReceiverPhone = $('#subReceiverPhone').val()
+		var subReceiverPostcode = $('#zipcode').val()
+		var deliverTo1 = $('#address1').val() 
+		var deliverTo2 = $('#address2').val()
+		
+		if (subReceiverPhone=="" || subReceiverUser=="" || subReceiverPostcode=="" || deliverTo1=="" || deliverTo2==""){
+			alert("모든 양식을 기입해야 결제가 가능합니다!");
+		}
+		else {
+			
+			var subLevel = $('#subLevel').val()
+			getBillingKey(subLevel)
+		}
+	}
+	
 	
 	// 빌링키 발급
 	function getBillingKey(numOfPay) {
