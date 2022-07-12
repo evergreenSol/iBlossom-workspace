@@ -1,5 +1,6 @@
 package com.kh.iblossom.common.bootpay.controller;
 
+import java.awt.Dimension;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ import com.kh.iblossom.common.bootpay.Bootpay;
 import com.kh.iblossom.common.bootpay.model.vo.request.Cancel;
 import com.kh.iblossom.common.bootpay.model.vo.request.SubscribePayload;
 import com.kh.iblossom.common.bootpay.model.vo.response.ResDefault;
+import com.kh.iblossom.member.model.service.MemberService;
 import com.kh.iblossom.subscribe.model.service.SubscribeService;
 import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
@@ -24,6 +26,9 @@ public class BootPayController {
 
 	@Autowired
 	SubscribeService subscribeService;
+	
+	@Autowired
+	MemberService memberService;
 	
 	static Bootpay bootpay = new Bootpay("62b2796de38c30001f5ae532", "Mps7sGIiLQAWaVDx3h2zSbyKuWBB8TTAGyS3l7QtMd8=");
 	private int cancelParam = 0;
@@ -86,7 +91,7 @@ public class BootPayController {
 				if(cancelParam==0) {	
 					goGetToken();
 					requestSubscribe(billingKey, totalPrice, subProductName);
-					insertSubscribe(s, numOfPay);
+					insertSubscribe(s, numOfPay, totalPrice);
 					
 				}
 				else {
@@ -101,17 +106,44 @@ public class BootPayController {
 	
 	@ResponseBody
 	@RequestMapping(value="insert.su", produces="text/html; charset=UTF-8")
-	public String insertSubscribe(Subscribe s, int numOfPay) {
+	public String insertSubscribe(Subscribe s, int numOfPay, int totalPrice) {
 
 		int result = 0;
 		
 		if(numOfPay==1) {
 			result =  subscribeService.insertSubscribe(s);
+			
+			int userNo = s.getUserNo();
+			int subLevel = s.getSubLevel();
+			int purchase = totalPrice/subLevel;
+			
+			HashMap<String, Integer> map = new HashMap<>();
+			map.put("userNo", userNo);
+			map.put("purchase", totalPrice);
+			
+			int purchaseResult = memberService.updateSubPurchase(map);
 		}
 		else {
 			for(int i = 0; i < numOfPay; i++) {
 			
 				result = subscribeService.insertSubscribe(s);
+				
+				int userNo = s.getUserNo();
+				int subLevel = s.getSubLevel();
+				int purchase = totalPrice/subLevel;
+				
+				System.out.println(userNo);
+				System.out.println(purchase);
+				
+				HashMap<String, Integer> map = new HashMap<>();
+				map.put("userNo", userNo);
+				map.put("purchase", purchase);
+				
+				int purchaseResult = memberService.updateSubPurchase(map);
+				
+
+				System.out.println(purchaseResult);
+				
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(s.getDeliverAt()); // 시간 설정
 				cal.add(Calendar.MONTH, 1); // 월 연산

@@ -60,11 +60,13 @@
 	
 	            <button type="button" id="signUp-cancelbutton">취소</button>
 	            <button type="submit" id="signUp-signupbutton" disabled onclick="return validate();">가입</button>
-	
-	
+	            
 	            <span id="signUp-logintext">이미 iBlossom의 회원이신가요?</span><br>
-	            <button type="button" id="signUp-loginbutton">로그인</button>
+            	<button type="button" id="signUp-loginbutton">로그인</button>
+	
             </form>
+
+
 
         </div>
     </div>
@@ -82,6 +84,7 @@
     var nameChk = 0;
     
     $(function () {
+
     	
     	$("#signUp-loginbutton").click(function () {
     		location.href="loginForm.me";
@@ -175,6 +178,7 @@
            var MBER_ID = $("#customer_id").val();
            regExp = /^[A-za-z0-9+]{6,12}$/; 
            $.ajax({
+
                 type : "POST",
                 data : {
                     userId : MBER_ID
@@ -182,6 +186,7 @@
                 url : "checkId.me",
                 success : function(result) {
                     // console.log(result);
+
                    var cnt = result;
                     if (cnt > 0) {
                        /*$("#customer_id").next().removeClass("green");
@@ -192,23 +197,33 @@
                         idChk = 0;
                     } else {
                         if (MBER_ID == "") {
+
+                        	/*$("#customer_id").next().removeClass("green");
+
                            /*$("#customer_id").next().removeClass("green");
+
                             $("#customer_id").next().addClass("red");*/
                             $("#customer_id").next().next().text("아이디를 입력해주세요.");
                             $("#customer_id").next().next().show();
                             $("#signUp-signupbutton").attr("disabled", true);
                             idChk = 0;
                         } else if (regExp.test(MBER_ID)) {
+
+                        	/*$("#customer_id").next().removeClass("red");
+
                            /*$("#customer_id").next().removeClass("red");
+
                             $("#customer_id").next().addClass("green");*/
                             $("#customer_id").next().next().text("사용가능한 아이디입니다.");
                             $("#customer_id").next().next().show();
                             $("#signUp-signupbutton").attr("disabled", false);
                             idChk = 1;
                         } else {
+
                            /*$("#customer_id").next().removeClass("green");
                             $("#customer_id").next().addClass("red");*/
                             $("#customer_id").next().next().text("유효하지않은 아이디입니다. (영문, 숫자 포함 6~12자리로 입력해주세요.)");
+
                             $("#customer_id").next().next().show();
                             $("#signUp-signupbutton").attr("disabled", true);
                             idChk = 0;
@@ -221,6 +236,9 @@
                 error : function(request, status, error) {
                 }
                 });
+
+
+
        });
        
        $("#customer_pwd").keyup(function () {
@@ -299,6 +317,7 @@
           
           return false;
        }
+
     }
     
     /*
@@ -350,9 +369,16 @@
                 });
 
     }
-
     */
     </script>
     
+    
+
+  
+
+    
+
+
+
 </body>
 </html>

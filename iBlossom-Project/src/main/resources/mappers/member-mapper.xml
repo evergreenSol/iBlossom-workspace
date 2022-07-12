@@ -125,4 +125,11 @@
 		        ELSE 4
 		    END
 	</update>
+	
+	<!-- 구독 시 멤버 purchase 업데이트 -->
+	<update id="updateSubPurchase" parameterType="hashmap">
+	UPDATE MEMBER
+	   SET PURCHASE = PURCHASE + #{purchase}
+	 WHERE USER_NO = #{userNo}
+	</update>
 </mapper>
