@@ -27,28 +27,24 @@ public class CartController {
 	
 	// 장바구니 조회용
 	@RequestMapping("list.ca")
-	public String selectCart(HttpSession session) {
+	public String selectCart(HttpSession session, Model model) {
 		
 		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
 		
 		ArrayList<Cart> list = cartService.selectCart(userNo);
 		
 		if(list.isEmpty()) {
+			
 			return "user/cart/cart_EmptyList";
 		}
 		else {
+			
+			model.addAttribute("list", list);
 			return "user/cart/cart_ListView";
 		}
 		
 		// 로그인한 유저의 list 가 있을 경우와 없을 경우 로직
 	}
-	
-
-	
-
-	
-
-	
 	
 	/*--------------------------------------------------------*/
 	// 상세페이지 -> cart 연결용
@@ -63,7 +59,7 @@ public class CartController {
 		
 		if(result > 0) { 
 			// session.setAttribute("alertMsg", "성공적으로 장바구니가 추가되었습니다.");
-			return "user/cart/cart_ListView";
+			return "redirect:list.ca";
 			
 		} else {
 			return "redirect:/";
@@ -76,23 +72,7 @@ public class CartController {
 		return "user/cart/cart_ListView";
 	
 	/*--------------------------------------------------------*/
-	
-	/* 빠꾸 당한 코드
-	Member loginUser = memberService.login(m);
-	
-	ArrayList<Cart> list = cartService.selectCart();
- 
-	if(list.isEmpty() && loginUser == null) { 
-		// 장바구니 빈 페이지 : 비로그인 상태 / select 할 상품이 없을 경우
-		return "user/cart/cart_EmptyList";
-	
-	} else { 
-		// 장바구니 페이지 : 로그인한 상태에서 select 할 상품이 있을 경우
-		return "user/cart/cart_ListView"; 
-		// /WEB-INF/views/user/cart/cart_ListView.jsp
-	}
-	*/
-	
+
 	/*
 	@RequestMapping("listView.ca")
 	public String selectCartList(int cartNo, int subLevel, String deliverAt, Model model) {
@@ -120,5 +100,24 @@ public class CartController {
 		
 		return "user/cart/cart_ListView";
 	}*/	
+		
+	/*
+	@RequestMapping("list.ca")
+	public String selectCart(HttpSession session, Model model, Member m) {
+	Member loginUser = memberService.login(m);
+	
+	ArrayList<Cart> list = cartService.selectCart();
+ 
+	if(list.isEmpty() && loginUser == null) { 
+		// 장바구니 빈 페이지 : 비로그인 상태 / select 할 상품이 없을 경우
+		return "user/cart/cart_EmptyList";
+	
+	} else { 
+		// 장바구니 페이지 : 로그인한 상태에서 select 할 상품이 있을 경우
+		return "user/cart/cart_ListView"; 
+		// /WEB-INF/views/user/cart/cart_ListView.jsp
+	}
+	}*/
+		
 	}
 }
