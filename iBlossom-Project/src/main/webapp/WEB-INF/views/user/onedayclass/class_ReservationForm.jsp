@@ -21,16 +21,14 @@
                 <div id="pay-content1">주문 상품 정보</div>
                 <div id="pay-image"><img src="resources/images/onedayclass_main.jpg" width="120px" style="float:left;"></div>
                 <div id="pay-content1_1" name="className">원데이클래스</div>
-                <div id="pay-content1_2" name="classNo">${ oc.classDate }</div>
+                <div id="pay-content1_2" name="classDate">${ date }</div>
                 <div id="pay-content1_3" name="price">60,000원</div>
-                <input type="hidden" id="classNo" value="${ oc.classNo }">
             </div>
             <div class='pay-info2'>
                 <div id="pay-content2">주문자 정보</div>
                 <div id="pay-content2_1" name="user_name">${ loginUser.userName }</div>
-                
-                <div id="pay-content2_3" name="email">${ loginUser.email }</div>     
-                <div id="pay-content2_2" name="phone">${ loginUser.phone }</div>           
+                <div id="pay-content2_2" name="phone">${ loginUser.phone }</div>
+                <div id="pay-content2_3" name="email">${ loginUser.email }</div>                
             </div>            
         </div>
         <!-- 
@@ -61,8 +59,6 @@
             <input type="hidden" id="userName" value="${ loginUser.userName }">
             <input type="hidden" id="email" value="${ loginUser.email }">
             <input type="hidden" id="phone" value="${ loginUser.phone }">
-            <input type="hidden" id="price" value="${ oc.price }">
-
 	    </div>
 
      
@@ -101,29 +97,29 @@
 			//결제가 취소되면 수행됩니다.
 			console.log(data);
 		}).done(function (data) {
-			var price = $('#price').val();
-			var onedayclass = "onedayclass";
+			var totalPrice = $('#totalPrice').val();
+			var subProductName = "onedayclass";
 			
-				requestPay(data.billing_key, data.receipt_id, price, onedayclass);
+				requestPay(data.billing_key, data.receipt_id, totalPrice, subProductName);
 
 		});
 	}
 	
 	// 결제용 메소드 getBillingKey 에서 호출
-	function requestPay(billingKey, receiptId, price, onedayclass) {
+	function requestPay(billingKey, receiptId, totalPrice, subProductName) {
 		
 		$.ajax({
 			url : "requestSubscribe.do",
 			type : "post",
 			data : {
 				billingKey : billingKey,
-				totalPrice : price,
-				subProductName : onedayclass,
+				totalPrice : totalPrice,
+				subProductName : subProductName,
 			},
 			success : function(data) {
 				console.log("상품 결제 성공");
 				// 여기서 DB INSERT 용 함수 호출
-				insertClassRes(receiptId);
+				
 				
 			}, error : function() {
 				console.log("상품 결제 실패");
@@ -138,16 +134,13 @@
 			url : "resInsert.cl",
 			type : "post",
 			data : {
-				classNo : $('#classNo').val(),
-				resName : $('#userName').val(),
-				resPhone : $('#phone').val(),
-				resEmail : $('#email').val(),
+				classReservationName : $('#classReservationName').val(),
+				classReservationPhone : $('#classReservationPhone').val(),
+				classReservationEmail : $('#classReservationEmail').val(),
 				// 그 외 필요한 변수들 세팅
 			},
-			success : function(result) {
-				console.log("DB 넣음");
-				alert(result);
-				location.href='onedayClass.me';
+			success : function(data) {
+				console.log("DB 넣음")		
 			}, error : function() {
 				console.log("DB 넣음 실패")
 			}
@@ -155,9 +148,6 @@
 	}
 
 	</script>
-	
-
-	
 
 <!--
      <script type="text/javascript">
