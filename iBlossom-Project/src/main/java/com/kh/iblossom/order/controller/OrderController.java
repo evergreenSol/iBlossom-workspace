@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.iblossom.cart.model.Service.CartService;
+import com.kh.iblossom.cart.model.vo.Cart;
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.common.template.Pagination;
 import com.kh.iblossom.member.model.service.MemberService;
@@ -22,6 +24,9 @@ public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private CartService cartService;
 	
 	@Autowired
 	private MemberService memberService;
@@ -43,7 +48,7 @@ public class OrderController {
 		
 		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
 		
-		ArrayList<Order> list = orderService.detailOrder(userNo);
+		ArrayList<Cart> list = cartService.selectCart(userNo);
 			
 		model.addAttribute("list", list);
 		

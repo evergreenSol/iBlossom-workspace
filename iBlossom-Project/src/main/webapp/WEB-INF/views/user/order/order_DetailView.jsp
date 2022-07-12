@@ -554,41 +554,43 @@
                         <!-- 내용 -->
                         <div id="CheckBox" class="order-check-contentbox">
 
-                            <!-- 1 -->
-                            <div class="order-check-content">
-
-                                <!-- 상품 이미지 -->
-                                <span>
-                                    <img src="resources/images/cart_flower_1.png"
-                                    	 style="width:250px; height:250px;">
-                                </span>
-
-                                <!-- 상품 옵션 확인란 -->
-                                <div class="order-check-list"><br>
-                                
-                                		<input type="hidden" id="cartNo" value="">
-                                		<input type="hidden" id="userNo" value="">
-                                		
-                                        <!-- 상품 제목 -->
-                                        <li></li> <!--  -->
-                                        <input type="hidden" id="productNo" value="">
-                                        <br>
-
-                                        <!-- 수령일 : YYYY-MM-DD(D) -->
-                                        <li>수령일 : </li>
-                                        <!-- <input type="hidden" id="" value=""> -->
-                                        <br>
-
-                                        <!-- 가격(원) / 수량(개) -->
-                                        <li> 원 / 개</li>
-                                        <br>
-                                </div>
-
-                                <!-- 공백 -->
-                                <div></div>
-                                <div></div>
-
-                            </div>
+                            <c:forEach var="o" items="${list}">
+                            
+	                            <div class="order-check-content">
+	
+	                                <!-- 상품 이미지 -->
+	                                <span>
+	                                    <img src="${o.thumbnail }"
+	                                    	style="width:330px; height:350px;">
+	                                </span>
+	
+	                                <!-- 상품 옵션 확인란 -->
+	                                <div class="order-check-list"><br>
+	                                
+	                                		<input type="hidden" id="cartNo" value="">
+	                                		<input type="hidden" id="userNo" value="">
+	                                		
+	                                        <!-- 상품 제목 -->
+	                                        <li>${o.flowerName}</li>
+	                                        <input type="hidden" id="productNo" value="">
+	                                        <br>
+	
+	                                        <!-- 가격(원) / 수량(개) -->
+	                                        <li> <fmt:formatNumber type="number" maxFractionDigits="3" value="${o.productPrice}" />원 
+	                                        
+	                                        / ${o.productCount}개
+	                                        
+	                                        </li>
+	                                        <br>
+	                                </div>
+	
+	                                <!-- 공백 -->
+	                                <div></div>
+	                                <div></div>
+	
+	                            </div>
+                            
+                            </c:forEach>
 
                             <hr> <!-------------------------------------------->
 
@@ -604,7 +606,7 @@
                                 <!-- 상품 옵션 확인란 -->
                                 <div class="order-check-list"><br>
                                         <!-- 상품 제목 -->
-                                        <li>${p.flowerName}</li>
+                                        <li></li>
                                         <br>
 
                                         <!-- 가격(원) / 수량(개) -->
@@ -617,6 +619,8 @@
                                 <div></div>
 
                             </div>
+                            
+                            
                             
                         </div> 
 
@@ -955,6 +959,95 @@
                 })
                 
             </script>
+            <!--  
+            <script>
+            
+	         	// 빌링키 발급
+	        	function getBillingKey(numOfPay) {
+	        		BootPay.request({
+	        			price: 0, // 0으로 해야 한다.
+	        			application_id: "62b2796de38c30001f5ae52f",
+	        			name: 'iBlossom 정기구독', //결제창에서 보여질 이름
+	        			pg: 'nicepay',
+	        			method: 'card_rebill', // 빌링키를 받기 위한 결제 수단
+	        			show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
+	        			user_info: {
+	        				username: $('#userName').val(), 
+	        				email: $('#email').val(),
+	        				addr: $('#address').val(),
+	        				phone: $('#phone').val(),
+	        			},
+	        			order_id: '고유order_id_1234', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
+	        			async : true
+	        		}).error(function (data) {
+	        			//결제 진행시 에러가 발생하면 수행됩니다.
+	        			console.log(data);
+	        		}).cancel(function (data) {
+	        			//결제가 취소되면 수행됩니다.
+	        			console.log(data);
+	        		}).done(function (data) {
+	        			var totalPrice = $('#totalPrice').val();
+	        			var subProductName = $('#subProductName').val();
+	        			if(numOfPay==1) {
+	        				// 정기결제 - 무한반복
+	        				subscribe(data.billing_key, totalPrice, subProductName, data.receipt_id, numOfPay);
+	        			}
+	        			else {
+	        				// 일시불 (바로 requestPay 로 점프)
+	        				requestPay(data.billing_key, data.receipt_id, totalPrice, subProductName, numOfPay);
+	        			}
+	        		});
+	        	}
+	         	
+	        	// 일시불 (바로 requestPay 로 점프)
+	        	function requestPay(billingKey, receiptId, totalPrice, subProductName, numOfPay) {
+	        		
+	        		$.ajax({
+	        			url : "requestSubscribe.do",
+	        			type : "post",
+	        			data : {
+	        				billingKey : billingKey,
+	        				totalPrice : totalPrice,
+	        				subProductName : subProductName,
+	        			},
+	        			success : function(data) {
+	        				console.log("상품 결제 성공");
+	        				insertSubscribe(numOfPay, receiptId);
+	        			}, error : function() {
+	        				console.log("상품 결제 실패");
+	        			}
+	        		});    
+	        	}
+	        	
+	        	// DB에 구독 객체 넣기?
+	        	function insertSubscribe(numOfPay, receiptId) {
+	        		$.ajax({
+	        			url : "insert.su",
+	        			type : "post",
+	        			data : {
+	        				subProductName : $('#subProductName').val(),
+	        				subProductNo : $('#subProductNo').val(),
+	        				userNo : $('#userNo').val(),
+	        				subLevel : $('#subLevel').val(),
+	        				subReceiverUser : $('#subReceiverUser').val(),
+	        				subReceiverPhone : $('#subReceiverPhone').val(),
+	        				subReceiverPostcode : $('#zipcode').val(),
+	        				deliverAt : new Date($('#deliverAt').val()),
+	        				deliverTo : $('#address1').val() + " " + $('#address2').val(),
+	        				deliverStatus : "배송준비",
+	        				receiptId : receiptId,
+	        				numOfPay : numOfPay
+	        			},
+	        			success : function(data) {
+	        				console.log("DB 넣음")		
+	        			}, error : function() {
+	        				console.log("DB 넣음 실패")
+	        			}
+	        		});
+	        	}
+	            
+            </script>
+            -->
  
         </div><!-- 1200px 너비 -->
         

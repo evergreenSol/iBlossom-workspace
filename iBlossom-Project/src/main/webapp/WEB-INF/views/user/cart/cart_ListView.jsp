@@ -207,110 +207,61 @@
 	    box-sizing: border-box;
 	}
 	
-	.rating .rate_radio {
-	
-	    position: relative;
-	
-	    display: inline-block;
-	
-	    z-index: 20;
-	
-	    opacity: 0.001;
-	
-	    width: 60px;
-	
-	    height: 60px;
-	
-	    background-color: #fff;
-	
-	    cursor: pointer;
-	
-	    vertical-align: top;
-	
+	.rating .rate_radio {	
+	    position: relative;	
+	    display: inline-block;	
+	    z-index: 20;	
+	    opacity: 0.001;	
+	    width: 60px;	
+	    height: 60px;	
+	    background-color: #fff;	
+	    cursor: pointer;	
+	    vertical-align: top;	
 	    display: none;
-	
 	}
 	
-	.rating .rate_radio + label {
-	
-	    position: relative;
-	
-	    display: inline-block;
-	
+	.rating .rate_radio + label {	
+	    position: relative;	
+	    display: inline-block;	
 	    margin-left: -4px;
-	
-	    z-index: 10;
-	
-	    width: 60px;
-	
-	    height: 60px;
-	
-	    background-image: url('./img/starrate.png');
-	
-	    background-repeat: no-repeat;
-	
-	    background-size: 60px 60px;
-	
-	    cursor: pointer;
-	
-	    background-color: #f0f0f0;
-	
+	    z-index: 10;	
+	    width: 60px;	
+	    height: 60px;	
+	    background-image: url('./img/starrate.png');	
+	    background-repeat: no-repeat;	
+	    background-size: 60px 60px;	
+	    cursor: pointer;	
+	    background-color: #f0f0f0;	
 	}
 	
-	.rating .rate_radio:checked + label {
-	
-	    background-color: #ff8;
-	
+	.rating .rate_radio:checked + label {	
+	    background-color: #ff8;	
 	}
 	
-	
-	
-	.cmd{
-	
-	    margin-top: 20px;
-	
-	    text-align: right;
-	
+	.cmd {	
+	    margin-top: 20px;	
+	    text-align: right;	
 	}
 	
 	.cmd input[type="button"]{
-	
-	    padding: 10px 20px;
-	
-	    border: 1px solid #e8e8e8;
-	
-	    background-color: #fff;
-	
-	    background-color:#000;  
-	
-	    color: #fff;
-	
+	    padding: 10px 20px;	
+	    border: 1px solid #e8e8e8;	
+	    background-color: #fff;	
+	    background-color:#000;  	
+	    color: #fff;	
 	}
-	
-	
-	
-	.warning_msg {
-	
-	    display: none;
-	
-	    position: relative;
-	
-	    text-align: center;
-	
-	    background: #ffffff;
-	
-	    line-height: 26px;
-	
-	    width: 100%;
-	
-	    color: red;
-	
-	    padding: 10px;
-	
-	    box-sizing: border-box;
-	
+		
+	.warning_msg {	
+	    display: none;	
+	    position: relative;	
+	    text-align: center;	
+	    background: #ffffff;	
+	    line-height: 26px;	
+	    width: 100%;	
+	    color: red;	
+	    padding: 10px;	
+	    box-sizing: border-box;	
 	    border: 1px solid #e0e0e0;
-	
 	}
 
 
@@ -507,7 +458,7 @@
 	
 	        <!-- 결제하기 버튼 -->
 	        <div>
-	            <button class="cart-btn" type="submit" onclick="location.href='detailView.or'">결제하기</button>
+	            <button class="cart-btn" type="submit" onclick="location.href='detail.or'">결제하기</button>
 	        </div>
 	        
 	    </div>
