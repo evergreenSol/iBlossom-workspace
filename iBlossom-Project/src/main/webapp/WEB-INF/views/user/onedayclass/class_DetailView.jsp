@@ -34,10 +34,12 @@
 	        <form action="ResForm.cl" method="post">
 		        <div>		   
 		            <label for="date" id="res" style="font-size: 15px;">예약일</label><br>
-		            	<select name="date" id="date" style="width:170px;height:25px;font-size: 14px;" required >
-			                <option value="2022-07-22 14:00">2022-07-22 14:00</option>
-			                <option value="2022-07-30 14:00">2022-07-30 14:00</option>
-			                <option value="2022-08-06 14:00">2022-08-06 14:00</option>
+		            	<select name="classNo" id="date" style="width:170px;height:25px;font-size: 14px;" required >
+			                <option value="1">2022-07-22 14:00</option>
+			                <option value="2">2022-07-30 14:00</option>
+			                <option value="3">2022-08-06 14:00</option>
+			                <!-- 리스트에 클래스 정보 담아서 (게시판 내용과 같음) 반복문으로 돌리기(?) -->
+			                 
 			            </select>
 			        </div>
 		        <br><br><br>
