@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user_Order_DetailView</title>
+<title>iBlossom | 주문/결제</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet">
 <style>
 
@@ -67,17 +70,25 @@
         padding-bottom: 60px;
     }
     
-    /* 1. 주문내역 확인 2. 주문자 정보 3. 발신인 이름 
-       4. 배송지 정보 5. 배송지 추가 6. 결제 수단 7. 카카오페이*/
-    .order-check, .order-orderer, .order-sender, 
-    .order-address, .order-address-add,  .order-payment, .order-kakaopay {
+    /* 1. 주문내역 확인 2. 주문자 정보 3. 발신인 이름  (220711 수령일추가)
+       4. 배송지 정보  5. 배송지 추가  6. 결제 수단 7. 카카오페이*/
+       
+    /* 결제 수단과 카카오페이는 삭제 했지만 결제수단을 주소 데이터값 뽑는 용도로 사용할 것임 */
+    .order-check, .order-orderer, .order-sender, .order-receiveDate,
+    .order-address, .order-address-add, .order-payment, .order-kakaopay {
         display: flex; 
         justify-content: space-between;
     }
+    
+    /* 결제수단 클래스에 주소 데이터값 뽑는 용도로 사용 */
+    .order-payment {
+    	padding: 10px; 
+    }
 
     /* 배송지 추가, 카카오페이 버튼 */
+    /* 카카오페이 버튼 삭제 */
     .address-btn, .kakao-btn { 
-        padding: 15px; 
+        padding: 18px; 
         width: 200px; 
         border: none; 
         background-color:whitesmoke; 
@@ -123,7 +134,12 @@
         border-radius: 3px;  
     }
 
-
+	/* 수령일 input 태그 */
+	#ReceiveBox>input {
+		padding: 18px; 
+        width: 160px;
+        border-radius: 3px;   
+	}
 
     /* ----------------------------------------------------------- */
     /* 주문내역 확인 - 내용 */
@@ -140,9 +156,9 @@
     }
     
     /* 주문자 정보 - 이름, 연락처 / 발신인 이름 */
-    .orderer-name, .orderer-phone, #SenderBox>p { 
-        width: 620px;
-        padding:10px; 
+    .orderer-name, .orderer-phone, #SenderBox>p, #receiveBox>p { 
+        width: 660px;
+        padding: 10px; 
         background-color:rgba(241, 241, 241, 0.707); 
     }
 
@@ -233,7 +249,7 @@
     /* 슬라이드 업/다운 요소 버튼 */
 
     /* 누를 버튼 */
-    #CheckBtn, #OrdererBtn, #SenderBtn {
+    #CheckBtn, #OrdererBtn, #SenderBtn, #ReceiveBtn {
         width: 700px;
         display: flex; 
         justify-content: space-between;
@@ -243,7 +259,7 @@
     }
 
     /* 내용 박스 */
-    #CheckBox, #OrdererBox, #SenderBox {
+    #CheckBox, #OrdererBox, #SenderBox, #ReceiveBox {
         width: 600px;
         margin-top: 20px;
         display: none;
@@ -301,13 +317,14 @@
         background-color: black; 
         color:white;
     }
-          
+    
+    /* 결제하기 버튼 호버시 */   
     .order-btn:hover {
     	cursor: pointer;	
     }
     
     /* 누를 슬라이드 헤드 부분 색상 변경 */
-    .order-check>button, .order-orderer>button, .order-sender>button {
+    .order-check>button, .order-orderer>button, .order-sender>button, .order-receive>button {
         background-color: white;
     }
     
@@ -367,9 +384,89 @@
 	.address-footer>button:hover {
 		cursor: pointer;
 		font-weight: 500;
-	}	
+	}
 	
-   
+	
+	
+	/* ----------------------------------------------------------- */
+	/* 수령일 css */
+	
+	/*datepicker ui */
+	 .ui-widget-header { border: 0px solid #dddddd; background: #fff; } 
+	
+	 .ui-datepicker-calendar>thead>tr>th { font-size: 14px !important; } 
+	
+	 .ui-datepicker .ui-datepicker-header { position: relative; padding: 10px 0; } 
+	
+	 .ui-state-default,
+	 .ui-widget-content .ui-state-default,
+	 .ui-widget-header .ui-state-default,
+	 .ui-button,
+	 html .ui-button.ui-state-disabled:hover,
+	 html .ui-button.ui-state-disabled:active { border: 0px solid #c5c5c5; background-color: transparent; font-weight: normal; color: #454545; text-align: center; } 
+	
+	 .ui-datepicker .ui-datepicker-title { margin: 0 0em; line-height: 16px; text-align: center; font-size: 14px; padding: 0px; font-weight: bold; } 
+	
+	 .ui-datepicker { display: none; background-color: #fff; border-radius: 4px; margin-top: 10px; margin-left: 0px; margin-right: 0px; padding: 20px; padding-bottom: 10px; width: 300px; box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.1); } 
+	
+	 .ui-widget.ui-widget-content { border: 1px solid #eee; } 
+	
+	.ui-datepicker-prev ui-corner-all { font-family : auto; }
+	
+	 #datepicker:focus>.ui-datepicker { display: block; } 
+	
+	 .ui-datepicker-prev,
+	 .ui-datepicker-next { cursor: pointer; } 
+	
+	 .ui-datepicker-next { float: right; } 
+	
+	 .ui-state-disabled { cursor: auto; color: hsla(0, 0%, 80%, 1); } 
+	
+	 .ui-datepicker-title { text-align: center; padding: 10px; font-weight: 100; font-size: 20px; } 
+	
+	 .ui-datepicker-calendar { width: 100%; } 
+	
+	 .ui-datepicker-calendar>thead>tr>th { padding: 5px; font-size: 20px; font-weight: 400; } 
+	
+	 .ui-datepicker-calendar>tbody>tr>td>a { color: #000; font-size: 12px !important; font-weight: bold !important; text-decoration: none;}
+	
+	 .ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover { cursor: auto; background-color: #fff; } 
+	
+	 .ui-datepicker-calendar>tbody>tr>td { border-radius: 100%; width: 44px; height: 30px; cursor: pointer; padding: 5px; font-weight: 100; text-align: center; font-size: 12px; } 
+	
+	 .ui-datepicker-calendar>tbody>tr>td:hover { background-color: transparent; opacity: 0.6; } 
+	
+	 .ui-state-hover,
+	 .ui-widget-content .ui-state-hover,
+	 .ui-widget-header .ui-state-hover,
+	 .ui-state-focus,
+	 .ui-widget-content .ui-state-focus,
+	 .ui-widget-header .ui-state-focus,
+	 .ui-button:hover,
+	 .ui-button:focus { border: 0px solid #cccccc; background-color: transparent; font-weight: normal; color: #2b2b2b; } 
+	
+	 .ui-widget-header .ui-icon { background-image: url('./btns.png'); } 
+	
+	 .ui-icon-circle-triangle-e { background-position: -20px 0px; background-size: 36px; } 
+	
+	 .ui-icon-circle-triangle-w { background-position: -0px -0px; background-size: 36px; } 
+	
+	 .ui-datepicker-calendar>tbody>tr>td:first-child a { color: red !important; } 
+	
+	 .ui-datepicker-calendar>tbody>tr>td:last-child a { color: #0099ff !important; } 
+	
+	 .ui-datepicker-calendar>thead>tr>th:first-child { color: red !important; } 
+	
+	 .ui-datepicker-calendar>thead>tr>th:last-child { color: #0099ff !important; } 
+	
+	 .ui-state-highlight,
+	 .ui-widget-content .ui-state-highlight,
+	 .ui-widget-header .ui-state-highlight { border: 0px; background: #f1f1f1; border-radius: 50%; padding-top: 10px; padding-bottom: 10px; } 
+	
+	 .inp { padding: 10px 10px; background-color: #f1f1f1; border-radius: 4px; border: 0px; } 
+	
+	 .inp:focus { outline: none; background-color: #eee; }  	
+	   
 </style>
 
 
@@ -399,6 +496,15 @@
         $("#SenderBtn").on("click", function() {
             // id가 "SenderBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
             $("#SenderBox").slideToggle("1500");
+        });
+    });
+</script>
+
+<script>
+    $(function() {
+        $("#ReceiveBtn").on("click", function() {
+            // id가 "ReceiveBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
+            $("#ReceiveBox").slideToggle("1500");
         });
     });
 </script>
@@ -448,35 +554,43 @@
                         <!-- 내용 -->
                         <div id="CheckBox" class="order-check-contentbox">
 
-                            <!-- 1 -->
-                            <div class="order-check-content">
-
-                                <!-- 상품 이미지 -->
-                                <span>
-                                    <img src="resources/images/cart_flower_1.png"
-                                    	 style="width:250px; height:250px;">
-                                </span>
-
-                                <!-- 상품 옵션 확인란 -->
-                                <div class="order-check-list"><br>
-                                        <!-- 상품 제목 -->
-                                        <li>상품 제목</li>
-                                        <br>
-
-                                        <!-- 수령일 : YYYY-MM-DD(D) -->
-                                        <li>수령일 : 2022-06-21(목)</li>
-                                        <br>
-
-                                        <!-- 가격(원) / 수량(개) -->
-                                        <li>6,900원 / 1개</li>
-                                        <br>
-                                </div>
-
-                                <!-- 공백 -->
-                                <div></div>
-                                <div></div>
-
-                            </div>
+                            <c:forEach var="o" items="${list}">
+                            
+	                            <div class="order-check-content">
+	
+	                                <!-- 상품 이미지 -->
+	                                <span>
+	                                    <img src="${o.thumbnail }"
+	                                    	style="width:330px; height:350px;">
+	                                </span>
+	
+	                                <!-- 상품 옵션 확인란 -->
+	                                <div class="order-check-list"><br>
+	                                
+	                                		<input type="hidden" id="cartNo" value="">
+	                                		<input type="hidden" id="userNo" value="">
+	                                		
+	                                        <!-- 상품 제목 -->
+	                                        <li>${o.flowerName}</li>
+	                                        <input type="hidden" id="productNo" value="">
+	                                        <br>
+	
+	                                        <!-- 가격(원) / 수량(개) -->
+	                                        <li> <fmt:formatNumber type="number" maxFractionDigits="3" value="${o.productPrice}" />원 
+	                                        
+	                                        / ${o.productCount}개
+	                                        
+	                                        </li>
+	                                        <br>
+	                                </div>
+	
+	                                <!-- 공백 -->
+	                                <div></div>
+	                                <div></div>
+	
+	                            </div>
+                            
+                            </c:forEach>
 
                             <hr> <!-------------------------------------------->
 
@@ -492,11 +606,7 @@
                                 <!-- 상품 옵션 확인란 -->
                                 <div class="order-check-list"><br>
                                         <!-- 상품 제목 -->
-                                        <li>상품 제목</li>
-                                        <br>
-
-                                        <!-- 수령일 : YYYY-MM-DD(D) -->
-                                        <li>수령일 : 2022-06-21(목)</li><!-- <fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd(D)"/> -->
+                                        <li></li>
                                         <br>
 
                                         <!-- 가격(원) / 수량(개) -->
@@ -509,6 +619,8 @@
                                 <div></div>
 
                             </div>
+                            
+                            
                             
                         </div> 
 
@@ -523,7 +635,7 @@
                                 <p>주문자 정보</p>
                                 <!-- 입력내용 보여지는 태그-->
                                 <p>
-                                    <span>아무개, &nbsp;010-0000-0000</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
+                                    <span>ㅇㅇㅇ, &nbsp;&nbsp;010-0000-0000</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
                                 </p>
 
                             </button>
@@ -535,10 +647,10 @@
                         <div id="OrdererBox" class="order-orderer-content" >
 
                             <p>&nbsp;이름</p>
-                            <p class="orderer-name">아무개</p>
+                            <p class="orderer-name"></p>
 
                             <p>&nbsp;연락처</p>
-                            <p class="orderer-phone">010-0000-0000</p>
+                            <p class="orderer-phone"></p>
 
                             <!-- 안내문구 -->
                             <p class="orderer-guide" style="font-size:small">
@@ -558,9 +670,49 @@
                         <hr>
 
                         <div id="SenderBox">
-                            <p>&nbsp;아무개</p>
+                            <p>&nbsp;</p>
                         </div>
-                    </div>     
+                    </div>
+                    
+                    <!-- 수령일 (220711 추가) -->
+                    <div>
+                         <div class="order-receive">
+                            <button id="ReceiveBtn">
+                                <p>수령일</p>
+                            </button>
+                        </div>
+
+                        <div id="ReceiveBox" style="margin-top:0px;">
+                        	<input type="text" class="datepicker" id="datepicker" name="deliverAt" required>
+                        </div>
+                    </div>
+                    
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+					<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+                                
+		            <!-- 수령일 script -->
+		            <script>
+		        		$.datepicker.setDefaults({
+		        		  dateFormat: 'yy-mm-dd',
+		        		  prevText: '<',
+		        		  nextText: '>',
+		        		  monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		        		  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		        		  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+		        		  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+		        		  dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+		        		  showMonthAfterYear: true,
+		        		  yearSuffix: '년',
+		        		  minDate: "+1D", //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+		        	      maxDate: "+1M"
+		        		});
+		        		
+		        		$(function () {
+		        		  $('.datepicker').datepicker();
+		        		});
+					</script>
+                    
+                    <hr> 
                     
                     <!-- 4. 배송지 정보 -->
                     <div>
@@ -576,13 +728,52 @@
                         <div class="order-address-add">
 
                             <!-- 모달의 원리 : 이 버튼 클릭시 data-target에 제시되어있는 해당 아이디의 div요소를 띄워줌 -->
+                            <!--
+                            	<div class="userAddress"><br>
+	                            	<span id="postalAddress"></span>
+	                            	<span id="detailAddress"></span>
+                            	</div>
+                            --> 
                             <button type="button" class="address-btn" data-toggle="modal" data-target="#modal-overlay">
                                 + 배송지 추가
                             </button>
                         
                     </div>
                      
-                    <!-- 우편번호 script -->
+                    
+
+                    </div>
+
+                    <hr> <!------------------------------------------------------------------->
+
+						<div>
+	                        <div class="order-payment">
+	                            <p></p>
+	                        </div>
+	                    </div>
+	                    
+	                <hr>   
+					
+					<!-- 결제수단 & 카카오페이 프론트 삭제 (220709) -->
+                    <!--  
+	                    <div>
+	                        <div class="order-payment">
+	                            <p>&nbsp;&nbsp;결제수단</p>
+	                        </div>
+	                    </div>
+	
+	                    <hr>
+	                    
+	                    <div>
+	                        <div class="order-kakaopay">
+	                            <button class="kakao-btn" type="button">카카오페이</button>
+	                        </div>
+	                    </div>
+					-->
+					
+					<!------------------------------------------------------------------->
+					
+					<!-- 우편번호 script -->
                     <script>
                     
                         function kakaopost() {
@@ -599,27 +790,7 @@
                         }
                         
                     </script>
-
-                    </div>
-
-                    <hr> <!------------------------------------------------------------------->
-
-                    <!-- 6. 결제수단 -->
-                    <div>
-                        <div class="order-payment">
-                            <p>&nbsp;&nbsp;결제수단</p>
-                        </div>
-                    </div>
-
-                    <hr>
-                    
-                    <!-- 7. 카카오페이 -->
-                    <div>
-                        <div class="order-kakaopay">
-                            <button class="kakao-btn" type="button">카카오페이</button>
-                        </div>
-                    </div>
-
+					
                     <br><br>
 
                     <!-- 버튼 두개 -->
@@ -662,7 +833,7 @@
                 <!-- 배송비 -->
                 <div class="order-delivery">
                     <span>배송비</span>
-                    <span>+ 3000원</span>
+                    <span>+ 3,000원</span>
                 </div>
 
                 <!-- 등급 할인 -->
@@ -726,7 +897,9 @@
 
                     <!-- Modal body -->
                     <div class="address-content">
-
+					
+						<!-- placeholder를 나중에 loginUser.XXXX 으로 변경 수신인 default는 로긴한 사람-->
+                        
                         <!-- 이름 -->
                         <input type="text" name="userName" id="userName" size="70" placeholder="이름을 입력해주세요." required><br>
                         <hr>
@@ -786,12 +959,99 @@
                 })
                 
             </script>
+            <!--  
+            <script>
             
-            <!-------------------------------------------------------------------> 
+	         	// 빌링키 발급
+	        	function getBillingKey(numOfPay) {
+	        		BootPay.request({
+	        			price: 0, // 0으로 해야 한다.
+	        			application_id: "62b2796de38c30001f5ae52f",
+	        			name: 'iBlossom 정기구독', //결제창에서 보여질 이름
+	        			pg: 'nicepay',
+	        			method: 'card_rebill', // 빌링키를 받기 위한 결제 수단
+	        			show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
+	        			user_info: {
+	        				username: $('#userName').val(), 
+	        				email: $('#email').val(),
+	        				addr: $('#address').val(),
+	        				phone: $('#phone').val(),
+	        			},
+	        			order_id: '고유order_id_1234', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
+	        			async : true
+	        		}).error(function (data) {
+	        			//결제 진행시 에러가 발생하면 수행됩니다.
+	        			console.log(data);
+	        		}).cancel(function (data) {
+	        			//결제가 취소되면 수행됩니다.
+	        			console.log(data);
+	        		}).done(function (data) {
+	        			var totalPrice = $('#totalPrice').val();
+	        			var subProductName = $('#subProductName').val();
+	        			if(numOfPay==1) {
+	        				// 정기결제 - 무한반복
+	        				subscribe(data.billing_key, totalPrice, subProductName, data.receipt_id, numOfPay);
+	        			}
+	        			else {
+	        				// 일시불 (바로 requestPay 로 점프)
+	        				requestPay(data.billing_key, data.receipt_id, totalPrice, subProductName, numOfPay);
+	        			}
+	        		});
+	        	}
+	         	
+	        	// 일시불 (바로 requestPay 로 점프)
+	        	function requestPay(billingKey, receiptId, totalPrice, subProductName, numOfPay) {
+	        		
+	        		$.ajax({
+	        			url : "requestSubscribe.do",
+	        			type : "post",
+	        			data : {
+	        				billingKey : billingKey,
+	        				totalPrice : totalPrice,
+	        				subProductName : subProductName,
+	        			},
+	        			success : function(data) {
+	        				console.log("상품 결제 성공");
+	        				insertSubscribe(numOfPay, receiptId);
+	        			}, error : function() {
+	        				console.log("상품 결제 실패");
+	        			}
+	        		});    
+	        	}
+	        	
+	        	// DB에 구독 객체 넣기?
+	        	function insertSubscribe(numOfPay, receiptId) {
+	        		$.ajax({
+	        			url : "insert.su",
+	        			type : "post",
+	        			data : {
+	        				subProductName : $('#subProductName').val(),
+	        				subProductNo : $('#subProductNo').val(),
+	        				userNo : $('#userNo').val(),
+	        				subLevel : $('#subLevel').val(),
+	        				subReceiverUser : $('#subReceiverUser').val(),
+	        				subReceiverPhone : $('#subReceiverPhone').val(),
+	        				subReceiverPostcode : $('#zipcode').val(),
+	        				deliverAt : new Date($('#deliverAt').val()),
+	        				deliverTo : $('#address1').val() + " " + $('#address2').val(),
+	        				deliverStatus : "배송준비",
+	        				receiptId : receiptId,
+	        				numOfPay : numOfPay
+	        			},
+	        			success : function(data) {
+	        				console.log("DB 넣음")		
+	        			}, error : function() {
+	        				console.log("DB 넣음 실패")
+	        			}
+	        		});
+	        	}
+	            
+            </script>
+            -->
  
         </div><!-- 1200px 너비 -->
         
-      	</div><!-- 전체 색상 변경 div -->
+      	</div>
       	
     </div>   
 

@@ -42,17 +42,17 @@
            <!-- 메인 이미지 리스트 wrap -->
            <div id="main-images-wrap">
 
-               <div class="main-imagelist-div">
+               <div class="main-imagelist-div" id="main-to-market">
                    <img src="resources/images/main-images-market.png" class="sa sa-up main-images" data-sa-delay="500"  onclick="location.href='flowerList.pr'";>
                    <span class="main-images-text">마켓</span>
                </div>
 
-               <div class="main-imagelist-div">
+               <div class="main-imagelist-div" id="main-to-subscribe">
                    <img src="resources/images/main-images-subscription.png" class="sa sa-up main-images" data-sa-delay="750"  onclick="location.href='listView.su'";>
                    <span class="main-images-text">정기구독</span>
                </div>
 
-               <div class="main-imagelist-div">
+               <div class="main-imagelist-div" id="main-to-class">
                    <img src="resources/images/main-images-class.png" class="sa sa-up main-images" data-sa-delay="1000"  onclick="location.href='classDetail.cl'";>
                    <span class="main-images-text">클래스</span>
                </div>
@@ -185,7 +185,28 @@
 
        window.addEventListener('load', saFunc);
        window.addEventListener('scroll', saFunc);
-     </script>
+   
+	$(function () {
+           	  
+		$("#main-to-market").click(function () {
+	   		  
+			location.href="flowerList.pr";
+		});
+	   	  
+		$("#main-to-subscribe").click(function () {
+	   		  
+			location.href="listView.su";
+	   	});
+	   	  
+		$("#main-to-class").click(function () {
+	   		  
+			location.href="classDetail.cl";
+		});
+	});
+       
+	</script>
+   
+   
    
 </body>
 </html>

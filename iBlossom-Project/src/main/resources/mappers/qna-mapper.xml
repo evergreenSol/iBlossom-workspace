@@ -12,13 +12,14 @@
 		<result column="USER_NO" property="userNo" />
 	</resultMap>
 
-	<!-- 
+
 	<select id="selectList" resultMap="qnaResultSet">
-  		SELECT QNA_NO, QNA_TITLE, QNA_DATE
+  		SELECT QNA_NO, QNA_TITLE, USER_NO, TO_CHAR(QNA_DATE, 'YYYY-MM-DD') "QNA_DATE"
 		FROM QNA
+		WHERE ANSWER_STATUS = 'N'
 		ORDER BY QNA_DATE DESC
   	</select>
-  	 -->
+
   	 
   	<insert id="insertQna" parameterType="qna">
   		INSERT INTO QNA(QNA_NO
@@ -28,13 +29,35 @@
 		VALUES(SEQ_QNANO.NEXTVAL
 		     , #{qnaTitle}
 		     , #{qnaContent}
-		     , 1)
+		     , #{userNo})
   	</insert>
   	
+
+  	
+  	<insert id="insertAnswer" parameterType="qna">
+  		INSERT INTO QNA(ANSWER
+		                , ANSWER_DATE)
+		VALUES(#{answer}
+		     , #{answerDate})
+  	</insert>
+  	
+  	<select id="selectQna" parameterType="_int" resultMap="qnaResultSet">
+		SELECT QNA_NO, QNA_TITLE, QNA_CONTENT, USER_NAME, QNA_DATE
+		FROM QNA
+		WHERE QNA_NO = #{qnaNo}
+  	</select>
+  	
+  	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM QNA
+		WHERE ANSWER_STATUS = 'Y'
+	</select>
+
   	<select id="selectMyQna" parameterType="_int" resultMap="qnaResultSet">
   		SELECT QNA_NO, QNA_TITLE, QNA_CONTENT, QNA_DATE, ANSWER, ANSWER_DATE, ANSWER_STATUS
   		  FROM QNA
   		 WHERE USER_NO = #{userNo}
   	</select>
+
 
 </mapper>

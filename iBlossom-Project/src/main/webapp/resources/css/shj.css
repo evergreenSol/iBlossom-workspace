@@ -753,6 +753,47 @@ div { box-sizing: border-box; }
 
 
 
+
+/* error div */
+#error-wrap {
+    width: 1200px;
+    height: 600px;
+    margin : auto;
+    position: relative;
+}
+
+#error-div {
+    width: 300px;
+    position: absolute;
+    left: 450px;
+    top:150px;
+}
+
+#error-img {
+    width: 40px;
+    position: absolute;
+    left: 128px;
+}
+
+#error-title {
+    font-size: 22px;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 40px;
+}
+
+.error-hr {
+    width: 300px;
+    border-width: 1px 0px 0px 0px;
+    border-color: black;
+}
+
+
+
+
+
+
+
 /* admin 관리자 페이지 */
 
 /* admin 관리자 페이지 메뉴 wrap */

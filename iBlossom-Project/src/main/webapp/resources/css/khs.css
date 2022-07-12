@@ -360,7 +360,7 @@ height: 97%;
     color:white;
 }
 
-#subscribe-3m, #subscribe-regular, #subscribe-6m, #subscribe-12m {
+.subscribe-content {
 	display: none;
 	margin-bottom : 60px;
 }

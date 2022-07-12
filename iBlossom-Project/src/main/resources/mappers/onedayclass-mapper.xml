@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="onedayclassMapper">
-
+		<resultMap id="onedayclassResultSet" type="onedayclass">
+		<result column="CLASS_NO" property="classNo" />
+		<result column="CLASS_NAME" property="className" />
+		<result column="PRICE" property="price" />
+		<result column="CLASS_DATE" property="classDate" />
+		<result column="CAP_NO" property="capNo" />
+		<result column="RES_NUM" property="resNum" />
+		<result column="CLASS_STATUS" property="classStatus" />
+	</resultMap>
+	
+	
 
 </mapper>
