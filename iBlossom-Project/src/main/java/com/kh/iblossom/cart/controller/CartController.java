@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.iblossom.cart.model.Service.CartService;
 import com.kh.iblossom.cart.model.vo.Cart;
+import com.kh.iblossom.cart.model.vo.CartCommand;
 import com.kh.iblossom.member.model.service.MemberService;
 import com.kh.iblossom.member.model.vo.Member;
 
@@ -162,4 +163,4 @@ public class CartController {
 	}*/
 		
 	}
-}
+
