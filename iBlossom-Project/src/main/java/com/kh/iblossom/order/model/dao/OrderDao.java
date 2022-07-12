@@ -37,5 +37,11 @@ public class OrderDao {
 	}
 
 
+	public int selectOrder(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
 
 }

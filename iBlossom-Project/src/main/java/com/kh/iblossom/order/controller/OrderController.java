@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.iblossom.cart.model.Service.CartService;
 import com.kh.iblossom.cart.model.vo.Cart;
@@ -18,6 +19,7 @@ import com.kh.iblossom.member.model.service.MemberService;
 import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.order.model.service.OrderService;
 import com.kh.iblossom.order.model.vo.Order;
+import com.kh.iblossom.subscribe.model.vo.SubProduct;
 
 @Controller
 public class OrderController {
@@ -56,10 +58,24 @@ public class OrderController {
 	}
 	
 	
-	// 결제완료
+	// 결제완료 페이지 이동
 	@RequestMapping("complete.or")
 	public String orderComplete() {
 		return "user/order/order_Complete";
+	}
+	
+	// 주문결제 페이지에서 데이터 추가
+	@RequestMapping("insert.or")
+	public String insertOrder(HttpSession session, Model model) {
+		
+		int result = orderService.insertOrder();
+		
+		if(result > 0) {
+			return "redirect:/";
+		}
+		else {
+			return "redirect:/";
+		}
 	}
 	
 	
