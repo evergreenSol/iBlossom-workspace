@@ -26,6 +26,14 @@ public class CartDao {
 
 		 return sqlSession.insert("cartMapper.insertCartList", c);
 	}
+	
+	
+	
+	public Cart selectOneCart(SqlSessionTemplate sqlSession, Cart c) {
+		System.out.println("카트넘버 : "  + c);
+		
+		return sqlSession.selectOne("cartMapper.selectOneCart", c);
+	}
 
 	
 	

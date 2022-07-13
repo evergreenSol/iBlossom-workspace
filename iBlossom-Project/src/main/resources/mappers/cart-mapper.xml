@@ -46,9 +46,16 @@
   		FROM CART
   		WHERE CART_NO = #{cartNo}
   	</delete>
+  	
+  	
+	<select id="selectOneCart" parameterType="cart" resultMap="cartResultSet">
+  		SELECT CART_NO, USER_NO, PRODUCT_NO, FLOWER_NAME, PRODUCT_PRICE, PRODUCT_COUNT, THUMBNAIL
+  		FROM CART
+		JOIN PRODUCT USING (PRODUCT_NO)
+		WHERE CART_NO = #{cartNo}
+  	</select>
 
-
-
+	
 
 	<!-- 상세페이지 -> cart 연결용 -->
 	
@@ -65,5 +72,6 @@
               , #{productCount}
               , #{productPrice})
      </insert>
+     
 	 
 </mapper>

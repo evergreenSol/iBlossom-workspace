@@ -9,6 +9,8 @@ public interface CartService {
 	// 장바구니 조회
 	ArrayList<Cart> selectCart(int userNo);
 	
+	Cart selectOneCart(Cart c);
+	
 	
 	/*--------------------------------------------------------*/
 	// 상세페이지 -> cart 연결용

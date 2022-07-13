@@ -30,7 +30,7 @@
 	        <div class="cart-choice">
 	
 	            <div>
-	                <input type="checkbox">&nbsp;전체선택 <span>(1/2)</span>
+	                <input type="radio">&nbsp;전체선택 <span>(1/2)</span>
 	            </div>
 	            <div>
 	                <button type="button" class="choice-delete-btn" onclick="location.href=''">선택삭제</button>
@@ -49,36 +49,35 @@
 	        </div>
 	
 	        <!-- 장바구니 내용 -->
-	        <form action="detail.or">
-	        <div>
-				<c:forEach var="c" begin="0" end="${ list.size() -1 }">
+	        <div> 
+				<c:forEach var="c" items="${list}">
 				
 		            <div class="cart-content">
 						
 		                <!-- 장바구니 라디오 버튼 -->
 		                <p class="cart-content1">
-		                    <input type="checkbox" name="cartList[${c}].cartNo" value="${list[c].cartNo}">
+		                    <input type="radio">
 		                </p>
 		
 		                <!-- 장바구니 이미지 -->
 		                <span class="cart-content2">
-		                    <img src="${ list[c].thumbnail }" style="width:330px; height:350px;">
+		                    <img src="${ c.thumbnail }" style="width:330px; height:350px;">
 		                </span>
 		
 		                <!-- 장바구니 선택항목 상세옵션 -->
 		                <span class="cart-content3">
 		                    
 		                        <!-- 제목 -->
-		                        <div> ${ list[c].flowerName }</div><br>
+		                        <div> ${ c.flowerName }</div><br>
 		                            
-		                        <div class="basketprice"><input type="hidden" name="" id="p_price1" class="p_price" value="${ list[c].productPrice }">${ list[c].productPrice }원</div>
+		                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="${ c.productPrice }">${ c.productPrice }원</div>
 
 					            <!-- 장바구니 수량 변경 -->		                        
 		                        <div class="num">
 					                <div class="updown">
 					                	<br>
 					                	<span onclick="javascript:basket.changePNum(1);"><i class="fas fa-arrow-alt-circle-down down"></i></span>		
-					                    <input type="text" name="" id="p_num1" size="1" maxlength="5" class="p_num" value="${ list[c].productCount }" 
+					                    <input type="text" name="p_num1" id="p_num1" size="1" maxlength="5" class="p_num" value="${ c.productCount }" 
 					                           onkeyup="javascript:basket.changePNum(1);">
 					                    <span onclick="javascript:basket.changePNum(1);"><i class="fas fa-arrow-alt-circle-up up"></i></span>				
 					                </div>					
@@ -88,19 +87,19 @@
 		                <!-- 장바구니 상품 합계 -->
 			            <div class="sum cart-content4"
 			             	 class="bigtext right-align box blue summoney" id="sum_p_price" 
-			            	 style="line-height: 280px; font-size:19px;">${ list[c].productCount * list[c].productPrice }원</div>
+			            	 style="line-height: 280px; font-size:19px;">${ c.productCount * c.productPrice }원</div>
 						<!-- <fmt:formatNumber type="number" maxFractionDigits="3" value="${p.productPrice}" />원 -->
 			            <div class="basketcmd"><a href="#" class="abutton">X</a></div>
 		            
 		            </div>
+	            
 	            </c:forEach>
-	            	<button type="submit" id="real-submit-button" style="display:none"></button><!--  -->
-				</form>
+	
 				<br>
 				
 	            <hr>
 	
-	     </div> 
+	        </div> 
 	        
 	        <!-- 
 	        	* 로그인이 되지 않은 상태 :  "바구니가 비어있습니다." 페이지
@@ -161,24 +160,14 @@
 	
 	        <!-- 결제하기 버튼 -->
 	        <div>
-	            <button class="cart-btn" type="button">결제하기</button>
+	            <button class="cart-btn" type="submit" onclick="location.href='detail.or'">결제하기</button>
 	        </div>
 	        
-	        
 	    </div>
-	    
   
     </div>    
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
-
-	<script>
-		$(function () {
-			$(".cart-btn").click(function () {
-				$("#real-submit-button").trigger("click");
-			});
-		});
-	</script>
 
 </body>
 </html>

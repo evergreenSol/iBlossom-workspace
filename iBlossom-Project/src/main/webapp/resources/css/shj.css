@@ -635,7 +635,7 @@ div { box-sizing: border-box; }
 /* signUp 회원가입 취소 버튼 속성 */
 #signUp-cancelbutton {
     background-color: lightgray;
-    color: white;
+    color: black;
     float: left;
     cursor: pointer;
 }

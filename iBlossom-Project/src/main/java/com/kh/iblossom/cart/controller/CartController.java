@@ -53,7 +53,7 @@ public class CartController {
 	/*--------------------------------------------------------*/
 	// 상세페이지 -> cart 연결용
 	
-/*	// 장바구니 상품 추가
+	// 장바구니 상품 추가
 	@RequestMapping("insert.ca")
 	public String insertCartList(Cart c, HttpSession session, Model model) {
 		
@@ -62,13 +62,13 @@ public class CartController {
 		int result = cartService.insertCartList(c);
 		
 		if(result > 0) { 
-			// session.setAttribute("alertMsg", "성공적으로 장바구니가 추가되었습니다.");
+			session.setAttribute("alertMsg", "성공적으로 장바구니가 추가되었습니다.");
 			return "redirect:list.ca";
 			
 		} else {
 			return "redirect:/";
 		}
-	}*/
+	}
 
 
 	// 조합형 장바구니

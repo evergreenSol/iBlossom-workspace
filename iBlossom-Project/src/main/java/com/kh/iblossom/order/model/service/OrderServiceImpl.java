@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.order.model.dao.OrderDao;
+import com.kh.iblossom.order.model.vo.DetailOrder;
 import com.kh.iblossom.order.model.vo.Order;
 
 @Service
@@ -44,9 +45,20 @@ public class OrderServiceImpl implements OrderService{
 
 
 	@Override
-	public int insertOrder() {
+	public int insertOrder(Order o) {
 		
-		return orderDao.selectOrder(sqlSession);
+		return orderDao.insertOrder(sqlSession, o);
+	}
+
+
+	@Override
+	public int insertDetailOrder(DetailOrder detailOrder) {
+		return orderDao.insertDetailOrder(sqlSession, detailOrder);
+	}
+
+	@Override
+	public Order selectOrder(String receiptId) {
+		return orderDao.selectOrder(sqlSession, receiptId);
 	}
 
 

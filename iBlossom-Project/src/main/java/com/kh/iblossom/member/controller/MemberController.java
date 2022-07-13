@@ -428,7 +428,7 @@ public class MemberController {
 	   // System.out.println(qnaNo);
 	   
 	   Qna q = qnaService.selectQna(qnaNo);
-	   
+	   System.out.println(q);
 	   model.addAttribute("q", q);
 	   
 	   return "user/member/myPage_QnaDetailView";

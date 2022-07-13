@@ -56,6 +56,20 @@
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
+		<c:choose>
+			<c:when test="${ loginUser.grLevel == 1 }">
+				<c:set var="discount" value="0"/>
+			</c:when>
+			<c:when test="${ loginUser.grLevel == 2 }">
+				<c:set var="discount" value="1000"/>
+			</c:when>
+			<c:when test="${ loginUser.grLevel == 3 }">
+				<c:set var="discount" value="2000"/>
+			</c:when>
+			<c:otherwise>
+				<c:set var="discount" value="3000"/>
+			</c:otherwise>
+		</c:choose>
 	<br><br>
 	
 	<!-- 전체 색상 변경 div -->
@@ -95,72 +109,49 @@
 
                         <!-- 내용 -->
                         <div id="CheckBox" class="order-check-contentbox">
-
-                            <c:forEach var="o" items="${list}">
-                            
-	                            <div class="order-check-content">
-	
-	                                <!-- 상품 이미지 -->
-	                                <span>
-	                                    <img src="${ o.thumbnail }"
-	                                    	style="width:330px; height:350px;">
-	                                </span>
-	
-	                                <!-- 상품 옵션 확인란 -->
-	                                <div class="order-check-list"><br>
-	                                
-	                                		<input type="hidden" id="cartNo" value="${ o.cartNo }">
-	                                		<input type="hidden" id="userNo" value="${ o.userNo }">
-	                                		
-	                                        <!-- 상품 제목 -->
-	                                        <li>${ o.flowerName }</li>
-	                                        <input type="hidden" id="productNo" value="">
-	                                        <br>
-	
-	                                        <!-- 가격(원) / 수량(개) -->
-	                                        <li> <fmt:formatNumber type="number" maxFractionDigits="3" value="${ o.productPrice }" />원 
-	                                        
-	                                        / ${o.productCount}개
-	                                        
-	                                        </li>
-	                                        <br>
-	                                </div>
-	
-	                                <!-- 공백 -->
-	                                <div></div>
-	                                <div></div>
-	
-	                            </div>
-                            
-                            </c:forEach>
-
+							<form action="insertDetailOrder.or" >
+							
+	                            <c:forEach var="i" begin="0" end="${ selectList.size() - 1 }">
+	                            
+		                            <div class="order-check-content">
+		
+		                                <!-- 상품 이미지 -->
+		                                <span>
+		                                    <img src="${ selectList[i].thumbnail }"
+		                                    	style="width:330px; height:350px;">
+		                                </span>
+		
+		                                <!-- 상품 옵션 확인란 -->
+		                                <div class="order-check-list"><br>
+		                                
+		                                		<input type="hidden" id="cartNo" name="" value="${ selectList[i].cartNo }">
+		                                		<input type="hidden" id="userNo" name="" value="${ selectList[i].userNo }">
+		                                		
+		                                        <!-- 상품 제목 -->
+		                                        <li>${ selectList[i].flowerName }</li>
+		                                        <input type="hidden" id="productNo" name="detailOrderList[${i}].productNo" value="${ selectList[i].productNo}">
+		                                        <br>
+		
+		                                        <!-- 가격(원) / 수량(개) -->
+		                                        <li> <fmt:formatNumber type="number" maxFractionDigits="3" value="${ selectList[i].productPrice }" />원 
+		                                        
+		                                        / ${selectList[i].productCount}개
+		                                        <input type="hidden" id="" name="detailOrderList[${i}].onePrice" value="${selectList[i].productPrice}">
+		                                        <input type="hidden" id="" name="detailOrderList[${i}].oneQuantity" value="${selectList[i].productCount}">
+		                                        </li>
+		                                        <br>
+		                                </div>
+		
+		                                <!-- 공백 -->
+		                                <div></div>
+		                                <div></div>
+		
+		                            </div>
+	                            </c:forEach>
+	                            	<input type="hidden" id="thisOrderNo" name="orderNo">
+	                            <button type="submit" id="real-submit-button" style="display:none"></button>
+							</form>
                             <hr> <!-------------------------------------------->
-
-                            <!-- 2 -->
-                            <div class="order-check-content">
-
-                                <!-- 상품 이미지 -->
-                                <span>
-                                    <img src="resources/images/order_flower_2.png"
-                                    	 style="width:250px; height:250px;">
-                                </span>
-
-                                <!-- 상품 옵션 확인란 -->
-                                <div class="order-check-list"><br>
-                                        <!-- 상품 제목 -->
-                                        <li></li>
-                                        <br>
-
-                                        <!-- 가격(원) / 수량(개) -->
-                                        <li>6,900원 / 1개</li>
-                                        <br>
-                                </div>
-
-                                <!-- 공백 -->
-                                <div></div>
-                                <div></div>
-
-                            </div>
 
                         </div> 
 
@@ -223,8 +214,7 @@
                         </div>
 
                         <div id="ReceiveBox" style="margin-top:0px;">
-                        	${ deliverAt }
-                        	<input type="text" class="datepicker" id="datepicker" name="deliverAt" value="${ deliverAt }">
+                        	<input type="text" class="datepicker" id="datepicker">
                         </div>
                     </div>
                     
@@ -346,10 +336,6 @@
                         
                             const btnModal = document.querySelector('.address-btn'); // 버튼 class 속성
                         
-                            fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
-                                .then(response => response.text())
-                                .then(result => loremIpsum.innerHTML = result)
-                    
                             function modalOn() {
                             modal.style.display = "flex"
                             }
@@ -427,10 +413,10 @@
                 <div class="order-price">
                     <span>총 주문 금액</span>
 	            	<c:set var = "total" value = "0" />
-					<c:forEach var="i" items="${ list }" varStatus="status">     
-					<c:set var="totalPrice" value="${ totalPrice + (i.productPrice * i.productCount) }"/>
+					<c:forEach var="i" items="${ selectList }" varStatus="status">     
+					<c:set var="total" value="${ total + (i.productPrice * i.productCount) }"/>
 					</c:forEach>
-		            <span>${ totalPrice } 원</span>
+		            <span>${ total } 원</span>
                 </div>
 
                 <!-- 배송비 -->
@@ -442,14 +428,14 @@
                 <!-- 등급 할인 -->
                 <div class="order-grade">
                     <span>등급할인</span>
-                    <span>- 0원</span>
+                    <span>- ${ discount }원</span>
                 </div>
                 <hr>
 
                 <!-- 총 결제 금액 -->    
                 <div class="order-tprice">
                     <span >총 결제 금액</span>
-                    <span>${ totalPrice }원</span><input type="hidden" id="totalPrice" value="${ subLevel * (sp.subPrice + deliverFee) }">
+                    <span>${ total + 3000 - discount }원</span><input type="hidden" id="totalPrice" value="${ total + 3000 - discount }">
                 </div>
 
                 <br>
@@ -489,7 +475,7 @@
             </script>
             
             
-            <input type="hidden" id="userNo" value="${ loginUser.userNo }">
+            <input type="hidden" name="userNo" id="userNo" value="${ loginUser.userNo }">
             <input type="hidden" id="userName" value="${ loginUser.userName }">
             <input type="hidden" id="email" value="${ loginUser.email }">
             <input type="hidden" id="address" value="${ loginUser.address }">
@@ -497,15 +483,19 @@
         </div><!-- 1200px 너비 -->
       	</div><!-- 전체 색상 변경 div -->
 
-	<script>	
+	<script>
+	
+	var userNo = $("#userNo").val();
+	var receiveUser = $('#subReceiverUser').val();
+	var receivePhone = $('#subReceiverPhone').val();
+	var postcode = $('#zipcode').val();
+	var deliverTo1 = $('#address1').val(); 
+	var deliverTo2 = $('#address2').val();
+
+	console.log(receiveDate);
 	function pay() {
-		var subReceiverUser = $('#subReceiverUser').val()
-		var subReceiverPhone = $('#subReceiverPhone').val()
-		var subReceiverPostcode = $('#zipcode').val()
-		var deliverTo1 = $('#address1').val() 
-		var deliverTo2 = $('#address2').val()
 		
-		if (subReceiverPhone=="" || subReceiverUser=="" || subReceiverPostcode=="" || deliverTo1=="" || deliverTo2==""){
+		if (receivePhone=="" || receiveUser=="" || postcode=="" || deliverTo1=="" || deliverTo2=="" || $('#datepicker').val()==""){
 			alert("모든 양식을 기입해야 결제가 가능합니다!");
 		}
 		else {
@@ -538,7 +528,7 @@
 			console.log(data);
 		}).done(function (data) {
 			var totalPrice = $('#totalPrice').val();
-			var flowerName = $('#flowerName').val();
+			var flowerName = '플라워 마켓'
 			
 			requestPay(data.billing_key, data.receipt_id, totalPrice, flowerName);
 
@@ -554,12 +544,12 @@
 			type : "post",
 			data : {
 				billingKey : billingKey,
-				totalPrice : totalPrice,
+				totalPrice : 1000,
 				subProductName : flowerName,
 			},
 			success : function(data) {
 				console.log("상품 결제 성공");
-				insertCart(receiptId);
+				insertOrder(receiptId);
 			}, error : function() {
 				console.log("상품 결제 실패");
 			}
@@ -567,16 +557,46 @@
 	}
 	
 	// DB에 구독 객체 넣기?
-	function insertCart(receiptId) {
+	function insertOrder(receiptId) {
 		$.ajax({
-			url : "insert.su", /* insert 구문의 맵핑값 */
+			url : "insert.or", /* insert 구문의 맵핑값 */
 			type : "post",
 			data : {
-
+				receiptId : receiptId,
+				userNo : userNo,
+				totalPrice : 1000,
+				receiveUser : receiveUser,
+				receiveDate : $('#datepicker').val(),
+				receivePhone : receivePhone,
+				orderAddress : $('#address1').val() + " " + $('#address2').val(),
+				postcode : $('#zipcode').val(),
+				orderStatus : '결제완료',
+				deliveryStatus : '배송준비'
+				
 			},
-			success : function(data) {
-				console.log("DB 넣음")
-				location.href='complete.or';
+			success : function(result) {
+				
+				if(result == 0) {
+					console.log("order DB 넣음X")
+				}
+				else {
+					console.log(result);
+					var orderNo = result;
+					console.log(orderNo);
+					console.log("order DB 넣음")
+					
+					// 트리거 실행
+					$("#thisOrderNo").val(orderNo);
+					
+					console.log($("#thisOrderNo").val());
+					
+					$("#real-submit-button").trigger("click");
+					
+				}
+				
+				
+				
+				// location.href='complete.or';
 			}, error : function() {
 				console.log("DB 넣음 실패")
 			}
