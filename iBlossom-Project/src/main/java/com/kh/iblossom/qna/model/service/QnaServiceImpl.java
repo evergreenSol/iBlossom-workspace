@@ -26,9 +26,9 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public ArrayList<Qna> selectMyQna(int userNo) {
+	public ArrayList<Qna> selectMyQnaList(int userNo) {
 		
-		return qnaDao.selectMyQna(sqlSession, userNo);
+		return qnaDao.selectMyQnaList(sqlSession, userNo);
 	}
 
 

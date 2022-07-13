@@ -23,7 +23,7 @@
 		PRODUCT
 		WHERE STATUS = 'Y'
 	</select>
-
+	
 	<select id="selectList" resultMap="productResultSet">
 		SELECT PRODUCT_NO, CATEGORY_NAME, FLOWER_NAME, PRICE, THUMBNAIL,
 		TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD') "ENROLL_DATE", TAG,STATUS
@@ -32,6 +32,29 @@
 		 WHERE STATUS = 'Y'
 		ORDER BY ENROLL_DATE DESC, PRODUCT_NO DESC
 	</select>
+
+	<!-- 꽃다발 리스트 -->
+ 	<select id="selectflowerList" resultMap="productResultSet">
+		SELECT PRODUCT_NO, CATEGORY_NAME, FLOWER_NAME, PRICE, THUMBNAIL,
+		TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD') "ENROLL_DATE", TAG,STATUS
+		FROM
+		PRODUCT
+		 WHERE STATUS = 'Y'
+		 AND CATEGORY_NAME ='꽃다발'
+		ORDER BY ENROLL_DATE DESC, PRODUCT_NO DESC
+	</select>
+	
+	<!-- 꽃병 리스트 -->
+	<select id="selectListBase" resultMap="productResultSet">
+		SELECT PRODUCT_NO, CATEGORY_NAME, FLOWER_NAME, PRICE, THUMBNAIL,
+		TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD') "ENROLL_DATE", TAG,STATUS
+		FROM
+		PRODUCT
+		 WHERE STATUS = 'Y'
+		 AND CATEGORY_NAME ='꽃병'
+		ORDER BY ENROLL_DATE DESC, PRODUCT_NO DESC
+	</select>
+
 
 	<!-- 상품 추가 -->
 	<insert id="insertProduct" parameterType="Product">
@@ -55,7 +78,7 @@
 		, #{tag})
 	</insert>
 
-	<!-- 상품 상세보기(admin,꽃다발/꽃대)-->
+	<!-- 상품 상세보기(admin)-->
 	<select id="selectProduct" parameterType="_int"
 		resultMap="productResultSet">
 		SELECT PRODUCT_NO,
@@ -93,10 +116,10 @@
 	</select>
 	
 	<!-- 상품 상세보기(조합형)-->
-	<select id="selectDetailList" parameterType="_int" resultMap="productResultSet">
+	<select id="selectDetailList" resultMap="productResultSet">
 		SELECT PRODUCT_NO,
-		CATEGORY_NAME,FLOWER_NAME,THUMBNAIL,CONTENT_PHOTO,FLOWER_INFO,PRICE,TAG
+		CATEGORY_NAME,FLOWER_NAME,THUMBNAIL,FLOWER_INFO,PRICE
 		FROM PRODUCT
-		WHERE PRODUCT_NO = #{productNo}
+		WHERE CATEGORY_NAME = '조합형'
 	</select>
 </mapper>

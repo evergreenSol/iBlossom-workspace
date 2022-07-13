@@ -29,17 +29,21 @@
                     	<h2>1대1 문의내역</h2>
                     
                    		<div style="width: 100%">
-                            <table align="center" style="text-align: center; font-size: 14px; width: 100%">
+                            <table align="center" style="text-align: center; font-size: 14px; width: 100%; border-collapse: collapse;" id="qnaTable">
                                 <thead style="background: rgb(248, 248, 248); border-style: none;">
                                     <tr height="40">
-                                        <th width="150">문의 날짜</th>
+                                    	<th width="50">번호</th>
+                                        <th width="100">문의 날짜</th>
                                         <th width="500">제목</th>
                                         <th width="150">문의 상태</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <c:if test="${ not empty list }">
+                                
                                 <c:forEach var="q" items="${ list }">
                                     <tr height="40">
+                                    	<td>${ q.qnaNo }</td>
                                         <td>${ q.qnaDate }</td>
                                         <td>${ q.qnaTitle }</td>
                                         
@@ -52,7 +56,16 @@
                                         	</c:otherwise>
                                         </c:choose>
                                     </tr>
+                                    <input type="hidden" name="qnaNo" value="${ q.qnaNo }">
                                 </c:forEach>
+                                </c:if>
+                                <c:if test="${ empty list }">
+                                	
+                                	<td height="300" width="900" colspan="4" id="no-qna">
+                                		회원님께서 남기신 문의가 없습니다.
+                                	</td>
+                               
+                                </c:if>
                                 </tbody>
                             </table>
                         </div>
@@ -68,5 +81,12 @@
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
+
+	<script>
+		$("#qnaTable>tbody").on("click", "tr", function () {
+			console.log($(this).children().eq(0).text());
+			location.href="qnaDetailView.me?qnaNo=" + $(this).children().eq(0).text();
+		});
+	</script>
 </body>
 </html>

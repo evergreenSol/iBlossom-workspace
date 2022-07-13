@@ -6,6 +6,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+#btnPrimary{
+	background-color: black;
+	width: 130px;
+    height: 50px;
+    color: white;
+    font-weight: 700;
+}
+
+#btnDanger{
+	width: 130px;
+    height: 50px;
+    background-color:#ff2393;
+    color: white;
+    font-weight: 700;
+    border: #ff2393;
+    margin-right: 900px;
+}
+</style>
+<!-- jQuery 라이브러리 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="resources/css/jsa.css" rel="stylesheet">
 </head>
 <body>
@@ -89,27 +111,30 @@
 			<div class="admin_sub_product">
 				<h3>카테고리명</h3>
 				<input type="text" id="admin_category_name"
-					name="admin_category_name" value="${p.categoryName}" readonly>
+					name="category_name" value="${p.categoryName}" readonly>
 
 				<h3>상품명</h3>
-				<input type="text" id="admin_product_name" name="admin_product_name"
+				<input type="text" id="admin_product_name" name="flowerName"
 					value="${p.flowerName}" readonly>
 
 				<h3>태그</h3>
-				<input type="text" id="admin_tag_name" name="admin_tag_name"
+				<input type="text" id="admin_tag_name" name="tag"
 					value="${p.tag}" readonly>
 
-				<h3>썸네일</h3>
+				
 				<table class="admin_product">
 					<tr>
-						<td><img id="admin_product-img"
-							src="resources/images/flower 2.PNG"></td>
-						<td><img id="admin_product-img"
-							src="resources/images/flower 2.PNG"></td>
+						<td>
+						<h3>썸네일</h3>
+						<img src="${p.thumbNail}" name="thumbNail" style="width:300px"></td>
+							
+						<td>
+						<h3>상세사진</h3>
+						<img src="${p.contentPhoto}" style="border:none;width:130px" name="contentPhoto"></td>
 							
 						<td width="60%">
 						<textarea id="admin_product-description"
-								name="product_description" readonly>${p.flowerInfo}</textarea></td>
+								name="flowerInfo" readonly>${p.flowerInfo}</textarea></td>
 					</tr>
 				</table>
 				<h3>가격</h3>
@@ -123,8 +148,9 @@
 
 				<div align="center">
 	                <!-- 수정하기, 삭제하기 버튼은 이 글이 본인이 작성한 글일 경우에만 보여져야 함 -->
-	                <a class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</a>
-	                <a class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</a>
+	                <button id="btnDanger" onclick="postFormSubmit(2);">삭제하기</button>
+	                <button id="btnPrimary"   onclick="postFormSubmit(1);">수정하기</button>
+	                
 	            </div>
 	            <br><br>
 	            

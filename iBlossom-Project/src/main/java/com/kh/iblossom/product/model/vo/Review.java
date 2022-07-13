@@ -16,4 +16,5 @@ private String reviewStatus;	//	REVIEW_STATUS
 private int orderNo;			//	ORDER_NO
 private int userNo;				//	USER_NO
 private int productNo;		//	PRODUCT_NO
+private String productName;
 }

@@ -11,6 +11,7 @@
     <title>header</title>
     <link href="resources/css/header.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico">
 </head>
 <body>
 
@@ -119,7 +120,7 @@
     		
     		$.ajax({
     			url : "checkPurchase.me",
-    			success : function () {
+    			success : function (result) {
     				if(result == "1") {
     					console.log("있음");
     				}

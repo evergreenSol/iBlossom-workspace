@@ -7,7 +7,7 @@ import com.kh.iblossom.qna.model.vo.Qna;
 
 public interface QnaService {
 
-	ArrayList<Qna> selectMyQna(int userNo);
+	ArrayList<Qna> selectMyQnaList(int userNo);
 
 	ArrayList<Qna> selectList(PageInfo pi);
 	

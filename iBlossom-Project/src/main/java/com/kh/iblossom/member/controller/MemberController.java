@@ -2,6 +2,7 @@ package com.kh.iblossom.member.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -93,6 +94,12 @@ public class MemberController {
 		
 	}
 	
+	// 회원가입 이용약관 이동 메소드
+		@RequestMapping(value="enrollAgree.me")
+		public String enrollAgree() {
+			return "common/enrollAgree";
+		}
+	
 	// 회원가입 폼 이동 메소드
 	@RequestMapping(value="enrollForm.me")
 	public String enrollMemberForm() {
@@ -160,8 +167,6 @@ public class MemberController {
 	}
 	
 	
-	
-	
 	// 메뉴바의 "상품관리" 클릭해서 요청한 경우 => /list.pr (기본적으로 1 번 페이지를 요청하게끔 처리)
 	   // 페이징바의 "숫자" 를 클릭해서 요청한 경우 => /list.pr?cpage=요청하는페이지수
 
@@ -223,15 +228,28 @@ public class MemberController {
       
       int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
       // 최근 3개만, 최근 6개만 최근 12개만...
-      ArrayList<Subscribe> list3m = subscribeService.selectMySubscribeThree(userNo);
-      ArrayList<Subscribe> list6m = subscribeService.selectMySubscribeSix(userNo);
-      ArrayList<Subscribe> list12m = subscribeService.selectMySubscribeTwelve(userNo);
-      ArrayList<Subscribe> listReg = subscribeService.selectMySubscribeRegular(userNo);
       
-      model.addAttribute("list3m", list3m);
-      model.addAttribute("list6m", list6m);
-      model.addAttribute("list12m", list12m);
-      model.addAttribute("listReg", listReg);
+      ArrayList<Map<String,String>> list = subscribeService.selectMySubReceiptId(userNo);
+      
+      ArrayList<String> receiptIdList = new ArrayList<>();
+      
+      for(int i = 0; i < list.size(); i++) {
+    	  
+    	  receiptIdList.add(list.get(i).get("RECEIPT_ID"));
+      }
+      
+      model.addAttribute("receiptIdList", receiptIdList);
+      
+//      
+//      ArrayList<Subscribe> list3m = subscribeService.selectMySubscribeThree(userNo);
+//      ArrayList<Subscribe> list6m = subscribeService.selectMySubscribeSix(userNo);
+//      ArrayList<Subscribe> list12m = subscribeService.selectMySubscribeTwelve(userNo);
+//      ArrayList<Subscribe> listReg = subscribeService.selectMySubscribeRegular(userNo);
+//      
+//      model.addAttribute("list3m", list3m);
+//      model.addAttribute("list6m", list6m);
+//      model.addAttribute("list12m", list12m);
+//      model.addAttribute("listReg", listReg);
       
       /*
       System.out.println(list3m);
@@ -243,20 +261,29 @@ public class MemberController {
       return "user/member/myPage_SubscribeView";
    }
    
+   
+   @RequestMapping(value="subscribeRealView.me")
+   public String selectMySubscribe(String receiptId, Model model) {
+	   System.out.println(receiptId);
+	   
+	   ArrayList<Subscribe> list = subscribeService.selectMySubscribe(receiptId);
+	   
+	   System.out.println("멤버 컨트롤러 list: " + list);
+	   
+	   model.addAttribute("list", list);
+	   
+	   return "user/member/myPage_SubscribeView_Content";
+   }
+   
+   
+   
+   
    // 구독 삭제 메소드
    @ResponseBody
    @RequestMapping(value="cancelSubscribe.me", produces="html/text; charset=UTF-8")
    public String cancelSubscribe(String receiptId) {
 	   
 	   System.out.println(receiptId);
-	   
-	   /*
-	    * 1. 몇 개 구독 취소할 수 있는지 보기(배송준비중인 친구들)
-	    * 1-1 생각해보니까 update 하면 그 update 한 만큼의 수가 나오잖아?
-	    * 2. 그 수만큼 결제 된거 취소하기
-	    * 3.  
-	    * 
-	    */
 	   
 	   int result = subscribeService.cancelMySubList(receiptId);
 	   
@@ -297,6 +324,7 @@ public class MemberController {
 		if(result > 0) {
 			Member updateMem = memberService.login(m);
 			session.setAttribute("loginUser", updateMem);
+			session.setAttribute("alertMsg", "수정이 완료되었습니다.");
 			return "redirect:updateForm.me";
 		}
 		else {
@@ -378,18 +406,33 @@ public class MemberController {
       return "user/member/myPage_ReviewListView";
    }
    
+   // 마이페이지 1대1문의
    @RequestMapping(value="qnaListView.me")
    public String myPageQnaListView(HttpSession session, Model model) {
       
       int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
       
-      ArrayList<Qna> list = qnaService.selectMyQna(userNo);
+      ArrayList<Qna> list = qnaService.selectMyQnaList(userNo);
       
-      System.out.println(list);
+      // System.out.println(list);
       
       model.addAttribute("list", list);
 
       return "user/member/myPage_QnaListView";
+   }
+   
+   // 1대1문의 상세보기
+   @RequestMapping(value="qnaDetailView.me")
+   public String myPageQnaDetailView(int qnaNo, Model model) {
+	   
+	   // System.out.println(qnaNo);
+	   
+	   Qna q = qnaService.selectQna(qnaNo);
+	   
+	   model.addAttribute("q", q);
+	   
+	   return "user/member/myPage_QnaDetailView";
+	   
    }
    
    

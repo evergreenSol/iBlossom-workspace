@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,27 +13,70 @@
 </head>
 <body>
 
-<jsp:include page="../common/header.jsp" />
+<jsp:include page="../../common/header.jsp" />
 
     <br><br><br>
+
+
+	<div id="wrap_detail1">
+		<div style="width: 1000px; margin: auto;">
+			<form name="form" method="get" id="form" action="insertCo.ca">
+				<input type="hidden" name="productNo" value="${ p.productNo }">
+				<table>
+					<tr class="tr1" valign="top">
+						<td rowspan="6"><img src="resources/images/flower3.PNG">
+
+						<select id="test5">
+
+								<option value='' selected disabled style="text-align: center;">
+									---------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									---------</option>
+								<c:forEach var="i" begin="0" end="${list.size()}">
+									<option value="${list[i].flowerName }">${list[i].flowerName }${list[i].productNo}</option>
+								</c:forEach>
+						</select></td>
+						<td class="pp" style="padding-top: 20px;"><b
+							style="font-size: 25px;">조합형</b></td>
+					</tr>
+
+					<%-- <c:forEach var="i" begin="0" end="${list.size() -1}">
+						<input type="text" name="cartList[${i}].productNo" value="${list[i].productNo }"> 
+						<input type="text" name="cartList[${i}].productCount" id="cartList${i}" class="productCount" value="1"> 
+						<input type="text" name="cartList[${i}].productPrice" value="${list[i].price }"> 
+						<input type="text" name="" value="${list[i].flowerName }"> 
+					</c:forEach> --%>
+					<tr>
+						<td class="pp">
+							<hr>
+					</tr>
+					<tr>
+						<td class="pp"><b>내가 직접 고르고 선물해보세요~ </b><br> 감동이 2배 <br>
+							<hr style="margin-bottom: 10px;"></td>
+					</tr>
+					<tr>
+						<td class="pp">
 
     <div id="wrap_detail1">
         <div style="width: 1000px;margin: auto;">
             <table>
+            
                 <tr valign="top">
                     <td rowspan="6"><img src="resources/images/flower3.PNG">
+                   
                         <select id="test5">
+                        
                             <option value='' selected disabled style="text-align: center;">
                                 ---------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ---------
                             </option>
-                            <option value="rose">장미</option>
-                            <option value="sunflower">해바라기</option>
-                            <option value="su">수국</option>
+                        <c:forEach var="v" items ="${list}">
+                            <option value="${v.flowerName }">${v.flowerName }</option>
+                              </c:forEach>
                         </select>
+                      
                     </td>
                     <td class="pp" style="padding-top: 20px;"><b style="font-size:25px;">조합형</b></td>
                 </tr>
-
+            
                 <tr>
                     <td class="pp">
                         <hr>
@@ -47,13 +91,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="pp">
+                    <!-- <td class="pp">
+
 
                         <p>수령일 : <input type="text" class="datepicker" id="datepicker"></p>
 
 
         </div>
-        </td>
+        <!-- </td> -->
         </tr>
         <tr>
             <td>
@@ -62,50 +107,82 @@
                     <form name="form" method="get">
                        
                 </div>
+                <br>
+                <div style="margin-left: 20px">
                 배송비:
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 3,000 원<br><br>
-                총 주문금액 : <input type="text"
-                    style="border:none; background-color: rgba(224, 224, 224, 0.001); padding-left: 60px; width: 40px;"
-                    name="sum" size="11" id="sum" readonly value="0">원
+                총 주문금액 :
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              
+                
+                 <input type="text"
+                    style="border:none; font-weight:700; font-size:15px; background-color: rgba(224, 224, 224, 0.001); padding-left: 60px; width: 50px;"
+                    name="sum" size="11" id="sum" readonly value="0">&nbsp;&nbsp;원
+                </div>
                 </form>
             </td>
         </tr>
 
         <tr>
+        
             <td>
+            <br><br>
                 <input type="submit" value="장바구니" id="btn1">
 
             </td>
 
+
+<!-- 						<td><br>
+						<br> 
+						 함수 태워서 인풋 히든값에 넣기
+						<button onclick="sub()" value="장바구니" id="btn1"></button>
+						</td>
+ -->
         </tr>
-
+      
         </table>
+<!-- 
 
-        <!-- <select name="job">
+        <select name="job">
             <option value="">조합할 꽃을 선택하세요</option>
             <option value="rose">장미</option>
             <option value="sunflower">해바라기</option>
             <option value="hydrangea"> 수국</option>
-        </select> -->
+        </select>
 
-        <!--상세 정보 버튼 시작-->
+        상세 정보 버튼 시작
         <div class="categorize review-box" style="height: 100px; margin-top: 30px;">
-            <div class="reviewBox" id="combination_content" onclick="test3();">상세정보</div>
+            <div class="reviewBox" id="combination_content" onclick="getList();">상세정보</div>
             <div class="reviewBox" id="combination_review" onclick="test4();">리뷰</div>
         </div>
 
-        <!-- 상세정보 폼-->
+        상세정보 폼
 
         <div id="cobinationContent">
             <div id="combinationPhoto" style="overflow : hidden;">
                 <br><br><br>
-            </div>
+            </div> -->
 
-        </div>
+
+		<!-- 리뷰 작성폼-->
+
+	</div>
+
+	<c:forEach var="e" items="${list}">
+		<input type="hidden" value="${e.price }" id="${e.flowerName }">
+	</c:forEach>
+<input type="text" id="test">
+
+   <!--      </div> -->
+
 
 
 
@@ -115,7 +192,9 @@
 
     </div>
 
-
+	<c:forEach var="e" items ="${list}">
+     <input type="hidden" value="${e.price }"  id="${e.flowerName }">
+     </c:forEach>
 
 
     </div>
@@ -128,59 +207,48 @@
         integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- 수량 올릴 시 가격 변동-->
-    <script>
-
-    </script>
-    <script>
-        $.datepicker.setDefaults({
-            dateFormat: 'yy-mm-dd',
-            prevText: '<',
-            nextText: '>',
-            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-            showMonthAfterYear: true,
-            yearSuffix: '년',
-            minDate: "+1D", //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-            maxDate: "+1M"
-        });
-
-        $(function () {
-            $('.datepicker').datepicker();
-        });
-    </script>
-
+ 
     <script>
         var height = 0;
         var sell_price;
         var amount;
         var shtml;
         var sumAll = 0;
-        $(document).ready(function () {
-            test3();
 
+       /*  var num = 0;
+        var length = "${fn:length(list)}"; */
+        
+/* 
+        $(document).ready(function () {
+            //test3();
+            getList();
+           
         });
 
         $('#test5').change(function () {
             var name = this.value;
-            var text;
-            if (name == 'rose') {
-                text = '장미'
-            } else if (name == 'sunflower') {
-                text = '해바라기'
-            } else if (name == 'su') {
-                text = '수국'
-            }
+        	var price = $("#"+name).val();
+       
             height = height + 80;
             shtml = '<div id="countWrite1">'
-            shtml += '<div onclick="removeItem(\'' + name + '\')" id="removeItem"><img src="resources/images/x.png" style="width: 15px;"></div>'
-            shtml += '<input type="text" id="name_' + name + '" value="' + text + '"  style="border: none; padding-left: 10px; padding-top: 5px;"><br><br>';
-            shtml += '<input type=hidden id="sell_price_' + name + '"value="1000">'
+            shtml += '<div onclick="removeItem(\'' + name + '\')" id="removeItem"><img src="resources/images/x.png" style="width: 15px; float:right"></div>'
+            shtml += '<input type="text" id="name_' + name + '" value="' + name + '"  style="border: none; padding-left: 10px; padding-top: 5px;"><br><br>';
+
+            shtml += '<input type= "hidden" id="sell_price_' + name + '"value="'+price+'">'
+            
+    
+
+            shtml += '<input type=hidden id="sell_price_' + name + '"value="'+price+'">'
+
             shtml += '<input type="button" value=" - " onclick="del(\'' + name + '\')"style="margin-left: 10px;">'
+            shtml += '<input type="hidden" id="'+num+'"  name="'+num+'">'
             shtml += '<input type="text" id="amount_' + name + '"value="1" size="1" >'
+
+            shtml += '<input type="button" value=" + " onclick="add(\'' + name +'\')"><br><br><br></div>'
+            
+
             shtml += '<input type="button" value=" + " onclick="add(\'' + name + '\')"><br><br><br></div>'
+
             if (height > 480) {
                 $('#countBox1').height(height);
             }
@@ -188,15 +256,22 @@
                 alert("이미 선택된 꽃입니다.");
                 return;
             }
-
-
+			
             $("#countBox1").append(shtml);
             sumAll = sumAll + parseInt($("#sell_price_" + name).val());
             $("#sum").val(sumAll);
 
         });
 
-
+		function sub(){
+			
+			for (var i=0; i<length; i++){
+				var y=$("#"+i).next().val();
+				$("#"+i).val(y);
+				console.log(y);
+			}
+			$("#form").submit();
+		}
         function add(name) {
             console.log(name);
             sell_price = $('#sell_price_' + name).val();
@@ -234,7 +309,7 @@
             $("#sum").val(sumAll);
             $("#name_"+name).parent().remove();
         
-        }
+        } */
 
 
         // function change() {
@@ -256,8 +331,49 @@
 
 
 
-    <script>
-        function test3() {
+   <script>
+   
+	   function getList(){
+		   var combinationContent;
+		   $('#combination_content').css("background-color", "rgba(224, 224, 224, 0.29)");
+           $('#combination_content').css("color", "black");
+           $('#combination_review').css("background-color", "white");
+           $('#combination_review').css("color", "rgb(190, 190, 190)");
+           
+		   $.ajax({
+		       type : "POST",            // HTTP method type(GET, POST) 형식이다.
+		       url : "combinationDetailList",      // 컨트롤러에서 대기중인 URL 주소이다.
+		       success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+		           // 응답코드 > 0000
+		           $('#combinationPhoto').children().remove();
+		            combinationContent = '<table>';
+		           for(var i = 0; i < res.length; i++) {
+		               combinationContent += '<tr>';
+		               combinationContent += '<td>';
+		               combinationContent += '<img src="'+res[i].thumbNail+'" class="combination_img">';
+		               combinationContent += '</td>';
+		               combinationContent += '<tr>';
+		               combinationContent += '<td>';
+		               combinationContent += '<p>';
+		               combinationContent += res[i].flowerName;
+		               combinationContent += '</p>';
+		               combinationContent += '</td>';
+		               combinationContent += '</tr>';
+		           }
+		           combinationContent += '</table>';
+		           $('#combinationPhoto').append(combinationContent);
+		           
+		       },
+		       error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+		           alert("통신 실패.")
+		       }
+		   });
+	
+	   }
+   
+   
+   
+        	function test3() {
 
             $('#combination_content').css("background-color", "rgba(224, 224, 224, 0.29)");
             $('#combination_content').css("color", "black");
@@ -265,53 +381,42 @@
             $('#combination_review').css("color", "rgb(190, 190, 190)");
             var combinationContent;
             $('#combinationPhoto').children().remove();
-
+			var data={};
+			var listArr = [];
+			<c:forEach var="p" items="${list}" varStatus="status">
+				listArr[<c:out value='${status.index}'/>] = "<c:out value='${p}'/>";
+				
+				console.log("<c:out value='${p}'/>");
+			</c:forEach>
+			
+			
+			console.log(listArr[0]);
+			console.log(listArr[0].thumbNail);
+			
+            for(var i=0; i < listArr.length; i++){
+            	
+            	console.log(listArr[i].thumbnail);
+            	console.log(i);
+            }
+            
             combinationContent = '<table>';
             combinationContent += '<tr>';
             combinationContent += '<td>';
-            combinationContent += '<img src="resources/images/flower6.PNG" class="combination_img">';
-            combinationContent += '</td>';
-            combinationContent += '<td>';
-            combinationContent += '<img src="resources/images/flower6.PNG" class="combination_img">';
-            combinationContent += '</td>';
-            combinationContent += '<td>';
-            combinationContent += '<img src="resources/images/flower6.PNG" class="combination_img">';
-            combinationContent += '</td>';
-            combinationContent += '<td>';
-            combinationContent += '<img src="resources/images/flower6.PNG" class="combination_img">';
+            combinationContent += '<img src="'+'${v.thumbNail}'+'" class="combination_img">';
             combinationContent += '</td>';
             combinationContent += '<tr>';
-            combinationContent += '<td>';
-            combinationContent += '<p>';
-            combinationContent += '수국';
-            combinationContent += '</p>';
-            combinationContent += '</td>';
-            combinationContent += '<td>';
-            combinationContent += '<p>';
-            combinationContent += '수국';
-            combinationContent += '</p>';
-            combinationContent += '</td>';
-            combinationContent += '<td>';
-            combinationContent += '<p>';
-            combinationContent += '수국';
-            combinationContent += '</p>';
-            combinationContent += '</td>';
             combinationContent += '<td>';
             combinationContent += '<p>';
             combinationContent += '수국';
             combinationContent += '</p>';
             combinationContent += '</td>';
             combinationContent += '</tr>';
-            combinationContent += '<tr>';
-            combinationContent += '<td>';
-            combinationContent += '<img src="resources/images/flower6.PNG" class="combination_img>';
-            combinationContent += '</td>';
             combinationContent += '</table>';
 
             $('#combinationPhoto').append(combinationContent);
         }
     </script>
-
+ 
     <script>
         function test4() {
             $('#combination_review').css("background-color", "rgba(224, 224, 224, 0.29)");
@@ -425,7 +530,7 @@
         });
     </script>
     
-    <jsp:include page="../common/footer.jsp" />
+    <jsp:include page="../../common/footer.jsp" />
 </body>
 
 </html>

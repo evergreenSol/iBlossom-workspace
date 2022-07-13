@@ -29,7 +29,7 @@
                    		<h2>리뷰 내역</h2>
                     
                     	<div style="width: 100%">
-                            <table align="center" style="text-align: center; font-size: 14px; width: 100%">
+                            <table align="center" style="text-align: center; font-size: 14px; width: 100%; border-collapse: collapse;" id="reviewTable">
                                 <thead style="background: rgb(248, 248, 248); border-style: none;">
                                     <tr height="40">
                                         <th width="150">리뷰 상품</th>
@@ -38,11 +38,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <c:if test="${ empty list }">
+                                <c:forEach var="r" items="${list}">
                                     <tr height="40">
-                                        <td>장미꽃다발</td>
-                                        <td>꽃이 너무 이뻐요</td>
-                                        <td>2022-05-19</td>
+                                        <td>${ r.productName }</td>
+                                        <td>${ r.reviewTitle }</td>
+                                        <td>${ r.createDate }</td>
                                     </tr>
+                                </c:forEach>
+                                </c:if>
+                                <c:if test="${ empty list }">
+                                	
+                                <tr>
+                                	<td height="300" width="900" colspan="4" id="no-qna">
+                                		회원님께서 남기신 문의가 없습니다.
+                                	</td>
+                                </tr>	
+                               
+                                </c:if>
+                                
                                 </tbody>
                             </table>
                         </div>
@@ -57,6 +71,13 @@
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
  
+ <script>
+ 	$(function () {
+ 		$("#reviewTable>tbody").on("click", "tr", function () {
+ 			console.log("click");
+ 		});
+ 	});
+ </script>
 
 </body>
 </html>

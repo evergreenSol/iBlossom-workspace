@@ -360,7 +360,7 @@ height: 97%;
     color:white;
 }
 
-#subscribe-3m, #subscribe-regular, #subscribe-6m, #subscribe-12m {
+.subscribe-content {
 	display: none;
 	margin-bottom : 60px;
 }
@@ -487,3 +487,10 @@ height: 97%;
 }
 
 /* 프로필 수정 및 삭제 끝 */
+
+/*1대1문의*/
+#no-qna {
+	font-size : 20px;
+	font-weight : 600;
+	
+}

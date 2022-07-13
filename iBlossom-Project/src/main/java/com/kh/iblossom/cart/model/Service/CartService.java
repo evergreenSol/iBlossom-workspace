@@ -6,8 +6,12 @@ import com.kh.iblossom.cart.model.vo.Cart;
 
 public interface CartService {
 			
-	// 장바구니 리스트 조회용 메소드
-	ArrayList<Cart> selectCartList();
+	// 장바구니 조회
+	ArrayList<Cart> selectCart(int userNo);
+	
+	
+	/*--------------------------------------------------------*/
+	// 상세페이지 -> cart 연결용
 	
 	// 장바구니 상품 추가용 메소드(승아)
 	int insertCartList(Cart c);

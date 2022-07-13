@@ -26,34 +26,25 @@
             		<jsp:include page="myPage_Category.jsp"/>
             	</td>
                 <td class="body_r" width="900" style="vertical-align: top;">
-                    <div class="delete">
-                    
-                    	<h2>나의 정기구독</h2>
-                    	
-						<c:if test="${ not empty listReg }">
-							<jsp:include page="myPage_SubscribeView_Regular.jsp"/>
-						</c:if>
-						<c:if test="${ not empty list3m }">
-							<jsp:include page="myPage_SubscribeView_3Month.jsp"/>
-						</c:if>
-						<c:if test="${ not empty list6m }">
-							<jsp:include page="myPage_SubscribeView_6Month.jsp"/>
-						</c:if>
-						<c:if test="${ not empty list12m }">
-							<jsp:include page="myPage_SubscribeView_12Month.jsp"/>
-						</c:if>
-						<c:if test="${ empty listReg and empty list3m and empty list6m and empty list12m }">
-							<div class="mypage-subscribe" style="text-align: center">
+                
+                	<c:choose>
+                		<c:when test="${ empty receiptIdList}">
+	                		<div class="mypage-subscribe" style="text-align: center">
 							    <span style="font-size: 16px; font-weight: 600;">
 							        ${ sessionScope.loginUser.userName }님은
 							        <span class="subscribe-name"></span>
-							        <span>구독중인 상품이 없습니다.</span>
+							        <span>현재 구독중인 상품이 없습니다.</span>
 							    </span>
-							</div>							
-						</c:if>
-                        
-                    </div>
-			
+							</div>
+                		</c:when>
+                		<c:otherwise>
+	                		<c:forEach var="i"  begin="1" end="${receiptIdList.size()}">
+		                    	<div class="delete" id="delete${i}">
+		                    	</div>
+	                   		</c:forEach>
+                		</c:otherwise>
+                	</c:choose>
+                    
                 </td>
             </tr>
     
@@ -65,35 +56,111 @@
     
     
     <script>
-    	$(function () {
-    		
-    		$("#subscribe-regular-show").on("click", function() {
-    			
-   				$("#subscribe-regular").slideToggle("1500");
+	
+    var str = '${receiptIdList}';
+    str = str.slice(1);
+    str = str.slice(0, -1);
+   
+ 	/*
+    var receiptIdList = new Array();
+    receiptIdList = list.split(',');
+    
+    console.log(list);
+    console.log(receiptIdList);
+	*/
 
-            });
+    var arr = str.split(', ');
+    // console.log(arr);
+    // console.log(arr.length);
+    
+    
+   	$(function () {
+   		// console.log(arr.length);
+   		
+   		
+   		$(".mypage-subscribe").on("click", function() {
+   			
+               $(".subscribe-content").slideToggle("1500");
+           });
+   		
+			for(var i = 0; i < arr.length; i++) {
+				console.log(i);
+    			// console.log($(".body_r").children().eq(i));
+    			// console.log($(".body_r").find("div:eq("+ i +")"));
+	    		(function(i) {
+	    			$.ajax({
+		    			url : "subscribeRealView.me",
+		    			type:"post",
+		    			dataType : "text",
+		    			async: true,
+		    			data : {
+		    				receiptId : arr[i] 
+		    			},
+		    			success : function (result) {
+		    				// console.log(result);
+		    				console.log(i);
+		    				var num = i + 1;
+		    				// console.log(num);
+		    				$("#delete"+ num +"").html(result);
+		    				//$(".body_r").children().eq(i).html(result);
+		    				//$(".body_r").find("div:eq("+ i +")").html(result);
+		    			},
+		    			error : function () {
+		    				console.log("실패");
+		    			}
+		    		});
+	    		})(i);
+    		/*
+    		$.ajax({
+    			url : "subscribeRealView.me",
+    			type:"post",
+    			dataType : "text",
+    			data : {
+    				receiptId : arr[1] 
+    			},
+    			success : function (result) {
+    				console.log(result);
+    				$("#delete2").html(result)
+    			},
+    			error : function () {
+    				console.log("실패");
+    			}
+    		});
     		
-    		$("#subscribe-3m-show").on("click", function() {
-
-    			$("#subscribe-3m").slideToggle("1500");
-    			
-            });
+    		$.ajax({
+    			url : "subscribeRealView.me",
+    			type:"post",
+    			dataType : "text",
+    			data : {
+    				receiptId : arr[2] 
+    			},
+    			success : function (result) {
+    				console.log(result);
+    				$("#delete3").html(result)
+    			},
+    			error : function () {
+    				console.log("실패");
+    			}
+    		});
+    		*/
     		
-    		$("#subscribe-6m-show").on("click", function() {
-    			
-                $("#subscribe-6m").slideToggle("1500");
-            });
-    		
-    		$("#subscribe-12m-show").on("click", function() {
-    			
-                $("#subscribe-12m").slideToggle("1500");
-            });
-    		
-    	});
-    	
-    	
+   		}
+   		
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+   	});
+  
     	
     </script>
     
+    	
 </body>
 </html>
