@@ -305,8 +305,8 @@ public class MemberController {
 	@RequestMapping(value="update.me")
 	public String myPageUpdateMember(HttpSession session, Member m, Model model) {
 		
-		System.out.println((Member)session.getAttribute("loginUser"));
-		System.out.println(m);
+//		System.out.println((Member)session.getAttribute("loginUser"));
+//		System.out.println(m);
 		
 		m.setUserNo(((Member)session.getAttribute("loginUser")).getUserNo());
 		   

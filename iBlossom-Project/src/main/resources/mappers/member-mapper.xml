@@ -132,4 +132,6 @@
 	   SET PURCHASE = PURCHASE + #{purchase}
 	 WHERE USER_NO = #{userNo}
 	</update>
+	
+	
 </mapper>

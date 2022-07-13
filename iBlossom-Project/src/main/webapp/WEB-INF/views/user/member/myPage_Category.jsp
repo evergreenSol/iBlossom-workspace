@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div style="height: 800px;">
 
 	<div id="content">
 	    <div id="content_1" style="padding:10px">
@@ -65,6 +66,6 @@
 	<div class="mypage-logout-wrap" align="center">
 	    <a class="mypage-logout" href="logout.me">로그아웃</a>
 	</div>
-
+</div>
 </body>
 </html>

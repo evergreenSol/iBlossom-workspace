@@ -36,6 +36,12 @@ public class CartDao {
 	}
 
 	
+	// DB 다 넣은 뒤 카트 삭제용 메소드
+	public int deleteCart(SqlSessionTemplate sqlSession, int cartNo) {
+		
+		return sqlSession.delete("cartMapper.deleteCart", cartNo);
+	}
+	
 	
 	/*
 	public ArrayList<Cart> selectCartList(SqlSessionTemplate sqlSession) {
