@@ -26,6 +26,8 @@ public interface OrderService {
 
 	Order selectOrder(String receiptId);
 	
+	ArrayList<Order> selectMyOrderList(int userNo);
 	
+	ArrayList<Order> selectMyOrderCancelList(int userNo);
 
 }

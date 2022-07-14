@@ -20,6 +20,8 @@ import com.kh.iblossom.common.template.Pagination;
 import com.kh.iblossom.member.model.service.MemberService;
 import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.onedayclass.model.Service.OnedayClassService;
+import com.kh.iblossom.order.model.service.OrderService;
+import com.kh.iblossom.order.model.vo.Order;
 import com.kh.iblossom.product.model.service.ProductService;
 import com.kh.iblossom.qna.model.service.QnaService;
 import com.kh.iblossom.qna.model.vo.Qna;
@@ -31,6 +33,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private OrderService orderService;
 	
 	@Autowired
 	private OnedayClassService onedayclassService;
@@ -202,8 +207,18 @@ public class MemberController {
    
    // 나의 주문정보 보기 메소드
    @RequestMapping(value="orderListView.me")
-   public String myPageOrderListView() {
+   public String myPageOrderListView(HttpSession session, Model model) {
       
+      int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+	   
+      ArrayList<Order> list = orderService.selectMyOrderList(userNo);
+      ArrayList<Order> cancelList = orderService.selectMyOrderCancelList(userNo);
+	   
+      System.out.println(list);
+      System.out.println(cancelList);
+      
+      model.addAttribute("list", list);
+      model.addAttribute("cancelList", cancelList);
       
       // DB에서 주문내역을 ArrayList로 받아오기. 
       

@@ -62,4 +62,17 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 
+	@Override
+	public ArrayList<Order> selectMyOrderList(int userNo) {
+		
+		return orderDao.selectMyOrderList(sqlSession, userNo);
+	}
+	
+	@Override
+	public ArrayList<Order> selectMyOrderCancelList(int userNo) {
+		
+		return orderDao.selectMyOrderCancelList(sqlSession, userNo);
+	}
+
+
 }

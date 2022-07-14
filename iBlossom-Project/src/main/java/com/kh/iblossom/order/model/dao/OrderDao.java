@@ -56,6 +56,16 @@ public class OrderDao {
 		
 		return sqlSession.selectOne("orderMapper.selectOrder", receiptId);
 	}
+	
+	public ArrayList<Order> selectMyOrderList(SqlSessionTemplate sqlSession, int userNo) {
+		
+		return (ArrayList)sqlSession.selectList("orderMapper.selectMyOrderList", userNo);
+	}
+	
+	public ArrayList<Order> selectMyOrderCancelList(SqlSessionTemplate sqlSession, int userNo) {
+		
+		return (ArrayList)sqlSession.selectList("orderMapper.selectMyOrderCancelList", userNo);
+	}
 
 
 }

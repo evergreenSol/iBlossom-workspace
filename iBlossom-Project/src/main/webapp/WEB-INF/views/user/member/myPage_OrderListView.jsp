@@ -49,8 +49,10 @@
                         </div>
 
                         <table id="mypage-view-order">
+                        <c:forEach var="o" items="${list}">
+                        
                             <tr>  
-                                <td colspan="2"><p style="font-size: 18px; font-weight: 600">2022-06-23</p></td>
+                                <td colspan="2"><p style="font-size: 18px; font-weight: 600">${ o.orderDate }</p></td>
                                 <td></td>
                                 <td colspan="2" width="650" align="right"><a href="orderDetailView.me" class="moreBtn" style="padding-right: 10px; color:black;">주문상세</a></td>  
                             </tr>
@@ -60,38 +62,46 @@
                                 <th width="80" >주문번호</th>
                                 <td width="10" ></td>
                                 <td class="orderNo" width="90">
-                                    1
+                                    ${ o.orderNo}
                                 </td>
                                 
                             </tr>
                             <tr height="26">
                                 <th>수령일</th>
                                 <td></td>
-                                <td>2022-06-25</td>
+                                <td>${ o.receiveDate }</td>
                             </tr>
                             <tr height="26">
                                 <th>결제금액</th>
                                 <td></td>
-                                <td>19000원</td>
+                                <td>${ o.totalPrice }원</td>
                             </tr>
                             <tr height="26">
                                 <th>주문상태</th>
                                 <td></td>
-                                <td>결제완료</td>
+                                <td>${ o.orderStatus }</td>
                                 
                             </tr>
                             <tr height="26">
                                 <th>배송상태</th>
                                 <td></td>
-                                <td>배송완료</td>
-                                <td style="text-align: right; padding-right: 10px;" width="300"><a class="mypage-pay-cancel" href="">취소하기</a></td>
+                                <td>${ o.deliveryStatus }</td>
+                                <c:if test="${ (o.deliveryStatus ne '배송완료') or (o.deliveryStatus ne '배송중') }">
+                                	<td style="text-align: right; padding-right: 10px;" width="300"><a class="mypage-pay-cancel" href="">취소하기</a></td>
+                                </c:if>
                             </tr>
+                            <tr height="30" >
+                            	<td class="endTd" colspan="6"></td>
+                            </tr>
+
+                        </c:forEach>
                         </table>
 
 
                         <table id="mypage-view-cancel">
+                        <c:forEach var="o" items="${cancelList}">
                             <tr >
-                                <td colspan="2"><p style="font-size: 18px; font-weight: 600">2022-06-23</p></td>
+                                <td colspan="2"><p style="font-size: 18px; font-weight: 600">${ o.orderDate }</p></td>
                                 <td></td>
                                 <td colspan="2" width="650" align="right"><a href="" class="moreBtn" style="padding-right: 10px; color:black;">주문상세</a></td>  
  
@@ -102,31 +112,35 @@
                                 <th width="80">주문번호</th>
                                 <td width="10"></td>
                                 <td class="orderNo" width="90">
-                                    1
+                                    ${ o.orderNo}
                                 </td>
                             </tr>
                             <tr height="26">
                                 <th>수령일</th>
                                 <td></td>
-                                <td>2022-06-25</td>
+                                <td>${ o.receiveDate }</td>
                             </tr>
                             <tr height="26">
-                                <th>결제금액</th>
+                                <th>취소금액</th>
                                 <td></td>
-                                <td>19000원</td>
+                                <td>${ o.totalPrice }원</td>
                             </tr>
                             <tr height="26">
                                 <th>주문상태</th>
                                 <td></td>
-                                <td>결제완료</td>
+                                <td>${ o.orderStatus }</td>
                                 
                             </tr>
                             <tr height="26">
                                 <th>배송상태</th>
                                 <td></td>
-                                <td>배송완료</td>
+                                <td>${ o.deliveryStatus }</td>
                                 <td style="text-align: right; padding-right: 10px;" width="300"></td>
                             </tr>
+                            <tr height="30" >
+                            	<td class="endTd" colspan="6"></td>
+                            </tr>
+                            </c:forEach>
                         </table>
 
 
@@ -143,6 +157,8 @@
 	
     <script>
         $(function () {
+        	
+        	
 
             $("#mypage-view-cancel").hide();
 

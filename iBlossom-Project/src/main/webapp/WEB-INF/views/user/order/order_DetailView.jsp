@@ -484,16 +484,17 @@
       	</div><!-- 전체 색상 변경 div -->
 
 	<script>
-	
 	var userNo = $("#userNo").val();
-	var receiveUser = $('#subReceiverUser').val();
-	var receivePhone = $('#subReceiverPhone').val();
-	var postcode = $('#zipcode').val();
-	var deliverTo1 = $('#address1').val(); 
-	var deliverTo2 = $('#address2').val();
+	
 
 	console.log(receiveDate);
 	function pay() {
+		
+		var receiveUser = $('#subReceiverUser').val();
+		var receivePhone = $('#subReceiverPhone').val();
+		var postcode = $('#zipcode').val();
+		var deliverTo1 = $('#address1').val(); 
+		var deliverTo2 = $('#address2').val();
 		
 		if (receivePhone=="" || receiveUser=="" || postcode=="" || deliverTo1=="" || deliverTo2=="" || $('#datepicker').val()==""){
 			alert("모든 양식을 기입해야 결제가 가능합니다!");
@@ -565,9 +566,9 @@
 				receiptId : receiptId,
 				userNo : userNo,
 				totalPrice : 1000,
-				receiveUser : receiveUser,
+				receiveUser : $('#subReceiverUser').val(),
 				receiveDate : $('#datepicker').val(),
-				receivePhone : receivePhone,
+				receivePhone : $('#subReceiverPhone').val(),
 				orderAddress : $('#address1').val() + " " + $('#address2').val(),
 				postcode : $('#zipcode').val(),
 				orderStatus : '결제완료',

@@ -309,6 +309,18 @@ height: 97%;
     color: white;
 }
 
+#mypage-view-order #mypage-view-cancel{
+	margin : 20px 0px;
+
+}
+
+.endTd {
+	border-bottom: 1px solid lightgray;
+	border-collapse:collapse;
+	margin-bottm: 10px;
+}
+
+
 /* 주문내역 버튼 끝 */
 
 
@@ -364,6 +376,39 @@ height: 97%;
 	display: none;
 	margin-bottom : 60px;
 }
+
+
+.mypage-to-sub-wrap {
+    width: 100%;
+    text-align:center;
+    
+    margin-top : 250px
+}
+
+.mypage-to-sub {
+    text-decoration: none;
+    width: 100%;
+    max-width: 375px;
+    height: 52px;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: normal;
+    padding :10px 90px;
+    
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255/var(--tw-text-opacity));
+
+    --tw-bg-opacity: 1;
+    background-color: rgb(21 21 21/var(--tw-bg-opacity));
+    
+    border-radius: 3px;
+}
+
+.mypage-to-sub:hover {
+	cursor : pointer; 
+}
+
+
 
 /* 마이페이지 나의 구독정보 끝 */
 
