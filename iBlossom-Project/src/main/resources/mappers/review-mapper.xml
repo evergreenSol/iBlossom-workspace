@@ -2,6 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="reviewMapper">
 
+ <resultMap id="reviewResultSet" type="review">
+      <result column="REVIEW_NO" property="reviewNo" />
+      <result column="REVIEW_TITLE" property="reviewTitle" />
+      <result column="REVIEW_CONTENT" property="reviewContent" />
+      <result column="REVIEW_PHOTO" property="reviewPhoto" />
+      <result column="CREATE_DATE" property="createDate" />
+      <result column="REVIEW_STATUS" property="reviewStatus" />
+      <result column="ORDER_NO" property="orderNo" />
+      <result column="USER_NO" property="userNo" />
+      <result column="PRODUCT_NO" property="productNo" />
+   </resultMap>
 
+   <insert id="insertReview" parameterType="review">
+        INSERT INTO SUB_PRODUCT(REVIEW_NO
+                         , REVIEW_TITLE
+                         , REVIEW_CONTENT
+                         , REVIEW_PHOTO
+                         , ORDER_NO
+                         , USER_NOGHRTL
+                         
+                         , PRODUCT_NO)
+      VALUES(SEQ_RNO.NEXTVAL
+           , #{reviewTitle}
+           , #{reviewContent}
+           , #{reviewPhoto}
+           , #{orderNo}
+           , #{userNo}
+           , #{productNo})
+     </insert>
+     
+     <select id="selectReviewList" resultMap="reviewResultSet">
+        SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_PHOTO
+      FROM FLOWER_REVIEW
+      WHERE PRODUCT_NO = #{productNo}
+     </select>
 
 </mapper>
