@@ -10,5 +10,6 @@ public class DetailOrder {
 	private int productNo; // PRODUCT_NO NUMBER NOT NULL,  		
 	private int onePrice; // ONE_PRICE NUMBER NOT NULL,
 	private int oneQuantity; // ONE_QUANTITY NUMBER NOT NULL,
+	private int cartNo;
 
 }

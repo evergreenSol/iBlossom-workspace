@@ -34,17 +34,16 @@
 	        <form action="ResForm.cl" method="post">
 		        <div>		   
 		            <label for="date" id="res" style="font-size: 15px;">예약일</label><br>
-		            	<select name="classNo" id="date" style="width:170px;height:25px;font-size: 14px;" required >
-			                <option value="1">2022-07-22 14:00</option>
-			                <option value="2">2022-07-30 14:00</option>
-			                <option value="3">2022-08-06 14:00</option>
+		            	<select name="classNo" id="date" style="width:170px;height:25px;font-size: 14px;" onchange="classCap();" required >
+			                <c:forEach var="c" items="${ list }">
+			                	<option value="${ c.classNo }">${ c.classDate }</option>
 			                <!-- 리스트에 클래스 정보 담아서 (게시판 내용과 같음) 반복문으로 돌리기(?) -->
-			                 
+			                 </c:forEach>
 			            </select>
 			        </div>
 		        <br><br><br>
 	        	<div>
-		            <button type="submit" id="class-res-btn" onclick="reservation()">예약하기</button>
+		            <button type="submit" id="class-res-btn" onclick="return reservation();">예약하기</button>
 		        </div>
 	        </form>
 
@@ -63,14 +62,24 @@
      		let loginUser = "${loginUser}";
      		if (loginUser == "") {
      				alert("예약페이지는 로그인 후 사용하실 수 있습니다.");
-     				location.herf="/loginForm.me";
+					return false;
      		} else {
-     				location.herf="/classDetail.cl";
+     				return true;
      		}
      	}
      </script>
       
-
+	<script>
+		function classCap(){
+			var classNo = $("select option:selected").val();
+			if(resNum == 5){
+				alert("해당 클래스는 인원 마감되었습니다.");
+			} else {
+				
+			}
+		}
+		
+	</script>
 
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

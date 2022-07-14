@@ -3,6 +3,7 @@ package com.kh.iblossom.order.model.service;
 import java.util.ArrayList;
 
 import com.kh.iblossom.common.model.vo.PageInfo;
+import com.kh.iblossom.order.model.vo.DetailOrder;
 import com.kh.iblossom.order.model.vo.Order;
 
 public interface OrderService {
@@ -18,5 +19,13 @@ public interface OrderService {
 	// 주문내역 리스트 조회
 	ArrayList<Order> selectOrderList(PageInfo pi);
 
+
+	int insertOrder(Order o);
+	
+	int insertDetailOrder(DetailOrder detailOrder);
+
+	Order selectOrder(String receiptId);
+	
+	
 
 }

@@ -85,12 +85,8 @@
 						</td>
 					</tr>
 
-					<tr>
-
 						<td><br>
 						<br> <input value="장바구니" id="btn1" onclick="getObject();"></td>
-
-					</tr>
 
 				</table>
 			</form>

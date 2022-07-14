@@ -1,5 +1,7 @@
 package com.kh.iblossom.onedayclass.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +17,18 @@ public class OnedayClassDao {
 		return sqlSession.insert("onedayclassMapper.insertClassRes", oa);
 	}
 
-
+	public ArrayList<OnedayClass> selectClassList(SqlSessionTemplate sqlSession) {
+		
+		 return (ArrayList)sqlSession.selectList("onedayclassMapper.selectClassList"); 
+	}
 	
+	public OnedayClass selectOnedayClass(SqlSessionTemplate sqlSession, int classNo) {
+		
+		return sqlSession.selectOne("onedayclassMapper.selectOnedayClass", classNo);
+	}
+
+	public int updateClassCap(SqlSessionTemplate sqlSession, int classNo) {
+		
+		return sqlSession.update("onedayclassMapper.updateClassCap", classNo);
+	}
 }

@@ -5,3 +5,856 @@
 
 div { box-sizing: border-box; }
 
+/*-----------------------------------------------------------------------------------------------*/
+/*-------------------------------------- cart_ListView.jsp --------------------------------------*/
+
+ /* 사용자 장바구니 페이지 레이아웃 */
+    
+    /* 전체 */
+    #cartMainOuter {
+    	width: 1200px;
+    	height: 3000px;
+    	margin: auto;
+    }
+     
+    /* 왼쪽 섹션 */ 
+    .cart-left {
+        width: 65%;
+        height: 100%;
+        float: left;
+        box-sizing: border-box;
+    }
+
+    /* 오른쪽 섹션 */
+    .cart-right {
+        width: 33%;
+        height: 100%;
+        float: right;
+        box-sizing: border-box;
+    }
+
+
+
+    /* ----------------------------------------------------------- */   
+    /* 사용자 장바구니 페이지 왼쪽 영역 */
+
+    /* 전체선택, 선택삭제 div  */
+    .cart-choice { 
+        display: flex; 
+        justify-content: space-between; 
+        margin-bottom: 5px;
+        font-weight: 500; 
+    }
+ 
+    /* 선택삭제 버튼 */
+    .choice-delete-btn { 
+        background-color: white;
+        border: none; 
+        padding: 5px; 
+        width: 65px; 
+        font-weight: 500;
+        font-size: small;
+        margin-bottom: 0.1cm;
+        border-radius: 3px;
+        color: gray;
+    }
+    
+    /* 선택삭제 버튼 호버시 */
+    .choice-delete-btn:hover {
+    	cursor: pointer;
+		font-weight: 600;
+		color: black;
+    }
+
+    /* 장바구니 메뉴바 */
+    .cart-menu { 
+        /* 정렬 */
+        display: flex; 
+        justify-content: space-between;
+        
+        /* 스타일 */
+        background-color: whitesmoke; /*lightgray*/
+        padding: 15px;
+        font-weight: 500; 
+    }
+
+    /* 장바구니 메뉴바 두개 항목 비율 */
+    .cart-menu1 { 
+	    flex-basis: 38%; 
+	    margin:auto; 
+	    
+    }
+    .cart-menu2 { 
+    	flex-basis: 16%;
+    }
+
+    /* 장바구니 내용 */ 
+    .cart-content { 
+        display: flex; 
+        justify-content: space-between; 
+        padding: 45px;
+        height: 400px;
+    }
+    
+    /* 라디오 버튼 세로 정렬 */
+    .cart-content1 {
+	     line-height: 230px;
+	     margin-left: -30px;
+    }
+    
+    /* 이미지 감싸는 div */
+    .cart-content2 {
+     	margin-left: -40px;
+    }
+    
+    /* 상세옵션 내용 */
+    .cart-content3 {
+    	margin-top: 120px; 
+    	line-height: 20px;
+    	margin-left: -40px;
+    	font-size: 19px;
+    }  
+        
+    /* 수량 버튼 */
+    .cart-num-btn { 
+	    background-color: whitesmoke; 
+	    border:0; 
+	    font-weight: 600; 
+	    width:25px; 
+	    height: 25px;
+	    border-radius: 3px;
+    }
+    
+    /* 총주문금액 X 마우스 hover */
+    .cart-content4>a:hover { 
+    	font-weight: 600;
+    	/* color: #ff2393; */ 
+    }
+
+	/* 총주문금액 X a 태그 */
+	.cart-content4>a {
+		 text-decoration: none;
+	}
+	
+	
+	
+    /* ----------------------------------------------------------- */
+    /* 사용자 장바구니 페이지 오른쪽 영역 */
+
+    /* 결제금액, 배송비 div */
+    .cart-price1, .cart-price2 { 
+        display: flex; 
+        justify-content: space-between; 
+        padding: 5px;
+        margin: 10px 15px 15px 15px;
+    }
+      
+    /* 총 결제 금액  div */
+    .total-price {
+    	display: flex; 
+        justify-content: space-between;  
+        padding: 5px;
+        margin: 30px 15px 10px 15px; 
+        font-weight: bold; 
+    } 
+
+    /* 안내사항 네모박스 div */
+    .cart-div { 
+        list-style: none; 
+        background-color:whitesmoke; 
+        padding: 5%;
+    }
+    
+    /* 안내사항 네모박스 div > li */
+    .cart-div>li {
+     	margin: 6px;
+    }
+    
+    /* 결제하기 버튼 */
+    .cart-btn { 
+        width:100%; 
+        height:40px; 
+        background-color: black; 
+        color:white;
+        border-radius: 3px;
+    }
+    
+    .cart-btn:hover {
+    	cursor: pointer;
+    }
+    
+    /*-------------------------------------------------------*/
+    
+    /* 일단 임시 */
+    
+    /* 레이아웃 외곽 너비 400px 제한*/
+
+	.wrap{
+    max-width: 480px;
+    margin: 0 auto; /* 화면 가운데로 */
+    background-color: #fff;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+	}
+
+	.reviewform textarea{
+	    width: 100%;
+	    padding: 10px;
+	    box-sizing: border-box;
+	}
+	
+	.rating .rate_radio {	
+	    position: relative;	
+	    display: inline-block;	
+	    z-index: 20;	
+	    opacity: 0.001;	
+	    width: 60px;	
+	    height: 60px;	
+	    background-color: #fff;	
+	    cursor: pointer;	
+	    vertical-align: top;	
+	    display: none;
+	}
+	
+	.rating .rate_radio + label {	
+	    position: relative;	
+	    display: inline-block;	
+	    margin-left: -4px;
+	    z-index: 10;	
+	    width: 60px;	
+	    height: 60px;	
+	    background-image: url('./img/starrate.png');	
+	    background-repeat: no-repeat;	
+	    background-size: 60px 60px;	
+	    cursor: pointer;	
+	    background-color: #f0f0f0;	
+	}
+	
+	.rating .rate_radio:checked + label {	
+	    background-color: #ff8;	
+	}
+	
+	.cmd {	
+	    margin-top: 20px;	
+	    text-align: right;	
+	}
+	
+	.cmd input[type="button"]{
+	    padding: 10px 20px;	
+	    border: 1px solid #e8e8e8;	
+	    background-color: #fff;	
+	    background-color:#000;  	
+	    color: #fff;	
+	}
+		
+	.warning_msg {	
+	    display: none;	
+	    position: relative;	
+	    text-align: center;	
+	    background: #ffffff;	
+	    line-height: 26px;	
+	    width: 100%;	
+	    color: red;	
+	    padding: 10px;	
+	    box-sizing: border-box;	
+	    border: 1px solid #e0e0e0;
+	}
+
+
+
+/*-----------------------------------------------------------------------------------------------*/
+/*-------------------------------------- cart_EmptyList.jsp --------------------------------------*/
+
+	/* 사용자 장바구니 빈 페이지 */
+	
+	/* 전체 */
+	.cartEmptyOuter {
+		width: 1200px; 
+		height: 760px; 
+		margin: auto;
+		margin-top: 53px;
+	}
+	
+	/* 장바구니 타이틀 : 쇼핑백 */
+	.emptyTitle {
+		 font-weight:700; 
+		 font-size:34px; 
+		 margin-bottom:15px; 
+		 float:left;
+	}
+	
+	/* 감싸주는 div */
+	.emptyWrap {
+		padding:210px; 
+		text-align: center;
+	}
+	
+	/* 이미지 */
+	.emptyWrap img {
+		width:50px; 
+		height:50px; 
+		margin-bottom: 15px;
+	}
+	
+	/* 쇼핑하러가기 버튼 */
+	.emptyWrap button {
+		width:320px; 
+		height:50px; 
+		background-color:black; 
+		color:white; 
+		border-radius:3px;
+	}
+	
+	/* 쇼핑하러가기 버튼 hover */
+	.emptyWrap button:hover {
+		cursor: pointer;
+	}
+
+
+
+/*-----------------------------------------------------------------------------------------------*/
+/*------------------------------------- order_DetailView.jsp ------------------------------------*/
+
+  /* 사용자 주문 페이지 레이아웃 */    
+    /* 전체 배경 색상 */
+    #orderMainOuter {
+    	width: 100%;
+    	height: 3000px;
+    	background-color: whitesmoke;
+    }
+    
+    /* 내용 감싸는 전체 레이아웃 */
+    #orderMainWrap {
+    	width: 1200px;
+    	height: 1400px;
+    	margin: auto;
+    }
+    
+    /* 왼쪽 섹션 */ 
+    .order-left {
+        width: 65%;
+        height: 100%;
+        float: left;
+        box-sizing: border-box;
+    }
+
+    /* 오른쪽 섹션 */
+    .order-right {
+        width: 33%;
+        float: right;
+        
+        /* sticky*/
+        position: relative;
+        top: -30px;
+        right: 57%; 
+        margin-right:-670px;
+    }
+
+
+
+	/* ----------------------------------------------------------- */
+    /* 사용자 주문 페이지 왼쪽 영역 */
+    
+    /* 주문내역 확인, 주문자 정보, 발신인 이름 펼친 페이지 */
+
+    /* 전체 배경 색입히기 */
+    .order-outer { 
+    	background-color: whitesmoke;
+        width : 100%; 
+    }
+
+    /* 하얀 네모박스 영역 */
+    .order-whitebox { 
+        background-color:white; 
+        padding: 34px;
+        padding-left: 40px;
+        margin: 10px;
+        padding-bottom: 60px;
+    }
+    
+    /* 1. 주문내역 확인 2. 주문자 정보 3. 발신인 이름  (220711 수령일추가)
+       4. 배송지 정보  5. 배송지 추가  6. 결제 수단 7. 카카오페이*/
+       
+    /* 결제 수단과 카카오페이는 삭제 했지만 결제수단을 주소 데이터값 뽑는 용도로 사용할 것임 */
+    .order-check, .order-orderer, .order-sender, .order-receiveDate,
+    .order-address, .order-address-add, .order-payment, .order-kakaopay {
+        display: flex; 
+        justify-content: space-between;
+    }
+    
+    /* 결제수단 클래스에 주소 데이터값 뽑는 용도로 사용 */
+    .order-payment {
+    	padding: 10px; 
+    }
+
+    /* 배송지 추가, 카카오페이 버튼 */
+    /* 카카오페이 버튼 삭제 */
+    .address-btn, .kakao-btn { 
+        padding: 18px; 
+        width: 200px; 
+        border: none; 
+        background-color:whitesmoke; 
+        border-radius: 3px; 
+    }
+    
+    /* 위 버튼 마우스 호버시 */
+    .address-btn:hover, .kakao-btn:hover {
+    	font-weight: 600;
+    	cursor: pointer;
+    } 
+
+    /* 버튼 두개 */
+    .order-two-btn { 
+        text-align: center;
+    }
+
+    /* 이전으로  버튼 */
+    .pre-btn { 
+        width: 65px;
+        height: 30px; 
+        border: none;
+        background-color: white;
+        border-radius: 3px; 
+        color: gray;
+        float: right;
+    }
+
+    /* 이전으로 가기 버튼 호버시 */
+    .pre-btn:hover { 
+        cursor: pointer;
+		font-weight: 600;
+		color: black;  
+    }
+    
+    /* 결제하기 버튼 */
+    .pay-btn { 
+        padding: 10px; 
+        width: 100px; 
+        border: none; 
+        background-color:rgb(67, 69, 69); 
+        color:white;
+        border-radius: 3px;  
+    }
+
+	/* 수령일 input 태그 */
+	#ReceiveBox>input {
+		padding: 18px; 
+        width: 160px;
+        border-radius: 3px;   
+	}
+
+    /* ----------------------------------------------------------- */
+    /* 주문내역 확인 - 내용 */
+    .order-check-content { 
+        padding: 20px;
+        display:flex; 
+        justify-content: space-between;
+    }
+
+    /* 주문내역 확인 - 상품옵션확인 div */                        
+    .order-check-list { 
+        list-style: none;
+        margin-top: 50px;
+    }
+    
+    /* 주문자 정보 - 이름, 연락처 / 발신인 이름 */
+    .orderer-name, .orderer-phone, #SenderBox>p, #receiveBox>p { 
+        width: 660px;
+        padding: 10px; 
+        background-color:rgba(241, 241, 241, 0.707); 
+    }
+
+
+
+    /* ----------------------------------------------------------- */
+    /* 모달창 */
+    #modal.modal-overlay {
+        width: 100%;
+        height: 100%;
+        /* position: absolute; */
+        /* left: 0; */
+        /* top: 0; */
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        /* background: rgba(255, 255, 255, 0.25); */
+        background: rgba(0, 0, 0, 0.712);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(1.5px);
+        -webkit-backdrop-filter: blur(1.5px);
+        /* backdrop-filter: blur(3.5px);
+        -webkit-backdrop-filter: blur(3.5px); */
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        z-index: 1;
+        
+        /* 모달창 화면 정중앙에 띄우기 */
+        position: fixed;
+ 		top: 50%;
+  		left: 50%;
+  		transform: translate(-50%, -50%);
+    }
+
+    #modal .modal-window {
+        /* background: rgba( 69, 139, 197, 0.70 ); */
+        background: white;
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        backdrop-filter: blur( 13.5px );
+        -webkit-backdrop-filter: blur( 13.5px );
+        border-radius: 10px;
+        border: 1px solid rgba( 255, 255, 255, 0.18 );
+        width: 550px;
+        height: 570px;
+        position: relative;
+        top: -100px;
+        padding : 30px;
+    }
+
+    #modal .address-header {
+        padding-left: 10px;
+        display: inline;
+        /* text-shadow: 1px 1px 2px gray; */
+        color: black;  
+    }
+
+    #modal .address-header h2 {
+        display: inline;
+    }
+
+    #modal .close-area {
+        display: inline;
+        float: right;
+        padding-right: 10px;
+        cursor: pointer;
+        /* text-shadow: 1px 1px 2px gray; */
+        color: black;
+    }
+
+    #modal .address-content {
+        margin-top: 20px;
+        padding: 0px 10px;
+        /* text-shadow: 1px 1px 2px gray; */
+        color: black;
+    }
+
+    .address-footer button {
+        border-radius: 3px;
+    }
+
+    .address-table>tr>td {
+        width: 50px;
+    }
+    
+    
+    
+    /* ----------------------------------------------------------- */
+    /* 슬라이드 업/다운 요소 버튼 */
+
+    /* 누를 버튼 */
+    #CheckBtn, #OrdererBtn, #SenderBtn, #ReceiveBtn {
+        width: 700px;
+        display: flex; 
+        justify-content: space-between;
+        border: none;
+        background-color: none;
+        font-size : 16px;
+    }
+
+    /* 내용 박스 */
+    #CheckBox, #OrdererBox, #SenderBox, #ReceiveBox {
+        width: 600px;
+        margin-top: 20px;
+        display: none;
+        /* height: 600px; */
+    }
+    
+    /* 주문 내역 확인 박스 가운데 정렬 */
+    #CheckBox { margin: auto; }
+
+
+
+    /* ----------------------------------------------------------- */
+    /* 사용자 주문 페이지 오른쪽 영역 */
+    
+    /* 전체 옵션 */
+    .order-right-wrap {
+    	background-color:white;
+    	padding: 5px;
+    }
+    
+    /* 총 주문 금액, 배송비, 등급할인 */
+    .order-price, .order-delivery, .order-grade {
+        display:flex;
+        justify-content: space-between;
+        padding: 5px;
+        margin: 10px 15px 15px 15px;
+    }
+    
+    /* 총 주문 금액 위에 공간 주기 */
+    .order-price>span {
+    	margin-top: 10px;
+    }
+
+    /* 총 결제 금액 */
+    .order-tprice {
+        display:flex;
+        justify-content: space-between;
+        padding: 10px;
+        font-weight: bold;
+        margin: 25px 15px 1px 15px;
+    }
+
+    /* 이용약관 네모박스 */
+    .payment-agree { 
+        list-style: none; 
+        padding: 1px;
+        text-align: center;
+        font-size: 0.3cm;
+    }
+    
+    /* 결제하기 버튼 */
+    .order-btn { 
+        width:100%; 
+        height:40px; 
+        background-color: black; 
+        color:white;
+    }
+    
+    /* 결제하기 버튼 호버시 */   
+    .order-btn:hover {
+    	cursor: pointer;	
+    }
+    
+    /* 누를 슬라이드 헤드 부분 색상 변경 */
+    .order-check>button, .order-orderer>button, .order-sender>button, .order-receive>button {
+        background-color: white;
+    }
+    
+    
+    
+    /* ----------------------------------------------------------- */
+    /* 모달창 상세 스타일 */
+    
+    /* 이름, 연락처, 주소, 상세주소 */
+      .address-content>#subReceiverUser, .address-content>#subReceiverPhone, .address-content>#address1, .address-content>#address2 { 
+		border:none; 
+		width:450px; 
+		height: 50px;
+		font-size: 18px; 
+	}
+	
+	/* 주소 p 태그 */
+	.address-content>p { font-weight: 600; }
+	
+	/* 우편번호 */
+	.address-content>#zipcode { 
+		border: none; 
+		width: 350px; 
+		height: 50px; 
+		display: inline-block; 
+		border: none; 
+		width: 310px; 
+		height: 40px; 
+		font-size: 18px;
+	}
+	
+	/* 우편번호 찾기 버튼*/
+	.zipcodeBtn {
+		border:none; 
+		width:146px; 
+		height: 50px; 
+		font-size: 15px;
+		border-radius: 3px;
+	}
+	
+	/* 우편번호 찾기 버튼 호버시 */
+	.zipcodeBtn:hover {
+		cursor: pointer;
+		font-weight: 500;
+	}
+
+	/* 저장하기 버튼 */
+	.address-footer>button {
+		border:none;
+		width:465px; 
+		height: 50px; 
+		font-size: 18px;
+		border-radius: 3px;
+	}
+	
+	/* 저장하기 버튼 호버시 */
+	.address-footer>button:hover {
+		cursor: pointer;
+		font-weight: 500;
+	}
+	
+	
+	
+	/* ----------------------------------------------------------- */
+	/* 수령일 css */
+	
+	/*datepicker ui */
+	 .ui-widget-header { border: 0px solid #dddddd; background: #fff; } 
+	
+	 .ui-datepicker-calendar>thead>tr>th { font-size: 14px !important; } 
+	
+	 .ui-datepicker .ui-datepicker-header { position: relative; padding: 10px 0; } 
+	
+	 .ui-state-default,
+	 .ui-widget-content .ui-state-default,
+	 .ui-widget-header .ui-state-default,
+	 .ui-button,
+	 html .ui-button.ui-state-disabled:hover,
+	 html .ui-button.ui-state-disabled:active { border: 0px solid #c5c5c5; background-color: transparent; font-weight: normal; color: #454545; text-align: center; } 
+	
+	 .ui-datepicker .ui-datepicker-title { margin: 0 0em; line-height: 16px; text-align: center; font-size: 14px; padding: 0px; font-weight: bold; } 
+	
+	 .ui-datepicker { display: none; background-color: #fff; border-radius: 4px; margin-top: 10px; margin-left: 0px; margin-right: 0px; padding: 20px; padding-bottom: 10px; width: 300px; box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.1); } 
+	
+	 .ui-widget.ui-widget-content { border: 1px solid #eee; } 
+	
+	.ui-datepicker-prev ui-corner-all { font-family : auto; }
+	
+	 #datepicker:focus>.ui-datepicker { display: block; } 
+	
+	 .ui-datepicker-prev,
+	 .ui-datepicker-next { cursor: pointer; } 
+	
+	 .ui-datepicker-next { float: right; } 
+	
+	 .ui-state-disabled { cursor: auto; color: hsla(0, 0%, 80%, 1); } 
+	
+	 .ui-datepicker-title { text-align: center; padding: 10px; font-weight: 100; font-size: 20px; } 
+	
+	 .ui-datepicker-calendar { width: 100%; } 
+	
+	 .ui-datepicker-calendar>thead>tr>th { padding: 5px; font-size: 20px; font-weight: 400; } 
+	
+	 .ui-datepicker-calendar>tbody>tr>td>a { color: #000; font-size: 12px !important; font-weight: bold !important; text-decoration: none;}
+	
+	 .ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover { cursor: auto; background-color: #fff; } 
+	
+	 .ui-datepicker-calendar>tbody>tr>td { border-radius: 100%; width: 44px; height: 30px; cursor: pointer; padding: 5px; font-weight: 100; text-align: center; font-size: 12px; } 
+	
+	 .ui-datepicker-calendar>tbody>tr>td:hover { background-color: transparent; opacity: 0.6; } 
+	
+	 .ui-state-hover,
+	 .ui-widget-content .ui-state-hover,
+	 .ui-widget-header .ui-state-hover,
+	 .ui-state-focus,
+	 .ui-widget-content .ui-state-focus,
+	 .ui-widget-header .ui-state-focus,
+	 .ui-button:hover,
+	 .ui-button:focus { border: 0px solid #cccccc; background-color: transparent; font-weight: normal; color: #2b2b2b; } 
+	
+	 .ui-widget-header .ui-icon { background-image: url('./btns.png'); } 
+	
+	 .ui-icon-circle-triangle-e { background-position: -20px 0px; background-size: 36px; } 
+	
+	 .ui-icon-circle-triangle-w { background-position: -0px -0px; background-size: 36px; } 
+	
+	 .ui-datepicker-calendar>tbody>tr>td:first-child a { color: red !important; } 
+	
+	 .ui-datepicker-calendar>tbody>tr>td:last-child a { color: #0099ff !important; } 
+	
+	 .ui-datepicker-calendar>thead>tr>th:first-child { color: red !important; } 
+	
+	 .ui-datepicker-calendar>thead>tr>th:last-child { color: #0099ff !important; } 
+	
+	 .ui-state-highlight,
+	 .ui-widget-content .ui-state-highlight,
+	 .ui-widget-header .ui-state-highlight { border: 0px; background: #f1f1f1; border-radius: 50%; padding-top: 10px; padding-bottom: 10px; } 
+	
+	 .inp { padding: 10px 10px; background-color: #f1f1f1; border-radius: 4px; border: 0px; } 
+	
+	 .inp:focus { outline: none; background-color: #eee; }  	
+	   
+
+
+/*-----------------------------------------------------------------------------------------------*/
+/*------------------------------------- order_Complete.jsp ------------------------------------*/
+   
+    /* 사용자 결제완료 페이지 */
+
+    /* 전체 배경 색입히기 */
+    .complete-outer { 
+        background-color: whitesmoke; 
+        width: 100%; 
+        height: 620px;
+        margin: auto;
+    }
+
+    /* 하얀 네모박스 영역 */
+    .complete-whitebox { 
+        background-color:white; 
+        width: 1200px;
+        height: 390px;
+        padding: 20px;
+        padding-left: 20px;
+        text-align: center;
+        margin: auto; /*가운데 정렬*/
+    }
+
+    /* 회색 네모박스 영역 */
+    .complete-graybox { 
+        background-color: rgba(231, 231, 231, 0.738);
+        display: inline-block;
+        width: 1100px;
+        height: 220px;
+        text-align: center;
+        margin-top: 40px;
+    }
+    
+    /* 회색 네모박스 안에 내용물 감싸는 틀 */
+    .complete-graybox-div { 
+        width: 300px; 
+        margin: auto;
+        margin-top: 15px; 
+    } 
+    
+    /* 주문번호 div */
+    .complete-graybox-num { 
+        background-color: white;
+        padding: 14px;
+        border-radius: 20px;
+     }
+
+     /* 버튼 두개 감싸는 div */
+    .order-two-btn { 
+        text-align: center; /* 가운데정렬 */ 
+    } 
+
+     /* 버튼 두개 */
+    .complete-two-btn1 { 
+        width: 120px; height: 35px; 
+        color: white;
+        border-radius: 3px;
+        border: none;
+        background-color: rgb(87, 84, 84);
+    }
+    
+    .complete-two-btn2 { 
+        width: 120px; height: 35px;
+        color: white; 
+        border-radius: 3px;
+        border: none;
+        background-color: rgb(28, 26, 26); 
+    }
+    
+    .complete-two-btn1:hover, .complete-two-btn2:hover {
+    	cursor: pointer;
+    }
+    
+    /* 주문/결제 타이틀 */
+    .order-title {
+    	width: 1200px; 
+    	margin: auto; 
+    	margin-top: 15px; 
+    	font-weight:700; 
+    	font-size: 31px; 
+    	margin-bottom:15px;
+    }
+
+

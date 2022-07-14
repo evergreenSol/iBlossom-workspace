@@ -41,8 +41,16 @@
 		     , #{answerDate})
   	</insert>
   	
+  	<!-- USER_NAME을 쓰셔서 USER_NO로 변경함  2022-07-13 한솔, 혹시 USER_NAME 이 필요한건지 물어보기 -->
+  	<!--  
   	<select id="selectQna" parameterType="_int" resultMap="qnaResultSet">
 		SELECT QNA_NO, QNA_TITLE, QNA_CONTENT, USER_NAME, QNA_DATE
+		FROM QNA
+		WHERE QNA_NO = #{qnaNo}
+  	</select>
+  	-->
+  	<select id="selectQna" parameterType="_int" resultMap="qnaResultSet">
+		SELECT QNA_NO, QNA_TITLE, QNA_CONTENT, USER_NO, QNA_DATE, ANSWER, ANSWER_DATE, ANSWER_STATUS
 		FROM QNA
 		WHERE QNA_NO = #{qnaNo}
   	</select>
@@ -53,7 +61,7 @@
 		WHERE ANSWER_STATUS = 'Y'
 	</select>
 
-  	<select id="selectMyQna" parameterType="_int" resultMap="qnaResultSet">
+  	<select id="selectMyQnaList" parameterType="_int" resultMap="qnaResultSet">
   		SELECT QNA_NO, QNA_TITLE, QNA_CONTENT, QNA_DATE, ANSWER, ANSWER_DATE, ANSWER_STATUS
   		  FROM QNA
   		 WHERE USER_NO = #{userNo}

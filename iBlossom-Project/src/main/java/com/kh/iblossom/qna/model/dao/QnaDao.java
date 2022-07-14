@@ -23,9 +23,9 @@ public class QnaDao {
 	
 	}
 	
-	public ArrayList<Qna> selectMyQna(SqlSessionTemplate sqlSession, int userNo) {
+	public ArrayList<Qna> selectMyQnaList(SqlSessionTemplate sqlSession, int userNo) {
 
-		return (ArrayList)sqlSession.selectList("qnaMapper.selectMyQna", userNo);
+		return (ArrayList)sqlSession.selectList("qnaMapper.selectMyQnaList", userNo);
 	}
 
 	

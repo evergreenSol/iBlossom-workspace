@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>join</title>
+    <title>iBlossom | join</title>
     <link href="resources/css/shj.css" rel="stylesheet">
 </head>
 <body>
@@ -58,7 +58,7 @@
 	            <input type="text" class="signUp-input" id="chkAuthKey" placeholder="인증번호 6자리를 입력해주세요." maxlength="6"><br>
 	            <span id="mail-check-warn"></span>
 	
-	            <button type="button" id="signUp-cancelbutton">취소</button>
+	            <button type="button" id="signUp-cancelbutton" onclick="location.href='${ pageContext.request.contextPath }/'">취소</button>
 	            <button type="submit" id="signUp-signupbutton" disabled onclick="return validate();">가입</button>
 	            
 	            <span id="signUp-logintext">이미 iBlossom의 회원이신가요?</span><br>
