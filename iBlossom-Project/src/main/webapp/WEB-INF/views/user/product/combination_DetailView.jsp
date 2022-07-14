@@ -12,6 +12,7 @@
 <body>
 
 <jsp:include page="../../common/header.jsp" />
+
 	<br>
 	<br>
 	<br>
@@ -85,8 +86,12 @@
 						</td>
 					</tr>
 
+					<tr>
+
 						<td><br>
 						<br> <input value="장바구니" id="btn1" onclick="getObject();"></td>
+
+					</tr>
 
 				</table>
 			</form>
@@ -107,9 +112,10 @@
 				</div>
 				</c:forEach>
 			</div>
-			
-			
-			<!-- 리뷰 작성폼-->
+
+    </div>
+
+    <!-- 리뷰 작성폼-->
 			<div>
 			
 			</div>
@@ -135,9 +141,6 @@
 			
 		</div>
 
-
-
-	</div>
 	
 	<script>
 	var items = [];
