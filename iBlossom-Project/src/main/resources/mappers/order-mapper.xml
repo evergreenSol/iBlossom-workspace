@@ -16,8 +16,6 @@
 		<result column="DELIVERY_STATUS" property="deliveryStatus"/><!-- 배송상태 -->
 		<result column="RECEIPT_ID" property="receiptId"/><!-- 결제번호 -->
 		
-		<result column="FLOWER_NAME" property="flowerName" /><!-- 상품 제목 -->
-		<result column="THUMBNAIL" property="thumbnail" /><!-- 썸네일 -->
 	</resultMap>
 	
 	<!--
@@ -47,24 +45,47 @@
   	</select>
   	 -->
 
-  	<insert id="insertCart" parameterType="order">
-  		INSERT INTO ORDER_TBL (CART_NO
+  	<insert id="insertOrder" parameterType="order">
+  		INSERT INTO ORDER_TBL (ORDER_NO
   							 , USER_NO
-  							 , PRODUCT_NO
-  							 , FLOWER_NAME
-  							 , PRODUCT_PRICE
-  							 , PRODUCT_COUNT
-  							 , THUMBNAIL)
-  		VALUES(SEQ_PNO.NEXTVAL
+  							 , TOTAL_PRICE
+  							 , RECEIVE_DATE
+  							 , RECEIVE_USER
+  							 , RECEIVE_PHONE
+  							 , ORDER_ADDRESS
+  							 , POSTCODE
+  							 , ORDER_STATUS
+  							 , DELIVERY_STATUS
+  							 , RECEIPT_ID)
+  		VALUES(SEQ_ORDNO.NEXTVAL
 		     , #{userNo}
-		     , #{productNo}
-		     , #{flowerName}
-		     , #{productPrice}
-		     , #{productCount}
-		     , #{thumbnail}
-		JOIN PRODUCT USING (PRODUCT_NO)
-		WHERE USER_NO = #{userNo}
+		     , #{totalPrice}
+		     , #{receiveDate}
+		     , #{receiveUser}
+		     , #{receivePhone}
+		     , #{orderAddress}
+		     , #{postcode}
+		     , #{orderStatus}
+		     , #{deliveryStatus}
+		     , #{receiptId}
+		     )
   	</insert>
+  	
+  	<insert id="insertDetailOrder" parameterType="detailOrder">
+  		INSERT INTO DETAIL_ORDER(DORDER_NO, ORDER_NO, PRODUCT_NO, ONE_PRICE, ONE_QUANTITY)
+  		VALUES(SEQ_DORNO.NEXTVAL,
+  			   #{orderNo},
+  			   #{productNo},
+  			   #{onePrice},
+  			   #{oneQuantity}
+  			   )
+  	</insert>
+  	
+  	<select id="selectOrder" parameterType="string" resultMap="orderResultSet">
+  		SELECT *
+  		FROM ORDER_TBL
+  		WHERE RECEIPT_ID = '${receiptId}'
+   	</select>
 
 	
 	<!-- 조회 

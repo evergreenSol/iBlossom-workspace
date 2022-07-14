@@ -155,7 +155,7 @@ public class BootPayController {
 			} 
 		}
 		
-		return (result > 0) ? "success" : "fail";
+		return (result > 0) ? "iBlossom 상품 구독 등록 : 매달 싱싱하고 예쁜 꽃을 보내드릴게요 :)" : "상품 구독에 실패하였습니다 :(";
 
 		
 	}

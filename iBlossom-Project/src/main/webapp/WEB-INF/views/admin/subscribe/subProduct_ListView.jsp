@@ -90,13 +90,13 @@
 
         <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
         <div class="wrap">
-           <c:choose>
+           <c:choose> 
               <c:when test="${ empty list }">
                  <h4>아직 진열된 상품이 없습니다.</h4>
               </c:when>
-              <c:otherwise>
+              <c:otherwise> <!-- 진열된 상품 -->
                  <c:forEach var="sp" items="${ list }"> <!-- SUB_PRODUCT 테이블로부터 읽어오기 -->   
-                    <div class="admin_sub_product">
+                    <div class="admin_sub_product"> 
                          <h3>상품명</h3>
                          <input type="text" class="admin_subproduct_name" value="${ sp.subProductName }">
                          <h3>썸네일</h3>
@@ -124,6 +124,7 @@
            <br>
            <hr>
            <br>
+           <!-- 상품 추가용 -->
            <div class="new_subproduct" hidden>
               <form method="post" action="insert.sp" enctype="multipart/form-data">
                 <h3>상품명</h3>
@@ -156,18 +157,21 @@
     </div>
     
     <script>
+    // 상품 추가 버튼 클릭 시
       function showHidden() {
          $('.new_subproduct').removeAttr("hidden")
          $('#showHidden').attr("hidden","true")
          $('#deleteSubProduct').attr("hidden","true")
       }
 
+      // 상품 삭제 또는 수정 버튼 클릭 시
       function postFormSubmit(spno, num, value) {
     	
     	var spName = $(value).siblings(".admin_subproduct_name").val();
     	var spDes = $(value).siblings(".admin_product").find(".admin_subproduct_description").val();
     	var price = $(value).siblings(".admin_price").val()
     	
+    	// num 값에 따라 수정으로 보내주던가 삭제로 보내주던가
     	if(num == 1) {
   			var url = "delete.sp"
   		}
@@ -202,19 +206,22 @@
     		}
     	})   
       }
-
+		
+      // 상품 추가시 사진 넣을 때 영역 클릭으로 사진 추가
       $('#insertImg').click(function() {
     	  $('#insertCaption').css("display","none");
           $('#admin_fileUpload').click()
        }); 
       
+  	  // 영역에 사진이 새로 추가될 때 마다 readURL 호출
       $(function() {
           $("#admin_fileUpload").on('change', function(){
-              readURL1(this);
+              readURL(this);
           });
       });
       
-      function readURL1(input) {
+  	  // 추가된 사진 경로 불러오기용 메소드
+      function readURL(input) {
           if (input.files && input.files[0]) {
              var reader = new FileReader();
              reader.onload = function (e) {
@@ -223,28 +230,6 @@
              reader.readAsDataURL(input.files[0]);
           }
       }
-      
-      $('#updateImg').click(function() {
-          $('#admin_fileUpdate').click()
-       }); 
-      
-      $(function() {
-          $("#admin_fileUpdate").on('change', function(){
-              readURL2(this);
-          });
-      });
-      
-      function readURL2(input) {
-          if (input.files && input.files[0]) {
-             var reader = new FileReader();
-             reader.onload = function (e) {
-                $('#admin_subproduct_img').attr('src', e.target.result);
-             }
-             reader.readAsDataURL(input.files[0]);
-          }
-      }
-      
-      
       
       // 가격 input 입력제한
       var regExp = /[^0-9]/gi;

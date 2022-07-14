@@ -117,8 +117,7 @@
 	
 	<!-- 상품 상세보기(조합형)-->
 	<select id="selectDetailList" resultMap="productResultSet">
-		SELECT PRODUCT_NO,
-		CATEGORY_NAME,FLOWER_NAME,THUMBNAIL,FLOWER_INFO,PRICE
+		SELECT PRODUCT_NO, CATEGORY_NAME, FLOWER_NAME, THUMBNAIL, FLOWER_INFO, PRICE
 		FROM PRODUCT
 		WHERE CATEGORY_NAME = '조합형'
 	</select>

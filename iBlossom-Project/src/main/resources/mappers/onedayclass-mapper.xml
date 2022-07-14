@@ -39,16 +39,16 @@
 		     , #{resEmail})
   	</insert>
   	
-  	<select id="selectOnedayClass" resultMap="onedayclassResultSet">
+  	<select id="selectOnedayClass" parameterType="_int" resultMap="onedayclassResultSet">
   		SELECT *
   		FROM ONECLASS
-  		WHERE CLASS_NO = #{ classNo }
+  		WHERE CLASS_NO = #{classNo}
   	</select>
 	
-	<update id="updateClassCap" parameterType="onedayclass">
+	<update id="updateClassCap" parameterType="_int">
   		UPDATE ONECLASS
   		   SET RES_NUM = RES_NUM+1
-  		 WHERE CLASS_NO = #{ classNo }
+  		 WHERE CLASS_NO = #{classNo}
   	</update>
 
 </mapper>

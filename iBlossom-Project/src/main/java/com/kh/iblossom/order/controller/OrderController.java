@@ -1,6 +1,7 @@
 package com.kh.iblossom.order.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,17 +10,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.iblossom.cart.model.Service.CartService;
 import com.kh.iblossom.cart.model.vo.Cart;
+import com.kh.iblossom.cart.model.vo.CartCommand;
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.common.template.Pagination;
 import com.kh.iblossom.member.model.service.MemberService;
 import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.order.model.service.OrderService;
+import com.kh.iblossom.order.model.vo.DetailOrder;
+import com.kh.iblossom.order.model.vo.DetailOrderCommand;
 import com.kh.iblossom.order.model.vo.Order;
-import com.kh.iblossom.subscribe.model.vo.SubProduct;
 
 @Controller
 public class OrderController {
@@ -46,15 +49,58 @@ public class OrderController {
 	
 	// 주문/결제 조회용
 	@RequestMapping("detail.or")
-	public String DetailOrder(HttpSession session, Model model) {
+	public String DetailOrder(CartCommand cartCommand, HttpSession session, Model model) {
 		
-		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		System.out.println("옴");
+		//System.out.println(cartCommand);
 		
-		ArrayList<Cart> list = cartService.selectCart(userNo);
+		ArrayList<Cart> list = (ArrayList<Cart>)cartCommand.getCartList();
+		
+		// int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		
+		
+		if(list == null) {
+			session.setAttribute("alertMsg", "결제할 항목을 선택해주세요.");
+			return "redirect:list.ca";
+		}
+		else {
 			
-		model.addAttribute("list", list);
-		
-		return "user/order/order_DetailView";
+			ArrayList<Cart> selectList = new ArrayList<>();
+			
+			System.out.println("list: " + list);
+			System.out.println("크기: " + list.size());
+			
+			
+			for(int i = 0; i < list.size(); i++) {
+				
+				int cartNo = list.get(i).getCartNo();
+				
+				Cart c = list.get(i);
+				
+				if(cartNo != 0) {
+					
+					System.out.println("카트넘버: " + cartNo);
+					
+					Cart cart = cartService.selectOneCart(c);
+					
+					System.out.println("추출한 카트: " + cart);
+					
+					selectList.add(cart);
+					
+				}
+				
+			}
+			
+			System.out.println(selectList);
+			
+			model.addAttribute("selectList", selectList);
+			
+			// ArrayList<Cart> list = cartService.selectCart(userNo);
+			
+			// model.addAttribute("list", list);
+			
+			return "user/order/order_DetailView";
+		}
 	}
 	
 	
@@ -65,18 +111,88 @@ public class OrderController {
 	}
 	
 	// 주문결제 페이지에서 데이터 추가
+	@ResponseBody
 	@RequestMapping("insert.or")
-	public String insertOrder(HttpSession session, Model model) {
+	public String insertOrder(Order o, HttpSession session, Model model) {
 		
-		int result = orderService.insertOrder();
+		System.out.println(o);
 		
-		if(result > 0) {
-			return "redirect:/";
+		String receiptId = o.getReceiptId();
+		int oNo;
+		
+		// 오더 테이블 만들기(주문)
+		int result = orderService.insertOrder(o);
+		
+		System.out.println("result = " + result);
+		System.out.println("receiptId = " + receiptId);
+		
+		if(result > 0) { // 오더테이블이 만드렁짐
+			
+			// 방금 만든 오더 테이블 조회해오기 
+			Order thisOrder = orderService.selectOrder(receiptId);
+			System.out.println(thisOrder);
+			oNo = thisOrder.getOrderNo();
+			
+			String orderNo = Integer.toString(oNo);
+			
+			return orderNo;
 		}
-		else {
-			return "redirect:/";
+		else { // 못만듦 ㅜㅜ
+			return "0";
+			
 		}
+		
 	}
+	
+	@RequestMapping("insertDetailOrder.or")
+	public String insertDetailOrder(DetailOrderCommand detailOrderCommand, int orderNo, HttpSession session) {
+		// 디테일 오더 테이블 만들기(주문상세)
+		System.out.println(detailOrderCommand);
+		
+		ArrayList<DetailOrder> list = (ArrayList<DetailOrder>)detailOrderCommand.getDetailOrderList();
+		
+		// 구매액 Purchase Amount
+		int purchase = 0;
+		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+		
+		Member m = new Member();
+		m.setUserId(userId);
+		
+		for(int i = 0; i < list.size(); i++) {
+			DetailOrder detailOrder = list.get(i);
+			// detailOrder.setOrderNo(orderNo);
+			
+			detailOrder.setOrderNo(orderNo);
+			
+			purchase += detailOrder.getOnePrice() * detailOrder.getOneQuantity();
+			
+			int cartNo = detailOrder.getCartNo();
+			
+			int DOResult = orderService.insertDetailOrder(detailOrder);
+			int cartDeleteResult = cartService.deleteCart(cartNo);
+			
+			if(DOResult * cartDeleteResult < 0) {
+				break;
+			}
+		}
+		
+		HashMap<String, Integer> map = new HashMap<>();
+		
+		map.put("userNo", userNo);
+		map.put("purchase", purchase);
+		
+		int paResult = memberService.updateSubPurchase(map);
+		if(paResult > 0) {
+			
+			Member updateMem = memberService.login(m);
+			session.setAttribute("loginUser", updateMem);
+		}
+		
+		
+		return "user/order/order_Complete";
+	}
+	
 	
 	
 	// -------------------------------------------------------------------------------------
