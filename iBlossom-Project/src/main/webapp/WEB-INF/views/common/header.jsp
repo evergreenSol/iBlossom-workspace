@@ -120,7 +120,7 @@
     		
     		$.ajax({
     			url : "checkPurchase.me",
-    			success : function () {
+    			success : function (result) {
     				if(result == "1") {
     					console.log("있음");
     				}
