@@ -39,12 +39,12 @@
 
                         <div class="mypage-show-order">
                             <button type="button" id="show-order">
-                                주문 / 배송 <span>(1)</span>
+                                주문 / 배송 <span>(${ list.size()})</span>
                             </button>
                         </div
                         ><div class="mypage-show-order">
                             <button type="button" id="show-cancel">
-                                취소 / 환불 <span>(1)</span>
+                                취소 / 환불 <span>(${cancelList.size()})</span>
                             </button>
                         </div>
 
@@ -54,10 +54,10 @@
                             <tr>  
                                 <td colspan="2"><p style="font-size: 18px; font-weight: 600">${ o.orderDate }</p></td>
                                 <td></td>
-                                <td colspan="2" width="650" align="right"><a href="orderDetailView.me" class="moreBtn" style="padding-right: 10px; color:black;">주문상세</a></td>  
+                                <td colspan="2" width="650" align="right"><a href="orderDetailView.me?orderNo=${o.orderNo}" class="moreBtn" style="padding-right: 10px; color:black;">주문상세</a></td>  
                             </tr>
                             <tr height="26">
-                                <td rowspan="5" width="100" height="100"><img src="" style="width:100%"></td>
+                                <td rowspan="5" width="100" height="100"><img src="${ o.thumbnail }" style="width:100%"></td>
                                 <!-- 사진은 ajax로 넣기 (모든게 로드 된 뒤에 ajax로 주문번호에 해당되는 상품 상세 조회 후 그 상품의 사진경로 가져오기)-->
                                 <th width="80" >주문번호</th>
                                 <td width="10" ></td>
@@ -87,7 +87,11 @@
                                 <td></td>
                                 <td>${ o.deliveryStatus }</td>
                                 <c:if test="${ (o.deliveryStatus ne '배송완료') or (o.deliveryStatus ne '배송중') }">
-                                	<td style="text-align: right; padding-right: 10px;" width="300"><a class="mypage-pay-cancel" href="">취소하기</a></td>
+                                	<td style="text-align: right; padding-right: 10px;" width="300">
+                                		<button class="mypage-pay-cancel" >취소하기</button>
+                                		<input type="hidden" value="${o.receiptId}">
+                                		<input type="hidden" value="${o.totalPrice}">
+                                	</td>
                                 </c:if>
                             </tr>
                             <tr height="30" >
@@ -103,11 +107,11 @@
                             <tr >
                                 <td colspan="2"><p style="font-size: 18px; font-weight: 600">${ o.orderDate }</p></td>
                                 <td></td>
-                                <td colspan="2" width="650" align="right"><a href="" class="moreBtn" style="padding-right: 10px; color:black;">주문상세</a></td>  
+                                <td colspan="2" width="650" align="right"><a href="orderDetailView.me?orderNo=${o.orderNo}" class="moreBtn" style="padding-right: 10px; color:black;">주문상세</a></td>  
  
                             </tr>
                             <tr height="26">
-                                <td rowspan="5" width="100" height="100"><img src="https://kukka-2-media-123.s3.amazonaws.com/static/kukkart_new/img/common/thumbnail_mypage.png" style="width:100%"></td>
+                                <td rowspan="5" width="100" height="100"><img src="${ o.thumbnail }" style="width:100%"></td>
                                 <!-- 사진은 ajax로 넣기 (모든게 로드 된 뒤에 ajax로 주문번호에 해당되는 상품 상세 조회 후 그 상품의 사진경로 가져오기)-->
                                 <th width="80">주문번호</th>
                                 <td width="10"></td>
@@ -183,22 +187,98 @@
 
             });
 
-            /*
+
             
-            $.ajax({
-            	url : "",
-            	data : {},
-            	success : function () {
-            		// 배열로 받아올 것인데, 그 중 첫 번째
-            		// 사진을 주문 사진에 넣어주기.
-            	},
-            	error : function () {
-            		console.log("실패");
-            	}
-            	
-            });
+			var refundPrice;
+			
+			$(".mypage-pay-cancel").click(function () { 
+				
+				console.log("클릭됨");
+				
+				var receiptId = $(this).next().val();
+				console.log("receipId=" + $(this).next().val());
+				console.log(receiptId)
+				var refundPrice = $(this).next().next().val();
+				console.log(refundPrice);
+				console.log("refundPrice ="+ $(this).next().next().val());
+
+				
+				
+				$.ajax({
+					url : "cancelPay.me",
+					data : {
+						receiptId : $(this).next().val()
+					},
+					type : "POST",
+					success : function (result) {
+						
+							console.log("수정이 되었음");
+							console.log(result);
+							
+							console.log(refundPrice);
+						
+							$.ajax({
+								url : "goGetToken.do",
+								type : "post",
+								success : function(token) {
+									
+									console.log("token 생성됨 : " + token);
+									
+									
+									$.ajax({
+										url : "cancelRequest.do",
+										data : {
+											receiptId : receiptId,
+											price : refundPrice
+											},
+										type : "post",
+										success : function(result) {
+	
+											alert("결제가 취소되었습니다.");
+											
+											$.ajax({
+												url : "refund.me",
+												date : {
+													price : refundPrice
+												},
+												type : "post",
+												success : function (result) {
+													if(result == 0) {
+														console.log("성공")
+													}
+													else {
+														console.log("실패")
+													}
+												},
+												error : function () {
+													
+												}
+											});
+											
+											location.reload();
+										
+										}, error : function() {
+											console.log("안되면 집ㄱ");
+										}
+									});
+									
+									
+								}, error : function() {
+									console.log("토큰 생성 실패");
+								}
+							});
+						
+					},
+					error : function () {
+						console.log("실패");
+					}
+					
+				});
+
+			});
             
-            */
+            
+        
             
         });
 

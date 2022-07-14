@@ -2,6 +2,7 @@ package com.kh.iblossom.member.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ import com.kh.iblossom.member.model.service.MemberService;
 import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.onedayclass.model.Service.OnedayClassService;
 import com.kh.iblossom.order.model.service.OrderService;
+import com.kh.iblossom.order.model.vo.DetailOrder;
 import com.kh.iblossom.order.model.vo.Order;
 import com.kh.iblossom.product.model.service.ProductService;
 import com.kh.iblossom.qna.model.service.QnaService;
@@ -229,8 +231,20 @@ public class MemberController {
    
    // 나의 주문내역 상세보기 메소드
    @RequestMapping(value="orderDetailView.me")
-   public String myPageOrderDetailView() {
-      
+   public String myPageOrderDetailView(int orderNo, Model model) {
+	   
+
+	  ArrayList<DetailOrder> list = orderService.selectMyDetailOrderList(orderNo);
+	  
+	  Order o = orderService.selectMyOneOrder(orderNo);
+	  
+	  System.out.println(list);
+	  System.out.println(o);
+	  
+	  model.addAttribute("list", list);
+	  model.addAttribute("o", o);
+	  
+	  
       // 매개변수로 주문 번호 가져오기
       // DB에서 해당 주문의 상세내역을 ArrayList로 받아오기
       
@@ -308,6 +322,24 @@ public class MemberController {
 	   
 	   return value;
    }
+   
+   // 꽃 주문 삭제 메소드
+   @ResponseBody
+   @RequestMapping(value="cancelPay.me", produces="html/text; charset=UTF-8")
+   public String cancelPay(String receiptId) {
+	   
+	   System.out.println(receiptId);
+	   
+	   int result = orderService.cancelMyPay(receiptId);
+	   
+	   System.out.println(result);
+	   
+	   String value = Integer.toString(result);
+	   
+	   return value;
+   }
+   
+   
    
    // 프로필 수정 페이지 이동 메소드
    @RequestMapping(value="updateForm.me")
@@ -472,6 +504,29 @@ public class MemberController {
    public String updateGrLevel() {
 	   
 	   int result = memberService.updateGrLevel();
+	   
+	   if(result > 0) {
+		   return "1";
+	   }
+	   else {
+		   return "0";
+	   }
+   }
+   
+   @ResponseBody
+   @RequestMapping(value="refund.me") 
+   public String refundPurchase(int price, HttpSession session) {
+	   
+	   System.out.println(price);
+	   
+	   int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+	   
+	   HashMap<String, Integer> map = new HashMap<>();
+		
+	   map.put("userNo", userNo);
+	   map.put("refund", Integer.valueOf(price));
+	   
+	   int result = memberService.refundPurchase(map);
 	   
 	   if(result > 0) {
 		   return "1";

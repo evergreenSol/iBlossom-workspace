@@ -29,5 +29,10 @@ public interface OrderService {
 	ArrayList<Order> selectMyOrderList(int userNo);
 	
 	ArrayList<Order> selectMyOrderCancelList(int userNo);
+	
+	int cancelMyPay(String receiptId);
+	
+	ArrayList<DetailOrder> selectMyDetailOrderList(int orderNo);
 
+	Order selectMyOneOrder(int orderNo);
 }

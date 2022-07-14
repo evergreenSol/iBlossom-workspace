@@ -285,12 +285,9 @@ height: 97%;
 }
 
 .mypage-pay-cancel {
-    text-decoration: none;
-    width: 100%;
-    max-width: 375px;
-    height: 52px;
+    width: 80px;
     font-size: 12px;
-    line-height: 22px;
+    font-weight: 600;
     letter-spacing: normal;
     padding :7px 12px;
     

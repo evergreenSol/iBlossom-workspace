@@ -480,12 +480,13 @@
             <input type="hidden" id="email" value="${ loginUser.email }">
             <input type="hidden" id="address" value="${ loginUser.address }">
             <input type="hidden" id="phone" value="${ loginUser.phone }">
+            <input type="hidden" id="thumbnailForOrder" value="${ selectList[0].thumbnail }">
         </div><!-- 1200px 너비 -->
       	</div><!-- 전체 색상 변경 div -->
 
 	<script>
 	var userNo = $("#userNo").val();
-	
+	var thumbnail = 
 
 	console.log(receiveDate);
 	function pay() {
@@ -572,7 +573,8 @@
 				orderAddress : $('#address1').val() + " " + $('#address2').val(),
 				postcode : $('#zipcode').val(),
 				orderStatus : '결제완료',
-				deliveryStatus : '배송준비'
+				deliveryStatus : '배송준비',
+				thumbnail : $("#thumbnailForOrder").val()
 				
 			},
 			success : function(result) {

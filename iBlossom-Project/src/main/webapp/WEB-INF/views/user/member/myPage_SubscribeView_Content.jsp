@@ -173,7 +173,7 @@
 			var refundPrice;
 			
 			var subPrice = ${ list[0].subPrice }
-			
+			var receiptId = $(this).next().val()
 			
 			$(".mypage-subscribe-cancel").click(function () { 
 				
@@ -193,7 +193,7 @@
 				$.ajax({
 					url : "cancelSubscribe.me",
 					data : {
-						receiptId : $(this).next().val()
+						receiptId : receiptId
 					},
 					type : "POST",
 					success : function (result) {
@@ -214,7 +214,7 @@
 								$.ajax({
 									url : "cancelRequest.do",
 									data : {
-										receiptId : $(this).next().val(),
+										receiptId : receiptId,
 										price : refundPrice
 										},
 									type : "post",

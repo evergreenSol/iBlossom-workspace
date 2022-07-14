@@ -75,4 +75,22 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 
+	@Override
+	public int cancelMyPay(String receiptId) {
+		return orderDao.cancelMyPay(sqlSession, receiptId);
+	}
+
+
+	@Override
+	public ArrayList<DetailOrder> selectMyDetailOrderList(int orderNo) {
+		return orderDao.selectMyDetailOrderList(sqlSession, orderNo);
+	}
+
+
+	@Override
+	public Order selectMyOneOrder(int orderNo) {
+		return orderDao.selectMyOneOrder(sqlSession, orderNo);
+	}
+
+
 }
