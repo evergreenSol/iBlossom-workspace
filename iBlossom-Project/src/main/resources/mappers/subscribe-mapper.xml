@@ -55,21 +55,21 @@
   	<select id="selectSubProduct" resultMap="subProductResultSet">
   		SELECT *
   		FROM SUB_PRODUCT
-  		WHERE SUBPRODUCT_NO = #{ subProductNo }
+  		WHERE SUBPRODUCT_NO = #{subProductNo}
   	</select>
   	
   	<delete id="deleteSubProduct" parameterType="int">
   		DELETE
   		FROM SUB_PRODUCT
-  		WHERE SUBPRODUCT_NO = #{ subProductNo }
+  		WHERE SUBPRODUCT_NO = #{subProductNo}
   	</delete>
   	
   	<update id="updateSubProduct" parameterType="subProduct">
   		UPDATE SUB_PRODUCT
-  		   SET SUBPRODUCT_NAME = #{ subProductName },
-  		   	   SUBPRODUCT_DESCRIPTION = #{ subProductDescription },
-  		   	   SUB_PRICE = #{ subPrice }
-  		 WHERE SUBPRODUCT_NO = #{ subProductNo }
+  		   SET SUBPRODUCT_NAME = #{subProductName},
+  		   	   SUBPRODUCT_DESCRIPTION = #{subProductDescription},
+  		   	   SUB_PRICE = #{subPrice}
+  		 WHERE SUBPRODUCT_NO = #{subProductNo}
   	</update>
   	
   	<insert id="insertSubscribe" parameterType="subscribe">
