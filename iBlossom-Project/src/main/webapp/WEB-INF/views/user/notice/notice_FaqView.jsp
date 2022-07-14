@@ -39,14 +39,14 @@
                     <br>
                     <li class="left_menu">
                         <a href="qnaForm.qu">
-                            <span class="category-content">1대1 문의</span>
+                            <span class="category-content">1:1 문의</span>
                             <span class="category-arrow">></span>
                         </a>
                     </li>
                     <br>
                     <li class="left_menu">
                         <a href="faq.no">
-                            <span class="category-content">FAQ</span>
+                            <span class="category-content" style="font-weight : 700;">FAQ</span>
                             <span class="category-arrow">></span>
                         </a>
                     </li>
@@ -56,7 +56,7 @@
         </div>
 
    <div id="faq">
-        <h2>FAQ</h1>
+        <h2 style="font-size: 23px;">FAQ</h1>
 
         <!-- FAQ : Frequently Asked Questions, 자주묻는질문 -->
 

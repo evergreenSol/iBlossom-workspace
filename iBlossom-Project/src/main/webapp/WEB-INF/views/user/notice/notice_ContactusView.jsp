@@ -32,14 +32,14 @@
                     <br>
                     <li class="left_menu" >
                         <a href="contactus.no">
-                            <span class="category-content">Contact Us</span>
+                            <span class="category-content" style="font-weight : 700;">Contact Us</span>
                             <span class="category-arrow">></span>
                         </a>
                     </li>
                     <br>
                     <li class="left_menu">
                         <a href="qnaForm.qu">
-                            <span class="category-content">1대1 문의</span>
+                            <span class="category-content">1:1 문의</span>
                             <span class="category-arrow">></span>
                         </a>
                     </li>
@@ -56,16 +56,16 @@
         </div>
         
     <div id="contact">
-        <p style="font-size: 20px; font-weight: 700;">Contact Us</p>
-        <pre>
+        <p style="font-size: 23px; font-weight: 700;">Contact Us</p>
+        <pre style="font-size: 15px;">
 법인명(상호) : (주)나블러썸 
 
 대표자(성명) : 김한솔
 
 서울특별시 영등포구 선유동2로 57 이레빌딩
 사업자등록번호 123-456-78900 
-통신판매번호 : 2022-서울당산-3333 
-OPEN HOURS AM 11:00 - PM 5:00 | LUNCH TIME PM 1:00 - PM 2:00 | OFFICE DAY MON - FRI
+통신판매번호 : 2022-서울당산-3333<br>
+OPEN HOURS AM 09:30 - PM 18:20 | LUNCH TIME PM 12:20 - PM 13:30 | OFFICE DAY MON - FRI
         </pre>
     </div>
 </div>    
