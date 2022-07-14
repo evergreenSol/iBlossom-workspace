@@ -94,11 +94,13 @@
 	             </a>
              </c:if>
              	
-             
-
         </div>
-
+        
     </div>
+    
+    
+    
+    
         <script>
     	$(function () {
     		

@@ -155,7 +155,7 @@
   		SELECT DISTINCT RECEIPT_ID
   		FROM SUBSCRIBE
   		WHERE USER_NO = #{userNo}
-  		<!-- AND NOT DELIVER_STATUS IN('결제취소') -->
+  		AND NOT DELIVER_STATUS IN('결제취소')
   	</select>
   	
   	
@@ -166,7 +166,7 @@
 		  FROM SUBSCRIBE S, SUB_PRODUCT SP
 		 WHERE RECEIPT_ID = #{receiptId}
 		   AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
-		   <!-- AND DELIVER_STATUS IN ('배송준비', '배송중', '배송완료') -->
+		   AND DELIVER_STATUS IN ('배송준비', '배송중', '배송완료')
 		ORDER BY S.SUBSCRIBE_NO ASC
   	</select>
   	

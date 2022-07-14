@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,466 +12,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet">
-<style>
 
-    /* 사용자 주문 페이지 레이아웃 */    
-    /* 전체 배경 색상 */
-    #orderMainOuter {
-    	width: 100%;
-    	height: 1700px;
-    	background-color: whitesmoke;
-    }
-    
-    /* 내용 감싸는 전체 레이아웃 */
-    #orderMainWrap {
-    	width: 1200px;
-    	height: 1400px;
-    	margin: auto;
-    }
-    
-    /* 왼쪽 섹션 */ 
-    .order-left {
-        width: 65%;
-        height: 100%;
-        float: left;
-        box-sizing: border-box;
-    }
-
-    /* 오른쪽 섹션 */
-    .order-right {
-        width: 33%;
-        float: right;
-        
-        /* sticky*/
-        position: relative;
-        top: -30px;
-        right: 57%; 
-        margin-right:-670px;
-    }
-
-
-
-	/* ----------------------------------------------------------- */
-    /* 사용자 주문 페이지 왼쪽 영역 */
-    
-    /* 주문내역 확인, 주문자 정보, 발신인 이름 펼친 페이지 */
-
-    /* 전체 배경 색입히기 */
-    .order-outer { 
-    	background-color: whitesmoke;
-        width : 100%; 
-    }
-
-    /* 하얀 네모박스 영역 */
-    .order-whitebox { 
-        background-color:white; 
-        padding: 34px;
-        padding-left: 40px;
-        margin: 10px;
-        padding-bottom: 60px;
-    }
-    
-    /* 1. 주문내역 확인 2. 주문자 정보 3. 발신인 이름  (220711 수령일추가)
-       4. 배송지 정보  5. 배송지 추가  6. 결제 수단 7. 카카오페이*/
-       
-    /* 결제 수단과 카카오페이는 삭제 했지만 결제수단을 주소 데이터값 뽑는 용도로 사용할 것임 */
-    .order-check, .order-orderer, .order-sender, .order-receiveDate,
-    .order-address, .order-address-add, .order-payment, .order-kakaopay {
-        display: flex; 
-        justify-content: space-between;
-    }
-    
-    /* 결제수단 클래스에 주소 데이터값 뽑는 용도로 사용 */
-    .order-payment {
-    	padding: 10px; 
-    }
-
-    /* 배송지 추가, 카카오페이 버튼 */
-    /* 카카오페이 버튼 삭제 */
-    .address-btn, .kakao-btn { 
-        padding: 18px; 
-        width: 200px; 
-        border: none; 
-        background-color:whitesmoke; 
-        border-radius: 3px; 
-    }
-    
-    /* 위 버튼 마우스 호버시 */
-    .address-btn:hover, .kakao-btn:hover {
-    	font-weight: 600;
-    	cursor: pointer;
-    } 
-
-    /* 버튼 두개 */
-    .order-two-btn { 
-        text-align: center;
-    }
-
-    /* 이전으로  버튼 */
-    .pre-btn { 
-        width: 65px;
-        height: 30px; 
-        border: none;
-        background-color: white;
-        border-radius: 3px; 
-        color: gray;
-        float: right;
-    }
-
-    /* 이전으로 가기 버튼 호버시 */
-    .pre-btn:hover { 
-        cursor: pointer;
-		font-weight: 600;
-		color: black;  
-    }
-    
-    /* 결제하기 버튼 */
-    .pay-btn { 
-        padding: 10px; 
-        width: 100px; 
-        border: none; 
-        background-color:rgb(67, 69, 69); 
-        color:white;
-        border-radius: 3px;  
-    }
-
-	/* 수령일 input 태그 */
-	#ReceiveBox>input {
-		padding: 18px; 
-        width: 160px;
-        border-radius: 3px;   
-	}
-
-    /* ----------------------------------------------------------- */
-    /* 주문내역 확인 - 내용 */
-    .order-check-content { 
-        padding: 20px;
-        display:flex; 
-        justify-content: space-between;
-    }
-
-    /* 주문내역 확인 - 상품옵션확인 div */                        
-    .order-check-list { 
-        list-style: none;
-        margin-top: 50px;
-    }
-    
-    /* 주문자 정보 - 이름, 연락처 / 발신인 이름 */
-    .orderer-name, .orderer-phone, #SenderBox>p, #receiveBox>p { 
-        width: 660px;
-        padding: 10px; 
-        background-color:rgba(241, 241, 241, 0.707); 
-    }
-
-
-
-    /* ----------------------------------------------------------- */
-    /* 모달창 */
-    #modal.modal-overlay {
-        width: 100%;
-        height: 100%;
-        /* position: absolute; */
-        /* left: 0; */
-        /* top: 0; */
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        /* background: rgba(255, 255, 255, 0.25); */
-        background: rgba(0, 0, 0, 0.712);
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        backdrop-filter: blur(1.5px);
-        -webkit-backdrop-filter: blur(1.5px);
-        /* backdrop-filter: blur(3.5px);
-        -webkit-backdrop-filter: blur(3.5px); */
-        border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        
-        /* 모달창 화면 정중앙에 띄우기 */
-        position: fixed;
- 		top: 50%;
-  		left: 50%;
-  		transform: translate(-50%, -50%);
-    }
-
-    #modal .modal-window {
-        /* background: rgba( 69, 139, 197, 0.70 ); */
-        background: white;
-        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-        backdrop-filter: blur( 13.5px );
-        -webkit-backdrop-filter: blur( 13.5px );
-        border-radius: 10px;
-        border: 1px solid rgba( 255, 255, 255, 0.18 );
-        width: 550px;
-        height: 570px;
-        position: relative;
-        top: -100px;
-        padding : 30px;
-    }
-
-    #modal .address-header {
-        padding-left: 10px;
-        display: inline;
-        /* text-shadow: 1px 1px 2px gray; */
-        color: black;  
-    }
-
-    #modal .address-header h2 {
-        display: inline;
-    }
-
-    #modal .close-area {
-        display: inline;
-        float: right;
-        padding-right: 10px;
-        cursor: pointer;
-        /* text-shadow: 1px 1px 2px gray; */
-        color: black;
-    }
-
-    #modal .address-content {
-        margin-top: 20px;
-        padding: 0px 10px;
-        /* text-shadow: 1px 1px 2px gray; */
-        color: black;
-    }
-
-    .address-footer button {
-        border-radius: 3px;
-    }
-
-    .address-table>tr>td {
-        width: 50px;
-    }
-    
-    
-    
-    /* ----------------------------------------------------------- */
-    /* 슬라이드 업/다운 요소 버튼 */
-
-    /* 누를 버튼 */
-    #CheckBtn, #OrdererBtn, #SenderBtn, #ReceiveBtn {
-        width: 700px;
-        display: flex; 
-        justify-content: space-between;
-        border: none;
-        background-color: none;
-        font-size : 16px;
-    }
-
-    /* 내용 박스 */
-    #CheckBox, #OrdererBox, #SenderBox, #ReceiveBox {
-        width: 600px;
-        margin-top: 20px;
-        display: none;
-        /* height: 600px; */
-    }
-    
-    /* 주문 내역 확인 박스 가운데 정렬 */
-    #CheckBox { margin: auto; }
-
-
-
-    /* ----------------------------------------------------------- */
-    /* 사용자 주문 페이지 오른쪽 영역 */
-    
-    /* 전체 옵션 */
-    .order-right-wrap {
-    	background-color:white;
-    	padding: 5px;
-    }
-    
-    /* 총 주문 금액, 배송비, 등급할인 */
-    .order-price, .order-delivery, .order-grade {
-        display:flex;
-        justify-content: space-between;
-        padding: 5px;
-        margin: 10px 15px 15px 15px;
-    }
-    
-    /* 총 주문 금액 위에 공간 주기 */
-    .order-price>span {
-    	margin-top: 10px;
-    }
-
-    /* 총 결제 금액 */
-    .order-tprice {
-        display:flex;
-        justify-content: space-between;
-        padding: 10px;
-        font-weight: bold;
-        margin: 25px 15px 1px 15px;
-    }
-
-    /* 이용약관 네모박스 */
-    .payment-agree { 
-        list-style: none; 
-        padding: 1px;
-        text-align: center;
-        font-size: 0.3cm;
-    }
-    
-    /* 결제하기 버튼 */
-    .order-btn { 
-        width:100%; 
-        height:40px; 
-        background-color: black; 
-        color:white;
-    }
-    
-    /* 결제하기 버튼 호버시 */   
-    .order-btn:hover {
-    	cursor: pointer;	
-    }
-    
-    /* 누를 슬라이드 헤드 부분 색상 변경 */
-    .order-check>button, .order-orderer>button, .order-sender>button, .order-receive>button {
-        background-color: white;
-    }
-    
-    
-    
-    /* ----------------------------------------------------------- */
-    /* 모달창 상세 스타일 */
-    
-    /* 이름, 연락처, 주소, 상세주소 */
-    .address-content>#userName, .address-content>#phone, .address-content>#address1, .address-content>#address2 { 
-		border:none; 
-		width:450px; 
-		height: 50px;
-		font-size: 18px; 
-	}
-	
-	/* 주소 p 태그 */
-	.address-content>p { font-weight: 600; }
-	
-	/* 우편번호 */
-	.address-content>#zipcode { 
-		border: none; 
-		width: 350px; 
-		height: 50px; 
-		display: inline-block; 
-		border: none; 
-		width: 310px; 
-		height: 40px; 
-		font-size: 18px;
-	}
-	
-	/* 우편번호 찾기 버튼*/
-	.zipcodeBtn {
-		border:none; 
-		width:146px; 
-		height: 50px; 
-		font-size: 15px;
-		border-radius: 3px;
-	}
-	
-	/* 우편번호 찾기 버튼 호버시 */
-	.zipcodeBtn:hover {
-		cursor: pointer;
-		font-weight: 500;
-	}
-
-	/* 저장하기 버튼 */
-	.address-footer>button {
-		border:none;
-		width:465px; 
-		height: 50px; 
-		font-size: 18px;
-		border-radius: 3px;
-	}
-	
-	/* 저장하기 버튼 호버시 */
-	.address-footer>button:hover {
-		cursor: pointer;
-		font-weight: 500;
-	}
-	
-	
-	
-	/* ----------------------------------------------------------- */
-	/* 수령일 css */
-	
-	/*datepicker ui */
-	 .ui-widget-header { border: 0px solid #dddddd; background: #fff; } 
-	
-	 .ui-datepicker-calendar>thead>tr>th { font-size: 14px !important; } 
-	
-	 .ui-datepicker .ui-datepicker-header { position: relative; padding: 10px 0; } 
-	
-	 .ui-state-default,
-	 .ui-widget-content .ui-state-default,
-	 .ui-widget-header .ui-state-default,
-	 .ui-button,
-	 html .ui-button.ui-state-disabled:hover,
-	 html .ui-button.ui-state-disabled:active { border: 0px solid #c5c5c5; background-color: transparent; font-weight: normal; color: #454545; text-align: center; } 
-	
-	 .ui-datepicker .ui-datepicker-title { margin: 0 0em; line-height: 16px; text-align: center; font-size: 14px; padding: 0px; font-weight: bold; } 
-	
-	 .ui-datepicker { display: none; background-color: #fff; border-radius: 4px; margin-top: 10px; margin-left: 0px; margin-right: 0px; padding: 20px; padding-bottom: 10px; width: 300px; box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.1); } 
-	
-	 .ui-widget.ui-widget-content { border: 1px solid #eee; } 
-	
-	.ui-datepicker-prev ui-corner-all { font-family : auto; }
-	
-	 #datepicker:focus>.ui-datepicker { display: block; } 
-	
-	 .ui-datepicker-prev,
-	 .ui-datepicker-next { cursor: pointer; } 
-	
-	 .ui-datepicker-next { float: right; } 
-	
-	 .ui-state-disabled { cursor: auto; color: hsla(0, 0%, 80%, 1); } 
-	
-	 .ui-datepicker-title { text-align: center; padding: 10px; font-weight: 100; font-size: 20px; } 
-	
-	 .ui-datepicker-calendar { width: 100%; } 
-	
-	 .ui-datepicker-calendar>thead>tr>th { padding: 5px; font-size: 20px; font-weight: 400; } 
-	
-	 .ui-datepicker-calendar>tbody>tr>td>a { color: #000; font-size: 12px !important; font-weight: bold !important; text-decoration: none;}
-	
-	 .ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover { cursor: auto; background-color: #fff; } 
-	
-	 .ui-datepicker-calendar>tbody>tr>td { border-radius: 100%; width: 44px; height: 30px; cursor: pointer; padding: 5px; font-weight: 100; text-align: center; font-size: 12px; } 
-	
-	 .ui-datepicker-calendar>tbody>tr>td:hover { background-color: transparent; opacity: 0.6; } 
-	
-	 .ui-state-hover,
-	 .ui-widget-content .ui-state-hover,
-	 .ui-widget-header .ui-state-hover,
-	 .ui-state-focus,
-	 .ui-widget-content .ui-state-focus,
-	 .ui-widget-header .ui-state-focus,
-	 .ui-button:hover,
-	 .ui-button:focus { border: 0px solid #cccccc; background-color: transparent; font-weight: normal; color: #2b2b2b; } 
-	
-	 .ui-widget-header .ui-icon { background-image: url('./btns.png'); } 
-	
-	 .ui-icon-circle-triangle-e { background-position: -20px 0px; background-size: 36px; } 
-	
-	 .ui-icon-circle-triangle-w { background-position: -0px -0px; background-size: 36px; } 
-	
-	 .ui-datepicker-calendar>tbody>tr>td:first-child a { color: red !important; } 
-	
-	 .ui-datepicker-calendar>tbody>tr>td:last-child a { color: #0099ff !important; } 
-	
-	 .ui-datepicker-calendar>thead>tr>th:first-child { color: red !important; } 
-	
-	 .ui-datepicker-calendar>thead>tr>th:last-child { color: #0099ff !important; } 
-	
-	 .ui-state-highlight,
-	 .ui-widget-content .ui-state-highlight,
-	 .ui-widget-header .ui-state-highlight { border: 0px; background: #f1f1f1; border-radius: 50%; padding-top: 10px; padding-bottom: 10px; } 
-	
-	 .inp { padding: 10px 10px; background-color: #f1f1f1; border-radius: 4px; border: 0px; } 
-	
-	 .inp:focus { outline: none; background-color: #eee; }  	
-	   
-</style>
-
-
-<!-------------------------------------------------------------------->
 <!-- 슬라이드 업/다운 스크립트  -->
 
 <script>
@@ -514,6 +56,20 @@
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
+		<c:choose>
+			<c:when test="${ loginUser.grLevel == 1 }">
+				<c:set var="discount" value="0"/>
+			</c:when>
+			<c:when test="${ loginUser.grLevel == 2 }">
+				<c:set var="discount" value="1000"/>
+			</c:when>
+			<c:when test="${ loginUser.grLevel == 3 }">
+				<c:set var="discount" value="2000"/>
+			</c:when>
+			<c:otherwise>
+				<c:set var="discount" value="3000"/>
+			</c:otherwise>
+		</c:choose>
 	<br><br>
 	
 	<!-- 전체 색상 변경 div -->
@@ -542,7 +98,7 @@
                         <div class="order-check">
                             <button id="CheckBtn">
                                 <p>주문내역 확인
-                                    <span>&nbsp;(2)</span>
+                                    <!-- <span>&nbsp;(2)</span> -->
                                 </p>
                                 <p><span>∨&nbsp;&nbsp;</span></p>
                             </button>
@@ -553,75 +109,50 @@
 
                         <!-- 내용 -->
                         <div id="CheckBox" class="order-check-contentbox">
-
-                            <c:forEach var="o" items="${list}">
-                            
-	                            <div class="order-check-content">
-	
-	                                <!-- 상품 이미지 -->
-	                                <span>
-	                                    <img src="${o.thumbnail }"
-	                                    	style="width:330px; height:350px;">
-	                                </span>
-	
-	                                <!-- 상품 옵션 확인란 -->
-	                                <div class="order-check-list"><br>
-	                                
-	                                		<input type="hidden" id="cartNo" value="">
-	                                		<input type="hidden" id="userNo" value="">
-	                                		
-	                                        <!-- 상품 제목 -->
-	                                        <li>${o.flowerName}</li>
-	                                        <input type="hidden" id="productNo" value="">
-	                                        <br>
-	
-	                                        <!-- 가격(원) / 수량(개) -->
-	                                        <li> <fmt:formatNumber type="number" maxFractionDigits="3" value="${o.productPrice}" />원 
-	                                        
-	                                        / ${o.productCount}개
-	                                        
-	                                        </li>
-	                                        <br>
-	                                </div>
-	
-	                                <!-- 공백 -->
-	                                <div></div>
-	                                <div></div>
-	
-	                            </div>
-                            
-                            </c:forEach>
-
+							<form action="insertDetailOrder.or" >
+							
+	                            <c:forEach var="i" begin="0" end="${ selectList.size() - 1 }">
+	                            
+		                            <div class="order-check-content">
+		
+		                                <!-- 상품 이미지 -->
+		                                <span>
+		                                    <img src="${ selectList[i].thumbnail }"
+		                                    	style="width:330px; height:350px;">
+		                                </span>
+		
+		                                <!-- 상품 옵션 확인란 -->
+		                                <div class="order-check-list"><br>
+		                                
+		                                		<input type="hidden" id="cartNo" name="detailOrderList[${i}].cartNo" value="${ selectList[i].cartNo }">
+		                                		<input type="hidden" id="userNo" name="" value="${ selectList[i].userNo }">
+		                                		
+		                                        <!-- 상품 제목 -->
+		                                        <li>${ selectList[i].flowerName }</li>
+		                                        <input type="hidden" id="productNo" name="detailOrderList[${i}].productNo" value="${ selectList[i].productNo}">
+		                                        <br>
+		
+		                                        <!-- 가격(원) / 수량(개) -->
+		                                        <li> <fmt:formatNumber type="number" maxFractionDigits="3" value="${ selectList[i].productPrice }" />원 
+		                                        
+		                                        / ${selectList[i].productCount}개
+		                                        <input type="hidden" id="" name="detailOrderList[${i}].onePrice" value="${selectList[i].productPrice}">
+		                                        <input type="hidden" id="" name="detailOrderList[${i}].oneQuantity" value="${selectList[i].productCount}">
+		                                        </li>
+		                                        <br>
+		                                </div>
+		
+		                                <!-- 공백 -->
+		                                <div></div>
+		                                <div></div>
+		
+		                            </div>
+	                            </c:forEach>
+	                            	<input type="hidden" id="thisOrderNo" name="orderNo">
+	                            <button type="submit" id="real-submit-button" style="display:none"></button>
+							</form>
                             <hr> <!-------------------------------------------->
 
-                            <!-- 2 -->
-                            <div class="order-check-content">
-
-                                <!-- 상품 이미지 -->
-                                <span>
-                                    <img src="resources/images/order_flower_2.png"
-                                    	 style="width:250px; height:250px;">
-                                </span>
-
-                                <!-- 상품 옵션 확인란 -->
-                                <div class="order-check-list"><br>
-                                        <!-- 상품 제목 -->
-                                        <li></li>
-                                        <br>
-
-                                        <!-- 가격(원) / 수량(개) -->
-                                        <li>6,900원 / 1개</li>
-                                        <br>
-                                </div>
-
-                                <!-- 공백 -->
-                                <div></div>
-                                <div></div>
-
-                            </div>
-                            
-                            
-                            
                         </div> 
 
                     <!------------------------------------------------------------------->
@@ -635,7 +166,7 @@
                                 <p>주문자 정보</p>
                                 <!-- 입력내용 보여지는 태그-->
                                 <p>
-                                    <span>ㅇㅇㅇ, &nbsp;&nbsp;010-0000-0000</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
+                                    <span>${ loginUser.userName } &nbsp;&nbsp; ${ loginUser.phone }</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
                                 </p>
 
                             </button>
@@ -647,13 +178,13 @@
                         <div id="OrdererBox" class="order-orderer-content" >
 
                             <p>&nbsp;이름</p>
-                            <p class="orderer-name"></p>
+                            <p class="orderer-name">${ loginUser.userName }</p>
 
                             <p>&nbsp;연락처</p>
-                            <p class="orderer-phone"></p>
+                            <p class="orderer-phone">&nbsp;${ loginUser.phone }</p>
 
                             <!-- 안내문구 -->
-                            <p class="orderer-guide" style="font-size:small">
+                            <p class="orderer-guide" style="font-size: small">
                                 * 주문자 정보변경은 마이페이지 > 개인정보수정에서 가능합니다.
                             </p>
                             <br>
@@ -670,7 +201,7 @@
                         <hr>
 
                         <div id="SenderBox">
-                            <p>&nbsp;</p>
+                            <p>&nbsp;${ loginUser.userName }</p>
                         </div>
                     </div>
                     
@@ -683,7 +214,7 @@
                         </div>
 
                         <div id="ReceiveBox" style="margin-top:0px;">
-                        	<input type="text" class="datepicker" id="datepicker" name="deliverAt" required>
+                        	<input type="text" class="datepicker" id="datepicker">
                         </div>
                     </div>
                     
@@ -723,86 +254,142 @@
 
                     <hr>
 
-                    <!-- 5. 배송지 추가 -->
+                   <!-- 5. 배송지 추가 -->
                     <div>
                         <div class="order-address-add">
 
                             <!-- 모달의 원리 : 이 버튼 클릭시 data-target에 제시되어있는 해당 아이디의 div요소를 띄워줌 -->
-                            <!--
-                            	<div class="userAddress"><br>
-	                            	<span id="postalAddress"></span>
-	                            	<span id="detailAddress"></span>
-                            	</div>
-                            --> 
                             <button type="button" class="address-btn" data-toggle="modal" data-target="#modal-overlay">
                                 + 배송지 추가
                             </button>
                         
-                    </div>
-                     
-                    
+                        </div>
 
-                    </div>
+                        <!-- Modal -->
+                        <div id="modal" class="modal-overlay">
+                            <div class="modal-window">
 
-                    <hr> <!------------------------------------------------------------------->
+                                <!-- Modal Header -->
+                                <h2 class="address-header">배송지 추가</h2>
+                                <div class="close-area">X</div>
 
-						<div>
-	                        <div class="order-payment">
-	                            <p></p>
-	                        </div>
-	                    </div>
-	                    
-	                <hr>   
-					
-					<!-- 결제수단 & 카카오페이 프론트 삭제 (220709) -->
-                    <!--  
-	                    <div>
-	                        <div class="order-payment">
-	                            <p>&nbsp;&nbsp;결제수단</p>
-	                        </div>
-	                    </div>
-	
-	                    <hr>
-	                    
-	                    <div>
-	                        <div class="order-kakaopay">
-	                            <button class="kakao-btn" type="button">카카오페이</button>
-	                        </div>
-	                    </div>
-					-->
-					
-					<!------------------------------------------------------------------->
-					
-					<!-- 우편번호 script -->
-                    <script>
-                    
-                        function kakaopost() {
-                            new daum.Postcode({
-                                oncomplete: function(data) {
-                                	
-                                    document.querySelector("#zipcode").value = data.zonecode;
-                                	// zipcode라는 아이디를 가진 input 태그 value에 가져온 우편번호 값을 저장
+                                <!-- Modal body -->
+                                <div class="address-content">
+									<!-- placeholder를 나중에 loginUser.XXXX 으로 변경 수신인 default는 로긴한 사람-->
+                                    <!-- 이름 -->
+                                    <input type="text" id="subReceiverUser" size="70" value="${ loginUser.userName }" onfocus="this.value=''" onblur="this.placeholder='이름을 입력해주세요.'" required><br>
+                                    
+                                    <hr>
+                                    <!-- 연락처 -->
+                                    <input type="tel" id="subReceiverPhone" size="70" placeholder="010-0000-0000" value="${ loginUser.phone }" onfocus="this.value=''" onblur="this.placeholder='010-0000-0000'" required><br> 
+                                    <hr>
 
-                                    document.querySelector("#address").value = data.address
-                                    // address라는 아이디를 가진 input 태그 value에 가져온 주소 값을 저장
-                                }
-                            }).open();
-                        }
+                                    <p>주소</p>
+
+                                    <!-- 우편번호 -->
+                                    <c:choose>
+	                                    <c:when test="${ (empty loginUser.postcode) || (empty loginUser.address1) }">
+		                                    <!-- 우편번호 -->
+		                                    <input type="text" name="zipcode" id="zipcode" size="70" readonly placeholder="우편번호 검색">
+		                                    <input type="button" value="우편번호찾기" onclick="kakaopost()" style="border:none; width:146px; height: 50px; font-size: 15px;"><br>
+		                                    <hr>
+		
+		                                    <!-- 주소 -->
+		                                    <input type="text" name="address" id="address1" size="70" placeholder="주소"><br>
+		                                    <hr>
+		                                    <input type="text" name="address" id="address2" size="70" placeholder="상세주소입력"><br>
+		                                    <hr>
+	                                    </c:when>
+	                                    <c:otherwise>
+	                                    	<c:choose>
+	                                    		<c:when test="${ fn:length(loginUser.postcode) < 5 }">
+	                                    			<input type="text" name="zipcode" id="zipcode" size="70" value="0${ loginUser.postcode }" onfocus="this.value='우편번호검색'" readonly>
+	                                    		</c:when>
+	                                    		<c:otherwise>
+	                                    			<input type="text" name="zipcode" id="zipcode" size="70" value="${ loginUser.postcode }" onfocus="this.value='우편번호검색'" readonly>
+	                                    		</c:otherwise>
+	                                    	</c:choose>
+		                                    <input type="button" value="우편번호찾기" onclick="kakaopost()" style="border:none; width:146px; height: 50px; font-size: 15px;" ><br>
+		                                    <hr>
+		
+		                                    <!-- 주소 -->
+		                                    <input type="text" name="address" id="address1" size="70" value="${ loginUser.address1 }" onfocus="this.value=''" required><br>
+		                                    <hr>
+		                                    <input type="text" name="address" id="address2" size="70" value="${ loginUser.address2 }" onfocus="this.value=''" required><br>
+		                                    <hr>
+	                                    </c:otherwise>
+                                    </c:choose>
+                  
+                                    
+
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="address-footer" align="center">
+                                    <button class="save-address"  style="border:none; width:465px; height: 50px; font-size: 18px;">저장하기</button>
+                                </div>
+                            </div>
+                        </div>
                         
-                    </script>
-					
-                    <br><br>
+                        <!-- Modal script -->
+                        <script>
+                        
+                            const btnModal = document.querySelector('.address-btn'); // 버튼 class 속성
+                        
+                            function modalOn() {
+                            modal.style.display = "flex"
+                            }
+                            function isModalOn() {
+                                return modal.style.display === "flex"
+                            }
+                            function modalOff() {
+                                modal.style.display = "none"
+                            }
+                            
+                            btnModal.addEventListener("click", e => {
+                                modal.style.display = "flex"
+                            })
+                    
+                            var closeBtn = modal.querySelector(".close-area")
+                            closeBtn.addEventListener("click", e => {
+                                modal.style.display = "none"
+                            })
+                           
+                            var closeBtn = modal.querySelector(".save-address")
+                            closeBtn.addEventListener("click", e => {
+                                modal.style.display = "none"
+                                $('#postalAddress').text($('#address1').val())
+                                $('#detailAddress').text($('#address2').val())
+                            })
+                        </script>
+                        
+                        <!-- 우편번호 script -->
+                        <script>
+                            function kakaopost() {
+                                new daum.Postcode({
+                                    oncomplete: function(data) {
+                                        document.querySelector("#zipcode").value = data.zonecode;
+                                        document.querySelector("#address1").value =  data.address;
+                                    }
+                                }).open();
+                            }
+                        </script>
 
+                    </div>
+
+                    <hr>
+
+					<div class="userAddress"><br>
+                            	<span id="postalAddress"></span>
+                            	<span id="detailAddress"></span>
+                    </div>
+                    
+					<br><br>
+					
                     <!-- 버튼 두개 -->
                     <div class="order-two-btn">
 
-                        <!-- 경로 : 장바구니 페이지  -->
-                        <button class="pre-btn" type="button" onclick="location.href='list.ca'">이전으로</button>
-                        
-                        <!-- 옆에 결제 하기 있으니까 뺄까 ? -->
-                        <!--  
-                        	<button class="pay-btn" type="submit">결제하기</button>
-                        -->
+                       <button class="pre-btn" type="button" onclick="location.href='list.ca'">이전으로</button>
                     
                     </div>
 
@@ -812,9 +399,7 @@
 
         </div>
         
-        
-        <!------------------------------------------------------------------->
-        
+
         <!-- 오른쪽 섹션 -->
         <div class="order-right">
 
@@ -827,26 +412,30 @@
                 <!-- 총 주문 금액 -->
                 <div class="order-price">
                     <span>총 주문 금액</span>
-                    <span>31,800원</span>
+	            	<c:set var = "total" value = "0" />
+					<c:forEach var="i" items="${ selectList }" varStatus="status">     
+					<c:set var="total" value="${ total + (i.productPrice * i.productCount) }"/>
+					</c:forEach>
+		            <span>${ total } 원</span>
                 </div>
 
                 <!-- 배송비 -->
                 <div class="order-delivery">
                     <span>배송비</span>
-                    <span>+ 3,000원</span>
+                    <span>+ 3000원</span>
                 </div>
 
                 <!-- 등급 할인 -->
                 <div class="order-grade">
                     <span>등급할인</span>
-                    <span>- 0원</span>
+                    <span>- ${ discount }원</span>
                 </div>
                 <hr>
 
                 <!-- 총 결제 금액 -->    
                 <div class="order-tprice">
                     <span >총 결제 금액</span>
-                    <span>34,800원</span>
+                    <span>${ total + 3000 - discount }원</span><input type="hidden" id="totalPrice" value="${ total + 3000 - discount }">
                 </div>
 
                 <br>
@@ -857,204 +446,166 @@
                     <p>이용약관 및 개인정보 처리방침에 대해 확인하였으며 결제에 동의합니다.</p>
                     </div>
                 </div>
-
+				
 			</div>
 			
             <!-- 결제하기 버튼 -->
-            <!-- 카카오페이 열리게  -->
             <div>
-                <button class="order-btn" type="submit" onclick="location.href='complete.or'">결제하기</button>
+                <button class="order-btn" onclick="pay();">결제하기</button>
+
             </div>
             
-	        <!-- follow quick menu -->
-	    	<script>  
-	    
-			    $(window).scroll(function(){
-			    	
-			    	var scrollTop = $(document).scrollTop();
-			    	
-				    if (scrollTop < 180) {
-				     scrollTop = -30; 
-				    }
-				    
-				    $(".order-right").stop();
-				    $(".order-right").animate( { "top" : scrollTop }
-				    );
-				    
-			    });
-	    
-	    	</script>
-	    	
-	    	<!------------------------------------------------------------------->
-
-            <!-- Modal -->
-            <div id="modal" class="modal-overlay">
-                <div class="modal-window">
-
-                    <!-- Modal Header -->
-                    <h2 class="address-header">배송지 추가</h2>
-                    <div class="close-area">X</div>
-
-                    <!-- Modal body -->
-                    <div class="address-content">
-					
-						<!-- placeholder를 나중에 loginUser.XXXX 으로 변경 수신인 default는 로긴한 사람-->
-                        
-                        <!-- 이름 -->
-                        <input type="text" name="userName" id="userName" size="70" placeholder="이름을 입력해주세요." required><br>
-                        <hr>
-
-                        <!-- 연락처 -->
-                        <input type="tel" name="Phone" id="phone" size="70" placeholder="010-0000-0000" required><br> 
-                        <hr>
-
-                        <p>주소</p>
-
-                        <!-- 우편번호 -->
-                        <input type="text" name="zipcode" id="zipcode" size="70" readonly placeholder="우편번호 검색">
-                        <input type="button" class="zipcodeBtn" value="우편번호찾기" onclick="kakaopost()"><br>
-                        <hr>
-
-                        <!-- 주소 -->
-                        <input type="text" name="address" id="address1" size="70" placeholder="주소"><br>
-                        <hr>
-                        <input type="text" name="address" id="address2" size="70" placeholder="상세주소입력"><br>
-                        <hr>
-
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="address-footer" align="center">
-                        <button type="submit">저장하기</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Modal script -->
-            <script>
-            
-                const btnModal = document.querySelector('.address-btn'); // 버튼 class 속성
-            
-                fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
-                    .then(response => response.text())
-                    .then(result => loremIpsum.innerHTML = result)
-        
-                function modalOn() {
-                modal.style.display = "flex"
-                }
-                function isModalOn() {
-                    return modal.style.display === "flex"
-                }
-                function modalOff() {
-                    modal.style.display = "none"
+            <!-- follow quick menu -->
+            <script>  
+       
+             $(window).scroll(function(){
+                
+                var scrollTop = $(document).scrollTop();
+                
+                if (scrollTop < 180) {
+                 scrollTop = -30; 
                 }
                 
-                btnModal.addEventListener("click", e => {
-                    modal.style.display = "flex"
-                })
-        
-                const closeBtn = modal.querySelector(".close-area")
-                closeBtn.addEventListener("click", e => {
-                    modal.style.display = "none"
-                })
+                $(".order-right").stop();
+                $(".order-right").animate( { "top" : scrollTop }
+                );
                 
+             });
+       
             </script>
-            <!--  
-            <script>
             
-	         	// 빌링키 발급
-	        	function getBillingKey(numOfPay) {
-	        		BootPay.request({
-	        			price: 0, // 0으로 해야 한다.
-	        			application_id: "62b2796de38c30001f5ae52f",
-	        			name: 'iBlossom 정기구독', //결제창에서 보여질 이름
-	        			pg: 'nicepay',
-	        			method: 'card_rebill', // 빌링키를 받기 위한 결제 수단
-	        			show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
-	        			user_info: {
-	        				username: $('#userName').val(), 
-	        				email: $('#email').val(),
-	        				addr: $('#address').val(),
-	        				phone: $('#phone').val(),
-	        			},
-	        			order_id: '고유order_id_1234', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
-	        			async : true
-	        		}).error(function (data) {
-	        			//결제 진행시 에러가 발생하면 수행됩니다.
-	        			console.log(data);
-	        		}).cancel(function (data) {
-	        			//결제가 취소되면 수행됩니다.
-	        			console.log(data);
-	        		}).done(function (data) {
-	        			var totalPrice = $('#totalPrice').val();
-	        			var subProductName = $('#subProductName').val();
-	        			if(numOfPay==1) {
-	        				// 정기결제 - 무한반복
-	        				subscribe(data.billing_key, totalPrice, subProductName, data.receipt_id, numOfPay);
-	        			}
-	        			else {
-	        				// 일시불 (바로 requestPay 로 점프)
-	        				requestPay(data.billing_key, data.receipt_id, totalPrice, subProductName, numOfPay);
-	        			}
-	        		});
-	        	}
-	         	
-	        	// 일시불 (바로 requestPay 로 점프)
-	        	function requestPay(billingKey, receiptId, totalPrice, subProductName, numOfPay) {
-	        		
-	        		$.ajax({
-	        			url : "requestSubscribe.do",
-	        			type : "post",
-	        			data : {
-	        				billingKey : billingKey,
-	        				totalPrice : totalPrice,
-	        				subProductName : subProductName,
-	        			},
-	        			success : function(data) {
-	        				console.log("상품 결제 성공");
-	        				insertSubscribe(numOfPay, receiptId);
-	        			}, error : function() {
-	        				console.log("상품 결제 실패");
-	        			}
-	        		});    
-	        	}
-	        	
-	        	// DB에 구독 객체 넣기?
-	        	function insertSubscribe(numOfPay, receiptId) {
-	        		$.ajax({
-	        			url : "insert.su",
-	        			type : "post",
-	        			data : {
-	        				subProductName : $('#subProductName').val(),
-	        				subProductNo : $('#subProductNo').val(),
-	        				userNo : $('#userNo').val(),
-	        				subLevel : $('#subLevel').val(),
-	        				subReceiverUser : $('#subReceiverUser').val(),
-	        				subReceiverPhone : $('#subReceiverPhone').val(),
-	        				subReceiverPostcode : $('#zipcode').val(),
-	        				deliverAt : new Date($('#deliverAt').val()),
-	        				deliverTo : $('#address1').val() + " " + $('#address2').val(),
-	        				deliverStatus : "배송준비",
-	        				receiptId : receiptId,
-	        				numOfPay : numOfPay
-	        			},
-	        			success : function(data) {
-	        				console.log("DB 넣음")		
-	        			}, error : function() {
-	        				console.log("DB 넣음 실패")
-	        			}
-	        		});
-	        	}
-	            
-            </script>
-            -->
- 
+            
+            <input type="hidden" name="userNo" id="userNo" value="${ loginUser.userNo }">
+            <input type="hidden" id="userName" value="${ loginUser.userName }">
+            <input type="hidden" id="email" value="${ loginUser.email }">
+            <input type="hidden" id="address" value="${ loginUser.address }">
+            <input type="hidden" id="phone" value="${ loginUser.phone }">
         </div><!-- 1200px 너비 -->
-        
-      	</div>
-      	
-    </div>   
+      	</div><!-- 전체 색상 변경 div -->
 
+	<script>
+	
+	var userNo = $("#userNo").val();
+	var receiveUser = $('#subReceiverUser').val();
+	var receivePhone = $('#subReceiverPhone').val();
+	var postcode = $('#zipcode').val();
+	var deliverTo1 = $('#address1').val(); 
+	var deliverTo2 = $('#address2').val();
+
+	console.log(receiveDate);
+	function pay() {
+		
+		if (receivePhone=="" || receiveUser=="" || postcode=="" || deliverTo1=="" || deliverTo2=="" || $('#datepicker').val()==""){
+			alert("모든 양식을 기입해야 결제가 가능합니다!");
+		}
+		else {
+			getBillingKey()
+		}
+	}
+	
+	
+	// 빌링키 발급
+	function getBillingKey() {
+		BootPay.request({
+			price: 0, // 0으로 해야 한다.
+			application_id: "62b2796de38c30001f5ae52f",
+			name: 'iBlossom 주문결제', // 결제창에서 보여질 이름 : 주문결제
+			pg: 'nicepay',
+			method: 'card_rebill', // 빌링키를 받기 위한 결제 수단
+			show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
+			user_info: {
+				username: $('#userName').val(), 
+				addr: $('#address').val(),
+				phone: $('#phone').val(),
+			},
+			order_id: '고유order_id_1234', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
+			async : true
+		}).error(function (data) {
+			//결제 진행시 에러가 발생하면 수행됩니다.
+			console.log(data);
+		}).cancel(function (data) {
+			//결제가 취소되면 수행됩니다.
+			console.log(data);
+		}).done(function (data) {
+			var totalPrice = $('#totalPrice').val();
+			var flowerName = '플라워 마켓'
+			
+			requestPay(data.billing_key, data.receipt_id, totalPrice, flowerName);
+
+		});
+	}
+
+	
+	// 일시불 (바로 requestPay 로 점프)
+	function requestPay(billingKey, receiptId, totalPrice, flowerName) {
+		
+		$.ajax({
+			url : "requestSubscribe.do",
+			type : "post",
+			data : {
+				billingKey : billingKey,
+				totalPrice : 1000,
+				subProductName : flowerName,
+			},
+			success : function(data) {
+				console.log("상품 결제 성공");
+				insertOrder(receiptId);
+			}, error : function() {
+				console.log("상품 결제 실패");
+			}
+		});    
+	}
+	
+	// DB에 구독 객체 넣기?
+	function insertOrder(receiptId) {
+		$.ajax({
+			url : "insert.or", /* insert 구문의 맵핑값 */
+			type : "post",
+			data : {
+				receiptId : receiptId,
+				userNo : userNo,
+				totalPrice : 1000,
+				receiveUser : receiveUser,
+				receiveDate : $('#datepicker').val(),
+				receivePhone : receivePhone,
+				orderAddress : $('#address1').val() + " " + $('#address2').val(),
+				postcode : $('#zipcode').val(),
+				orderStatus : '결제완료',
+				deliveryStatus : '배송준비'
+				
+			},
+			success : function(result) {
+				
+				if(result == 0) {
+					console.log("order DB 넣음X")
+				}
+				else {
+					console.log(result);
+					var orderNo = result;
+					console.log(orderNo);
+					console.log("order DB 넣음")
+					
+					// 트리거 실행
+					$("#thisOrderNo").val(orderNo);
+					
+					console.log($("#thisOrderNo").val());
+					
+					$("#real-submit-button").trigger("click");
+					
+				}
+				
+				
+				
+				// location.href='complete.or';
+			}, error : function() {
+				console.log("DB 넣음 실패")
+			}
+		});
+	}
+
+	</script>
+
+</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 	
 </body>

@@ -94,6 +94,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+
 	// 회원 상세조회
 //	   @Override
 //	   public Member selectMember(int userNo) {

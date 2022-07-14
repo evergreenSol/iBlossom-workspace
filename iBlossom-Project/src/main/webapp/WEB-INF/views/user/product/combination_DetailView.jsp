@@ -12,6 +12,7 @@
 <body>
 
 <jsp:include page="../../common/header.jsp" />
+
 	<br>
 	<br>
 	<br>
@@ -111,9 +112,9 @@
 				</div>
 				</c:forEach>
 			</div>
-			
-			
-			<!-- 리뷰 작성폼-->
+    </div>
+
+    <!-- 리뷰 작성폼-->
 			<div>
 			
 			</div>

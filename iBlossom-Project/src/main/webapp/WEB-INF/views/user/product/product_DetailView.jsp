@@ -33,7 +33,7 @@
                 </tr>
 				
                 <tr>
-                    <td class="pp"><input type="text"id="price" style="border: none" size="1" readonly value="${ p.price }">원
+                    <td class="pp"><input type="text" name="productPrice" id="price" style="border: none" size="1" readonly value="${ p.price }">원
                     
                         <hr>
                         

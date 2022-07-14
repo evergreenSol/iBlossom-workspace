@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.iblossom.common.model.vo.PageInfo;
+import com.kh.iblossom.order.model.vo.DetailOrder;
 import com.kh.iblossom.order.model.vo.Order;
 
 @Repository
@@ -36,6 +37,25 @@ public class OrderDao {
 		return (ArrayList)sqlSession.selectList("orderMapper.selectOrderList", null, rowBounds);
 	}
 
+
+	public int selectOrder(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int insertOrder(SqlSessionTemplate sqlSession, Order o) {
+		return sqlSession.insert("orderMapper.insertOrder", o);
+	}
+	
+	public int insertDetailOrder(SqlSessionTemplate sqlSession, DetailOrder detailOrder) {
+		
+		return sqlSession.insert("orderMapper.insertDetailOrder", detailOrder);
+	}
+	
+	public Order selectOrder(SqlSessionTemplate sqlSession, String receiptId) {
+		
+		return sqlSession.selectOne("orderMapper.selectOrder", receiptId);
+	}
 
 
 }

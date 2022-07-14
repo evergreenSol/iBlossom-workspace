@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="onedayclassMapper">
-		<resultMap id="onedayclassResultSet" type="onedayclass">
+
+	<resultMap id="onedayclassResultSet" type="onedayclass">
 		<result column="CLASS_NO" property="classNo" />
 		<result column="CLASS_NAME" property="className" />
 		<result column="PRICE" property="price" />
@@ -11,6 +12,43 @@
 		<result column="CLASS_STATUS" property="classStatus" />
 	</resultMap>
 	
+	<resultMap id="onedayclassadminResultSet" type="onedayclassadmin">
+		<result column="RES_NO" property="resNo" />
+		<result column="CLASS_NO" property="classNo" />
+		<result column="RES_NAME" property="resName" />
+		<result column="RES_PHONE" property="resPhone" />
+		<result column="RES_EMAIL" property="resEmail" />
+		<result column="PAY_DATE" property="payDate" />
+	</resultMap>
 	
+	<select id="selectClassList" resultMap="onedayclassResultSet">
+		SELECT CLASS_NO, CLASS_NAME, PRICE, CLASS_DATE, CAP_NO, RES_NUM, CLASS_STATUS
+		FROM ONECLASS
+	</select>
+	
+	<insert id="insertClassRes" parameterType="onedayclassadmin">
+  		INSERT INTO CLASS_ADMIN(RES_NO
+  						,CLASS_NO
+		                , RES_NAME
+		                , RES_PHONE
+		                , RES_EMAIL)
+		VALUES(SEQ_RESNO.NEXTVAL
+			, #{classNo}
+		     , #{resName}
+		     , #{resPhone}
+		     , #{resEmail})
+  	</insert>
+  	
+  	<select id="selectOnedayClass" parameterType="_int" resultMap="onedayclassResultSet">
+  		SELECT *
+  		FROM ONECLASS
+  		WHERE CLASS_NO = #{classNo}
+  	</select>
+	
+	<update id="updateClassCap" parameterType="_int">
+  		UPDATE ONECLASS
+  		   SET RES_NUM = RES_NUM+1
+  		 WHERE CLASS_NO = #{classNo}
+  	</update>
 
 </mapper>
