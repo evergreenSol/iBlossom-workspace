@@ -19,6 +19,7 @@
 		<result column="RES_PHONE" property="resPhone" />
 		<result column="RES_EMAIL" property="resEmail" />
 		<result column="PAY_DATE" property="payDate" />
+		<result column="USER_NO" property="userNo" />
 	</resultMap>
 	
 	<select id="selectClassList" resultMap="onedayclassResultSet">
@@ -32,12 +33,14 @@
   						,CLASS_NO
 		                , RES_NAME
 		                , RES_PHONE
-		                , RES_EMAIL)
+		                , RES_EMAIL
+		                , USER_NO)
 		VALUES(SEQ_RESNO.NEXTVAL
 			, #{classNo}
 		     , #{resName}
 		     , #{resPhone}
-		     , #{resEmail})
+		     , #{resEmail}
+		     , #{userNo})
   	</insert>
   	
   	<select id="selectOnedayClass" parameterType="_int" resultMap="onedayclassResultSet">

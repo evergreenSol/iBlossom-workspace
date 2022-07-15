@@ -30,7 +30,8 @@
                 <div id="pay-content2_1" name="user_name">${ loginUser.userName }</div>
                 
                 <div id="pay-content2_3" name="email">${ loginUser.email }</div>     
-                <div id="pay-content2_2" name="phone">${ loginUser.phone }</div>           
+                <div id="pay-content2_2" name="phone">${ loginUser.phone }</div> 
+                          
             </div>            
         </div>
         <!-- 
@@ -62,7 +63,7 @@
             <input type="hidden" id="email" value="${ loginUser.email }">
             <input type="hidden" id="phone" value="${ loginUser.phone }">
             <input type="hidden" id="price" value="${ oc.price }">
-
+			<input type="hidden" id="userNo" name="userNo" value="${ loginUser.userNo }">
 	    </div>
 
      
@@ -142,6 +143,7 @@
 				resName : $('#userName').val(),
 				resPhone : $('#phone').val(),
 				resEmail : $('#email').val(),
+				userNo : $('#userNo').val()
 				// 그 외 필요한 변수들 세팅
 			},
 			success : function(result) {

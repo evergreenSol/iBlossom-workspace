@@ -26,4 +26,5 @@ public class OnedayClassAdmin {
 	private String resPhone;
 	private String resEmail;
 	private Date payDate;
+	private int userNo;
 }
