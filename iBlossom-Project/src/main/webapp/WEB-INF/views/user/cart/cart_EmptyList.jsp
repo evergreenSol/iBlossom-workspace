@@ -35,7 +35,7 @@
 				    <!-- 버튼 -->  
 				    <!-- 220710 : 쇼핑백 구현을 위해 임시로 경로를 쇼핑백으로 정함, 구현이 완료된 후에는 마켓 경로를 연결해줄 예정 -->
 				    <div>
-				    	<button class="" type="button" onclick="location.href='test.ca'">쇼핑하러가기</button>
+				    	<button class="" type="button" onclick="location.href='flowerList.pr'">쇼핑하러가기</button>
 				    </div>
 			    				    	
 			    </div>

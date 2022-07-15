@@ -90,29 +90,44 @@ div { box-sizing: border-box; }
 
     /* 장바구니 내용 */ 
     .cart-content { 
-        display: flex; 
+        display: flex;
         justify-content: space-between; 
-        padding: 45px;
         height: 400px;
     }
     
-    /* 라디오 버튼 세로 정렬 */
-    .cart-content1 {
-	     line-height: 230px;
-	     margin-left: -30px;
+    /* 세로 정렬 */
+    /* 라디오버튼, 이미지 div, x 표시 */
+    .cart-content1, .cart-content2, .cart-content5 {
+	     display: flex;
+         height: 100%;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
     }
     
+    /* 세로정렬 flex 제외 */
+    /* 금액 input */	
+	.cart-content4 {
+		display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+	}
+	
     /* 이미지 감싸는 div */
     .cart-content2 {
      	margin-left: -40px;
+     	width: 350px;
     }
     
     /* 상세옵션 내용 */
     .cart-content3 {
-    	margin-top: 120px; 
-    	line-height: 20px;
-    	margin-left: -40px;
     	font-size: 19px;
+        height: 100%;
+        /*flex-direction: column;*/
+        align-items: center;
+        justify-content: center;
+        width: 110px;
     }  
         
     /* 수량 버튼 */
@@ -135,8 +150,7 @@ div { box-sizing: border-box; }
 	.cart-content4>a {
 		 text-decoration: none;
 	}
-	
-	
+
 	
     /* ----------------------------------------------------------- */
     /* 사용자 장바구니 페이지 오른쪽 영역 */
@@ -182,84 +196,6 @@ div { box-sizing: border-box; }
     .cart-btn:hover {
     	cursor: pointer;
     }
-    
-    /*-------------------------------------------------------*/
-    
-    /* 일단 임시 */
-    
-    /* 레이아웃 외곽 너비 400px 제한*/
-
-	.wrap{
-    max-width: 480px;
-    margin: 0 auto; /* 화면 가운데로 */
-    background-color: #fff;
-    height: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-	}
-
-	.reviewform textarea{
-	    width: 100%;
-	    padding: 10px;
-	    box-sizing: border-box;
-	}
-	
-	.rating .rate_radio {	
-	    position: relative;	
-	    display: inline-block;	
-	    z-index: 20;	
-	    opacity: 0.001;	
-	    width: 60px;	
-	    height: 60px;	
-	    background-color: #fff;	
-	    cursor: pointer;	
-	    vertical-align: top;	
-	    display: none;
-	}
-	
-	.rating .rate_radio + label {	
-	    position: relative;	
-	    display: inline-block;	
-	    margin-left: -4px;
-	    z-index: 10;	
-	    width: 60px;	
-	    height: 60px;	
-	    background-image: url('./img/starrate.png');	
-	    background-repeat: no-repeat;	
-	    background-size: 60px 60px;	
-	    cursor: pointer;	
-	    background-color: #f0f0f0;	
-	}
-	
-	.rating .rate_radio:checked + label {	
-	    background-color: #ff8;	
-	}
-	
-	.cmd {	
-	    margin-top: 20px;	
-	    text-align: right;	
-	}
-	
-	.cmd input[type="button"]{
-	    padding: 10px 20px;	
-	    border: 1px solid #e8e8e8;	
-	    background-color: #fff;	
-	    background-color:#000;  	
-	    color: #fff;	
-	}
-		
-	.warning_msg {	
-	    display: none;	
-	    position: relative;	
-	    text-align: center;	
-	    background: #ffffff;	
-	    line-height: 26px;	
-	    width: 100%;	
-	    color: red;	
-	    padding: 10px;	
-	    box-sizing: border-box;	
-	    border: 1px solid #e0e0e0;
-	}
 
 
 
@@ -333,7 +269,7 @@ div { box-sizing: border-box; }
     
     /* 왼쪽 섹션 */ 
     .order-left {
-        width: 65%;
+        width: 60%;
         height: 100%;
         float: left;
         box-sizing: border-box;
@@ -341,7 +277,7 @@ div { box-sizing: border-box; }
 
     /* 오른쪽 섹션 */
     .order-right {
-        width: 33%;
+        width: 36%;
         float: right;
         
         /* sticky*/
@@ -448,14 +384,16 @@ div { box-sizing: border-box; }
     /* 주문내역 확인 - 내용 */
     .order-check-content { 
         padding: 20px;
+        width: 660px;
         display:flex; 
         justify-content: space-between;
+        height: 100%;
+        align-items: center;
     }
 
     /* 주문내역 확인 - 상품옵션확인 div */                        
     .order-check-list { 
         list-style: none;
-        margin-top: 50px;
     }
     
     /* 주문자 정보 - 이름, 연락처 / 발신인 이름 */
@@ -554,7 +492,7 @@ div { box-sizing: border-box; }
 
     /* 누를 버튼 */
     #CheckBtn, #OrdererBtn, #SenderBtn, #ReceiveBtn {
-        width: 700px;
+        width: 640px;
         display: flex; 
         justify-content: space-between;
         border: none;
@@ -638,7 +576,8 @@ div { box-sizing: border-box; }
     /* 모달창 상세 스타일 */
     
     /* 이름, 연락처, 주소, 상세주소 */
-      .address-content>#subReceiverUser, .address-content>#subReceiverPhone, .address-content>#address1, .address-content>#address2 { 
+      .address-content>#subReceiverUser, .address-content>#subReceiverPhone, 
+      .address-content>#address1, .address-content>#address2 { 
 		border:none; 
 		width:450px; 
 		height: 50px;
@@ -790,7 +729,7 @@ div { box-sizing: border-box; }
     .complete-whitebox { 
         background-color:white; 
         width: 1200px;
-        height: 390px;
+        height: 430px;
         padding: 20px;
         padding-left: 20px;
         text-align: center;

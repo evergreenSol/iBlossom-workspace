@@ -112,9 +112,9 @@
 							<li><a href="">구독회원관리</a></li>
 							<li><a href="">구독상품관리</a></li>
 						</ul></li>
-					<li><a href="" class="admin-navi-menu"
+					<li><a href="list.pr" class="admin-navi-menu"
 						style="font-weight: 700;">상품관리</a></li>
-					<li><a href="" class="admin-navi-menu">리뷰관리</a></li>
+					<li><a href="list.re" class="admin-navi-menu">리뷰관리</a></li>
 					<li><a href="" class="admin-navi-menu">클래스관리</a></li>
 					<li><a href="" class="admin-navi-menu">고객센터관리</a>
 						<ul class="admin-navi-ul">
