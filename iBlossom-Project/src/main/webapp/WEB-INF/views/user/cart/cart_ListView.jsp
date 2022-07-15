@@ -50,7 +50,8 @@
 	        	
 	        	<div style="border:1px solid; padding:30px;">
 	        		        
-					<c:forEach var="c" begin="0" end="${ list.size() -1 }">
+					<c:forEach var="c" begin="0" end="${ list.size() -1 }" varStatus="status">
+					<input type="hidden" value="${ list.size() }" id="listSize">
 					
 			            <div class="cart-content">
 							
@@ -72,21 +73,27 @@
 			                         
 			                        <!-- 가격 -->   
 			                        <div class="basketprice" style="border:1px solid;">
-			                        	<input type="hidden" value="${ list[c].productPrice }">
+			                        	<input type="hidden" id="price${ status.count }" value="${ list[c].productPrice }">
 			                        	<fmt:formatNumber value="${ list[c].productPrice }" pattern="###,###"/>원
 			                        </div><br><br>
 	
 						            <!-- 장바구니 수량 변경 -->
+				                    <input type="button" value="-" onclick="count('minus',${ status.count })">
+			                        <input type="number" id="productCount${ status.count }" value="${ list[c].productCount }" size="1">
+			                        <input type="button" value="+" onclick="count('plus',${ status.count })">
+			                        
+			                        <!--  
 				                	<input type="hidden" name="sell_price" value="${ list[c].productCount }">
 				                	<input class="cart-num-btn" type="button" value=" - " onclick="del();">	
 				                    <input type="text" name="amount" size="1" onchange="change();" value="${ list[c].productCount }"
 				                           style="width:20px; height:20px; text-align:center;">
-				                    <input class="cart-num-btn" type="button" value=" + " onclick="add();">							    
+				                    <input class="cart-num-btn" type="button" value=" + " onclick="add();">
+				                   -->						    
 			                </div>
 	
 			                <!-- 장바구니 상품 금액 -->
 				            <div class="cart-content4"style="border:1px solid;">
-						        <input type="text" name="sum" size="3" readonly style="border:none; font-size:18px; text-align:center;"
+						        <input type="text" id="sum${ status.count }" name="sum" size="3" readonly style="border:none; font-size:18px; text-align:center;"
 						               value="<fmt:formatNumber value="${ list[c].productCount * list[c].productPrice }" pattern="###,###"/>" />
 						               <!-- ${ list[c].productCount * list[c].productPrice }원 -->
 				            </div>
@@ -104,54 +111,64 @@
 			</form>
 				
 			<br><hr>
-			
-			<form name="form" method="get">
-			            수량 : <input type=hidden name="sell_price" value="500">
-					   <input type="text" name="amount" value="1" size="3" onchange="change();">
-					   <input type="button" value=" + " onclick="add();"><input type="button" value=" - " onclick="del();"><br>
-
-				   금액 : <input type="text" name="sum" size="11" readonly>원
-			</form>
 
 	    </div> <!-- class="cart-left" -->
 	    
 	    <script>
-			var sell_price;
-			var amount;
-			
-			function init () {
-				sell_price = document.form.sell_price.value;
-				amount = document.form.amount.value;
-				document.form.sum.value = sell_price;
-				change();
-			}
-			
-			function add () {
-				hm = document.form.amount;
-				sum = document.form.sum;
-				hm.value ++ ;
-			
-				sum.value = (parseInt(hm.value) * sell_price);
-			}
-			
-			function del () {
-				hm = document.form.amount;
-				sum = document.form.sum;
-					if (hm.value > 1) {
-						hm.value -- ;
-						sum.value = parseInt(hm.value) * sell_price;
-					}
-			}
-			
-			function change () {
-				hm = document.form.amount;
-				sum = document.form.sum;
-			
-					if (hm.value < 0) {
-						hm.value = 0;
-					}
-				sum.value = parseInt(hm.value) * sell_price;
-			}  
+	    
+	 		// 수량 더하기, 빼기용 함수
+		    function count(type,index)  { 
+		        
+		        const productCount = document.getElementById('productCount'+index+''); // id="productCount1, productCount2..."
+		        
+		        // 현재 화면에 표시된 값
+		        let count = productCount.value; // 변수 선언 및 값을 productCount input의 value로 초기화
+		        
+		        let price = document.getElementById('price'+index+'').value;
+		        
+		        const sum = document.getElementById('sum'+index+'');
+	 			var sumAll = document.getElementById('sumAll');
+	 			
+		        
+		        // 더하기/빼기
+		        if(type === 'plus') { // 매개변수로 plus type이 넘어오면
+		          productCount.value = parseInt(count) + 1; // count++
+		          
+		          sum.value = price * productCount.value;
+		         
+	
+		        } else if(type === 'minus' && count > 1)  { // 매개변수로 minus type 이 넘어오고 1보다 크다면
+		          productCount.value = parseInt(count) - 1; // count--
+	
+		          sum.value = price * productCount.value;
+		          
+		        }
+		        else { // 그 외에는
+		          productCount.value = parseInt(count); // 현상 유지
+		          
+		          sum.value = price * productCount.value;
+		          
+		        }
+		        
+
+	 			console.log(sum);
+	 			console.log(sumAll);
+				
+		        //getSum();
+		    }
+	 		
+	 		/*
+	 		function getSum() {
+	 			
+	 			
+	 			var sumAll = document.getElementById('sumAll');
+	 			
+	 			
+	 		}
+
+	 		*/
+
+	 		
 		</script>
 	    
 	    <!------------------------------------------------------------------->
@@ -164,11 +181,16 @@
 		        <!-- 총 주문 금액 -->
 		        <div class="cart-price1">
 		            <span>총 주문 금액</span>
+		            
+		            <span id="sumAll">원</span>
+		            
+		            <!--  
 	            	<c:set var = "total" value = "0" />
 						<c:forEach var="i" items="${ list }" varStatus="status">     
 							<c:set var="total" value="${ total + (i.productPrice * i.productCount) }"/>
 						</c:forEach>
-		            <span><fmt:formatNumber value="${ total }" pattern="###,###"/>원</span>
+		            <span id="sumAll"><fmt:formatNumber value="${ total }" pattern="###,###"/>원</span>
+		            -->
 
 		        </div>
 		        
