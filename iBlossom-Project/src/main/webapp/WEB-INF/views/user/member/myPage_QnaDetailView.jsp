@@ -125,6 +125,12 @@
     </div>
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-
+	
+	<script>
+		$(function () {
+			$("#category-qna").css("font-weight", "700");
+		});
+	</script>
+	
 </body>
 </html>

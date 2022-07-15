@@ -487,9 +487,9 @@
 	<script>
 	var userNo = $("#userNo").val();
 
-	console.log(receiveDate);
 	function pay() {
 		
+		var receiveDate = $('#datepicker').val();
 		var receiveUser = $('#subReceiverUser').val();
 		var receivePhone = $('#subReceiverPhone').val();
 		var postcode = $('#zipcode').val();

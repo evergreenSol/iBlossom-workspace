@@ -19,29 +19,34 @@ public interface SubscribeService {
 
 	// 정기구독 상품 삭제용 메소드
 	int deleteSubProduct(int spno);
-
+	
+	// 특정 정기구독 상품 조회용 메소드
 	SubProduct selectSubProduct(int spno);
 
+	// 정기구독 상품 수정용 메소드
 	int updateSubProduct(SubProduct sp);
 
+	// 정기구독 추가용 메소드
 	int insertSubscribe(Subscribe s);
-	
 
 	// 마이페이지 구독 취소 메소드
 	int cancelMySubList(String receiptId);
 	
+	// count용 메소드
 	int selectListCount();
 	
+	// 구독 회원 리스트 조회용 메소드
 	ArrayList<Subscribe> selectSubMemberList(PageInfo pi);
 
+	// 검색용 메소드
 	int selectSearchCount(HashMap<String, String> map);
 
+	// 구독 회원 검색용 메소드
 	ArrayList<Subscribe> selectSearchList(PageInfo pi, HashMap<String, String> map);
 
 	// 배송상태 변경 메소드
 	int updateDeliverStatus();
 	
-
 	// 마이페이지 구독 조회용 메소드
 	ArrayList<Map<String,String>> selectMySubReceiptId(int userNo);
 	

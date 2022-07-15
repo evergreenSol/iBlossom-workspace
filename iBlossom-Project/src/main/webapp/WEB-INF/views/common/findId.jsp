@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>iBlossom | findId</title>
+<title>iBlossom | FindId</title>
 <link href="resources/css/shj.css" rel="stylesheet">
 </head>
 <body>

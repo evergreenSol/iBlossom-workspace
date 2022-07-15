@@ -20,10 +20,11 @@
         margin-left: 50px;
     }
 
-    /*클래스 날짜 select*/
-    #date{
-        margin-left: 40px;
-    }
+	/*클래스 날짜 select*/
+	#date{
+    margin-left: 40px;
+    margin-top: 10px;
+}
 
     /*클래스 예약일*/
     #res{
@@ -38,17 +39,20 @@
         color: white;
         height: 40px;
         width: 100px;
-        font-size: larger;
+        font-size: 15px;
         cursor: pointer;
     }
 
-    /*sale 마크*/
-    #sale{
-        border-radius : 10px;
-        background-color: red;
-        color: white;
-
-    }
+	/*sale 마크*/
+	#sale{
+    border-radius : 10px;
+    background-color: red;
+    color: white;
+    padding: 1px;
+    font-size: 13px;
+    margin-left : 2px;
+    /* margin-bottom: 10px; */
+}
 
     /*클래스 상품명, 설명*/
     #title1{

@@ -137,5 +137,47 @@
 		WHERE ORDER_NO = #{orderNo}
 	</select>
 
+	<select id="countReady" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		  FROM ORDER_TBL
+		 WHERE USER_NO = #{userNo}
+		   AND DELIVERY_STATUS = '배송준비'
+		   <!--[CDATA[
+		   AND ADD_MONTHS(SYSDATE, -1) <= ORDER_DATE
+		   ]]-->
+		   
+	</select>
+
+	<select id="countShipping" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		  FROM ORDER_TBL
+		 WHERE USER_NO = #{userNo}
+		   AND DELIVERY_STATUS = '배송중'
+		   <!--[CDATA[ 
+		   AND ADD_MONTHS(SYSDATE, -1) <= ORDER_DATE
+		   ]]-->
+	</select>
+
+	<select id="countComplete" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		  FROM ORDER_TBL
+		 WHERE USER_NO = #{userNo}
+		   AND DELIVERY_STATUS = '배송완료'
+		   <!--[CDATA[
+		   AND ADD_MONTHS(SYSDATE, -1) <= ORDER_DATE
+		   ]]-->
+	</select>
+	
+	<select id="selectMyOrderAllList" parameterType="_int" resultMap="orderResultSet">
+		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE", TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", RECEIVE_USER, RECEIVE_PHONE, ORDER_ADDRESS
+  			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL
+		FROM ORDER_TBL
+		WHERE USER_NO = #{userNo}
+		<!--[CDATA[
+	    AND ADD_MONTHS(SYSDATE, -1) <= ORDER_DATE
+	    ]]-->
+	</select>
+
+
 
 </mapper>

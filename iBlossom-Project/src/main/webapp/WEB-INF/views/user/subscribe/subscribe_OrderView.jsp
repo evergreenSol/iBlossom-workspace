@@ -12,7 +12,6 @@
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet"> 
 <!-- <link href="resources/css/kdh.css" rel="stylesheet"> -->
-
 </head>
 <body>
 
@@ -271,10 +270,6 @@
                         <script>
                         
                             const btnModal = document.querySelector('.address-btn'); // 버튼 class 속성
-                        
-                            fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
-                                .then(response => response.text())
-                                .then(result => loremIpsum.innerHTML = result)
                     
                             function modalOn() {
                             modal.style.display = "flex"
@@ -390,7 +385,7 @@
                 <button class="order-btn" onclick="cancelSubscribe();">취소하기</button>
             </div>
             
-                       <!-- follow quick menu -->
+            <!-- follow quick menu -->
             <script>  
        
              $(window).scroll(function(){
@@ -463,13 +458,13 @@
 			console.log(data);
 		}).done(function (data) {
 			var totalPrice = $('#totalPrice').val();
-			console.log(totalPrice);
+
 			var subProductName = $('#subProductName').val();
-			if(numOfPay==1) {
+			if(numOfPay==1) { // 만약 subLevel == 1
 				// 정기결제 - 무한반복
 				subscribe(data.billing_key, totalPrice, subProductName, data.receipt_id, numOfPay);
 			}
-			else {
+			else { // 만약 subLevel != 1
 				// 일시불 (바로 requestPay 로 점프)
 				requestPay(data.billing_key, data.receipt_id, totalPrice, subProductName, numOfPay);
 			}
@@ -478,7 +473,7 @@
 	
 	// 정기결제 - 무한반복
 	function subscribe(billingKey, totalPrice, subProductName, receiptId, numOfPay) {
-		console.log(totalPrice);
+
 		$.ajax({
 			url : "subscribe.do",
 			type : "post",
@@ -501,17 +496,16 @@
 				numOfPay : numOfPay
 				},
 			success : function(data) {
-				console.log("iBlossom 상품 구독 등록 : 매달 싱싱하고 예쁜 꽃을 보내드릴게요 :)");
+				alert("iBlossom 상품 구독 등록 : 매달 싱싱하고 예쁜 꽃을 보내드릴게요 :)");
 				
 			}, error : function() {
-				console.log("상품 구독에 실패하였습니다 :(");
+				alert("상품 구독에 실패하였습니다 :(");
 			}
 		});
 	}
 	
 	// 일시불 (바로 requestPay 로 점프)
 	function requestPay(billingKey, receiptId, totalPrice, subProductName, numOfPay) {
-		console.log(totalPrice);
 		
 		$.ajax({
 			url : "requestSubscribe.do",
@@ -531,13 +525,13 @@
 		});    
 	}
 	
-	// DB에 구독 객체 넣기?
+	// DB에 구독 객체 넣기
 	function insertSubscribe(numOfPay, receiptId, totalPrice) {
-		console.log(totalPrice);
+
 		$.ajax({
 			url : "insert.su",
 			type : "post",
-			data : {
+			data : { // 구독 객체 생성용
 				subProductName : $('#subProductName').val(),
 				subProductNo : $('#subProductNo').val(),
 				userNo : $('#userNo').val(),

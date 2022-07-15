@@ -78,6 +78,22 @@ public class OrderDao {
 	public Order selectMyOneOrder(SqlSessionTemplate sqlSession, int orderNo) {
 		return sqlSession.selectOne("orderMapper.selectMyOneOrder", orderNo);
 	}
+	
+	public int countReady(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("orderMapper.countReady", userNo);
+	}
+	
+	public int countShipping(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("orderMapper.countShipping", userNo);
+	}
+	
+	public int countComplete(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("orderMapper.countComplete", userNo);
+	}
+	
+	public ArrayList<Order> selectMyOrderAllList(SqlSessionTemplate sqlSession, int userNo) {
+		return (ArrayList)sqlSession.selectList("orderMapper.selectMyOrderAllList", userNo);
+	}
 
 
 }

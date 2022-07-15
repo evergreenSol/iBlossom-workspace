@@ -159,12 +159,11 @@
 			
 			
 			
-		$(function () {
-    		$("#mypage-to-sub").click(function() {
-    			location.href="listView.su";
-    		});
-    	});
-		
+   		$("#mypage-to-sub").click(function() {
+   			location.href="listView.su";
+   		});
+	
+   		$("#category-subscribe").css("font-weight", "700");
 		
 			
 			

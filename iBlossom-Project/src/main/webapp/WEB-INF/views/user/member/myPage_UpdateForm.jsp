@@ -225,8 +225,12 @@
 				return true;
 			}
 			*/
-        	
+			
         }
+        
+		$(function () {
+			$("#category-profile").css("font-weight", "700");
+		});
     </script>
 
     
