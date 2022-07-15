@@ -34,9 +34,18 @@
 	        <form action="ResForm.cl" method="post">
 		        <div>		   
 		            <label for="date" id="res" style="font-size: 15px;">예약일</label><br>
-		            	<select name="classNo" id="date" style="width:170px;height:25px;font-size: 14px;" onchange="classCap();" required >
+		            	<select name="classNo" id="date" style="width:190px;height:25px;font-size: 14px;" onchange="classCap();" required >
 			                <c:forEach var="c" items="${ list }">
-			                	<option value="${ c.classNo }">${ c.classDate }</option>
+			                <c:choose>
+			                
+				                <c:when test="${ c.resNum >= 5 }">
+				                	<option value="${ c.classNo }" disabled>${ c.classDate } (마감되었습니다.)</option>
+				                </c:when>
+				                <c:otherwise>
+				                	<option value="${ c.classNo }">${ c.classDate }</option>
+				                </c:otherwise>
+			                </c:choose>
+
 			                <!-- 리스트에 클래스 정보 담아서 (게시판 내용과 같음) 반복문으로 돌리기(?) -->
 			                 </c:forEach>
 			            </select>
@@ -69,19 +78,7 @@
      	}
      </script>
       
-	<script>
-		function classCap(){
-			var classNo = $("select option:selected").val();
-			if(resNum == 5){
-				alert("해당 클래스는 인원 마감되었습니다.");
-			} else {
-				
-			}
-		}
-		
-	</script>
-
-    
+  
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,50 +11,6 @@
     <link href="resources/css/shj.css" rel="stylesheet">
     <link href="resources/css/kms.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<style>
- 
-
- #pagingArea {
-   width: fit-content;
-   margin: auto;
-   margin-top : 600px;
-}
-
-.page-link {
-   font-size : 14px;
-   width : 35px;
-   height: 25px;
-   background-color : white;
-   border : 1px solid lightgray;
-   color : black;
-   display: inline-block;
-   margin-left : 10px;
-   text-decoration : none;
-   text-align : center;
-   border-radius : 3px;
-   padding-top: 5px;
-}
-
-.page-link:active:focus 
-.page-item:active {
-   color : #ff2393;
-}
-
-.page-link:hover {
-   color : #ff2393;
-   	font-weight:700;
-}
-
-.pagination {
-   list-style-type : none;
-}
-
-.pagination li {
-   float : left;
-}
-
-
-</style>
 </head>
 <body>
 
@@ -112,14 +68,14 @@
                     </li>
                     <li><a href="" class="admin-navi-menu">상품관리</a></li>
                     <li><a href="" class="admin-navi-menu">리뷰관리</a></li>
-                    <li><a href="" class="admin-navi-menu">클래스관리</a>
+                    <li><a href="" class="admin-navi-menu" style="font-weight: 700;">클래스관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="classAddForm.ad">클래스 추가</a></li>
                             <li><a href="classList.ad">클래스 예약내역</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="" class="admin-navi-menu" style="font-weight: 700;">고객센터관리</a>
+                        <a href="" class="admin-navi-menu">고객센터관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="qnaList.ad">1:1 문의</a></li>
                             <li><a href="">공지사항</a></li>
@@ -133,95 +89,85 @@
         </div>
 
     </div>
-    
+
+    <!-- admin 관리자페이지 회원관리 -->
     <div id="admin-member-wrap">
-        <span id="admin-member-title">1대1 문의관리</span>
+
+        <span id="admin-member-title">클래스 전체리스트</span>
         <hr id="admin-member-hr">
 
         <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
-
-        <div id="admin-list-container">
-
-            <table id="admin-list-table" style="font-size: 16px;">
-                <thead>
-                    <tr>
-                        <th width="100">글번호</th>
-                        <th width="400">제목</th>
-                        <th width="100">작성자</th>
-                        <th width="120">작성일</th>
+        <div>
+            
+            <table id="admin-order-list-table">
+                <!-- 메뉴바 -->
+                <thead id="admin-order-list-thead">
+                    <tr >
+                        <th width="80">클래스번호</th>
+                        <th width="150">클래스명</th>
+                        <th width="120">결제금액</th>
+                        <th width="160">수업일</th>
+                        <th width="80">정원</th>
+                        <th width="80">신청인원</th>
+                        <th width="80">진행상태</th>
+                        <th width="80">삭제</th>
                     </tr>
                 </thead>
                 <tbody>
-	                <c:forEach var="q" items="${ list }">
-	                    <tr>
-	                        <td>${ q.qnaNo }</td>
-	                        <td>${ q.qnaTitle }</td>
-	                        <td>${ q.userNo }</td>
-	                        <td>${ q.qnaDate }</td>
-	                    </tr>
-	                </c:forEach>   
+                    <c:forEach var="c" items="${ list }">
+                    <tr>
+                        <td>${ c.classNo }</td>
+                        <td>${ c.className }</td>
+                        <td>${ c.price }</td>
+                        <td>${ c.classDate }</td>
+                        <td>${ c.capNo }</td>
+                        <td>${ c.resNum }</td>
+                        <td>${ c.classStatus }</td>
+                        <td><button type="submit" onclick="deleteClass(${ c.classNo });">삭제</button></td>
+                    </tr>
+                    </c:forEach>
                 </tbody>
-            </table>
+            </table>           
         </div>
     </div>
-
+    
 		<script>
-        	$(function() {
-        		
-        		$("#admin-list-table>tbody>tr").click(function(){
+        	$(function() {        		
+        		$("#admin-order-list-table>tbody>tr").click(function(){
         			console.log("클릭됨");
         			console.log($(this).children().eq(0).text());
-        			location.href = "qnaDetail.ad?qnaNo=" + $(this).children().eq(0).text();
-        			
+        			location.href = "resList.ad?classNo=" + $(this).children().eq(0).text();        			
         		});
         	});
         </script>
-
-    <div id="pagingArea">
-        <ul class="pagination">
-
-            <c:choose>
-                <c:when test="${ pi.currentPage eq 1 }">
-                    <li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
-                </c:when>
-                <c:otherwise>
-                    <li class="page-item"><a class="page-link"
-                        href="qnaList.ad?cpage=${ pi.currentPage - 1 }">◀</a></li>
-                </c:otherwise>
-            </c:choose>
-			
-			<%-- 
-            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                <li class="page-item"><a class="page-link"
-                    href="qnaList.ad?cpage=${ p }">${ p }</a></li>
-            </c:forEach>
-			--%>
-			
-	             <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-		        <c:choose>
-		         <c:when test="${ pi.currentPage eq p }">
-		          
-		                <li class="page-item"><a class="page-link"  style="color : #ff2393; font-weight:700;"
-		             href="qnaList.ad?cpage=${ p }">${ p }</a></li>
-		            </c:when>
-		            <c:otherwise>
-
-		                <li class="page-item"><a class="page-link"
-		                    href="qnaList.ad?cpage=${ p }">${ p }</a></li>
-		          </c:otherwise>
-		          </c:choose>
-		       </c:forEach>
+        
+     <script>
+	    function deleteClass(classNo) {
 	
-	            <c:choose>
-	               <c:when test="${ pi.currentPage eq pi.maxPage }">
-	                  <li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
-	               </c:when>
-	               <c:otherwise>
-	                  <li class="page-item"><a class="page-link"
-	                     href="qnaList.ad?cpage=${ pi.currentPage + 1 }">▶</a></li>
-	               </c:otherwise>
-	            </c:choose>	
-	         </ul>
-   		 </div>
+	  	  console.log(classNo);
+	  	  
+	  	  $.ajax({
+	  		url : "deleteClass.ad",
+	  		type : "post",
+	  		data : { classNo : classNo },
+	  		success : function(result) {
+	  			console.log(result);
+	  			if(result == "성공") {
+	  				alert("클래스 삭제에 성공했습니다.");
+	  				location.href="classList.ad";
+	  				
+	  			}
+	  			else{
+	  				alert("클래스 삭제에 실패했습니다.");	
+	  			}
+	  		},
+	  		error : function(result) {
+	  			console.log(result);
+	  			console.log("ajax 통신 실패");
+	  		}
+	  	})  
+	    }
+    </script>
 
 </body>
+</html>

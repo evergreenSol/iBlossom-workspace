@@ -36,9 +36,9 @@ public class QnaDao {
 	
 	
 	// 답변작성
-	public int insertAnswer(SqlSessionTemplate sqlSession, Qna q) {
+	public int updateAnswer(SqlSessionTemplate sqlSession, Qna q) {
 		
-		return sqlSession.insert("qnaMapper.insertAnswer", q);
+		return sqlSession.update("qnaMapper.updateAnswer", q);
 	}
 
 	public Qna selectQna(SqlSessionTemplate sqlSession, int qnaNo) {
@@ -49,6 +49,11 @@ public class QnaDao {
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 
 		return sqlSession.selectOne("qnaMapper.selectListCount");
+	}
+
+	public Qna selectAdminQna(SqlSessionTemplate sqlSession, int qnaNo) {
+		
+		return sqlSession.selectOne("qnaMapper.selectAdminQna", qnaNo);
 	}
 	
 
