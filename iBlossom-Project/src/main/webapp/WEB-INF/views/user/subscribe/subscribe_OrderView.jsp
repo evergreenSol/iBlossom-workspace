@@ -12,41 +12,7 @@
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet"> 
 <!-- <link href="resources/css/kdh.css" rel="stylesheet"> -->
-<style>
 
-    
-
-</style>
-
-<!-------------------------------------------------------------------->
-<!-- 슬라이드 업/다운 스크립트  -->
-
-<script>
-    $(function() {
-        $("#CheckBtn").on("click", function() {
-            // id가 "CheckBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
-            $("#CheckBox").slideToggle("1500");
-        });
-    });
-</script>
-
-<script>
-    $(function() {
-        $("#OrdererBtn").on("click", function() {
-            // id가 "OrdererBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
-            $("#OrdererBox").slideToggle("1500");
-        });
-    });
-</script>
-
-<script>
-    $(function() {
-        $("#SenderBtn").on("click", function() {
-            // id가 "SenderBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
-            $("#SenderBox").slideToggle("1500");
-        });
-    });
-</script>
 </head>
 <body>
 
@@ -92,7 +58,7 @@
 		
 	<!-- 사용자 주문 페이지 왼쪽 영역 -->
     <!-- 주문내역 확인, 주문자 정보, 발신인 이름 펼친 페이지 -->
-    <p style="font-weight:700; font-size:31px; margin-bottom:15px;">&nbsp;주문/결제</p>
+    <p id="MainWrapTitle">&nbsp;주문/결제</p>
 
         <!-- 왼쪽 섹션 -->
         <div class="order-left">
@@ -124,8 +90,7 @@
 
                                 <!-- 상품 이미지 -->
                                 <span>
-                                    <img src="${ sp.subChangeName }"
-                                    	 style="width:250px; height:250px;">
+                                    <img src="${ sp.subChangeName }">
                                 </span>
 
                                 <!-- 상품 옵션 확인란 -->

@@ -12,7 +12,7 @@
 <link href="resources/css/ldo-user.css" rel="stylesheet">
 
 </head>
-<body  onload="init();">
+<body>
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
@@ -23,7 +23,7 @@
 	<div id="cartMainOuter">
 	
 	    <!-- 장바구니 타이틀 -->
-	    <p style="font-weight:700; font-size:34px; margin-bottom:15px;">&nbsp;쇼핑백</p>
+	    <p id="CartTitle">&nbsp;쇼핑백</p>
 	
 	    <div class="cart-left">
 	
@@ -48,7 +48,7 @@
 	        <!-- 장바구니 내용 -->
 			<form action="detail.or">
 	        	
-	        	<div style="border:1px solid; padding:30px;">
+	        	<div style="border:1px solid; padding:0px;">
 	        		        
 					<c:forEach var="c" begin="0" end="${ list.size() -1 }" varStatus="status">
 					<input type="hidden" value="${ list.size() }" id="listSize">
@@ -62,7 +62,7 @@
 			
 			                <!-- 장바구니 이미지 -->
 			                <div class="cart-content2">
-			                    <img src="${ list[c].thumbnail }" style="width:280px; height:320px;">
+			                    <img src="${ list[c].thumbnail }" style="width:280px; height:280px;">
 			                </div>
 			
 			                <!-- 장바구니 상세옵션 -->
@@ -81,14 +81,7 @@
 				                    <input type="button" value="-" onclick="count('minus',${ status.count })">
 			                        <input type="number" id="productCount${ status.count }" value="${ list[c].productCount }" size="1">
 			                        <input type="button" value="+" onclick="count('plus',${ status.count })">
-			                        
-			                        <!--  
-				                	<input type="hidden" name="sell_price" value="${ list[c].productCount }">
-				                	<input class="cart-num-btn" type="button" value=" - " onclick="del();">	
-				                    <input type="text" name="amount" size="1" onchange="change();" value="${ list[c].productCount }"
-				                           style="width:20px; height:20px; text-align:center;">
-				                    <input class="cart-num-btn" type="button" value=" + " onclick="add();">
-				                   -->						    
+			                        					    
 			                </div>
 	
 			                <!-- 장바구니 상품 금액 -->
@@ -163,7 +156,7 @@
 	 			
 	 			var sumAll = document.getElementById('sumAll');
 	 			
-	 			
+
 	 		}
 
 	 		*/

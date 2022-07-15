@@ -37,6 +37,13 @@ div { box-sizing: border-box; }
 
     /* ----------------------------------------------------------- */   
     /* 사용자 장바구니 페이지 왼쪽 영역 */
+    
+    /* 쇼핑백 title */
+    #cartMainOuter>#CartTitle {
+    	font-weight:700; 
+    	font-size:31px; 
+    	margin-bottom:15px;
+    }
 
     /* 전체선택, 선택삭제 div  */
     .cart-choice { 
@@ -299,6 +306,13 @@ div { box-sizing: border-box; }
     	background-color: whitesmoke;
         width : 100%; 
     }
+    
+    /* 주문/결제 title */
+    #orderMainWrap>#MainWrapTitle {
+    	font-weight:700; 
+    	font-size:31px; 
+    	margin-bottom:15px;
+    }
 
     /* 하얀 네모박스 영역 */
     .order-whitebox { 
@@ -384,7 +398,7 @@ div { box-sizing: border-box; }
     /* 주문내역 확인 - 내용 */
     .order-check-content { 
         padding: 20px;
-        width: 660px;
+        width: 600px;
         display:flex; 
         justify-content: space-between;
         height: 100%;
@@ -401,6 +415,12 @@ div { box-sizing: border-box; }
         width: 605px;
         padding: 10px; 
         background-color:rgba(241, 241, 241, 0.707); 
+    }
+    
+    /* 주문내역확인 - 상품이미지 */
+    .order-check-content>span>img {
+    	width: 250px; 
+    	height: 250px;
     }
 
 
