@@ -110,6 +110,7 @@ div { box-sizing: border-box; }
          flex-direction: column;
          align-items: center;
          justify-content: center;
+         width: 50px;
     }
     
     /* 세로정렬 flex 제외 */
@@ -162,22 +163,30 @@ div { box-sizing: border-box; }
     /* ----------------------------------------------------------- */
     /* 사용자 장바구니 페이지 오른쪽 영역 */
 
-    /* 결제금액, 배송비 div */
+    /* 1. 총 주문 금액, 2. 배송비 div */
     .cart-price1, .cart-price2 { 
         display: flex; 
         justify-content: space-between; 
         padding: 5px;
         margin: 10px 15px 15px 15px;
     }
+    
+    /* 총 주문 금액 input 타입 */
+    .cart-price1>input {
+    	margin-right: -40px;
+    	border: none;
+    	text-align: right;
+    	font-size: 16px;
+    }
       
-    /* 총 결제 금액  div */
+    /* 3. 총 결제 금액  div */
     .total-price {
     	display: flex; 
         justify-content: space-between;  
         padding: 5px;
         margin: 30px 15px 10px 15px; 
         font-weight: bold; 
-    } 
+    }
 
     /* 안내사항 네모박스 div */
     .cart-div { 
