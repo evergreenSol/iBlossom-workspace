@@ -89,5 +89,12 @@
 		     , #{classDate}
 		     , #{capNo})
   	</insert>
+  	
+  	<select id="selectMyOnedayClass" parameterType="_int" resultMap="onedayclassResultSet">
+		SELECT CLASS_NAME, PRICE, CLASS_DATE, CLASS_STATUS
+		FROM ONECLASS O
+		JOIN CLASS_ADMIN C ON(O.CLASS_NO = C.CLASS_NO)
+  		WHERE USER_NO = #{userNo}
+  	</select>
 
 </mapper>

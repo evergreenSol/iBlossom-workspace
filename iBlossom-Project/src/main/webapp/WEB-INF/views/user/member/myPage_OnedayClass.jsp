@@ -43,34 +43,56 @@
                             </tr>
                         </table>
                         -->
-
+						
+						<c:forEach var="c" items="${ list }">
                         <table>
                             <tr>
                                 <td colspan="2"></td>
                                 <td></td>
-                                <td width="490" align="right"></td>
+                                <td width="440" align="right"></td>
+                                <td></td>
                             </tr>
                             <tr>
-                                <td rowspan="5" width="100" height="100"><img src=""></td>
-                                <th width="80">클래스명</th>
+                                <td rowspan="5" width="150" height=""><img src="resources/images/onedayclass_main.jpg" width="100%"></td>
+                                <th width="90">클래스명</th>
                                 <td width="10"></td>
                                 <td class="productName" width="80">
-                                    꽃으로 100억 벌기
+                                    ${c.className }
                                 </td>
                             </tr>
                             <tr>
                                 <th>수업일</th>
                                 <td></td>
-                                <td>2022-02-08</td>
+                               
+                                <td>${c.classDate }</td>
                             </tr>
                             <tr>
                                 <th>수업료</th>
                                 <td></td>
-                                <td>14000원</td>
-                                <td colspan="3" style="text-align: right; padding-right: 10px;"><button>결제내역</button></td>
+                                <td>${c.price}원</td>
                             </tr>
-                            
+                            <tr>
+                                <th>진행여부</th>
+                                <td></td>
+                                <c:if test="${c.classStatus eq 'N'}">
+                                <td>미진행</td>
+                                </c:if>
+                                <c:if test="${c.classStatus eq 'Y'}">
+                                <td>완료</td>
+                                </c:if>
+                                <td colspan="3" style="text-align: right; padding-right: 10px;">
+                                	<c:if test="${c.classStatus eq 'N'}">
+                                	<button class="smsBtn">예약 확인</button>
+                                	<input type="hidden" value="${c.classDate}">
+                                	<input type="hidden" value="${c.className}">
+                                	<input type="hidden" value="${c.price}">
+                                	</c:if>
+                                	<c:if test="${c.classStatus eq 'Y'}">
+                                	</c:if>
+                                </td>
+                            </tr>
                         </table>
+                        </c:forEach>
 
                         <br><br>
 
@@ -98,6 +120,41 @@
     	$(function () {
     		$("#mypage-to-class").click(function() {
     			location.href="classDetail.cl";
+    		});
+    		
+    		$(".smsBtn").click(function () {
+    			
+    			var result = confirm("예약 확인 문자를 받으시겠습니까?" + "\r" + "(단 한번만 발송 가능합니다.)"); 
+    			if(result == true) {
+    				
+    				$(this).attr("disabled", true);
+    				console.log($(this).next().val());
+    				console.log($(this).next().next().val());
+    			}
+    			else {
+    				
+    			}
+    			
+    			/*
+
+    			$.ajax({
+    				url:"sendOnedayClassMessage.do.do",
+    				data : {
+    					classDate : $(this).next().val(),
+    					className : $(this).next().next().val(),
+    					price : $(this).next().next().next().val()
+    				},
+    				success : function (result) {
+    					console.log(result)	
+    				},
+    				error : function () {
+    					
+    				}
+    				
+    			});
+				
+    			*/
+    			
     		});
     		
     		$("#category-onedayclass").css("font-weight", "700");

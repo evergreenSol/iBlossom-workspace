@@ -56,4 +56,9 @@ public class OnedayClassDao {
 //		
 //		return sqlSession.selectOne("onedayclassMapper.selectClassRes", classNo);
 //	}
+	
+	public ArrayList<OnedayClass> selectMyOnedayClass(SqlSessionTemplate sqlSession, int userNo) {
+		return (ArrayList)sqlSession.selectList("onedayclassMapper.selectMyOnedayClass", userNo);
+	}
+	
 }

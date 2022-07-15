@@ -164,7 +164,6 @@
    		});
 	
    		$("#category-subscribe").css("font-weight", "700");
-		
 			
 			
    	});

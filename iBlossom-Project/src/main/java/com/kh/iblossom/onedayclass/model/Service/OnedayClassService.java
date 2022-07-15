@@ -31,4 +31,7 @@ public interface OnedayClassService {
 	int insertClass(OnedayClass o);
 	
 	// OnedayClassAdmin selectClassRes(int classNo);
+	
+	// 마이페이지 원데이 클래스
+	ArrayList<OnedayClass> selectMyOnedayClass(int userNo);
 }
