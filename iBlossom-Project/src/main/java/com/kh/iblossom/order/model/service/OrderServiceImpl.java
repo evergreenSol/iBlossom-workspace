@@ -93,4 +93,40 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 
+	@Override
+	public int countReady(int userNo) {
+
+		return orderDao.countReady(sqlSession, userNo);
+	}
+
+
+	@Override
+	public int countShipping(int userNo) {
+		
+		return orderDao.countShipping(sqlSession, userNo);
+	}
+
+
+	@Override
+	public int countComplete(int userNo) {
+
+		return orderDao.countComplete(sqlSession, userNo);
+	}
+
+
+	@Override
+	public ArrayList<Order> selectMyOrderAllList(int userNo) {
+
+		return orderDao.selectMyOrderAllList(sqlSession, userNo);
+	}
+
+
+	@Override
+	public int updateDeliveryStatus() {
+		return  orderDao.updateDeliveryStatus(sqlSession);
+	}
+	
+	
+
+
 }

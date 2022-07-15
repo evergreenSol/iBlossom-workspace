@@ -66,5 +66,13 @@
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
+    
+    <script>
+    
+    	$(function () {
+    		$("#category-profile").css("font-weight", "700");
+    	});
+    
+    </script>
 </body>
 </html>

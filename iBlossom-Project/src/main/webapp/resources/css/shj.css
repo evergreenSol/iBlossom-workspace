@@ -400,6 +400,8 @@ div { box-sizing: border-box; }
 /* signUp-agree 이용약관 textarea 속성 */
 .agree-textarea {
     border-color: lightgray;
+    width: 340px;
+    height: 130px;
 }
 
 /* signUp-agree 이용약관 textarea 클릭 했을경우 */
@@ -453,12 +455,14 @@ div { box-sizing: border-box; }
 #agree-checkbox1-label {
     position: absolute;
     top: 77px;
+    margin-left: 4px;
 }
 
 /* signUp-agree 이용약관 개인정보수집~ label 속성 */
 #agree-checkbox2-label {
     position: absolute;
-    bottom: 143px;
+    bottom: 145px;
+    margin-left: 4px;
 }
 
 /* signUp-agree 이용약관 전체동의 */
@@ -486,7 +490,7 @@ div { box-sizing: border-box; }
     border-radius: 3px;
     border: 0px;
     right: 60px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 /* signUp-agree 이용약관 취소 버튼 속성 */

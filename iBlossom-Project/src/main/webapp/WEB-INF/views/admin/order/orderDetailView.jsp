@@ -68,8 +68,8 @@
                             <li><a href="">구독상품관리</a></li>
                         </ul>
                     </li>
-                    <li><a href="" class="admin-navi-menu">상품관리</a></li>
-                    <li><a href="" class="admin-navi-menu">리뷰관리</a></li>
+                    <li><a href="list.pr" class="admin-navi-menu">상품관리</a></li>
+                    <li><a href="reviewList.pr" class="admin-navi-menu">리뷰관리</a></li>
                     <li><a href="" class="admin-navi-menu">클래스관리</a></li>
                     <li>
                         <a href="" class="admin-navi-menu">고객센터관리</a>

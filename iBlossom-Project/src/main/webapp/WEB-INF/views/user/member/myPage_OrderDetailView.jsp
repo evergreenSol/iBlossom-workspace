@@ -162,8 +162,12 @@
     	
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
-</body>
 
+<script>
+	$(function () {
+		$("#category-orderList").css("font-weight", "700");
+	});
+</script>
 
 </body>
 </html>

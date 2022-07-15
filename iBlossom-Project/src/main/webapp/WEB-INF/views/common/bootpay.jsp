@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://js.bootpay.co.kr/bootpay-4.1.5.min.js" type="application/javascript"></script>
-<title>Insert title here</title>
+<title>iBlossom | BootPay</title>
 </head>
 <body>
 

@@ -137,7 +137,8 @@
 		WHERE ORDER_NO = #{orderNo}
 	</select>
 
-	<!-- 지승아 리뷰 오더 검사 -->
+
+	<!--  지승아 리뷰 오더 검사-->
 	<select id="selectReviewOrder" parameterType="review" resultMap="orderResultSet">
 		SELECT *
 		FROM ORDER_TBL
@@ -146,5 +147,63 @@
 		WHERE PRODUCT_NO = #{productNo}
 		AND USER_NO = #{userNo}
 	</select>
+
+	<select id="countReady" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		  FROM ORDER_TBL
+		 WHERE USER_NO = #{userNo}
+		   AND DELIVERY_STATUS = '배송준비'
+		   <!--[CDATA[
+		   AND ADD_MONTHS(SYSDATE, -1) <= ORDER_DATE
+		   ]]-->
+		   
+	</select>
+
+	<select id="countShipping" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		  FROM ORDER_TBL
+		 WHERE USER_NO = #{userNo}
+		   AND DELIVERY_STATUS = '배송중'
+		   <!--[CDATA[ 
+		   AND ADD_MONTHS(SYSDATE, -1) <= ORDER_DATE
+		   ]]-->
+	</select>
+
+	<select id="countComplete" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		  FROM ORDER_TBL
+		 WHERE USER_NO = #{userNo}
+		   AND DELIVERY_STATUS = '배송완료'
+		   <!--[CDATA[
+		   AND ADD_MONTHS(SYSDATE, -1) <= ORDER_DATE
+		   ]]-->
+	</select>
+	
+	<select id="selectMyOrderAllList" parameterType="_int" resultMap="orderResultSet">
+		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE", TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", RECEIVE_USER, RECEIVE_PHONE, ORDER_ADDRESS
+  			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL
+		FROM ORDER_TBL
+		WHERE USER_NO = #{userNo}
+		<!--[CDATA[
+	    AND ADD_MONTHS(SYSDATE, -1) <= ORDER_DATE
+	    ]]-->
+	</select>
+	
+	<!-- (자동) 배송상태 변경하기 -->
+<!--   	<update id="updateDeliveryStatus">
+  		UPDATE ORDER_TBL
+		SET DELIVERY_STATUS = 
+		    CASE 
+		    <![CDATA[
+		        WHEN TO_DATE(RECEIVE_DATE, 'YYYY-MM-DD') - TO_DATE(SYSDATE, 'YYYY-MM-DD') <= 0 THEN '배송완료'
+		        WHEN TO_DATE(RECEIVE_DATE, 'YYYY-MM-DD') - TO_DATE(SYSDATE, 'YYYY-MM-DD') <= 1 THEN '배송중'
+		        ELSE '배송준비'
+		    ]]>
+		    END
+		WHERE NOT DELIVERY_STATUS IN('결제취소')
+  	</update> -->
+
+
+
 
 </mapper>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>iBlossom | findPwd</title>
+<title>iBlossom | FindPwd</title>
 <link href="resources/css/shj.css" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>

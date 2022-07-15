@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,22 +30,22 @@
 						<h2>주문배송조회</h2>
                         <div class="mypage-first">
                             <div class="delivery">
-                                <b>0</b>
+                                <b>${ ready }</b>
                                 <span>배송 전</span>
                             </div
                             ><div class="delivery">
-                                <b>0</b>
+                                <b>${ shipping }</b>
                                 <span>배송 중</span>
                             </div
                             ><div class="delivery">
-                                <b>0</b>
+                                <b>${ complete }</b>
                                 <span>배송 완료</span>
                             </div>
                         </div>
 
                         <br><br>
 
-                        <h2>나의주문내역</h2>
+                        <span id="mainView-title">나의 주문내역</span><span id="mainView-subTitle">(최근 1개월)</span>
                         <!-- <hr color="lightgray"> -->
                         <!--
                         <table style="text-align: center">
@@ -55,41 +56,48 @@
                         -->
 
                         <table>
+                        <c:forEach var="o" items="${list}">
+                        
                             <tr>
-                                <td colspan="2"><p style="font-size: 18px; font-weight: 600">2022-06-23</p></td>
+                                <td colspan="2"><p style="font-size: 18px; font-weight: 600; margin-top: 18px; margin-bottom: 10px;">${o.orderDate }</p></td>
                                 <td></td>
-                                <td width="650" align="right"><a href="orderDetailView.me" class="moreBtn" style="padding-right : 10px;">주문상세</a></td>  
+                                <td width="650" align="right"><a href="orderDetailView.me?orderNo=${o.orderNo}" class="moreBtn" style="padding-right : 10px;">주문상세</a></td>  
  
                             </tr>
                             <tr>
-                                <td rowspan="5" width="100" height="100"><img src="https://kukka-2-media-123.s3.amazonaws.com/static/kukkart_new/img/common/thumbnail_mypage.png"></td>
+                                <td rowspan="5" width="150" height="100"><img src="${o.thumbnail}" style="width:100%"></td>
                                 <!-- 사진은 ajax로 넣기 (모든게 로드 된 뒤에 ajax로 주문번호에 해당되는 상품 상세 조회 후 그 상품의 사진경로 가져오기)-->
                                 <th width="80">주문번호</th>
                                 <td width="10"></td>
                                 <td class="orderNo" width="80">
-                                    1
+                                    ${o.orderNo}
                                 </td>
                             </tr>
                             <tr>
                                 <th>수령일</th>
                                 <td></td>
-                                <td>2022-06-25</td>
+                                <td>${o.receiveDate}</td>
                             </tr>
                             <tr>
                                 <th>결제금액</th>
                                 <td></td>
-                                <td>19000원</td>
+                                <td>${o.totalPrice}원</td>
                             </tr>
                             <tr>
                                 <th>주문상태</th>
                                 <td></td>
-                                <td>결제완료</td>
+                                <td>${o.orderStatus}</td>
                             </tr>
                             <tr>
                                 <th>배송상태</th>
                                 <td></td>
-                                <td>배송완료</td>
+                                <td>${o.deliveryStatus}</td>
                             </tr>
+                            <tr height="30" >
+                            	<td class="endTd" colspan="6"></td>
+                            </tr>
+                            
+                        </c:forEach>
                         </table>
 
                     </div>

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,6 +70,7 @@
 				<c:set var="discount" value="3000"/>
 			</c:otherwise>
 		</c:choose>
+		
 	<br><br>
 	
 	<!-- 전체 색상 변경 div -->
@@ -81,7 +82,7 @@
 		
 	<!-- 사용자 주문 페이지 왼쪽 영역 -->
     <!-- 주문내역 확인, 주문자 정보, 발신인 이름 펼친 페이지 -->
-    <p style="font-weight:700; font-size:31px; margin-bottom:15px;">&nbsp;주문/결제</p>
+    <p id="MainWrapTitle">&nbsp;주문/결제</p>
 
         <!-- 왼쪽 섹션 -->
         <div class="order-left">
@@ -117,8 +118,7 @@
 		
 		                                <!-- 상품 이미지 -->
 		                                <span>
-		                                    <img src="${ selectList[i].thumbnail }"
-		                                    	style="width:330px; height:350px;">
+		                                    <img src="${ selectList[i].thumbnail }">
 		                                </span>
 		
 		                                <!-- 상품 옵션 확인란 -->
@@ -132,12 +132,15 @@
 		                                        <input type="hidden" id="productNo" name="detailOrderList[${i}].productNo" value="${ selectList[i].productNo}">
 		                                        <br>
 		
-		                                        <!-- 가격(원) / 수량(개) -->
-		                                        <li> <fmt:formatNumber type="number" maxFractionDigits="3" value="${ selectList[i].productPrice }" />원 
+		                                        <!-- 가격(원)-->
+		                                        <li> <fmt:formatNumber type="number" maxFractionDigits="3" value="${ selectList[i].productPrice }" />원
+		                                        	 <input type="hidden" id="" name="detailOrderList[${i}].onePrice" value="${selectList[i].productPrice}">
+		                                        </li>
+		                                        <br>
 		                                        
-		                                        / ${selectList[i].productCount}개
-		                                        <input type="hidden" id="" name="detailOrderList[${i}].onePrice" value="${selectList[i].productPrice}">
-		                                        <input type="hidden" id="" name="detailOrderList[${i}].oneQuantity" value="${selectList[i].productCount}">
+		                                        <!-- 수량(개) -->
+		                                        <li>${selectList[i].productCount}개
+		                                        	<input type="hidden" id="" name="detailOrderList[${i}].oneQuantity" value="${selectList[i].productCount}">
 		                                        </li>
 		                                        <br>
 		                                </div>
@@ -150,8 +153,8 @@
 	                            </c:forEach>
 	                            	<input type="hidden" id="thisOrderNo" name="orderNo">
 	                            <button type="submit" id="real-submit-button" style="display:none"></button>
-							</form>
-                            <hr> <!-------------------------------------------->
+                            
+                            </form>
 
                         </div> 
 
@@ -320,8 +323,6 @@
 	                                    </c:otherwise>
                                     </c:choose>
                   
-                                    
-
                                 </div>
 
                                 <!-- Modal footer -->
@@ -380,17 +381,15 @@
                     <hr>
 
 					<div class="userAddress"><br>
-                            	<span id="postalAddress"></span>
-                            	<span id="detailAddress"></span>
+                         	<span id="postalAddress"></span>
+                         	<span id="detailAddress"></span>
                     </div>
                     
 					<br><br>
 					
                     <!-- 버튼 두개 -->
                     <div class="order-two-btn">
-
-                       <button class="pre-btn" type="button" onclick="location.href='list.ca'">이전으로</button>
-                    
+                       <button class="pre-btn" type="button" onclick="location.href='list.ca'">이전으로</button>  
                     </div>
 
                 </div>
@@ -399,6 +398,7 @@
 
         </div>
         
+        <!------------------------------------------------------------>
 
         <!-- 오른쪽 섹션 -->
         <div class="order-right">
@@ -416,13 +416,13 @@
 					<c:forEach var="i" items="${ selectList }" varStatus="status">     
 					<c:set var="total" value="${ total + (i.productPrice * i.productCount) }"/>
 					</c:forEach>
-		            <span>${ total } 원</span>
+		            <span><fmt:formatNumber value="${ total }" pattern="###,###"/>원</span>
                 </div>
 
                 <!-- 배송비 -->
                 <div class="order-delivery">
                     <span>배송비</span>
-                    <span>+ 3000원</span>
+                    <span>+ <fmt:formatNumber value="3000" pattern="###,###"/>원</span>
                 </div>
 
                 <!-- 등급 할인 -->
@@ -435,7 +435,8 @@
                 <!-- 총 결제 금액 -->    
                 <div class="order-tprice">
                     <span >총 결제 금액</span>
-                    <span>${ total + 3000 - discount }원</span><input type="hidden" id="totalPrice" value="${ total + 3000 - discount }">
+                    <span><fmt:formatNumber value="${ total + 3000 - discount }" pattern="###,###"/>원</span>
+                    <input type="hidden" id="totalPrice" value="${ total + 3000 - discount }">
                 </div>
 
                 <br>
@@ -452,7 +453,6 @@
             <!-- 결제하기 버튼 -->
             <div>
                 <button class="order-btn" onclick="pay();">결제하기</button>
-
             </div>
             
             <!-- follow quick menu -->
@@ -474,23 +474,22 @@
        
             </script>
             
-            
             <input type="hidden" name="userNo" id="userNo" value="${ loginUser.userNo }">
             <input type="hidden" id="userName" value="${ loginUser.userName }">
             <input type="hidden" id="email" value="${ loginUser.email }">
             <input type="hidden" id="address" value="${ loginUser.address }">
             <input type="hidden" id="phone" value="${ loginUser.phone }">
             <input type="hidden" id="thumbnailForOrder" value="${ selectList[0].thumbnail }">
+        
         </div><!-- 1200px 너비 -->
       	</div><!-- 전체 색상 변경 div -->
 
 	<script>
 	var userNo = $("#userNo").val();
-	var thumbnail = 
 
-	console.log(receiveDate);
 	function pay() {
 		
+		var receiveDate = $('#datepicker').val();
 		var receiveUser = $('#subReceiverUser').val();
 		var receivePhone = $('#subReceiverPhone').val();
 		var postcode = $('#zipcode').val();
@@ -523,10 +522,13 @@
 			order_id: '고유order_id_1234', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
 			async : true
 		}).error(function (data) {
-			//결제 진행시 에러가 발생하면 수행됩니다.
+			// 결제 진행시 에러가 발생하면 수행됩니다.
 			console.log(data);
+			
+			// 결제 실패시 알람창
+			alert("결제에 실패하여 주문이 완료되지 않았습니다. \n다시 시도해주세요.");
 		}).cancel(function (data) {
-			//결제가 취소되면 수행됩니다.
+			// 결제가 취소되면 수행됩니다.
 			console.log(data);
 		}).done(function (data) {
 			var totalPrice = $('#totalPrice').val();
@@ -546,12 +548,13 @@
 			type : "post",
 			data : {
 				billingKey : billingKey,
-				totalPrice : 1000,
+				totalPrice : 1000, 
 				subProductName : flowerName,
 			},
 			success : function(data) {
 				console.log("상품 결제 성공");
 				insertOrder(receiptId);
+				
 			}, error : function() {
 				console.log("상품 결제 실패");
 			}
@@ -561,7 +564,7 @@
 	// DB에 구독 객체 넣기?
 	function insertOrder(receiptId) {
 		$.ajax({
-			url : "insert.or", /* insert 구문의 맵핑값 */
+			url : "insert.or", // insert 구문의 맵핑값 
 			type : "post",
 			data : {
 				receiptId : receiptId,
@@ -580,13 +583,13 @@
 			success : function(result) {
 				
 				if(result == 0) {
-					console.log("order DB 넣음X")
+					console.log("order DB 넣음X"); // 여기
 				}
 				else {
 					console.log(result);
 					var orderNo = result;
 					console.log(orderNo);
-					console.log("order DB 넣음")
+					console.log("order DB 넣음"); // 여기
 					
 					// 트리거 실행
 					$("#thisOrderNo").val(orderNo);
@@ -596,12 +599,12 @@
 					$("#real-submit-button").trigger("click");
 					
 				}
+					
+				location.href='complete.or';
 				
-				
-				
-				// location.href='complete.or';
 			}, error : function() {
-				console.log("DB 넣음 실패")
+				console.log("DB 넣음 실패");
+
 			}
 		});
 	}

@@ -83,10 +83,15 @@
 
 
 	<script>
-		$("#qnaTable>tbody").on("click", "tr", function () {
-			console.log($(this).children().eq(0).text());
-			location.href="qnaDetailView.me?qnaNo=" + $(this).children().eq(0).text();
-		});
+		$(function () {
+			$("#qnaTable>tbody").on("click", "tr", function () {
+				console.log($(this).children().eq(0).text());
+				location.href="qnaDetailView.me?qnaNo=" + $(this).children().eq(0).text();
+			});
+		
+			$("#category-qna").css("font-weight", "700");
+			
+		})
 	</script>
 </body>
 </html>

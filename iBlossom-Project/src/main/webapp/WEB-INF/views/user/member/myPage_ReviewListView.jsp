@@ -76,6 +76,8 @@
  		$("#reviewTable>tbody").on("click", "tr", function () {
  			console.log("click");
  		});
+ 		
+ 		$("#category-review").css("font-weight", "700");
  	});
  </script>
 

@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -200,12 +201,32 @@ public class MemberController {
 	      return "admin/member/memberListView";
 	   }
 
-   // 마이페이지 호출 및 응답
-   @RequestMapping(value="mypage.me")
-   public String myPageMainView() {
+	// 마이페이지 메인 호출 및 응답
+	@RequestMapping(value="mypage.me")
+	public String myPageMainView(HttpSession session, Model model) {
+	   
+	   int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+	   
+	   // 최근 1개월
+	   // 배송준비
+	   // 배송중
+	   // 배송완료
+	   int ready = orderService.countReady(userNo);
+	   int shipping = orderService.countShipping(userNo);
+	   int complete = orderService.countComplete(userNo);
+
+	   // 최근 1개월 
+	   // 주문
+	   ArrayList<Order> list = orderService.selectMyOrderAllList(userNo);
+	   
+	   model.addAttribute("ready", ready);
+	   model.addAttribute("shipping", shipping);
+	   model.addAttribute("complete",complete);
+	   model.addAttribute("list", list);
+	   
       
-      return "user/member/myPage_MainView";
-   }
+       return "user/member/myPage_MainView";
+    }
    
    // 나의 주문정보 보기 메소드
    @RequestMapping(value="orderListView.me")
@@ -488,9 +509,11 @@ public class MemberController {
    @RequestMapping(value="checkDate.me")
    public String updateDeliverStatus() {
 	   
-	   int result = subscribeService.updateDeliverStatus();
+	   int result1 = subscribeService.updateDeliverStatus();
 	   
-	   if(result > 0) {
+	   int result2 = orderService.updateDeliveryStatus();
+	   
+	   if(result1 * result2 > 0) {
 		   return "1";
 	   }
 	   else {
@@ -513,28 +536,43 @@ public class MemberController {
 	   }
    }
    
-   @ResponseBody
-   @RequestMapping(value="refund.me") 
-   public String refundPurchase(int price, HttpSession session) {
-	   
-	   System.out.println(price);
-	   
-	   int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
-	   
-	   HashMap<String, Integer> map = new HashMap<>();
+	@RequestMapping(value="refund.me", method=RequestMethod.POST) 
+	public String refundPurchase(Order o, HttpSession session) {
 		
-	   map.put("userNo", userNo);
-	   map.put("refund", Integer.valueOf(price));
+		System.out.println("refund.me 로 넘어옴");
 	   
-	   int result = memberService.refundPurchase(map);
+		System.out.println(o.getTotalPrice());
 	   
-	   if(result > 0) {
-		   return "1";
-	   }
-	   else {
-		   return "0";
-	   }
-   }
+		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+		
+		Member m = new Member();
+		m.setUserId(userId);
+	   
+		HashMap<String, Integer> map = new HashMap<>();
+		
+		
+		map.put("userNo", userNo);
+		map.put("refund", o.getTotalPrice());
+//		map.put("refund", Integer.valueOf(price));
+	   
+		System.out.println(map);
+
+		int result = memberService.refundPurchase(map);
+	   
+		if(result > 0) {
+		   
+			Member updateMem = memberService.login(m);
+			session.setAttribute("loginUser", updateMem);
+			
+			session.setAttribute("alertMsg", "refund.me에서 결제취소가 되었습니다.");
+			return "redirect:orderListView.me";
+		}
+		else {
+			session.setAttribute("alertMsg", "결제취소에 실패했습니다.");
+			return "redirect:orderListView.me";
+		}
+	}
  
    
 }

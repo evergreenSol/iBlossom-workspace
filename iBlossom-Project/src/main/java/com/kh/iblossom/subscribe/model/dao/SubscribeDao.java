@@ -53,11 +53,13 @@ public class SubscribeDao {
 		return sqlSession.insert("subscribeMapper.insertSubscribe", s);
 	}
 	
+	// count
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("subscribeMapper.selectListCount");
 	}
 	
+	// 구독 회원 조회
 	public ArrayList<Subscribe> selectSubMembertList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		
 		int limit = pi.getBoardLimit();
@@ -68,11 +70,13 @@ public class SubscribeDao {
 		return (ArrayList)sqlSession.selectList("subscribeMapper.selectSubMemberList", null, rowBounds); 
 	}
 
+	// 검색
 	public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
 		
 		return sqlSession.selectOne("subscribeMapper.selectSearchCount", map);
 	}
 
+	// 구독 회원 검색
 	public ArrayList<Subscribe> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi,
 			HashMap<String, String> map) {
 		

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>iBlossom | Error</title>
 </head>
 <body>
 	<h1 align="center">${ errorMsg }</h1>

@@ -16,43 +16,43 @@
 	            <br><br>
 	            <!-- <hr color="black" style="border: 1px solid black"> -->
 	            <li class="left_menu">
-	                <a href="orderListView.me">
-	                    <span class="category-content">주문내역 / 배송조회</span>
+	                <a href="orderListView.me" >
+	                    <span class="category-content" id="category-orderList">주문내역 / 배송조회</span>
 	                    <span class="category-arrow">></span>
 	                </a>
 	            </li>
 	            <br>
 	            <li class="left_menu" >
-	                <a href="subscribeView.me">
-	                    <span class="category-content">나의 정기구독</span>
+	                <a href="subscribeView.me" >
+	                    <span class="category-content" id="category-subscribe">나의 정기구독</span>
 	                    <span class="category-arrow">></span>
 	                </a>
 	            </li>
 	            <br>
 	            <li class="left_menu">
-	                <a href="onedayClass.me">
-	                    <span class="category-content">나의 클래스</span>
+	                <a href="onedayClass.me" >
+	                    <span class="category-content" id="category-onedayclass">나의 클래스</span>
 	                    <span class="category-arrow">></span>
 	                </a>
 	            </li>
 	            <br>
 	            <li class="left_menu">
-	                <a href="updateForm.me">
-	                    <span class="category-content">프로필수정</span>
+	                <a href="updateForm.me" >
+	                    <span class="category-content" id="category-profile">프로필수정</span>
 	                    <span class="category-arrow">></span>
 	                </a>
 	            </li>
 	            <br>
 	            <li class="left_menu">
-	                <a href="qnaListView.me">
-	                    <span class="category-content">나의 1대1문의</span>
+	                <a href="qnaListView.me" >
+	                    <span class="category-content" id="category-qna">나의 1대1문의</span>
 	                    <span class="category-arrow">></span>
 	                </a>
 	            </li>
 	            <br>
 	            <li class="left_menu">
-	                <a href="reviewListView.me">
-	                    <span class="category-content">나의 리뷰</span>
+	                <a href="reviewListView.me" >
+	                    <span class="category-content" id="category-review">나의 리뷰</span>
 	                    <span class="category-arrow">></span>
 	                </a>
 	            </li>
