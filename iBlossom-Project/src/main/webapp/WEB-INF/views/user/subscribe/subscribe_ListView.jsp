@@ -206,8 +206,8 @@
 	$('.sub_level').click(function() {
 		
 		if($('#datepicker').val().length > 1) { // 수령일을 선택하고 구독 개월수를 클릭하면
-			
-			$(this).css("border","2px solid rgb(255,35,147)") // 핑크색 테두리
+			$('.sub_level').css("border","2px solid rgb(243,243,243)") // 핑크였던 애가 있다면 회색 테두리로
+			$(this).css("border","2px solid rgb(255,35,147)") // 선택된 애만 핑크색 테두리
 			$('.sub_product').removeAttr("hidden")
 			var spno = $('#spno').val(); // 상품 번호 저장
 			var deliverAt = $('#datepicker').val(); // 수령 날짜 저장
