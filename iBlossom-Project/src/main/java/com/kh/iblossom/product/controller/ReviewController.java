@@ -51,6 +51,7 @@ public class ReviewController {
 	//리뷰 작성하기
 	@RequestMapping("insert.re")
 	public String insertReview(Review r, MultipartFile upReviewPhoto, HttpSession session, Model model) {
+	
 		
 		if(!upReviewPhoto.getOriginalFilename().equals("")) {
 			String changeName = saveFile(upReviewPhoto,session);

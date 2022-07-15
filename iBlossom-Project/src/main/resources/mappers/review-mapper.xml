@@ -45,9 +45,9 @@
                          , PRODUCT_NO)
       VALUES(SEQ_RNO.NEXTVAL
            , #{reviewTitle}
+           , #{reviewContent}
            , 'path'
-           , #{reviewPhoto}
-           , #{orderNo}
+           , 2
            , #{userNo}
            , #{productNo})
      </insert>
