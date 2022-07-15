@@ -42,6 +42,7 @@ public interface MemberService {
 
    int updateSubPurchase(HashMap<String, Integer> map);
    
+   int refundPurchase(HashMap<String, Integer> map);
 
 
 

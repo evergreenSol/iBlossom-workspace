@@ -126,10 +126,17 @@
 		    END
 	</update>
 	
-	<!-- 구독 시 멤버 purchase 업데이트 -->
+	<!-- 구독(구매) 시 멤버 purchase 업데이트 -->
 	<update id="updateSubPurchase" parameterType="hashmap">
 	UPDATE MEMBER
 	   SET PURCHASE = PURCHASE + #{purchase}
+	 WHERE USER_NO = #{userNo}
+	</update>
+	
+	<!-- 환불 시 멤버 purchase 업데이트-->
+	<update id="refundPurchase" parameterType="hashmap">
+	UPDATE MEMBER
+	   SET PURCHASE = PURCHASE - #{refund}
 	 WHERE USER_NO = #{userNo}
 	</update>
 	

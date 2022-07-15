@@ -8,6 +8,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <link href="resources/css/jsa.css" rel="stylesheet">
+ <style>
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	    -webkit-appearance: none;
+	    margin: 0;
+	}
+
+ </style>
+ 
 </head>
 <body>
 
@@ -19,8 +28,6 @@
 
 	<div id="wrap_detail1">
 		<div style="width: 1000px; margin: auto;">
-			<form name="form" method="get" action="insertCo.ca">
-				<input type="hidden" name="productNo" value="${ p.productNo }">
 				<table>
 					<tr class="tr1" valign="top">
 						<td rowspan="6"><img src="resources/images/flower3.PNG">
@@ -29,7 +36,7 @@
 										---------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										---------</option>
 									<c:forEach var="p" items="${ list }" varStatus="status">
-										<option id="option_flower" value="${ status.count }">${ p.flowerName }</option>
+										<option id="option_flower${ status.count }" value="${ status.count }" style="text-align: center;">${ p.flowerName }</option>
 									</c:forEach>
 							</select>
 						</td>
@@ -51,21 +58,23 @@
 					</tr>
 					<tr>
 						<td>
-							<div id="countBox1" align="center">
-								<input type="hidden" id="listLength" value="${ fn:length(list) }">
+						<form id="cartItems" method="post" action="">
+							<div id="countBox1" align="center"> <!-- overflow : auto -->
 								<c:forEach var="p" items="${ list }" varStatus="status">
 								<div class="item${ status.count }" hidden>
-								<div onclick="removeItem()" id="removeItem"><img src="resources/images/x.png" style="width: 15px; float:right"></div>
-								<input type="text" name="index" id="index" value=${ status.count }>
-								<input type="text" name="productNo" id="productNo" value="${ p.productNo }">
-								<input type="text" name="flowerName" id="flowerName" value="${ p.flowerName }">
+								<div onclick="removeItem(${ status.count })" id="removeItem"><img src="resources/images/x.png" style="width: 15px; float:right"></div>
+								<input type="hidden" id="index" value=${ status.count }>
+								<input type="hidden" id="userNo" value="${ loginUser.userNo }">
+								<input type="hidden" id="productNo" value="${ p.productNo }">
+								${ p.flowerName }
 								<input type="button" value="-" onclick="count('minus',${ status.count })">
-								<div id="productCount${ status.count }">1</div>
+								<input type="number" id="productCount${ status.count }" value="1">
 								<input type="button" value="+" onclick="count('plus',${ status.count })">
-								<input type="text" id="price" name="price" value="${ p.price }">
+								<input type="hidden" id="productPrice${ status.count }" value="${ p.price }">
 								</div>
-								</c:forEach>
+								</c:forEach>		
 							</div> 
+						</form>
 							<br>
 							<div style="margin-left: 20px">
 								배송비: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
@@ -80,42 +89,58 @@
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"
 									style="border: none; font-weight: 700; font-size: 15px; background-color: rgba(224, 224, 224, 0.001); padding-left: 60px; width: 50px;"
-									name="sum" size="11" id="sum" readonly value="0">&nbsp;&nbsp;원
+									name="sum" size="11" id="sum" readonly value="">&nbsp;&nbsp;원
 							</div>
-							<!-- </form> -->
 						</td>
 					</tr>
 
 					<tr>
-
-						<td><br>
-						<br> <input value="장바구니" id="btn1" onclick="getObject();"></td>
-
+						<td>
+							<br>
+							<br>
+							<c:choose>
+								<c:when test="${ loginUser eq null }">
+									<input value="장바구니" id="btn1" onclick="alert('로그인이 필요한 서비스 입니다!'); location.href='loginForm.me';">
+								</c:when>
+								<c:otherwise>
+									<input value="장바구니" id="btn1" onclick="submitForm();">
+								</c:otherwise>
+							</c:choose> 
+						</td>
 					</tr>
 
 				</table>
-			</form>
+
 
 			<!--상세 정보 버튼 시작-->
 			<div class="categorize review-box"
 				style="height: 100px; margin-top: 30px;">
-				<div class="reviewBox" id="combination_content" onclick="showList();">상세정보</div>
-				<div class="reviewBox" id="combination_review" onclick="test4();">리뷰</div>
+				<div class="reviewBox" id="combination_content" onclick="showDetail();">상세정보</div>
+				<div class="reviewBox" id="combination_review" onclick="showReview();">리뷰</div>
 			</div>
 
 			<!-- 상세정보 폼-->
 
-			<div id="cobinationContent">
+			<div id="flowerDetailList">
 				<c:forEach var="p" items="${ list }">
-				<div id="combinationPhoto" style="overflow: hidden;">
-					<img src="${ p.thumbNail }">
-				</div>
+				<table>
+					<tr>
+						<td width="100px" height="150px">
+								<img src="${ p.thumbNail }">
+						</td>
+					</tr>
+					<tr>
+						<td>${ p.flowerName }</td>
+					</tr>
+				</table>
 				</c:forEach>
 			</div>
+
     </div>
 
     <!-- 리뷰 작성폼-->
-			<div>
+
+			<div id="reviewList" hidden>
 			
 			</div>
 			
@@ -140,56 +165,81 @@
 			
 		</div>
 
-
-
-	</div>
-	
 	<script>
+	// 빈 배열 만들기
 	var items = [];
-	var itemArr = [];
 	
+	// 특정 상품이 셀렉 되면
 	function selectFlower() {
-		var selectFlower = $("#select_flower").val();
-		$(".item"+ selectFlower +"").removeAttr("hidden");
-		var index = $(".item"+ selectFlower +"").children("#index").val();
-		items.push(index);
+		
+		var selectFlower = $("#select_flower").val(); // 해당 상품의 인덱스 가져오기
+		$(".item"+ selectFlower +"").removeAttr("hidden"); // class="item + 해당 인덱스" 인 div hidden 제거 
+		
+		// var index = $(".item"+ selectFlower +"").children("#index").val(); // index
+		items.push(selectFlower); // 아까 생성한 빈 배열에 인덱스 밀어넣어주기
+
+		$("#option_flower"+selectFlower+"").attr("disabled", "true"); // 이미 셀렉된 상품은 다시 셀렉 못하게
+		
 	}
 	
-	function count(type,index)  {
+	function count(type,index)  { // 수량 더하기, 빼기용 함수
 		  
-		  const resultElement = document.getElementById('productCount'+index+'');
+		  const productCount = document.getElementById('productCount'+index+''); // id="productCount1, productCount2..."
 		  
 		  // 현재 화면에 표시된 값
-		  let number = resultElement.innerText;
+		  let count = productCount.value; // 변수 선언 및 값을 productCount input의 value로 초기화
 		  
 		  // 더하기/빼기
-		  if(type === 'plus') {
-		    number = parseInt(number) + 1;
-		  }else if(type === 'minus' && number > 1)  {
-		    number = parseInt(number) - 1;
+		  if(type === 'plus') { // 매개변수로 plus type이 넘어오면
+		    productCount.value = parseInt(count) + 1; // count++
+
+		  }else if(type === 'minus' && count > 1)  { // 매개변수로 minus type 이 넘어오고 1보다 크다면
+		    productCount.value = parseInt(count) - 1; // count--
+
 		  }
-		  else {
-			  number = number;
+		  else { // 그 외에는
+			 productCount.value = parseInt(count); // 현상 유지
 		  }
 		  
-		  // 결과 출력
-		  resultElement.innerText = number;
-		
 	 }
 
-     function removeItem(){
+     function removeItem(num){ // 상품 삭제용 함수
 
+    	 $(".item"+ num +"").attr("hidden","true"); // itemX 다시 hidden
+    	 $("#option_flower"+num+"").removeAttr("disabled"); // 해당 상품 다시 셀렉 가능하게
+
+  		var index;
+		for(var i = 0; i < items.length; i++) { // 해당 상품들의 인덱스가 담긴 배열을 돌면서
+			if(items[i]==num){ // 해당 상품의 인덱스와 매개변수로 넘어온 num이 같다면
+				index = i; // index에 i 저장
+			}
+		}  		
+		items.splice(index, 1); // 배열에서 아까 선언한 인덱스에 있는 아이템 삭제
      }
      
-     function getObject() {
-    	 for(var i = 0; i < items.length; i++) {
-    		 var object = { 
-    				 productNo : $(".item"+items[i]+"").children("#productNo").val(),
-    				 productCount : $(".item"+items[i]+"").children("#productCount").text()
-    		 }
-    		 itemArr.push(object)
-    	 }
-    	 console.log(itemArr);
+     function submitForm() {
+		if(items.length==0) { // 셀렉된 아이템이 없다면
+			alert("장바구니에 넣으신 물건이 없습니다");
+		}
+		else {
+	    	for(var i = 0; i < items.length; i++) { // 현재까지 남아있는 아이템 리스트 배열을 돌면서 필요한 name 속성 추가
+	 				$(".item"+ items[i] + "").children("#userNo").attr("name","cartList[" + i + "].userNo")
+	    			$(".item"+ items[i] + "").children("#productNo").attr("name","cartList[" + i + "].productNo")
+	    			$(".item"+ items[i] + "").children("#productPrice"+items[i]+"").attr("name","cartList[" + i + "].productPrice")
+	    			$(".item"+ items[i] + "").children("#productCount"+items[i]+"").attr("name","cartList[" + i + "].productCount")	
+	 		}
+	    	 $('#cartItems').attr("action", "insertCo.ca").submit();
+		}
+     }
+     
+     function showDetail() { // 상세정보 페이지 열기
+    	 $('#reviewList').attr("hidden","true");
+    	 $('#flowerDetailList').removeAttr("hidden");
+     }
+     
+     function showReview() { // 리뷰 열기
+    	 $('#reviewList').removeAttr("hidden");
+    	 $('#flowerDetailList').attr("hidden","true");
      }
  	</script>
     

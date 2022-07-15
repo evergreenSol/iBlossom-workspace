@@ -98,5 +98,9 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.updateSubPurchase", map);
 	}
 	
+	public int refundPurchase(SqlSessionTemplate sqlSession, HashMap<String, Integer> map) {
+		return sqlSession.update("memberMapper.refundPurchase", map);
+	}
+	
 
 }

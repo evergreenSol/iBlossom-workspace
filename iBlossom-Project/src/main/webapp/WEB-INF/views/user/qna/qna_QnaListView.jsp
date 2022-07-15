@@ -39,7 +39,7 @@
                     <br>
                     <li class="left_menu">
                         <a href="qnaList.qu">
-                            <span class="category-content">1대1 문의</span>
+                            <span class="category-content" style="font-weight : 700;">1:1 문의</span>
                             <span class="category-arrow">></span>
                         </a>
                     </li>
@@ -56,7 +56,7 @@
         </div>
 	
         <div id="list-container">
-            <p style="font-size: 20px; font-weight: 700;">1대1 문의게시판</p>
+            <p style="font-size: 20px; font-weight: 700;">1:1 문의게시판</p>
       		  <a type=button id="btn-write" href="qnaForm.qu">작성하기</a>
             <table id="list-table">
                 <thead>

@@ -39,7 +39,7 @@
                     <br>
                     <li class="left_menu">
                         <a href="qnaForm.qu">
-                            <span class="category-content">1대1 문의</span>
+                            <span class="category-content" style="font-weight : 700;">1:1 문의</span>
                             <span class="category-arrow">></span>
                         </a>
                     </li>
@@ -56,11 +56,11 @@
         </div>
 	
 		<form id="answer-container" method="post" action="insert.qu">
-			<p id="ans" style="font-size: 20px; font-weight: 700;">문의하기</p>
-			<table id="anwcontent" border="1">
+			<p id="ans" style="font-size: 23px; font-weight: 700;">문의하기</p>
+			<table id="anwcontent" border="1" style="border-collapse: collapse;">
 				<tr>
 					<th width="120" height="40" style="font-size: 16px;"><label for="title">제목</label></th>
-					<td width="450" ><input type="text" id="qnaTitle" name="qnaTitle" style="border:none" style="width:400px;font-size: 15px;" maxlength="50" required></td>
+					<td width="720" ><input type="text" id="qnaTitle" name="qnaTitle" style="border:none; outline:none; width:700px; height:35px; font-size:15px;" maxlength="50" required></td>
 
 				</tr>
 				<tr>
@@ -68,15 +68,15 @@
                     <c:when test="${ empty loginUser }">
 		            	<th style="font-size: 16px;"><label for="content">내용</label></th>
 							<td id="anwcontent" colspan="3">
-								<p style="height:200px;"><textarea id="qnaContent" name="qnaContent"  cols="55" rows="13" maxlength="700"
-									style="resize:none; border: none;" style="font-size: 15px;" readonly>로그인한 사용자만 이용 가능한 서비스입니다. 로그인 후 이용 바랍니다.</textarea></p>
+								<p style="height:200px; margin:0px; padding:0px;"><textarea id="qnaContent" name="qnaContent"  cols="87" rows="10.5" maxlength="700"
+									style="resize:none;border: none; font-size:15px;" readonly>로그인한 사용자만 이용 가능한 서비스입니다. 로그인 후 이용 바랍니다.</textarea></p>
 							</td>
                   		</c:when>
              		<c:otherwise>
 						<th style="font-size: 16px;"><label for="content">내용</label></th>
 							<td id="anwcontent" colspan="3">
-								<p style="height:200px;"><textarea id="qnaContent" name="qnaContent"  cols="55" rows="13" maxlength="700"
-									style="resize:none; border: none;" style="font-size: 15px;" required></textarea></p>
+								<p style="height:200px; margin:0px; padding:0px;"><textarea id="qnaContent" name="qnaContent"  cols="87" rows="10.5" maxlength="700"
+									style="resize:none; border: none; outline:none; font-size: 15px;" required></textarea></p>
 							</td>	
                		</c:otherwise>
                	</c:choose>

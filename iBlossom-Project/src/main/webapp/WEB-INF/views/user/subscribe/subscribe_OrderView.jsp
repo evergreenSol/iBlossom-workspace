@@ -10,8 +10,43 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
-<link href="resources/css/ldo-user.css" rel="stylesheet">
-<link href="resources/css/kdh.css" rel="stylesheet">
+<link href="resources/css/ldo-user.css" rel="stylesheet"> 
+<!-- <link href="resources/css/kdh.css" rel="stylesheet"> -->
+<style>
+
+    
+
+</style>
+
+<!-------------------------------------------------------------------->
+<!-- 슬라이드 업/다운 스크립트  -->
+
+<script>
+    $(function() {
+        $("#CheckBtn").on("click", function() {
+            // id가 "CheckBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
+            $("#CheckBox").slideToggle("1500");
+        });
+    });
+</script>
+
+<script>
+    $(function() {
+        $("#OrdererBtn").on("click", function() {
+            // id가 "OrdererBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
+            $("#OrdererBox").slideToggle("1500");
+        });
+    });
+</script>
+
+<script>
+    $(function() {
+        $("#SenderBtn").on("click", function() {
+            // id가 "SenderBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
+            $("#SenderBox").slideToggle("1500");
+        });
+    });
+</script>
 </head>
 <body>
 
