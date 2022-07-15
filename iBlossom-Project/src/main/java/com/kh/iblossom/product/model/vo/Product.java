@@ -19,4 +19,5 @@ public class Product {
 	private Date enrollDate;	   	//	ENROLL_DATE
 	private String tag;				//	TAG
 	private String status;			//	STATUS
+	
 }

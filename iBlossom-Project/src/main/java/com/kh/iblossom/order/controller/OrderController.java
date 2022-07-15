@@ -1,6 +1,7 @@
 package com.kh.iblossom.order.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +18,7 @@ import com.kh.iblossom.cart.model.vo.CartCommand;
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.common.template.Pagination;
 import com.kh.iblossom.member.model.service.MemberService;
+import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.order.model.service.OrderService;
 import com.kh.iblossom.order.model.vo.DetailOrder;
 import com.kh.iblossom.order.model.vo.DetailOrderCommand;
@@ -143,12 +145,19 @@ public class OrderController {
 	}
 	
 	@RequestMapping("insertDetailOrder.or")
-	public String insertDetailOrder(DetailOrderCommand detailOrderCommand, int orderNo) {
+	public String insertDetailOrder(DetailOrderCommand detailOrderCommand, int orderNo, HttpSession session) {
 		// 디테일 오더 테이블 만들기(주문상세)
 		System.out.println(detailOrderCommand);
 		
 		ArrayList<DetailOrder> list = (ArrayList<DetailOrder>)detailOrderCommand.getDetailOrderList();
 		
+		// 구매액 Purchase Amount
+		int purchase = 0;
+		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+		
+		Member m = new Member();
+		m.setUserId(userId);
 		
 		for(int i = 0; i < list.size(); i++) {
 			DetailOrder detailOrder = list.get(i);
@@ -156,12 +165,30 @@ public class OrderController {
 			
 			detailOrder.setOrderNo(orderNo);
 			
-			int DOResult = orderService.insertDetailOrder(detailOrder);
+			purchase += detailOrder.getOnePrice() * detailOrder.getOneQuantity();
 			
-			if(DOResult < 0) {
+			int cartNo = detailOrder.getCartNo();
+			
+			int DOResult = orderService.insertDetailOrder(detailOrder);
+			int cartDeleteResult = cartService.deleteCart(cartNo);
+			
+			if(DOResult * cartDeleteResult < 0) {
 				break;
 			}
 		}
+		
+		HashMap<String, Integer> map = new HashMap<>();
+		
+		map.put("userNo", userNo);
+		map.put("purchase", purchase);
+		
+		int paResult = memberService.updateSubPurchase(map);
+		if(paResult > 0) {
+			
+			Member updateMem = memberService.login(m);
+			session.setAttribute("loginUser", updateMem);
+		}
+		
 		
 		return "user/order/order_Complete";
 	}

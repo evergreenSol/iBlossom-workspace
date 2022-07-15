@@ -124,7 +124,7 @@
 		                                <!-- 상품 옵션 확인란 -->
 		                                <div class="order-check-list"><br>
 		                                
-		                                		<input type="hidden" id="cartNo" name="" value="${ selectList[i].cartNo }">
+		                                		<input type="hidden" id="cartNo" name="detailOrderList[${i}].cartNo" value="${ selectList[i].cartNo }">
 		                                		<input type="hidden" id="userNo" name="" value="${ selectList[i].userNo }">
 		                                		
 		                                        <!-- 상품 제목 -->

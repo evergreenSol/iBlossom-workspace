@@ -97,6 +97,6 @@ public class MemberDao {
 		
 		return sqlSession.update("memberMapper.updateSubPurchase", map);
 	}
-
+	
 
 }
