@@ -12,11 +12,6 @@
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet"> 
 <!-- <link href="resources/css/kdh.css" rel="stylesheet"> -->
-<style>
-
-    
-
-</style>
 </head>
 <body>
 
@@ -62,7 +57,7 @@
 		
 	<!-- 사용자 주문 페이지 왼쪽 영역 -->
     <!-- 주문내역 확인, 주문자 정보, 발신인 이름 펼친 페이지 -->
-    <p style="font-weight:700; font-size:31px; margin-bottom:15px;">&nbsp;주문/결제</p>
+    <p id="MainWrapTitle">&nbsp;주문/결제</p>
 
         <!-- 왼쪽 섹션 -->
         <div class="order-left">
@@ -94,8 +89,7 @@
 
                                 <!-- 상품 이미지 -->
                                 <span>
-                                    <img src="${ sp.subChangeName }"
-                                    	 style="width:250px; height:250px;">
+                                    <img src="${ sp.subChangeName }">
                                 </span>
 
                                 <!-- 상품 옵션 확인란 -->

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,11 +38,11 @@
                             <div><img src="resources/images/order_complete_check.png" style="width:54px; height:54px;"></div>
 
                             <!-- 멘트 -->
-                            <div style="font-weight:bold; font-size:medium;">${ m.userName } 님의 주문이 완료되었습니다.</div><!-- ${m.userName} -->
+                            <div style="font-weight:bold; font-size:medium;">${ loginUser.userName } 님의 주문이 완료되었습니다.</div><!-- ${m.userName} -->
                             <br>
 
                             <!-- 주문번호 -->
-                            <div class="complete-graybox-num">주문번호 : 1</div> <!-- ${o.orderNo} -->
+                            <div class="complete-graybox-num">주문번호 : </div> <!-- ${o.orderNo} -->
 	
                         </div> 
 

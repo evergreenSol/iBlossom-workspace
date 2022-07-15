@@ -23,15 +23,28 @@
 	<div id="cartMainOuter">
 	
 	    <!-- 장바구니 타이틀 -->
-	    <p style="font-weight:700; font-size:34px; margin-bottom:15px;">&nbsp;쇼핑백</p>
+	    <p id="CartTitle">&nbsp;쇼핑백</p>
 	
 	    <div class="cart-left">
 	
 	        <!-- 전체선택, 선택삭제 div -->
 	        <div class="cart-choice">
 	            <div>
-	                <input type="checkbox">&nbsp;전체선택 <span>(1/2)</span>
+	                <input type="checkbox" checked onclick="checkFalse">&nbsp;전체선택 <span>(1/2)</span>
 	            </div>
+	            
+	            <!-- 현재 페이지 들어오면 전체선택 되게끔 -->
+	            <script>
+		            $(document).ready(function(){
+		                var link =  document.location.href; // 현재 페이지 url 를 가지고 옵니다.    
+	                        $( "input[type=checkbox]" ).each(function(){ // 확인됐으면 모든 체크박스에 체크를 해줍니다.
+	                        	$(this).attr('checked', true);
+	                        });
+		        	});
+		            
+		            function
+	            </script>
+	            
 	            <div>
 	                <button type="button" class="choice-delete-btn" onclick="location.href=''">선택삭제</button>
 	            </div>
@@ -48,7 +61,7 @@
 	        <!-- 장바구니 내용 -->
 			<form action="detail.or">
 	        	
-	        	<div style="border:1px solid; padding:30px;">
+	        	<div style="border:1px solid; padding:0px;">
 	        		        
 					<c:forEach var="c" begin="0" end="${ list.size() -1 }" varStatus="status">
 					<input type="hidden" value="${ list.size() }" id="listSize">
@@ -62,7 +75,7 @@
 			
 			                <!-- 장바구니 이미지 -->
 			                <div class="cart-content2">
-			                    <img src="${ list[c].thumbnail }" style="width:280px; height:320px;">
+			                    <img src="${ list[c].thumbnail }" style="width:280px; height:280px;">
 			                </div>
 			
 			                <!-- 장바구니 상세옵션 -->
@@ -78,20 +91,14 @@
 	
 						            <!-- 장바구니 수량 변경 -->
 				                    <input type="button" value="-" onclick="count('minus',${ status.count })">
-			                        <input type="number" id="productCount${ status.count }" value="${ list[c].productCount }" size="1">
+			                        <input type="text" id="productCount${ status.count }" value="${ list[c].productCount }" size="1">
+			                        <!-- 0715 PM 5:45 type="number" 에서 text 로 변경 - 다온 -->
 			                        <input type="button" value="+" onclick="count('plus',${ status.count })">
-			                        
-			                        <!--  
-				                	<input type="hidden" name="sell_price" value="${ list[c].productCount }">
-				                	<input class="cart-num-btn" type="button" value=" - " onclick="del();">	
-				                    <input type="text" name="amount" size="1" onchange="change();" value="${ list[c].productCount }"
-				                           style="width:20px; height:20px; text-align:center;">
-				                    <input class="cart-num-btn" type="button" value=" + " onclick="add();">
-				                   -->						    
+			                        					    
 			                </div>
 	
 			                <!-- 장바구니 상품 금액 -->
-				            <div class="cart-content4"style="border:1px solid;">
+				            <div class="cart-content4" style="border:1px solid;">
 						        <input type="text" id="sum${ status.count }" name="sum" size="3" readonly style="border:none; font-size:18px; text-align:center;">
 						               <!-- ${ list[c].productCount * list[c].productPrice }원 -->
 				            </div>
@@ -113,7 +120,8 @@
 	    </div> <!-- class="cart-left" -->
 	    
 	    <script>
-	    	$(function() {
+	    
+	    	$(function() { // 페이지 로딩시 바로 실행되는 아이 
 	    		
 	    		var listSize = $('#listSize').val(); // 상품 리스트 사이즈 (상품이 3개면 3개)
 	    		var sumAll = 0;
@@ -125,9 +133,19 @@
 	    			sumAll += parseInt($('#sum'+(i+1)+'').val()); // sumAll = sum1 + sum2 + ...
 	    		}
 				$('#sumAll').attr("value",sumAll); // sumAll input에 sumAll 값 전달
+				$('#totalPrice').text(sumAll + 3000);
 	    	});
 	    	
-    		function getSum() {
+	    	// 체크가 됐을 때 : 체크된 애가 몇번째 박스인지 가져오고 그 값을 이용해서 price + 그값 
+	    	// 체크가 풀리면 체크된 애가 몇번째 박스인지 가져오고 그 "몇번쨰" 인지 값을 이용해서 $('#price'+(그값)+'').val() 을 0으로 바꿔주기
+	    	// 체크가 안됐을 때는 아이디를 다르게 주면 된다. notPrice/ notProductCount
+	    	
+	    	function checkPrice() { // 이름을 주게 되면 그 실행해달라고 하는 곳에서 실행됨
+	    		
+	    	}
+	    	
+	    	
+    		function getSum() { // 이름을 주게 되면 그 실행해달라고 하는 곳에서 실행됨
     			
     			var listSize = $('#listSize').val(); // 상품 리스트 사이즈 (상품이 3개면 3개)
 	    		var sumAll = 0;
@@ -139,9 +157,9 @@
 	    			sumAll += parseInt($('#sum'+(i+1)+'').val()); // sumAll = sum1 + sum2 + ...
 	    		}
 				$('#sumAll').attr("value",sumAll); // sumAll input에 sumAll 값 전달
+				$('#totalPrice').text(sumAll + 3000);
     		}
-	    
-	    
+	    	    
 	 		// 수량 더하기, 빼기용 함수
 		    function count(type,index)  { 
 		        
@@ -173,12 +191,14 @@
 		          sum.value = price * productCount.value;
 		          getSum();
 		        }
-
 		    }
 	 		
-			
-
-	 		
+	 		/*
+	 		function getSum() {
+	 			var sumAll = document.getElementById('sumAll');
+	 		}
+	 		*/
+	
 		</script>
 	    
 	    <!------------------------------------------------------------------->
@@ -188,11 +208,12 @@
 		    <!-- 사용자 장바구니 페이지 오른쪽 영역-->
 		    <div class="cart-right-price">
 		
-		        <!-- 총 주문 금액 -->
+		        <!-- 1. 총 주문 금액 -->
 		        <div class="cart-price1">
 		            <span>총 주문 금액</span>
 		            
-		            <input id="sumAll" name="sumAll">원
+		            <input type="text" id="sumAll" name="sumAll">원
+		            
 		            
 		            <!--  
 	            	<c:set var = "total" value = "0" />
@@ -204,18 +225,20 @@
 
 		        </div>
 		        
-		        <!-- 배송비 -->
+		        <!-- 2. 배송비 -->
 		        <div class="cart-price2">
 		            <span>배송비</span>
-		            <span><fmt:formatNumber value="3000" pattern="###,###"/>원</span>
+		            <!-- <span><fmt:formatNumber value="3000" pattern="###,###"/>&nbsp;원</span> -->
+		            <span>3000&nbsp;원</span>
 		        </div>
 
 		        <hr>
 		
-		        <!-- 총 결제 금액 -->
+		        <!-- 3. 총 결제 금액 = 1 + 2 -->
 		        <div class="total-price">
 		            <span>총 결제 금액</span>
-			        <span><fmt:formatNumber value="${ total + 3000 }" pattern="###,###"/>원</span>
+			        <span id="totalPrice"></span>원
+			        
 		        </div>
 		
 	        </div>
