@@ -124,10 +124,10 @@ div { box-sizing: border-box; }
     .cart-content3 {
     	font-size: 19px;
         height: 100%;
-        /*flex-direction: column;*/
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 110px;
+        width: 190px;
     }  
         
     /* 수량 버튼 */
@@ -398,7 +398,7 @@ div { box-sizing: border-box; }
     
     /* 주문자 정보 - 이름, 연락처 / 발신인 이름 */
     .orderer-name, .orderer-phone, #SenderBox>p, #receiveBox>p { 
-        width: 660px;
+        width: 605px;
         padding: 10px; 
         background-color:rgba(241, 241, 241, 0.707); 
     }
