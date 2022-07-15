@@ -509,9 +509,11 @@ public class MemberController {
    @RequestMapping(value="checkDate.me")
    public String updateDeliverStatus() {
 	   
-	   int result = subscribeService.updateDeliverStatus();
+	   int result1 = subscribeService.updateDeliverStatus();
 	   
-	   if(result > 0) {
+	   int result2 = orderService.updateDeliveryStatus();
+	   
+	   if(result1 * result2 > 0) {
 		   return "1";
 	   }
 	   else {

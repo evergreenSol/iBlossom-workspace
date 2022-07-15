@@ -94,6 +94,10 @@ public class OrderDao {
 	public ArrayList<Order> selectMyOrderAllList(SqlSessionTemplate sqlSession, int userNo) {
 		return (ArrayList)sqlSession.selectList("orderMapper.selectMyOrderAllList", userNo);
 	}
+	
+	public int updateDeliveryStatus(SqlSessionTemplate sqlSession) {
+		return sqlSession.update("orderMapper.updateDeliveryStatus", null);
+	}
 
 
 }
