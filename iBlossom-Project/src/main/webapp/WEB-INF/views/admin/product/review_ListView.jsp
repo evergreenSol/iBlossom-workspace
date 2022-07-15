@@ -7,6 +7,44 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="resources/css/jsa.css" rel="stylesheet">
+<style>
+#pagingArea {
+   width: fit-content;
+   margin: auto;
+}
+
+.page-link {
+   font-size : 14px;
+   width : 35px;
+   height: 25px;
+   background-color : white;
+   border : 1px solid lightgray;
+   color : black;
+   display: inline-block;
+   margin-left : 10px;
+   text-decoration : none;
+   text-align : center;
+   border-radius : 3px;
+   padding-top: 5px;
+}
+
+.page-link:active:focus 
+.page-item:active {
+   color : #ff2393;
+}
+
+.page-link:hover {
+   color : #ff2393;
+}
+
+.pagination {
+   list-style-type : none;
+}
+
+.pagination li {
+   float : left;
+}
+</style>
 </head>
 <body>
 
@@ -62,8 +100,8 @@
                             <li><a href="">구독상품관리</a></li>
                         </ul>
                     </li>
-                    <li><a href="" class="admin-navi-menu">상품관리</a></li>
-                    <li><a href="" class="admin-navi-menu"style="font-weight: 700;">리뷰관리</a></li>
+                    <li><a href="list.pr" class="admin-navi-menu">상품관리</a></li>
+                    <li><a href="list.re" class="admin-navi-menu"style="font-weight: 700;">리뷰관리</a></li>
                     <li><a href="" class="admin-navi-menu">클래스관리</a></li>
                     <li>
                         <a href="" class="admin-navi-menu">고객센터관리</a>
@@ -105,41 +143,62 @@
 
         <div style="padding-top: 100px;">
             <table id="reviewTable" border="1px solid" align="center">
-                <thead>
+                <thead style="height:50px; font-weight:700;">
+                	<th>리뷰번호</th>
                     <th>상품명</th>
                     <th>아이디</th>
                     <th>제목</th>
                     <th>작성일</th>
+                    <th>상태값</th>
                 </thead>
-                <tbody>
+                <tbody style="height:40px;">
+                	<c:forEach var ="r" items="${ list }">
                     <tr>
-                        <td>장미</td>
-                        <td>user001</td>
-                        <td>테스트</td>
-                        <td>2021-10-01</td>
+                        <td class="rno">${r.reviewNo }</td>
+                        <td>${r.flowerName}</td>
+                        <td>${r.userId}</td>
+                        <td>${r.reviewTitle }</td>
+                        <td>${r.createDate }</td>
+                        <td>${r.reviewStatus }</td>
                     </tr>
-                    <tr>
-                        <td>장미</td>
-                        <td>user001</td>
-                        <td>테스트</td>
-                        <td>2021-10-01</td>
-                    </tr>
-                    <tr>
-                        <td>장미</td>
-                        <td>user001</td>
-                        <td>테스트</td>
-                        <td>2021-10-01</td>
-                    </tr>
-                    <tr>
-                        <td>장미</td>
-                        <td>user001</td>
-                        <td>테스트</td>
-                        <td>2021-10-01</td>
-                    </tr>
-                    
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
+        
+        <div id="pagingArea">
+			<ul class="pagination">
+
+				<c:choose>
+					<c:when test="${ pi.currentPage eq 1 }">
+						<li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link"
+							href="list.re?cpage=${ pi.currentPage - 1 }">◀</a></li>
+					</c:otherwise>
+				</c:choose>
+
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<li class="page-item"><a class="page-link"
+						href="list.re?cpage=${ p }">${ p }</a></li>
+				</c:forEach>
+
+				<c:choose>
+					<c:when test="${ pi.currentPage eq pi.maxPage }">
+						<li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link"
+							href="list.re?cpage=${ pi.currentPage + 1 }">▶</a></li>
+					</c:otherwise>
+				</c:choose>
+
+
+			</ul>
+		</div>
+        
+        
     </div>
 
 

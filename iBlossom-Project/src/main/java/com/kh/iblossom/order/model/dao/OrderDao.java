@@ -56,6 +56,28 @@ public class OrderDao {
 		
 		return sqlSession.selectOne("orderMapper.selectOrder", receiptId);
 	}
+	
+	public ArrayList<Order> selectMyOrderList(SqlSessionTemplate sqlSession, int userNo) {
+		
+		return (ArrayList)sqlSession.selectList("orderMapper.selectMyOrderList", userNo);
+	}
+	
+	public ArrayList<Order> selectMyOrderCancelList(SqlSessionTemplate sqlSession, int userNo) {
+		
+		return (ArrayList)sqlSession.selectList("orderMapper.selectMyOrderCancelList", userNo);
+	}
+	
+	public int cancelMyPay(SqlSessionTemplate sqlSession, String receiptId) {
+		return sqlSession.update("orderMapper.cancelMyPay", receiptId);
+	}
+	
+	public ArrayList<DetailOrder> selectMyDetailOrderList(SqlSessionTemplate sqlSession, int userNo) {
+		return (ArrayList)sqlSession.selectList("orderMapper.selectMyDetailOrderList", userNo);
+	}
+	
+	public Order selectMyOneOrder(SqlSessionTemplate sqlSession, int orderNo) {
+		return sqlSession.selectOne("orderMapper.selectMyOneOrder", orderNo);
+	}
 
 
 }

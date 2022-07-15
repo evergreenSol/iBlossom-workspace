@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -118,7 +118,7 @@
 		                                <!-- 상품 이미지 -->
 		                                <span>
 		                                    <img src="${ selectList[i].thumbnail }"
-		                                    	style="width:330px; height:350px;">
+		                                    	style="width:250px; height:250px;">
 		                                </span>
 		
 		                                <!-- 상품 옵션 확인란 -->
@@ -150,8 +150,8 @@
 	                            </c:forEach>
 	                            	<input type="hidden" id="thisOrderNo" name="orderNo">
 	                            <button type="submit" id="real-submit-button" style="display:none"></button>
-							</form>
-                            <hr> <!-------------------------------------------->
+                            
+                            </form>
 
                         </div> 
 
@@ -416,13 +416,13 @@
 					<c:forEach var="i" items="${ selectList }" varStatus="status">     
 					<c:set var="total" value="${ total + (i.productPrice * i.productCount) }"/>
 					</c:forEach>
-		            <span>${ total } 원</span>
+		            <span><fmt:formatNumber value="${ total }" pattern="###,###"/>원</span>
                 </div>
 
                 <!-- 배송비 -->
                 <div class="order-delivery">
                     <span>배송비</span>
-                    <span>+ 3000원</span>
+                    <span>+ <fmt:formatNumber value="3000" pattern="###,###"/>원</span>
                 </div>
 
                 <!-- 등급 할인 -->
@@ -435,7 +435,8 @@
                 <!-- 총 결제 금액 -->    
                 <div class="order-tprice">
                     <span >총 결제 금액</span>
-                    <span>${ total + 3000 - discount }원</span><input type="hidden" id="totalPrice" value="${ total + 3000 - discount }">
+                    <span><fmt:formatNumber value="${ total + 3000 - discount }" pattern="###,###"/>원</span>
+                    <input type="hidden" id="totalPrice" value="${ total + 3000 - discount }">
                 </div>
 
                 <br>
@@ -480,20 +481,21 @@
             <input type="hidden" id="email" value="${ loginUser.email }">
             <input type="hidden" id="address" value="${ loginUser.address }">
             <input type="hidden" id="phone" value="${ loginUser.phone }">
+            <input type="hidden" id="thumbnailForOrder" value="${ selectList[0].thumbnail }">
         </div><!-- 1200px 너비 -->
       	</div><!-- 전체 색상 변경 div -->
 
 	<script>
-	
 	var userNo = $("#userNo").val();
-	var receiveUser = $('#subReceiverUser').val();
-	var receivePhone = $('#subReceiverPhone').val();
-	var postcode = $('#zipcode').val();
-	var deliverTo1 = $('#address1').val(); 
-	var deliverTo2 = $('#address2').val();
 
 	console.log(receiveDate);
 	function pay() {
+		
+		var receiveUser = $('#subReceiverUser').val();
+		var receivePhone = $('#subReceiverPhone').val();
+		var postcode = $('#zipcode').val();
+		var deliverTo1 = $('#address1').val(); 
+		var deliverTo2 = $('#address2').val();
 		
 		if (receivePhone=="" || receiveUser=="" || postcode=="" || deliverTo1=="" || deliverTo2=="" || $('#datepicker').val()==""){
 			alert("모든 양식을 기입해야 결제가 가능합니다!");
@@ -544,12 +546,13 @@
 			type : "post",
 			data : {
 				billingKey : billingKey,
-				totalPrice : 1000,
+				totalPrice : 1000, 
 				subProductName : flowerName,
 			},
 			success : function(data) {
 				console.log("상품 결제 성공");
 				insertOrder(receiptId);
+				
 			}, error : function() {
 				console.log("상품 결제 실패");
 			}
@@ -559,19 +562,20 @@
 	// DB에 구독 객체 넣기?
 	function insertOrder(receiptId) {
 		$.ajax({
-			url : "insert.or", /* insert 구문의 맵핑값 */
+			url : "insert.or", // insert 구문의 맵핑값 
 			type : "post",
 			data : {
 				receiptId : receiptId,
 				userNo : userNo,
 				totalPrice : 1000,
-				receiveUser : receiveUser,
+				receiveUser : $('#subReceiverUser').val(),
 				receiveDate : $('#datepicker').val(),
-				receivePhone : receivePhone,
+				receivePhone : $('#subReceiverPhone').val(),
 				orderAddress : $('#address1').val() + " " + $('#address2').val(),
 				postcode : $('#zipcode').val(),
 				orderStatus : '결제완료',
-				deliveryStatus : '배송준비'
+				deliveryStatus : '배송준비',
+				thumbnail : $("#thumbnailForOrder").val()
 				
 			},
 			success : function(result) {
@@ -593,10 +597,9 @@
 					$("#real-submit-button").trigger("click");
 					
 				}
-				
-				
-				
+					
 				// location.href='complete.or';
+				
 			}, error : function() {
 				console.log("DB 넣음 실패")
 			}

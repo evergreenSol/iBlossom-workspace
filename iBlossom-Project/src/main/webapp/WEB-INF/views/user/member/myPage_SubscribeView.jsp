@@ -29,6 +29,8 @@
                 
                 	<c:choose>
                 		<c:when test="${ empty receiptIdList}">
+                		<div class="delete" id="delete">
+                			<h2>나의 구독 상품</h2>
 	                		<div class="mypage-subscribe" style="text-align: center">
 							    <span style="font-size: 16px; font-weight: 600;">
 							        ${ sessionScope.loginUser.userName }님은
@@ -36,8 +38,14 @@
 							        <span>현재 구독중인 상품이 없습니다.</span>
 							    </span>
 							</div>
+							
+							<div class="mypage-to-sub-wrap">
+                            	<button class="mypage-to-sub" id="mypage-to-sub">구독 상품 보러 가기</button>
+                        	</div>
+						</div>	
                 		</c:when>
                 		<c:otherwise>
+                		<h2>나의 구독 상품</h2>
 	                		<c:forEach var="i"  begin="1" end="${receiptIdList.size()}">
 		                    	<div class="delete" id="delete${i}">
 		                    	</div>
@@ -151,9 +159,13 @@
 			
 			
 			
-			
-			
-			
+		$(function () {
+    		$("#mypage-to-sub").click(function() {
+    			location.href="listView.su";
+    		});
+    	});
+		
+		
 			
 			
    	});
