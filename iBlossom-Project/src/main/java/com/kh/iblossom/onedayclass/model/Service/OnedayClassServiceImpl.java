@@ -42,6 +42,36 @@ public class OnedayClassServiceImpl implements OnedayClassService {
 		
 		return onedayClassDao.updateClassCap(sqlSession, classNo);
 	}
+
+	@Override
+	public ArrayList<OnedayClass> selectAdminList() {
+		
+		return onedayClassDao.selectAdminList(sqlSession);
+	}
+
+	@Override
+	public ArrayList<OnedayClassAdmin> selectResList(int classNo) {
+
+		return onedayClassDao.selectResList(sqlSession, classNo);
+	}
+
+	@Override
+	public int deleteClass(int classNo) {
+		
+		return onedayClassDao.deleteClass(sqlSession, classNo);
+	}
+
+	@Override
+	public int insertClass(OnedayClass o) {
+		
+		return onedayClassDao.insertClass(sqlSession, o);
+	}
+
+//	@Override
+//	public OnedayClassAdmin selectClassRes(int classNo) {
+//		
+//		return onedayClassDao.selectClassRes(sqlSession, classNo);
+//	}
 	
 
 

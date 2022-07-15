@@ -32,23 +32,7 @@
 		     , #{userNo})
   	</insert>
   	
-
   	
-  	<insert id="insertAnswer" parameterType="qna">
-  		INSERT INTO QNA(ANSWER
-		                , ANSWER_DATE)
-		VALUES(#{answer}
-		     , #{answerDate})
-  	</insert>
-  	
-  	<!-- USER_NAME을 쓰셔서 USER_NO로 변경함  2022-07-13 한솔, 혹시 USER_NAME 이 필요한건지 물어보기 -->
-  	<!--  
-  	<select id="selectQna" parameterType="_int" resultMap="qnaResultSet">
-		SELECT QNA_NO, QNA_TITLE, QNA_CONTENT, USER_NAME, QNA_DATE
-		FROM QNA
-		WHERE QNA_NO = #{qnaNo}
-  	</select>
-  	-->
   	<select id="selectQna" parameterType="_int" resultMap="qnaResultSet">
 		SELECT QNA_NO, QNA_TITLE, QNA_CONTENT, USER_NO, QNA_DATE, ANSWER, ANSWER_DATE, ANSWER_STATUS
 		FROM QNA
@@ -66,6 +50,19 @@
   		  FROM QNA
   		 WHERE USER_NO = #{userNo}
   	</select>
+  	
+  	<select id="selectAdminQna" parameterType="_int" resultMap="qnaResultSet">
+		SELECT QNA_NO, QNA_TITLE, QNA_CONTENT, USER_NO, QNA_DATE, ANSWER, ANSWER_DATE, ANSWER_STATUS
+		FROM QNA
+		WHERE QNA_NO = #{qnaNo}
+  	</select>
 
-
+  	<update id="updateAnswer" parameterType="qna">
+  		UPDATE QNA
+  		   SET ANSWER = #{answer}
+  		     , ANSWER_DATE = SYSDATE
+  		     , ANSWER_STATUS = 'Y'
+  		 WHERE QNA_NO = #{qnaNo}
+  	</update>
+  	
 </mapper>

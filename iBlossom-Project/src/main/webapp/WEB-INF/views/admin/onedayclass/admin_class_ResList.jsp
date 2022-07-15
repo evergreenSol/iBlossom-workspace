@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +11,6 @@
     <link href="resources/css/shj.css" rel="stylesheet">
     <link href="resources/css/kms.css" rel="stylesheet">
 
-<style>
-
-</style>
 </head>
 <body>
 
@@ -27,8 +24,8 @@
             <div id="admin-logo-div">
                 <a href="" id="admin-logo-a">
                     <img src="resources/images/iBlossom_logo_black.png">
-                    </a>
-                </div>
+                 </a>
+             </div>
 
             <!-- 로그인 div -->
             <div id="admin-login-div">
@@ -71,14 +68,14 @@
                     </li>
                     <li><a href="" class="admin-navi-menu">상품관리</a></li>
                     <li><a href="" class="admin-navi-menu">리뷰관리</a></li>
-                    <li><a href="" class="admin-navi-menu">클래스관리</a>
+                    <li><a href="" class="admin-navi-menu" style="font-weight: 700;">클래스관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="classAddForm.ad">클래스 추가</a></li>
                             <li><a href="classList.ad">클래스 예약내역</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="" class="admin-navi-menu" style="font-weight: 700;">고객센터관리</a>
+                        <a href="" class="admin-navi-menu">고객센터관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="qnaList.ad">1:1 문의</a></li>
                             <li><a href="">공지사항</a></li>
@@ -86,44 +83,49 @@
                     </li>
                     <li><a href="" class="admin-navi-menu" id="admin-navi-chat">채팅관리</a></li>
                 </ul>
+
             </div>
+
         </div>
+
     </div>
 
     <!-- admin 관리자페이지 회원관리 -->
     <div id="admin-member-wrap">
 
-        <span id="admin-member-title">1대1 문의관리</span>
+        <span id="admin-member-title">클래스 전체리스트</span>
         <hr id="admin-member-hr">
 
         <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
+        <div>
+            
+            <table id="admin-order-list-table">
+                <!-- 메뉴바 -->
+                <thead id="admin-order-list-thead">
+                    <tr >
+                        <th width="80">예약순번</th>
+                        <th width="80">클래스번호</th>
+                        <th width="120">예약자 이름</th>
+                        <th width="180">연락처</th>
+                        <th width="200">이메일</th>
+                        <th width="180">결제일</th>
+                    </tr>
+                </thead>
 
-        <form id="admin-answer-container" method="post" action="answerUpdate.ad">
-            <table id="anwcontent" border="1">
-                <tr>
-                    <th width="70" height="30">제목</th>
-                    <td width="250" name="qnaTitle">${ q.qnaTitle }</td>
-                    <th width="60" >작성자</th>
-                    <td width="100" name="userNo">${ q.userNo }</td>
-                    <th width="70" >작성날짜</th>
-                    <td width="100" name="qnaDate">${ q.qnaDate }</td>
-                    <input type="hidden" name="qnaNo" value="${ q.qnaNo }">
-                </tr>
-                <tr>
-                    <th>내용</th>
-                    <td id="qnaContent" height="200px" colspan="5" name="qnaContent">${ q.qnaContent }</td>
-                </tr>
-                <tr>
-                    <th height="140">답변</th>
-                    <td colspan="5">
-                        <p style="height:80px;"><textarea name="answer" id="answer" cols="75" rows="6"  maxlength="400"
-                            style="resize:none; border: none;" required></textarea></p>
-                    </td>              
-                </tr>           
-            </table>
-            <button id="adminAnswerBtn" type="submit">확인</button>
-        </form> 
+                <tbody>
+                    <c:forEach var="qa" items="${ list }">
+                    <tr>
+                        <td>${ qa.resNo }</td>
+                        <td>${ qa.classNo }</td>
+                        <td>${ qa.resName }</td>
+                        <td>${ qa.resPhone }</td>
+                        <td>${ qa.resEmail }</td>
+                        <td>${ qa.payDate }</td>
+                    </tr>
+                    </c:forEach>
+                </tbody>
+            </table>           
+        </div>
     </div>
-    
 </body>
 </html>

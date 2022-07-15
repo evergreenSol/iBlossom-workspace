@@ -44,7 +44,7 @@ public class QnaController {
 		
 		q.setUserNo(userNo);
 		
-		System.out.println(q);
+		// System.out.println(q);
 		
 
 		int result = qnaService.insertQna(q);
@@ -66,13 +66,7 @@ public class QnaController {
 		}
 	}
 	
-	// 관리자페이지 문의 리스트
-//	@RequestMapping("qnaList.ad")
-//	public String qnaListView() {
-//
-//		return "admin/qna/admin_qna_ListView";
-//	}
-	
+	// 관리자페이지 문의 리스트	
 	@RequestMapping("qnaList.ad")
 	public String qnaListView(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model) {
 
@@ -86,7 +80,8 @@ public class QnaController {
 		int boardLimit = 5;
 
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
-
+		
+		
 		ArrayList<Qna> list = qnaService.selectList(pi);
 
 		model.addAttribute("pi", pi);
@@ -95,38 +90,39 @@ public class QnaController {
 		return "admin/qna/admin_qna_ListView";
 	}	
 	
-	// 관리자페이지 문의 상세보기
-	@RequestMapping("qnaDetail.ad")
-	public ModelAndView selectQna(int qno, ModelAndView mv) {
-		//pno에 상세조회하고자하는 해당 상품 번호가 담겨있음
-		
-		// ModelAndView 객체의 addObject 메소드는 자기자신을 리턴해주기 때문에
-		// 한번에 setViewName 메소드까지 메소드체이닝으로 호출 가능하다.
-		
-		Qna q = QnaService.selectQna(qno);
-		mv.addObject("q", q).setViewName("admin/qna/admin_qna_AnswerForm");
-		
-		return mv;
-	}
+	
+   // 1대1문의 상세보기
+   @RequestMapping(value="qnaDetail.ad")
+   public String selectAdminQna(int qnaNo, Model model) {
+
+	 //  System.out.println(qnaNo);
+	   
+	   Qna q = qnaService.selectAdminQna(qnaNo);
+	   
+	   model.addAttribute("q", q);
+	   
+	   return "admin/qna/admin_qna_AnswerForm";
+	   
+   }
+	
+//	// 관리자페이지 문의 답변작성 화면
+//	@RequestMapping("answerForm.ad")
+//	public String answerForm() {
+//		
+//		return "admin/qna/admin_qna_AnswerForm";
+//	}
 	
 	// 관리자페이지 문의 답변작성 화면
-	@RequestMapping("answerForm.ad")
-	public String answerForm() {
-		
-		return "admin/qna/admin_qna_AnswerForm";
-	}
-	
-	// 관리자페이지 문의 답변작성 화면
-	@RequestMapping("answerInsert.ad")
-	public String insertAnswer(Qna q, HttpSession session, Model model) {
+	@RequestMapping("answerUpdate.ad")
+	public String updateAnswer(Qna q, HttpSession session, Model model) {
 		
 //		System.out.println(q.getQnaTitle());
 //		System.out.println(q.getQnaContent());
 		
-		int result = qnaService.insertQna(q);
+		int result = qnaService.updateAnswer(q);
 		
 //		System.out.println(result);
-		
+//		System.out.println(q);
 		
 		if(result > 0) { 
 		

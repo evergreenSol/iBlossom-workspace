@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,8 +10,30 @@
     <title>member</title>
     <link href="resources/css/shj.css" rel="stylesheet">
     <link href="resources/css/kms.css" rel="stylesheet">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
+#add-container{
+
+}
+
+#addClass{
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+
+#addBtn{
+    position: absolute;
+    margin-left: 270px;
+    margin-top: -27px;
+    background-color: black;
+    border-radius: 3px;
+    color: white;
+    width: 55px;
+    height: 27px;
+}
+
 
 </style>
 </head>
@@ -27,8 +49,8 @@
             <div id="admin-logo-div">
                 <a href="" id="admin-logo-a">
                     <img src="resources/images/iBlossom_logo_black.png">
-                    </a>
-                </div>
+                 </a>
+             </div>
 
             <!-- 로그인 div -->
             <div id="admin-login-div">
@@ -71,14 +93,14 @@
                     </li>
                     <li><a href="" class="admin-navi-menu">상품관리</a></li>
                     <li><a href="" class="admin-navi-menu">리뷰관리</a></li>
-                    <li><a href="" class="admin-navi-menu">클래스관리</a>
+                    <li><a href="" class="admin-navi-menu" style="font-weight: 700;">클래스관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="classAddForm.ad">클래스 추가</a></li>
                             <li><a href="classList.ad">클래스 예약내역</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="" class="admin-navi-menu" style="font-weight: 700;">고객센터관리</a>
+                        <a href="" class="admin-navi-menu">고객센터관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="qnaList.ad">1:1 문의</a></li>
                             <li><a href="">공지사항</a></li>
@@ -90,40 +112,24 @@
         </div>
     </div>
 
-    <!-- admin 관리자페이지 회원관리 -->
-    <div id="admin-member-wrap">
+    <form id="add-container" action="insertClass.ad" method="post">
+        <table id="addClassForm" border="1">
+            <p id="addClass">클래스 추가하기</p>
+            <tr>
+                <td><input type="text" id="classAdd" name="className" style="border:none" width="300" maxlength="40" placeholder="클래스명"></td>
+            </tr> 
+            <tr>
+                <td><input type="text" id="classAdd" name="price" style="border:none" width="300" maxlength="40" placeholder="가격"></td>
+            </tr>   
+            <tr>
+                <td><input type="text" id="classAdd" name="classDate" style="border:none" width="300" maxlength="40" placeholder="날짜(yyyy-mm-dd hh:mm 형식)"></td>
+            </tr>   
+            <tr>
+                <td><input type="text" id="classAdd" name="capNo" style="border:none" width="300" maxlength="40" placeholder="정원"></td>
+            </tr>   
+        </table>
+        <button id="addBtn" type="submit">추가</button>
+    </form>
 
-        <span id="admin-member-title">1대1 문의관리</span>
-        <hr id="admin-member-hr">
-
-        <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
-
-        <form id="admin-answer-container" method="post" action="answerUpdate.ad">
-            <table id="anwcontent" border="1">
-                <tr>
-                    <th width="70" height="30">제목</th>
-                    <td width="250" name="qnaTitle">${ q.qnaTitle }</td>
-                    <th width="60" >작성자</th>
-                    <td width="100" name="userNo">${ q.userNo }</td>
-                    <th width="70" >작성날짜</th>
-                    <td width="100" name="qnaDate">${ q.qnaDate }</td>
-                    <input type="hidden" name="qnaNo" value="${ q.qnaNo }">
-                </tr>
-                <tr>
-                    <th>내용</th>
-                    <td id="qnaContent" height="200px" colspan="5" name="qnaContent">${ q.qnaContent }</td>
-                </tr>
-                <tr>
-                    <th height="140">답변</th>
-                    <td colspan="5">
-                        <p style="height:80px;"><textarea name="answer" id="answer" cols="75" rows="6"  maxlength="400"
-                            style="resize:none; border: none;" required></textarea></p>
-                    </td>              
-                </tr>           
-            </table>
-            <button id="adminAnswerBtn" type="submit">확인</button>
-        </form> 
-    </div>
-    
 </body>
 </html>
