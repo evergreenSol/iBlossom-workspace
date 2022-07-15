@@ -30,11 +30,7 @@ public class SubscribeController {
 	
 	@Autowired private SubscribeService subscribeService;
 	 	
-	@RequestMapping("review.do")
-	public String review() {
-		return "admin/subscribe/test";
-	}
-	
+	// 구독 상품 리스트 조회
 	@RequestMapping("listView.su")
 	public String subscribeListView(Model model) {
 
@@ -46,7 +42,7 @@ public class SubscribeController {
 	}
 	
 
-	
+	// 특정 구독 상품 셀렉트
 	@ResponseBody
 	@RequestMapping(value="getSubProduct.su", produces="application/json; charset=UTF-8")
 	public String ajaxSelectSubProduct(int spno) {
@@ -56,7 +52,7 @@ public class SubscribeController {
 		return new Gson().toJson(sp);
 	}
 	
-	
+	// 구독 상품 리스트 조회 (관리자)
 	@RequestMapping("listView.sp")
 	public String subscribeUpdateForm(Model model) {
 
@@ -67,6 +63,7 @@ public class SubscribeController {
 		return "admin/subscribe/subProduct_ListView";
 	}
 	
+	// 구독 상품 추가 (관리자)
 	@RequestMapping("insert.sp")
 	public String insertSubProduct(SubProduct sp, MultipartFile subfile, HttpSession session, Model model) {
 		
@@ -88,6 +85,8 @@ public class SubscribeController {
 		}
 	}
 	
+	
+	// 구독 상품 삭제 (관리자)
 	@ResponseBody
 	@RequestMapping(value="delete.sp", produces="text/html; charset=UTF-8")
 	public String ajaxDeleteSubProduct(int subProductNo, String filePath, HttpSession session) {
@@ -108,6 +107,8 @@ public class SubscribeController {
 		return (result > 0) ? "success" : "fail";
 	}	
 	
+	
+	// 구독 상품 수정 (관리자)
 	@ResponseBody
 	@RequestMapping(value="update.sp", produces="text/html; charset=UTF-8")
 	public String updateSubProduct(SubProduct sp) {
@@ -117,6 +118,7 @@ public class SubscribeController {
 		return (result > 0) ? "success" : "fail";
 	}	
 	
+	// 파일명 수정 후 서버 저장 
 	public String saveFile(MultipartFile subfile, HttpSession session) {
 		
 		// 파일명 수정 후 업로드 시키기
@@ -152,7 +154,7 @@ public class SubscribeController {
 		return changeName;
 	}
 	
-	
+	// 구독중인 회원 리스트 조회 (관리자)
 	@RequestMapping("subMemberListView.su")
 	public String subMemberListView(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
 		
@@ -171,6 +173,7 @@ public class SubscribeController {
 		return "admin/subscribe/subMember_ListView";
 	}
 	
+	// 구독 중인 회원 검색 (관리자)
 	@RequestMapping("search.su")
 	public String subMemberSearch(@RequestParam(value="cpage", defaultValue="1") int currentPage, String condition, String keyword, Model model) {
 		
@@ -201,7 +204,7 @@ public class SubscribeController {
 		return "admin/subscribe/subMember_ListView";
 	}
 	
-	
+	// 결제 정보 페이지 구독 상품 리스트 조회
 	@RequestMapping("orderView.su")
 	public String subOrderView(int spno, int subLevel, String deliverAt, Model model) {
 

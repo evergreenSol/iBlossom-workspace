@@ -173,7 +173,7 @@
 	var subPrice = 0;
 
 	$('.sub_list_product').click(function() { // 정기구독 상품 클릭 시
-		
+		$('.sub_list_img').css("border","2px solid rgb(243,243,243)"); // 테두리가 핑크였던 상품이 있다면
 		var spno = $(this).children(".spno").text(); // 클릭된 상품 subProductNo 가져오기
         showSubPeriod(spno); // showSubPeriod 호출
 		$(this).children('#sub_list_img').css("border","1px solid rgb(255,35,147)")  // 이미지에 핑크색 테두리 추가
@@ -206,8 +206,8 @@
 	$('.sub_level').click(function() {
 		
 		if($('#datepicker').val().length > 1) { // 수령일을 선택하고 구독 개월수를 클릭하면
-			
-			$(this).css("border","2px solid rgb(255,35,147)") // 핑크색 테두리
+			$('.sub_level').css("border","2px solid rgb(243,243,243)") // 핑크였던 애가 있다면 회색 테두리로
+			$(this).css("border","2px solid rgb(255,35,147)") // 선택된 애만 핑크색 테두리
 			$('.sub_product').removeAttr("hidden")
 			var spno = $('#spno').val(); // 상품 번호 저장
 			var deliverAt = $('#datepicker').val(); // 수령 날짜 저장
