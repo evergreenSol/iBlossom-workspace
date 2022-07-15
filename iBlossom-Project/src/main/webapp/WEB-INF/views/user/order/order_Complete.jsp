@@ -56,10 +56,10 @@
                     <div class="complete-two-btn">
 
                         <!-- 경로 : 마이페이지 > 주문 내역 조회 -->
-                        <button class="complete-two-btn1" type="button" onclick="location.href='adminList.or'">주문 내역 조회</button>
+                        <button class="complete-two-btn1" type="button" onclick="location.href='orderListView.me'">주문 내역 조회</button>
                         
                         <!-- 경로 : 마켓 -->
-                        <button class="complete-two-btn2" type="button" onclick="location.href='adminDetail.or'">쇼핑하러 가기</button>
+                        <button class="complete-two-btn2" type="button" onclick="location.href='flowerList.pr'">쇼핑하러 가기</button>
                     
                     </div> 
 
