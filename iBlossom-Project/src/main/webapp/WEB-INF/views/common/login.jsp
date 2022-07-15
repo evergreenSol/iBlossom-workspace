@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>iBlossom | login</title>
+<title>iBlossom | Login</title>
 <link href="resources/css/shj.css" rel="stylesheet">
 <link href="resources/css/header.css" rel="stylesheet">
 <link href="resources/css/footer.css" rel="stylesheet">
