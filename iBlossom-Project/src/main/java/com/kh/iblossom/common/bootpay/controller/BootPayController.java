@@ -164,6 +164,9 @@ public class BootPayController {
 	@ResponseBody
 	@RequestMapping(value="cancelRequest.do", produces="application/json; charset=UTF-8")
 	public static String receiptCancel(String receiptId, Double price) {
+		
+		System.out.println(receiptId);
+		
         Cancel cancel = new Cancel();
         cancel.receiptId = receiptId;
         cancel.name = "관리자";

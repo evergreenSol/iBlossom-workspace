@@ -52,12 +52,12 @@
                         <c:forEach var="o" items="${list}">
                         
                             <tr>  
-                                <td colspan="2"><p style="font-size: 18px; font-weight: 600">${ o.orderDate }</p></td>
+                                <td colspan="2" ><p style="font-size: 18px; font-weight: 600; margin-top: 18px; margin-bottom: 10px;">${ o.orderDate }</p></td>
                                 <td></td>
                                 <td colspan="2" width="650" align="right"><a href="orderDetailView.me?orderNo=${o.orderNo}" class="moreBtn" style="padding-right: 10px; color:black;">주문상세</a></td>  
                             </tr>
                             <tr height="26">
-                                <td rowspan="5" width="100" height="100"><img src="${ o.thumbnail }" style="width:100%"></td>
+                                <td rowspan="5" width="150" height="100"><img src="${ o.thumbnail }" style="width:100%"></td>
                                 <!-- 사진은 ajax로 넣기 (모든게 로드 된 뒤에 ajax로 주문번호에 해당되는 상품 상세 조회 후 그 상품의 사진경로 가져오기)-->
                                 <th width="80" >주문번호</th>
                                 <td width="10" ></td>
@@ -97,7 +97,11 @@
                             <tr height="30" >
                             	<td class="endTd" colspan="6"></td>
                             </tr>
-
+							<!-- 환불 -->
+							<form action="refund.me" method="post" id="real-submit">
+								<input type="text" value="${o.totalPrice}" name="totalPrice">
+								<button type="submit" id="real-submit-button" >test</button>
+							</form>
                         </c:forEach>
                         </table>
 
@@ -105,13 +109,13 @@
                         <table id="mypage-view-cancel">
                         <c:forEach var="o" items="${cancelList}">
                             <tr >
-                                <td colspan="2"><p style="font-size: 18px; font-weight: 600">${ o.orderDate }</p></td>
+                                <td colspan="2" ><p style="font-size: 18px; font-weight: 600; margin-top: 18px; margin-bottom: 10px;">${ o.orderDate }</p></td>
                                 <td></td>
                                 <td colspan="2" width="650" align="right"><a href="orderDetailView.me?orderNo=${o.orderNo}" class="moreBtn" style="padding-right: 10px; color:black;">주문상세</a></td>  
  
                             </tr>
                             <tr height="26">
-                                <td rowspan="5" width="100" height="100"><img src="${ o.thumbnail }" style="width:100%"></td>
+                                <td rowspan="5" width="150" height="100"><img src="${ o.thumbnail }" style="width:100%"></td>
                                 <!-- 사진은 ajax로 넣기 (모든게 로드 된 뒤에 ajax로 주문번호에 해당되는 상품 상세 조회 후 그 상품의 사진경로 가져오기)-->
                                 <th width="80">주문번호</th>
                                 <td width="10"></td>
@@ -146,7 +150,7 @@
                             </tr>
                             </c:forEach>
                         </table>
-
+						
 
                     </div>
 			
@@ -161,8 +165,6 @@
 	
     <script>
         $(function () {
-        	
-        	
 
             $("#mypage-view-cancel").hide();
 
@@ -187,7 +189,6 @@
 
             });
 
-
             
 			var refundPrice;
 			
@@ -198,10 +199,9 @@
 				var receiptId = $(this).next().val();
 				console.log("receipId=" + $(this).next().val());
 				console.log(receiptId)
-				var refundPrice = $(this).next().next().val();
+				var refundPrice =$(this).next().next().val();
 				console.log(refundPrice);
 				console.log("refundPrice ="+ $(this).next().next().val());
-
 				
 				
 				$.ajax({
@@ -217,13 +217,14 @@
 							
 							console.log(refundPrice);
 						
+							$("#real-submit-button").trigger("click");
+							
 							$.ajax({
 								url : "goGetToken.do",
 								type : "post",
 								success : function(token) {
 									
 									console.log("token 생성됨 : " + token);
-									
 									
 									$.ajax({
 										url : "cancelRequest.do",
@@ -235,25 +236,8 @@
 										success : function(result) {
 	
 											alert("결제가 취소되었습니다.");
-											
-											$.ajax({
-												url : "refund.me",
-												date : {
-													price : refundPrice
-												},
-												type : "post",
-												success : function (result) {
-													if(result == 0) {
-														console.log("성공")
-													}
-													else {
-														console.log("실패")
-													}
-												},
-												error : function () {
-													
-												}
-											});
+											console.log("이제 refund.me");
+											console.log(refundPrice);
 											
 											location.reload();
 										
@@ -277,9 +261,8 @@
 
 			});
             
-            
-        
-            
+			$("#category-orderList").css("font-weight", "700");
+			
         });
 
     </script>

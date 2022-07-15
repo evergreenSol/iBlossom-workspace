@@ -35,4 +35,11 @@ public interface OrderService {
 	ArrayList<DetailOrder> selectMyDetailOrderList(int orderNo);
 
 	Order selectMyOneOrder(int orderNo);
+	
+	// 마이페이지 메인용
+	int countReady(int userNo);
+	int countShipping(int userNo);
+	int countComplete(int userNo);
+	ArrayList<Order> selectMyOrderAllList(int userNo);
+	
 }
