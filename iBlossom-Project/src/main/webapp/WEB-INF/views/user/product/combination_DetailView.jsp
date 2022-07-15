@@ -9,23 +9,12 @@
 <title>Insert title here</title>
  <link href="resources/css/jsa.css" rel="stylesheet">
  <style>
- 	div, span, input, table {
- 		border : 1px solid black;
- 	}
- 
 	input[type="number"]::-webkit-outer-spin-button,
 	input[type="number"]::-webkit-inner-spin-button {
 	    -webkit-appearance: none;
 	    margin: 0;
 	}
-	#selectFlower {
-		width : 420px;
-	}
-	
-	#countBox1 input {
-		text-aiign : center;
-	}
- 
+
  </style>
  
 </head>
@@ -126,13 +115,13 @@
 			<!--상세 정보 버튼 시작-->
 			<div class="categorize review-box"
 				style="height: 100px; margin-top: 30px;">
-				<div class="reviewBox" id="combination_content" onclick="showList();">상세정보</div>
-				<div class="reviewBox" id="combination_review" onclick="test4();">리뷰</div>
+				<div class="reviewBox" id="combination_content" onclick="showDetail();">상세정보</div>
+				<div class="reviewBox" id="combination_review" onclick="showReview();">리뷰</div>
 			</div>
 
 			<!-- 상세정보 폼-->
 
-			<div id="flowerDetailList" >
+			<div id="flowerDetailList">
 				<c:forEach var="p" items="${ list }">
 				<table>
 					<tr>
@@ -151,7 +140,7 @@
 
     <!-- 리뷰 작성폼-->
 
-			<div>
+			<div id="reviewList" hidden>
 			
 			</div>
 			
@@ -182,59 +171,58 @@
 	
 	// 특정 상품이 셀렉 되면
 	function selectFlower() {
+		
 		var selectFlower = $("#select_flower").val(); // 해당 상품의 인덱스 가져오기
 		$(".item"+ selectFlower +"").removeAttr("hidden"); // class="item + 해당 인덱스" 인 div hidden 제거 
 		
 		// var index = $(".item"+ selectFlower +"").children("#index").val(); // index
-		items.push(selectFlower);
-		console.log(items);
-		$("#option_flower"+selectFlower+"").attr("disabled", "true");
+		items.push(selectFlower); // 아까 생성한 빈 배열에 인덱스 밀어넣어주기
+
+		$("#option_flower"+selectFlower+"").attr("disabled", "true"); // 이미 셀렉된 상품은 다시 셀렉 못하게
 		
 	}
 	
-	function count(type,index)  {
+	function count(type,index)  { // 수량 더하기, 빼기용 함수
 		  
-		  const productCount = document.getElementById('productCount'+index+'');
+		  const productCount = document.getElementById('productCount'+index+''); // id="productCount1, productCount2..."
 		  
 		  // 현재 화면에 표시된 값
-		  let count = productCount.value;
+		  let count = productCount.value; // 변수 선언 및 값을 productCount input의 value로 초기화
 		  
 		  // 더하기/빼기
-		  if(type === 'plus') {
-		    productCount.value = parseInt(count) + 1;
+		  if(type === 'plus') { // 매개변수로 plus type이 넘어오면
+		    productCount.value = parseInt(count) + 1; // count++
 
-		  }else if(type === 'minus' && count > 1)  {
-		    productCount.value = parseInt(count) - 1;
+		  }else if(type === 'minus' && count > 1)  { // 매개변수로 minus type 이 넘어오고 1보다 크다면
+		    productCount.value = parseInt(count) - 1; // count--
 
 		  }
-		  else {
-			 productCount.value = parseInt(count);
+		  else { // 그 외에는
+			 productCount.value = parseInt(count); // 현상 유지
 		  }
 		  
 	 }
 
-     function removeItem(num){
+     function removeItem(num){ // 상품 삭제용 함수
 
-    	 $(".item"+ num +"").attr("hidden","true");
-    	 $("#option_flower"+num+"").removeAttr("disabled");
+    	 $(".item"+ num +"").attr("hidden","true"); // itemX 다시 hidden
+    	 $("#option_flower"+num+"").removeAttr("disabled"); // 해당 상품 다시 셀렉 가능하게
 
   		var index;
-		for(var i = 0; i < items.length; i++) {
-			if(items[i]==num){
-				index = i;
-				console.log(index);
+		for(var i = 0; i < items.length; i++) { // 해당 상품들의 인덱스가 담긴 배열을 돌면서
+			if(items[i]==num){ // 해당 상품의 인덱스와 매개변수로 넘어온 num이 같다면
+				index = i; // index에 i 저장
 			}
 		}  		
-		items.splice(index, 1);
+		items.splice(index, 1); // 배열에서 아까 선언한 인덱스에 있는 아이템 삭제
      }
      
      function submitForm() {
-		if(items.length==0) {
+		if(items.length==0) { // 셀렉된 아이템이 없다면
 			alert("장바구니에 넣으신 물건이 없습니다");
-			location.href="combinationDetailList.pr"
 		}
 		else {
-	    	for(var i = 0; i < items.length; i++) {
+	    	for(var i = 0; i < items.length; i++) { // 현재까지 남아있는 아이템 리스트 배열을 돌면서 필요한 name 속성 추가
 	 				$(".item"+ items[i] + "").children("#userNo").attr("name","cartList[" + i + "].userNo")
 	    			$(".item"+ items[i] + "").children("#productNo").attr("name","cartList[" + i + "].productNo")
 	    			$(".item"+ items[i] + "").children("#productPrice"+items[i]+"").attr("name","cartList[" + i + "].productPrice")
@@ -242,6 +230,16 @@
 	 		}
 	    	 $('#cartItems').attr("action", "insertCo.ca").submit();
 		}
+     }
+     
+     function showDetail() { // 상세정보 페이지 열기
+    	 $('#reviewList').attr("hidden","true");
+    	 $('#flowerDetailList').removeAttr("hidden");
+     }
+     
+     function showReview() { // 리뷰 열기
+    	 $('#reviewList').removeAttr("hidden");
+    	 $('#flowerDetailList').attr("hidden","true");
      }
  	</script>
     
