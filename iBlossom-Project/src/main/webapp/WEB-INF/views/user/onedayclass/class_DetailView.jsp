@@ -23,9 +23,9 @@
 	        </div>
 	        <div id="title1">
 	            <p style="font-size: 25px; font-weight: 700;">원데이 클래스</p>
-	            <p style="font-size: 20px; font-weight: 700;">60,000원 </p> <s>80,000원</s> <span id="sale" class="">Sale</span>
+	            <p style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">60,000원 </p> <span style="text-decoration:line-through;">80,000원</span> <span id="sale" class="">Sale</span>
 	            <hr width="550px">
-	            <pre style="font-size: 17px;">
+	            <pre style="font-size: 15px; line-height: 1.3;">
 5인 이하 소수 정원 진행합니다.
 그 계절 가장 예쁜 꽃을 만나 볼 수 있는 원데이 클래스 수업입니다.
 가볍게 배워보실 수 있도록 핸드타이/바스켓/박스 등 여러 과목이 준비되어 있습니다.
