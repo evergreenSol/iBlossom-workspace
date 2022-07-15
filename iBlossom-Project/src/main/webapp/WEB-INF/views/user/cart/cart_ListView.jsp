@@ -12,7 +12,7 @@
 <link href="resources/css/ldo-user.css" rel="stylesheet">
 
 </head>
-<body  onload="init();">
+<body>
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
@@ -73,8 +73,7 @@
 			                         
 			                        <!-- 가격 -->   
 			                        <div class="basketprice" style="border:1px solid;">
-			                        	<input type="hidden" id="price${ status.count }" value="${ list[c].productPrice }">
-			                        	<fmt:formatNumber value="${ list[c].productPrice }" pattern="###,###"/>원
+			                        	<input type="text" id="price${ status.count }" value="${ list[c].productPrice }">원
 			                        </div><br><br>
 	
 						            <!-- 장바구니 수량 변경 -->
@@ -93,8 +92,7 @@
 	
 			                <!-- 장바구니 상품 금액 -->
 				            <div class="cart-content4"style="border:1px solid;">
-						        <input type="text" id="sum${ status.count }" name="sum" size="3" readonly style="border:none; font-size:18px; text-align:center;"
-						               value="<fmt:formatNumber value="${ list[c].productCount * list[c].productPrice }" pattern="###,###"/>" />
+						        <input type="text" id="sum${ status.count }" name="sum" size="3" readonly style="border:none; font-size:18px; text-align:center;">
 						               <!-- ${ list[c].productCount * list[c].productPrice }원 -->
 				            </div>
 							
@@ -115,6 +113,34 @@
 	    </div> <!-- class="cart-left" -->
 	    
 	    <script>
+	    	$(function() {
+	    		
+	    		var listSize = $('#listSize').val(); // 상품 리스트 사이즈 (상품이 3개면 3개)
+	    		var sumAll = 0;
+	    		for(var i = 0; i < listSize; i++) { // 상품 리스트를 돌면서
+	    			var price = $('#price'+(i+1)+'').val(); // 각 상품 가격
+	    			var productCount = $('#productCount'+(i+1)+'').val(); // 각 상품 수량
+	    			$('#sum'+(i+1)+'').attr("value",price*productCount); // sum1, sum2, ... 에 전달
+	    			
+	    			sumAll += parseInt($('#sum'+(i+1)+'').val()); // sumAll = sum1 + sum2 + ...
+	    		}
+				$('#sumAll').attr("value",sumAll); // sumAll input에 sumAll 값 전달
+	    	});
+	    	
+    		function getSum() {
+    			
+    			var listSize = $('#listSize').val(); // 상품 리스트 사이즈 (상품이 3개면 3개)
+	    		var sumAll = 0;
+	    		for(var i = 0; i < listSize; i++) { // 상품 리스트를 돌면서
+	    			var price = $('#price'+(i+1)+'').val(); // 각 상품 가격
+	    			var productCount = $('#productCount'+(i+1)+'').val(); // 각 상품 수량
+	    			$('#sum'+(i+1)+'').attr("value",price*productCount); // sum1, sum2, ... 에 전달
+	    			
+	    			sumAll += parseInt($('#sum'+(i+1)+'').val()); // sumAll = sum1 + sum2 + ...
+	    		}
+				$('#sumAll').attr("value",sumAll); // sumAll input에 sumAll 값 전달
+    		}
+	    
 	    
 	 		// 수량 더하기, 빼기용 함수
 		    function count(type,index)  { 
@@ -127,46 +153,30 @@
 		        let price = document.getElementById('price'+index+'').value;
 		        
 		        const sum = document.getElementById('sum'+index+'');
-	 			var sumAll = document.getElementById('sumAll');
-	 			
-		        
+
 		        // 더하기/빼기
 		        if(type === 'plus') { // 매개변수로 plus type이 넘어오면
 		          productCount.value = parseInt(count) + 1; // count++
 		          
 		          sum.value = price * productCount.value;
-		         
-	
+		          getSum();
+				  
 		        } else if(type === 'minus' && count > 1)  { // 매개변수로 minus type 이 넘어오고 1보다 크다면
 		          productCount.value = parseInt(count) - 1; // count--
 	
 		          sum.value = price * productCount.value;
-		          
+		          getSum();
 		        }
 		        else { // 그 외에는
 		          productCount.value = parseInt(count); // 현상 유지
 		          
 		          sum.value = price * productCount.value;
-		          
+		          getSum();
 		        }
-		        
 
-	 			console.log(sum);
-	 			console.log(sumAll);
-				
-		        //getSum();
 		    }
 	 		
-	 		/*
-	 		function getSum() {
-	 			
-	 			
-	 			var sumAll = document.getElementById('sumAll');
-	 			
-	 			
-	 		}
-
-	 		*/
+			
 
 	 		
 		</script>
@@ -182,7 +192,7 @@
 		        <div class="cart-price1">
 		            <span>총 주문 금액</span>
 		            
-		            <span id="sumAll">원</span>
+		            <input id="sumAll" name="sumAll">원
 		            
 		            <!--  
 	            	<c:set var = "total" value = "0" />
