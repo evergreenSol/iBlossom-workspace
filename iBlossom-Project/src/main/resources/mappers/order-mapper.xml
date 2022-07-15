@@ -15,9 +15,18 @@
 		<result column="ORDER_STATUS" property="orderStatus"/><!-- 주문상태 -->
 		<result column="DELIVERY_STATUS" property="deliveryStatus"/><!-- 배송상태 -->
 		<result column="RECEIPT_ID" property="receiptId"/><!-- 결제번호 -->
-		
+		<result column="THUMBNAIL" property="thumbnail"/> <!-- 대표사진 -->
 	</resultMap>
 	
+	<resultMap id="detailOrderResultSet" type="detailOrder">
+		<result column="DORDER_NO" property="dorderNo"/>
+		<result column="ORDER_NO" property="orderNo"/>
+		<result column="PRODUCT_NO" property="productNo"/>
+		<result column="ONE_PRICE" property="onePrice"/>
+		<result column="ONE_QUANTITY" property="oneQuantity"/>
+		<result column="FLOWER_NAME" property="flowerName"/>
+		<result column="THUMBNAIL" property="thumbnail"/>
+	</resultMap>
 	<!--
 	<select id="selectOrderListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -56,7 +65,8 @@
   							 , POSTCODE
   							 , ORDER_STATUS
   							 , DELIVERY_STATUS
-  							 , RECEIPT_ID)
+  							 , RECEIPT_ID
+  							 , THUMBNAIL)
   		VALUES(SEQ_ORDNO.NEXTVAL
 		     , #{userNo}
 		     , #{totalPrice}
@@ -68,6 +78,7 @@
 		     , #{orderStatus}
 		     , #{deliveryStatus}
 		     , #{receiptId}
+		     , #{thumbnail}
 		     )
   	</insert>
   	
@@ -86,47 +97,45 @@
   		FROM ORDER_TBL
   		WHERE RECEIPT_ID = '${receiptId}'
    	</select>
-
 	
-	<!-- 조회 
-	<select id="detailOrder" resultMap="orderResultSet">
-		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, PRICE, 
-		       TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE",
-		       TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", ORDER_STATUS
+	<select id="selectMyOrderList" parameterType="_int" resultMap="orderResultSet">
+		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE", TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", RECEIVE_USER, RECEIVE_PHONE, ORDER_ADDRESS
+  			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL
 		FROM ORDER_TBL
-		WHERE ORDER_STATUS = 'Y'
-		ORDER BY ORDER_DATE DESC, ORDER_NO DESC
+		WHERE USER_NO = #{userNo}
+		  AND ORDER_STATUS = '결제완료'
+		  AND DELIVERY_STATUS IN ('배송준비', '배송중', '배송완료')
 	</select>
-	-->
 	
-	<!-- 추가 
-	<insert id="insertOrder" parameterType="Order">
-  		INSERT INTO ORDER_TBL(ORDER_NO
-		                    , USER_NO
-		                    , TOTAL_PRICE
-		                    , ORDER_DATE
-		                    , RECEIVE_DATE
-		                    , RECEIVE_USER
-		                    , RECEIVE_PHONE
-		                    , ORDER_ADDRESS
-		                    , POSTCODE
-		                    , ORDER_STATUS
-		                    , DELIVERY_STATUS
-		                    , RECEIPT_ID)
-		VALUES(SEQ_PNO.NEXTVAL
-		     , #{userNo}
-		     , #{totalPrice}
-		     , #{orderDate}
-		     , #{receiveDate}
-   		     , #{receiveUser}
-		     , #{receivePhone}
-   		     , #{orderAddress}
-		     , #{postcode}
-		     , #{orderStatus}
-		     , #{deliveryStatus}
-		     , #{receiptId)
-  	</insert>
-  	-->
+	<select id="selectMyOrderCancelList" parameterType="_int" resultMap="orderResultSet">
+		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE", TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", RECEIVE_USER, RECEIVE_PHONE, ORDER_ADDRESS
+  			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL
+		FROM ORDER_TBL
+		WHERE USER_NO = #{userNo}
+		  AND ORDER_STATUS = '결제취소'
+		  AND DELIVERY_STATUS NOT IN ('배송준비', '배송중', '배송완료')
+	</select>
+	
+	<update id="cancelMyPay" parameterType="string">
+		UPDATE ORDER_TBL
+		   SET ORDER_STATUS = '결제취소',
+		   	   DELIVERY_STATUS = '결제취소'
+		 WHERE RECEIPT_ID = '${receiptId}'
+	</update>
+	
+	<select id="selectMyDetailOrderList" parameterType="_int" resultMap="detailOrderResultSet">
+		SELECT DORDER_NO, ORDER_NO, DO.PRODUCT_NO, ONE_PRICE, ONE_QUANTITY, FLOWER_NAME, THUMBNAIL
+		  FROM DETAIL_ORDER DO
+		  JOIN PRODUCT P ON (DO.PRODUCT_NO = P.PRODUCT_NO)
+		WHERE ORDER_NO = #{orderNo}
+	</select>
+	
+	<select id="selectMyOneOrder" parameterType="_int" resultMap="orderResultSet">
+		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE", TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", RECEIVE_USER, RECEIVE_PHONE, ORDER_ADDRESS
+  			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL
+		FROM ORDER_TBL
+		WHERE ORDER_NO = #{orderNo}
+	</select>
 
 
 </mapper>

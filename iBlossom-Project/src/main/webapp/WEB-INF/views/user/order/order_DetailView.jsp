@@ -480,20 +480,22 @@
             <input type="hidden" id="email" value="${ loginUser.email }">
             <input type="hidden" id="address" value="${ loginUser.address }">
             <input type="hidden" id="phone" value="${ loginUser.phone }">
+            <input type="hidden" id="thumbnailForOrder" value="${ selectList[0].thumbnail }">
         </div><!-- 1200px 너비 -->
       	</div><!-- 전체 색상 변경 div -->
 
 	<script>
-	
 	var userNo = $("#userNo").val();
-	var receiveUser = $('#subReceiverUser').val();
-	var receivePhone = $('#subReceiverPhone').val();
-	var postcode = $('#zipcode').val();
-	var deliverTo1 = $('#address1').val(); 
-	var deliverTo2 = $('#address2').val();
+	var thumbnail = 
 
 	console.log(receiveDate);
 	function pay() {
+		
+		var receiveUser = $('#subReceiverUser').val();
+		var receivePhone = $('#subReceiverPhone').val();
+		var postcode = $('#zipcode').val();
+		var deliverTo1 = $('#address1').val(); 
+		var deliverTo2 = $('#address2').val();
 		
 		if (receivePhone=="" || receiveUser=="" || postcode=="" || deliverTo1=="" || deliverTo2=="" || $('#datepicker').val()==""){
 			alert("모든 양식을 기입해야 결제가 가능합니다!");
@@ -565,13 +567,14 @@
 				receiptId : receiptId,
 				userNo : userNo,
 				totalPrice : 1000,
-				receiveUser : receiveUser,
+				receiveUser : $('#subReceiverUser').val(),
 				receiveDate : $('#datepicker').val(),
-				receivePhone : receivePhone,
+				receivePhone : $('#subReceiverPhone').val(),
 				orderAddress : $('#address1').val() + " " + $('#address2').val(),
 				postcode : $('#zipcode').val(),
 				orderStatus : '결제완료',
-				deliveryStatus : '배송준비'
+				deliveryStatus : '배송준비',
+				thumbnail : $("#thumbnailForOrder").val()
 				
 			},
 			success : function(result) {

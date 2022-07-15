@@ -62,4 +62,35 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 
+	@Override
+	public ArrayList<Order> selectMyOrderList(int userNo) {
+		
+		return orderDao.selectMyOrderList(sqlSession, userNo);
+	}
+	
+	@Override
+	public ArrayList<Order> selectMyOrderCancelList(int userNo) {
+		
+		return orderDao.selectMyOrderCancelList(sqlSession, userNo);
+	}
+
+
+	@Override
+	public int cancelMyPay(String receiptId) {
+		return orderDao.cancelMyPay(sqlSession, receiptId);
+	}
+
+
+	@Override
+	public ArrayList<DetailOrder> selectMyDetailOrderList(int orderNo) {
+		return orderDao.selectMyDetailOrderList(sqlSession, orderNo);
+	}
+
+
+	@Override
+	public Order selectMyOneOrder(int orderNo) {
+		return orderDao.selectMyOneOrder(sqlSession, orderNo);
+	}
+
+
 }
