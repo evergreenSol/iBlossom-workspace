@@ -97,9 +97,9 @@
 
                 <!-- 메뉴 -->
                 <ul id="admin-navi">
-                    <li><a href="" class="admin-navi-menu">회원관리</a></li>
+                    <li><a href="list.me" class="admin-navi-menu">회원관리</a></li>
                     <li>
-                        <a href="" class="admin-navi-menu">주문정보관리</a>
+                        <a href="adminList.or" class="admin-navi-menu">주문정보관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="">전체주문내역</a></li>
                             <li><a href="">개별주문내역</a></li>
@@ -108,17 +108,17 @@
                     <li>
                         <a href="" class="admin-navi-menu" style="font-weight: 700;">정기구독관리</a>
                         <ul class="admin-navi-ul">
-                            <li><a href="">구독회원관리</a></li>
+                            <li><a href="subMemberListView.su">구독회원관리</a></li>
                             <li><a href="listView.sp">구독상품관리</a></li>
                         </ul>
                     </li>
-                    <li><a href="" class="admin-navi-menu">상품관리</a></li>
+                    <li><a href="list.pr" class="admin-navi-menu">상품관리</a></li>
                     <li><a href="" class="admin-navi-menu">리뷰관리</a></li>
                     <li><a href="" class="admin-navi-menu">클래스관리</a></li>
                     <li>
                         <a href="" class="admin-navi-menu">고객센터관리</a>
                         <ul class="admin-navi-ul">
-                            <li><a href="">1:1 문의</a></li>
+                            <li><a href="qnaList.ad">1:1 문의</a></li>
                             <li><a href="">FAQ</a></li>
                         </ul>
                     </li>
@@ -138,6 +138,7 @@
         <hr id="admin-member-hr">
 
         <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
+        <!-- 셀렉트 + 검색창  -->
         <div style="padding-top:40px;" align="center">
             <form method="post" action="search.su">
  				<input type="hidden" name="currentPage" value="1">
@@ -152,7 +153,8 @@
                 <input type="submit" id="selectbtn" value="검색">
             </form>
         </div>
-		<a href="review.do">테스트</a>
+        
+        <!-- 구독한 회원들 리스트 조회용 테이블  -->
         <div style="padding-top: 100px;">
             <table id="productTable" border="1px solid" align="center">
                 <thead>
@@ -195,6 +197,7 @@
             </table>
         </div>
 
+		<!-- 페이징 처리  -->
        	<div id="pagingArea">
 	         <ul class="pagination">
 	

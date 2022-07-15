@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.iblossom.common.model.vo.PageInfo;
+import com.kh.iblossom.order.model.vo.DetailOrder;
 import com.kh.iblossom.order.model.vo.Order;
 
 @Repository
@@ -42,6 +43,61 @@ public class OrderDao {
 		return 0;
 	}
 
+	public int insertOrder(SqlSessionTemplate sqlSession, Order o) {
+		return sqlSession.insert("orderMapper.insertOrder", o);
+	}
+	
+	public int insertDetailOrder(SqlSessionTemplate sqlSession, DetailOrder detailOrder) {
+		
+		return sqlSession.insert("orderMapper.insertDetailOrder", detailOrder);
+	}
+	
+	public Order selectOrder(SqlSessionTemplate sqlSession, String receiptId) {
+		
+		return sqlSession.selectOne("orderMapper.selectOrder", receiptId);
+	}
+	
+	public ArrayList<Order> selectMyOrderList(SqlSessionTemplate sqlSession, int userNo) {
+		
+		return (ArrayList)sqlSession.selectList("orderMapper.selectMyOrderList", userNo);
+	}
+	
+	public ArrayList<Order> selectMyOrderCancelList(SqlSessionTemplate sqlSession, int userNo) {
+		
+		return (ArrayList)sqlSession.selectList("orderMapper.selectMyOrderCancelList", userNo);
+	}
+	
+	public int cancelMyPay(SqlSessionTemplate sqlSession, String receiptId) {
+		return sqlSession.update("orderMapper.cancelMyPay", receiptId);
+	}
+	
+	public ArrayList<DetailOrder> selectMyDetailOrderList(SqlSessionTemplate sqlSession, int userNo) {
+		return (ArrayList)sqlSession.selectList("orderMapper.selectMyDetailOrderList", userNo);
+	}
+	
+	public Order selectMyOneOrder(SqlSessionTemplate sqlSession, int orderNo) {
+		return sqlSession.selectOne("orderMapper.selectMyOneOrder", orderNo);
+	}
+	
+	public int countReady(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("orderMapper.countReady", userNo);
+	}
+	
+	public int countShipping(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("orderMapper.countShipping", userNo);
+	}
+	
+	public int countComplete(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("orderMapper.countComplete", userNo);
+	}
+	
+	public ArrayList<Order> selectMyOrderAllList(SqlSessionTemplate sqlSession, int userNo) {
+		return (ArrayList)sqlSession.selectList("orderMapper.selectMyOrderAllList", userNo);
+	}
+	
+	public int updateDeliveryStatus(SqlSessionTemplate sqlSession) {
+		return sqlSession.update("orderMapper.updateDeliveryStatus", null);
+	}
 
 
 }

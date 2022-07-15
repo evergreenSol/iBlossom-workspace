@@ -197,6 +197,21 @@ height: 97%;
 /* 마이페이지 로그아웃 버튼 끝 */
 
 
+/* 마이페이지 메인 시작*/
+
+#mainView-title{
+	font-size : 24px;
+	font-weight : 700;
+}
+
+#mainView-subTitle{
+	margin-left: 10px;
+	font-size : 14px;
+	font-weight : 300;
+}
+
+
+/* 마이페이지 메인 끝*/
 
 
 
@@ -234,7 +249,7 @@ height: 97%;
 
 .moreBtn {
     text-decoration: none;
-
+	color: black;
 }
 /* 주문배송조회 끝*/
 
@@ -285,12 +300,9 @@ height: 97%;
 }
 
 .mypage-pay-cancel {
-    text-decoration: none;
-    width: 100%;
-    max-width: 375px;
-    height: 52px;
+    width: 80px;
     font-size: 12px;
-    line-height: 22px;
+    font-weight: 600;
     letter-spacing: normal;
     padding :7px 12px;
     
@@ -308,6 +320,18 @@ height: 97%;
     cursor: pointer;
     color: white;
 }
+
+#mypage-view-order #mypage-view-cancel{
+	margin : 20px 0px;
+
+}
+
+.endTd {
+	border-bottom: 1px solid lightgray;
+	border-collapse:collapse;
+	margin-bottm: 10px;
+}
+
 
 /* 주문내역 버튼 끝 */
 
@@ -364,6 +388,39 @@ height: 97%;
 	display: none;
 	margin-bottom : 60px;
 }
+
+
+.mypage-to-sub-wrap {
+    width: 100%;
+    text-align:center;
+    
+    margin-top : 250px
+}
+
+.mypage-to-sub {
+    text-decoration: none;
+    width: 100%;
+    max-width: 375px;
+    height: 52px;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: normal;
+    padding :10px 90px;
+    
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255/var(--tw-text-opacity));
+
+    --tw-bg-opacity: 1;
+    background-color: rgb(21 21 21/var(--tw-bg-opacity));
+    
+    border-radius: 3px;
+}
+
+.mypage-to-sub:hover {
+	cursor : pointer; 
+}
+
+
 
 /* 마이페이지 나의 구독정보 끝 */
 
@@ -493,4 +550,60 @@ height: 97%;
 	font-size : 20px;
 	font-weight : 600;
 	
+}
+
+.balloon {
+    position: relative;
+    display: inline-block;
+}
+
+.balloon span {
+    display: inline-block;
+    padding: 15px;
+    color: black;
+    background: white;
+    border-style: solid;
+    border-radius: 20px;
+    width : 500px;
+    text-align:left;
+    
+}
+
+.balloon:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.balloon.right:after, .balloon.left:after {
+    border-width: 10px 15px;
+    top: 50%;
+    margin-top: -10px;
+}
+
+.balloon.left:after {
+    border-color: transparent black transparent transparent;
+    left: -27px;
+}
+
+.balloon.right:after {
+    border-color: transparent transparent transparent black;
+    right: -27px;
+}
+
+.qna-detail-content {
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.qna-detail-date{
+    margin: 10px 20px;
+    font-size: 14px;
+}
+
+.qna-detail-title {
+	font-size: 20px;
+	font-weight: 600;
 }

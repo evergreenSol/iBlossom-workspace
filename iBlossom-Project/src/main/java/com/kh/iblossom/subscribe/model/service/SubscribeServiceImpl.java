@@ -43,42 +43,49 @@ public class SubscribeServiceImpl implements SubscribeService {
 		return subscribeDao.deleteSubProduct(sqlSession, spno);
 	}
 
+	// 정기구독 상품 조회용 메소드
 	@Override
 	public SubProduct selectSubProduct(int spno) {
 		
 		return subscribeDao.selectSubProduct(sqlSession, spno);
 	}
 
+	// 정기구독 상품 수정용 메소드
 	@Override
 	public int updateSubProduct(SubProduct sp) {
 
 		return subscribeDao.updateSubProduct(sqlSession, sp);
 	}
 
+	// 정기구독 상품 추가용 메소드
 	@Override
 	public int insertSubscribe(Subscribe s) {
 		
 		return subscribeDao.insertSubscribe(sqlSession, s);
 	}
 	
+	// count용 메소드
 	@Override
 	public int selectListCount() {
 		
 		return subscribeDao.selectListCount(sqlSession);
 	}
 
+	// 구독 회원 조회용 메소드
 	@Override
 	public ArrayList<Subscribe> selectSubMemberList(PageInfo pi) {
 		
 		return subscribeDao.selectSubMembertList(sqlSession, pi);
 	}
 
+	// 검색용 메소드
 	@Override
 	public int selectSearchCount(HashMap<String, String> map) {
 		 
 		return subscribeDao.selectSearchCount(sqlSession, map);
 	}
 
+	// 구독회원 검색용 메소드
 	@Override
 	public ArrayList<Subscribe> selectSearchList(PageInfo pi, HashMap<String, String> map) {
 

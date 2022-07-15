@@ -155,7 +155,7 @@ public class BootPayController {
 			} 
 		}
 		
-		return (result > 0) ? "success" : "fail";
+		return (result > 0) ? "iBlossom 상품 구독 등록 : 매달 싱싱하고 예쁜 꽃을 보내드릴게요 :)" : "상품 구독에 실패하였습니다 :(";
 
 		
 	}
@@ -164,6 +164,9 @@ public class BootPayController {
 	@ResponseBody
 	@RequestMapping(value="cancelRequest.do", produces="application/json; charset=UTF-8")
 	public static String receiptCancel(String receiptId, Double price) {
+		
+		System.out.println(receiptId);
+		
         Cancel cancel = new Cancel();
         cancel.receiptId = receiptId;
         cancel.name = "관리자";

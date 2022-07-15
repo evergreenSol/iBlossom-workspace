@@ -2,6 +2,7 @@ package com.kh.iblossom.member.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,6 +22,9 @@ import com.kh.iblossom.common.template.Pagination;
 import com.kh.iblossom.member.model.service.MemberService;
 import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.onedayclass.model.Service.OnedayClassService;
+import com.kh.iblossom.order.model.service.OrderService;
+import com.kh.iblossom.order.model.vo.DetailOrder;
+import com.kh.iblossom.order.model.vo.Order;
 import com.kh.iblossom.product.model.service.ProductService;
 import com.kh.iblossom.qna.model.service.QnaService;
 import com.kh.iblossom.qna.model.vo.Qna;
@@ -31,6 +36,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private OrderService orderService;
 	
 	@Autowired
 	private OnedayClassService onedayclassService;
@@ -193,17 +201,47 @@ public class MemberController {
 	      return "admin/member/memberListView";
 	   }
 
-   // 마이페이지 호출 및 응답
-   @RequestMapping(value="mypage.me")
-   public String myPageMainView() {
+	// 마이페이지 메인 호출 및 응답
+	@RequestMapping(value="mypage.me")
+	public String myPageMainView(HttpSession session, Model model) {
+	   
+	   int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+	   
+	   // 최근 1개월
+	   // 배송준비
+	   // 배송중
+	   // 배송완료
+	   int ready = orderService.countReady(userNo);
+	   int shipping = orderService.countShipping(userNo);
+	   int complete = orderService.countComplete(userNo);
+
+	   // 최근 1개월 
+	   // 주문
+	   ArrayList<Order> list = orderService.selectMyOrderAllList(userNo);
+	   
+	   model.addAttribute("ready", ready);
+	   model.addAttribute("shipping", shipping);
+	   model.addAttribute("complete",complete);
+	   model.addAttribute("list", list);
+	   
       
-      return "user/member/myPage_MainView";
-   }
+       return "user/member/myPage_MainView";
+    }
    
    // 나의 주문정보 보기 메소드
    @RequestMapping(value="orderListView.me")
-   public String myPageOrderListView() {
+   public String myPageOrderListView(HttpSession session, Model model) {
       
+      int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+	   
+      ArrayList<Order> list = orderService.selectMyOrderList(userNo);
+      ArrayList<Order> cancelList = orderService.selectMyOrderCancelList(userNo);
+	   
+      System.out.println(list);
+      System.out.println(cancelList);
+      
+      model.addAttribute("list", list);
+      model.addAttribute("cancelList", cancelList);
       
       // DB에서 주문내역을 ArrayList로 받아오기. 
       
@@ -214,8 +252,20 @@ public class MemberController {
    
    // 나의 주문내역 상세보기 메소드
    @RequestMapping(value="orderDetailView.me")
-   public String myPageOrderDetailView() {
-      
+   public String myPageOrderDetailView(int orderNo, Model model) {
+	   
+
+	  ArrayList<DetailOrder> list = orderService.selectMyDetailOrderList(orderNo);
+	  
+	  Order o = orderService.selectMyOneOrder(orderNo);
+	  
+	  System.out.println(list);
+	  System.out.println(o);
+	  
+	  model.addAttribute("list", list);
+	  model.addAttribute("o", o);
+	  
+	  
       // 매개변수로 주문 번호 가져오기
       // DB에서 해당 주문의 상세내역을 ArrayList로 받아오기
       
@@ -294,6 +344,24 @@ public class MemberController {
 	   return value;
    }
    
+   // 꽃 주문 삭제 메소드
+   @ResponseBody
+   @RequestMapping(value="cancelPay.me", produces="html/text; charset=UTF-8")
+   public String cancelPay(String receiptId) {
+	   
+	   System.out.println(receiptId);
+	   
+	   int result = orderService.cancelMyPay(receiptId);
+	   
+	   System.out.println(result);
+	   
+	   String value = Integer.toString(result);
+	   
+	   return value;
+   }
+   
+   
+   
    // 프로필 수정 페이지 이동 메소드
    @RequestMapping(value="updateForm.me")
    public String myPageUpdateForm() {
@@ -305,8 +373,8 @@ public class MemberController {
 	@RequestMapping(value="update.me")
 	public String myPageUpdateMember(HttpSession session, Member m, Model model) {
 		
-		System.out.println((Member)session.getAttribute("loginUser"));
-		System.out.println(m);
+//		System.out.println((Member)session.getAttribute("loginUser"));
+//		System.out.println(m);
 		
 		m.setUserNo(((Member)session.getAttribute("loginUser")).getUserNo());
 		   
@@ -428,7 +496,7 @@ public class MemberController {
 	   // System.out.println(qnaNo);
 	   
 	   Qna q = qnaService.selectQna(qnaNo);
-	   
+	   System.out.println(q);
 	   model.addAttribute("q", q);
 	   
 	   return "user/member/myPage_QnaDetailView";
@@ -441,9 +509,11 @@ public class MemberController {
    @RequestMapping(value="checkDate.me")
    public String updateDeliverStatus() {
 	   
-	   int result = subscribeService.updateDeliverStatus();
+	   int result1 = subscribeService.updateDeliverStatus();
 	   
-	   if(result > 0) {
+	   int result2 = orderService.updateDeliveryStatus();
+	   
+	   if(result1 * result2 > 0) {
 		   return "1";
 	   }
 	   else {
@@ -465,6 +535,44 @@ public class MemberController {
 		   return "0";
 	   }
    }
+   
+	@RequestMapping(value="refund.me", method=RequestMethod.POST) 
+	public String refundPurchase(Order o, HttpSession session) {
+		
+		System.out.println("refund.me 로 넘어옴");
+	   
+		System.out.println(o.getTotalPrice());
+	   
+		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+		
+		Member m = new Member();
+		m.setUserId(userId);
+	   
+		HashMap<String, Integer> map = new HashMap<>();
+		
+		
+		map.put("userNo", userNo);
+		map.put("refund", o.getTotalPrice());
+//		map.put("refund", Integer.valueOf(price));
+	   
+		System.out.println(map);
+
+		int result = memberService.refundPurchase(map);
+	   
+		if(result > 0) {
+		   
+			Member updateMem = memberService.login(m);
+			session.setAttribute("loginUser", updateMem);
+			
+			session.setAttribute("alertMsg", "refund.me에서 결제취소가 되었습니다.");
+			return "redirect:orderListView.me";
+		}
+		else {
+			session.setAttribute("alertMsg", "결제취소에 실패했습니다.");
+			return "redirect:orderListView.me";
+		}
+	}
  
    
 }

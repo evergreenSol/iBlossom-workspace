@@ -394,12 +394,14 @@ div { box-sizing: border-box; }
     width: 349px;
     position: absolute;
     left: 27px;
-    top: 170px;
+    top: 165px;
 }
 
 /* signUp-agree 이용약관 textarea 속성 */
 .agree-textarea {
     border-color: lightgray;
+    width: 340px;
+    height: 130px;
 }
 
 /* signUp-agree 이용약관 textarea 클릭 했을경우 */
@@ -446,6 +448,21 @@ div { box-sizing: border-box; }
 .agree-checkbox-label {
     font-size: 15px;
     font-weight: 600;
+    line-height: 1;
+}
+
+/* signUp-agree 이용약관 이용약관동의~ label 속성 */
+#agree-checkbox1-label {
+    position: absolute;
+    top: 77px;
+    margin-left: 4px;
+}
+
+/* signUp-agree 이용약관 개인정보수집~ label 속성 */
+#agree-checkbox2-label {
+    position: absolute;
+    bottom: 145px;
+    margin-left: 4px;
 }
 
 /* signUp-agree 이용약관 전체동의 */
@@ -473,6 +490,7 @@ div { box-sizing: border-box; }
     border-radius: 3px;
     border: 0px;
     right: 60px;
+    cursor: pointer;
 }
 
 /* signUp-agree 이용약관 취소 버튼 속성 */
@@ -483,6 +501,21 @@ div { box-sizing: border-box; }
     cursor: pointer;
     left: 60px;
 }
+
+/* 체크박스 색상 변경 */
+.agree-normal, #agree-checkAll {
+    accent-color: black;
+    width: 18px;
+    height: 18px;
+    margin-left: 0px;
+}
+
+.agree-normal,
+.agree-checkbox-label,
+#agree-checkAll {
+    cursor: pointer;
+}
+
 
 
 
@@ -606,7 +639,7 @@ div { box-sizing: border-box; }
 /* signUp 회원가입 취소 버튼 속성 */
 #signUp-cancelbutton {
     background-color: lightgray;
-    color: white;
+    color: black;
     float: left;
     cursor: pointer;
 }

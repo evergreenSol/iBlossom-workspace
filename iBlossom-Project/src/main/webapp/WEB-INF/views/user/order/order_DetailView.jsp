@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,6 +56,21 @@
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
+		<c:choose>
+			<c:when test="${ loginUser.grLevel == 1 }">
+				<c:set var="discount" value="0"/>
+			</c:when>
+			<c:when test="${ loginUser.grLevel == 2 }">
+				<c:set var="discount" value="1000"/>
+			</c:when>
+			<c:when test="${ loginUser.grLevel == 3 }">
+				<c:set var="discount" value="2000"/>
+			</c:when>
+			<c:otherwise>
+				<c:set var="discount" value="3000"/>
+			</c:otherwise>
+		</c:choose>
+		
 	<br><br>
 	
 	<!-- 전체 색상 변경 div -->
@@ -67,7 +82,7 @@
 		
 	<!-- 사용자 주문 페이지 왼쪽 영역 -->
     <!-- 주문내역 확인, 주문자 정보, 발신인 이름 펼친 페이지 -->
-    <p style="font-weight:700; font-size:31px; margin-bottom:15px;">&nbsp;주문/결제</p>
+    <p id="MainWrapTitle">&nbsp;주문/결제</p>
 
         <!-- 왼쪽 섹션 -->
         <div class="order-left">
@@ -95,72 +110,51 @@
 
                         <!-- 내용 -->
                         <div id="CheckBox" class="order-check-contentbox">
-
-                            <c:forEach var="o" items="${list}">
+							<form action="insertDetailOrder.or" >
+							
+	                            <c:forEach var="i" begin="0" end="${ selectList.size() - 1 }">
+	                            
+		                            <div class="order-check-content">
+		
+		                                <!-- 상품 이미지 -->
+		                                <span>
+		                                    <img src="${ selectList[i].thumbnail }">
+		                                </span>
+		
+		                                <!-- 상품 옵션 확인란 -->
+		                                <div class="order-check-list"><br>
+		                                
+		                                		<input type="hidden" id="cartNo" name="detailOrderList[${i}].cartNo" value="${ selectList[i].cartNo }">
+		                                		<input type="hidden" id="userNo" name="" value="${ selectList[i].userNo }">
+		                                		
+		                                        <!-- 상품 제목 -->
+		                                        <li>${ selectList[i].flowerName }</li>
+		                                        <input type="hidden" id="productNo" name="detailOrderList[${i}].productNo" value="${ selectList[i].productNo}">
+		                                        <br>
+		
+		                                        <!-- 가격(원)-->
+		                                        <li> <fmt:formatNumber type="number" maxFractionDigits="3" value="${ selectList[i].productPrice }" />원
+		                                        	 <input type="hidden" id="" name="detailOrderList[${i}].onePrice" value="${selectList[i].productPrice}">
+		                                        </li>
+		                                        <br>
+		                                        
+		                                        <!-- 수량(개) -->
+		                                        <li>${selectList[i].productCount}개
+		                                        	<input type="hidden" id="" name="detailOrderList[${i}].oneQuantity" value="${selectList[i].productCount}">
+		                                        </li>
+		                                        <br>
+		                                </div>
+		
+		                                <!-- 공백 -->
+		                                <div></div>
+		                                <div></div>
+		
+		                            </div>
+	                            </c:forEach>
+	                            	<input type="hidden" id="thisOrderNo" name="orderNo">
+	                            <button type="submit" id="real-submit-button" style="display:none"></button>
                             
-	                            <div class="order-check-content">
-	
-	                                <!-- 상품 이미지 -->
-	                                <span>
-	                                    <img src="${ o.thumbnail }"
-	                                    	style="width:330px; height:350px;">
-	                                </span>
-	
-	                                <!-- 상품 옵션 확인란 -->
-	                                <div class="order-check-list"><br>
-	                                
-	                                		<input type="hidden" id="cartNo" value="${ o.cartNo }">
-	                                		<input type="hidden" id="userNo" value="${ o.userNo }">
-	                                		
-	                                        <!-- 상품 제목 -->
-	                                        <li>${ o.flowerName }</li>
-	                                        <input type="hidden" id="productNo" value="">
-	                                        <br>
-	
-	                                        <!-- 가격(원) / 수량(개) -->
-	                                        <li> <fmt:formatNumber type="number" maxFractionDigits="3" value="${ o.productPrice }" />원 
-	                                        
-	                                        / ${o.productCount}개
-	                                        
-	                                        </li>
-	                                        <br>
-	                                </div>
-	
-	                                <!-- 공백 -->
-	                                <div></div>
-	                                <div></div>
-	
-	                            </div>
-                            
-                            </c:forEach>
-
-                            <hr> <!-------------------------------------------->
-
-                            <!-- 2 -->
-                            <div class="order-check-content">
-
-                                <!-- 상품 이미지 -->
-                                <span>
-                                    <img src="resources/images/order_flower_2.png"
-                                    	 style="width:250px; height:250px;">
-                                </span>
-
-                                <!-- 상품 옵션 확인란 -->
-                                <div class="order-check-list"><br>
-                                        <!-- 상품 제목 -->
-                                        <li></li>
-                                        <br>
-
-                                        <!-- 가격(원) / 수량(개) -->
-                                        <li>6,900원 / 1개</li>
-                                        <br>
-                                </div>
-
-                                <!-- 공백 -->
-                                <div></div>
-                                <div></div>
-
-                            </div>
+                            </form>
 
                         </div> 
 
@@ -223,8 +217,7 @@
                         </div>
 
                         <div id="ReceiveBox" style="margin-top:0px;">
-                        	${ deliverAt }
-                        	<input type="text" class="datepicker" id="datepicker" name="deliverAt" value="${ deliverAt }">
+                        	<input type="text" class="datepicker" id="datepicker">
                         </div>
                     </div>
                     
@@ -330,8 +323,6 @@
 	                                    </c:otherwise>
                                     </c:choose>
                   
-                                    
-
                                 </div>
 
                                 <!-- Modal footer -->
@@ -346,10 +337,6 @@
                         
                             const btnModal = document.querySelector('.address-btn'); // 버튼 class 속성
                         
-                            fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
-                                .then(response => response.text())
-                                .then(result => loremIpsum.innerHTML = result)
-                    
                             function modalOn() {
                             modal.style.display = "flex"
                             }
@@ -394,17 +381,15 @@
                     <hr>
 
 					<div class="userAddress"><br>
-                            	<span id="postalAddress"></span>
-                            	<span id="detailAddress"></span>
+                         	<span id="postalAddress"></span>
+                         	<span id="detailAddress"></span>
                     </div>
                     
 					<br><br>
 					
                     <!-- 버튼 두개 -->
                     <div class="order-two-btn">
-
-                       <button class="pre-btn" type="button" onclick="location.href='list.ca'">이전으로</button>
-                    
+                       <button class="pre-btn" type="button" onclick="location.href='list.ca'">이전으로</button>  
                     </div>
 
                 </div>
@@ -413,6 +398,7 @@
 
         </div>
         
+        <!------------------------------------------------------------>
 
         <!-- 오른쪽 섹션 -->
         <div class="order-right">
@@ -427,29 +413,30 @@
                 <div class="order-price">
                     <span>총 주문 금액</span>
 	            	<c:set var = "total" value = "0" />
-					<c:forEach var="i" items="${ list }" varStatus="status">     
-					<c:set var="totalPrice" value="${ totalPrice + (i.productPrice * i.productCount) }"/>
+					<c:forEach var="i" items="${ selectList }" varStatus="status">     
+					<c:set var="total" value="${ total + (i.productPrice * i.productCount) }"/>
 					</c:forEach>
-		            <span>${ totalPrice } 원</span>
+		            <span><fmt:formatNumber value="${ total }" pattern="###,###"/>원</span>
                 </div>
 
                 <!-- 배송비 -->
                 <div class="order-delivery">
                     <span>배송비</span>
-                    <span>+ 3000원</span>
+                    <span>+ <fmt:formatNumber value="3000" pattern="###,###"/>원</span>
                 </div>
 
                 <!-- 등급 할인 -->
                 <div class="order-grade">
                     <span>등급할인</span>
-                    <span>- 0원</span>
+                    <span>- ${ discount }원</span>
                 </div>
                 <hr>
 
                 <!-- 총 결제 금액 -->    
                 <div class="order-tprice">
                     <span >총 결제 금액</span>
-                    <span>${ totalPrice }원</span><input type="hidden" id="totalPrice" value="${ subLevel * (sp.subPrice + deliverFee) }">
+                    <span><fmt:formatNumber value="${ total + 3000 - discount }" pattern="###,###"/>원</span>
+                    <input type="hidden" id="totalPrice" value="${ total + 3000 - discount }">
                 </div>
 
                 <br>
@@ -466,7 +453,6 @@
             <!-- 결제하기 버튼 -->
             <div>
                 <button class="order-btn" onclick="pay();">결제하기</button>
-
             </div>
             
             <!-- follow quick menu -->
@@ -488,24 +474,29 @@
        
             </script>
             
-            
-            <input type="hidden" id="userNo" value="${ loginUser.userNo }">
+            <input type="hidden" name="userNo" id="userNo" value="${ loginUser.userNo }">
             <input type="hidden" id="userName" value="${ loginUser.userName }">
             <input type="hidden" id="email" value="${ loginUser.email }">
             <input type="hidden" id="address" value="${ loginUser.address }">
             <input type="hidden" id="phone" value="${ loginUser.phone }">
+            <input type="hidden" id="thumbnailForOrder" value="${ selectList[0].thumbnail }">
+        
         </div><!-- 1200px 너비 -->
       	</div><!-- 전체 색상 변경 div -->
 
-	<script>	
+	<script>
+	var userNo = $("#userNo").val();
+
 	function pay() {
-		var subReceiverUser = $('#subReceiverUser').val()
-		var subReceiverPhone = $('#subReceiverPhone').val()
-		var subReceiverPostcode = $('#zipcode').val()
-		var deliverTo1 = $('#address1').val() 
-		var deliverTo2 = $('#address2').val()
 		
-		if (subReceiverPhone=="" || subReceiverUser=="" || subReceiverPostcode=="" || deliverTo1=="" || deliverTo2==""){
+		var receiveDate = $('#datepicker').val();
+		var receiveUser = $('#subReceiverUser').val();
+		var receivePhone = $('#subReceiverPhone').val();
+		var postcode = $('#zipcode').val();
+		var deliverTo1 = $('#address1').val(); 
+		var deliverTo2 = $('#address2').val();
+		
+		if (receivePhone=="" || receiveUser=="" || postcode=="" || deliverTo1=="" || deliverTo2=="" || $('#datepicker').val()==""){
 			alert("모든 양식을 기입해야 결제가 가능합니다!");
 		}
 		else {
@@ -531,14 +522,17 @@
 			order_id: '고유order_id_1234', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
 			async : true
 		}).error(function (data) {
-			//결제 진행시 에러가 발생하면 수행됩니다.
+			// 결제 진행시 에러가 발생하면 수행됩니다.
 			console.log(data);
+			
+			// 결제 실패시 알람창
+			alert("결제에 실패하여 주문이 완료되지 않았습니다. \n다시 시도해주세요.");
 		}).cancel(function (data) {
-			//결제가 취소되면 수행됩니다.
+			// 결제가 취소되면 수행됩니다.
 			console.log(data);
 		}).done(function (data) {
 			var totalPrice = $('#totalPrice').val();
-			var flowerName = $('#flowerName').val();
+			var flowerName = '플라워 마켓'
 			
 			requestPay(data.billing_key, data.receipt_id, totalPrice, flowerName);
 
@@ -554,12 +548,13 @@
 			type : "post",
 			data : {
 				billingKey : billingKey,
-				totalPrice : totalPrice,
+				totalPrice : 1000, 
 				subProductName : flowerName,
 			},
 			success : function(data) {
 				console.log("상품 결제 성공");
-				insertCart(receiptId);
+				insertOrder(receiptId);
+				
 			}, error : function() {
 				console.log("상품 결제 실패");
 			}
@@ -567,18 +562,49 @@
 	}
 	
 	// DB에 구독 객체 넣기?
-	function insertCart(receiptId) {
+	function insertOrder(receiptId) {
 		$.ajax({
-			url : "insert.su", /* insert 구문의 맵핑값 */
+			url : "insert.or", // insert 구문의 맵핑값 
 			type : "post",
 			data : {
-
+				receiptId : receiptId,
+				userNo : userNo,
+				totalPrice : 1000,
+				receiveUser : $('#subReceiverUser').val(),
+				receiveDate : $('#datepicker').val(),
+				receivePhone : $('#subReceiverPhone').val(),
+				orderAddress : $('#address1').val() + " " + $('#address2').val(),
+				postcode : $('#zipcode').val(),
+				orderStatus : '결제완료',
+				deliveryStatus : '배송준비',
+				thumbnail : $("#thumbnailForOrder").val()
+				
 			},
-			success : function(data) {
-				console.log("DB 넣음")
+			success : function(result) {
+				
+				if(result == 0) {
+					console.log("order DB 넣음X"); // 여기
+				}
+				else {
+					console.log(result);
+					var orderNo = result;
+					console.log(orderNo);
+					console.log("order DB 넣음"); // 여기
+					
+					// 트리거 실행
+					$("#thisOrderNo").val(orderNo);
+					
+					console.log($("#thisOrderNo").val());
+					
+					$("#real-submit-button").trigger("click");
+					
+				}
+					
 				location.href='complete.or';
+				
 			}, error : function() {
-				console.log("DB 넣음 실패")
+				console.log("DB 넣음 실패");
+
 			}
 		});
 	}

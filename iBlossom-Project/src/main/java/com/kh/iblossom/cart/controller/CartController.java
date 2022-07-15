@@ -53,7 +53,7 @@ public class CartController {
 	/*--------------------------------------------------------*/
 	// 상세페이지 -> cart 연결용
 	
-/*	// 장바구니 상품 추가
+	// 장바구니 상품 추가
 	@RequestMapping("insert.ca")
 	public String insertCartList(Cart c, HttpSession session, Model model) {
 		
@@ -62,45 +62,33 @@ public class CartController {
 		int result = cartService.insertCartList(c);
 		
 		if(result > 0) { 
-			// session.setAttribute("alertMsg", "성공적으로 장바구니가 추가되었습니다.");
+			session.setAttribute("alertMsg", "성공적으로 장바구니가 추가되었습니다.");
 			return "redirect:list.ca";
 			
 		} else {
 			return "redirect:/";
 		}
-	}*/
+	}
 
 
 	// 조합형 장바구니
 	@RequestMapping("insertCo.ca")
-	public void inserCommandCartList(CartCommand cartCommand, HttpServletRequest request, HttpSession session, Model model) {
+	public String inserCommandCartList(CartCommand cartCommand, HttpSession session, Model model) {
 
-		//Member loginUser = (Member) session.getAttribute("loginUser");
+		ArrayList<Cart> list = (ArrayList<Cart>)cartCommand.getCartList();
 		
-		//request.getParameter("0");
-		System.out.println(request.getParameter("sum"));
-		System.out.println(request.getParameter("1"));
-		//System.out.println(loginUser);
-		ArrayList<Cart> list = (ArrayList<Cart>) cartCommand.getCartList();
+		System.out.println(list);
 		
-		/*
-		 * System.out.println(list); System.out.println(list.get(0).getProductNo());
-		 * System.out.println(list.get(1).getProductNo());
-		 */
-		/*
-		 * if(loginUser == null) { return "common/login"; } else { // Service 단으로 cart 를
-		 * 넘겨서 insert 요청 cartCommand.setUserNo(loginUser.getUserNo()); int result =
-		 * cartService.inserCommandCartList(cartCommand);
-		 * 
-		 * if(result > 0 ) {
-		 * 
-		 * // 성공시 ~~~ 페이지로 url 재요청 // session.setAttribute("alertMsg",
-		 * "성공적으로 장바구니가 추가되었습니다."); return "user/cart/cart_ListView";
-		 * 
-		 * } else {
-		 * 
-		 * return "common/login"; } }
-		 */
+		for(int i = 0; i < list.size(); i++) {
+			
+			Cart c = list.get(i);
+			
+			cartService.insertCartList(c);
+			
+		}
+		
+		return "redirect:list.ca";
+		
 	}
 /*
 	// 빈 장바구니 조회

@@ -93,6 +93,12 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.updateSubPurchase(sqlSession, map);
 	}
 
+	@Override
+	public int refundPurchase(HashMap<String, Integer> map) {
+		return memberDao.refundPurchase(sqlSession, map);
+	}
+
+
 
 	// 회원 상세조회
 //	   @Override

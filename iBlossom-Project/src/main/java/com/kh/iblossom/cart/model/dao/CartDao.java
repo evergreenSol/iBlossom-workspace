@@ -26,7 +26,21 @@ public class CartDao {
 
 		 return sqlSession.insert("cartMapper.insertCartList", c);
 	}
+	
+	
+	
+	public Cart selectOneCart(SqlSessionTemplate sqlSession, Cart c) {
+		System.out.println("카트넘버 : "  + c);
+		
+		return sqlSession.selectOne("cartMapper.selectOneCart", c);
+	}
 
+	
+	// DB 다 넣은 뒤 카트 삭제용 메소드
+	public int deleteCart(SqlSessionTemplate sqlSession, int cartNo) {
+		
+		return sqlSession.delete("cartMapper.deleteCart", cartNo);
+	}
 	
 	
 	/*

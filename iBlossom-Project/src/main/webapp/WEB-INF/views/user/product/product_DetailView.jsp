@@ -33,7 +33,7 @@
                 </tr>
 				
                 <tr>
-                    <td class="pp"><input type="text"id="price" style="border: none" size="1" readonly value="${ p.price }">원
+                    <td class="pp"><input type="text" name="productPrice" id="price" style="border: none" size="1" readonly value="${ p.price }">원
                     
                         <hr>
                         
@@ -336,12 +336,12 @@
 
 <script>
 
-    const loremIpsum = document.querySelector('.modal');
+/*     const loremIpsum = document.querySelector('.modal'); */
     const btnModal = document.querySelector('.view-grade');
 
-    fetch("https://baconipproductPrice.com/api/?type=all-meat&paras=200&format=html")
+/*     fetch("https://baconipproductPrice.com/api/?type=all-meat&paras=200&format=html")
         .then(response => response.text())
-        .then(result => loremIpsum.innerHTML = result)
+        .then(result => loremIpsum.innerHTML = result) */
 
     function modalOn() {
     modal.style.display = "flex"

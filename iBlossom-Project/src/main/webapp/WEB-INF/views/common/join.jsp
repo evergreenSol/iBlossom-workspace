@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iBlossom | join</title>
+    <title>iBlossom | Join</title>
     <link href="resources/css/shj.css" rel="stylesheet">
 </head>
 <body>
@@ -294,7 +294,7 @@
        }
        else {
           if(nameChk != 1) {
-             alert("아이디는 한글로 총 2~6글자로 입력해주세요.");
+             alert("이름은 한글로 총 2~6글자로 입력해주세요.");
           }
           
           if(idChk != 1) {

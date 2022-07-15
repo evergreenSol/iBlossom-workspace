@@ -13,11 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.common.template.Pagination;
 import com.kh.iblossom.product.model.service.ProductService;
@@ -165,34 +163,19 @@ public class ProductController {
 		return mv;
 	}
 
-
-	
-	  // 조합형
-	  @RequestMapping("combinationDetailList.pr") 
-	  public String selectDetailList(Model model) {
+	// 조합형
+	@RequestMapping("combinationDetailList.pr") 
+	public String selectDetailList(Model model) {
 		  
-		  ArrayList<Product>  list = productService.selectDetailList();
-		  model.addAttribute("list",list);
-		  
-	  return "user/product/combination_DetailView";
+		ArrayList<Product> list = productService.selectDetailList();
+		
+		model.addAttribute("list",list);
+		
+		System.out.println(list);
+		
+		return "user/product/combination_DetailView";
 	  
-	  }
-	  @ResponseBody
-	  @RequestMapping(value="combinationDetailList", produces="application/json; charset=UTF-8")
-	  public String combinationDetailList(ModelAndView mv) {
-		  System.out.println("a");
-		 // ModelAndView mv = new ModelAndView();
-		  //mv.setView(jsonView);
-		  ArrayList<Product>  list = productService.selectDetailList();
-		  System.out.println(list);
-		  //model.addAttribute("list", list);
-//		  mv.addObject("list1", list[0]);
-//		  mv.addObject("list2", list[2]);
-		  
-		  return new Gson().toJson(list);
-		  
-	  }
-
+	}
 
 	// 상품관리 (상품 삭제) -admin
 	@RequestMapping("delete.pr")

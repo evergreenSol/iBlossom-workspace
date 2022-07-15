@@ -99,6 +99,8 @@
     		$("#mypage-to-class").click(function() {
     			location.href="classDetail.cl";
     		});
+    		
+    		$("#category-onedayclass").css("font-weight", "700");
     	});
     </script>
              

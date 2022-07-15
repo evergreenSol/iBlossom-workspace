@@ -41,6 +41,24 @@ public class CartServiceImpl implements CartService {
 
 
 
+
+	@Override
+	public Cart selectOneCart(Cart c) {
+		
+		System.out.println(c);
+		return cartDao.selectOneCart(sqlSession, c);
+	}
+
+
+
+
+	@Override
+	public int deleteCart(int cartNo) {
+		return cartDao.deleteCart(sqlSession, cartNo);
+	}
+
+
+
 	/*@Override
 	public ArrayList<Cart> selectCartList() {
 

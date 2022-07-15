@@ -10,47 +10,41 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
-<link href="resources/css/ldo-user.css" rel="stylesheet">
-<link href="resources/css/kdh.css" rel="stylesheet">
-<style>
-
-    
-
-</style>
-
-<!-------------------------------------------------------------------->
-<!-- 슬라이드 업/다운 스크립트  -->
-
-<script>
-    $(function() {
-        $("#CheckBtn").on("click", function() {
-            // id가 "CheckBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
-            $("#CheckBox").slideToggle("1500");
-        });
-    });
-</script>
-
-<script>
-    $(function() {
-        $("#OrdererBtn").on("click", function() {
-            // id가 "OrdererBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
-            $("#OrdererBox").slideToggle("1500");
-        });
-    });
-</script>
-
-<script>
-    $(function() {
-        $("#SenderBtn").on("click", function() {
-            // id가 "SenderBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
-            $("#SenderBox").slideToggle("1500");
-        });
-    });
-</script>
+<link href="resources/css/ldo-user.css" rel="stylesheet"> 
+<!-- <link href="resources/css/kdh.css" rel="stylesheet"> -->
 </head>
 <body>
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	
+	<!-------------------------------------------------------------------->
+	<!-- 슬라이드 업/다운 스크립트  -->
+	<script>
+	    $(function() {
+	        $("#CheckBtn").on("click", function() {
+	            // id가 "CheckBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
+	            $("#CheckBox").slideToggle("1500");
+	        });
+	    });
+	</script>
+	
+	<script>
+	    $(function() {
+	        $("#OrdererBtn").on("click", function() {
+	            // id가 "OrdererBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
+	            $("#OrdererBox").slideToggle("1500");
+	        });
+	    });
+	</script>
+	
+	<script>
+	    $(function() {
+	        $("#SenderBtn").on("click", function() {
+	            // id가 "SenderBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
+	            $("#SenderBox").slideToggle("1500");
+	        });
+	    });
+	</script>
 
 	<br><br>
 	
@@ -63,7 +57,7 @@
 		
 	<!-- 사용자 주문 페이지 왼쪽 영역 -->
     <!-- 주문내역 확인, 주문자 정보, 발신인 이름 펼친 페이지 -->
-    <p style="font-weight:700; font-size:31px; margin-bottom:15px;">&nbsp;주문/결제</p>
+    <p id="MainWrapTitle">&nbsp;주문/결제</p>
 
         <!-- 왼쪽 섹션 -->
         <div class="order-left">
@@ -95,8 +89,7 @@
 
                                 <!-- 상품 이미지 -->
                                 <span>
-                                    <img src="${ sp.subChangeName }"
-                                    	 style="width:250px; height:250px;">
+                                    <img src="${ sp.subChangeName }">
                                 </span>
 
                                 <!-- 상품 옵션 확인란 -->
@@ -277,10 +270,6 @@
                         <script>
                         
                             const btnModal = document.querySelector('.address-btn'); // 버튼 class 속성
-                        
-                            fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
-                                .then(response => response.text())
-                                .then(result => loremIpsum.innerHTML = result)
                     
                             function modalOn() {
                             modal.style.display = "flex"
@@ -396,7 +385,7 @@
                 <button class="order-btn" onclick="cancelSubscribe();">취소하기</button>
             </div>
             
-                       <!-- follow quick menu -->
+            <!-- follow quick menu -->
             <script>  
        
              $(window).scroll(function(){
@@ -415,7 +404,7 @@
        
             </script>
             
-            
+            <!-- 구독 상품 결제 용 필요 변수들 미리 세팅 -->
             <input type="hidden" id="userNo" value="${ loginUser.userNo }">
             <input type="hidden" id="userName" value="${ loginUser.userName }">
             <input type="hidden" id="email" value="${ loginUser.email }">
@@ -424,7 +413,8 @@
         </div><!-- 1200px 너비 -->
       	</div><!-- 전체 색상 변경 div -->
 
-	<script>	
+	<script>
+	// 결제하기 버튼이 눌렸을때
 	function pay() {
 		var subReceiverUser = $('#subReceiverUser').val()
 		var subReceiverPhone = $('#subReceiverPhone').val()
@@ -432,10 +422,10 @@
 		var deliverTo1 = $('#address1').val() 
 		var deliverTo2 = $('#address2').val()
 		
-		if (subReceiverPhone=="" || subReceiverUser=="" || subReceiverPostcode=="" || deliverTo1=="" || deliverTo2==""){
+		if (subReceiverPhone=="" || subReceiverUser=="" || subReceiverPostcode=="" || deliverTo1=="" || deliverTo2==""){ // 만약 아직 양식이 기입이 덜 되어있다면
 			alert("모든 양식을 기입해야 결제가 가능합니다!");
 		}
-		else {
+		else { // 결제로
 			
 			var subLevel = $('#subLevel').val()
 			getBillingKey(subLevel)
@@ -468,13 +458,13 @@
 			console.log(data);
 		}).done(function (data) {
 			var totalPrice = $('#totalPrice').val();
-			console.log(totalPrice);
+
 			var subProductName = $('#subProductName').val();
-			if(numOfPay==1) {
+			if(numOfPay==1) { // 만약 subLevel == 1
 				// 정기결제 - 무한반복
 				subscribe(data.billing_key, totalPrice, subProductName, data.receipt_id, numOfPay);
 			}
-			else {
+			else { // 만약 subLevel != 1
 				// 일시불 (바로 requestPay 로 점프)
 				requestPay(data.billing_key, data.receipt_id, totalPrice, subProductName, numOfPay);
 			}
@@ -483,7 +473,7 @@
 	
 	// 정기결제 - 무한반복
 	function subscribe(billingKey, totalPrice, subProductName, receiptId, numOfPay) {
-		console.log(totalPrice);
+
 		$.ajax({
 			url : "subscribe.do",
 			type : "post",
@@ -506,17 +496,16 @@
 				numOfPay : numOfPay
 				},
 			success : function(data) {
-				console.log("구독이 등록되었습니다!");
+				alert("iBlossom 상품 구독 등록 : 매달 싱싱하고 예쁜 꽃을 보내드릴게요 :)");
 				
 			}, error : function() {
-				console.log("구독 등록 실패");
+				alert("상품 구독에 실패하였습니다 :(");
 			}
 		});
 	}
 	
 	// 일시불 (바로 requestPay 로 점프)
 	function requestPay(billingKey, receiptId, totalPrice, subProductName, numOfPay) {
-		console.log(totalPrice);
 		
 		$.ajax({
 			url : "requestSubscribe.do",
@@ -528,21 +517,21 @@
 				totalPrice : totalPrice
 			},
 			success : function(data) {
-				console.log("상품 결제 성공");
+
 				insertSubscribe(numOfPay, receiptId, totalPrice);
 			}, error : function() {
-				console.log("상품 결제 실패");
+				alert("상품결제 실패")
 			}
 		});    
 	}
 	
-	// DB에 구독 객체 넣기?
+	// DB에 구독 객체 넣기
 	function insertSubscribe(numOfPay, receiptId, totalPrice) {
-		console.log(totalPrice);
+
 		$.ajax({
 			url : "insert.su",
 			type : "post",
-			data : {
+			data : { // 구독 객체 생성용
 				subProductName : $('#subProductName').val(),
 				subProductNo : $('#subProductNo').val(),
 				userNo : $('#userNo').val(),
@@ -557,10 +546,11 @@
 				numOfPay : numOfPay,
 				totalPrice : totalPrice
 			},
-			success : function(data) {
-				console.log("DB 넣음")		
+			success : function(result) {
+				alert(result);
+				location.href="subscribeView.me"
 			}, error : function() {
-				console.log("DB 넣음 실패")
+				alert(result)
 			}
 		});
 	}
@@ -581,7 +571,8 @@
 
 	</script>
 
-
+	</div>
+	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 	
 </body>
