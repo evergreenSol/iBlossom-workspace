@@ -16,7 +16,7 @@
         <div align="center" class="banner">
 	       <span class="banner_title">SUBSCRIBE</span>
 	    </div>
-        <!-- 이용 안내 -->
+        <!-- 이용 안내 영역 -->
         <div class="info">
 	        <br>
 	        <h1 style="text-align: center; ">이용안내</h1>
@@ -46,6 +46,7 @@
         <hr style="width:1200px; margin-bottom : 30px; border-width: 1px 0px 0px 0px;" >
         
 		<div class="subscription">
+		
 	        <!-- 구독 상품 목록 -->
 	        <div class="sub_list">
 	            <br>
@@ -59,9 +60,9 @@
 	            <br>
             
 
-	            <!-- tr 마다 따로 c:forEach 로 -->
+	            <!-- SUB_PRODUCT 테이블로부터 읽어오기-->
 	            <table class="sub_list_table"> 
-	                <c:forEach var="sp" items="${ list }"> <!-- SUB_PRODUCT 테이블로부터 읽어오기-->   
+	                <c:forEach var="sp" items="${ list }">    
 		                <tr class="sub_list_product">
 		                	<td class="spno">${ sp.subProductNo }</td>
 		                    <td height="250px" width="250px" class="sub_list_img" id="sub_list_img">
@@ -144,10 +145,10 @@
 	                <tr>
 	                    <td height="50px"><button onclick="location.href='listView.su'">이전</button></td>
 	                    <c:choose>
-	                    	<c:when test="${ empty loginUser }">
+	                    	<c:when test="${ empty loginUser }"> <!-- 로그인 안했으면 -->
 		                    	<td height="50px"><button onclick="alert('로그인이 필요한 서비스입니다!'); location.href='loginForm.me';">결제</button></td>
 		                    </c:when>
-		                    <c:otherwise>
+		                    <c:otherwise> <!-- 로그인 했으면 -->
 		                    	<td height="50px"><button onclick="pay();">결제</button></td>
 		                    </c:otherwise>
 	                    </c:choose>
@@ -163,33 +164,37 @@
 	        
 	    </div>
     </div>
-    
+
+<!-- datepicker CDN -->    
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
  
 	<script>
 	var subPrice = 0;
-	// 정기구독 상품 클릭 시 정기구독 기간 설정 창 히든 제거
-	$('.sub_list_product').click(function() {
-		$('.sub_list_img').css("border","1px solid rgb(243,243,243)")
-		var spno = $(this).children(".spno").text();
-        showSubPeriod(spno);
-		$(this).children('#sub_list_img').css("border","1px solid rgb(255,35,147)")
+
+	$('.sub_list_product').click(function() { // 정기구독 상품 클릭 시
+		
+		var spno = $(this).children(".spno").text(); // 클릭된 상품 subProductNo 가져오기
+        showSubPeriod(spno); // showSubPeriod 호출
+		$(this).children('#sub_list_img').css("border","1px solid rgb(255,35,147)")  // 이미지에 핑크색 테두리 추가
 	});
 	
+	// 정기구독 기간 설정 창 히든 제거
 	function showSubPeriod(spno) {
+		
+		// 넘겨 받은 subProductNo으로 해당 상품 객체 읽어오기
 		$.ajax({
 			url : "getSubProduct.su",
 			type : "post",
 			data : { spno : spno },
-			success : function(response) {
-				$('.sub_period').removeAttr("hidden")
-				$('#period_img').attr('src', response.subChangeName);
-				$('#product_img').attr('src', response.subChangeName);
-				$('#subProductName').html(response.subProductName)
-				$('#totalPrice').html("매월	" + (response.subPrice) + "원 씩")
-				$('#spno').attr('value', spno);
-				$('#payInfo>#spno').attr('value', spno);
+			success : function(response) { // 객체 가져오기 성공시
+				$('.sub_period').removeAttr("hidden"); // 정기구독 기간 설정 창 히든 제거
+				$('#period_img').attr('src', response.subChangeName); // 해당 상품 이미지 화면으로 보내주기
+				$('#product_img').attr('src', response.subChangeName); // 아래 선택 상품에도 미리
+				$('#subProductName').html(response.subProductName) // 해당 상품 이름 
+				$('#totalPrice').html("매월	" + (response.subPrice) + "원 씩") // 해당 상품 가격
+				$('#spno').attr('value', spno); // 상품 번호 (form 안에 있는 input)
+				$('#payInfo>#spno').attr('value', spno); // 상품 번호 (form 안에 있는 input)
 			},
 			error : function() {
 				console.log("ajax 통신 실패");
@@ -201,13 +206,13 @@
 	$('.sub_level').click(function() {
 		
 		if($('#datepicker').val().length > 1) { // 수령일을 선택하고 구독 개월수를 클릭하면
-			$('.sub_level').css("border","1px solid lightgrey")
-			$(this).css("border","2px solid rgb(255,35,147)")
+			
+			$(this).css("border","2px solid rgb(255,35,147)") // 핑크색 테두리
 			$('.sub_product').removeAttr("hidden")
-			var spno = $('#spno').val();
-			var deliverAt = $('#datepicker').val()
-			var subLevel = $(this).val();
-			selectSubProduct(spno, deliverAt, subLevel);
+			var spno = $('#spno').val(); // 상품 번호 저장
+			var deliverAt = $('#datepicker').val(); // 수령 날짜 저장
+			var subLevel = $(this).val(); // 구독기간 저장
+			selectSubProduct(spno, deliverAt, subLevel); // selectSubProduct 호출
 		}
 		else { // 구독 개월을 선택했으나 수령일을 아직 선택하지 않았다면
 			alert("첫 수령일을 먼저 선택해주세요");
