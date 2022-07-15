@@ -10,8 +10,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
-<link href="resources/css/ldo-user.css" rel="stylesheet">
-<link href="resources/css/kdh.css" rel="stylesheet">
+<link href="resources/css/ldo-user.css" rel="stylesheet"> 
+<!-- <link href="resources/css/kdh.css" rel="stylesheet"> -->
 <style>
 
     
@@ -51,6 +51,35 @@
 <body>
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	
+	<!-------------------------------------------------------------------->
+	<!-- 슬라이드 업/다운 스크립트  -->
+	<script>
+	    $(function() {
+	        $("#CheckBtn").on("click", function() {
+	            // id가 "CheckBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
+	            $("#CheckBox").slideToggle("1500");
+	        });
+	    });
+	</script>
+	
+	<script>
+	    $(function() {
+	        $("#OrdererBtn").on("click", function() {
+	            // id가 "OrdererBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
+	            $("#OrdererBox").slideToggle("1500");
+	        });
+	    });
+	</script>
+	
+	<script>
+	    $(function() {
+	        $("#SenderBtn").on("click", function() {
+	            // id가 "SenderBox"인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함.
+	            $("#SenderBox").slideToggle("1500");
+	        });
+	    });
+	</script>
 
 	<br><br>
 	
@@ -415,7 +444,7 @@
        
             </script>
             
-            
+            <!-- 구독 상품 결제 용 필요 변수들 미리 세팅 -->
             <input type="hidden" id="userNo" value="${ loginUser.userNo }">
             <input type="hidden" id="userName" value="${ loginUser.userName }">
             <input type="hidden" id="email" value="${ loginUser.email }">
@@ -424,7 +453,8 @@
         </div><!-- 1200px 너비 -->
       	</div><!-- 전체 색상 변경 div -->
 
-	<script>	
+	<script>
+	// 결제하기 버튼이 눌렸을때
 	function pay() {
 		var subReceiverUser = $('#subReceiverUser').val()
 		var subReceiverPhone = $('#subReceiverPhone').val()
@@ -432,10 +462,10 @@
 		var deliverTo1 = $('#address1').val() 
 		var deliverTo2 = $('#address2').val()
 		
-		if (subReceiverPhone=="" || subReceiverUser=="" || subReceiverPostcode=="" || deliverTo1=="" || deliverTo2==""){
+		if (subReceiverPhone=="" || subReceiverUser=="" || subReceiverPostcode=="" || deliverTo1=="" || deliverTo2==""){ // 만약 아직 양식이 기입이 덜 되어있다면
 			alert("모든 양식을 기입해야 결제가 가능합니다!");
 		}
-		else {
+		else { // 결제로
 			
 			var subLevel = $('#subLevel').val()
 			getBillingKey(subLevel)
@@ -506,10 +536,10 @@
 				numOfPay : numOfPay
 				},
 			success : function(data) {
-				console.log("구독이 등록되었습니다!");
+				console.log("iBlossom 상품 구독 등록 : 매달 싱싱하고 예쁜 꽃을 보내드릴게요 :)");
 				
 			}, error : function() {
-				console.log("구독 등록 실패");
+				console.log("상품 구독에 실패하였습니다 :(");
 			}
 		});
 	}
@@ -528,10 +558,10 @@
 				totalPrice : totalPrice
 			},
 			success : function(data) {
-				console.log("상품 결제 성공");
+
 				insertSubscribe(numOfPay, receiptId, totalPrice);
 			}, error : function() {
-				console.log("상품 결제 실패");
+				alert("상품결제 실패")
 			}
 		});    
 	}
@@ -557,10 +587,11 @@
 				numOfPay : numOfPay,
 				totalPrice : totalPrice
 			},
-			success : function(data) {
-				console.log("DB 넣음")		
+			success : function(result) {
+				alert(result);
+				location.href="subscribeView.me"
 			}, error : function() {
-				console.log("DB 넣음 실패")
+				alert(result)
 			}
 		});
 	}
@@ -581,7 +612,8 @@
 
 	</script>
 
-
+	</div>
+	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 	
 </body>

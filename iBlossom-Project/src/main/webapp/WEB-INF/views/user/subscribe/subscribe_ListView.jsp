@@ -42,7 +42,9 @@
 	                </tr>
 	            </table>
         </div>
+        
         <hr style="width:1200px; margin-bottom : 30px; border-width: 1px 0px 0px 0px;" >
+        
 		<div class="subscription">
 	        <!-- 구독 상품 목록 -->
 	        <div class="sub_list">
@@ -52,7 +54,6 @@
 	            <h2 style="text-align: center;">STEP1. 구독할 꽃다발을 선택해주세요.</h2>
 	            
 	            <!-- 구독 상품 전체 리스트 조회-->
-
 	            <br>
 	            <a style="float:right;" href="listView.sp">구독 상품 목록 수정</a>
 	            <br>
@@ -168,7 +169,7 @@
  
 	<script>
 	var subPrice = 0;
-	// 정기구독 상품 클릭 시
+	// 정기구독 상품 클릭 시 정기구독 기간 설정 창 히든 제거
 	$('.sub_list_product').click(function() {
 		$('.sub_list_img').css("border","1px solid rgb(243,243,243)")
 		var spno = $(this).children(".spno").text();
@@ -199,7 +200,7 @@
 	// 구독 개월 수 클릭 시
 	$('.sub_level').click(function() {
 		
-		if($('#datepicker').val().length > 1) {
+		if($('#datepicker').val().length > 1) { // 수령일을 선택하고 구독 개월수를 클릭하면
 			$('.sub_level').css("border","1px solid lightgrey")
 			$(this).css("border","2px solid rgb(255,35,147)")
 			$('.sub_product').removeAttr("hidden")
@@ -208,13 +209,15 @@
 			var subLevel = $(this).val();
 			selectSubProduct(spno, deliverAt, subLevel);
 		}
-		else {
+		else { // 구독 개월을 선택했으나 수령일을 아직 선택하지 않았다면
 			alert("첫 수령일을 먼저 선택해주세요");
 		}
 		
 	});
 
+	// 구독 개월수 클릭 시 해당 구독상품 번호를 가진 구독 상품 객체 불러오기
 	function selectSubProduct(spno, deliverAt, subLevel) {
+		
 		$.ajax({
 			url : "getSubProduct.su",
 			type : "post",
@@ -238,6 +241,7 @@
 		});
 	}
 	
+	// 지금까지 유저가 입력한 정보 모아서 결제페이지로 보내주기
 	function pay() {
 		$('#payInfo').submit();
 	}
@@ -260,13 +264,7 @@
 	
 	$(function () {
 	  $('.datepicker').datepicker();
-	});
-	
-	
-		
-	
-		
-		
+	});	
 	</script>
     
     <jsp:include page="../../common/footer.jsp" />

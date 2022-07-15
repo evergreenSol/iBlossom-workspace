@@ -43,8 +43,6 @@ float : left;
 		<a href="combinationDetailList.pr" style="text-decoration: none;  font-size:20px;">조합형</a>
 	</div>
 
-
-
 	<br>
 	<br>
 

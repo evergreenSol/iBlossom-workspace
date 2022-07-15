@@ -234,7 +234,7 @@
 
     /*공지전체 틀*/       
     #notice-content{
-        width: 850px;
+        width: 860px;
         height: 300px;
         margin: auto;
         margin-left: 350px;
@@ -246,6 +246,7 @@
         width : 730px;
         height : 230px;
         margin-top : 5px;
+        margin-bottom : 50px;
         padding : 10px;
         box-sizing : border-box;
         display : none;
@@ -254,8 +255,9 @@
     /*공지작성일*/
     .notice-date{
         position:absolute;
-        margin-left: 750px;
-        margin-top: -20px;
+        /* margin-left: 750px; */
+        right : 0px;
+        margin-top: -35px;
     }
     
      /*contact us 내용전체*/
@@ -268,27 +270,32 @@
 
     /*FAQ 질문 제목*/
     .q {
-        background-color : rgb(223, 223, 219);
-        width : 550px;
+        /* background-color : rgb(223, 223, 219); */
+        width: 860px;
         height: 35px;
-        text-align:left;
+        text-align: left;
         line-height : 30px;
-        border-radius : 10px;
+        /* border-radius: 10px; */
         cursor : pointer;
-        margin-top : 5px;
-        
+        margin-top: 10px;
+        padding-bottom: 7px;
+        font-size: 17px;
+        font-weight: 600;
+        border-bottom: 1px solid lightgray;
     }
 
     /*FAQ 답변*/
     .a1 {
-        border : 1px solid lightgray;
+        /* border : 1px solid lightgray; */
         width : 550px;
         height : 120px;
-        margin-top : 5px;
+        /* margin-top : 5px; */
         border-radius : 10px;
         padding : 10px;
         box-sizing : border-box;
         display : none;
+        font-size: 15px;
+        line-height: 1.4;
     }
 
     /*FAQ 전체 틀*/
@@ -344,13 +351,17 @@
     #answerContent:focus, #answerTitle:focus{
     outline:none;
     }
+    
+    #qnaContent {
+    outline:none;
+    }
 
     #questionBtn{
-    margin-left: 517px;
-    margin-top: 10px;
+    margin-left: 730px;
+    margin-top: 30px;
     border-radius: 3px;
-    width: 70px;
-    height: 35px;
+    width: 120px;
+    height: 40px;
     background-color: black;
     border-color: black;
     color: white;
