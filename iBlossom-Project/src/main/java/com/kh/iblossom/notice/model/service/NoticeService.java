@@ -8,4 +8,16 @@ public interface NoticeService {
 	
 	ArrayList<Notice> selectList();
 
+	ArrayList<Notice> selectAdminList();
+
+	int insertNotice(Notice n);
+
+	Notice selectAdminNotice(int noticeNo);
+
+	int updateNotice(Notice n);
+
+	int deleteNotice(int noticeNo);
+
+	int selectListCount();
+
 }

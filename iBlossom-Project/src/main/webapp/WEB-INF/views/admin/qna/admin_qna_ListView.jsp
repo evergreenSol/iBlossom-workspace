@@ -12,7 +12,7 @@
     <link href="resources/css/kms.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
- 
+ /* 페이징바 */
 
  #pagingArea {
    width: fit-content;
@@ -52,7 +52,7 @@
 .pagination li {
    float : left;
 }
-
+ 
 
 </style>
 </head>
@@ -122,7 +122,7 @@
                         <a href="" class="admin-navi-menu" style="font-weight: 700;">고객센터관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="qnaList.ad">1:1 문의</a></li>
-                            <li><a href="">공지사항</a></li>
+                            <li><a href="noticeList.ad">공지사항</a></li>
                         </ul>
                     </li>
                     <li><a href="" class="admin-navi-menu" id="admin-navi-chat">채팅관리</a></li>
