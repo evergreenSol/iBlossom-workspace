@@ -26,6 +26,7 @@ public class sendSMS {
 	    Message coolsms = new Message(api_key, api_secret);
 	    
 	    String phone = ((Member)session.getAttribute("loginUser")).getPhone();
+	    String userName  = 	((Member)session.getAttribute("loginUser")).getUserName();    
 	    
 	    phone = phone.replace("-", "");
 	    
@@ -34,6 +35,7 @@ public class sendSMS {
 	    int price = o.getPrice();
 	    
 	    String text = "iBlossom 원데이 클래스 예약안내" + "\r\n" + "\r\n"
+	    			+ "예약자명: " + userName + "\r\n"
 	    			+ "예약일: " + classDate + "\r\n"
 	    			+ "클래스명: " + className + "\r\n"
 	    			+ "결제금액: " + price + "원" + "\r\n"

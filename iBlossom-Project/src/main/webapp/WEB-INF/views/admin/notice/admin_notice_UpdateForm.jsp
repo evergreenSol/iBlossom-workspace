@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +10,7 @@
     <title>member</title>
     <link href="resources/css/shj.css" rel="stylesheet">
     <link href="resources/css/kms.css" rel="stylesheet">
-	<!-- 파비콘 -->
-	<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
-	<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -70,14 +68,14 @@
                     </li>
                     <li><a href="" class="admin-navi-menu">상품관리</a></li>
                     <li><a href="" class="admin-navi-menu">리뷰관리</a></li>
-                    <li><a href="" class="admin-navi-menu" style="font-weight: 700;">클래스관리</a>
+                    <li><a href="" class="admin-navi-menu">클래스관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="classAddForm.ad">클래스 추가</a></li>
                             <li><a href="classList.ad">클래스 예약내역</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="" class="admin-navi-menu">고객센터관리</a>
+                        <a href="" class="admin-navi-menu" style="font-weight: 700;">고객센터관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="qnaList.ad">1:1 문의</a></li>
                             <li><a href="noticeList.ad">공지사항</a></li>
@@ -95,39 +93,35 @@
     <!-- admin 관리자페이지 회원관리 -->
     <div id="admin-member-wrap">
 
-        <span id="admin-member-title">클래스별 예약자 리스트</span>
+        <span id="admin-member-title">공지사항 작성하기</span>
         <hr id="admin-member-hr">
 
         <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
-        <div>
-            
-            <table id="admin-order-list-table">
-                <!-- 메뉴바 -->
-                <thead id="admin-order-list-thead">
-                    <tr >
-                        <th width="80">예약순번</th>
-                        <th width="80">클래스번호</th>
-                        <th width="120">예약자 이름</th>
-                        <th width="180">연락처</th>
-                        <th width="200">이메일</th>
-                        <th width="180">결제일</th>
-                    </tr>
-                </thead>
+     <form id="admin-notice-container" action="updateNotice.ad" method="post">
+        <table id="noticeContent" border="1">
+            <tr>
+                <th width="70" height="30">제목</th>
+                <td width="250">
+                	<p><textarea type="text" id="noticeTitle" name="noticeTitle" 
+                	style="resize:none; border:none; outline:none; width:700px; height:35px; font-size:15px;" 
+                	maxlength="100" required>${ n.noticeTitle }</textarea></p>
+                </td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td id="noticeContent" height="200px" colspan="5" name="noticeContent">
+                	<p style="height:200px; margin:0px; padding:0px;"><textarea id="noticeContent" name="noticeContent" cols="87" rows="10.5" maxlength="1000"
+					 style="resize:none; border: none; outline:none; font-size: 15px;" required>${ n.noticeContent }</textarea></p>
+                </td>
+                <input type="hidden" name="noticeNo" value="${ n.noticeNo }">
+                <input type="hidden" name="noticeDate" value="${ n.noticeDate }">
+            </tr>         
+        </table>
+        <button id="adminNoticeBtn" type="submit">확인</button>
+     </form>
+    </div> 
+   
+        
 
-                <tbody>
-                    <c:forEach var="qa" items="${ list }">
-                    <tr>
-                        <td>${ qa.resNo }</td>
-                        <td>${ qa.classNo }</td>
-                        <td>${ qa.resName }</td>
-                        <td>${ qa.resPhone }</td>
-                        <td>${ qa.resEmail }</td>
-                        <td>${ qa.payDate }</td>
-                    </tr>
-                    </c:forEach>
-                </tbody>
-            </table>           
-        </div>
-    </div>
 </body>
 </html>

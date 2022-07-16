@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>      
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +10,7 @@
     <title>member</title>
     <link href="resources/css/shj.css" rel="stylesheet">
     <link href="resources/css/kms.css" rel="stylesheet">
-	<!-- 파비콘 -->
-	<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
-	<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -70,14 +68,14 @@
                     </li>
                     <li><a href="" class="admin-navi-menu">상품관리</a></li>
                     <li><a href="" class="admin-navi-menu">리뷰관리</a></li>
-                    <li><a href="" class="admin-navi-menu" style="font-weight: 700;">클래스관리</a>
+                    <li><a href="" class="admin-navi-menu">클래스관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="classAddForm.ad">클래스 추가</a></li>
                             <li><a href="classList.ad">클래스 예약내역</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="" class="admin-navi-menu">고객센터관리</a>
+                        <a href="" class="admin-navi-menu" style="font-weight: 700;">고객센터관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="qnaList.ad">1:1 문의</a></li>
                             <li><a href="noticeList.ad">공지사항</a></li>
@@ -95,7 +93,7 @@
     <!-- admin 관리자페이지 회원관리 -->
     <div id="admin-member-wrap">
 
-        <span id="admin-member-title">클래스별 예약자 리스트</span>
+        <span id="admin-member-title">공지사항 리스트</span>
         <hr id="admin-member-hr">
 
         <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
@@ -105,29 +103,66 @@
                 <!-- 메뉴바 -->
                 <thead id="admin-order-list-thead">
                     <tr >
-                        <th width="80">예약순번</th>
-                        <th width="80">클래스번호</th>
-                        <th width="120">예약자 이름</th>
-                        <th width="180">연락처</th>
-                        <th width="200">이메일</th>
-                        <th width="180">결제일</th>
+                        <th width="80">번호</th>
+                        <th width="300">제목</th>
+                        <th width="150">작성일</th>
+                        <th width="80">삭제</th>
                     </tr>
                 </thead>
-
                 <tbody>
-                    <c:forEach var="qa" items="${ list }">
+                    <c:forEach var="n" items="${ list }">
                     <tr>
-                        <td>${ qa.resNo }</td>
-                        <td>${ qa.classNo }</td>
-                        <td>${ qa.resName }</td>
-                        <td>${ qa.resPhone }</td>
-                        <td>${ qa.resEmail }</td>
-                        <td>${ qa.payDate }</td>
+                        <td>${ n.noticeNo }</td>
+                        <td>${ n.noticeTitle }</td>
+                        <td>${ n.noticeDate }</td>
+                        <td><button type="submit" onclick="deleteNotice(${ n.noticeNo });">삭제</button></td>
                     </tr>
                     </c:forEach>
                 </tbody>
-            </table>           
+            </table>
+  
+            <a id="addNoticeBtn" type="button" href="noticeForm.ad">작성하기</a>       
         </div>
     </div>
+    
+    
+		<script>
+        	$(function() {        		
+        		$("#admin-order-list-table>tbody>tr").click(function(){
+        			console.log("클릭됨");
+        			console.log($(this).children().eq(0).text());
+        			location.href = "detailNotice.ad?noticeNo=" + $(this).children().eq(0).text();        			
+        		});
+        	});
+        </script>
+        
+     <script>
+	    function deleteNotice(noticeNo) {
+	
+	  	  console.log(noticeNo);
+	  	  
+	  	  $.ajax({
+	  		url : "deleteNotice.ad",
+	  		type : "post",
+	  		data : { noticeNo : noticeNo },
+	  		success : function(result) {
+	  			console.log(result);
+	  			if(result == "성공") {
+	  				alert("공지사항 삭제에 성공했습니다.");
+	  				location.href="noticeList.ad";
+	  				
+	  			}
+	  			else{
+	  				alert("공지사항 삭제에 실패했습니다.");	
+	  			}
+	  		},
+	  		error : function(result) {
+	  			console.log(result);
+	  			console.log("ajax 통신 실패");
+	  		}
+	  	})  
+	    }
+    </script>
+
 </body>
 </html>

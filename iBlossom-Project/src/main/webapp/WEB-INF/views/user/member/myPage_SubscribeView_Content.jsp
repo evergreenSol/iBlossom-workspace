@@ -171,6 +171,8 @@
 				console.log("클릭");
 				*/
 				$(this).next("div").slideDown("1500");
+				
+				
             });
 			
 			var refundPrice;

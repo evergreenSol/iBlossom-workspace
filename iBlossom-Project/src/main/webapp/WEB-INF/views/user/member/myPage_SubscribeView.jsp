@@ -17,10 +17,7 @@
 
 	<div class="mypage-wrap">
 	
-		<br><br>
         <jsp:include page="myPage_Header.jsp"/>
-        
-        <br>
         
         
         <table class="mypage-body">

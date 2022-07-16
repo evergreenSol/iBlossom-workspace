@@ -6,8 +6,11 @@ div { box-sizing: border-box; }
 
 .mypage-wrap {
     margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
     width: 1200px;
     height: 100%;
+    
 }
 
 
@@ -19,6 +22,7 @@ div { box-sizing: border-box; }
     /* text-align : center; */
     --tw-bg-opacity: 1;
     background-color: rgb(248 248 248/var(--tw-bg-opacity));
+    margin-bottom: 15px;
 }
 
 .grade-first {
@@ -450,6 +454,12 @@ height: 97%;
     background-color: rgb(21 21 21/var(--tw-bg-opacity));
     
     border-radius: 3px;
+}
+
+#no-class {
+	font-size : 20px;
+	font-weight : 600;
+	
 }
 /* 마이페이지 나의 클래스 끝*/
 

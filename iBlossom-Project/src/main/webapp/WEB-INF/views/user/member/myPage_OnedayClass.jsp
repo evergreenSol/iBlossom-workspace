@@ -17,10 +17,8 @@
 
 	<div class="mypage-wrap">
 	
-		<br><br>
         <jsp:include page="myPage_Header.jsp"/>
         
-        <br>
         
         <table class="mypage-body">
         	<tr>
@@ -46,6 +44,14 @@
                             </tr>
                         </table>
                         -->
+						
+						<c:if test="${ empty list }">
+						<table style="text-align: center">
+                            <tr>
+                                <td height="300" width="900"  id="no-class">등록된 클래스 정보가 존재하지 않습니다.</td>
+                            </tr>
+                        </table>
+						</c:if>
 						
 						<c:forEach var="c" items="${ list }">
                         <table>
@@ -84,14 +90,6 @@
                                 <td>완료</td>
                                 </c:if>
                                 <td colspan="3" style="text-align: right; padding-right: 10px;">
-                                	<c:if test="${c.classStatus eq 'N'}">
-                                	<button class="smsBtn">예약 확인</button>
-                                	<input type="hidden" value="${c.classDate}">
-                                	<input type="hidden" value="${c.className}">
-                                	<input type="hidden" value="${c.price}">
-                                	</c:if>
-                                	<c:if test="${c.classStatus eq 'Y'}">
-                                	</c:if>
                                 </td>
                             </tr>
                         </table>
@@ -125,6 +123,9 @@
     			location.href="classDetail.cl";
     		});
     		
+    		$("#category-onedayclass").css("font-weight", "700");
+    		
+    		/*
     		$(".smsBtn").click(function () {
     			
     			var result = confirm("예약 확인 문자를 받으시겠습니까?" + "\r" + "(단 한번만 발송 가능합니다.)"); 
@@ -138,10 +139,9 @@
     				
     			}
     			
-    			/*
 
     			$.ajax({
-    				url:"sendOnedayClassMessage.do.do",
+    				url:"sendOnedayClassMessage.do",
     				data : {
     					classDate : $(this).next().val(),
     					className : $(this).next().next().val(),
@@ -156,11 +156,11 @@
     				
     			});
 				
-    			*/
     			
     		});
+    		*/
     		
-    		$("#category-onedayclass").css("font-weight", "700");
+    		
     	});
     </script>
              

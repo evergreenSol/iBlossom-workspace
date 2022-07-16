@@ -17,10 +17,8 @@
 
 	<div class="mypage-wrap">
 	
-		<br><br>
         <jsp:include page="myPage_Header.jsp"/>
         
-        <br>
         
         <table class="mypage-body">
         	<tr>
@@ -102,8 +100,8 @@
                             </tr>
 							<!-- 환불 -->
 							<form action="refund.me" method="post" id="real-submit">
-								<input type="text" value="${o.totalPrice}" name="totalPrice">
-								<button type="submit" id="real-submit-button" >test</button>
+								<input type="hidden" value="${o.totalPrice}" name="totalPrice">
+								<button type="submit" id="real-submit-button" style="display:none">test</button>
 							</form>
                         </c:forEach>
                         </table>

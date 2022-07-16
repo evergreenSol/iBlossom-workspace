@@ -45,7 +45,7 @@
                             <br>
 
                             <!-- 주문번호 -->
-                            <div class="complete-graybox-num">주문번호 : </div> <!-- ${o.orderNo} -->
+                            <div class="complete-graybox-num">주문번호 : ${ orderNo }</div> <!-- ${o.orderNo} -->
 	
                         </div> 
 

@@ -28,15 +28,19 @@
 
 #addBtn{
     position: absolute;
-    margin-left: 270px;
-    margin-top: -27px;
+    margin-left: 220px;
+    margin-top: 15px;
     background-color: black;
     border-radius: 3px;
     color: white;
-    width: 55px;
-    height: 27px;
+    width: 90px;
+    height: 40px;
+    font-size: 19px;
 }
 
+#addClassForm{
+	margin:auto;
+}
 
 </style>
 </head>
@@ -106,7 +110,7 @@
                         <a href="" class="admin-navi-menu">고객센터관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="qnaList.ad">1:1 문의</a></li>
-                            <li><a href="">공지사항</a></li>
+                            <li><a href="noticeList.ad">공지사항</a></li>
                         </ul>
                     </li>
                     <li><a href="" class="admin-navi-menu" id="admin-navi-chat">채팅관리</a></li>
@@ -114,25 +118,41 @@
             </div>
         </div>
     </div>
+    
+        <!-- admin 관리자페이지 회원관리 -->
+    <div id="admin-member-wrap">
+
+        <span id="admin-member-title">클래스 추가</span>
+        <hr id="admin-member-hr">
+
+        <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
+        <div>
+            
+    <div id="admin-order-list-table">
 
     <form id="add-container" action="insertClass.ad" method="post">
-        <table id="addClassForm" border="1">
-            <p id="addClass">클래스 추가하기</p>
-            <tr>
-                <td><input type="text" id="classAdd" name="className" style="border:none" width="300" maxlength="40" placeholder="클래스명"></td>
+        <table id="addClassForm" border="1" style="font-size:20px">
+            <tr> 
+            	<th width="200">클래스명</th>
+                <td width="400" height="60"><input type="text" id="classAdd" name="className" style="border:none; width:350px; height:50px; font-size:18px;"  maxlength="50" ></td>
             </tr> 
-            <tr>
-                <td><input type="text" id="classAdd" name="price" style="border:none" width="300" maxlength="40" placeholder="가격"></td>
+            <tr> 
+            	<th>가격</th>
+                <td height="60"><input type="text" id="classAdd" name="price" style="border:none; width:350px; height:50px; font-size:18px;" maxlength="50" ></td>
             </tr>   
             <tr>
-                <td><input type="text" id="classAdd" name="classDate" style="border:none" width="300" maxlength="40" placeholder="날짜(yyyy-mm-dd hh:mm 형식)"></td>
+            	<th>수업일</th>
+                <td height="60"><input type="text" id="classAdd" name="classDate" style="border:none; width:350px; height:50px; font-size:18px;" maxlength="40" placeholder="날짜(yyyy-mm-dd hh:mm 형식)"></td>
             </tr>   
             <tr>
-                <td><input type="text" id="classAdd" name="capNo" style="border:none" width="300" maxlength="40" placeholder="정원"></td>
+            	<th>정원</th>
+                <td height="60"><input type="text" id="classAdd" name="capNo" style="border:none; width:350px; height:50px; font-size:18px;" maxlength="40" ></td>
             </tr>   
         </table>
         <button id="addBtn" type="submit">추가</button>
     </form>
+    </div>
+    </div>
 
 </body>
 </html>

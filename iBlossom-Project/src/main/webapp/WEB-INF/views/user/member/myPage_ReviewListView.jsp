@@ -17,10 +17,8 @@
 
 	<div class="mypage-wrap">
 	
-		<br><br>
         <jsp:include page="myPage_Header.jsp"/>
         
-        <br>
         
         <table class="mypage-body">
         	<tr>
@@ -54,7 +52,7 @@
                                 	
                                 <tr>
                                 	<td height="300" width="900" colspan="4" id="no-qna">
-                                		회원님께서 남기신 문의가 없습니다.
+                                		회원님께서 남기신 리뷰가 없습니다.
                                 	</td>
                                 </tr>	
                                

@@ -15,7 +15,8 @@ public class Subscribe {
 	private String subReceiverUser; // 수신인
 	private String subReceiverPhone; // 수인인 전화번호
 	private int subReceiverPostcode; // 수신인 우편번호
-	private Date deliverAt; // 배송일
+	//private Date deliverAt; // 배송일
+	private String deliverAt;
 	private String deliverTo; // 배송지
 	private String deliverStatus; // 배송 상태
 	private String receiptId; // 영수증 ID
