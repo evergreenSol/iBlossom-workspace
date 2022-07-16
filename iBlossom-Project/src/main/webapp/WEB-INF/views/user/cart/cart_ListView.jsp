@@ -10,6 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <link href="resources/css/ldo-user.css" rel="stylesheet">
+
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 <link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
@@ -30,26 +31,26 @@
 	    <div class="cart-left">
 	
 	        <!-- 전체선택, 선택삭제 div -->
-	        <div class="cart-choice">
-	            <div>
-	                <input type="checkbox" checked onclick="checkFalse">&nbsp;전체선택 <span>(1/2)</span>
-	            </div>
-	            
+            <div class="cart-choice">
+                <div>
+                    <input type="checkbox" id="checkAll" checked>&nbsp;전체선택 <span>(1/2)</span>
+                </div>
+			    
 	            <!-- 현재 페이지 들어오면 전체선택 되게끔 -->
 	            <script>
 		            $(document).ready(function(){
-		                var link =  document.location.href; // 현재 페이지 url 를 가지고 옵니다.    
-	                        $( "input[type=checkbox]" ).each(function(){ // 확인됐으면 모든 체크박스에 체크를 해줍니다.
-	                        	$(this).attr('checked', true);
-	                        });
+                        $( "input[type=checkbox]" ).each(function(){ // 확인됐으면 모든 체크박스에 체크를 해줍니다.
+                        	$(this).attr('checked', true);
+                        });
 		        	});
 		            
-		            function
+		            $(document).onclick
 	            </script>
 	            
 	            <div>
-	                <button type="button" class="choice-delete-btn" onclick="location.href=''">선택삭제</button>
+	                <button type="button" id="cartChoiceCheck" class="choice-delete-btn" onclick="location.href=''">선택삭제</button>
 	            </div>
+	            
 	        </div>
 	
 	        <!-- 장바구니 메뉴바 -->
@@ -63,7 +64,7 @@
 	        <!-- 장바구니 내용 -->
 			<form action="detail.or">
 	        	
-	        	<div style="border:1px solid; padding:0px;">
+	        	<div style="padding:0px;">
 	        		        
 					<c:forEach var="c" begin="0" end="${ list.size() -1 }" varStatus="status">
 					<input type="hidden" value="${ list.size() }" id="listSize">
@@ -71,42 +72,48 @@
 			            <div class="cart-content">
 							
 			                <!-- 장바구니 라디오 버튼 -->
-			                <p class="cart-content1">
-			                    <input type="checkbox" name="cartList[${c}].cartNo" value="${list[c].cartNo}">
-			                </p>
+	                        <p class="cart-content1">
+	                            <input type="checkbox" class="cartCheck" name="cartList[${c}].cartNo" value="${list[c].cartNo}">
+	                            <input type="hidden" id="prevPrice" value="${ list[c].productPrice }">
+	                        </p>
 			
 			                <!-- 장바구니 이미지 -->
 			                <div class="cart-content2">
-			                    <img src="${ list[c].thumbnail }" style="width:280px; height:280px;">
+			                    <img src="${ list[c].thumbnail }">
 			                </div>
 			
 			                <!-- 장바구니 상세옵션 -->
-			                <div class="cart-content3" style="border:1px solid;">
+			                <div class="cart-content3">
 			                    
 			                        <!-- 제목 -->
-			                        <div style="border:1px solid;"> ${ list[c].flowerName }</div><br><br><br>
+			                        <div>${ list[c].flowerName }</div><br>
 			                         
 			                        <!-- 가격 -->   
-			                        <div class="basketprice" style="border:1px solid;">
-			                        	<input type="text" id="price${ status.count }" value="${ list[c].productPrice }">원
-			                        </div><br><br>
+			                        <div class="basketprice">
+			                        	<input type="text" id="price${ status.count }" id="resizable" class="price" onkeyup="javascript:CheckSize();"
+			                        			value="${ list[c].productPrice }">&nbsp;원
+			                        	
+			                        </div><br>
 	
 						            <!-- 장바구니 수량 변경 -->
-				                    <input type="button" value="-" onclick="count('minus',${ status.count })">
-			                        <input type="text" id="productCount${ status.count }" value="${ list[c].productCount }" size="1">
-			                        <!-- 0715 PM 5:45 type="number" 에서 text 로 변경 - 다온 -->
-			                        <input type="button" value="+" onclick="count('plus',${ status.count })">
-			                        					    
+						            <div class="basketnum">
+					                    <input type="button" value="-" onclick="count('minus',${ status.count })">
+				                        <input type="text" id="productCount${ status.count }" value="${ list[c].productCount }" size="1">
+				                        <!-- 0715 PM 5:45 type="number" 에서 text 로 변경 - 다온 -->
+				                        <input type="button" value="+" onclick="count('plus',${ status.count })">
+			                        </div>					    
 			                </div>
 	
 			                <!-- 장바구니 상품 금액 -->
-				            <div class="cart-content4" style="border:1px solid;">
-						        <input type="text" id="sum${ status.count }" name="sum" size="3" readonly style="border:none; font-size:18px; text-align:center;">
+				            <div class="cart-content4">
+						        <input type="text" id="sum${ status.count }" name="sum" size="3" readonly
+									   style="border:none; font-size:18px; text-align:center;">
 						               <!-- ${ list[c].productCount * list[c].productPrice }원 -->
 				            </div>
 							
 				            <div class="cart-content5">
-				            	<a href="#" class="abutton">X</a>
+				            	<a href="#" class="abutton" 
+	                            		onClick={this.deleteItem} type="submit">X</a>
 				            </div>
 			            
 			            </div>
@@ -122,6 +129,21 @@
 	    </div> <!-- class="cart-left" -->
 	    
 	    <script>
+	    $(document).ready(function(){	
+	    	$(".cartCheck").on('click',function() {
+	    		if($(this).prop('checked')) {
+	    			var prevPrice = $(this).siblings("#prevPrice").val();
+	    			$(this).parentsUntil(".cart-content").nextUntil(".cart-content3").next().find(".price").attr("value", prevPrice);
+	    			getSum();
+	    		}
+	    		else {
+	    			
+	    			$(this).parentsUntil(".cart-content").nextUntil(".cart-content3").next().find(".price").attr("value", 0);
+	    			getSum();
+	    		}
+	    	})
+    	});
+	    
 	    
 	    	$(function() { // 페이지 로딩시 바로 실행되는 아이 
 	    		
@@ -142,22 +164,19 @@
 	    	// 체크가 풀리면 체크된 애가 몇번째 박스인지 가져오고 그 "몇번쨰" 인지 값을 이용해서 $('#price'+(그값)+'').val() 을 0으로 바꿔주기
 	    	// 체크가 안됐을 때는 아이디를 다르게 주면 된다. notPrice/ notProductCount
 	    	
-	    	function checkPrice() { // 이름을 주게 되면 그 실행해달라고 하는 곳에서 실행됨
-	    		
-	    	}
-	    	
-	    	
     		function getSum() { // 이름을 주게 되면 그 실행해달라고 하는 곳에서 실행됨
     			
     			var listSize = $('#listSize').val(); // 상품 리스트 사이즈 (상품이 3개면 3개)
 	    		var sumAll = 0;
 	    		for(var i = 0; i < listSize; i++) { // 상품 리스트를 돌면서
 	    			var price = $('#price'+(i+1)+'').val(); // 각 상품 가격
+	    			console.log(price)
 	    			var productCount = $('#productCount'+(i+1)+'').val(); // 각 상품 수량
 	    			$('#sum'+(i+1)+'').attr("value",price*productCount); // sum1, sum2, ... 에 전달
 	    			
 	    			sumAll += parseInt($('#sum'+(i+1)+'').val()); // sumAll = sum1 + sum2 + ...
 	    		}
+	    		
 				$('#sumAll').attr("value",sumAll); // sumAll input에 sumAll 값 전달
 				$('#totalPrice').text(sumAll + 3000);
     		}
@@ -177,20 +196,17 @@
 		        // 더하기/빼기
 		        if(type === 'plus') { // 매개변수로 plus type이 넘어오면
 		          productCount.value = parseInt(count) + 1; // count++
-		          
-		          sum.value = price * productCount.value;
+
 		          getSum();
 				  
 		        } else if(type === 'minus' && count > 1)  { // 매개변수로 minus type 이 넘어오고 1보다 크다면
 		          productCount.value = parseInt(count) - 1; // count--
-	
-		          sum.value = price * productCount.value;
+
 		          getSum();
 		        }
 		        else { // 그 외에는
 		          productCount.value = parseInt(count); // 현상 유지
-		          
-		          sum.value = price * productCount.value;
+
 		          getSum();
 		        }
 		    }
@@ -200,7 +216,15 @@
 	 			var sumAll = document.getElementById('sumAll');
 	 		}
 	 		*/
-	
+		</script>
+		
+		<!-- 글자수에 따라 증감 -->
+		<script type="text/javascript">
+			function CheckSize() {
+				var textObj = document.getElementById('resizable');
+				var resize = textObj.value.length;
+				textObj.setAttribute('size',resize);
+			}
 		</script>
 	    
 	    <!------------------------------------------------------------------->
@@ -239,7 +263,8 @@
 		        <!-- 3. 총 결제 금액 = 1 + 2 -->
 		        <div class="total-price">
 		            <span>총 결제 금액</span>
-			        <span id="totalPrice"></span>원
+			        <span id="totalPrice"></span>
+			        <span>원</span>
 			        
 		        </div>
 		
@@ -260,6 +285,23 @@
 	        <div>
 	            <button class="cart-btn" type="button">결제하기</button>
 	        </div>
+	        
+	        <!-- follow quick menu -->
+            <script>  
+	            $(window).scroll(function(){
+	                
+	               var scrollTop = $(document).scrollTop();
+	                
+	               if (scrollTop < 180) {
+	               	   scrollTop = -30; 
+	               }
+	                
+	               $(".cart-right").stop();
+	               $(".cart-right").animate( { "top" : scrollTop }
+	               );
+	                
+	            });
+            </script>
 
 	    </div> <!-- class="cart-right" -->
 	    
@@ -274,7 +316,6 @@
 			});
 		});
 	</script>
-	
 
 
 </body>
