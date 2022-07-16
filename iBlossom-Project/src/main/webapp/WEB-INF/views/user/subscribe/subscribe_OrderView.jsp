@@ -12,9 +12,6 @@
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet"> 
 <!-- <link href="resources/css/kdh.css" rel="stylesheet"> -->
-<!-- 파비콘 -->
-<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
-<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 
