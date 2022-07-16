@@ -98,7 +98,7 @@ div { box-sizing: border-box; }
 	    
     }
     .cart-menu2 { 
-    	flex-basis: 16%;
+    	flex-basis: 12%;
     }
 
     /* 장바구니 내용 */ 
@@ -133,8 +133,6 @@ div { box-sizing: border-box; }
 		display: flex;
         height: 100%;
         align-items: center;
-        justify-content: right;
-        width: 120px;
 	}
 	
     /* 이미지 감싸는 div */
@@ -215,9 +213,14 @@ div { box-sizing: border-box; }
 		 text-decoration: none;
 	}
 	
+	/* x 버튼 */
+	.abutton {
+		font-size: 20px;
+	}
+	
 	.cart-content5 {
-		text-align: center;
-		margin-left: 0px;
+		width: 60px;
+		margin-left: -30px;
 	}
 
 	
