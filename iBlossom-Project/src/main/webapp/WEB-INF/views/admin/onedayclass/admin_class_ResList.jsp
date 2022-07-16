@@ -78,7 +78,7 @@
                         <a href="" class="admin-navi-menu">고객센터관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="qnaList.ad">1:1 문의</a></li>
-                            <li><a href="">공지사항</a></li>
+                            <li><a href="noticeList.ad">공지사항</a></li>
                         </ul>
                     </li>
                     <li><a href="" class="admin-navi-menu" id="admin-navi-chat">채팅관리</a></li>
@@ -93,7 +93,7 @@
     <!-- admin 관리자페이지 회원관리 -->
     <div id="admin-member-wrap">
 
-        <span id="admin-member-title">클래스 전체리스트</span>
+        <span id="admin-member-title">클래스별 예약자 리스트</span>
         <hr id="admin-member-hr">
 
         <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->

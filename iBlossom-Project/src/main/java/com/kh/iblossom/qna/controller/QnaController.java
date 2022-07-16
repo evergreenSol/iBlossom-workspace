@@ -58,7 +58,7 @@ public class QnaController {
 			
 			return "redirect:qnaListView.me";
 		}
-		else { // 실패 => 에러페이지 포워딩
+		else { 
 			
 			model.addAttribute("errorMsg", "문의글 등록 실패");
 			

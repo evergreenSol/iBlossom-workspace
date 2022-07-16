@@ -65,7 +65,7 @@ public class OnedayClassController {
 	@RequestMapping(value="resInsert.cl", produces="text/html; charset=UTF-8")
 	public String insertClassRes(OnedayClassAdmin oa, HttpSession session, Model model) {
 		
-		// System.out.println(oa);
+		System.out.println(oa);
 		int classNo = oa.getClassNo();	
 		int result = onedayClassService.insertClassRes(oa);
 		
