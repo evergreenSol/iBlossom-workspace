@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>iBlossom | Flower Market</title>
 <link href="resources/css/jsa.css" rel="stylesheet">
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
