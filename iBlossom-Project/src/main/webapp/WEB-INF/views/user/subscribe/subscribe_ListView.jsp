@@ -55,11 +55,6 @@
 	            <h2 style="text-align: center;">STEP1. 구독할 꽃다발을 선택해주세요.</h2>
 	            
 	            <!-- 구독 상품 전체 리스트 조회-->
-	            <br>
-	            <a style="float:right;" href="listView.sp">구독 상품 목록 수정</a>
-	            <br>
-            
-
 	            <!-- SUB_PRODUCT 테이블로부터 읽어오기-->
 	            <table class="sub_list_table"> 
 	                <c:forEach var="sp" items="${ list }">    

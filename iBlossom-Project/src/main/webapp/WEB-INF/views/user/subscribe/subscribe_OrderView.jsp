@@ -388,7 +388,6 @@
             <!-- 결제하기 버튼 -->
             <div>
                 <button class="order-btn" onclick="pay();">결제하기</button>
-                <button class="order-btn" onclick="cancelSubscribe();">취소하기</button>
             </div>
             
             <!-- follow quick menu -->
