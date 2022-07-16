@@ -139,7 +139,7 @@
         <div id="admin-memberList-wrap">
 
             <table id="admin-member-table" border="1">
-            	<thead style="background-color : lightgray; height : 50px; font-weight : 700;">
+            	<thead style="background-color : black; color:white; height : 50px; font-weight : 700;">
             
                     <th style="width:60px;">회원번호</th>
                     <th style="width:100px;">아이디</th>
