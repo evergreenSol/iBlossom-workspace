@@ -90,8 +90,8 @@
 			                         
 			                        <!-- 가격 -->   
 			                        <div class="basketprice">
-			                        	<input type="text" id="price${ status.count }" id="resizable" class="price" onkeyup="javascript:CheckSize();"
-			                        			value="${ list[c].productPrice }">&nbsp;원
+			                        	<input type="text" id="price${ status.count }" id="resizable1" class="price" onkeyup="javascript:CheckSize();"
+			                        			value="${ list[c].productPrice }">원
 			                        	
 			                        </div><br>
 	
@@ -106,14 +106,13 @@
 	
 			                <!-- 장바구니 상품 금액 -->
 				            <div class="cart-content4">
-						        <input type="text" id="sum${ status.count }" name="sum" size="3" readonly
-									   style="border:none; font-size:18px; text-align:center;">
+						        <input type="text" id="sum${ status.count }" id="resizable2" name="sum" size="1" readonly onkeyup="javascript:CheckSize();"
+									   style="border:none; font-size:18px; text-align:right;">원&nbsp;
 						               <!-- ${ list[c].productCount * list[c].productPrice }원 -->
 				            </div>
 							
 				            <div class="cart-content5">
-				            	<a href="#" class="abutton" 
-	                            		onClick={this.deleteItem} type="submit">X</a>
+				            	<a href="#" class="abutton">X</a>
 				            </div>
 			            
 			            </div>
@@ -221,7 +220,13 @@
 		<!-- 글자수에 따라 증감 -->
 		<script type="text/javascript">
 			function CheckSize() {
-				var textObj = document.getElementById('resizable');
+				var textObj = document.getElementById('resizable1');
+				var resize = textObj.value.length;
+				textObj.setAttribute('size',resize);
+			}
+			
+			function CheckSize() {
+				var textObj = document.getElementById('resizable2');
 				var resize = textObj.value.length;
 				textObj.setAttribute('size',resize);
 			}
