@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>iBlossom | Subscription</title>
 <link href="resources/css/kdh.css" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 	<jsp:include page="../../common/header.jsp" />

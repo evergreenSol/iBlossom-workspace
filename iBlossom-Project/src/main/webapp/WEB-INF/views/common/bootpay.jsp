@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <script src="https://js.bootpay.co.kr/bootpay-4.1.5.min.js" type="application/javascript"></script>
 <title>iBlossom | BootPay</title>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 

@@ -10,6 +10,7 @@
     <link href="resources/css/kms.css" rel="stylesheet">
     <title>iBlossom | Notice</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <!-- 파비콘 -->
 	<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 	<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
@@ -58,6 +59,7 @@
 }
  
    </style>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
