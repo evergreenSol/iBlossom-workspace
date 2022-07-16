@@ -6,8 +6,11 @@ div { box-sizing: border-box; }
 
 .mypage-wrap {
     margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
     width: 1200px;
     height: 100%;
+    
 }
 
 
@@ -19,6 +22,7 @@ div { box-sizing: border-box; }
     /* text-align : center; */
     --tw-bg-opacity: 1;
     background-color: rgb(248 248 248/var(--tw-bg-opacity));
+    margin-bottom: 15px;
 }
 
 .grade-first {
@@ -197,6 +201,21 @@ height: 97%;
 /* 마이페이지 로그아웃 버튼 끝 */
 
 
+/* 마이페이지 메인 시작*/
+
+#mainView-title{
+	font-size : 24px;
+	font-weight : 700;
+}
+
+#mainView-subTitle{
+	margin-left: 10px;
+	font-size : 14px;
+	font-weight : 300;
+}
+
+
+/* 마이페이지 메인 끝*/
 
 
 
@@ -436,6 +455,12 @@ height: 97%;
     
     border-radius: 3px;
 }
+
+#no-class {
+	font-size : 20px;
+	font-weight : 600;
+	
+}
 /* 마이페이지 나의 클래스 끝*/
 
 
@@ -535,4 +560,60 @@ height: 97%;
 	font-size : 20px;
 	font-weight : 600;
 	
+}
+
+.balloon {
+    position: relative;
+    display: inline-block;
+}
+
+.balloon span {
+    display: inline-block;
+    padding: 15px;
+    color: black;
+    background: white;
+    border-style: solid;
+    border-radius: 20px;
+    width : 500px;
+    text-align:left;
+    
+}
+
+.balloon:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.balloon.right:after, .balloon.left:after {
+    border-width: 10px 15px;
+    top: 50%;
+    margin-top: -10px;
+}
+
+.balloon.left:after {
+    border-color: transparent black transparent transparent;
+    left: -27px;
+}
+
+.balloon.right:after {
+    border-color: transparent transparent transparent black;
+    right: -27px;
+}
+
+.qna-detail-content {
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.qna-detail-date{
+    margin: 10px 20px;
+    font-size: 14px;
+}
+
+.qna-detail-title {
+	font-size: 20px;
+	font-weight: 600;
 }

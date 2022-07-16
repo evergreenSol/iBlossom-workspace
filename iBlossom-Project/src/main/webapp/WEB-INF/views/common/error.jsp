@@ -8,6 +8,9 @@
 <link href="resources/css/shj.css" rel="stylesheet">
 <link href="resources/css/header.css" rel="stylesheet">
 <link href="resources/css/footer.css" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 

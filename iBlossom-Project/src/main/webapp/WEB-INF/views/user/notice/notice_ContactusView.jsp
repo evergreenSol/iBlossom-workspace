@@ -9,9 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="resources/css/kms.css" rel="stylesheet">
     <title>iBlossom | Contact Us</title>
+    <!-- 파비콘 -->
+	<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+	<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
     <style>
-
-     </style>    
+#map{
+    margin-bottom: -100px;
+    
+    }
+    </style>    
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -67,9 +73,22 @@
 통신판매번호 : 2022-서울당산-3333<br>
 OPEN HOURS AM 09:30 - PM 18:20 | LUNCH TIME PM 12:20 - PM 13:30 | OFFICE DAY MON - FRI
         </pre>
+	<p id="mapTitle" style="font-size: 20px; font-weight: 700;">찾아오시는 길</p>
+	<div id="map" style="width:700px;height:400px;"></div>
     </div>
 </div>    
 
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d4dec692125d4be6e05e4143d093b0d4"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(37.534210337206666, 126.89724512270467),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+	</script>
+	
 
     
     	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

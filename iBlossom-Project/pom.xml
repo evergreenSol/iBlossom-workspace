@@ -225,6 +225,13 @@
 		    <artifactId>javax.mail</artifactId>
 		    <version>1.5.1</version>
 		</dependency>
+		
+		<!-- SMS 0716 -->
+		<dependency>
+		    <groupId>net.nurigo</groupId>
+		    <artifactId>javaSDK</artifactId>
+		    <version>2.2</version>
+		</dependency>
 	   
 	</dependencies>
 	

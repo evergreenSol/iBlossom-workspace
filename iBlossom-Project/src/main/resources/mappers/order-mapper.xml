@@ -177,6 +177,20 @@
 	    AND ADD_MONTHS(SYSDATE, -1) <= ORDER_DATE
 	    ]]-->
 	</select>
+	
+	<!-- (자동) 배송상태 변경하기 -->
+  	<update id="updateDeliveryStatus">
+  		UPDATE ORDER_TBL
+		SET DELIVERY_STATUS = 
+		    CASE 
+		    <![CDATA[
+		        WHEN TO_DATE(RECEIVE_DATE, 'YYYY-MM-DD') - TO_DATE(SYSDATE, 'YYYY-MM-DD') <= 0 THEN '배송완료'
+		        WHEN TO_DATE(RECEIVE_DATE, 'YYYY-MM-DD') - TO_DATE(SYSDATE, 'YYYY-MM-DD') <= 1 THEN '배송중'
+		        ELSE '배송준비'
+		    ]]>
+		    END
+		WHERE NOT DELIVERY_STATUS IN('결제취소')
+  	</update>
 
 
 

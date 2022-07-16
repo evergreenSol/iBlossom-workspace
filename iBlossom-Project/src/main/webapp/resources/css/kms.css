@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+* { font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; }
 
     /*클래스 전체 감싼 틀*/
     #class-container-wrap{
@@ -239,7 +243,7 @@
     /*공지전체 틀*/       
     #notice-content{
         width: 860px;
-        height: 300px;
+        height: 520px;
         margin: auto;
         margin-left: 350px;
         margin-top: 80px;
@@ -268,7 +272,7 @@
      #contact{
         margin-left: 350px;
         margin-top: 80px;
-        height: 300px;
+
      }
 
 
@@ -472,10 +476,15 @@ hr{
 }
 
 /* admin 관리자 페이지 전체주문내역 table */
-.admin-order-list-table {
+#admin-order-list-table {
     margin: auto; /* 표 중간 */
     text-align: center; /* 글자 가운데 정렬 */
     border-collapse: collapse; /* 테두리 사이의 간격을 없애고 싶다면 */
+
+}
+
+#admin-order-list-table tbody>tr:hover {
+    cursor: pointer;
 }
 
 /* admin 관리자 페이지 전체주문내역 thead */
@@ -485,14 +494,14 @@ hr{
 }
 
 /* admin 관리자 페이지 전체주문내역 th */
-.admin-order-list-table>thead>tr>th {
+#admin-order-list-table>thead>tr>th {
     border: 1px solid black;
     padding: 15px;
     font-size: small;
 }
 
 /* admin 관리자 페이지 전체주문내역 td */
-.admin-order-list-table>tbody>tr>td {
+#admin-order-list-table>tbody>tr>td {
     border: 1px solid rgba(226, 226, 226, 0.982);
     padding: 10px;
     font-size: small;
@@ -507,10 +516,11 @@ hr{
 }
 
 /* admin 관리자 페이지 전체주문내역 table */
-.admin-order-list-table {
+#admin-order-list-table {
     margin: auto; /* 표 중간 */
     text-align: center; /* 글자 가운데 정렬 */
     border-collapse: collapse; /* 테두리 사이의 간격을 없애고 싶다면 */
+    margin-top: 80px;
 }
 
 /* admin 관리자 페이지 전체주문내역 thead */
@@ -520,14 +530,14 @@ hr{
 }
 
 /* admin 관리자 페이지 전체주문내역 th */
-.admin-order-list-table>thead>tr>th {
+#admin-order-list-table>thead>tr>th {
     border: 1px solid black;
     padding: 15px;
     font-size: small;
 }
 
 /* admin 관리자 페이지 전체주문내역 td */
-.admin-order-list-table>tbody>tr>td {
+#admin-order-list-table>tbody>tr>td {
     border: 1px solid rgba(226, 226, 226, 0.982);
     padding: 15px;
     font-size: medium;
@@ -544,53 +554,69 @@ hr{
 
 
 
+	
+	/* 고객센터 관리자페이지 스타일 */
+	/*admin 문의게시판 리스트*/
+	#admin-list-container{
+	     position:absolute;
+	     width: 800px;
+	     margin-left: 200px;
+	     margin-top: 10px;
+	}
+	
+	#admin-list-table tr {
+	     line-height:3;
+	     text-align: center;
+	}
+	
+	#admin-list-table tbody>tr:hover {
+	    cursor: pointer;
+	}
 
-/* 고객센터 관리자페이지 스타일 */
-/*admin 문의게시판 리스트*/
-#admin-list-container{
-     position:absolute;
-     width: 800px;
-     margin-left: 200px;
-     margin-top: 10px;
-}
+	/* 1대1 문의 내용 및 답변 content 관련스타일 */
+	#admin-updatebutton{
+	     cursor : pointer;
+	     margin-left: 630px;
+	    }        
+	
+	#answerContent:focus, #answerTitle:focus{
+	    outline:none;
+	    }
 
-#admin-list-table tr {
-     line-height:3;
-     text-align: center;
-}
-
-#admin-list-table tbody>tr:hover {
-    cursor: pointer;
-}
-
-/* 1대1 문의 내용 및 답변 content 관련스타일 */
-#admin-updatebutton{
-     cursor : pointer;
-     margin-left: 630px;
-    }        
-
-#answerContent:focus, #answerTitle:focus{
-    outline:none;
-    }
-
-#adminAnswerBtn{
-    margin-left: 630px;
-    margin-top: 10px;
-    border-radius: 3px;
-    width: 60px;
-    height: 30px;
-    background-color: black;
-    border-color: black;
-    color: white;
-    cursor: pointer;
-    }
+	#adminAnswerBtn{
+	    margin-left: 630px;
+	    margin-top: 10px;
+	    border-radius: 3px;
+	    width: 60px;
+	    height: 30px;
+	    background-color: black;
+	    border-color: black;
+	    color: white;
+	    cursor: pointer;
+	    }
 
     #admin-answer-container{
-    position:absolute;
-    margin-left: 300px;
-    margin-top: 130px;
-    width:1200px;
-    }
+	    position:absolute;
+	    margin-left: 300px;
+	    margin-top: 40px;
+	    width:1200px;
+	    }
+    
+    /*관리자페이지 공지사항*/
+    #addNoticeBtn{
+	    border-radius : 3px;
+	    background-color: black;
+	    color: white;
+	    font-size: larger;
+	    cursor: pointer; 
+	    text-decoration: none; 
+	    padding: 7px 12px; 
+	    margin-left: 876px;
+	    margin-top: -200px;
+	    position: absolute;
+	}
+    
+    
 
 /* 마이페이지 카테고리 - 카테고리 나누기 */
 .myPage-body {
@@ -676,3 +702,4 @@ height: 97%;
     text-decoration: none;
     color : black;
 }
+

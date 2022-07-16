@@ -7,7 +7,10 @@
 <meta charset="UTF-8">
 <title>iBlossom | Membership</title>
 <link href="resources/css/khs.css" rel="stylesheet">
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -15,10 +18,8 @@
 
 	<div class="mypage-wrap">
 	
-		<br><br>
         <jsp:include page="myPage_Header.jsp"/>
         
-        <br>
         
         <table class="mypage-body">
         	<tr>

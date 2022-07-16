@@ -119,6 +119,12 @@ public class OrderServiceImpl implements OrderService{
 
 		return orderDao.selectMyOrderAllList(sqlSession, userNo);
 	}
+
+
+	@Override
+	public int updateDeliveryStatus() {
+		return  orderDao.updateDeliveryStatus(sqlSession);
+	}
 	
 	
 

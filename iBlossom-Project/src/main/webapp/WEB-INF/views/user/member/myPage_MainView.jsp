@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>iBlossom | MyPage</title>
 <link href="resources/css/khs.css" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -14,10 +17,8 @@
 
 	<div class="mypage-wrap">
 	
-		<br><br>
         <jsp:include page="myPage_Header.jsp"/>
         
-        <br>
         
         <table class="mypage-body">
         	<tr>
@@ -45,7 +46,7 @@
 
                         <br><br>
 
-                        <h2>나의주문내역</h2>
+                        <span id="mainView-title">나의 주문내역</span><span id="mainView-subTitle">(최근 1개월)</span>
                         <!-- <hr color="lightgray"> -->
                         <!--
                         <table style="text-align: center">

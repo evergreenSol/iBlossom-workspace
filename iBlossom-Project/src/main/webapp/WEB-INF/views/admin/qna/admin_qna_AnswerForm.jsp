@@ -7,10 +7,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>member</title>
+    <title>admin | member</title>
     <link href="resources/css/shj.css" rel="stylesheet">
     <link href="resources/css/kms.css" rel="stylesheet">
-
+	<!-- 파비콘 -->
+	<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+	<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 <style>
 
 </style>
@@ -73,15 +75,15 @@
                     <li><a href="" class="admin-navi-menu">리뷰관리</a></li>
                     <li><a href="" class="admin-navi-menu">클래스관리</a>
                         <ul class="admin-navi-ul">
-                            <li><a href="">클래스 수정/추가</a></li>
-                            <li><a href="">클래스 예약내역</a></li>
+                            <li><a href="classAddForm.ad">클래스 추가</a></li>
+                            <li><a href="classList.ad">클래스 예약내역</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="" class="admin-navi-menu" style="font-weight: 700;">고객센터관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="qnaList.ad">1:1 문의</a></li>
-                            <li><a href="">FAQ</a></li>
+                            <li><a href="noticeList.ad">공지사항</a></li>
                         </ul>
                     </li>
                     <li><a href="" class="admin-navi-menu" id="admin-navi-chat">채팅관리</a></li>
@@ -98,30 +100,32 @@
 
         <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
 
-        <div id="admin-answer-container">
+        <form id="admin-answer-container" method="post" action="answerUpdate.ad">
             <table id="anwcontent" border="1">
                 <tr>
                     <th width="70" height="30">제목</th>
-                    <td width="250" name="answerTitle"></td>
+                    <td width="250" name="qnaTitle">${ q.qnaTitle }</td>
                     <th width="60" >작성자</th>
-                    <td width="100" name="userName"></td>
+                    <td width="100" name="userNo">${ q.userNo }</td>
                     <th width="70" >작성날짜</th>
-                    <td width="100" name="answerDate"></td>
+                    <td width="100" name="qnaDate">${ q.qnaDate }</td>
+                    <input type="hidden" name="qnaNo" value="${ q.qnaNo }">
                 </tr>
                 <tr>
                     <th>내용</th>
-                    <td id="answerContent" height="200px" colspan="5" name="answerContent"></td>
+                    <td id="qnaContent" height="200px" colspan="5" name="qnaContent">${ q.qnaContent }</td>
                 </tr>
                 <tr>
                     <th height="140">답변</th>
                     <td colspan="5">
-                        <p style="height:80px;"><textarea name="answerReply" id="answerReply" cols="75" rows="6"  maxlength="400"
+                        <p style="height:80px;"><textarea name="answer" id="answer" cols="75" rows="6"  maxlength="400"
                             style="resize:none; border: none;" required></textarea></p>
                     </td>              
                 </tr>           
             </table>
             <button id="adminAnswerBtn" type="submit">확인</button>
-        </div> 
+        </form> 
     </div>
+    
 </body>
 </html>

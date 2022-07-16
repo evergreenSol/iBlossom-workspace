@@ -13,10 +13,12 @@ public interface QnaService {
 	
 	int insertQna(Qna q);
 
-	int insertAnswer(Qna q);
+	int updateAnswer(Qna q);
 
 	Qna selectQna(int qnaNo);
 
 	int selectListCount();
+	
+	Qna selectAdminQna(int qnaNo);
 
 }

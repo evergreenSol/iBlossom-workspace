@@ -7,11 +7,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>iBlossom | 주문/결제</title>
+<title>iBlossom | Order</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 
 <!-- 슬라이드 업/다운 스크립트  -->
 
@@ -58,16 +61,16 @@
 
 		<c:choose>
 			<c:when test="${ loginUser.grLevel == 1 }">
-				<c:set var="discount" value="0"/>
+				<c:set var="discount" value="1"/>
 			</c:when>
 			<c:when test="${ loginUser.grLevel == 2 }">
-				<c:set var="discount" value="1000"/>
+				<c:set var="discount" value="0.9"/>
 			</c:when>
 			<c:when test="${ loginUser.grLevel == 3 }">
-				<c:set var="discount" value="2000"/>
+				<c:set var="discount" value="0.85"/>
 			</c:when>
 			<c:otherwise>
-				<c:set var="discount" value="3000"/>
+				<c:set var="discount" value="0.8"/>
 			</c:otherwise>
 		</c:choose>
 		
@@ -110,7 +113,7 @@
 
                         <!-- 내용 -->
                         <div id="CheckBox" class="order-check-contentbox">
-							<form action="insertDetailOrder.or" >
+							<form action="insertDetailOrder.or"  id="real-submit">
 							
 	                            <c:forEach var="i" begin="0" end="${ selectList.size() - 1 }">
 	                            
@@ -152,7 +155,7 @@
 		                            </div>
 	                            </c:forEach>
 	                            	<input type="hidden" id="thisOrderNo" name="orderNo">
-	                            <button type="submit" id="real-submit-button" style="display:none"></button>
+	                            <button type="submit" id="real-make-button" style="display:none"></button>
                             
                             </form>
 
@@ -428,16 +431,16 @@
                 <!-- 등급 할인 -->
                 <div class="order-grade">
                     <span>등급할인</span>
-                    <!-- <span>- ${ discount }원</span> -->
-                    <span>-&nbsp;<fmt:formatNumber value="${ discount }" pattern="###,###"/>원</span>
+                    <!-- <span>- ${ total * (1 - discount) }원</span> -->
+                    <span>-&nbsp;<fmt:formatNumber value="${ total * (1 - discount) }" pattern="###,###"/>원</span>
                 </div>
                 <hr>
 
                 <!-- 총 결제 금액 -->    
                 <div class="order-tprice">
                     <span >총 결제 금액</span>
-                    <span><fmt:formatNumber value="${ total + 3000 - discount }" pattern="###,###"/>원</span>
-                    <input type="hidden" id="totalPrice" value="${ total + 3000 - discount }">
+                    <span><fmt:formatNumber value="${total * discount + 3000}" pattern="###,###"/>원</span>
+                    <input type="hidden" id="totalPrice" value="${ total * discount + 3000  }">
                 </div>
 
                 <br>
@@ -486,6 +489,10 @@
       	</div><!-- 전체 색상 변경 div -->
 
 	<script>
+	$(function() {
+		
+	});
+	
 	var userNo = $("#userNo").val();
 
 	function pay() {
@@ -597,18 +604,23 @@
 					
 					console.log($("#thisOrderNo").val());
 					
-					$("#real-submit-button").trigger("click");
+					console.log($("#real-make-button"));
+					alert("천천히 읽어요");
+					$("#real-make-button").trigger("click");
+					// $("#real-submit").submit();
+					//$("#real-make-button").trigger("click");
 					
 				}
-					
-				location.href='complete.or';
+				
+				// location.href='complete.or';
 				
 			}, error : function() {
 				console.log("DB 넣음 실패");
 
 			}
-		});
+		});	
 	}
+
 
 	</script>
 
