@@ -428,7 +428,8 @@
                 <!-- 등급 할인 -->
                 <div class="order-grade">
                     <span>등급할인</span>
-                    <span>- ${ discount }원</span>
+                    <!-- <span>- ${ discount }원</span> -->
+                    <span>-&nbsp;<fmt:formatNumber value="${ discount }" pattern="###,###"/>원</span>
                 </div>
                 <hr>
 
@@ -463,7 +464,7 @@
                 var scrollTop = $(document).scrollTop();
                 
                 if (scrollTop < 180) {
-                 scrollTop = -30; 
+                 scrollTop = 20; 
                 }
                 
                 $(".order-right").stop();
