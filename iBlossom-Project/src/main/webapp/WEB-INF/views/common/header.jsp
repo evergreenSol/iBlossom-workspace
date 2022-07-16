@@ -7,11 +7,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+    <link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
     <script src="https://kit.fontawesome.com/c8ea39d107.js" crossorigin="anonymous"></script>
     <title>header</title>
     <link href="resources/css/header.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico">
 </head>
 <body>
 
