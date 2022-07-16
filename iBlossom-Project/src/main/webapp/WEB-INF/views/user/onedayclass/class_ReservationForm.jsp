@@ -6,6 +6,9 @@
 <title>iBlossom | Class</title>
 <link href="resources/css/kms.css" rel="stylesheet">
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 <style type="text/css">
 
 </style>

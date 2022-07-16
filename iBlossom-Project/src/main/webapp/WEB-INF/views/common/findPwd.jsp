@@ -7,6 +7,9 @@
 <title>iBlossom | FindPwd</title>
 <link href="resources/css/shj.css" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 
