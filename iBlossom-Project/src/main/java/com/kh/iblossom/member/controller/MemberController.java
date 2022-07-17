@@ -26,7 +26,8 @@ import com.kh.iblossom.onedayclass.model.vo.OnedayClass;
 import com.kh.iblossom.order.model.service.OrderService;
 import com.kh.iblossom.order.model.vo.DetailOrder;
 import com.kh.iblossom.order.model.vo.Order;
-import com.kh.iblossom.product.model.service.ProductService;
+import com.kh.iblossom.product.model.service.ReviewService;
+import com.kh.iblossom.product.model.vo.Review;
 import com.kh.iblossom.qna.model.service.QnaService;
 import com.kh.iblossom.qna.model.vo.Qna;
 import com.kh.iblossom.subscribe.model.service.SubscribeService;
@@ -45,7 +46,7 @@ public class MemberController {
 	private OnedayClassService onedayclassService;
 	
 	@Autowired
-	private ProductService productService;
+	private ReviewService reviewService;
 	
 	@Autowired
 	private QnaService qnaService;
@@ -291,24 +292,6 @@ public class MemberController {
       
       model.addAttribute("receiptIdList", receiptIdList);
       
-//      
-//      ArrayList<Subscribe> list3m = subscribeService.selectMySubscribeThree(userNo);
-//      ArrayList<Subscribe> list6m = subscribeService.selectMySubscribeSix(userNo);
-//      ArrayList<Subscribe> list12m = subscribeService.selectMySubscribeTwelve(userNo);
-//      ArrayList<Subscribe> listReg = subscribeService.selectMySubscribeRegular(userNo);
-//      
-//      model.addAttribute("list3m", list3m);
-//      model.addAttribute("list6m", list6m);
-//      model.addAttribute("list12m", list12m);
-//      model.addAttribute("listReg", listReg);
-      
-      /*
-      System.out.println(list3m);
-      System.out.println(list6m);
-      System.out.println(list12m);
-      System.out.println(listReg);
-      */
-      
       return "user/member/myPage_SubscribeView";
    }
    
@@ -462,22 +445,27 @@ public class MemberController {
    @RequestMapping(value="reviewListView.me")
    public String myPageReviewListView(HttpSession session, Model model) {
       
-      /*
-      
       int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
       
-      ArrayList<Review> list = productService.selectMyReview(userNo);
+      ArrayList<Review> list = reviewService.selectMyReview(userNo);
       
-      */
+      model.addAttribute("list", list);
       
       return "user/member/myPage_ReviewListView";
    }
    
-   // 나의 리뷰 상세 보기
-//   @RequestMapping(value="reviewDetailView.me")
-//   public String myPageReviewDetailView() {
-//	   
-//   }
+    // 나의 리뷰 상세 보기
+   @RequestMapping(value="reviewDetailView.me")
+   public String myPageReviewDetailView(int reviewNo, Model model) {
+	   
+	   Review r = reviewService.selectReview(reviewNo);
+	   
+	   System.out.println(r);
+	   
+	   model.addAttribute("r", r);
+	   
+	   return "user/member/myPage_ReviewDetailView";
+   }
    
    // 마이페이지 1대1문의
    @RequestMapping(value="qnaListView.me")

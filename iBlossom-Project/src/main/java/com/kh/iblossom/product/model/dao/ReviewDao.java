@@ -57,5 +57,10 @@ public class ReviewDao {
 
 		return sqlSession.selectOne("reviewMapper.selectReview", reviewNo);
 	}
+	
+	public ArrayList<Review> selectMyReview(SqlSessionTemplate sqlSession, int userNo) {
+		
+		return (ArrayList) sqlSession.selectList("reviewMapper.selectMyReview", userNo);
+	}
 
 }

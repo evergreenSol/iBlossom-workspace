@@ -617,3 +617,27 @@ height: 97%;
 	font-size: 20px;
 	font-weight: 600;
 }
+
+.mypage-review-wrap {
+	
+	margin-top: 50px;
+    
+}
+
+.mypage-review {
+    width: 70px;
+    height: 100%;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: normal;
+    padding :7px 12px;
+    margin: 0px 10px;
+    
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255/var(--tw-text-opacity));
+
+    --tw-bg-opacity: 1;
+    background-color: rgb(21 21 21/var(--tw-bg-opacity));
+    
+    border-radius: 3px;
+}

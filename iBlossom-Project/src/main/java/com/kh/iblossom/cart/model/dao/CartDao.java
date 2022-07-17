@@ -48,5 +48,10 @@ public class CartDao {
 
 		return (ArrayList)sqlSession.selectList("cartMapper.selectCartList"); 
 	}*/
+	
+	public int updateCart(SqlSessionTemplate sqlSession, Cart c) {
+		
+		return sqlSession.update("cartMapper.updateCart", c);
+	}
 
 }

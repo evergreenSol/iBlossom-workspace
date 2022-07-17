@@ -59,6 +59,15 @@ public class CartServiceImpl implements CartService {
 
 
 
+
+	@Override
+	public int updateCart(Cart c) {
+
+		return cartDao.updateCart(sqlSession, c);
+	}
+
+
+
 	/*@Override
 	public ArrayList<Cart> selectCartList() {
 

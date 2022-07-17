@@ -60,5 +60,11 @@ public class ReviewServiceImpl implements ReviewService{
 		
 		return reviewDao.selectReview(sqlSession, reviewNo);
 	}
+
+	@Override
+	public ArrayList<Review> selectMyReview(int userNo) {
+
+		return reviewDao.selectMyReview(sqlSession, userNo);
+	}
 	
 }
