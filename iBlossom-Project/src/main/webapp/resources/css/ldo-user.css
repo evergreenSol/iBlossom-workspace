@@ -13,13 +13,13 @@ div { box-sizing: border-box; }
     /* 전체 */
     #cartMainOuter {
     	width: 1200px;
-    	height: 3000px;
+    	height: 2000px;
     	margin: auto;
     }
      
     /* 왼쪽 섹션 */ 
     .cart-left {
-        width: 65%;
+        width: 63%;
         height: 100%;
         float: left;
         box-sizing: border-box;
@@ -28,9 +28,15 @@ div { box-sizing: border-box; }
     /* 오른쪽 섹션 */
     .cart-right {
         width: 33%;
-        height: 100%;
+        /*height: 100%;*/
         float: right;
         box-sizing: border-box;
+        
+        /* sticky*/
+        position: relative;
+        top: 20px;
+        right: 57%; 
+        margin-right:-670px;
     }
 
 
@@ -92,7 +98,7 @@ div { box-sizing: border-box; }
 	    
     }
     .cart-menu2 { 
-    	flex-basis: 16%;
+    	flex-basis: 12%;
     }
 
     /* 장바구니 내용 */ 
@@ -100,6 +106,7 @@ div { box-sizing: border-box; }
         display: flex;
         justify-content: space-between; 
         height: 400px;
+        padding: 5px;
     }
     
     /* 세로 정렬 */
@@ -113,31 +120,78 @@ div { box-sizing: border-box; }
          width: 50px;
     }
     
+    /* 장바구니 이미지 사이즈 */
+    .cart-content2>img {
+    	 width: 300px; 
+    	 height: 300px;
+    	 padding: 25px;
+    }
+    
     /* 세로정렬 flex 제외 */
     /* 금액 input */	
 	.cart-content4 {
 		display: flex;
         height: 100%;
         align-items: center;
-        justify-content: center;
 	}
 	
     /* 이미지 감싸는 div */
     .cart-content2 {
-     	margin-left: -40px;
+     	margin-left: -15px;
      	width: 350px;
     }
     
-    /* 상세옵션 내용 */
+    /* 장바구니 라디오 버튼 사이즈 */
+    #checkAll, .cartCheck {
+    	width: 16px;
+    	height: 16px;
+    }
+    
+    /* 장바구니 상세옵션  내용 */
     .cart-content3 {
+    	margin:auto 0;
     	font-size: 19px;
-        height: 100%;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 190px;
-    }  
-        
+    	width: 200px;
+    	margin-left: 20px;
+    }
+    
+    /* 장바구니 상세옵션 > 가격 */
+    .basketprice {
+    	text-align: left;
+    }
+    
+    /* 장바구니 상세옵션>가격 */
+    .cart-content3 .price {
+    	width: 55px;
+    	text-align: right;
+    	border: none;
+    	font-size: 17px;
+    	width: 28px;
+    }
+    
+    /* 수량 버튼 +, - */
+    .basketnum input[type="button"] {
+    	width: 23px;
+    	height: 23px;
+    	background-color: whitesmoke;
+    	border-radius: 3px;
+    	border: none;
+    }
+
+    /* 수량 버튼 호버시 */
+    .basketnum input[type="button"]:hover {
+    	font-weight:bolder;
+    	cursor: pointer;
+    }
+    
+    /* 수량 올라가는 input */
+    .basketnum input[type="text"] {
+    	text-align: center;
+    	border-radius: 3px;
+    	width: 20px;
+    	height: 20px;
+    }
+ 
     /* 수량 버튼 */
     .cart-num-btn { 
 	    background-color: whitesmoke; 
@@ -157,6 +211,16 @@ div { box-sizing: border-box; }
 	/* 총주문금액 X a 태그 */
 	.cart-content4>a {
 		 text-decoration: none;
+	}
+	
+	/* x 버튼 */
+	.abutton {
+		font-size: 20px;
+	}
+	
+	.cart-content5 {
+		width: 60px;
+		margin-left: -30px;
 	}
 
 	
@@ -186,6 +250,11 @@ div { box-sizing: border-box; }
         padding: 5px;
         margin: 30px 15px 10px 15px; 
         font-weight: bold; 
+    }
+    
+    #totalPrice {
+    	float: right;
+    	margin-left: 200px;
     }
 
     /* 안내사항 네모박스 div */
@@ -398,9 +467,10 @@ div { box-sizing: border-box; }
 
 	/* 수령일 input 태그 */
 	#ReceiveBox>input {
-		padding: 18px; 
+		padding: 17px; 
         width: 160px;
-        border-radius: 3px;   
+        border-radius: 3px;
+        font-size: 15px;   
 	}
 
     /* ----------------------------------------------------------- */

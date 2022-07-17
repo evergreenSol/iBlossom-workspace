@@ -40,9 +40,9 @@ public class QnaServiceImpl implements QnaService {
 
 
 	@Override
-	public int insertAnswer(Qna q) {
+	public int updateAnswer(Qna q) {
 		
-		return qnaDao.insertAnswer(sqlSession, q);
+		return qnaDao.updateAnswer(sqlSession, q);
 	}
 
 	@Override
@@ -55,6 +55,12 @@ public class QnaServiceImpl implements QnaService {
 	public int selectListCount() {
 
 		return qnaDao.selectListCount(sqlSession);
+	}
+
+	@Override
+	public Qna selectAdminQna(int qnaNo) {
+		
+		return qnaDao.selectAdminQna(sqlSession, qnaNo);
 	}
 
 }

@@ -7,6 +7,9 @@
 <title>iBlossom | 개별주문내역</title>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link href="resources/css/ldo-admin.css" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 

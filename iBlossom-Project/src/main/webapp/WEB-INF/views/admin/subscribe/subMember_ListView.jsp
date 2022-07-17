@@ -8,6 +8,9 @@
 <meta charset="UTF-8">
 <title>admin | 구독회원</title>
 <link href="resources/css/kdh.css" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 <style>
 #pagingArea {
 	width: fit-content;

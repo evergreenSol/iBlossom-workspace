@@ -7,7 +7,9 @@
 <meta charset="UTF-8">
 <title>admin | memberList</title>
 <link href="resources/css/shj.css" rel="stylesheet">
-
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 <style>
 #pagingArea {
 	width: fit-content;
@@ -139,7 +141,7 @@
         <div id="admin-memberList-wrap">
 
             <table id="admin-member-table" border="1">
-            	<thead style="background-color : lightgray; height : 50px; font-weight : 700;">
+            	<thead style="background-color : black; color:white; height : 50px; font-weight : 700;">
             
                     <th style="width:60px;">회원번호</th>
                     <th style="width:100px;">아이디</th>

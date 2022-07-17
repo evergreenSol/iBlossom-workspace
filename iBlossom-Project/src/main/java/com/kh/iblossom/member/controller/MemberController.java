@@ -22,6 +22,7 @@ import com.kh.iblossom.common.template.Pagination;
 import com.kh.iblossom.member.model.service.MemberService;
 import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.onedayclass.model.Service.OnedayClassService;
+import com.kh.iblossom.onedayclass.model.vo.OnedayClass;
 import com.kh.iblossom.order.model.service.OrderService;
 import com.kh.iblossom.order.model.vo.DetailOrder;
 import com.kh.iblossom.order.model.vo.Order;
@@ -447,7 +448,6 @@ public class MemberController {
    @RequestMapping(value="onedayClass.me")
    public String myPageOneDayClass(HttpSession session, Model model) {
       
-      /*
       
       int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
       
@@ -455,11 +455,10 @@ public class MemberController {
       
       model.addAttribute("list", list);
       
-      */
-      
       return "user/member/myPage_OnedayClass";
    }
    
+   // 나의 리뷰
    @RequestMapping(value="reviewListView.me")
    public String myPageReviewListView(HttpSession session, Model model) {
       
@@ -473,6 +472,12 @@ public class MemberController {
       
       return "user/member/myPage_ReviewListView";
    }
+   
+   // 나의 리뷰 상세 보기
+//   @RequestMapping(value="reviewDetailView.me")
+//   public String myPageReviewDetailView() {
+//	   
+//   }
    
    // 마이페이지 1대1문의
    @RequestMapping(value="qnaListView.me")
@@ -521,20 +526,28 @@ public class MemberController {
 	   }
    }
    
-   // 누적금에 따른 회원 등급 변경하기
-   @ResponseBody
-   @RequestMapping(value="checkPurchase.me")
-   public String updateGrLevel() {
+	// 누적금에 따른 회원 등급 변경하기
+	@ResponseBody
+	@RequestMapping(value="checkPurchase.me")
+	public String updateGrLevel(HttpSession session) {
 	   
-	   int result = memberService.updateGrLevel();
+		int result = memberService.updateGrLevel();
 	   
-	   if(result > 0) {
-		   return "1";
-	   }
-	   else {
-		   return "0";
-	   }
-   }
+		String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+		
+		Member m = new Member();
+		m.setUserId(userId);
+	   
+		if(result > 0) {
+			Member updateMem = memberService.login(m);
+			session.setAttribute("loginUser", updateMem);
+			return "1";
+			
+		}
+		else {
+			return "0";
+		}
+	}
    
 	@RequestMapping(value="refund.me", method=RequestMethod.POST) 
 	public String refundPurchase(Order o, HttpSession session) {

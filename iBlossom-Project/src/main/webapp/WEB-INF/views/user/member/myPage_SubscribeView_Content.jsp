@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>구독</title>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -168,6 +171,8 @@
 				console.log("클릭");
 				*/
 				$(this).next("div").slideDown("1500");
+				
+				
             });
 			
 			var refundPrice;

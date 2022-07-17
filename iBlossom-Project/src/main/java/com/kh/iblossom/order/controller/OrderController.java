@@ -145,8 +145,10 @@ public class OrderController {
 	}
 	
 	@RequestMapping("insertDetailOrder.or")
-	public String insertDetailOrder(DetailOrderCommand detailOrderCommand, int orderNo, HttpSession session) {
+	public String insertDetailOrder(DetailOrderCommand detailOrderCommand, int orderNo, HttpSession session, Model model) {
 		// 디테일 오더 테이블 만들기(주문상세)
+		
+		System.out.println("트리거 실행");
 		System.out.println(detailOrderCommand);
 		
 		ArrayList<DetailOrder> list = (ArrayList<DetailOrder>)detailOrderCommand.getDetailOrderList();
@@ -188,6 +190,8 @@ public class OrderController {
 			Member updateMem = memberService.login(m);
 			session.setAttribute("loginUser", updateMem);
 		}
+		
+		model.addAttribute("orderNo", orderNo);
 		
 		
 		return "user/order/order_Complete";

@@ -19,11 +19,13 @@
 		<result column="RES_PHONE" property="resPhone" />
 		<result column="RES_EMAIL" property="resEmail" />
 		<result column="PAY_DATE" property="payDate" />
+		<result column="USER_NO" property="userNo" />
 	</resultMap>
 	
 	<select id="selectClassList" resultMap="onedayclassResultSet">
 		SELECT CLASS_NO, CLASS_NAME, PRICE, CLASS_DATE, CAP_NO, RES_NUM, CLASS_STATUS
 		FROM ONECLASS
+		WHERE CLASS_STATUS = 'N'
 	</select>
 	
 	<insert id="insertClassRes" parameterType="onedayclassadmin">
@@ -31,12 +33,14 @@
   						,CLASS_NO
 		                , RES_NAME
 		                , RES_PHONE
-		                , RES_EMAIL)
+		                , RES_EMAIL
+		                , USER_NO)
 		VALUES(SEQ_RESNO.NEXTVAL
 			, #{classNo}
 		     , #{resName}
 		     , #{resPhone}
-		     , #{resEmail})
+		     , #{resEmail}
+		     , #{userNo})
   	</insert>
   	
   	<select id="selectOnedayClass" parameterType="_int" resultMap="onedayclassResultSet">
@@ -50,5 +54,47 @@
   		   SET RES_NUM = RES_NUM+1
   		 WHERE CLASS_NO = #{classNo}
   	</update>
+  	
+  	<select id="selectAdminList" resultMap="onedayclassResultSet">
+		SELECT CLASS_NO, CLASS_NAME, PRICE, CLASS_DATE, CAP_NO, RES_NUM, CLASS_STATUS
+		FROM ONECLASS
+	</select>
+	<!-- 
+	<select id="selectResList" resultMap="onedayclassadminResultSet">
+		SELECT RES_NO, CLASS_NO, RES_NAME, RES_PHONE, RES_EMAIL, PAY_DATE
+		FROM CLASS_ADMIN
+	</select>
+	 -->
+	<select id="selectResList" parameterType="_int" resultMap="onedayclassadminResultSet">
+  		SELECT *
+  		FROM CLASS_ADMIN
+  		WHERE CLASS_NO = #{classNo}
+  	</select>
+  	
+  	<update id="deleteClass" parameterType="_int">
+  		UPDATE ONECLASS
+  		   SET CLASS_STATUS = 'Y'
+  		 WHERE CLASS_NO = #{classNo}
+  	</update>
+  	
+  	<insert id="insertClass" parameterType="onedayclass">
+  		INSERT INTO ONECLASS(CLASS_NO
+  						, CLASS_NAME
+		                , PRICE
+		                , CLASS_DATE
+		                , CAP_NO)
+		VALUES(SEQ_CNO.NEXTVAL
+			, #{className}
+		     , #{price}
+		     , #{classDate}
+		     , #{capNo})
+  	</insert>
+  	
+  	<select id="selectMyOnedayClass" parameterType="_int" resultMap="onedayclassResultSet">
+		SELECT CLASS_NAME, PRICE, CLASS_DATE, CLASS_STATUS
+		FROM ONECLASS O
+		JOIN CLASS_ADMIN C ON(O.CLASS_NO = C.CLASS_NO)
+  		WHERE USER_NO = #{userNo}
+  	</select>
 
 </mapper>

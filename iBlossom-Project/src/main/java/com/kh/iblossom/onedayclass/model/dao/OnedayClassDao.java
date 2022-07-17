@@ -31,4 +31,34 @@ public class OnedayClassDao {
 		
 		return sqlSession.update("onedayclassMapper.updateClassCap", classNo);
 	}
+
+	public ArrayList<OnedayClass> selectAdminList(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("onedayclassMapper.selectAdminList");
+	}
+
+	public ArrayList<OnedayClassAdmin> selectResList(SqlSessionTemplate sqlSession, int classNo) {
+
+		return (ArrayList)sqlSession.selectList("onedayclassMapper.selectResList", classNo);
+	}
+
+	public int deleteClass(SqlSessionTemplate sqlSession, int classNo) {
+
+		return sqlSession.update("onedayclassMapper.deleteClass", classNo);
+	}
+
+	public int insertClass(SqlSessionTemplate sqlSession, OnedayClass o) {
+		
+		return sqlSession.insert("onedayclassMapper.insertClass", o);
+	}
+
+//	public OnedayClassAdmin selectClassRes(SqlSessionTemplate sqlSession, int classNo) {
+//		
+//		return sqlSession.selectOne("onedayclassMapper.selectClassRes", classNo);
+//	}
+	
+	public ArrayList<OnedayClass> selectMyOnedayClass(SqlSessionTemplate sqlSession, int userNo) {
+		return (ArrayList)sqlSession.selectList("onedayclassMapper.selectMyOnedayClass", userNo);
+	}
+	
 }

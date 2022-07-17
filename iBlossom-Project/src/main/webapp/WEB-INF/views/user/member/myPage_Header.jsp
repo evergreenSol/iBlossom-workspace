@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="resources/css/modal_mypage.css" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -114,9 +117,9 @@
                     <tr> 
                         <td>혜택</td>
                         <td>없음</td>
-                        <td>1000원 할인</td>
-                        <td>2000원 할인</td>
-                        <td>3000원 할인</td>
+                        <td>10% 할인</td>
+                        <td>15% 할인</td>
+                        <td>20% 할인</td>
                     </tr>
                     <tr height="10"></tr>
                     <tr>

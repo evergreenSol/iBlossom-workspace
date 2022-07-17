@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>iBlossom | 주문내역</title>
 <link href="resources/css/khs.css" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -14,10 +17,8 @@
 
 	<div class="mypage-wrap">
 	
-		<br><br>
         <jsp:include page="myPage_Header.jsp"/>
         
-        <br>
         
         <table class="mypage-body">
         	<tr>
@@ -99,8 +100,8 @@
                             </tr>
 							<!-- 환불 -->
 							<form action="refund.me" method="post" id="real-submit">
-								<input type="text" value="${o.totalPrice}" name="totalPrice">
-								<button type="submit" id="real-submit-button" >test</button>
+								<input type="hidden" value="${o.totalPrice}" name="totalPrice">
+								<button type="submit" id="real-submit-button" style="display:none">test</button>
 							</form>
                         </c:forEach>
                         </table>

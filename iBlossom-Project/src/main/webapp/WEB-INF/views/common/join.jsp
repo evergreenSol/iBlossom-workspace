@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iBlossom | Join</title>
     <link href="resources/css/shj.css" rel="stylesheet">
+    <!-- 파비콘 -->
+	<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+	<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -320,56 +323,6 @@
 
     }
     
-    /*
-    function oncheckId() {
-        var MBER_ID = $("#customer_id").val();
-        var regex = /^[A-za-z0-9+]{6,12}$/; 
-        jQuery.ajax({
-                type : "POST",
-                data : {
-                    MBER_ID : MBER_ID
-                },
-                url : "/join/checkId.do",
-                dataType : "JSON",
-                success : function(data) {
-                    var cnt = data.chkCnt;
-                    if (cnt > 0) {
-                        $("#customer_id").next().removeClass("green");
-                        $("#customer_id").next().addClass("red");
-                        $("#customer_id").next().text("중복된 아이디입니다.");
-                        $("#customer_id").next().show();
-                        idcheck=false;
-                    } else {
-                        if (MBER_ID == "") {
-                            $("#customer_id").next().removeClass("green");
-                            $("#customer_id").next().addClass("red");
-                            $("#customer_id").next().text("아이디를 입력해주세요.");
-                            $("#customer_id").next().show();
-                            idcheck=false;
-                        } else if (regex.test(MBER_ID)) {
-                            $("#customer_id").next().removeClass("red");
-                            $("#customer_id").next().addClass("green");
-                            $("#customer_id").next().text("사용가능한 아이디입니다.");
-                            $("#customer_id").next().show();
-                            idcheck=true;
-                        } else {
-                            $("#customer_id").next().removeClass("green");
-                            $("#customer_id").next().addClass("red");
-                            $("#customer_id").next().text("유효하지않은 아이디입니다. (영문,숫자포함 6~12자리로 입력해주세요)");
-                            $("#customer_id").next().show();
-                            idcheck=false;
-                        }
-                    }
-                    
-                },
-                complete : function(data) {
-                },
-                error : function(request, status, error) {
-                }
-                });
-
-    }
-    */
     </script>
     
     
