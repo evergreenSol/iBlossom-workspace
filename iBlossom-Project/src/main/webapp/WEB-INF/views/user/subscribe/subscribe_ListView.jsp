@@ -85,7 +85,7 @@
 	                <tr>
 	                    <td rowspan="6" width="360px;" height="400;"><img id="period_img"></td>
 	                    <td colspan="2" height="50"><br><br>첫 수령일을 선택하세요.<br>
-	                        <input type="text" class="datepicker" id="datepicker" name="deliverAt" required>
+	                        <input type="text" class="datepicker" id="datepicker" name="deliverAt" readonly required>
 	                    </td>
 	                </tr>
 	
