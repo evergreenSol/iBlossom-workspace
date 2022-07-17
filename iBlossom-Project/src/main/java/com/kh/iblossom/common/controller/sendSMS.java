@@ -21,6 +21,7 @@ public class sendSMS {
 	@ResponseBody
 	@RequestMapping(value="sendOnedayClassMessage.do", produces="text/html; charset=UTF-8")
 	 public String sendOnedayClassMessage(HttpSession session, OnedayClass o) {
+		
 	    String api_key = "NCSJGXUBBQAKRK1P";
 	    String api_secret = "VMG2VLAJPBIAUAPIVNIHCPFOQKY8YZFE";
 	    Message coolsms = new Message(api_key, api_secret);

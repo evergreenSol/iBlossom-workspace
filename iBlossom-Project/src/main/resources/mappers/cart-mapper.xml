@@ -79,5 +79,12 @@
      	WHERE CART_NO = #{cartNo}
      </delete>
      
+     <update id="updateCart" parameterType="cart">
+     	UPDATE CART
+     	   SET PRODUCT_COUNT = #{productCount}
+     	 WHERE CART_NO = #{cartNo}
+     </update>
+     
+     
 	 
 </mapper>

@@ -41,7 +41,7 @@
 			                <c:forEach var="c" items="${ list }">
 			                <c:choose>
 			                
-				                <c:when test="${ c.resNum >= 5 }">
+				                <c:when test="${ c.resNum >= c.capNo }">
 				                	<option value="${ c.classNo }" disabled>${ c.classDate } (마감되었습니다.)</option>
 				                </c:when>
 				                <c:otherwise>
