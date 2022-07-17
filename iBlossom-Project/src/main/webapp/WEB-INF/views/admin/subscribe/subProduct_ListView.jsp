@@ -76,7 +76,7 @@
                             <li><a href="">FAQ</a></li>
                         </ul>
                     </li>
-                    <li><a href="" class="admin-navi-menu" id="admin-navi-chat">채팅관리</a></li>
+                    <li><a href="https://dashboard.tawk.to/#/monitoring" target="_blank" class="admin-navi-menu" id="admin-navi-chat">채팅관리</a></li>
                 </ul>
 
             </div>
