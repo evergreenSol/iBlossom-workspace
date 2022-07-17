@@ -121,4 +121,11 @@
 		FROM PRODUCT
 		WHERE CATEGORY_NAME = '조합형'
 	</select>
+	
+	<!-- 이달의 꽃 -->
+	<select id="selectTagProduct" parameterType="product" resultMap="productResultSet">
+		SELECT *
+		FROM PRODUCT
+		WHERE TAG LIKE '%${tag}%' 
+	</select>
 </mapper>

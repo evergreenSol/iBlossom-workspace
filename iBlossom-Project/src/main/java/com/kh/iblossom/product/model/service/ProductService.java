@@ -38,4 +38,8 @@ public interface ProductService {
 	//상품 마켓 전체 조회(꽃병)
 	ArrayList<Product> selectListBase();
 	
+	// 이달의 꽃
+	Product selectTagProduct(Product p);
+	
+	
 }

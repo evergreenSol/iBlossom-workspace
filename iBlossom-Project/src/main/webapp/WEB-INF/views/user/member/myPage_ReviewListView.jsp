@@ -83,24 +83,23 @@
 <script>
  	$(function () {
  		
- 		
  		$("#category-review").css("font-weight", "700");
- 		
  		
  	});
  	
  	$("#reviewTable>tbody tr").click( function () {
-			console.log("click");
-			console.log($(this).children().eq(0).val());
 			
-			var reviewNo = $(this).children().eq(0).val();
+		var reviewNo = $(this).children().eq(0).val();
+		
 			
-			location.href="reviewDetailView.me?reviewNo=" + reviewNo;
+		location.href="reviewDetailView.me?reviewNo=" + reviewNo;
+			
+			
 			
 	});
  	
- 	$("no-qna").click(function () {
-		location.href="flowerList.pr";
+ 	$("#no-qna").click(function () {
+ 		location.href="flowerList.pr";
 	});
  	
     

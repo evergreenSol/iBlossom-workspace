@@ -5,8 +5,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.common.template.Pagination;
 import com.kh.iblossom.product.model.service.ProductService;
@@ -300,23 +302,38 @@ public class ProductController {
 	
 	// 이달의 꽃
 	@ResponseBody
-	@RequestMapping("flowerOfTheMonth.pr")
-	public String selectTagProduct(@RequestParam(value="keywords[]") String keywords) {
+	@RequestMapping(value="flowerOfTheMonth.pr", produces="application/json; charset=UTF-8")
+	public String selectTagProduct(@RequestParam(value="keywords[]") ArrayList<String> keywords) {
 		
 		System.out.println(keywords);
 		
-		String str[] = keywords.split(",");
+		ArrayList<String> list = keywords;
 		
-		HashMap<String, String> map = new HashMap<>();
-		for(int i = 0; i < str.length; i++) {
+		ArrayList<Product> result = new ArrayList<>();
+		
+		
+		Product resultP = new Product();
+		
+		for(int i = 0; i < keywords.size(); i++) {
+			System.out.println(list.get(i));
 			
-			map.put("keywords", str[i]);
+			Product p = new Product();
+			
+			p.setTag(list.get(i));
+			
+			resultP = productService.selectTagProduct(p);
+			
+			result.add(resultP);
+			
 		}
 		
-		System.out.println(map);
+		System.out.println(result);
 		
+		ArrayList<Product> selectList = (ArrayList<Product>) result.stream().distinct().collect(Collectors.toList());
 		
-		return "";
+		System.out.println(selectList);
+		
+		return new Gson().toJson(selectList);
 		
 	}
 	
