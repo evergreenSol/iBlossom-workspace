@@ -583,6 +583,12 @@ height: 97%;
 	
 }
 
+tbody#qnaTbody tr:hover {
+	cursor: pointer;
+	background-color: lightgray;
+}
+
+
 .balloon {
     position: relative;
     display: inline-block;
@@ -668,5 +674,5 @@ height: 97%;
 
 tbody#reviewTbody tr:hover {
 	cursor: pointer;
-	background-color: gray;
+	background-color: lightgray;
 }

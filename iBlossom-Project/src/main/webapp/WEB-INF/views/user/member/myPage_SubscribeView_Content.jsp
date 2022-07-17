@@ -104,7 +104,7 @@
 			<c:forEach var="i"  begin="0" end="${ list.size() -1 }" >
 				    	<tr height="40">
 							<td>${ i+1 }회차</td>
-							<td>${ list[i].deliverAt }</td>
+							<td>${ list[i].deliverAt2 }</td>
 							<td>${list[i].deliverStatus }</td>
 						</tr>
 			</c:forEach>
@@ -148,7 +148,7 @@
 					<tr height="40">
 						<td>${ i+1 }회차</td>
 						<td>${ list[i].subDate }</td>
-						<td>${ list[i].deliverAt }</td>
+						<td>${ list[i].deliverAt2 }</td>
 						<td>${ list[i].deliverStatus }</td>
 					</tr>
 				</c:forEach>

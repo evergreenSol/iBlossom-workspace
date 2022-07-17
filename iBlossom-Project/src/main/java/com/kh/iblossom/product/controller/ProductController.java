@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -293,6 +296,32 @@ public class ProductController {
 	 * 
 	 * return "product/admin_product_ListView"; }
 	 */
+	
+	
+	// 이달의 꽃
+	@ResponseBody
+	@RequestMapping("flowerOfTheMonth.pr")
+	public String selectTagProduct(@RequestParam(value="keywords[]") String keywords) {
+		
+		System.out.println(keywords);
+		
+		String str[] = keywords.split(",");
+		
+		HashMap<String, String> map = new HashMap<>();
+		for(int i = 0; i < str.length; i++) {
+			
+			map.put("keywords", str[i]);
+		}
+		
+		System.out.println(map);
+		
+		
+		return "";
+		
+	}
+	
+	
+	
 
 	public String saveFile(MultipartFile thumNail, HttpSession session) {
 
