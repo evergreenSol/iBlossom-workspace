@@ -611,8 +611,7 @@
 					//$("#real-make-button").trigger("click");
 					
 				}
-				
-				// location.href='complete.or';
+					
 				
 			}, error : function() {
 				console.log("DB 넣음 실패");

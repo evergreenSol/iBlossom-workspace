@@ -23,4 +23,10 @@ public interface ReviewService {
 	
 	//리뷰 삭제 서비스
 	int deleteReview(int reviewNo);
+	
+	//리뷰 jsp 띄우기
+	ArrayList<Review> reviewSelectList(int productNo);
+	
+	// 게시글 상세 조회
+	Review selectReview(int ReviewNo);
 }

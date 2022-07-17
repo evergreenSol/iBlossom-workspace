@@ -49,4 +49,16 @@ public class ReviewServiceImpl implements ReviewService{
 		
 		return reviewDao.deleteReivew(sqlSession,reviewNo);
 	}
+
+	@Override
+	public ArrayList<Review> reviewSelectList(int productNo) {
+		return reviewDao.reviewSelectList(sqlSession, productNo);
+	}
+
+	@Override
+	public Review selectReview(int reviewNo) {
+		
+		return reviewDao.selectReview(sqlSession, reviewNo);
+	}
+	
 }

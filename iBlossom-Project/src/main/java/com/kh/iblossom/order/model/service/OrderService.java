@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.order.model.vo.DetailOrder;
 import com.kh.iblossom.order.model.vo.Order;
+import com.kh.iblossom.product.model.vo.Review;
 
 public interface OrderService {
 
@@ -49,5 +50,9 @@ public interface OrderService {
 	ArrayList<Order> selectMyOrderAllList(int userNo);
 	
 	int updateDeliveryStatus();
+	
+	//승아
+	//리뷰
+	ArrayList<Order> selectOrderReview(Review r);
 	
 }

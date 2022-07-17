@@ -9,7 +9,6 @@
       <result column="REVIEW_PHOTO" property="reviewPhoto" />
       <result column="CREATE_DATE" property="createDate" />
       <result column="REVIEW_STATUS" property="reviewStatus" />
-      <result column="ORDER_NO" property="orderNo" />
       <result column="USER_NO" property="userNo" />
       <result column="PRODUCT_NO" property="productNo" />
       <result column="USER_ID" property="userId"/>
@@ -40,14 +39,12 @@
                          , REVIEW_TITLE
                          , REVIEW_CONTENT
                          , REVIEW_PHOTO
-                         , ORDER_NO
                          , USER_NO
                          , PRODUCT_NO)
       VALUES(SEQ_RNO.NEXTVAL
            , #{reviewTitle}
-           , 'path'
+           , #{reviewContent}
            , #{reviewPhoto}
-           , #{orderNo}
            , #{userNo}
            , #{productNo})
      </insert>
@@ -63,11 +60,33 @@
      
      <!-- 리뷰 수정하기 -->
      	<update id="updateReview" parameterType="product">
-		UPDATE PRODUCT
+		UPDATE FLOWER_REVIEW
 		SET REVIEW_TITLE = #{reviewTitle}
 			, REVIEW_CONTENT = #{flowerName}
 			, REVIEW_PHOTO = 'path'
 		WHERE REVIEW_NO = #{reviewNo}
 	</update>
+	
+	<!-- 리뷰 띄우기 -->
+	     <select id="reviewSelectList" resultMap="reviewResultSet">
+   SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_PHOTO, CREATE_DATE, USER_ID
+      FROM FLOWER_REVIEW F INNER JOIN MEMBER M
+      ON F.USER_NO = M.USER_NO
+       INNER JOIN PRODUCT P
+      ON F.PRODUCT_NO = P.PRODUCT_NO
+       WHERE F.PRODUCT_NO = #{productNo}
+       AND REVIEW_STATUS='Y'
+     </select>
+     
+     
+     <!-- 리뷰 상세보기(admin)-->
+	<select id="selectReview" parameterType="_int"
+		resultMap="reviewResultSet">
+        SELECT REVIEW_NO,
+		REVIEW_TITLE, REVIEW_CONTENT, CREATE_DATE , USER_ID , REVIEW_PHOTO
+        FROM FLOWER_REVIEW
+        JOIN MEMBER USING(USER_NO)
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>
 
 </mapper>
