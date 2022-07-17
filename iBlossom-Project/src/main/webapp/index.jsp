@@ -79,6 +79,9 @@
             <!-- 슬라이더 -->
             <div class="swiper mySwiper" id="swiper-mySwiper">
              <div class="swiper-wrapper">
+             
+             
+
                <div class="swiper-slide">
                    <img src="resources/images/pexels-eleonora-sky-12292365.jpg">
                    <span  class="main-slider-text" id="main-slider-Gangneung-text">백합</span>
@@ -115,6 +118,8 @@
                    <img src="resources/images/pexels-eleonora-sky-12292365.jpg">
                    <span  class="main-slider-text" id="main-slider-Gangneung-text">해바라기</span>
                  </div>
+
+                 
              </div>
            </div>
            
@@ -227,8 +232,7 @@
 		}
 		console.log(keywords);
 		
-		
-		
+		swiper.removeAllSlides();
 		
 		$.ajax({
 			url : "flowerOfTheMonth.pr",
@@ -237,8 +241,27 @@
 			},
 			success : function (result) {
 				
+				console.log(result[0].thumbNail);
+				
+				var resultStr = "";
+				var resultArr=[];
+				for(var i; i < result.length; i++) {
+					
+
+					resultStr += '<div class="swiper-slide">'
+							   + '<img src="'+ result[i].thumbNail + '">'
+							   + '<span  class="main-slider-text" id="main-slider-Gangneung-text">' + result[i].flowerName + '</span>'
+							   + '</div>';
+					resultArr.push(resultStr);
+							   
+				}
+					//$(".swiper-wrapper").text(resultStr);
+				swiper.appendSlide(resultArr);
+				swiper.update();
+				
+				
 			},
-			fail : function () {
+			error : function () {
 				
 			}
 			

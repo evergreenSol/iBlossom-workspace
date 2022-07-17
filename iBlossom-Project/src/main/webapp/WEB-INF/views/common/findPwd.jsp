@@ -26,7 +26,7 @@
             <form class="pwd-search-form">
             <p id="pwd-search-p">
                 아이디를 입력해주시면 회원정보에 등록된<br>
-                이메일로 인증번호가 발송 됩니다.
+                이메일로 임시 비밀번호가 발송 됩니다.
             </p>
             <label id="pwd-search-label">아이디를 입력해주세요</label><br>
             <input type="text" id="pwd-search-email-input" placeholder="아이디 입력"><br>
