@@ -180,7 +180,7 @@
 		  let count = productCount.value; // 변수 선언 및 값을 productCount input의 value로 초기화
 		  
 		  // 더하기/빼기
-		  if(type === 'plus' && count < 10) { // 매개변수로 plus type이 넘어오면
+		  if(type === 'plus' && count) { // 매개변수로 plus type이 넘어오면
 		    productCount.value = parseInt(count) + 1; // count++
 		    getSum();
 

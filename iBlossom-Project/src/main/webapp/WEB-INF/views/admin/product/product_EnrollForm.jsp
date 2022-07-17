@@ -93,25 +93,32 @@
 				<form id="enrollForm" method="post" action="insert.pr"
 					enctype="multipart/form-data">
 					<h3>카테고리명</h3>
-					<input type="text" id="admin_category_name" name="categoryName"
-						required>
-
+				<!-- 	<input type="text" id="admin_category_name" name="categoryName"
+						required> -->
+					<select name ="categoryName" id="admin_category_name">
+						<option value='꽃다발' selected >꽃다발</option>
+						<option value='꽃병'>꽃병</option>
+						<option value='조합형'>조합형</option>
+					</select>
 					<h3>상품명</h3>
-					<input type="text" id="admin_product_name" name="flowerName"
+					<input type="text" id="admin_product_name" name="flowerName" 
 						value="" required>
 
 					<h3>태그</h3>
 					<input type="text" id="admin_tag_name" name="tag" value="">
 
-
+					<br><br><br><br>
 					<table class="admin_product">
 						<tr>
-							<td><lable for="thumbnail">썸네일</lable> <input type="file"
-								name="upThumbNail" id="admin_product-img"></td>
+							<td><label for="thumbnail" style="font-size:20px; font-weight:700px">썸네일</label>
+							
+							<input type="file" name="upThumbNail" id="admin_product-img" required style="margin-top:15px"></td>
 
-							<td><lable for="contentPhoto"
-									style="font-size:20px; font-weight:700px">상세사진</lable> <input
-								type="file" name="upContentPhoto" id="admin_product-img"></td>
+							<td><label for="contentPhoto"
+									style="font-size:20px; font-weight:700px">상세사진</label>
+									<br>
+									 <input type="file" name="upContentPhoto" id="admin_product-img" style="margin-top:15px"></td>
+								
 							<td width="60%"><textarea id="admin_product-description"
 									name="flowerInfo"></textarea></td>
 						</tr>
@@ -120,14 +127,17 @@
 
 
 					<h3>가격</h3>
-					<input type="text" id="admin_price" name="price" value="" required><span>원</span>
+					<input type="text" id="admin_price" name="price" value="" required><span style="margin-left:10px">원</span>
 					<br>
+					<br>
+					<hr>
+					
 					<button type="submit" id="insertProduct"
-						style="margin-left: 1000px;">등록</button>
+						style="margin-left: 1000px; margin-top: 30px;">등록</button>
 				</form>
 			</div>
 			<br>
-			<hr>
+			
 			<br>
 
 		</div>

@@ -31,6 +31,7 @@
         INNER JOIN PRODUCT P
       ON F.PRODUCT_NO = P.PRODUCT_NO
        WHERE REVIEW_STATUS='Y'
+       ORDER BY CREATE_DATE DESC
      </select>
 
 	<!-- 리뷰 작성하기 -->
@@ -68,14 +69,16 @@
 	</update>
 	
 	<!-- 리뷰 띄우기 -->
-	     <select id="reviewSelectList" resultMap="reviewResultSet">
-   SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_PHOTO, CREATE_DATE, USER_ID
+<select id="reviewSelectList" resultMap="reviewResultSet">
+   SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_PHOTO, 
+   TO_CHAR(CREATE_DATE,'YYYY-MM-DD')"CREATE_DATE", USER_ID
       FROM FLOWER_REVIEW F INNER JOIN MEMBER M
       ON F.USER_NO = M.USER_NO
        INNER JOIN PRODUCT P
       ON F.PRODUCT_NO = P.PRODUCT_NO
        WHERE F.PRODUCT_NO = #{productNo}
        AND REVIEW_STATUS='Y'
+      ORDER BY CREATE_DATE DESC
      </select>
      
      

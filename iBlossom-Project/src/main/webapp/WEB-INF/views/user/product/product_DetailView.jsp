@@ -36,15 +36,15 @@
 
 					<tr>
 						<td rowspan="6"><img src="${p.thumbNail }" width="500px"></td>
-						<td class="pp" style="padding-top: 20px;"><b
-							style="font-size: 25px;"><c:out value="${p.flowerName}">
+						<td class="pp" >
+						<b style="font-size: 25px; margin-bottom:-30px "><c:out value="${p.flowerName}">
 								</c:out></b></td>
 
 					</tr>
 
 					<tr>
 						<td class="pp"><input type="text" name="productPrice"
-							id="price" style="border: none" size="1" readonly
+							id="price" style="border: none; font-size:20px;"size="1" readonly
 							value="${ p.price }">원
 
 							<hr></td>
@@ -72,17 +72,17 @@
 
 
 									<input type="text" value="${p.flowerName }"
-										style="border: none; padding-left: 10px; padding-top: 5px;"><br>
+										style="border: none; padding-left: 10px; outline:none; padding-top: 5px;"><br>
 									<br> <input type=hidden id="sell_price"
-										value="${ p.price }"> <input type="button" value=" - "
-										onclick="del();" style="margin-left: 10px;"> <input
-										type="text" name="amount" value="1" size="1"
+										value="${ p.price }"> <input type="button"  value=" - "
+										onclick="del();" style="margin-left: 10px;" class="detailBtn"> 
+										<input type="text" name="amount" value="1" size="1" disabled="disabled" style="background-color: white; border: 1px solid gray; height:20px; text-align: center" 
 										onchange="change();"> <input type="button" value=" + "
-										onclick="add();"><br> <br> <br> 배송비: <span
+										onclick="add();" class="detailBtn"><br> <br> <br> 배송비: <span
 										style="padding-left: 200px"> 3,000 원</span><br> <br>
 									총 주문금액 : <input type="text"
-										style="border: none; background-color: rgba(224, 224, 224, 0.001); padding-left: 50px; width: 60px;"
-										name="sum" size="11" readonly>원
+										style="border: none; outline:none; background-color: rgba(224, 224, 224, 0.001); padding-left: 150px; width: 60px;"
+										name="sum" size="11" readonly >원
 
 
 								</div>
@@ -98,7 +98,7 @@
 						<c:choose>
 							<c:when test="${empty loginUser}">
 								<td>
-								<button onclick="alert('로그인이 필요한 서비스!'); location.href='loginForm.me';">
+								<button onclick="alert('로그인이 필요한 서비스!'); location.href='loginForm.me';" id="btn1">
 								  장바구니
 								</button>
 								</td>
@@ -170,9 +170,13 @@
         function add() {
             hm = document.form.amount;
             sum = document.form.sum;
-            hm.value++;
-
-            sum.value = (parseInt(hm.value) * sell_price) + 3000;
+            if(hm.value < 15){
+           	 hm.value++;
+           	sum.value = (parseInt(hm.value) * sell_price) + 3000;
+            }else{
+            	 alert("개당 최대 15개까지 구매 가능합니다.");
+            }
+            
         }
 
         function del() {
@@ -332,10 +336,11 @@
 		<form action="insert.re" method="post" enctype="multipart/form-data">
 
 			<div class="modal-window" style="height: 550px">
-				<input type="text" name="productNo" value="${ p.productNo }">
-				<input type="text" name="userNo" value="${loginUser.userNo}">
+				<input type="hidden" name="productNo" value="${ p.productNo }">
+				<input type="hidden" name="userNo" value="${loginUser.userNo}">
 				<div class="title">
-					<span style="font-size: 20px; margin-top: 10px;">구매평 작성</span>
+				<br>
+					<span style="font-size: 20px; margin-top: 10px; margin-left:10px">구매평 작성</span>
 				</div>
 				<div class="close-area">
 					<img src="resources/images/x.png" style="width: 15px;">
@@ -351,7 +356,7 @@
 					<br>
 					<div>
 						<input type="text" name="reviewTitle"
-							style="width: 370px; height: 30px; border: 1px solid gray;">
+							style="width: 370px; height: 30px; border: 1px solid gainsboro;" placeholder="제목을 작성해주세요.">
 					</div>
 					<br>
 					<textarea rows="2" cols="10" onkeyup="counter(this,150)"
