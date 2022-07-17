@@ -155,6 +155,10 @@
 		        </tbody>
 			</table>
 		</div>
+		
+		<div class="close-sub" align="center">
+		<button class="close-sub-btn">닫기</button>
+		</div>
 	</div>
 	
 	<script>
@@ -174,6 +178,11 @@
 				
 				
             });
+			
+			$(".close-sub-btn").on("click", function () {
+				$(this).parent().parent().slideUp("1500");
+			});
+			
 			
 			var refundPrice;
 			
