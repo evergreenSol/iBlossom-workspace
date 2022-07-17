@@ -17,7 +17,7 @@
 	    -webkit-appearance: none;
 	    margin: 0;
 	}
-
+</style>
 </head>
 <body>
 
@@ -70,6 +70,7 @@
 											<input type="number" id="productCount${ status.count }" value="1" class="input-productCount">
 											<input type="button" value="+" onclick="count('plus',${ status.count })" class="input-button2">
 											<input type="hidden" id="productPrice${ status.count }" value="${ p.price }">
+											<input type="hidden" id="sum${ status.count }">
 										</div>
 									</div>
 								</c:forEach>
@@ -83,9 +84,9 @@
 								<br>
 							</div>
 							<div>
-								총 주문금액 : <input type="text"
+								총 주문금액 : <input type="text" id="sumAll"
 									style="border: none; font-weight: 700; font-size: 15px; background-color: rgba(224, 224, 224, 0.001); padding-left: 60px; width: 50px;"
-									name="sum" size="11" id="sum" readonly value=""><span style="margin-left: 200px">원</span>
+									name="sum" size="11" id="sum" readonly value=""><span style="margin-left: 200px"> 원</span>
 							</div>
 						</div>
 					</td>
@@ -166,6 +167,7 @@
 		items.push(selectFlower); // 아까 생성한 빈 배열에 인덱스 밀어넣어주기
 
 		$("#option_flower"+selectFlower+"").attr("disabled", "true"); // 이미 셀렉된 상품은 다시 셀렉 못하게
+		getSum();
 		
 	}
 	
@@ -178,15 +180,18 @@
 		  let count = productCount.value; // 변수 선언 및 값을 productCount input의 value로 초기화
 		  
 		  // 더하기/빼기
-		  if(type === 'plus') { // 매개변수로 plus type이 넘어오면
+		  if(type === 'plus' && count < 10) { // 매개변수로 plus type이 넘어오면
 		    productCount.value = parseInt(count) + 1; // count++
+		    getSum();
 
 		  }else if(type === 'minus' && count > 1)  { // 매개변수로 minus type 이 넘어오고 1보다 크다면
 		    productCount.value = parseInt(count) - 1; // count--
+		    getSum();
 
 		  }
 		  else { // 그 외에는
 			 productCount.value = parseInt(count); // 현상 유지
+			 getSum();
 		  }
 		  
 	 }
@@ -203,7 +208,25 @@
 			}
 		}  		
 		items.splice(index, 1); // 배열에서 아까 선언한 인덱스에 있는 아이템 삭제
+		getSum();
      }
+     
+     function getSum() { // 이름을 주게 되면 그 실행해달라고 하는 곳에서 실행됨
+			
+		var listSize = items.length; // 상품 리스트 사이즈 (상품이 3개면 3개)
+ 		var sumAll = 0;
+ 		for(var i = 0; i < listSize; i++) { // 상품 리스트를 돌면서
+ 			var price = $('#productPrice'+(i+1)+'').val(); // 각 상품 가격
+ 			console.log(price)
+ 			var productCount = $('#productCount'+(i+1)+'').val(); // 각 상품 수량
+ 			$('#sum'+(i+1)+'').attr("value",price*productCount); // sum1, sum2, ... 에 전달
+ 			
+ 			sumAll += parseInt($('#sum'+(i+1)+'').val()); // sumAll = sum1 + sum2 + ...
+ 		}
+ 		
+			$('#sumAll').attr("value",(sumAll+3000)); // sumAll input에 sumAll 값 전달
+			
+	}
      
      function submitForm() {
 		if(items.length==0) { // 셀렉된 아이템이 없다면
@@ -244,9 +267,51 @@
          combinationreview += '<text class="text1">진짜 마음에 들어요</text>';
          combinationreview += '<span class="span1">우와 이쁘다 진짜 제 마음에 속 들어요</span>';
          combinationreview += '</div>';
+         
          $('#reviewList').append(combinationreview);
      }
  	</script>
+ 	
+ 		<script>
+        function showReview()
+
+          $.ajax({
+        	  url: "reviewList.re",
+        	  data : {productNo : ${ p.productNo }},
+        	  success : function(result){
+        		  
+        		  console.log(result);
+        		  var review = "";
+        		  
+        		  
+        		  for(var i in result){
+        			  
+                      review += "<br><br>";
+                      review += "<hr>";
+                      review += "<div class='reviewbb'>";
+                      review += "<input type='hidden' value="+ result[i].reviewNo +">"
+                      review +="<div class='divBox'>"
+                      review += "<img class='img1' src='" + result[i].reviewPhoto + "' style='width: 190px; height:190px;  margin-left: 20px;margin-top: 10px; float: left;'>";
+                      review += "<p class='text3'>" + result[i].userId + "</p>";
+                      review += "<p class='text4'>" + result[i].createDate + "</p>";
+                      review += "<p class='text1'>" + result[i].reviewTitle + "</p>";
+                      review += "<p class='text2'>" + result[i].reviewContent + "</p>";
+                      review += "</div>";
+                      review += "</div>";
+        		  }
+        		  review += "<br><br><br><br><br>";
+        		  
+        		  $("#detailReview").html(review);
+        	  },
+        	  error:function(){
+        		  console.log("에러발생");
+        	  }
+         		
+        	 
+          });
+        }
+    </script>
+ 	
 
 	<jsp:include page="../../common/footer.jsp" />
 </body>

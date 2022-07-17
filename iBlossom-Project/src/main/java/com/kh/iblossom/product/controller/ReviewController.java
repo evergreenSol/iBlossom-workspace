@@ -79,7 +79,8 @@ public class ReviewController {
 
 
 
-		System.out.println(r); System.out.println(list); model.addAttribute("r",r);
+		System.out.println(r); System.out.println(list);
+		model.addAttribute("r",r);
 
 		if(list.isEmpty()) {
 

@@ -8,8 +8,10 @@
 <title>Insert title here</title>
 <link href="resources/css/jsa.css" rel="stylesheet">
 <!-- 파비콘 -->
-<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
-<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico"
+	type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico"
+	type="image/x-icon">
 <style>
 #price:focus {
 	outline: none;
@@ -27,7 +29,7 @@
 	<div id="wrap_detail">
 		<div style="width: 1000px; margin: auto;">
 			<br>
-			<form name="form" method="get" action="insert.ca">
+			<form name="form" method="get" action="insert.ca" id="cartInfo">
 				<input type="hidden" name="productNo" value="${ p.productNo }">
 				<input type="hidden" name="userNo" value="${ loginUser.userNo }">
 				<table>
@@ -73,9 +75,8 @@
 										style="border: none; padding-left: 10px; padding-top: 5px;"><br>
 									<br> <input type=hidden id="sell_price"
 										value="${ p.price }"> <input type="button" value=" - "
-										onclick="del();" style="margin-left: 10px;"> 
-										
-										<input type="text" name="amount" value="1" size="1"
+										onclick="del();" style="margin-left: 10px;"> <input
+										type="text" name="amount" value="1" size="1"
 										onchange="change();"> <input type="button" value=" + "
 										onclick="add();"><br> <br> <br> 배송비: <span
 										style="padding-left: 200px"> 3,000 원</span><br> <br>
@@ -94,7 +95,21 @@
 					</tr>
 
 					<tr>
-						<td><input type="submit" value="장바구니" id="btn1"></td>
+						<c:choose>
+							<c:when test="${empty loginUser}">
+								<td>
+								<button onclick="alert('로그인이 필요한 서비스!'); location.href='loginForm.me';">
+								  장바구니
+								</button>
+								</td>
+							</c:when>
+							<c:otherwise>
+								<td>
+								<button onclick="cartbtn" id="btn1">장바구니</button>
+								<!-- <input type="submit" value="장바구니" id="btn1"> -->
+								</td>
+							</c:otherwise>
+						</c:choose>
 
 					</tr>
 
@@ -118,16 +133,19 @@
 			</div>
 
 			<!-- 리뷰 폼 -->
-			<div >
+			<div>
 				<input type='button' id='btn_rv' value='구매평 작성' class="insertReview">
-				<div id="detailReview">
-				
-				</div>
+				<div id="detailReview"></div>
 			</div>
 
 
 		</div>
 	</div>
+	<script>
+		function cartbtn(){
+			$('#cartInfo').submit();
+		}
+	</script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 		integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
@@ -312,7 +330,7 @@
 
 	<div id="modal" class="modal-overlay">
 		<form action="insert.re" method="post" enctype="multipart/form-data">
-			
+
 			<div class="modal-window" style="height: 550px">
 				<input type="text" name="productNo" value="${ p.productNo }">
 				<input type="text" name="userNo" value="${loginUser.userNo}">
@@ -363,8 +381,8 @@
                 document.getElementById("reCount").innerHTML = text.value.length + " / " + limit;
             }
         </script>
-        
-        
+
+
 
 
 
