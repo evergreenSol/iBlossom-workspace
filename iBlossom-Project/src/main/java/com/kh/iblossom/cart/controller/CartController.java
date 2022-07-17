@@ -58,7 +58,7 @@ public class CartController {
 		
 		
 		  
-		 // System.out.println(c);
+		System.out.println(c);
 		
 		  
 		int result = cartService.insertCartList(c);

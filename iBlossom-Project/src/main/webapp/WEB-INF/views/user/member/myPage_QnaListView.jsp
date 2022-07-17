@@ -39,7 +39,7 @@
                                         <th width="150">문의 상태</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="qnaTbody">
                                 <c:if test="${ not empty list }">
                                 
                                 <c:forEach var="q" items="${ list }">

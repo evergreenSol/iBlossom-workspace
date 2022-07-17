@@ -204,6 +204,45 @@
 	   		  
 			location.href="classDetail.cl";
 		});
+		
+		var indexNow = new Date();
+		
+		var indexMonth = indexNow.getMonth() + 1;
+		
+		var keywords = new Array();
+		
+		console.log(indexMonth);
+		
+		if(indexMonth == 7) {
+			
+			keywords[0] = '해바라기'; 
+			keywords[1] = "졸업"; 
+			keywords[2] = "입학"; 
+			keywords[3] = "생일"; 
+			keywords[4] = "축하"; 
+			keywords[5] = "여름"; 
+			//kewords[6] = ""; 
+			//kewords[7] = ""; 
+			
+		}
+		console.log(keywords);
+		
+		
+		
+		
+		$.ajax({
+			url : "flowerOfTheMonth.pr",
+			data : {
+				keywords : keywords
+			},
+			success : function (result) {
+				
+			},
+			fail : function () {
+				
+			}
+			
+		});
 	});
        
 	</script>
