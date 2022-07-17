@@ -185,6 +185,7 @@
             	$(function() {
             		
             		$("#productTable>tbody tr").on("click", function() {
+            			console.log("클릭");
             			location.href = "detail.pr?pno=" + $(this).children(".pno").text();
             		});
             	});

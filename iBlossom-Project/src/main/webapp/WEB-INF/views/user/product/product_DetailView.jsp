@@ -70,8 +70,9 @@
 										style="border: none; padding-left: 10px; padding-top: 5px;"><br>
 									<br> <input type=hidden id="sell_price"
 										value="${ p.price }"> <input type="button" value=" - "
-										onclick="del();" style="margin-left: 10px;"> <input
-										type="text" name="amount" value="1" size="1"
+										onclick="del();" style="margin-left: 10px;"> 
+										
+										<input type="text" name="amount" value="1" size="1"
 										onchange="change();"> <input type="button" value=" + "
 										onclick="add();"><br> <br> <br> 배송비: <span
 										style="padding-left: 200px"> 3,000 원</span><br> <br>
@@ -111,6 +112,14 @@
 				<br>
 
 
+			</div>
+
+			<!-- 리뷰 폼 -->
+			<div >
+				<input type='button' id='btn_rv' value='구매평 작성' class="insertReview">
+				<div id="detailReview">
+				
+				</div>
 			</div>
 
 
@@ -199,9 +208,10 @@
           $('#detail_content').css("color","black");
           $('#detail_review').css("background-color","white");
           $('#detail_review').css("color","rgb(190, 190, 190)");
+          $('#detailReview').children().remove();
+          $('#btn_rv').css("display","none");
 
             var html;
-          $('#detailContent').children().remove();
          
           html = '<img src="'+'${p.contentPhoto}'+'" style="width:970px;">';
           html += '<div id="exchange_info" style="height: 1000px;">';
@@ -249,83 +259,96 @@
 	<script>
         function test1(){
 
-            $('#detail_review').css("background-color","rgba(224, 224, 224, 0.29)");
+          $('#detail_review').css("background-color","rgba(224, 224, 224, 0.29)");
           $('#detail_review').css("color","black");
           $('#detail_content').css("background-color","white");
           $('#detail_content').css("color","rgb(190, 190, 190)");
-          var review;
           $('#detailContent').children().remove();
-        
-          review = '<input type="button" id="btn_rv" value="구매평 작성" onclick="modalOn();">';
-          review += ' <br><br>';
-          review += ' <hr>';
-          review += '<div class="reviewbb">';
-          review +='<img class="img1" src="resources/images/flower1.jpg">';
-          review +='<text class="text1">진짜 마음에 들어요</text>';
-          review +='<span class="span1">우와 이쁘다 진짜 제 마음에 속 들어요</span>';
-          review +='</div>';
-          review += '<div class="reviewbb">';
-          review +='<img class="img1" src="resources/images/flower1.jpg">';
-          review +='<text class="text1">진짜 마음에 들어요</text>';
-          review +='<span class="span1">우와 이쁘다 진짜 제 마음에 속 들어요</span>';
-          review +='</div>';
-          review += '<div class="reviewbb">';
-          review +='<img class="img1" src="resources/images/flower1.jpg">';
-          review +='<text class="text1">진짜 마음에 들어요</text>';
-          review +='<span class="span1">우와 이쁘다 진짜 제 마음에 속 들어요</span>';
-          review +='</div>';
-          review +='<br><br><br><br><br>';
- 
-
-          $('#detailContent').append(review);
+          $('#btn_rv').css("display","block");
+          
+          
+          $.ajax({
+        	  url: "reviewList.re",
+        	  data : {productNo : ${ p.productNo }},
+        	  success : function(result){
+        		  
+        		  console.log(result);
+        		  var review = "";
+        		  
+        		  
+        		  for(var i in result){
+        			  
+                      review += "<br><br>";
+                      review += "<hr>";
+                      review += "<div class='reviewbb'>";
+                      review += "<input type='hidden' value="+ result[i].reviewNo +">"
+                      review +="<div class='divBox'>"
+                      review += "<img class='img1' src='" + result[i].reviewPhoto + "' style='width: 190px; height:190px;  margin-left: 20px;margin-top: 10px; float: left;'>";
+                      review += "<p class='text3'>" + result[i].userId + "</p>";
+                      review += "<p class='text4'>" + result[i].createDate + "</p>";
+                      review += "<p class='text1'>" + result[i].reviewTitle + "</p>";
+                      review += "<p class='text2'>" + result[i].reviewContent + "</p>";
+                      review += "</div>";
+                      review += "</div>";
+        		  }
+        		  review += "<br><br><br><br><br>";
+        		  
+        		  $("#detailReview").html(review);
+        	  },
+        	  error:function(){
+        		  console.log("에러발생");
+        	  }
+         		
+        	 
+          });
         }
     </script>
 
-	<script>
-    
-</script>
+
 
 
 	<div id="modal" class="modal-overlay">
 		<form action="insert.re" method="post" enctype="multipart/form-data">
-		<%-- <input type="hidden" name="orderNo" value="${}"> --%>
-		<input type="hidden" name ="userNo" value="${loginUser.userNo}">
-		<div class="modal-window" style="height:550px">
-			<div class="title">
-				<span style="font-size: 20px; margin-top: 10px;">구매평 작성</span>
-			</div>
-			<div class="close-area" onclick="modalOff()">
-				<img src="resources/images/x.png" style="width: 15px;">
-			</div>
-
-			<div class="content">
-				<hr>
-
-				<div
-					style="height: 50px; border: 1px solid gainsboro; margin-top: 40px; text-align: center;">
-					<p>${p.flowerName}</p>
+			
+			<div class="modal-window" style="height: 550px">
+				<input type="text" name="productNo" value="${ p.productNo }">
+				<input type="text" name="userNo" value="${loginUser.userNo}">
+				<div class="title">
+					<span style="font-size: 20px; margin-top: 10px;">구매평 작성</span>
 				</div>
-				<br>
-				<div>
-					<input type="text" name="reviewTitle" style="width: 370px; height: 30px; border: 1px solid gray; ">
-				</div>
-				<br>
-				<textarea rows="2" cols="10" onkeyup="counter(this,150)"
-					name="reviewContent"
-					placeholder="꽃 파손이나 배송등 문제사항은 구매평에 남겨주시면 확인이 어렵습니다."></textarea>
-				<div style="text-align: right;">
-					<span id="reCount">0 / 150</span>
+				<div class="close-area">
+					<img src="resources/images/x.png" style="width: 15px;">
 				</div>
 
-				<br> <br> <input type="file" name="upReviewPhoto">
-				<div class="modal-button-area" align="center">
+				<div class="content">
+					<hr>
 
-					<!--<button onclick="modalOff()">취소</button>-->
-					<button type="submit" id="sign">등록</button>
+					<div
+						style="height: 50px; border: 1px solid gainsboro; margin-top: 40px; text-align: center;">
+						<p>${p.flowerName}</p>
+					</div>
+					<br>
+					<div>
+						<input type="text" name="reviewTitle"
+							style="width: 370px; height: 30px; border: 1px solid gray;">
+					</div>
+					<br>
+					<textarea rows="2" cols="10" onkeyup="counter(this,150)"
+						name="reviewContent"
+						placeholder="꽃 파손이나 배송등 문제사항은 구매평에 남겨주시면 확인이 어렵습니다."></textarea>
+					<div style="text-align: right;">
+						<span id="reCount">0 / 150</span>
+					</div>
+
+					<br> <br> <input type="file" name="upReviewPhoto">
+					<div class="modal-button-area" align="center">
+
+						<!--<button onclick="modalOff()">취소</button>-->
+						<button type="submit" id="sign">등록</button>
+					</div>
 				</div>
-			</div>
 
-			<script>
+				<script>
             function counter(text,length){
                 var limit = length;
                 var str = text.value.length;
@@ -337,23 +360,86 @@
                 document.getElementById("reCount").innerHTML = text.value.length + " / " + limit;
             }
         </script>
+        
+        
 
 
 
-		</div>
+			</div>
 		</form>
 	</div>
 
 
+
+
+
+	<%-- <!-- 리뷰 수정 모달 -->
+	<div id="modal" class="modal-overlay reviewModal">
+		<form action="update.re" method="post" enctype="multipart/form-data">
+			
+			<div class="modal-window" style="height: 550px">
+				<input type="text" name="reviewNo" value="">
+				<input type="text" name="userNo" value="${loginUser.userNo}">
+				<div class="title">
+					<span style="font-size: 20px; margin-top: 10px;">리뷰 확인</span>
+				</div>
+				<div class="close-area">
+					<img src="resources/images/x.png" style="width: 15px;">
+				</div>
+
+				<div class="content">
+					<hr>
+
+					<div
+						style="height: 50px; border: 1px solid gainsboro; margin-top: 40px; text-align: center;">
+						<p>${p.flowerName}</p>
+					</div>
+					<br>
+					<div>
+						<input type="text" name="reviewTitle"
+							style="width: 370px; height: 30px; border: 1px solid gray;">
+					</div>
+					<br>
+					<textarea rows="2" cols="10" onkeyup="counter(this,150)"
+						name="reviewContent"
+						placeholder="꽃 파손이나 배송등 문제사항은 구매평에 남겨주시면 확인이 어렵습니다."></textarea>
+					<div style="text-align: right;">
+						<span id="reCount">0 / 150</span>
+					</div>
+
+					<br> <br> <input type="file" name="upReviewPhoto">
+					<div class="modal-button-area" align="center">
+
+						<!--<button onclick="modalOff()">취소</button>-->
+						<button type="submit" id="sign">등록</button>
+					</div>
+				</div>
+
+				<script>
+            function counter(text,length){
+                var limit = length;
+                var str = text.value.length;
+                if(str>limit){
+                    alert("최대 150자까지 입력 가능합니다.");
+                    text.value = text.value.substring(0,limit);
+                    text.focus();
+                }
+                document.getElementById("reCount").innerHTML = text.value.length + " / " + limit;
+            }
+        </script>
+        
+        
+
+
+
+			</div>
+		</form>
+	</div> --%>
+
+
 	<script>
-
-/*     const loremIpsum = document.querySelector('.modal'); */
-    const btnModal = document.querySelector('.view-grade');
-
-/*     fetch("https://baconipproductPrice.com/api/?type=all-meat&paras=200&format=html")
-        .then(response => response.text())
-        .then(result => loremIpsum.innerHTML = result) */
-
+    const btnModal = document.querySelector('.insertReview');
+	
     function modalOn() {
     modal.style.display = "flex"
     }
@@ -372,6 +458,7 @@
     closeBtn.addEventListener("click", e => {
         modal.style.display = "none"
     })
+    
 </script>
 
 	<jsp:include page="../../common/footer.jsp" />

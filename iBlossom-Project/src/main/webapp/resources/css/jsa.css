@@ -332,8 +332,12 @@ html, body {
 
 .reviewbb {
 	margin-top: 2px;
-	height: 100px;
-	border-bottom: 1px solid gainsboro;
+	height: 200px;
+}
+
+.img{
+	border: 5px solid black;
+	
 }
 
 #detailContent1 {
@@ -349,18 +353,42 @@ html, body {
 }
 
 .text1 {
-	float: left;
-	margin-top: 25px;
-	margin-left: 20px;
-	font-size: 15px;
+
+	font-size: 25px;
+	border: 1px solid black; 
+	text-align: center;
+	display: inline-block;
+	transform : translate ( 100px, 100px )
 }
 
-.span1 {
-	float: left;
-	margin-top: 55px;
-	margin-left: -110px;
-	font-size: 15px;
+.text2 {
+	font-size: 20px;
+	 border: 1px solid orange; 
+	margin:auto;
+	width: 870px;
+	text-align: center;
+	
 }
+
+.text3 {
+	font-size: 15px;
+	border: 1px solid red; 
+	text-align: right;
+	display: inline-block;
+	margin-left: 700px;
+}
+
+.text4 {
+	font-size: 15px;
+	 border: 1px solid green;
+	text-align: right;
+	display: inline-block;
+	margin-left: 700px;
+	
+}
+
+
+
 
 #btn_rv {
 	border: 1px solid gainsboro;

@@ -600,7 +600,6 @@
 					
 				}
 					
-				location.href='complete.or';
 				
 			}, error : function() {
 				console.log("DB 넣음 실패");

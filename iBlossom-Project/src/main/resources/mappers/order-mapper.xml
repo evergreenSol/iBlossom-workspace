@@ -137,17 +137,6 @@
 		WHERE ORDER_NO = #{orderNo}
 	</select>
 
-
-	<!--  지승아 리뷰 오더 검사-->
-	<select id="selectReviewOrder" parameterType="review" resultMap="orderResultSet">
-		SELECT *
-		FROM ORDER_TBL
-		JOIN DETAIL_ORDER USING (ORDER_NO)
-		JOIN MEMBER USING(USER_NO)
-		WHERE PRODUCT_NO = #{productNo}
-		AND USER_NO = #{userNo}
-	</select>
-
 	<select id="countReady" parameterType="_int" resultType="_int">
 		SELECT COUNT(*)
 		  FROM ORDER_TBL
@@ -190,7 +179,7 @@
 	</select>
 	
 	<!-- (자동) 배송상태 변경하기 -->
-<!--   	<update id="updateDeliveryStatus">
+  	<update id="updateDeliveryStatus">
   		UPDATE ORDER_TBL
 		SET DELIVERY_STATUS = 
 		    CASE 
@@ -201,9 +190,17 @@
 		    ]]>
 		    END
 		WHERE NOT DELIVERY_STATUS IN('결제취소')
-  	</update> -->
+  	</update> 
 
-
+	<!--  지승아 리뷰 오더 검사-->
+	<select id="selectOrderReview" parameterType="review" resultMap="orderResultSet">
+		SELECT *
+		FROM ORDER_TBL
+		JOIN DETAIL_ORDER USING (ORDER_NO)
+		JOIN MEMBER USING(USER_NO)
+		WHERE PRODUCT_NO = #{productNo}
+		AND USER_NO = #{userNo}
+	</select>
 
 
 </mapper>

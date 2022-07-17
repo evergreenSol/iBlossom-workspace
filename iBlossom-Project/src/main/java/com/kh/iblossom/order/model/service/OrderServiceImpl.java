@@ -10,6 +10,7 @@ import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.order.model.dao.OrderDao;
 import com.kh.iblossom.order.model.vo.DetailOrder;
 import com.kh.iblossom.order.model.vo.Order;
+import com.kh.iblossom.product.model.vo.Review;
 
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -124,6 +125,14 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public int updateDeliveryStatus() {
 		return  orderDao.updateDeliveryStatus(sqlSession);
+	}
+
+
+	//승아 리뷰
+	@Override
+	public ArrayList<Order> selectOrderReview(Review r) {
+		
+		return orderDao.selectOrderReview(sqlSession,r);
 	}
 	
 	
