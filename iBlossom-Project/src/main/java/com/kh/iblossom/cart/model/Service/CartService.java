@@ -19,5 +19,7 @@ public interface CartService {
 	int insertCartList(Cart c);
 	
 	int deleteCart(int cartNo);
+	
+	int updateCart(Cart c);
 
 }

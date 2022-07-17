@@ -66,8 +66,8 @@
             <input type="hidden" id="email" value="${ loginUser.email }">
             <input type="hidden" id="phone" value="${ loginUser.phone }">
             <input type="hidden" id="price" value="${ oc.price }">
-            <input type="hidden" id="classDate" value="${ oc.classDate }">
-            <input type="hidden" id="className" value="${ oc.className }">
+            <input type="text" id="classDate" value="${ oc.classDate }">
+            <input type="text" id="className" value="${ oc.className }">
 			<input type="hidden" id="userNo" name="userNo" value="${ loginUser.userNo }">
 	    </div>
      
@@ -161,8 +161,8 @@
 				$.ajax({
     				url:"sendOnedayClassMessage.do",
     				data : {
-    					classDate : $("#classeDate").val(),
-    					className : $("#classeName").val(),
+    					classDate : $("#classDate").val(),
+    					className : $("#className").val(),
     					price : $("#price").val()
     				},
     				success : function (result) {
