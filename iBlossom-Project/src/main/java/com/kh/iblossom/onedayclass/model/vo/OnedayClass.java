@@ -1,5 +1,8 @@
 package com.kh.iblossom.onedayclass.model.vo;
 
+
+
+
 import java.sql.Date;
 
 import lombok.Getter;
@@ -24,7 +27,7 @@ public class OnedayClass {
 	private int classNo;
 	private String className;
 	private int price;
-	private String classDate;
+	private Date classDate;
 	private int capNo;
 	private int resNum;
 	private String classStatus;

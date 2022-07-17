@@ -12,32 +12,6 @@
     <link href="resources/css/kms.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
-#add-container{
-
-}
-
-#addClass{
-
-    font-size: 18px;
-    font-weight: 800;
-}
-
-
-#addBtn{
-    position: absolute;
-    margin-left: 220px;
-    margin-top: 15px;
-    background-color: black;
-    border-radius: 3px;
-    color: white;
-    width: 90px;
-    height: 40px;
-    font-size: 19px;
-}
-
-#addClassForm{
-	margin:auto;
-}
 
 </style>
 </head>
@@ -139,7 +113,7 @@
             </tr>   
             <tr>
             	<th>수업일</th>
-                <td height="60"><input type="text" id="classAdd" name="classDate" style="border:none; width:350px; height:50px; font-size:18px;" maxlength="40" placeholder="날짜(yyyy-mm-dd hh:mm 형식)"></td>
+                <td height="60"><input type="text" id="classAdd" name="classDate" style="border:none; width:350px; height:50px; font-size:18px;" maxlength="40" placeholder="날짜(yyyy-mm-dd 형식)"></td>
             </tr>   
             <tr>
             	<th>정원</th>

@@ -23,7 +23,7 @@
 	</resultMap>
 	
 	<select id="selectClassList" resultMap="onedayclassResultSet">
-		SELECT CLASS_NO, CLASS_NAME, PRICE, CLASS_DATE, CAP_NO, RES_NUM, CLASS_STATUS
+		SELECT CLASS_NO, CLASS_NAME, PRICE, TO_CHAR(CLASS_DATE,'YYYY-MM-DD') "CLASS_DATE", CAP_NO, RES_NUM, CLASS_STATUS
 		FROM ONECLASS
 		WHERE CLASS_STATUS = 'N'
 	</select>
@@ -56,7 +56,7 @@
   	</update>
   	
   	<select id="selectAdminList" resultMap="onedayclassResultSet">
-		SELECT CLASS_NO, CLASS_NAME, PRICE, CLASS_DATE, CAP_NO, RES_NUM, CLASS_STATUS
+		SELECT CLASS_NO, CLASS_NAME, PRICE, TO_CHAR(CLASS_DATE,'YYYY-MM-DD') "CLASS_DATE", CAP_NO, RES_NUM, CLASS_STATUS
 		FROM ONECLASS
 	</select>
 	<!-- 

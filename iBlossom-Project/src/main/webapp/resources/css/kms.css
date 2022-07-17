@@ -443,6 +443,28 @@ hr{
 }
 
 
+#addClass{
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+
+#addBtn{
+    position: absolute;
+    margin-left: 220px;
+    margin-top: 15px;
+    background-color: black;
+    border-radius: 3px;
+    color: white;
+    width: 90px;
+    height: 40px;
+    font-size: 19px;
+}
+
+#addClassForm{
+	margin:auto;
+}
 
 
 
@@ -614,6 +636,22 @@ hr{
 	    position: absolute;
 	}
     
+    
+    #adminNoticeBtn{
+    position: absolute;
+    margin-left: 945px;
+    margin-top: 15px;
+    background-color: black;
+    border-radius: 3px;
+    color: white;
+    width: 90px;
+    height: 40px;
+    font-size: 19px;
+}
+
+#noticeContent{
+	margin:auto;
+}
     
 
 /* 마이페이지 카테고리 - 카테고리 나누기 */
