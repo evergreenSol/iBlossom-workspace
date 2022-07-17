@@ -58,7 +58,7 @@
 
 	        
 	    </div>
-	    <br><br><br><br><br><br><br><br>
+	    <br><br><br><br><br><br><br><br><br><br><br><br>
 	    <div id="image2">
 	        <img src="resources/images/onedayclass_detail-1.png" width="1200px">
 	        <img src="resources/images/onedayclass_detail-2.png" width="1200px">
