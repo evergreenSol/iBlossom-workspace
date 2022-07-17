@@ -269,12 +269,13 @@ public class ProductController {
 		}
 	}
 
-	// 리뷰 관리 -admin
-	@RequestMapping("reviewList.pr")
-	public String reviewListView() {
-
-		return "admin/product/review_ListView";
-	}
+	/*
+	 * // 리뷰 관리 -admin
+	 * 
+	 * @RequestMapping("reviewList.pr") public String reviewListView() {
+	 * 
+	 * return "admin/product/review_ListView"; }
+	 */
 	
 	/*
 	 * // 조합형

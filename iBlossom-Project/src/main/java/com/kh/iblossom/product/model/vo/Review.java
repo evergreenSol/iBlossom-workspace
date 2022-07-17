@@ -13,7 +13,6 @@ private String reviewContent;	//	REVIEW_CONTENT
 private String reviewPhoto;		//	REVIEW_PHOTO
 private Date createDate;		//	CREATE_DATE
 private String reviewStatus;	//	REVIEW_STATUS
-private int orderNo;			//	ORDER_NO
 private String userId;				//	USER_NO
 private int productNo;		//	PRODUCT_NO
 private String flowerName;

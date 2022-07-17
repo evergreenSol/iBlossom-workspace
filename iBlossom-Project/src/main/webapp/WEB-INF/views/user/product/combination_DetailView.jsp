@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,13 +17,11 @@
 	    -webkit-appearance: none;
 	    margin: 0;
 	}
-
- </style>
- 
+</style>
 </head>
 <body>
 
-<jsp:include page="../../common/header.jsp" />
+	<jsp:include page="../../common/header.jsp" />
 
 	<br>
 	<br>
@@ -31,142 +29,129 @@
 
 	<div id="wrap_detail1">
 		<div style="width: 1000px; margin: auto;">
-				<table>
-					<tr class="tr1" valign="top">
-						<td rowspan="6"><img src="resources/images/flower3.PNG">
-							<select id="select_flower" name="select_flower" onchange="selectFlower()">
-									<option selected disabled style="text-align: center;">
-										---------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										---------</option>
-									<c:forEach var="p" items="${ list }" varStatus="status">
-										<option id="option_flower${ status.count }" value="${ status.count }" style="text-align: center;">${ p.flowerName }</option>
-									</c:forEach>
-							</select>
-						</td>
-						<td class="pp" style="padding-top: 20px;">
-							<b style="font-size: 25px;">조합형</b>
-						</td>
-					</tr>
-					<tr>
-						<td class="pp"><hr></td>
-					</tr>
-					<tr>
-						<td class="pp">
-							<b>내가 직접 고르고 선물해보세요~ </b>
-							<br>
-							감동이 2배 
-							<br>
-							<hr style="margin-bottom: 10px;">
-						</td>
-					</tr>
-					<tr>
-						<td>
+			<table>
+				<tr class="tr1" valign="top">
+					<td rowspan="6"><img src="resources/images/flower3.PNG">
+						<select id="select_flower" name="select_flower"
+						onchange="selectFlower()">
+							<option selected disabled>
+								---------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								---------</option>
+							<c:forEach var="p" items="${ list }" varStatus="status">
+								<option id="option_flower${ status.count }"
+									value="${ status.count }">${ p.flowerName }</option>
+							</c:forEach>
+					</select></td>
+					<td class="pp" style="padding-top: 20px;"><b
+						style="font-size: 25px;">조합형</b></td>
+				</tr>
+				<tr>
+					<td class="pp"><hr></td>
+				</tr>
+				<tr>
+					<td class="pp"><b>내가 직접 고르고 선물해보세요~ </b> <br> 감동이 2배 <br>
+						<hr style="margin-bottom: 10px;"></td>
+				</tr>
+				<tr>
+					<td>
 						<form id="cartItems" method="post" action="">
-							<div id="countBox1" align="center"> <!-- overflow : auto -->
+							<div id="countBox1" align="center" style="overflow: auto">
 								<c:forEach var="p" items="${ list }" varStatus="status">
-								<div class="item${ status.count }" hidden>
-								<div onclick="removeItem(${ status.count })" id="removeItem"><img src="resources/images/x.png" style="width: 15px; float:right"></div>
-								<input type="hidden" id="index" value=${ status.count }>
-								<input type="hidden" id="userNo" value="${ loginUser.userNo }">
-								<input type="hidden" id="productNo" value="${ p.productNo }">
-								${ p.flowerName }
-								<input type="button" value="-" onclick="count('minus',${ status.count })">
-								<input type="number" id="productCount${ status.count }" value="1">
-								<input type="button" value="+" onclick="count('plus',${ status.count })">
-								<input type="hidden" id="productPrice${ status.count }" value="${ p.price }">
-								</div>
-								</c:forEach>		
-							</div> 
-						</form>
-							<br>
-							<div style="margin-left: 20px">
-								배송비: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								3,000 원<br>
-								<br> 총 주문금액 : &nbsp; &nbsp; &nbsp; &nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"
-									style="border: none; font-weight: 700; font-size: 15px; background-color: rgba(224, 224, 224, 0.001); padding-left: 60px; width: 50px;"
-									name="sum" size="11" id="sum" readonly value="">&nbsp;&nbsp;원
+									<div class="item${ status.count }" hidden>
+										<div onclick="removeItem(${ status.count })" id="removeItem">
+											<img src="resources/images/x.png" style="width: 13px;float: right; cursor:pointer;margin: 8px 8px 0px 0px;">
+										</div>
+										<input type="hidden" id="index" value=${ status.count }>
+										<input type="hidden" id="userNo" value="${ loginUser.userNo }">
+										<input type="hidden" id="productNo" value="${ p.productNo }">
+										<div style="background-color: white;height: 40px;padding-top: 20px;margin-top:10px;" >
+											<span>${ p.flowerName }</span>
+											<input type="button" value="-" onclick="count('minus',${ status.count })" class="input-button1">
+											<input type="number" id="productCount${ status.count }" value="1" class="input-productCount">
+											<input type="button" value="+" onclick="count('plus',${ status.count })" class="input-button2">
+											<input type="hidden" id="productPrice${ status.count }" value="${ p.price }">
+											<input type="hidden" id="sum${ status.count }">
+										</div>
+									</div>
+								</c:forEach>
 							</div>
-						</td>
-					</tr>
+						</form> <br>
+						<div style="margin-left: 20px">
+							<div>
+								배송비: 
+								<span style="margin-left:300px">3,000 원</span>
+								<br>
+								<br>
+							</div>
+							<div>
+								총 주문금액 : <input type="text" id="sumAll"
+									style="border: none; font-weight: 700; font-size: 15px; background-color: rgba(224, 224, 224, 0.001); padding-left: 60px; width: 50px;"
+									name="sum" size="11" id="sum" readonly value=""><span style="margin-left: 200px"> 원</span>
+							</div>
+						</div>
+					</td>
+				</tr>
 
-					<tr>
-						<td>
-							<br>
-							<br>
-							<c:choose>
-								<c:when test="${ loginUser eq null }">
-									<input value="장바구니" id="btn1" onclick="alert('로그인이 필요한 서비스 입니다!'); location.href='loginForm.me';">
-								</c:when>
-								<c:otherwise>
-									<input value="장바구니" id="btn1" onclick="submitForm();">
-								</c:otherwise>
-							</c:choose> 
-						</td>
-					</tr>
+				<tr>
+					<td><br> <br> <c:choose>
+							<c:when test="${ loginUser eq null }">
+								<input value="장바구니" type="button" id="btn1"
+									onclick="alert('로그인이 필요한 서비스 입니다!'); location.href='loginForm.me';">
+							</c:when>
+							<c:otherwise>
+								<input value="장바구니" id="btn1" type="button"
+									onclick="submitForm();">
+							</c:otherwise>
+						</c:choose></td>
+				</tr>
 
-				</table>
+			</table>
 
 
 			<!--상세 정보 버튼 시작-->
 			<div class="categorize review-box"
 				style="height: 100px; margin-top: 30px;">
-				<div class="reviewBox" id="combination_content" onclick="showDetail();">상세정보</div>
-				<div class="reviewBox" id="combination_review" onclick="showReview();">리뷰</div>
+				<div class="reviewBox" id="combination_content"
+					onclick="showDetail();">상세정보</div>
+				<div class="reviewBox" id="combination_review"
+					onclick="showReview();">리뷰</div>
 			</div>
 
 			<!-- 상세정보 폼-->
 
 			<div id="flowerDetailList">
 				<c:forEach var="p" items="${ list }">
-				<table>
-					<tr>
-						<td width="100px" height="150px">
-								<img src="${ p.thumbNail }">
-						</td>
-					</tr>
-					<tr>
-						<td>${ p.flowerName }</td>
-					</tr>
-				</table>
+					<table style="overflow: hidden;">
+						
+						<tr>
+							<td>
+							<img src="${ p.thumbNail }">
+							</td>
+						</tr>
+						<tr>  
+							<td>${ p.flowerName }</td>
+						</tr>
+					</table>
 				</c:forEach>
 			</div>
 
-    </div>
-
-    <!-- 리뷰 작성폼-->
-
-			<div id="reviewList" hidden>
-			
-			</div>
-			
-			
-			<script>
-/*            $('#combination_review').css("background-color", "rgba(224, 224, 224, 0.29)");
-            $('#combination_review').css("color", "black");
-            $('#combination_content').css("background-color", "white");
-            $('#combination_content').css("color", "rgb(190, 190, 190)");
-            var combinationreview;
-            $('#combinationPhoto').children().remove();
-
-            combinationreview = '<input type="button" id="btn_rv" value="구매평 작성" onclick="modalOn();">';
-            combinationreview += ' <br><br>';
-            combinationreview += ' <hr>';
-            combinationreview += '<div class="reviewbb">';
-            combinationreview += '<img class="img2" src="resources/images/flower1.jpg">';
-            combinationreview += '<text class="text1">진짜 마음에 들어요</text>';
-            combinationreview += '<span class="span1">우와 이쁘다 진짜 제 마음에 속 들어요</span>';
-            combinationreview += '</div>'; */
-			</script>
-			
 		</div>
+
+
+    <script>
+        $(document).ready(function(){
+        	showDetail();
+        });
+    </script>
+
+		<!-- 리뷰 작성폼-->
+
+		<div id="reviewList" hidden>
+		
+		</div>
+
+
+	</div>
 
 	<script>
 	// 빈 배열 만들기
@@ -182,6 +167,7 @@
 		items.push(selectFlower); // 아까 생성한 빈 배열에 인덱스 밀어넣어주기
 
 		$("#option_flower"+selectFlower+"").attr("disabled", "true"); // 이미 셀렉된 상품은 다시 셀렉 못하게
+		getSum();
 		
 	}
 	
@@ -189,19 +175,23 @@
 		  
 		  const productCount = document.getElementById('productCount'+index+''); // id="productCount1, productCount2..."
 		  
+		  
 		  // 현재 화면에 표시된 값
 		  let count = productCount.value; // 변수 선언 및 값을 productCount input의 value로 초기화
 		  
 		  // 더하기/빼기
-		  if(type === 'plus') { // 매개변수로 plus type이 넘어오면
+		  if(type === 'plus' && count < 10) { // 매개변수로 plus type이 넘어오면
 		    productCount.value = parseInt(count) + 1; // count++
+		    getSum();
 
 		  }else if(type === 'minus' && count > 1)  { // 매개변수로 minus type 이 넘어오고 1보다 크다면
 		    productCount.value = parseInt(count) - 1; // count--
+		    getSum();
 
 		  }
 		  else { // 그 외에는
 			 productCount.value = parseInt(count); // 현상 유지
+			 getSum();
 		  }
 		  
 	 }
@@ -218,7 +208,25 @@
 			}
 		}  		
 		items.splice(index, 1); // 배열에서 아까 선언한 인덱스에 있는 아이템 삭제
+		getSum();
      }
+     
+     function getSum() { // 이름을 주게 되면 그 실행해달라고 하는 곳에서 실행됨
+			
+		var listSize = items.length; // 상품 리스트 사이즈 (상품이 3개면 3개)
+ 		var sumAll = 0;
+ 		for(var i = 0; i < listSize; i++) { // 상품 리스트를 돌면서
+ 			var price = $('#productPrice'+(i+1)+'').val(); // 각 상품 가격
+ 			console.log(price)
+ 			var productCount = $('#productCount'+(i+1)+'').val(); // 각 상품 수량
+ 			$('#sum'+(i+1)+'').attr("value",price*productCount); // sum1, sum2, ... 에 전달
+ 			
+ 			sumAll += parseInt($('#sum'+(i+1)+'').val()); // sumAll = sum1 + sum2 + ...
+ 		}
+ 		
+			$('#sumAll').attr("value",(sumAll+3000)); // sumAll input에 sumAll 값 전달
+			
+	}
      
      function submitForm() {
 		if(items.length==0) { // 셀렉된 아이템이 없다면
@@ -243,10 +251,69 @@
      function showReview() { // 리뷰 열기
     	 $('#reviewList').removeAttr("hidden");
     	 $('#flowerDetailList').attr("hidden","true");
+    	 
+    	 $('#combination_review').css("background-color","rgba(224, 224, 224, 0.29)");
+         $('#combination_review').css("color","black");
+         $('#combination_content').css("background-color","white");
+         $('#combination_content').css("color","rgb(190, 190, 190)");
+         
+         var combinationreview;
+
+         combinationreview = '<input type="button" id="btn_rv" value="구매평 작성" onclick="modalOn();">';
+         combinationreview += ' <br><br>';
+         combinationreview += ' <hr>';
+         combinationreview += '<div class="reviewbb">';
+         combinationreview += '<img class="img2" src="resources/images/flower1.jpg">';
+         combinationreview += '<text class="text1">진짜 마음에 들어요</text>';
+         combinationreview += '<span class="span1">우와 이쁘다 진짜 제 마음에 속 들어요</span>';
+         combinationreview += '</div>';
+         
+         $('#reviewList').append(combinationreview);
      }
  	</script>
-    
-    <jsp:include page="../../common/footer.jsp" />
+ 	
+ 		<script>
+        function showReview()
+
+          $.ajax({
+        	  url: "reviewList.re",
+        	  data : {productNo : ${ p.productNo }},
+        	  success : function(result){
+        		  
+        		  console.log(result);
+        		  var review = "";
+        		  
+        		  
+        		  for(var i in result){
+        			  
+                      review += "<br><br>";
+                      review += "<hr>";
+                      review += "<div class='reviewbb'>";
+                      review += "<input type='hidden' value="+ result[i].reviewNo +">"
+                      review +="<div class='divBox'>"
+                      review += "<img class='img1' src='" + result[i].reviewPhoto + "' style='width: 190px; height:190px;  margin-left: 20px;margin-top: 10px; float: left;'>";
+                      review += "<p class='text3'>" + result[i].userId + "</p>";
+                      review += "<p class='text4'>" + result[i].createDate + "</p>";
+                      review += "<p class='text1'>" + result[i].reviewTitle + "</p>";
+                      review += "<p class='text2'>" + result[i].reviewContent + "</p>";
+                      review += "</div>";
+                      review += "</div>";
+        		  }
+        		  review += "<br><br><br><br><br>";
+        		  
+        		  $("#detailReview").html(review);
+        	  },
+        	  error:function(){
+        		  console.log("에러발생");
+        	  }
+         		
+        	 
+          });
+        }
+    </script>
+ 	
+
+	<jsp:include page="../../common/footer.jsp" />
 </body>
 
 </html>

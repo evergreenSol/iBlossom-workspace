@@ -56,8 +56,11 @@ public class CartController {
 	@RequestMapping("insert.ca")
 	public String insertCartList(Cart c, HttpSession session, Model model) {
 		
-		System.out.println(c);
-			
+		
+		  
+		 // System.out.println(c);
+		
+		  
 		int result = cartService.insertCartList(c);
 		
 		if(result > 0) { 
@@ -65,7 +68,7 @@ public class CartController {
 			return "redirect:list.ca";
 			
 		} else {
-			return "redirect:/";
+			return "common/login";
 		}
 	}
 

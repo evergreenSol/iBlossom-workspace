@@ -52,7 +52,7 @@ public class OrderController {
 	public String DetailOrder(CartCommand cartCommand, HttpSession session, Model model) {
 		
 		System.out.println("옴");
-		//System.out.println(cartCommand);
+		System.out.println(cartCommand);
 		
 		ArrayList<Cart> list = (ArrayList<Cart>)cartCommand.getCartList();
 		
@@ -75,7 +75,13 @@ public class OrderController {
 				
 				int cartNo = list.get(i).getCartNo();
 				
+				
 				Cart c = list.get(i);
+				c.setProductCount(list.get(i).getProductCount());
+				
+				System.out.println(c);
+				
+				int updateResult = cartService.updateCart(c);
 				
 				if(cartNo != 0) {
 					
@@ -239,5 +245,7 @@ public class OrderController {
 		// 전체주문내역 화면 포워딩
 		return "admin/order/orderListView";
 	}
+	
+
 	
 }

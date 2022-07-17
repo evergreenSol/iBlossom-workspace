@@ -79,7 +79,7 @@
 						            <!-- 장바구니 수량 변경 -->
 						            <div class="basketnum">
 					                    <input type="button" value="-" onclick="count('minus',${ status.count })">
-				                        <input type="text" id="productCount${ status.count }" value="${ list[c].productCount }" size="1" disabled>
+				                        <input type="text" id="productCount${ status.count }" name="cartList[${c}].productCount" value="${ list[c].productCount }" size="1" disabled>
 				                        <!-- 0715 PM 5:45 type="number" 에서 text 로 변경 - 다온 -->
 				                        <input type="button" value="+" onclick="count('plus',${ status.count })">
 			                        </div>					    

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.order.model.vo.DetailOrder;
 import com.kh.iblossom.order.model.vo.Order;
+import com.kh.iblossom.product.model.vo.Review;
 
 @Repository
 public class OrderDao {
@@ -99,5 +100,10 @@ public class OrderDao {
 		return sqlSession.update("orderMapper.updateDeliveryStatus", null);
 	}
 
+	//승아
+	//리뷰
+	public ArrayList<Order>selectOrderReview(SqlSessionTemplate sqlSession, Review r){
+		return (ArrayList)sqlSession.selectList("orderMapper.selectOrderReview",r);
+	}
 
 }
