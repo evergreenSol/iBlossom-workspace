@@ -639,6 +639,9 @@ height: 97%;
 	font-weight: 600;
 }
 
+
+/* 마이페이지 리뷰 시작 */
+
 .mypage-review-wrap {
 	
 	margin-top: 50px;
@@ -661,4 +664,9 @@ height: 97%;
     background-color: rgb(21 21 21/var(--tw-bg-opacity));
     
     border-radius: 3px;
+}
+
+tbody#reviewTbody tr:hover {
+	cursor: pointer;
+	background-color: gray;
 }

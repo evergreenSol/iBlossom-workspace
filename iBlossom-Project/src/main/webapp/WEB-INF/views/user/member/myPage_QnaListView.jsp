@@ -30,7 +30,7 @@
                     	<h2>1대1 문의내역</h2>
                     
                    		<div style="width: 100%">
-                            <table align="center" style="text-align: center; font-size: 14px; width: 100%; border-collapse: collapse;" id="qnaTable">
+                            <table align="center" style="text-align: center; font-size: 16px; width: 100%; border-collapse: collapse;" id="qnaTable">
                                 <thead style="background: rgb(248, 248, 248); border-style: none;">
                                     <tr height="40">
                                     	<th width="50">번호</th>
@@ -91,6 +91,10 @@
 			});
 		
 			$("#category-qna").css("font-weight", "700");
+			
+			$("no-qna").click(function () {
+				location.href="qnaForm.qu";
+			});
 			
 		})
 	</script>

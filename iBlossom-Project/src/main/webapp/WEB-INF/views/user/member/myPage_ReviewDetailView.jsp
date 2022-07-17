@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>iBlossom | Membership</title>
 <link href="resources/css/khs.css" rel="stylesheet">
-<link href="resources/css/modal_mypage_review.css" rel="stylesheet">
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 <link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
