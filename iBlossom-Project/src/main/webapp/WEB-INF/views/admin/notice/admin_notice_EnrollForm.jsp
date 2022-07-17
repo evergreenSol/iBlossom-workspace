@@ -12,21 +12,7 @@
     <link href="resources/css/kms.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
-#adminNoticeBtn{
-    position: absolute;
-    margin-left: 955px;
-    margin-top: 15px;
-    background-color: black;
-    border-radius: 3px;
-    color: white;
-    width: 90px;
-    height: 40px;
-    font-size: 19px;
-}
 
-#noticeContent{
-	margin:auto;
-}
 </style>
 </head>
 <body>
