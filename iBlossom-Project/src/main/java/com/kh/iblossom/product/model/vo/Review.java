@@ -11,7 +11,7 @@ private int reviewNo;			//	REVIEW_NO
 private String reviewTitle;		//	REVIEW_TITLE
 private String reviewContent;	//	REVIEW_CONTENT
 private String reviewPhoto;		//	REVIEW_PHOTO
-private Date createDate;		//	CREATE_DATE
+private String createDate;		//	CREATE_DATE
 private String reviewStatus;	//	REVIEW_STATUS
 private String userId;				//	USER_NO
 private int productNo;		//	PRODUCT_NO

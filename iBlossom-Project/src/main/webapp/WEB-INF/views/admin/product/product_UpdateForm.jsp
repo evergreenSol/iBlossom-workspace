@@ -94,9 +94,15 @@
 				<form id="updateForm" method="post" action="update.pr" enctype="multipart/form-data">
 					<input type="hidden" name="productNo" value="${ p.productNo }">
 					<h3>카테고리명</h3>
-					<input type="text" id="admin_category_name"
-						name="categoryName" value="${p.categoryName}">
-
+					<%-- <input type="text" id="admin_category_name"
+						name="categoryName" value="${p.categoryName}"> --%>
+					<select name ="categoryName" id="admin_category_name">
+						<option  selected  style="display: none" >${p.categoryName}</option>
+						<option value='꽃다발'>꽃다발</option>
+						<option value='꽃병'>꽃병</option>
+						<option value='조합형'>조합형</option>
+					</select>
+					
 					<h3>상품명</h3>
 					<input type="text" id="admin_product_name"
 						name="flowerName" value="${p.flowerName}">
@@ -109,13 +115,17 @@
 					<table class="admin_product">
 						<tr>
 							<h3 style="display:inline-block;">썸네일</h3>
-							<td><lable for="thumbnail"></lable> 
-							<input type="file" name="reThumbNail" id="admin_product-img"></td>
+							<td>
+							<input type="file" name="reThumbNail" id="admin_product-img" value="${p.thumbNail }">
+							<label for="thumbnail"></label> 
+							</td>
+							
 							
 							<h3 style="display:inline-block;margin-left:200px">상세사진</h3>
 							<td>
-							<lable for="contentPhoto"></lable>
-							<input type="file" name="reContentPhoto" id="admin_product-img"></td> 
+							<input type="file" name="reContentPhoto" id="admin_product-img" value="${p.contentPhoto }">
+							<label for="contentPhoto"></label>
+							</td> 
 						
 							
 							

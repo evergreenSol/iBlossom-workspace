@@ -30,6 +30,21 @@ html, body {
 	height: 150px;
 }
 
+/* 수량 버튼 +, - */
+.detailBtn{
+	 width: 30px;
+     height: 25px;
+	 background-color: whitesmoke;
+     border-radius: 3px;
+     border: none;
+}
+
+/* 수량 버튼 호버시 */
+ .detailBtn:hover {
+       font-weight:bolder;
+       cursor: pointer;
+    }
+    
 #wrap_detail {
 	width: 1200px;
 	margin: auto;
@@ -844,21 +859,21 @@ html, body {
 
 /* 상품용 input 가격용 input css*/
 #admin_category_name {
-	width: 400px;
+	width: 600px;
 	text-align: center;
 	font-size: 20px;
 	height: 30px;
 }
 
 #admin_product_name {
-	width: 400px;
+	width: 600px;
 	text-align: center;
 	font-size: 20px;
 	height: 30px;
 }
 
 #admin_tag_name {
-	width: 400px;
+	width: 600px;
 	text-align: center;
 	font-size: 20px;
 	height: 30px;
