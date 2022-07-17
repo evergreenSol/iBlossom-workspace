@@ -36,17 +36,7 @@ public class OrderController {
 	@Autowired
 	private MemberService memberService;
 	
-	/*------------------------------------------------------------*/
-	
-	/*
-	// 기존에 연결을 위해 쓴거 
-	// 주문
-	@RequestMapping("detailView.or")
-	public String DetailOrderList() {
-		return "user/order/order_DetailView";
-		// /WEB-INF/views/user/order/order_DetailView.jsp
-	}*/
-	
+
 	// 주문/결제 조회용
 	@RequestMapping("detail.or")
 	public String DetailOrder(CartCommand cartCommand, HttpSession session, Model model) {
@@ -57,7 +47,6 @@ public class OrderController {
 		ArrayList<Cart> list = (ArrayList<Cart>)cartCommand.getCartList();
 		
 		// int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
-		
 		
 		if(list == null) {
 			session.setAttribute("alertMsg", "결제할 항목을 선택해주세요.");
@@ -70,11 +59,9 @@ public class OrderController {
 			System.out.println("list: " + list);
 			System.out.println("크기: " + list.size());
 			
-			
 			for(int i = 0; i < list.size(); i++) {
 				
 				int cartNo = list.get(i).getCartNo();
-				
 				
 				Cart c = list.get(i);
 				c.setProductCount(list.get(i).getProductCount());
@@ -94,7 +81,6 @@ public class OrderController {
 					selectList.add(cart);
 					
 				}
-				
 			}
 			
 			System.out.println(selectList);
@@ -108,7 +94,6 @@ public class OrderController {
 			return "user/order/order_DetailView";
 		}
 	}
-	
 	
 	// 결제완료 페이지 이동
 	@RequestMapping("complete.or")
@@ -132,7 +117,7 @@ public class OrderController {
 		System.out.println("result = " + result);
 		System.out.println("receiptId = " + receiptId);
 		
-		if(result > 0) { // 오더테이블이 만드렁짐
+		if(result > 0) { // 오더테이블이 만들어짐
 			
 			// 방금 만든 오더 테이블 조회해오기 
 			Order thisOrder = orderService.selectOrder(receiptId);
@@ -147,7 +132,6 @@ public class OrderController {
 			return "0";
 			
 		}
-		
 	}
 	
 	@RequestMapping("insertDetailOrder.or")
@@ -198,11 +182,9 @@ public class OrderController {
 		}
 		
 		model.addAttribute("orderNo", orderNo);
-		
-		
+				
 		return "user/order/order_Complete";
 	}
-	
 	
 	
 	// -------------------------------------------------------------------------------------
@@ -215,13 +197,11 @@ public class OrderController {
 		return "admin/order/orderListView"; 
 	}
 	
-	
 	// 관리자 - 개별주문내역
 	@RequestMapping("adminDetail.or")
 	public String orderDetailView() { 
 		return "admin/order/orderDetailView"; 
 	}
-	
 	
 	// 관리자 페이지에서 쓰일 < 페이징 처리 >
 	
@@ -244,8 +224,34 @@ public class OrderController {
 
 		// 전체주문내역 화면 포워딩
 		return "admin/order/orderListView";
+		
 	}
 	
-
+	// 관리자 - 전체주문내역 조회용 메소드
+    @RequestMapping(value="adminSelectList.or")
+    public String adminSelectList(HttpSession session, Model model) {
+      
+       int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+	   
+       ArrayList<Order> list = orderService.adminSelectList(userNo);
+	   
+       System.out.println(list);
+      
+       model.addAttribute("list", list);
+      
+       // DB에서 주문내역을 ArrayList로 받아오기. 
+      
+       return "admin/order/orderListView"; 
+	      
+	 }
+	
+	/*
+	// 기존에 연결을 위해 쓴거 
+	// 주문
+	@RequestMapping("detailView.or")
+	public String DetailOrderList() {
+		return "user/order/order_DetailView";
+		// /WEB-INF/views/user/order/order_DetailView.jsp
+	}*/
 	
 }
