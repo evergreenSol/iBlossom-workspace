@@ -220,7 +220,7 @@
                         </div>
 
                         <div id="ReceiveBox" style="margin-top:0px;">
-                        	<input type="text" class="datepicker" id="datepicker">
+                        	<input type="text" class="datepicker" id="datepicker" readonly>
                         </div>
                     </div>
                     
@@ -297,7 +297,7 @@
 	                                    <c:when test="${ (empty loginUser.postcode) || (empty loginUser.address1) }">
 		                                    <!-- 우편번호 -->
 		                                    <input type="text" name="zipcode" id="zipcode" size="70" readonly placeholder="우편번호 검색">
-		                                    <input type="button" value="우편번호찾기" onclick="kakaopost()" style="border:none; width:146px; height: 50px; font-size: 15px;"><br>
+		                                    <input type="button" class="zipcodeBtn" value="우편번호찾기" onclick="kakaopost()"><br>
 		                                    <hr>
 		
 		                                    <!-- 주소 -->

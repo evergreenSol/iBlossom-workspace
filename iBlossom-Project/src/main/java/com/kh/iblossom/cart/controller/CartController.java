@@ -2,14 +2,13 @@ package com.kh.iblossom.cart.controller;
 
 import java.util.ArrayList;
 
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.iblossom.cart.model.Service.CartService;
 import com.kh.iblossom.cart.model.vo.Cart;
@@ -91,6 +90,17 @@ public class CartController {
 		}
 		
 		return "redirect:list.ca";
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="cartDelete.ca", produces="text/html; charset=UTF-8")
+	public String deleteCart(int cartNo) {
+		
+		int result = cartService.deleteCart(cartNo);
+		
+		return (result > 0) ? "상품이 장바구니에서 삭제되었습니다" : "삭제 실패";
+		
 		
 	}
 /*

@@ -40,12 +40,12 @@
 		WHERE USER_NO = #{userNo}
   	</select>
   	
-  	<!-- 장바구니 행 삭제 -->
+<!--   
   	<delete id="deleteCartList" parameterType="_int">
   		DELETE
   		FROM CART
   		WHERE CART_NO = #{cartNo}
-  	</delete>
+  	</delete> -->
   	
   	
 	<select id="selectOneCart" parameterType="cart" resultMap="cartResultSet">
@@ -73,7 +73,7 @@
               , #{productPrice})
      </insert>
      
-     
+     <!-- 장바구니 행 삭제 -->
      <delete id="deleteCart" parameterType="_int">
      	DELETE FROM CART
      	WHERE CART_NO = #{cartNo}

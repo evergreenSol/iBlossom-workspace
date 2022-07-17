@@ -52,12 +52,53 @@ div { box-sizing: border-box; }
     }
 
     /* 전체선택, 선택삭제 div  */
+    /*-------------------*/
     .cart-choice { 
         display: flex; 
         justify-content: space-between; 
         margin-bottom: 5px;
         font-weight: 500; 
     }
+    
+    /* checkbox 스타일 */
+    /* 장바구니 체크박스 */
+	input[type="checkbox"] {
+        -webkit-appearance: none;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        outline: none !important;
+        border: 1px solid #eeeeee;
+        border-radius: 2px;
+        background: #fbfbfb;
+    }
+ 
+    input[type="checkbox"]::before {
+        content: "\2713";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        overflow: hidden;
+        transform: scale(0) translate(-50%, -50%);
+        line-height: 1;
+    }
+ 
+    input[type="checkbox"]:hover {
+        border-color: rgba(15, 3, 3, 0.373);
+    }
+ 
+    input[type="checkbox"]:checked {
+        background-color: black;
+        border-color: rgba(255, 255, 255, 0.3);
+        color: white;
+    }
+ 
+    input[type="checkbox"]:checked::before {
+        border-radius: 2px;
+        transform: scale(1) translate(-50%, -50%)
+    }    
+    /*-------------------*/
  
     /* 선택삭제 버튼 */
     .choice-delete-btn { 
@@ -78,7 +119,7 @@ div { box-sizing: border-box; }
 		font-weight: 600;
 		color: black;
     }
-
+    
     /* 장바구니 메뉴바 */
     .cart-menu { 
         /* 정렬 */
@@ -140,13 +181,7 @@ div { box-sizing: border-box; }
      	margin-left: -15px;
      	width: 350px;
     }
-    
-    /* 장바구니 라디오 버튼 사이즈 */
-    #checkAll, .cartCheck {
-    	width: 16px;
-    	height: 16px;
-    }
-    
+
     /* 장바구니 상세옵션  내용 */
     .cart-content3 {
     	margin:auto 0;
@@ -161,12 +196,13 @@ div { box-sizing: border-box; }
     }
     
     /* 장바구니 상세옵션>가격 */
-    .cart-content3 .price {
-    	width: 55px;
-    	text-align: right;
+    .price {
+        width: 50px;
+    	text-align: center;
     	border: none;
     	font-size: 17px;
-    	width: 28px;
+    	background-color: white;
+    	color: black;
     }
     
     /* 수량 버튼 +, - */
@@ -190,6 +226,9 @@ div { box-sizing: border-box; }
     	border-radius: 3px;
     	width: 20px;
     	height: 20px;
+    	border: 1px solid rgba(170, 170, 170, 0.5);
+    	background-color: white;
+    	color: black;
     }
  
     /* 수량 버튼 */
@@ -202,20 +241,26 @@ div { box-sizing: border-box; }
 	    border-radius: 3px;
     }
     
+    /* 장바구니 가격*수량 합한 금액 */
+    .cart-content4>input {
+    	border:none; 
+    	font-size:17px; 
+    	text-align:right; 
+    	background-color: white;
+    	color: black;
+    }
+    
     /* 총주문금액 X 마우스 hover */
-    .cart-content4>a:hover { 
+    .abutton:hover { 
     	font-weight: 600;
+    	cursor: pointer;
     	/* color: #ff2393; */ 
     }
 
-	/* 총주문금액 X a 태그 */
-	.cart-content4>a {
-		 text-decoration: none;
-	}
-	
-	/* x 버튼 */
+	/* 총주문금액 X */
 	.abutton {
-		font-size: 20px;
+		 text-decoration: none;
+		 font-size: 20px;
 	}
 	
 	.cart-content5 {
@@ -609,7 +654,18 @@ div { box-sizing: border-box; }
     
     /* 주문 내역 확인 박스 가운데 정렬 */
     #CheckBox { margin: auto; }
-
+    
+    /* 모달창 안에 우편번호찾기 버튼 */
+    .zipcodeBtn {
+    	 border:none; 
+    	 width:146px; 
+    	 height: 50px; 
+    	 font-size: 15px;
+    }
+	
+	.zipcodeBtn:hover {
+		cursor: pointer;
+	}
 
 
     /* ----------------------------------------------------------- */
