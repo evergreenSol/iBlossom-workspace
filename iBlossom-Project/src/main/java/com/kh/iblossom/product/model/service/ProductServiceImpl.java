@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.product.model.dao.ProductDao;
 import com.kh.iblossom.product.model.vo.Product;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -72,5 +73,17 @@ public class ProductServiceImpl implements ProductService{
    public ArrayList<Product> selectDetailList() {
       return productDao.selectDetailList(sqlSession);
    }
+
+	@Override
+	public int selectSearchCount(String keyword) {
+	
+	  return productDao.selectSearchCount(sqlSession,keyword);
+	}
+
+	@Override
+	public ArrayList<Product> selectSearchList(String keyword) {
+
+	  return productDao.selectSearchList(sqlSession, keyword);
+	}
 
 }

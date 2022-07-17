@@ -37,9 +37,9 @@
 
         <!-- 검색창 -->
         <div id="header-search" style="position: relative;">
-            <form action="">
-                <button class="btn_search" style="position: absolute;"></button>
-                <input class="btn_text" type="text" placeholder="검색어를 입력하세요." style="border:0 solid black; border-radius: 30px; padding-left: 21px;">
+            <form action="search.me">
+                <button type="submit" class="btn_search" style="position: absolute;"></button>
+                <input class="btn_text" type="text" placeholder="검색어를 입력하세요." name="keyword" value="${ keyword }" style="border:0 solid black; border-radius: 30px; padding-left: 21px;">
             </form>
         </div>
 
