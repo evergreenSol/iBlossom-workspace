@@ -25,17 +25,44 @@
 	
 	<!-- 인터셉터 등록 -->
 	<!-- 인터셉터 클래스 생성 후 등록 2022-07-10 -->
+	<!-- 인터셉터 클래스 수정 2022-07-18 -->
 	<interceptors>
+		<!-- 사용자가 로그인해야만 -->
 	 	<interceptor>
+	 		<!-- 마이페이지 -->
 	 		<mapping path="/mypage.me"/>
 	 		<mapping path="/orderListView.me"/>
+	 		<mapping path="/orderDetailView.me"/>
 	 		<mapping path="/subscribeView.me"/>
+	 		<mapping path="/subscribeRealView.me"/>
+	 		<mapping path="/cancelSubscribe.me"/>
+	 		<mapping path="/cancelPay.me"/>
+	 		
+	 		
 	 		<mapping path="/updateForm.me"/>
+	 		<mapping path="/update.me"/>
 	 		<mapping path="/deleteForm.me"/>
+	 		<mapping path="/delete.me"/>
 	 		<mapping path="/onedayClass.me"/>
 	 		<mapping path="/reviewListView.me"/>
+	 		<mapping path="/reviewDetailView.me"/>
 	 		<mapping path="/qnaListView.me"/>
+	 		<mapping path="/qnaDetailView.me"/>
+	 		<!-- 정기구독 -->
+	 		<mapping path="/orderView.su"/>
+	 		
+	 		<!-- 상품페이지 -->
+	 		<!-- 클래스 페이지 -->
+	 		<!-- 고객센터페이지 -->
 	 		<beans:bean class="com.kh.iblossom.common.interceptor.LoginInterceptor" id="loginInterceptor"/>
+	 	</interceptor>
+	 	<interceptor>
+	 		<!-- 관리자: 회원관리 -->
+	 		<mapping path="/list.me"/>
+	 		<!-- 관리자: 구독 -->
+		 	<mapping path="/subMemberListView.su"/>
+	 		<mapping path="/listView.sp"/>
+	 		<beans:bean class="com.kh.iblossom.common.interceptor.AdminInterceptor" id="adminInterceptor"/>
 	 	</interceptor>
 	 </interceptors>
 	

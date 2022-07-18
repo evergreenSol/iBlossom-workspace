@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,13 +21,13 @@
 			<c:set var="discount" value="0"/>
 		</c:when>
 		<c:when test="${ loginUser.grLevel == 2 }">
-			<c:set var="discount" value="1000"/>
+			<c:set var="discount" value="0.9"/>
 		</c:when>
 		<c:when test="${ loginUser.grLevel == 3 }">
-			<c:set var="discount" value="2000"/>
+			<c:set var="discount" value="0.85"/>
 		</c:when>
 		<c:otherwise>
-			<c:set var="discount" value="3000"/>
+			<c:set var="discount" value="0.8"/>
 		</c:otherwise>
 	</c:choose>
 
@@ -78,7 +80,7 @@
                             <tr>
                                 <th>가격</th>
                                 <td></td>
-                                <td>${ d.onePrice }원</td>
+                                <td><fmt:formatNumber value="${ d.onePrice }" pattern="###,###"/>원</td>
                             </tr>
                             <tr>
                                 <th>수량</th>
@@ -113,19 +115,20 @@
                             <tr>
 								<td width="120">주 문 금 액</td>
 								<td width="680"></td>
-								<td width="100"><span>${o.totalPrice + 3000 + discount}</span><span>원</span></td>
+								<td width="100"><span><fmt:formatNumber value="${ o.totalPrice }" pattern="###,###"/></span><span>원</span></td>
+							</tr>
+							<tr height="20"></tr>
+							<tr>
+								<td>등 급 할 인</td>
+								<td></td>
+								<!--  <td>-<span>${o.totalPrice * (1- discount)}</span><span>원</span></td> -->
+								<td>-<span><fmt:formatNumber value="${ o.totalPrice * (1 - discount) }" pattern="###,###"/></span><span>원</span></td>
 							</tr>
 							<tr height="20"></tr>
 							<tr>
 								<td>배 송 비</td>
 								<td></td>
 								<td><span>3000</span><span>원</span></td>
-							</tr>
-							<tr height="20"></tr>
-							<tr>
-								<td>등 급 할 인</td>
-								<td></td>
-								<td>-<span>${discount}</span><span>원</span></td>
 							</tr>
 							<tr height="20"></tr>
 							<tr>
@@ -143,7 +146,7 @@
 							<tr>
 								<td>총 결 제 금 액</td>
 								<td></td>
-								<td><span>${o.totalPrice}</span><span>원</span></td>
+								<td><span><fmt:formatNumber value="${ o.totalPrice * discount + 3000 }" pattern="###,###"/></span><span>원</span></td>
 							</tr>
                         
                         

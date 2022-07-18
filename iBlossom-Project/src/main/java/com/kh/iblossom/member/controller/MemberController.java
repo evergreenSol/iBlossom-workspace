@@ -317,7 +317,7 @@ public class MemberController {
    
    
    
-   // 구독 삭제 메소드
+   // 구독 취소 메소드
    @ResponseBody
    @RequestMapping(value="cancelSubscribe.me", produces="html/text; charset=UTF-8")
    public String cancelSubscribe(String receiptId) {
