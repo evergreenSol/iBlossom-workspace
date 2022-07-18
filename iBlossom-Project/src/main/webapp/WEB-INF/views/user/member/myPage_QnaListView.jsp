@@ -45,6 +45,7 @@
                                 
                                 <c:forEach var="q" items="${ list }">
                                     <tr height="40">
+                                   		<input type="hidden" value="${ q.qnaNo }">
                                     	<td>${ q.qnaNo }</td>
                                         <td>${ q.qnaDate }</td>
                                         <td>${ q.qnaTitle }</td>
@@ -62,11 +63,14 @@
                                 </c:forEach>
                                 </c:if>
                                 <c:if test="${ empty list }">
-                                	
-                                	<td height="300" width="900" colspan="4" id="no-qna">
-                                		회원님께서 남기신 문의가 없습니다.
-                                	</td>
-                               
+                                	<tr>
+                                		<input type="hidden" value="0">
+	                                	<td height="300" width="900" colspan="4" id="no-qna">
+	                                		회원님께서 남기신 문의가 없습니다.<br><br>
+	                                		[ 1대1문의 작성하러 가기 ]
+	                                	</td>
+                              		 </tr>
+                              		 
                                 </c:if>
                                 </tbody>
                             </table>
@@ -87,15 +91,12 @@
 	<script>
 		$(function () {
 			$("#qnaTable>tbody").on("click", "tr", function () {
-				console.log($(this).children().eq(0).text());
-				location.href="qnaDetailView.me?qnaNo=" + $(this).children().eq(0).text();
+				console.log($(this).children().eq(0).val());
+				
+				location.href="qnaDetailView.me?qnaNo=" + $(this).children().eq(0).val();
 			});
 		
 			$("#category-qna").css("font-weight", "700");
-			
-			$("no-qna").click(function () {
-				location.href="qnaForm.qu";
-			});
 			
 		})
 	</script>
