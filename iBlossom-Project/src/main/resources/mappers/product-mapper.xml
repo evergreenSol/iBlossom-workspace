@@ -122,6 +122,7 @@
 		WHERE CATEGORY_NAME = '조합형'
 	</select>
 	
+
 	<!-- 검색 -->
 	<select id="selectSearchCount" parameterType="String" resultType="_int">
 		SELECT COUNT(*)
@@ -133,5 +134,11 @@
 		SELECT THUMBNAIL, FLOWER_NAME, PRODUCT_NO
 		FROM PRODUCT
         WHERE TAG LIKE '%' || #{keyword} || '%'
+
+	<!-- 이달의 꽃 -->
+	<select id="selectTagProduct" parameterType="product" resultMap="productResultSet">
+		SELECT *
+		FROM PRODUCT
+		WHERE TAG LIKE '%${tag}%' 
 	</select>
 </mapper>

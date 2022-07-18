@@ -44,5 +44,10 @@ public interface ProductService {
 	
 	// 검색 결과 조회용
 	ArrayList<Product> selectSearchList(String keyword);
+
+	// 이달의 꽃
+	Product selectTagProduct(Product p);
+	
+
 	
 }
