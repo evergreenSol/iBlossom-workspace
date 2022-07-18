@@ -334,7 +334,7 @@ public class ProductController {
 			
 			// 페이징 처리를 위한 pi 객체 만들기
 			// => Pagination 클래스에 getPageInfo(listCount, currentPage, pageLimit, boardLimit) 메소드를 호출
-			int searchCount = productService.selectSearchCount(map); // 현재 검색결과에 맞는 게시글의 총 갯수
+			int searchCount = productService.selectSearchCountFlower(map); // 현재 검색결과에 맞는 게시글의 총 갯수
 			
 			int pageLimit = 10;
 			int boardLimit = 5;
@@ -342,7 +342,7 @@ public class ProductController {
 			PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, pageLimit, boardLimit);
 			
 			// 조회 요청
-			ArrayList<Product> list = productService.selectSearchList(pi, map);
+			ArrayList<Product> list = productService.selectSearchListFlower(pi, map);
 
 			model.addAttribute("pi", pi);
 			model.addAttribute("list", list);

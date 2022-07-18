@@ -41,10 +41,10 @@ public interface ProductService {
 	ArrayList<Product> selectListBase();
 	
 	// 검색용 메소드
-	int selectSearchCount(HashMap<String, String> map);
+	int selectSearchCountFlower(HashMap<String, String> map);
 	
 	// 구독 회원 검색용 메소드
-	ArrayList<Product> selectSearchList(PageInfo pi, HashMap<String, String> map);
+	ArrayList<Product> selectSearchListFlower(PageInfo pi, HashMap<String, String> map);
 	// 검색용
 	int selectSearchCount(String keyword);
 	

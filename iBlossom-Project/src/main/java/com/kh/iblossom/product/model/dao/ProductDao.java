@@ -94,13 +94,13 @@ public class ProductDao {
 	}
 	
 	// 검색
-		public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		public int selectSearchCountFlower(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
 			
-			return sqlSession.selectOne("productMapper.selectSearchCount", map);
+			return sqlSession.selectOne("productMapper.selectSearchCountFlower", map);
 		}
 		
 	// 상품 등록 검색
-		public ArrayList<Product> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi,
+		public ArrayList<Product> selectSearchListFlower(SqlSessionTemplate sqlSession, PageInfo pi,
 				HashMap<String, String> map) {
 			
 			int limit = pi.getBoardLimit();
@@ -108,7 +108,7 @@ public class ProductDao {
 			
 			RowBounds rowBounds = new RowBounds(offset, limit);
 			
-			return (ArrayList)sqlSession.selectList("productMapper.selectSearchList", map, rowBounds);
+			return (ArrayList)sqlSession.selectList("productMapper.selectSearchListFlower", map, rowBounds);
 		}
 		
 		

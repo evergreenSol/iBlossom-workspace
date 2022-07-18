@@ -94,10 +94,10 @@
 					</td>
 
 				</tr>
-
+				
 				<tr>
 					<c:choose>
-						<c:when test="${empty loginUser}">
+						<c:when test="${ empty loginUser }">
 							<td>
 								<button
 									onclick="alert('로그인이 필요한 서비스!'); location.href='loginForm.me';"
@@ -106,7 +106,7 @@
 						</c:when>
 						<c:otherwise>
 							<td>
-								<button onclick="cartbtn" id="btn1">장바구니</button> <!-- <input type="submit" value="장바구니" id="btn1"> -->
+								<button onclick="cartbtn();" id="btn1">장바구니</button> <!-- <input type="submit" value="장바구니" id="btn1"> -->
 							</td>
 						</c:otherwise>
 					</c:choose>
@@ -114,7 +114,7 @@
 				</tr>
 
 			</table>
-			</form>
+			
 			<!--상세 정보 버튼 시작-->
 			<div class="categorize review-box"
 				style="height: 100px; margin-top: 30px;">
@@ -142,7 +142,7 @@
 		</div>
 	</div>
 	<script>
-		function cartbtn(){
+		function cartbtn() {
 			$('#cartInfo').submit();
 		}
 	</script>

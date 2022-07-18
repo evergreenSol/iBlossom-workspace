@@ -138,6 +138,8 @@ public class OrderServiceImpl implements OrderService{
 	public ArrayList<Order> selectComOrderReview(Review r) {
 		
 		return orderDao.selectComOrderReview(sqlSession,r);
+	}
+	
 	// 관리자 - 개별주문내역 조회용 메소드 (상세보기)
 	@Override
 	public ArrayList<DetailOrder> adminSelectDetail(int orderNo) {

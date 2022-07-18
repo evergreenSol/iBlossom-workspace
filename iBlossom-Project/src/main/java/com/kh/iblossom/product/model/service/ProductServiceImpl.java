@@ -77,16 +77,16 @@ public class ProductServiceImpl implements ProductService{
    
 	// 검색용 메소드
 	@Override
-	public int selectSearchCount(HashMap<String, String> map) {
+	public int selectSearchCountFlower(HashMap<String, String> map) {
 		 
-		return productDao.selectSearchCount(sqlSession, map);
+		return productDao.selectSearchCountFlower(sqlSession, map);
 	}
 	
 	//상품 검색용 메소드
 	@Override
-	public ArrayList<Product> selectSearchList(PageInfo pi, HashMap<String, String> map) {
+	public ArrayList<Product> selectSearchListFlower(PageInfo pi, HashMap<String, String> map) {
 
-		return productDao.selectSearchList(sqlSession, pi, map);
+		return productDao.selectSearchListFlower(sqlSession, pi, map);
 	}
 
 	@Override

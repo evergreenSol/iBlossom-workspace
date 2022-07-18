@@ -531,23 +531,6 @@ public class MemberController {
 		   return "0";
 	   }
    }
-   
-	// 누적금에 따른 회원 등급 변경하기
-	@ResponseBody
-	@RequestMapping(value="checkDate.me")
-	public String updateDeliverStatus() {
-
-		int result1 = subscribeService.updateDeliverStatus();
-
-		int result2 = orderService.updateDeliveryStatus();
-
-		if(result1 * result2 > 0) {
-			return "1";
-		}
-		else {
-			return "0";
-		}
-	}
 
 	// 누적금에 따른 회원 등급 변경하기
 	@ResponseBody
@@ -731,7 +714,7 @@ public class MemberController {
 	}
 
 
-}
+
 
 
 	
