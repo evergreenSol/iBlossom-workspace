@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>iBlossom | Membership</title>
 <link href="resources/css/khs.css" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 <style>
 
 </style>
@@ -17,10 +20,8 @@
 
 	<div class="mypage-wrap">
 	
-		<br><br>
         <jsp:include page="myPage_Header.jsp"/>
         
-        <br>
         
         <table class="mypage-body">
         	<tr>
@@ -29,8 +30,9 @@
             	</td>
                 <td class="body_r" width="900" style="vertical-align: top;">
                     <div class="delete">
-                    	<h2>1대1 문의내역</h2>
-                        
+                    	<div style="margin : 20px 0px;">
+                    	<span class="mainView-title">1대1 문의내역</span>
+                        </div>
                    		<div class="qna-detail-content" style="width: 800px; position: relative;" align="right">
                             <div class="qna-detail-title" style="position: absolute;left: 280px;top: -31px;">제목: <span>${q.qnaTitle}</span></div>
                             <div class="balloon right">

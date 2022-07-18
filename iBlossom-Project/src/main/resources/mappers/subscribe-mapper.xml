@@ -30,6 +30,8 @@
 		<result column="SUB_PRICE" property="subPrice"/>
 		<result column="COUNT" property="count"/>
 		<result column="SUBCHANGE_NAME" property="subChangeName" />
+		<result column="DELIVER_AT2" property="deliverAt2" />
+		
 	</resultMap>
 
 	<!-- 구독 상품 리스트 조회 -->
@@ -175,7 +177,7 @@
   	<!-- 나의 구독 조회 -->
   	<select id="selectMySubscribe" parameterType="string" resultMap="subscribeResultSet">
   		SELECT SUBSCRIBE_NO, SP.SUBPRODUCT_NAME, TO_CHAR(SUB_DATE,'YYYY-MM-DD') "SUB_DATE", 
-			   SUB_LEVEL, SUB_RECEIVER_USER, SUB_RECEIVER_PHONE, DELIVER_AT, DELIVER_AT, DELIVER_TO, SUB_RECEIVER_POSTCODE,
+			   SUB_LEVEL, SUB_RECEIVER_USER, SUB_RECEIVER_PHONE, TO_CHAR(DELIVER_AT,'YYYY-MM-DD') "DELIVER_AT2", DELIVER_TO, SUB_RECEIVER_POSTCODE,
 			   RECEIPT_ID, SP.SUB_PRICE, DELIVER_STATUS, SUBPRODUCT_NAME, SUBCHANGE_NAME
 		  FROM SUBSCRIBE S, SUB_PRODUCT SP
 		 WHERE RECEIPT_ID = #{receiptId}

@@ -2,14 +2,13 @@ package com.kh.iblossom.cart.controller;
 
 import java.util.ArrayList;
 
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.iblossom.cart.model.Service.CartService;
 import com.kh.iblossom.cart.model.vo.Cart;
@@ -50,15 +49,12 @@ public class CartController {
 		// 로그인한 유저의 list 가 있을 경우와 없을 경우 로직
 	}
 	
-	/*--------------------------------------------------------*/
-	// 상세페이지 -> cart 연결용
-	
 	// 장바구니 상품 추가
 	@RequestMapping("insert.ca")
 	public String insertCartList(Cart c, HttpSession session, Model model) {
 		
 		System.out.println(c);
-			
+		
 		int result = cartService.insertCartList(c);
 		
 		if(result > 0) { 
@@ -66,10 +62,9 @@ public class CartController {
 			return "redirect:list.ca";
 			
 		} else {
-			return "redirect:/";
+			return "common/login";
 		}
 	}
-
 
 	// 조합형 장바구니
 	@RequestMapping("insertCo.ca")
@@ -80,17 +75,24 @@ public class CartController {
 		System.out.println(list);
 		
 		for(int i = 0; i < list.size(); i++) {
-			
 			Cart c = list.get(i);
-			
 			cartService.insertCartList(c);
-			
 		}
 		
 		return "redirect:list.ca";
-		
 	}
-/*
+	
+	// 장바구니 행 삭제
+	@ResponseBody
+	@RequestMapping(value="cartDelete.ca", produces="text/html; charset=UTF-8")
+	public String deleteCart(int cartNo) {
+		
+		int result = cartService.deleteCart(cartNo);
+		return (result > 0) ? "선택하신 상품이 장바구니에서 삭제되었습니다" : "선택하신 상품이 장바구니에서 삭제되지 않았습니다.";
+	}
+	
+	
+	/*
 	// 빈 장바구니 조회
 	@RequestMapping("empty.ca")
 	public String emptyCartList() {
@@ -99,10 +101,8 @@ public class CartController {
 	@RequestMapping("test.ca")
 	public String test() {
 		
-		return "user/cart/cart_ListView";*/
-	
-	/*--------------------------------------------------------*/
-
+		return "user/cart/cart_ListView";
+	*/
 
 	/*
 	@RequestMapping("listView.ca")
@@ -137,17 +137,17 @@ public class CartController {
 	public String selectCart(HttpSession session, Model model, Member m) {
 	Member loginUser = memberService.login(m);
 	
-	ArrayList<Cart> list = cartService.selectCart();
- 
-	if(list.isEmpty() && loginUser == null) { 
-		// 장바구니 빈 페이지 : 비로그인 상태 / select 할 상품이 없을 경우
-		return "user/cart/cart_EmptyList";
-	
-	} else { 
-		// 장바구니 페이지 : 로그인한 상태에서 select 할 상품이 있을 경우
-		return "user/cart/cart_ListView"; 
-		// /WEB-INF/views/user/cart/cart_ListView.jsp
-	}
+		ArrayList<Cart> list = cartService.selectCart();
+	 
+		if(list.isEmpty() && loginUser == null) { 
+			// 장바구니 빈 페이지 : 비로그인 상태 / select 할 상품이 없을 경우
+			return "user/cart/cart_EmptyList";
+		
+		} else { 
+			// 장바구니 페이지 : 로그인한 상태에서 select 할 상품이 있을 경우
+			return "user/cart/cart_ListView"; 
+			// /WEB-INF/views/user/cart/cart_ListView.jsp
+		}
 	}*/
 		
 	}

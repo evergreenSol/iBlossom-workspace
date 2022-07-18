@@ -5,17 +5,16 @@ import java.util.ArrayList;
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.order.model.vo.DetailOrder;
 import com.kh.iblossom.order.model.vo.Order;
+import com.kh.iblossom.product.model.vo.Review;
 
 public interface OrderService {
 
 	// 주문/결제 조회용
 	ArrayList<Order> detailOrder(int userNo);
 	
-	
 	// 리스트조회, 페이징처리
 	int selectOrderListCount();
 
-	
 	// 주문내역 리스트 조회
 	ArrayList<Order> selectOrderList(PageInfo pi);
 
@@ -49,5 +48,12 @@ public interface OrderService {
 	ArrayList<Order> selectMyOrderAllList(int userNo);
 	
 	int updateDeliveryStatus();
+	
+	//승아
+	//리뷰
+	ArrayList<Order> selectOrderReview(Review r);
+
+	// 관리자 - 전체주문내역 조회용 메소드
+	ArrayList<Order> adminSelectList(int userNo);
 	
 }

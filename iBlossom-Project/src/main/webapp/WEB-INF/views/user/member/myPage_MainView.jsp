@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>iBlossom | MyPage</title>
 <link href="resources/css/khs.css" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -14,10 +19,8 @@
 
 	<div class="mypage-wrap">
 	
-		<br><br>
         <jsp:include page="myPage_Header.jsp"/>
         
-        <br>
         
         <table class="mypage-body">
         	<tr>
@@ -27,7 +30,9 @@
                 <td class="body_r" width="900" style="vertical-align: top;">
                     <div class="delete">
                         <!-- <h2>상품 주문내역</h2> -->
-						<h2>주문배송조회</h2>
+                        <div style="margin : 20px 0px;">
+						<span class="mainView-title">주문배송조회</span><span id="mainView-subTitle">(최근 1개월)</span>
+                        </div>
                         <div class="mypage-first">
                             <div class="delivery">
                                 <b>${ ready }</b>
@@ -45,7 +50,7 @@
 
                         <br><br>
 
-                        <span id="mainView-title">나의 주문내역</span><span id="mainView-subTitle">(최근 1개월)</span>
+                        <span class="mainView-title">나의 주문내역</span>
                         <!-- <hr color="lightgray"> -->
                         <!--
                         <table style="text-align: center">
@@ -81,7 +86,7 @@
                             <tr>
                                 <th>결제금액</th>
                                 <td></td>
-                                <td>${o.totalPrice}원</td>
+                                <td><fmt:formatNumber value="${ o.totalPrice }" pattern="###,###"/>원</td>
                             </tr>
                             <tr>
                                 <th>주문상태</th>

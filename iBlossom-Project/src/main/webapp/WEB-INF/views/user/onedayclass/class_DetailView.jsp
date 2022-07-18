@@ -8,6 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="resources/css/kms.css" rel="stylesheet">
+    <!-- 파비콘 -->
+	<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+	<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
     <title>iBlossom | Class</title>
     <style>
 
@@ -38,7 +41,7 @@
 			                <c:forEach var="c" items="${ list }">
 			                <c:choose>
 			                
-				                <c:when test="${ c.resNum >= 5 }">
+				                <c:when test="${ c.resNum >= c.capNo }">
 				                	<option value="${ c.classNo }" disabled>${ c.classDate } (마감되었습니다.)</option>
 				                </c:when>
 				                <c:otherwise>

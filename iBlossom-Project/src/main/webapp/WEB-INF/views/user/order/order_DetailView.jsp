@@ -7,11 +7,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>iBlossom | 주문/결제</title>
+<title>iBlossom | Order</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 
 <!-- 슬라이드 업/다운 스크립트  -->
 
@@ -58,16 +61,16 @@
 
 		<c:choose>
 			<c:when test="${ loginUser.grLevel == 1 }">
-				<c:set var="discount" value="0"/>
+				<c:set var="discount" value="1"/>
 			</c:when>
 			<c:when test="${ loginUser.grLevel == 2 }">
-				<c:set var="discount" value="1000"/>
+				<c:set var="discount" value="0.9"/>
 			</c:when>
 			<c:when test="${ loginUser.grLevel == 3 }">
-				<c:set var="discount" value="2000"/>
+				<c:set var="discount" value="0.85"/>
 			</c:when>
 			<c:otherwise>
-				<c:set var="discount" value="3000"/>
+				<c:set var="discount" value="0.8"/>
 			</c:otherwise>
 		</c:choose>
 		
@@ -110,7 +113,7 @@
 
                         <!-- 내용 -->
                         <div id="CheckBox" class="order-check-contentbox">
-							<form action="insertDetailOrder.or" >
+							<form action="insertDetailOrder.or"  id="real-submit">
 							
 	                            <c:forEach var="i" begin="0" end="${ selectList.size() - 1 }">
 	                            
@@ -128,18 +131,20 @@
 		                                		<input type="hidden" id="userNo" name="" value="${ selectList[i].userNo }">
 		                                		
 		                                        <!-- 상품 제목 -->
-		                                        <li>${ selectList[i].flowerName }</li>
+		                                        <li style="font-weight:bold;">${ selectList[i].flowerName }</li>
 		                                        <input type="hidden" id="productNo" name="detailOrderList[${i}].productNo" value="${ selectList[i].productNo}">
 		                                        <br>
 		
 		                                        <!-- 가격(원)-->
-		                                        <li> <fmt:formatNumber type="number" maxFractionDigits="3" value="${ selectList[i].productPrice }" />원
+		                                        <li> <span>가격 : </span>
+		                                        	 <fmt:formatNumber type="number" maxFractionDigits="3" value="${ selectList[i].productPrice }" />원
 		                                        	 <input type="hidden" id="" name="detailOrderList[${i}].onePrice" value="${selectList[i].productPrice}">
 		                                        </li>
 		                                        <br>
 		                                        
 		                                        <!-- 수량(개) -->
-		                                        <li>${selectList[i].productCount}개
+		                                        <li>
+		                                        	<span>선택하신 수량 : </span>${selectList[i].productCount}개
 		                                        	<input type="hidden" id="" name="detailOrderList[${i}].oneQuantity" value="${selectList[i].productCount}">
 		                                        </li>
 		                                        <br>
@@ -152,7 +157,7 @@
 		                            </div>
 	                            </c:forEach>
 	                            	<input type="hidden" id="thisOrderNo" name="orderNo">
-	                            <button type="submit" id="real-submit-button" style="display:none"></button>
+	                            <button type="submit" id="real-make-button" style="display:none"></button>
                             
                             </form>
 
@@ -169,7 +174,14 @@
                                 <p>주문자 정보</p>
                                 <!-- 입력내용 보여지는 태그-->
                                 <p>
-                                    <span>${ loginUser.userName } &nbsp;&nbsp; ${ loginUser.phone }</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
+                                    <c:choose>
+										<c:when test="${ (empty loginUser.phone) }">
+											<span>${ loginUser.userName },&nbsp; xxx-xxxx-xxxx</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
+										</c:when>
+										<c:otherwise>
+											<span>${ loginUser.userName } &nbsp;&nbsp; ${ loginUser.phone }</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
+										</c:otherwise>
+									</c:choose>
                                 </p>
 
                             </button>
@@ -181,14 +193,21 @@
                         <div id="OrdererBox" class="order-orderer-content" >
 
                             <p>&nbsp;이름</p>
-                            <p class="orderer-name">${ loginUser.userName }</p>
+                            <p class="orderer-name">&nbsp;${ loginUser.userName }</p>
 
                             <p>&nbsp;연락처</p>
-                            <p class="orderer-phone">&nbsp;${ loginUser.phone }</p>
+                            <c:choose>
+								<c:when test="${ (empty loginUser.phone) }">
+									<p class="orderer-phone">&nbsp;개인정보에서 연락처가 입력되지 않았습니다. 배송지 추가를 통해 입력해주시기 바랍니다.</p>
+								</c:when>
+								<c:otherwise>
+									<p class="orderer-phone">${ loginUser.phone }</p>
+								</c:otherwise>
+							</c:choose>
 
                             <!-- 안내문구 -->
                             <p class="orderer-guide" style="font-size: small">
-                                * 주문자 정보변경은 마이페이지 > 개인정보수정에서 가능합니다.
+                                &nbsp;* 주문자 정보변경은 마이페이지 > 개인정보수정에서 가능합니다.
                             </p>
                             <br>
                         </div>
@@ -217,35 +236,13 @@
                         </div>
 
                         <div id="ReceiveBox" style="margin-top:0px;">
-                        	<input type="text" class="datepicker" id="datepicker">
+                        	<input type="text" class="datepicker" id="datepicker" readonly>
                         </div>
                     </div>
                     
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 					<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-                                
-		            <!-- 수령일 script -->
-		            <script>
-		        		$.datepicker.setDefaults({
-		        		  dateFormat: 'yy-mm-dd',
-		        		  prevText: '<',
-		        		  nextText: '>',
-		        		  monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-		        		  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-		        		  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-		        		  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-		        		  dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-		        		  showMonthAfterYear: true,
-		        		  yearSuffix: '년',
-		        		  minDate: "+1D", //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-		        	      maxDate: "+1M"
-		        		});
-		        		
-		        		$(function () {
-		        		  $('.datepicker').datepicker();
-		        		});
-					</script>
-                    
+
                     <hr> 
                     
                     <!-- 4. 배송지 정보 -->
@@ -260,12 +257,10 @@
                    <!-- 5. 배송지 추가 -->
                     <div>
                         <div class="order-address-add">
-
                             <!-- 모달의 원리 : 이 버튼 클릭시 data-target에 제시되어있는 해당 아이디의 div요소를 띄워줌 -->
                             <button type="button" class="address-btn" data-toggle="modal" data-target="#modal-overlay">
                                 + 배송지 추가
                             </button>
-                        
                         </div>
 
                         <!-- Modal -->
@@ -294,7 +289,7 @@
 	                                    <c:when test="${ (empty loginUser.postcode) || (empty loginUser.address1) }">
 		                                    <!-- 우편번호 -->
 		                                    <input type="text" name="zipcode" id="zipcode" size="70" readonly placeholder="우편번호 검색">
-		                                    <input type="button" value="우편번호찾기" onclick="kakaopost()" style="border:none; width:146px; height: 50px; font-size: 15px;"><br>
+		                                    <input type="button" class="zipcodeBtn" value="우편번호찾기" onclick="kakaopost()"><br>
 		                                    <hr>
 		
 		                                    <!-- 주소 -->
@@ -381,13 +376,13 @@
                     <hr>
 
 					<div class="userAddress"><br>
-                         	<span id="postalAddress"></span>
-                         	<span id="detailAddress"></span>
+                         &nbsp;<span id="postalAddress"></span>
+                         <span id="detailAddress"></span>
                     </div>
                     
 					<br><br>
 					
-                    <!-- 버튼 두개 -->
+                    <!-- 버튼 -->
                     <div class="order-two-btn">
                        <button class="pre-btn" type="button" onclick="location.href='list.ca'">이전으로</button>  
                     </div>
@@ -428,15 +423,16 @@
                 <!-- 등급 할인 -->
                 <div class="order-grade">
                     <span>등급할인</span>
-                    <span>- ${ discount }원</span>
+                    <!-- <span>- ${ total * (1 - discount) }원</span> -->
+                    <span>-&nbsp;<fmt:formatNumber value="${ total * (1 - discount) }" pattern="###,###"/>원</span>
                 </div>
                 <hr>
 
                 <!-- 총 결제 금액 -->    
                 <div class="order-tprice">
                     <span >총 결제 금액</span>
-                    <span><fmt:formatNumber value="${ total + 3000 - discount }" pattern="###,###"/>원</span>
-                    <input type="hidden" id="totalPrice" value="${ total + 3000 - discount }">
+                    <span><fmt:formatNumber value="${total * discount + 3000}" pattern="###,###"/>원</span>
+                    <input type="hidden" id="totalPrice" value="${ total * discount + 3000  }">
                 </div>
 
                 <br>
@@ -456,21 +452,18 @@
             </div>
             
             <!-- follow quick menu -->
-            <script>  
-       
-             $(window).scroll(function(){
-                
-                var scrollTop = $(document).scrollTop();
-                
-                if (scrollTop < 180) {
-                 scrollTop = -30; 
-                }
-                
-                $(".order-right").stop();
-                $(".order-right").animate( { "top" : scrollTop }
-                );
-                
-             });
+            <script>
+            
+	             $(window).scroll(function(){
+	                var scrollTop = $(document).scrollTop();
+	                if (scrollTop < 180) {
+	                	scrollTop = -30; 
+	                }
+	                
+	                $(".order-right").stop();
+	                $(".order-right").animate( { "top" : scrollTop }
+	                );  
+	             });
        
             </script>
             
@@ -484,134 +477,153 @@
         </div><!-- 1200px 너비 -->
       	</div><!-- 전체 색상 변경 div -->
 
-	<script>
-	var userNo = $("#userNo").val();
+        <script>
+        
+        	// 수령일
+    		$.datepicker.setDefaults({
+    		  dateFormat: 'yy-mm-dd',
+    		  prevText: '<',
+    		  nextText: '>',
+    		  monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+    		  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+    		  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+    		  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+    		  dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+    		  showMonthAfterYear: true,
+    		  yearSuffix: '년',
+    		  minDate: "+1D", //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+    	      maxDate: "+1M"
+    		});
+    		
+    		$(function () {
+    		  $('.datepicker').datepicker();
+    		});
 
-	function pay() {
-		
-		var receiveDate = $('#datepicker').val();
-		var receiveUser = $('#subReceiverUser').val();
-		var receivePhone = $('#subReceiverPhone').val();
-		var postcode = $('#zipcode').val();
-		var deliverTo1 = $('#address1').val(); 
-		var deliverTo2 = $('#address2').val();
-		
-		if (receivePhone=="" || receiveUser=="" || postcode=="" || deliverTo1=="" || deliverTo2=="" || $('#datepicker').val()==""){
-			alert("모든 양식을 기입해야 결제가 가능합니다!");
-		}
-		else {
-			getBillingKey()
-		}
-	}
-	
-	
-	// 빌링키 발급
-	function getBillingKey() {
-		BootPay.request({
-			price: 0, // 0으로 해야 한다.
-			application_id: "62b2796de38c30001f5ae52f",
-			name: 'iBlossom 주문결제', // 결제창에서 보여질 이름 : 주문결제
-			pg: 'nicepay',
-			method: 'card_rebill', // 빌링키를 받기 위한 결제 수단
-			show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
-			user_info: {
-				username: $('#userName').val(), 
-				addr: $('#address').val(),
-				phone: $('#phone').val(),
-			},
-			order_id: '고유order_id_1234', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
-			async : true
-		}).error(function (data) {
-			// 결제 진행시 에러가 발생하면 수행됩니다.
-			console.log(data);
+    		
+			$(function() {
+			});
 			
-			// 결제 실패시 알람창
-			alert("결제에 실패하여 주문이 완료되지 않았습니다. \n다시 시도해주세요.");
-		}).cancel(function (data) {
-			// 결제가 취소되면 수행됩니다.
-			console.log(data);
-		}).done(function (data) {
-			var totalPrice = $('#totalPrice').val();
-			var flowerName = '플라워 마켓'
-			
-			requestPay(data.billing_key, data.receipt_id, totalPrice, flowerName);
-
-		});
-	}
-
-	
-	// 일시불 (바로 requestPay 로 점프)
-	function requestPay(billingKey, receiptId, totalPrice, flowerName) {
+			var userNo = $("#userNo").val();
 		
-		$.ajax({
-			url : "requestSubscribe.do",
-			type : "post",
-			data : {
-				billingKey : billingKey,
-				totalPrice : 1000, 
-				subProductName : flowerName,
-			},
-			success : function(data) {
-				console.log("상품 결제 성공");
-				insertOrder(receiptId);
+			function pay() {
+				var receiveDate = $('#datepicker').val();
+				var receiveUser = $('#subReceiverUser').val();
+				var receivePhone = $('#subReceiverPhone').val();
+				var postcode = $('#zipcode').val();
+				var deliverTo1 = $('#address1').val(); 
+				var deliverTo2 = $('#address2').val();
 				
-			}, error : function() {
-				console.log("상품 결제 실패");
-			}
-		});    
-	}
-	
-	// DB에 구독 객체 넣기?
-	function insertOrder(receiptId) {
-		$.ajax({
-			url : "insert.or", // insert 구문의 맵핑값 
-			type : "post",
-			data : {
-				receiptId : receiptId,
-				userNo : userNo,
-				totalPrice : 1000,
-				receiveUser : $('#subReceiverUser').val(),
-				receiveDate : $('#datepicker').val(),
-				receivePhone : $('#subReceiverPhone').val(),
-				orderAddress : $('#address1').val() + " " + $('#address2').val(),
-				postcode : $('#zipcode').val(),
-				orderStatus : '결제완료',
-				deliveryStatus : '배송준비',
-				thumbnail : $("#thumbnailForOrder").val()
-				
-			},
-			success : function(result) {
-				
-				if(result == 0) {
-					console.log("order DB 넣음X"); // 여기
+				if (receivePhone=="" || receiveUser=="" || postcode=="" || deliverTo1=="" || deliverTo2=="" || $('#datepicker').val()==""){
+					alert("모든 양식을 기입해야 결제가 가능합니다!");
 				}
 				else {
-					console.log(result);
-					var orderNo = result;
-					console.log(orderNo);
-					console.log("order DB 넣음"); // 여기
-					
-					// 트리거 실행
-					$("#thisOrderNo").val(orderNo);
-					
-					console.log($("#thisOrderNo").val());
-					
-					$("#real-submit-button").trigger("click");
-					
+					getBillingKey()
 				}
-					
-				location.href='complete.or';
-				
-			}, error : function() {
-				console.log("DB 넣음 실패");
-
 			}
-		});
-	}
+			
+			// 빌링키 발급
+			function getBillingKey() {
+				BootPay.request({
+					price: 0, // 0으로 해야 한다.
+					application_id: "62b2796de38c30001f5ae52f",
+					name: 'iBlossom 주문결제', // 결제창에서 보여질 이름 : 주문결제
+					pg: 'nicepay',
+					method: 'card_rebill', // 빌링키를 받기 위한 결제 수단
+					show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
+					user_info: {
+						username: $('#userName').val(), 
+						addr: $('#address').val(),
+						phone: $('#phone').val(),
+					},
+					order_id: '고유order_id_1234', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
+					async : true
+				}).error(function (data) {
+					// 결제 진행시 에러가 발생하면 수행됩니다.
+					console.log(data);
+					
+					// 결제 실패시 알람창
+					alert("결제에 실패하여 주문이 완료되지 않았습니다. \n다시 시도해주세요.");
+				}).cancel(function (data) {
+					// 결제가 취소되면 수행됩니다.
+					console.log(data);
+				}).done(function (data) {
+					var totalPrice = $('#totalPrice').val();
+					var flowerName = '플라워 마켓'
+					
+					requestPay(data.billing_key, data.receipt_id, totalPrice, flowerName);
+				});
+			}
+		
+			// 일시불 (바로 requestPay 로 점프)
+			function requestPay(billingKey, receiptId, totalPrice, flowerName) {
+				
+				$.ajax({
+					url : "requestSubscribe.do",
+					type : "post",
+					data : {
+						billingKey : billingKey,
+						totalPrice : 1000, 
+						subProductName : flowerName,
+					},
+					success : function(data) {
+						console.log("상품 결제 성공");
+						insertOrder(receiptId);
+						
+					}, error : function() {
+						console.log("상품 결제 실패");
+					}
+				});    
+			}
+			
+			// DB에 구독 객체 넣기
+			function insertOrder(receiptId) {
+				$.ajax({
+					url : "insert.or", // insert 구문의 맵핑값 
+					type : "post",
+					data : {
+						receiptId : receiptId,
+						userNo : userNo,
+						totalPrice : 1000,
+						receiveUser : $('#subReceiverUser').val(),
+						receiveDate : $('#datepicker').val(),
+						receivePhone : $('#subReceiverPhone').val(),
+						orderAddress : $('#address1').val() + " " + $('#address2').val(),
+						postcode : $('#zipcode').val(),
+						orderStatus : '결제완료',
+						deliveryStatus : '배송준비',
+						thumbnail : $("#thumbnailForOrder").val()
+					},
+					success : function(result) {
+						
+						if(result == 0) {
+							console.log("order DB 넣음X"); // 여기
+						} else {
+							console.log(result);
+							var orderNo = result;
+							console.log(orderNo);
+							console.log("order DB 넣음"); // 여기
+							
+							// 트리거 실행
+							$("#thisOrderNo").val(orderNo);
+							
+							console.log($("#thisOrderNo").val());
+							
+							console.log($("#real-make-button"));
+							alert("주문하신 상품의 결제가 완료되었습니다. 감사합니다.");
+							$("#real-make-button").trigger("click");
+							// $("#real-submit").submit();
+							//$("#real-make-button").trigger("click");
+						}
+					}, error : function() {
+						console.log("DB 넣음 실패");
+					}
+				});	
+			}
+	
+		</script>
 
-	</script>
-
-</div>
+	</div>
+	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 	
 </body>

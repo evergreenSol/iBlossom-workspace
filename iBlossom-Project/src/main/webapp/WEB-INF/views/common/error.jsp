@@ -5,9 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>iBlossom | Error</title>
-<link href="resources/css/shj.css" rel="stylesheet">
-<link href="resources/css/header.css" rel="stylesheet">
-<link href="resources/css/footer.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/shj.css" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="${pageContext.request.contextPath}/resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -18,7 +19,7 @@
     <div id="error-wrap">
 
         <div id="error-div">
-            <img src="resources/images/iBlossom-error.jpg" id="error-img"><br>
+            <img src="${pageContext.request.contextPath}/resources/images/iBlossom-error.jpg" id="error-img"><br>
             <p id="error-title" style="margin-bottom: 15px;">Error</p>
             <hr class="error-hr" style="margin-bottom: 30px;">
             <p style="text-align: center; font-size: 13.5px;">

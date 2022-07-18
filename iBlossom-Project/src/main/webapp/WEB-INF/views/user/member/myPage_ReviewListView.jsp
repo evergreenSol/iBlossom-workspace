@@ -7,6 +7,16 @@
 <meta charset="UTF-8">
 <title>iBlossom | Membership</title>
 <link href="resources/css/khs.css" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<style>
+#reviewTable:hover {
+	cusor: pointer;
+	background-color: light-gray;
+}
+</style>
+
 </head>
 <body>
 
@@ -14,10 +24,8 @@
 
 	<div class="mypage-wrap">
 	
-		<br><br>
         <jsp:include page="myPage_Header.jsp"/>
         
-        <br>
         
         <table class="mypage-body">
         	<tr>
@@ -29,19 +37,20 @@
                    		<h2>리뷰 내역</h2>
                     
                     	<div style="width: 100%">
-                            <table align="center" style="text-align: center; font-size: 14px; width: 100%; border-collapse: collapse;" id="reviewTable">
+                            <table align="center" style="text-align: center; font-size: 16px; width: 100%; border-collapse: collapse;" id="reviewTable">
                                 <thead style="background: rgb(248, 248, 248); border-style: none;">
-                                    <tr height="40">
-                                        <th width="150">리뷰 상품</th>
-                                        <th width="500">제목</th>
+                                    <tr height="50">
+                                        <th width="250">리뷰 상품</th>
+                                        <th width="300">제목</th>
                                         <th width="150">리뷰 날짜</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                <c:if test="${ empty list }">
+                                <tbody id="reviewTbody">
+                                <c:if test="${ not empty list }">
                                 <c:forEach var="r" items="${list}">
-                                    <tr height="40">
-                                        <td>${ r.productName }</td>
+                                    <tr height="50">
+                                    	<input type="hidden" value="${r.reviewNo}">
+                                        <td>${ r.flowerName }</td>
                                         <td>${ r.reviewTitle }</td>
                                         <td>${ r.createDate }</td>
                                     </tr>
@@ -51,7 +60,7 @@
                                 	
                                 <tr>
                                 	<td height="300" width="900" colspan="4" id="no-qna">
-                                		회원님께서 남기신 문의가 없습니다.
+                                		회원님께서 남기신 리뷰가 없습니다.
                                 	</td>
                                 </tr>	
                                
@@ -67,19 +76,37 @@
             </tr>
     
         </table>
-    
+        
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
  
- <script>
+<script>
  	$(function () {
- 		$("#reviewTable>tbody").on("click", "tr", function () {
- 			console.log("click");
- 		});
  		
  		$("#category-review").css("font-weight", "700");
+ 		
  	});
- </script>
+ 	
+ 	$("#reviewTable>tbody tr").click( function () {
+			
+		var reviewNo = $(this).children().eq(0).val();
+		
+			
+		location.href="reviewDetailView.me?reviewNo=" + reviewNo;
+			
+			
+			
+	});
+ 	
+ 	$("#no-qna").click(function () {
+ 		location.href="flowerList.pr";
+	});
+ 	
+    
+
+</script>
+ 
+
 
 </body>
 </html>

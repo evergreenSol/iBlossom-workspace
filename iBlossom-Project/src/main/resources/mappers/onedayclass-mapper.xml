@@ -10,6 +10,7 @@
 		<result column="CAP_NO" property="capNo" />
 		<result column="RES_NUM" property="resNum" />
 		<result column="CLASS_STATUS" property="classStatus" />
+		<result column="CLASS_DATE2" property="classDate2" />
 	</resultMap>
 	
 	<resultMap id="onedayclassadminResultSet" type="onedayclassadmin">
@@ -44,7 +45,7 @@
   	</insert>
   	
   	<select id="selectOnedayClass" parameterType="_int" resultMap="onedayclassResultSet">
-  		SELECT *
+  		SELECT CLASS_NO, CLASS_NAME, PRICE, TO_CHAR(CLASS_DATE,'YYYY-MM-DD') "CLASS_DATE", TO_CHAR(CLASS_DATE,'YYYY-MM-DD') "CLASS_DATE2", CAP_NO, RES_NUM, CLASS_STATUS
   		FROM ONECLASS
   		WHERE CLASS_NO = #{classNo}
   	</select>
@@ -89,5 +90,12 @@
 		     , #{classDate}
 		     , #{capNo})
   	</insert>
+  	
+  	<select id="selectMyOnedayClass" parameterType="_int" resultMap="onedayclassResultSet">
+		SELECT CLASS_NAME, PRICE, TO_CHAR(CLASS_DATE, 'YYYY-MM-DD') "CLASS_DATE2", CLASS_STATUS
+		FROM ONECLASS O
+		JOIN CLASS_ADMIN C ON(O.CLASS_NO = C.CLASS_NO)
+  		WHERE USER_NO = #{userNo}
+  	</select>
 
 </mapper>

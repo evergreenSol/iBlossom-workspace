@@ -12,6 +12,11 @@
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet"> 
 <!-- <link href="resources/css/kdh.css" rel="stylesheet"> -->
+<style>
+
+    
+
+</style>
 </head>
 <body>
 
@@ -57,7 +62,7 @@
 		
 	<!-- 사용자 주문 페이지 왼쪽 영역 -->
     <!-- 주문내역 확인, 주문자 정보, 발신인 이름 펼친 페이지 -->
-    <p id="MainWrapTitle">&nbsp;주문/결제</p>
+    <p style="font-weight:700; font-size:31px; margin-bottom:15px;">&nbsp;주문/결제</p>
 
         <!-- 왼쪽 섹션 -->
         <div class="order-left">
@@ -89,7 +94,8 @@
 
                                 <!-- 상품 이미지 -->
                                 <span>
-                                    <img src="${ sp.subChangeName }">
+                                    <img src="${ sp.subChangeName }"
+                                    	 style="width:250px; height:250px;">
                                 </span>
 
                                 <!-- 상품 옵션 확인란 -->
@@ -382,7 +388,6 @@
             <!-- 결제하기 버튼 -->
             <div>
                 <button class="order-btn" onclick="pay();">결제하기</button>
-                <button class="order-btn" onclick="cancelSubscribe();">취소하기</button>
             </div>
             
             <!-- follow quick menu -->
@@ -452,10 +457,10 @@
 			async : true
 		}).error(function (data) {
 			//결제 진행시 에러가 발생하면 수행됩니다.
-			console.log(data);
+			alert(data.message);
 		}).cancel(function (data) {
-			//결제가 취소되면 수행됩니다.
-			console.log(data);
+			//결제가 취소되면 수행됩니다.	
+			alert(data.message);
 		}).done(function (data) {
 			var totalPrice = $('#totalPrice').val();
 

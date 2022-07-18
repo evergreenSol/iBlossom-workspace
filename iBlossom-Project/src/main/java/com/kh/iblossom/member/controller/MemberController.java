@@ -22,10 +22,14 @@ import com.kh.iblossom.common.template.Pagination;
 import com.kh.iblossom.member.model.service.MemberService;
 import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.onedayclass.model.Service.OnedayClassService;
+import com.kh.iblossom.onedayclass.model.vo.OnedayClass;
 import com.kh.iblossom.order.model.service.OrderService;
 import com.kh.iblossom.order.model.vo.DetailOrder;
 import com.kh.iblossom.order.model.vo.Order;
 import com.kh.iblossom.product.model.service.ProductService;
+import com.kh.iblossom.product.model.service.ReviewService;
+import com.kh.iblossom.product.model.vo.Product;
+import com.kh.iblossom.product.model.vo.Review;
 import com.kh.iblossom.qna.model.service.QnaService;
 import com.kh.iblossom.qna.model.vo.Qna;
 import com.kh.iblossom.subscribe.model.service.SubscribeService;
@@ -41,10 +45,13 @@ public class MemberController {
 	private OrderService orderService;
 	
 	@Autowired
+	private ProductService productService;
+	
+	@Autowired
 	private OnedayClassService onedayclassService;
 	
 	@Autowired
-	private ProductService productService;
+	private ReviewService reviewService;
 	
 	@Autowired
 	private QnaService qnaService;
@@ -290,24 +297,6 @@ public class MemberController {
       
       model.addAttribute("receiptIdList", receiptIdList);
       
-//      
-//      ArrayList<Subscribe> list3m = subscribeService.selectMySubscribeThree(userNo);
-//      ArrayList<Subscribe> list6m = subscribeService.selectMySubscribeSix(userNo);
-//      ArrayList<Subscribe> list12m = subscribeService.selectMySubscribeTwelve(userNo);
-//      ArrayList<Subscribe> listReg = subscribeService.selectMySubscribeRegular(userNo);
-//      
-//      model.addAttribute("list3m", list3m);
-//      model.addAttribute("list6m", list6m);
-//      model.addAttribute("list12m", list12m);
-//      model.addAttribute("listReg", listReg);
-      
-      /*
-      System.out.println(list3m);
-      System.out.println(list6m);
-      System.out.println(list12m);
-      System.out.println(listReg);
-      */
-      
       return "user/member/myPage_SubscribeView";
    }
    
@@ -328,7 +317,7 @@ public class MemberController {
    
    
    
-   // 구독 삭제 메소드
+   // 구독 취소 메소드
    @ResponseBody
    @RequestMapping(value="cancelSubscribe.me", produces="html/text; charset=UTF-8")
    public String cancelSubscribe(String receiptId) {
@@ -447,7 +436,6 @@ public class MemberController {
    @RequestMapping(value="onedayClass.me")
    public String myPageOneDayClass(HttpSession session, Model model) {
       
-      /*
       
       int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
       
@@ -455,23 +443,33 @@ public class MemberController {
       
       model.addAttribute("list", list);
       
-      */
-      
       return "user/member/myPage_OnedayClass";
    }
    
+   // 나의 리뷰
    @RequestMapping(value="reviewListView.me")
    public String myPageReviewListView(HttpSession session, Model model) {
       
-      /*
-      
       int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
       
-      ArrayList<Review> list = productService.selectMyReview(userNo);
+      ArrayList<Review> list = reviewService.selectMyReview(userNo);
       
-      */
+      model.addAttribute("list", list);
       
       return "user/member/myPage_ReviewListView";
+   }
+   
+    // 나의 리뷰 상세 보기
+   @RequestMapping(value="reviewDetailView.me")
+   public String myPageReviewDetailView(int reviewNo, Model model) {
+	   
+	   Review r = reviewService.selectReview(reviewNo);
+	   
+	   System.out.println(r);
+	   
+	   model.addAttribute("r", r);
+	   
+	   return "user/member/myPage_ReviewDetailView";
    }
    
    // 마이페이지 1대1문의
@@ -521,20 +519,28 @@ public class MemberController {
 	   }
    }
    
-   // 누적금에 따른 회원 등급 변경하기
-   @ResponseBody
-   @RequestMapping(value="checkPurchase.me")
-   public String updateGrLevel() {
+	// 누적금에 따른 회원 등급 변경하기
+	@ResponseBody
+	@RequestMapping(value="checkPurchase.me")
+	public String updateGrLevel(HttpSession session) {
 	   
-	   int result = memberService.updateGrLevel();
+		int result = memberService.updateGrLevel();
 	   
-	   if(result > 0) {
-		   return "1";
-	   }
-	   else {
-		   return "0";
-	   }
-   }
+		String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+		
+		Member m = new Member();
+		m.setUserId(userId);
+	   
+		if(result > 0) {
+			Member updateMem = memberService.login(m);
+			session.setAttribute("loginUser", updateMem);
+			return "1";
+			
+		}
+		else {
+			return "0";
+		}
+	}
    
 	@RequestMapping(value="refund.me", method=RequestMethod.POST) 
 	public String refundPurchase(Order o, HttpSession session) {
@@ -572,6 +578,30 @@ public class MemberController {
 			session.setAttribute("alertMsg", "결제취소에 실패했습니다.");
 			return "redirect:orderListView.me";
 		}
+	}
+	
+	// 검색용 메소드
+	@RequestMapping("search.me")
+	public String tagSearch(String keyword, Model model) {
+		
+		String modifiedKeyword = keyword.trim().replace(" ", "");
+		
+		System.out.println(modifiedKeyword);
+		
+		int searchCount = productService.selectSearchCount(modifiedKeyword); // 현재 검색결과에 맞는 게시글의 총 갯수
+		
+		// 조회 요청
+		ArrayList<Product> list = productService.selectSearchList(modifiedKeyword);
+		
+		System.out.println(list);
+
+		model.addAttribute("count",searchCount);
+		model.addAttribute("list", list);
+		model.addAttribute("keyword", modifiedKeyword);
+		
+
+		return "common/searchResultView";
+
 	}
  
    

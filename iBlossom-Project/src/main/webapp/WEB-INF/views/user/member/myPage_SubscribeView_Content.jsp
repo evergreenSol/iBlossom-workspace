@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>구독</title>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -101,7 +104,7 @@
 			<c:forEach var="i"  begin="0" end="${ list.size() -1 }" >
 				    	<tr height="40">
 							<td>${ i+1 }회차</td>
-							<td>${ list[i].deliverAt }</td>
+							<td>${ list[i].deliverAt2 }</td>
 							<td>${list[i].deliverStatus }</td>
 						</tr>
 			</c:forEach>
@@ -145,12 +148,16 @@
 					<tr height="40">
 						<td>${ i+1 }회차</td>
 						<td>${ list[i].subDate }</td>
-						<td>${ list[i].deliverAt }</td>
+						<td>${ list[i].deliverAt2 }</td>
 						<td>${ list[i].deliverStatus }</td>
 					</tr>
 				</c:forEach>
 		        </tbody>
 			</table>
+		</div>
+		
+		<div class="close-sub" align="center">
+		<button class="close-sub-btn">닫기</button>
 		</div>
 	</div>
 	
@@ -168,14 +175,22 @@
 				console.log("클릭");
 				*/
 				$(this).next("div").slideDown("1500");
+				
+				
             });
+			
+			$(".close-sub-btn").on("click", function () {
+				$(this).parent().parent().slideUp("1500");
+			});
+			
 			
 			var refundPrice;
 			
 			var subPrice = ${ list[0].subPrice }
-			var receiptId = $(this).next().val()
 			
 			$(".mypage-subscribe-cancel").click(function () { 
+			var receiptId = $(this).next().val()
+			console.log(receiptId);
 				
 				console.log("클릭됨");
 		

@@ -10,6 +10,7 @@ import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.order.model.dao.OrderDao;
 import com.kh.iblossom.order.model.vo.DetailOrder;
 import com.kh.iblossom.order.model.vo.Order;
+import com.kh.iblossom.product.model.vo.Review;
 
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -20,7 +21,6 @@ public class OrderServiceImpl implements OrderService{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	/*----------------------------------------------------*/
 	
 	// 주문/결제 조회용	
 	@Override
@@ -28,7 +28,6 @@ public class OrderServiceImpl implements OrderService{
 
 		return orderDao.detailOrder(sqlSession, userNo);
 	}
-
 	
 	@Override
 	public int selectOrderListCount() {
@@ -36,20 +35,17 @@ public class OrderServiceImpl implements OrderService{
 		return orderDao.selectOrderListCount(sqlSession);
 	}
 
-	
 	@Override
 	public ArrayList<Order> selectOrderList(PageInfo pi) {
 		
 		return orderDao.selectOrderList(sqlSession, pi);
 	}
 
-
 	@Override
 	public int insertOrder(Order o) {
 		
 		return orderDao.insertOrder(sqlSession, o);
 	}
-
 
 	@Override
 	public int insertDetailOrder(DetailOrder detailOrder) {
@@ -60,7 +56,6 @@ public class OrderServiceImpl implements OrderService{
 	public Order selectOrder(String receiptId) {
 		return orderDao.selectOrder(sqlSession, receiptId);
 	}
-
 
 	@Override
 	public ArrayList<Order> selectMyOrderList(int userNo) {
@@ -74,24 +69,20 @@ public class OrderServiceImpl implements OrderService{
 		return orderDao.selectMyOrderCancelList(sqlSession, userNo);
 	}
 
-
 	@Override
 	public int cancelMyPay(String receiptId) {
 		return orderDao.cancelMyPay(sqlSession, receiptId);
 	}
-
 
 	@Override
 	public ArrayList<DetailOrder> selectMyDetailOrderList(int orderNo) {
 		return orderDao.selectMyDetailOrderList(sqlSession, orderNo);
 	}
 
-
 	@Override
 	public Order selectMyOneOrder(int orderNo) {
 		return orderDao.selectMyOneOrder(sqlSession, orderNo);
 	}
-
 
 	@Override
 	public int countReady(int userNo) {
@@ -99,13 +90,11 @@ public class OrderServiceImpl implements OrderService{
 		return orderDao.countReady(sqlSession, userNo);
 	}
 
-
 	@Override
 	public int countShipping(int userNo) {
 		
 		return orderDao.countShipping(sqlSession, userNo);
 	}
-
 
 	@Override
 	public int countComplete(int userNo) {
@@ -113,17 +102,22 @@ public class OrderServiceImpl implements OrderService{
 		return orderDao.countComplete(sqlSession, userNo);
 	}
 
-
 	@Override
 	public ArrayList<Order> selectMyOrderAllList(int userNo) {
 
 		return orderDao.selectMyOrderAllList(sqlSession, userNo);
 	}
 
-
 	@Override
 	public int updateDeliveryStatus() {
 		return  orderDao.updateDeliveryStatus(sqlSession);
+	}
+
+	//승아 리뷰
+	@Override
+	public ArrayList<Order> selectOrderReview(Review r) {
+		
+		return orderDao.selectOrderReview(sqlSession,r);
 	}
 	
 	

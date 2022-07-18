@@ -73,6 +73,12 @@ public class OnedayClassServiceImpl implements OnedayClassService {
 //		return onedayClassDao.selectClassRes(sqlSession, classNo);
 //	}
 	
+	
+	@Override
+	public ArrayList<OnedayClass> selectMyOnedayClass(int userNo) {
+		return onedayClassDao.selectMyOnedayClass(sqlSession, userNo);
+	}
+	
 
 
 }

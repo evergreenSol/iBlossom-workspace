@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -7,164 +7,198 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="resources/css/jsa.css" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico"
+	type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico"
+	type="image/x-icon">
 <style>
-#price:focus {outline:none;}
+#price:focus {
+	outline: none;
+}
 </style>
 
 </head>
 <body onload="init();">
-<jsp:include page="../../common/header.jsp" />
-   
-    <br><br><br>
+	<jsp:include page="../../common/header.jsp" />
 
-    <div id="wrap_detail">
-        <div style="width: 1000px;margin: auto;">
-        <br>
-          <form name="form" method="get" action="insert.ca">
-          <input type="hidden" name="productNo" value="${ p.productNo }">
-          <input type="hidden" name="userNo" value="${ loginUser.userNo }">
-            <table>
-    		
-                <tr>
-                    <td rowspan="6"><img src="${p.thumbNail }" width="500px"></td>
-                    <td class="pp" style="padding-top: 20px;"><b style="font-size:25px;"><c:out value="${p.flowerName}">
-                    </c:out></b></td>
-                
-                </tr>
-				
-                <tr>
-                    <td class="pp"><input type="text" name="productPrice" id="price" style="border: none" size="1" readonly value="${ p.price }">원
-                    
-                        <hr>
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <td class="pp" style="font-size:15px; font-weight:700px;">"${p.flowerInfo}"
-                      <br>
-                        <br>
-                        <hr style="margin-bottom:10px;">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="pp">
+	<br>
+	<br>
+	<br>
 
-                        <!-- <p>수령일 : <input type="text" class="datepicker" id="datepicker"></p>
+	<div id="wrap_detail">
+		<div style="width: 1000px; margin: auto;">
+			<br>
+			<form name="form" method="get" action="insert.ca" id="cartInfo">
+				<input type="hidden" name="productNo" value="${ p.productNo }">
+				<input type="hidden" name="userNo" value="${ loginUser.userNo }">
+				<table>
+
+					<tr>
+						<td rowspan="6"><img src="${p.thumbNail }" width="500px"></td>
+						<td class="pp" >
+						<b style="font-size: 25px; margin-bottom:-30px "><c:out value="${p.flowerName}">
+								</c:out></b></td>
+
+					</tr>
+
+					<tr>
+						<td class="pp"><input type="text" name="productPrice"
+							id="price" style="border: none; font-size:20px;"size="1" readonly
+							value="${ p.price }">원
+
+							<hr></td>
+					</tr>
+					<tr>
+						<td class="pp" style="font-size: 15px; font-weight: 700px;">"${p.flowerInfo}"
+							<br> <br>
+							<hr style="margin-bottom: 10px;">
+						</td>
+					</tr>
+					<tr>
+						<td class="pp">
+							<!-- <p>수령일 : <input type="text" class="datepicker" id="datepicker"></p>
  -->
 
-        </div>
-        </td>
-        </tr>
+							</div>
+						</td>
+					</tr>
 
-        <tr>
-            <td>
-                <div id="countBox">
-                    <div id="countWrite">
-
-
-                      
-                            <input type="text" value="${p.flowerName }"
-                                style="border: none; padding-left: 10px; padding-top: 5px;"><br><br>
-                            <input type=hidden id="sell_price" value="${ p.price }">
-                            <input type="button" value=" - " onclick="del();" style="margin-left: 10px;">
-                            <input type="text" name="productCount" value="1" size="1" onchange="change();">
-                            <input type="button" value=" + " onclick="add();"><br><br><br>
-
-                            
-                            배송비:
-                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            3,000 원<br><br>
-                            총 주문금액 : <input type="text"
-                                style="border:none; background-color: rgba(224, 224, 224, 0.001); padding-left: 50px; width: 60px;"
-                                name="productPrice" size="11" readonly>원
-
-					
-                    </div>
-
-                  
-                </div>
-
-            </td>
-           
-        </tr>
-
-        <tr>
-            <td>
-                <input type="submit" value="장바구니" id="btn1">
-            </td>
-           
-        </tr>
-
-        </table>
-  </form>
-        <!--상세 정보 버튼 시작-->
-        <div class="categorize review-box" style="height: 100px; margin-top: 30px;">
-            <div class="reviewBox" id="detail_content" onclick="test();">상세정보</div>
-            <div class="reviewBox" id="detail_review" onclick="test1();">리뷰</div>
-        </div>
-
-        <!-- 상세정보 폼-->
-
-        <div  id="detailContent">
+					<tr>
+						<td>
+							<div id="countBox">
+								<div id="countWrite">
 
 
-            <br>
 
-       
-        </div>
+									<input type="text" value="${p.flowerName }"
+										style="border: none; padding-left: 10px; outline:none; padding-top: 5px;"><br>
+									<br> <input type=hidden id="sell_price"
+										value="${ p.price }"> <input type="button"  value=" - "
+										onclick="del();" style="margin-left: 10px;" class="detailBtn"> 
+										<input type="text" name="productCount" value="1" size="1" readonly style="background-color: white; border: 1px solid gray; height:20px; text-align: center" 
+										onchange="change();"> <input type="button" value=" + "
+										onclick="add();" class="detailBtn"><br> <br> <br> 배송비: <span
+										style="padding-left: 200px"> 3,000 원</span><br> <br>
+									총 주문금액 : <input type="text"
+										style="border: none; outline:none; background-color: rgba(224, 224, 224, 0.001); padding-left: 150px; width: 60px;"
+										name="sum" size="11" readonly >원
 
 
-    </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
-        integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- 수량 올릴 시 가격 변동-->
-    <script>
+								</div>
+
+
+							</div>
+
+						</td>
+
+					</tr>
+
+					<tr>
+						<c:choose>
+							<c:when test="${empty loginUser}">
+								<td>
+								<button onclick="alert('로그인이 필요한 서비스!'); location.href='loginForm.me';" id="btn1">
+								  장바구니
+								</button>
+								</td>
+							</c:when>
+							<c:otherwise>
+								<td>
+								<button onclick="cartbtn" id="btn1">장바구니</button>
+								<!-- <input type="submit" value="장바구니" id="btn1"> -->
+								</td>
+							</c:otherwise>
+						</c:choose>
+
+					</tr>
+
+				</table>
+			</form>
+			<!--상세 정보 버튼 시작-->
+			<div class="categorize review-box"
+				style="height: 100px; margin-top: 30px;">
+				<div class="reviewBox" id="detail_content" onclick="test();">상세정보</div>
+				<div class="reviewBox" id="detail_review" onclick="test1();">리뷰</div>
+			</div>
+
+			<!-- 상세정보 폼-->
+
+			<div id="detailContent">
+
+
+				<br>
+
+
+			</div>
+
+			<!-- 리뷰 폼 -->
+			<div>
+				<input type='button' id='btn_rv' value='구매평 작성' class="insertReview">
+				<div id="detailReview"></div>
+			</div>
+
+
+		</div>
+	</div>
+	<script>
+		function cartbtn(){
+			$('#cartInfo').submit();
+		}
+	</script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+		integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+		integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<!-- 수량 올릴 시 가격 변동-->
+	<script>
         var sell_price;
-        var productCount;
+        var amount;
 
         function init() {
-        	sell_price = document.form.sell_price.value;
-            productCount = document.form.productCount.value;
-            document.form.productPrice.value = sell_price;
+            sell_price = document.form.sell_price.value;
+            amount = document.form.productCount.value;
+            document.form.sum.value = sell_price;
             change();
         }
 
         function add() {
             hm = document.form.productCount;
-            productPrice = document.form.productPrice;
-            hm.value++;
-
-            productPrice.value = (parseInt(hm.value) * sell_price);
+            sum = document.form.sum;
+            if(hm.value < 15){
+           	 hm.value++;
+           	sum.value = (parseInt(hm.value) * sell_price) + 3000;
+            }else{
+            	 alert("개당 최대 15개까지 구매 가능합니다.");
+            }
+            
         }
 
         function del() {
             hm = document.form.productCount;
-            productPrice = document.form.productPrice;
+            sum = document.form.sum;
             if (hm.value > 1) {
                 hm.value--;
-                productPrice.value = parseInt(hm.value) * sell_price;
+                sum.value = parseInt(hm.value) * sell_price + 3000;
             }
         }
 
         function change() {
             hm = document.form.productCount;
-            productPrice = document.form.productPrice;
+            sum = document.form.sum;
 
             if (hm.value < 0) {
                 hm.value = 0;
             }
-            productPrice.value = parseInt(hm.value) * sell_price;
+            sum.value = parseInt(hm.value) * sell_price + 3000;
         }  
     </script>
-    <!-- <script>
+	<!-- <script>
         $.datepicker.setDefaults({
             dateFormat: 'yy-mm-dd',
             prevText: '<',
@@ -185,13 +219,13 @@
         });
     </script> -->
 
-    <script>
+	<script>
         $(document).ready(function(){
             test();
         });
     </script>
-    
-    <script>
+
+	<script>
  
         function test(){
 
@@ -199,9 +233,10 @@
           $('#detail_content').css("color","black");
           $('#detail_review').css("background-color","white");
           $('#detail_review').css("color","rgb(190, 190, 190)");
+          $('#detailReview').children().remove();
+          $('#btn_rv').css("display","none");
 
             var html;
-          $('#detailContent').children().remove();
          
           html = '<img src="'+'${p.contentPhoto}'+'" style="width:970px;">';
           html += '<div id="exchange_info" style="height: 1000px;">';
@@ -245,78 +280,106 @@
 
 
 
-    
-    <script>
+
+	<script>
         function test1(){
 
-            $('#detail_review').css("background-color","rgba(224, 224, 224, 0.29)");
+          $('#detail_review').css("background-color","rgba(224, 224, 224, 0.29)");
           $('#detail_review').css("color","black");
           $('#detail_content').css("background-color","white");
           $('#detail_content').css("color","rgb(190, 190, 190)");
-          var review;
           $('#detailContent').children().remove();
-        
-          review = '<input type="button" id="btn_rv" value="구매평 작성" onclick="modalOn();">';
-          review += ' <br><br>';
-          review += ' <hr>';
-          review += '<div class="reviewbb">';
-          review +='<img class="img1" src="resources/images/flower1.jpg">';
-          review +='<text class="text1">진짜 마음에 들어요</text>';
-          review +='<span class="span1">우와 이쁘다 진짜 제 마음에 속 들어요</span>';
-          review +='</div>';
-          review += '<div class="reviewbb">';
-          review +='<img class="img1" src="resources/images/flower1.jpg">';
-          review +='<text class="text1">진짜 마음에 들어요</text>';
-          review +='<span class="span1">우와 이쁘다 진짜 제 마음에 속 들어요</span>';
-          review +='</div>';
-          review += '<div class="reviewbb">';
-          review +='<img class="img1" src="resources/images/flower1.jpg">';
-          review +='<text class="text1">진짜 마음에 들어요</text>';
-          review +='<span class="span1">우와 이쁘다 진짜 제 마음에 속 들어요</span>';
-          review +='</div>';
-          review +='<br><br><br><br><br>';
- 
-
-          $('#detailContent').append(review);
+          $('#btn_rv').css("display","block");
+          
+          
+          $.ajax({
+        	  url: "reviewList.re",
+        	  data : {productNo : ${ p.productNo }},
+        	  success : function(result){
+        		  
+        		  console.log(result);
+        		  var review = "";
+        		  
+        		  
+        		  for(var i in result){
+        			  
+                      review += "<br><br>";
+                      review += "<hr>";
+                      review += "<div class='reviewbb'>";
+                      review += "<input type='hidden' value="+ result[i].reviewNo +">"
+                      review +="<div class='divBox'>"
+                      review += "<img class='img1' src='" + result[i].reviewPhoto + "' style='width: 190px; height:190px;  margin-left: 20px;margin-top: 10px; float: left;'>";
+                      review += "<p class='text3'>" + result[i].userId + "</p>";
+                      review += "<p class='text4'>" + result[i].createDate + "</p>";
+                      review += "<p class='text1'>" + result[i].reviewTitle + "</p>";
+                      review += "<p class='text2'>" + result[i].reviewContent + "</p>";
+                      review += "</div>";
+                      review += "</div>";
+        		  }
+        		  review += "<br><br><br><br><br>";
+        		  
+        		  $("#detailReview").html(review);
+        	  },
+        	  error:function(){
+        		  console.log("에러발생");
+        	  }
+         		
+        	 
+          });
         }
     </script>
 
-<script>
-    
-</script>
 
 
-<div id="modal" class="modal-overlay">
-    <div class="modal-window" >
-        <div class="title">
-            <span style="font-size: 20px; margin-top:10px;">구매평 작성</span>
-        </div>
-        <div class="close-area" onclick="modalOff()"><img src="resources/images/x.png" style="width: 15px;"></div>
-       
-        <div class="content">
-            <hr>
-            
-            <div style="height: 50px; border: 1px solid gainsboro; margin-top:40px; text-align: center;">
-                <p>${p.flowerName}</p>
-            </div>
-            <br>
-                <textarea rows="2" cols="10" onkeyup="counter(this,100)" name="contents"
-                 placeholder="꽃 파손이나 배송등 문제사항은 구매평에 남겨주시면 확인이 어렵습니다."></textarea>
-           <div style="text-align:right;">
-                <span id="reCount">0 / 100</span>
-            </div>
 
-            <br><br><br>
-            <input type="file">
+	<div id="modal" class="modal-overlay">
+		<form action="insert.re" method="post" enctype="multipart/form-data">
 
-        </div>
+			<div class="modal-window" style="height: 550px">
+				<input type="hidden" name="productNo" value="${ p.productNo }">
+				<input type="hidden" name="userNo" value="${loginUser.userNo}">
+				<div class="title">
+				<br>
+					<span style="font-size: 20px; margin-top: 10px; margin-left:10px">구매평 작성</span>
+				</div>
+				<div class="close-area">
+					<img src="resources/images/x.png" style="width: 15px;">
+				</div>
 
-        <script>
+				<div class="content">
+					<hr>
+
+					<div
+						style="height: 50px; border: 1px solid gainsboro; margin-top: 40px; text-align: center;">
+						<p>${p.flowerName}</p>
+					</div>
+					<br>
+					<div>
+						<input type="text" name="reviewTitle"
+							style="width: 370px; height: 30px; border: 1px solid gainsboro;" placeholder="제목을 작성해주세요.">
+					</div>
+					<br>
+					<textarea rows="2" cols="10" onkeyup="counter(this,150)"
+						name="reviewContent"
+						placeholder="꽃 파손이나 배송등 문제사항은 구매평에 남겨주시면 확인이 어렵습니다."></textarea>
+					<div style="text-align: right;">
+						<span id="reCount">0 / 150</span>
+					</div>
+
+					<br> <br> <input type="file" name="upReviewPhoto">
+					<div class="modal-button-area" align="center">
+
+						<!--<button onclick="modalOff()">취소</button>-->
+						<button type="submit" id="sign">등록</button>
+					</div>
+				</div>
+
+				<script>
             function counter(text,length){
                 var limit = length;
                 var str = text.value.length;
                 if(str>limit){
-                    alert("최대 100자까지 입력 가능합니다.");
+                    alert("최대 150자까지 입력 가능합니다.");
                     text.value = text.value.substring(0,limit);
                     text.focus();
                 }
@@ -325,24 +388,84 @@
         </script>
 
 
-        <div class="modal-button-area" align="center">
-
-            <!--<button onclick="modalOff()">취소</button>-->
-            <button id="sign">등록</button>
-        </div>
-    </div>
-</div>
 
 
-<script>
 
-/*     const loremIpsum = document.querySelector('.modal'); */
-    const btnModal = document.querySelector('.view-grade');
+			</div>
+		</form>
+	</div>
 
-/*     fetch("https://baconipproductPrice.com/api/?type=all-meat&paras=200&format=html")
-        .then(response => response.text())
-        .then(result => loremIpsum.innerHTML = result) */
 
+
+
+
+	<%-- <!-- 리뷰 수정 모달 -->
+	<div id="modal" class="modal-overlay reviewModal">
+		<form action="update.re" method="post" enctype="multipart/form-data">
+			
+			<div class="modal-window" style="height: 550px">
+				<input type="text" name="reviewNo" value="">
+				<input type="text" name="userNo" value="${loginUser.userNo}">
+				<div class="title">
+					<span style="font-size: 20px; margin-top: 10px;">리뷰 확인</span>
+				</div>
+				<div class="close-area">
+					<img src="resources/images/x.png" style="width: 15px;">
+				</div>
+
+				<div class="content">
+					<hr>
+
+					<div
+						style="height: 50px; border: 1px solid gainsboro; margin-top: 40px; text-align: center;">
+						<p>${p.flowerName}</p>
+					</div>
+					<br>
+					<div>
+						<input type="text" name="reviewTitle"
+							style="width: 370px; height: 30px; border: 1px solid gray;">
+					</div>
+					<br>
+					<textarea rows="2" cols="10" onkeyup="counter(this,150)"
+						name="reviewContent"
+						placeholder="꽃 파손이나 배송등 문제사항은 구매평에 남겨주시면 확인이 어렵습니다."></textarea>
+					<div style="text-align: right;">
+						<span id="reCount">0 / 150</span>
+					</div>
+
+					<br> <br> <input type="file" name="upReviewPhoto">
+					<div class="modal-button-area" align="center">
+
+						<!--<button onclick="modalOff()">취소</button>-->
+						<button type="submit" id="sign">등록</button>
+					</div>
+				</div>
+
+				<script>
+            function counter(text,length){
+                var limit = length;
+                var str = text.value.length;
+                if(str>limit){
+                    alert("최대 150자까지 입력 가능합니다.");
+                    text.value = text.value.substring(0,limit);
+                    text.focus();
+                }
+                document.getElementById("reCount").innerHTML = text.value.length + " / " + limit;
+            }
+        </script>
+        
+        
+
+
+
+			</div>
+		</form>
+	</div> --%>
+
+
+	<script>
+    const btnModal = document.querySelector('.insertReview');
+	
     function modalOn() {
     modal.style.display = "flex"
     }
@@ -361,8 +484,9 @@
     closeBtn.addEventListener("click", e => {
         modal.style.display = "none"
     })
+    
 </script>
 
-  <jsp:include page="../../common/footer.jsp" />
+	<jsp:include page="../../common/footer.jsp" />
 </body>
 </html>

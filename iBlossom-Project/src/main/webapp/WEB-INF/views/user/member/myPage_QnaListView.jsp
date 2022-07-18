@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>iBlossom | Membership</title>
 <link href="resources/css/khs.css" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -14,10 +17,8 @@
 
 	<div class="mypage-wrap">
 	
-		<br><br>
         <jsp:include page="myPage_Header.jsp"/>
         
-        <br>
         
         <table class="mypage-body">
         	<tr>
@@ -26,10 +27,11 @@
             	</td>
                 <td class="body_r" width="900" style="vertical-align: top;">
                     <div class="delete">
-                    	<h2>1대1 문의내역</h2>
-                    
+	                    <div style="margin : 20px 0px;">
+	                    	<span class="mainView-title">1대1 문의내역</span>
+	                    </div>
                    		<div style="width: 100%">
-                            <table align="center" style="text-align: center; font-size: 14px; width: 100%; border-collapse: collapse;" id="qnaTable">
+                            <table align="center" style="text-align: center; font-size: 16px; width: 100%; border-collapse: collapse;" id="qnaTable">
                                 <thead style="background: rgb(248, 248, 248); border-style: none;">
                                     <tr height="40">
                                     	<th width="50">번호</th>
@@ -38,7 +40,7 @@
                                         <th width="150">문의 상태</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="qnaTbody">
                                 <c:if test="${ not empty list }">
                                 
                                 <c:forEach var="q" items="${ list }">
@@ -90,6 +92,10 @@
 			});
 		
 			$("#category-qna").css("font-weight", "700");
+			
+			$("no-qna").click(function () {
+				location.href="qnaForm.qu";
+			});
 			
 		})
 	</script>
