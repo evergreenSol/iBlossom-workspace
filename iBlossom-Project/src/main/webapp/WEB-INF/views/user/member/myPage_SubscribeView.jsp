@@ -45,7 +45,7 @@
 						</div>	
                 		</c:when>
                 		<c:otherwise>
-                		<h2>나의 구독 상품</h2>
+                		<h2 style="margin-left: 89px;">나의 구독 상품</h2>
 	                		<c:forEach var="i"  begin="1" end="${receiptIdList.size()}">
 		                    	<div class="delete" id="delete${i}">
 		                    	</div>

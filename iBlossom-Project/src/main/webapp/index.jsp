@@ -80,53 +80,13 @@
             <div class="swiper mySwiper" id="swiper-mySwiper">
              <div class="swiper-wrapper">
              
-             
-
-               <div class="swiper-slide">
-                   <img src="resources/images/pexels-eleonora-sky-12292365.jpg">
-                   <span  class="main-slider-text" id="main-slider-Gangneung-text">백합</span>
-                 </div>
-               <div class="swiper-slide">
-                   <img src="resources/images/pexels-eleonora-sky-12292365.jpg">
-                   <span  class="main-slider-text" id="main-slider-Gangneung-text">수국</span>
-                 </div>
-               <div class="swiper-slide">
-                   <img src="resources/images/pexels-eleonora-sky-12292365.jpg">
-                   <span  class="main-slider-text" id="main-slider-Gangneung-text">장미</span>
-                 </div>
-               <div class="swiper-slide">
-                   <img src="resources/images/pexels-eleonora-sky-12292365.jpg">
-                   <span  class="main-slider-text" id="main-slider-Gangneung-text">데이지</span>
-                 </div>
-               <div class="swiper-slide">
-                   <img src="resources/images/pexels-eleonora-sky-12292365.jpg">
-                   <span  class="main-slider-text" id="main-slider-Gangneung-text">개나리</span>
-                 </div>
-               <div class="swiper-slide">
-                   <img src="resources/images/pexels-eleonora-sky-12292365.jpg">
-                   <span  class="main-slider-text" id="main-slider-Gangneung-text">튤립</span>
-                 </div>
-               <div class="swiper-slide">
-                   <img src="resources/images/pexels-eleonora-sky-12292365.jpg">
-                   <span  class="main-slider-text" id="main-slider-Gangneung-text">동백</span>
-                 </div>
-               <div class="swiper-slide">
-                   <img src="resources/images/pexels-eleonora-sky-12292365.jpg">
-                   <span  class="main-slider-text" id="main-slider-Gangneung-text">프리지아</span>
-                 </div>
-               <div class="swiper-slide">
-                   <img src="resources/images/pexels-eleonora-sky-12292365.jpg">
-                   <span  class="main-slider-text" id="main-slider-Gangneung-text">해바라기</span>
-                 </div>
-
-                 
              </div>
            </div>
            
              <!-- 양 옆 화살표 -->
              <div class="slide_btn_box">
                    <button type="button" class="slide_btn_prev">
-                   <img src="resources/images/prev-arrow.png" style="width: 15px; height: 30px;"></button>
+                   <img src="resources/	images/prev-arrow.png" style="width: 15px; height: 30px;"></button>
                    <button type="button" class="slide_btn_next">
                    <img src="resources/images/next-arrow.png" style="width: 15px; height: 30px;"></button>
              </div>
@@ -136,29 +96,26 @@
 
    </div>
 
-  <jsp:include page="WEB-INF/views/common/bootpay.jsp" />
-  
   <jsp:include page="WEB-INF/views/common/footer.jsp" />
-  
   
       <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
          
-             <!-- Initialize Swiper -->
-             <script>
-               var swiper = new Swiper(".mySwiper", {
-                 slidesPerView: 3,
-                 spaceBetween: 35,
-                 slidesPerGroup: 3,
-                 loop: true,
-                 loopFillGroupWithBlank: true,
-                 navigation: {
-                   nextEl: ".slide_btn_next",
-                   prevEl: ".slide_btn_prev",
-                 },
-               });
-             </script>
-
-     <script> // 컨트롤 + i = 자동정렬 (이클립스) / 컨트롤 + k + f (vscode)
+     <!-- Initialize Swiper -->
+     <script>
+       var swiper = new Swiper(".mySwiper", {
+         slidesPerView: 3,
+         spaceBetween: 35,
+         slidesPerGroup: 3,
+         loop: true,
+         loopFillGroupWithBlank: true,
+         navigation: {
+           nextEl: ".slide_btn_next",
+           prevEl: ".slide_btn_prev",
+         },
+       });
+     
+       
+       // 컨트롤 + i = 자동정렬 (이클립스) / 컨트롤 + k + f (vscode)
        // Scroll Animation (sa, 스크롤 애니메이션)
        const saDefaultMargin = 300;
        let saTriggerMargin = 0;
@@ -226,13 +183,17 @@
 			keywords[3] = "생일"; 
 			keywords[4] = "축하"; 
 			keywords[5] = "여름"; 
-			//kewords[6] = ""; 
-			//kewords[7] = ""; 
+			keywords[6] = "비"; 
+			keywords[7] = "장마";
+			keywords[8] = "7월";
 			
 		}
 		console.log(keywords);
 		
 		swiper.removeAllSlides();
+		//var resultStr = "<div class='swiper-slide'><img src='" + "resources/uploadFiles/2022071810025028050.jpg'" +"><span class=\"main-slider-text\" id=\"main-slider-Gangneung-text\">상품7</span></div>";
+		//swiper.appendSlide(resultStr);
+		//swiper.update();
 		
 		$.ajax({
 			url : "flowerOfTheMonth.pr",
@@ -241,24 +202,27 @@
 			},
 			success : function (result) {
 				
+				console.log(result);
 				console.log(result[0].thumbNail);
+				console.log(result.length)
 				
 				var resultStr = "";
 				var resultArr=[];
-				for(var i; i < result.length; i++) {
+				for(var i = 0; i < result.length; i++) {
 					
-
-					resultStr += '<div class="swiper-slide">'
-							   + '<img src="'+ result[i].thumbNail + '">'
-							   + '<span  class="main-slider-text" id="main-slider-Gangneung-text">' + result[i].flowerName + '</span>'
-							   + '</div>';
-					resultArr.push(resultStr);
-							   
+					resultStr += '<div class="swiper-slide">\r\n<img src="'+ result[i].thumbNail +'">\r\n<span class="main-slider-text" id="main-slider-Gangneung-text">'+ result[i].flowerName +'</span>\r\n</div>\r\n';
+							   // resultStr += "<div class=\"swiper-slide\">result[i].thumbNail</div>";
+					// resultArr.push(resultStr);
+					
+					
 				}
-					//$(".swiper-wrapper").text(resultStr);
-				swiper.appendSlide(resultArr);
-				swiper.update();
+				swiper.appendSlide(resultStr);
+				console.log(resultStr);
 				
+				//console.log(resultStr);
+				//$("#test").html(resultStr);
+				
+				swiper.update();
 				
 			},
 			error : function () {
@@ -266,11 +230,9 @@
 			}
 			
 		});
+		
 	});
        
 	</script>
-   
-   
-   
 </body>
 </html>

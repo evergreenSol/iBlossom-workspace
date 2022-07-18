@@ -31,5 +31,6 @@ public class OnedayClass {
 	private int capNo;
 	private int resNum;
 	private String classStatus;
+	private String classDate2;
 	
 }

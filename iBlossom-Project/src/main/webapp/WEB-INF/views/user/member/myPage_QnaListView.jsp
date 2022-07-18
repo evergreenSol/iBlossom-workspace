@@ -27,8 +27,9 @@
             	</td>
                 <td class="body_r" width="900" style="vertical-align: top;">
                     <div class="delete">
-                    	<h2>1대1 문의내역</h2>
-                    
+	                    <div style="margin : 20px 0px;">
+	                    	<span class="mainView-title">1대1 문의내역</span>
+	                    </div>
                    		<div style="width: 100%">
                             <table align="center" style="text-align: center; font-size: 16px; width: 100%; border-collapse: collapse;" id="qnaTable">
                                 <thead style="background: rgb(248, 248, 248); border-style: none;">

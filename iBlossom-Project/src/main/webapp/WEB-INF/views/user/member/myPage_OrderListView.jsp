@@ -27,8 +27,9 @@
             	</td>
                 <td class="body_r" width="900" style="vertical-align: top;">
                     <div class="delete">
-						
-                        <h2>나의주문내역</h2>
+						<div style="margin : 20px 0px;">
+                        <span class="mainView-title">나의 주문 내역</span>
+                        </div>
                         <!-- <hr color="lightgray"> -->
                         <!--
                         <table style="text-align: center">

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.product.model.vo.Product;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Repository
 public class ProductDao {
@@ -73,10 +74,22 @@ public class ProductDao {
 
 		return (ArrayList)sqlSession.selectList("productMapper.selectListBase");
 	}
+
+
+	public int selectSearchCount(SqlSessionTemplate sqlSession, String keyword) {
+
+		return sqlSession.selectOne("productMapper.selectSearchCount", keyword);
+	}
+
+
+	public ArrayList<Product> selectSearchList(SqlSessionTemplate sqlSession, String keyword) {
+
+		return (ArrayList)sqlSession.selectList("productMapper.selectSearchList", keyword);
+	}
 	
 	// 이달의 꽃
-	public Product selectTagProduct(SqlSessionTemplate sqlSession, Product p) {
-		return sqlSession.selectOne("productMapper.selectTagProduct", p);
+	public ArrayList<Product> selectTagProduct(SqlSessionTemplate sqlSession, Product p) {
+		return (ArrayList)sqlSession.selectList("productMapper.selectTagProduct", p);
 	}
 	
 	

@@ -30,8 +30,9 @@
             	</td>
                 <td class="body_r" width="900" style="vertical-align: top;">
                     <div class="delete">
-                    	<h2>1대1 문의내역</h2>
-                        
+                    	<div style="margin : 20px 0px;">
+                    	<span class="mainView-title">1대1 문의내역</span>
+                        </div>
                    		<div class="qna-detail-content" style="width: 800px; position: relative;" align="right">
                             <div class="qna-detail-title" style="position: absolute;left: 280px;top: -31px;">제목: <span>${q.qnaTitle}</span></div>
                             <div class="balloon right">
