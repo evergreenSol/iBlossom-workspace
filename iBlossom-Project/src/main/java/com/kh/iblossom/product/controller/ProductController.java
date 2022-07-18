@@ -4,9 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
@@ -303,7 +302,7 @@ public class ProductController {
 	// 이달의 꽃
 	@ResponseBody
 	@RequestMapping(value="flowerOfTheMonth.pr", produces="application/json; charset=UTF-8")
-	public String selectTagProduct(@RequestParam(value="keywords[]") ArrayList<String> keywords) {
+	public String selectTagProduct(@RequestParam(value="keywords[]") ArrayList<String> keywords, HttpSession session) {
 		
 		System.out.println(keywords);
 		
@@ -329,9 +328,13 @@ public class ProductController {
 		
 		System.out.println(result);
 		
+		result.removeAll(Arrays.asList("", null));
+		
 		ArrayList<Product> selectList = (ArrayList<Product>) result.stream().distinct().collect(Collectors.toList());
 		
 		System.out.println(selectList);
+		
+		// session.setAttribute("selectList", selectList);
 		
 		return new Gson().toJson(selectList);
 		

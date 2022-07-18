@@ -134,11 +134,12 @@
 		SELECT THUMBNAIL, FLOWER_NAME, PRODUCT_NO
 		FROM PRODUCT
         WHERE TAG LIKE '%' || #{keyword} || '%'
+    </select>
 
 	<!-- 이달의 꽃 -->
 	<select id="selectTagProduct" parameterType="product" resultMap="productResultSet">
 		SELECT *
 		FROM PRODUCT
-		WHERE TAG LIKE '%${tag}%' 
+		WHERE TAG LIKE '%${tag}%'
 	</select>
 </mapper>
