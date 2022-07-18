@@ -1,6 +1,7 @@
 package com.kh.iblossom.product.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.product.model.dao.ReviewDao;
 import com.kh.iblossom.product.model.vo.Review;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Service
 public class ReviewServiceImpl implements ReviewService{
@@ -39,8 +41,9 @@ public class ReviewServiceImpl implements ReviewService{
 
 	//리뷰 수정하기
 	@Override
-	public int updateReivew(Review r) {
-		return reviewDao.updateReivew(sqlSession,r);
+	public int updateReview(Review r) {
+		System.out.println("Service:" + r.getReviewNo());
+		return reviewDao.updateReview(sqlSession,r);
 	}
 
 	//리뷰 삭제하기
@@ -66,5 +69,20 @@ public class ReviewServiceImpl implements ReviewService{
 
 		return reviewDao.selectMyReview(sqlSession, userNo);
 	}
+	
+	
+	// 검색용 메소드
+		@Override
+		public int selectSearchCount(HashMap<String, String> map) {
+			 
+			return reviewDao.selectSearchCount(sqlSession, map);
+		}
+
+		// 리뷰 검색용 메소드
+		@Override
+		public ArrayList<Review> selectSearchList(PageInfo pi, HashMap<String, String> map) {
+
+			return reviewDao.selectSearchList(sqlSession, pi, map);
+		}
 	
 }

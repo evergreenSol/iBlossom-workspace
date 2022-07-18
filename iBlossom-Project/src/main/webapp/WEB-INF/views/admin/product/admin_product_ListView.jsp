@@ -140,16 +140,18 @@
 
 		<!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
 		<div style="padding-top: 40px;" align="center">
-			<form name="form1" method="post" action="">
-
-				<select id="selectReview" name="search_option">
-					<option value="product_id">꽃명</option>
-
-					<option value="category_name">카테고리명</option>
-
-					<option value="price">가격</option>
-				</select> <input id="inputBox" name="keyword" value=""> <input
-					type="submit" id="selectbtn" value="검색">
+			<form method="post" action="search.pr">
+				<input type="hidden" name="currentPage" value="1">
+				<select id="selectReview" name="condition">
+				
+					<option value="FLOWER_NAME">상품명</option>
+					<option value="CATEGORY_NAME">카테고리명</option>
+					<option value="PRICE">가격</option>
+					<option value="TAG">태그 </option>
+					
+				</select> 
+				<input type="text" id="inputBox" name="keyword" value="${ keyword }"> 
+				<input type="submit" id="selectbtn" value="검색">
 			</form>
 		</div>
 
@@ -166,6 +168,11 @@
 
 				</thead>
 				<tbody style="height:40px;">
+					<c:choose>
+						 <c:when test="${ empty list }">
+						 	<h4>아직 진열된 상품이 없습니다.</h4>
+						 </c:when>
+					<c:otherwise>
 					<c:forEach var="p" items="${ list }">
 						<tr>
 							<td class="pno">${p.productNo}</td>
@@ -177,12 +184,59 @@
 							<td>${ p.status }</td>
 
 						</tr>
-					</c:forEach>
-
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 				</tbody>
 			</table>
 		</div>
 		<br> <br>
+			<!-- 페이징 처리  -->
+       	<div id="pagingArea">
+	         <ul class="pagination">
+	
+	            <c:choose>
+	               <c:when test="${ pi.currentPage eq 1 }">
+	                  <li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
+	               </c:when>
+	               <c:otherwise>
+	               <c:choose>
+	            	   <c:when test="${ empty condition }">
+		                	<li class="page-item"><a class="page-link" href="list.pr?cpage=${ pi.currentPage - 1 }">◀</a></li>
+		               </c:when>
+		               <c:otherwise>
+		                	<li class="page-item"><a class="page-link" href="list.pr?cpage=${ pi.currentPage - 1 }&condition=${ condition }&keyword=${ keyword }">◀</a></li>
+		               </c:otherwise>
+            	   </c:choose>
+	               </c:otherwise>
+	            </c:choose>
+	
+	            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	               <li class="page-item"><a class="page-link"
+	                 href="list.pr?cpage=${ p }">${ p }</a></li>
+	            </c:forEach>
+	
+	            <c:choose>
+	               <c:when test="${ pi.currentPage eq pi.maxPage }">
+	                  <li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
+	               </c:when>
+	               <c:otherwise>
+		               <c:choose>
+		            	   <c:when test="${ empty condition }">
+			                   <li class="page-item"><a class="page-link"
+			                  href="list.pr?cpage=${ pi.currentPage + 1 }">▶</a></li>
+		            	   </c:when>
+		            	   <c:otherwise>
+		            	   	   <li class="page-item"><a class="page-link" href="list.pr?cpage=${ pi.currentPage + 1 }&condition=${ condition }&keyword=${ keyword }">▶</a></li>
+		           		   </c:otherwise>
+			           </c:choose>
+		           </c:otherwise>
+	            </c:choose>
+	         </ul>
+	    </div>
+
+
+
 		<script>
             	$(function() {
             		
@@ -192,46 +246,6 @@
             		});
             	});
             </script>
-
-		<div id="pagingArea">
-			<ul class="pagination">
-
-				<c:choose>
-					<c:when test="${ pi.currentPage eq 1 }">
-						<li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link"
-							href="list.pr?cpage=${ pi.currentPage - 1 }">◀</a></li>
-					</c:otherwise>
-				</c:choose>
-
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-					<li class="page-item"><a class="page-link"
-						href="list.pr?cpage=${ p }">${ p }</a></li>
-				</c:forEach>
-
-				<c:choose>
-					<c:when test="${ pi.currentPage eq pi.maxPage }">
-						<li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link"
-							href="list.pr?cpage=${ pi.currentPage + 1 }">▶</a></li>
-					</c:otherwise>
-				</c:choose>
-
-
-			</ul>
-		</div>
-		<div align="center" style="padding-top: 100px;">
-			<a href="productEnroll.pr"><button id="insertBtn">등록</button></a>
-		</div>
-
-
-	</div>
-
-
 
 </body>
 </html>

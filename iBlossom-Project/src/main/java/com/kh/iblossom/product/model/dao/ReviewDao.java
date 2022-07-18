@@ -1,6 +1,7 @@
 package com.kh.iblossom.product.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.product.model.vo.Review;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Repository
 public class ReviewDao {
@@ -35,8 +37,9 @@ public class ReviewDao {
 	}
 
 	// 리뷰 수정하기
-	public int updateReivew(SqlSessionTemplate sqlSession, Review r) {
-		return sqlSession.update("reviewMapper.updateReivew",r);
+	public int updateReview(SqlSessionTemplate sqlSession, Review r) {
+		System.out.println("Dao:" + r.getReviewNo());
+		return sqlSession.update("reviewMapper.updateReview",r);
 	}
 
 	//리뷰 삭제하기
@@ -62,5 +65,23 @@ public class ReviewDao {
 		
 		return (ArrayList) sqlSession.selectList("reviewMapper.selectMyReview", userNo);
 	}
+	
+		// 검색
+		public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+			
+			return sqlSession.selectOne("reviewMapper.selectSearchCount", map);
+		}
+
+		// 구독 회원 검색
+		public ArrayList<Review> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi,
+				HashMap<String, String> map) {
+			
+			int limit = pi.getBoardLimit();
+			int offset = (pi.getCurrentPage() - 1) * limit;
+			
+			RowBounds rowBounds = new RowBounds(offset, limit);
+			
+			return (ArrayList)sqlSession.selectList("reviewMapper.selectSearchList", map, rowBounds);
+		}
 
 }
