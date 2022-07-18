@@ -49,7 +49,7 @@
                             <div class="complete-graybox-num">
                             	주문번호 : ${ orderNo }
                             </div>
-	
+
                         </div> 
 
                     </div>

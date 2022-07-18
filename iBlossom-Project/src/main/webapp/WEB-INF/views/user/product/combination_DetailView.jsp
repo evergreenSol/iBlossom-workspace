@@ -239,7 +239,7 @@
 	    			$(".item"+ items[i] + "").children().children("#productPrice"+items[i]+"").attr("name","cartList[" + i + "].productPrice")
 	    			$(".item"+ items[i] + "").children().children("#productCount"+items[i]+"").attr("name","cartList[" + i + "].productCount")	
 	 		}
-	    	 $('#cartItems').attr("action", "insertCo.ca").submit();
+	    	 $('#cartItems').attr("action", "insertCo.ca").submit(); 
 		}
      }
      
@@ -272,8 +272,8 @@
      }
  	</script>
  	
- 		<script>
-        function showReview()
+	<script>
+        function showReview() {
 
           $.ajax({
         	  url: "reviewList.re",
@@ -311,7 +311,7 @@
           });
         }
     </script>
- 	
+
 
 	<jsp:include page="../../common/footer.jsp" />
 </body>

@@ -33,7 +33,6 @@
                 <div><input type="checkbox" id="checkAll" checked style="margin:auto 0;">
                 	<label for="checkAll" id="checkAllLabel">&nbsp;전체선택</label><span></span>
                 </div>
-                
 	            <div>
 	            	<button type="button" id="cartChoiceCheck" class="choice-delete-btn" onclick="location.href=''"></button>
 	            </div>
@@ -76,22 +75,25 @@
 			                         
 			                        <!-- 가격 -->   
 			                        <div class="basketprice">
-			                        	<input type="text" id="price${ status.count }" id="resizable1" class="price" onkeyup="javascript:CheckSize();"
-			                        			value="${ list[c].productPrice }" readonly>원
-			                        	
+			                        	<input type="text" id="price${ status.count }" id="resizable1" class="price" 
+			                        		   onkeyup="javascript:CheckSize();" value="${ list[c].productPrice }" readonly>원
 			                        </div><br>
 	
 						            <!-- 장바구니 수량 변경 -->
 						            <div class="basketnum">
 					                    <input type="button" value="-" onclick="count('minus',${ status.count })">
-				                        <input type="text" id="productCount${ status.count }" name="cartList[${c}].productCount" value="${ list[c].productCount }" size="1" readonly>
+
+				                        <input type="text" id="productCount${ status.count }" name="cartList[${c}].productCount"
+				                        	   value="${ list[c].productCount }" size="1" readonly>
+
 				                        <input type="button" value="+" onclick="count('plus',${ status.count })">
 			                        </div>					    
 			                </div>
 	
 			                <!-- 장바구니 상품 금액 -->
 				            <div class="cart-content4">
-						        <input type="text" id="sum${ status.count }" id="resizable2" name="sum" size="2" onkeyup="javascript:CheckSize();" readonly>원&nbsp;
+						        <input type="text" id="sum${ status.count }" id="resizable2" name="sum" size="2" 
+						        	   onkeyup="javascript:CheckSize();" readonly>원&nbsp;
 						               <!-- ${ list[c].productCount * list[c].productPrice }원 -->
 				            </div>
 							
@@ -311,7 +313,8 @@
 		$(window).scroll(function(){
         	var scrollTop = $(document).scrollTop();
 	        if (scrollTop < 180) {
-	        	scrollTop = -40; 
+	        	scrollTop = 20; 
+
 	        }
 	        $(".cart-right").stop();
 	        $(".cart-right").animate( { "top" : scrollTop }
@@ -326,8 +329,7 @@
 		
 		// 장바구니 삭제
 		function cartDelete(cartNo, value){
-
-		    $.ajax({		        
+		    $.ajax({
 		        url : 'cartDelete.ca',
 		        data : { cartNo : cartNo },
 		        success: function(result) {
@@ -337,7 +339,6 @@
 					location.reload();
 		        },
 		        error : function() {
-		        	
 		        }
 		    })
 		};

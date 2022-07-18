@@ -107,9 +107,7 @@
                                 <p><span>∨&nbsp;&nbsp;</span></p>
                             </button>
 
-                        </div>
-
-                        <hr>
+                        </div><hr>
 
                         <!-- 내용 -->
                         <div id="CheckBox" class="order-check-contentbox">
@@ -452,19 +450,21 @@
             </div>
             
             <!-- follow quick menu -->
-            <script>
-            
-	             $(window).scroll(function(){
-	                var scrollTop = $(document).scrollTop();
-	                if (scrollTop < 180) {
-	                	scrollTop = -30; 
-	                }
-	                
-	                $(".order-right").stop();
-	                $(".order-right").animate( { "top" : scrollTop }
-	                );  
-	             });
+            <script>  
        
+             $(window).scroll(function(){
+                
+                var scrollTop = $(document).scrollTop();
+                
+                if (scrollTop < 180) {
+                	scrollTop = -30; 
+                }
+                
+                $(".order-right").stop();
+                $(".order-right").animate( { "top" : scrollTop }
+                );
+                
+             });
             </script>
             
             <input type="hidden" name="userNo" id="userNo" value="${ loginUser.userNo }">
