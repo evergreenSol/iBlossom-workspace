@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.product.model.vo.Product;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 public interface ProductService {
 
@@ -38,8 +39,15 @@ public interface ProductService {
 	//상품 마켓 전체 조회(꽃병)
 	ArrayList<Product> selectListBase();
 	
+	// 검색용
+	int selectSearchCount(String keyword);
+	
+	// 검색 결과 조회용
+	ArrayList<Product> selectSearchList(String keyword);
+
 	// 이달의 꽃
 	Product selectTagProduct(Product p);
 	
+
 	
 }

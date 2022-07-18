@@ -26,7 +26,9 @@ import com.kh.iblossom.onedayclass.model.vo.OnedayClass;
 import com.kh.iblossom.order.model.service.OrderService;
 import com.kh.iblossom.order.model.vo.DetailOrder;
 import com.kh.iblossom.order.model.vo.Order;
+import com.kh.iblossom.product.model.service.ProductService;
 import com.kh.iblossom.product.model.service.ReviewService;
+import com.kh.iblossom.product.model.vo.Product;
 import com.kh.iblossom.product.model.vo.Review;
 import com.kh.iblossom.qna.model.service.QnaService;
 import com.kh.iblossom.qna.model.vo.Qna;
@@ -41,6 +43,9 @@ public class MemberController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private ProductService productService;
 	
 	@Autowired
 	private OnedayClassService onedayclassService;
@@ -573,6 +578,30 @@ public class MemberController {
 			session.setAttribute("alertMsg", "결제취소에 실패했습니다.");
 			return "redirect:orderListView.me";
 		}
+	}
+	
+	// 검색용 메소드
+	@RequestMapping("search.me")
+	public String tagSearch(String keyword, Model model) {
+		
+		String modifiedKeyword = keyword.trim().replace(" ", "");
+		
+		System.out.println(modifiedKeyword);
+		
+		int searchCount = productService.selectSearchCount(modifiedKeyword); // 현재 검색결과에 맞는 게시글의 총 갯수
+		
+		// 조회 요청
+		ArrayList<Product> list = productService.selectSearchList(modifiedKeyword);
+		
+		System.out.println(list);
+
+		model.addAttribute("count",searchCount);
+		model.addAttribute("list", list);
+		model.addAttribute("keyword", modifiedKeyword);
+		
+
+		return "common/searchResultView";
+
 	}
  
    
