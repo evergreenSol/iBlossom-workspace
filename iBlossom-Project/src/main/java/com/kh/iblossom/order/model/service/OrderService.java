@@ -12,11 +12,9 @@ public interface OrderService {
 	// 주문/결제 조회용
 	ArrayList<Order> detailOrder(int userNo);
 	
-	
 	// 리스트조회, 페이징처리
 	int selectOrderListCount();
 
-	
 	// 주문내역 리스트 조회
 	ArrayList<Order> selectOrderList(PageInfo pi);
 
@@ -54,5 +52,8 @@ public interface OrderService {
 	//승아
 	//리뷰
 	ArrayList<Order> selectOrderReview(Review r);
+
+	// 관리자 - 전체주문내역 조회용 메소드
+	ArrayList<Order> adminSelectList(int userNo);
 	
 }

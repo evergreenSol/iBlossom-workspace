@@ -30,10 +30,15 @@
 	
 	        <!-- 전체선택, 선택삭제 div -->
             <div class="cart-choice">
-                <div><input type="checkbox" id="checkAll" checked>&nbsp;전체선택 <span>(1/2)</span></div>
-	            <div><button type="button" id="cartChoiceCheck" class="choice-delete-btn" onclick="location.href=''">선택삭제</button></div>
+                <div><input type="checkbox" id="checkAll" checked style="margin:auto 0;">
+                	<label for="checkAll" id="checkAllLabel">&nbsp;전체선택</label><span></span>
+                </div>
+                
+	            <div>
+	            	<button type="button" id="cartChoiceCheck" class="choice-delete-btn" onclick="location.href=''"></button>
+	            </div>
 	        </div>
-	
+	        
 	        <!-- 장바구니 메뉴바 -->
 	        <div>
 	            <div class="cart-menu">
@@ -67,7 +72,7 @@
 			                <div class="cart-content3">
 			                    
 			                        <!-- 제목 -->
-			                        <div>${ list[c].flowerName }</div><br>
+			                        <div class="cartFlowerName">${ list[c].flowerName }</div><br>
 			                         
 			                        <!-- 가격 -->   
 			                        <div class="basketprice">
@@ -80,14 +85,13 @@
 						            <div class="basketnum">
 					                    <input type="button" value="-" onclick="count('minus',${ status.count })">
 				                        <input type="text" id="productCount${ status.count }" name="cartList[${c}].productCount" value="${ list[c].productCount }" size="1" readonly>
-				                        <!-- 0715 PM 5:45 type="number" 에서 text 로 변경 - 다온 -->
 				                        <input type="button" value="+" onclick="count('plus',${ status.count })">
 			                        </div>					    
 			                </div>
 	
 			                <!-- 장바구니 상품 금액 -->
 				            <div class="cart-content4">
-						        <input type="text" id="sum${ status.count }" id="resizable2" name="sum" size="2" readonly onkeyup="javascript:CheckSize();" disabled>원&nbsp;
+						        <input type="text" id="sum${ status.count }" id="resizable2" name="sum" size="2" onkeyup="javascript:CheckSize();" readonly>원&nbsp;
 						               <!-- ${ list[c].productCount * list[c].productPrice }원 -->
 				            </div>
 							
@@ -121,7 +125,7 @@
 		        <!-- 1. 총 주문 금액 -->
 		        <div class="cart-price1">
 		            <span>총 주문 금액</span>
-		            <input type="text" id="sumAll" name="sumAll">원
+		            <input type="text" id="sumAll" name="sumAll" readonly>원
 		            
 		            <!--  
 	            	<c:set var = "total" value = "0" />
@@ -160,7 +164,7 @@
 	
 	        <!-- 결제하기 버튼 -->
 	        <div>
-	            <button class="cart-btn" type="button">결제하기</button>
+	            <button class="cart-btn" type="button" onclick="cartBtn();">결제하기</button>
 	        </div>
 
 	    </div> <!-- class="cart-right" -->
@@ -307,7 +311,7 @@
 		$(window).scroll(function(){
         	var scrollTop = $(document).scrollTop();
 	        if (scrollTop < 180) {
-	        	scrollTop = -30; 
+	        	scrollTop = -40; 
 	        }
 	        $(".cart-right").stop();
 	        $(".cart-right").animate( { "top" : scrollTop }
@@ -319,14 +323,13 @@
 				$("#real-submit-button").trigger("click");
 			});
 		});
-			
+		
+		// 장바구니 삭제
 		function cartDelete(cartNo, value){
 
-		    $.ajax({
-		        
+		    $.ajax({		        
 		        url : 'cartDelete.ca',
 		        data : { cartNo : cartNo },
-
 		        success: function(result) {
 		        	alert(result);
 
@@ -337,6 +340,17 @@
 		        	
 		        }
 		    })
+		};
+		
+		// 결제버튼 눌렀을시 확인/취소 알람창 띄우기
+		function cartBtn() {
+			if (confirm("주문하신 상품을 결제하시겠습니까?") == true){ 
+				   console.log("완료되었습니다.");
+			} else {
+			   // false는 취소버튼을 눌렀을 때, 취소됨
+			   console.log("취소되었습니다");
+			   return false;
+		 	}
 		}
 
 	</script>
