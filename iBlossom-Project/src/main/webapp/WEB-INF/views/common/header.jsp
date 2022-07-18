@@ -37,8 +37,8 @@
 
         <!-- 검색창 -->
         <div id="header-search" style="position: relative;">
-            <form action="search.me">
-                <button type="submit" class="btn_search" style="position: absolute;"></button>
+            <form action="search.me" method="post">
+                <button type="submit" class="btn_search" style="position: absolute;" onclick="return validate();"></button>
                 <input class="btn_text" type="text" placeholder="검색어를 입력하세요." name="keyword" value="${ keyword }" style="border:0 solid black; border-radius: 30px; padding-left: 21px;">
             </form>
         </div>
@@ -137,10 +137,20 @@
     			
     		});
     		
-    		
-    		
     	});
-    
+    	
+    	function validate() {
+	    	
+			var keyword = $(".btn_text").val();
+    		console.log(keyword);
+    		
+    		if(keyword=="") {
+    			return false
+			}
+    		
+			return true;
+    	}
+
     </script>
    
     

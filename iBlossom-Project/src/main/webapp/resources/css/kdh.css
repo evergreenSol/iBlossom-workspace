@@ -93,6 +93,7 @@
 	.spno {
 		visibility : hidden;
 	}
+	
     /* sub_list 테이블 transpose 용 css */
     .sub_list tr { display: block; float: left; } 
     .sub_list th, .sub_list td { display: block; }

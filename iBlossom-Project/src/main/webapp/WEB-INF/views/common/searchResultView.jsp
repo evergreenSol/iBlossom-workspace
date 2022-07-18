@@ -49,44 +49,43 @@
 	
 	.result_list {
 		width : 1200px;
+		
+	}
+	
+	.result_product {
+		margin : 2px;
+		display : inline-block;
+		text-align : center;
 	}
 
-	.result_list tr {
-		text-align : center;
-    	font-size : 20px;
-        margin : 30px;
-    }
-    
-    /* 검색 결과 테이블 transpose 용 css */
-    .result_list tr { display: block; float: left; } 
-    .result_list th, .result_list td { display: block; }
-	
 	#flower_name {
-		font-size : 20px;
-		font-weight : 700;
+		font-size : 14px;
+		font-weight : 500;
+		margin-bottom : 15px;
 	}
 	
-    /* 검색 결과 사진 css*/
-    #result_img {
-    	width : 250px;
-    	height : 300px;
-        border : solid 1px rgb(243, 243, 243);
-    	background-color : white;
-        border-radius : 50%;
-        margin : auto;
-        text-align : center;
-        -webkit-user-drag: none;
-    }
-    
-    .result_list tr:hover {
-    	cursor : pointer;
-    }
-    
-    #result_img:hover {
-    	width : 270px;
-    	height : 320px;
-        border : solid 1px rgb(243, 243, 243);
-    }
+	.result_img_div {
+		width : 290px;
+		height : 400px;
+		background-size: contain;
+		background-repeat : no-repeat;
+		background-position : center;
+		margin : auto;
+	}
+	
+	.result_img_div:hover {
+		cursor : pointer;
+	}
+	
+	.result_img {
+		width : 95%;
+		height : 95%;
+	}
+	
+	.result_img:hover {
+		width : 97%;
+		height : 97%;
+	}
 	
 </style>
 </head>
@@ -123,12 +122,12 @@
 					    	<div class="result_list">
 								<table class="result_table"> 
 					                <c:forEach var="s" items="${ list }">    
-						                <tr class="result_product" onclick="location.href='detailList.pr?pno=${ s.productNo }'">
-						                    <td height="250px" width="250px" class="result_img" id="result_img">
-						                    	<img src="${ s.thumbNail }" id="result_img">
-						                    </td>
-						                    <td id="flower_name" style="margin-top:30px;">${ s.flowerName }</td>
-						                </tr>
+						                <div class="result_product" onclick="location.href='detailList.pr?pno=${ s.productNo }'">
+							                <div class="result_img_div">
+							                	<img class="result_img" src="${ s.thumbNail }">
+							                </div>
+							                <div id="flower_name">${ s.flowerName }</div>
+						                </div>
 					                </c:forEach>
 					            </table>
 				            </div>	
