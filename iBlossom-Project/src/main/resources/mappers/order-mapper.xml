@@ -105,6 +105,7 @@
 		WHERE USER_NO = #{userNo}
 		  AND ORDER_STATUS = '결제완료'
 		  AND DELIVERY_STATUS IN ('배송준비', '배송중', '배송완료')
+		  ORDER BY ORDER_NO DESC
 	</select>
 	
 	<select id="selectMyOrderCancelList" parameterType="_int" resultMap="orderResultSet">
@@ -114,6 +115,7 @@
 		WHERE USER_NO = #{userNo}
 		  AND ORDER_STATUS = '결제취소'
 		  AND DELIVERY_STATUS NOT IN ('배송준비', '배송중', '배송완료')
+		  ORDER BY ORDER_NO DESC
 	</select>
 	
 	<update id="cancelMyPay" parameterType="string">
@@ -166,6 +168,7 @@
 		   <!--[CDATA[
 		   AND ADD_MONTHS(SYSDATE, -1) <= ORDER_DATE
 		   ]]-->
+		   
 	</select>
 	
 	<select id="selectMyOrderAllList" parameterType="_int" resultMap="orderResultSet">
@@ -176,6 +179,7 @@
 		<!--[CDATA[
 	    AND ADD_MONTHS(SYSDATE, -1) <= ORDER_DATE
 	    ]]-->
+	    ORDER BY ORDER_NO DESC
 	</select>
 	
 	<!-- (자동) 배송상태 변경하기 -->

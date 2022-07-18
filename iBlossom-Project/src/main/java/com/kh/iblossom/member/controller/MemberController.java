@@ -463,6 +463,11 @@ public class MemberController {
    @RequestMapping(value="reviewDetailView.me")
    public String myPageReviewDetailView(int reviewNo, Model model) {
 	   
+	   if(reviewNo == 0) {
+		   return "redirect:flowerList.pr";
+		   
+	   }
+	   
 	   Review r = reviewService.selectReview(reviewNo);
 	   
 	   System.out.println(r);
@@ -492,6 +497,10 @@ public class MemberController {
    public String myPageQnaDetailView(int qnaNo, Model model) {
 	   
 	   // System.out.println(qnaNo);
+	   
+	   if(qnaNo == 0) {
+		   return "redirect:qnaForm.qu";
+	   }
 	   
 	   Qna q = qnaService.selectQna(qnaNo);
 	   System.out.println(q);
