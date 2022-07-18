@@ -315,10 +315,10 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	    	for(var i = 0; i < items.length; i++) { // 현재까지 남아있는 아이템 리스트 배열을 돌면서 필요한 name 속성 추가
 	 				$(".item"+ items[i] + "").children("#userNo").attr("name","cartList[" + i + "].userNo")
 	    			$(".item"+ items[i] + "").children("#productNo").attr("name","cartList[" + i + "].productNo")
-	    			$(".item"+ items[i] + "").children("#productPrice"+items[i]+"").attr("name","cartList[" + i + "].productPrice")
-	    			$(".item"+ items[i] + "").children("#productCount"+items[i]+"").attr("name","cartList[" + i + "].productCount")	
+	    			$(".item"+ items[i] + "").children().children("#productPrice"+items[i]+"").attr("name","cartList[" + i + "].productPrice")
+	    			$(".item"+ items[i] + "").children().children("#productCount"+items[i]+"").attr("name","cartList[" + i + "].productCount")	
 	 		}
-	    	 $('#cartItems').attr("action", "insertCo.ca").submit();
+	    	 $('#cartItems').attr("action", "insertCo.ca").submit(); 
 		}
      }
      

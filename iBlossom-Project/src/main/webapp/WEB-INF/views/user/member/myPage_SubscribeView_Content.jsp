@@ -104,7 +104,7 @@
 			<c:forEach var="i"  begin="0" end="${ list.size() -1 }" >
 				    	<tr height="40">
 							<td>${ i+1 }회차</td>
-							<td>${ list[i].deliverAt }</td>
+							<td>${ list[i].deliverAt2 }</td>
 							<td>${list[i].deliverStatus }</td>
 						</tr>
 			</c:forEach>
@@ -148,12 +148,16 @@
 					<tr height="40">
 						<td>${ i+1 }회차</td>
 						<td>${ list[i].subDate }</td>
-						<td>${ list[i].deliverAt }</td>
+						<td>${ list[i].deliverAt2 }</td>
 						<td>${ list[i].deliverStatus }</td>
 					</tr>
 				</c:forEach>
 		        </tbody>
 			</table>
+		</div>
+		
+		<div class="close-sub" align="center">
+		<button class="close-sub-btn">닫기</button>
 		</div>
 	</div>
 	
@@ -175,12 +179,18 @@
 				
             });
 			
+			$(".close-sub-btn").on("click", function () {
+				$(this).parent().parent().slideUp("1500");
+			});
+			
+			
 			var refundPrice;
 			
 			var subPrice = ${ list[0].subPrice }
-			var receiptId = $(this).next().val()
 			
 			$(".mypage-subscribe-cancel").click(function () { 
+			var receiptId = $(this).next().val()
+			console.log(receiptId);
 				
 				console.log("클릭됨");
 		
@@ -226,8 +236,22 @@
 									success : function(result) {
 
 										// alert("구독 취소되었습니다.");
+										$.ajax({
+											url : "refund.me",
+											data : {
+												totalPrice : refundPrice
+											},
+											success: function () {
+												location.reload();
+											},
+											error : function () {
+												
+											}
+											
+										});
 										
-										location.reload();
+										
+										
 									
 									}, error : function() {
 										console.log("안되면 집ㄱ");

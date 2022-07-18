@@ -18,12 +18,11 @@
     <br>
     
     <!-- 사용자 결제완료 페이지  -->
-
     <div class="complete-outer">
 
         <br><br>
 
-        <p class="order-title">주문/결제</p>
+        <p class="order-title">&nbsp;주문/결제</p>
 
         <!-- 레이아웃 -->
         <div>
@@ -34,27 +33,29 @@
                     <!-- 회색 박스 틀-->
                     <div class="complete-graybox">
 
-                        <div class="complete-graybox-div">
-                            <br>
+                        <div class="complete-graybox-div"><br>
 
                             <!-- 체크 이미지 -->
-                            <div><img src="resources/images/order_complete_check.png" style="width:54px; height:54px;"></div>
+                            <div>
+                           		<img src="resources/images/order_complete_check.png" style="width:52px; height:52px;">
+                            </div>
 
                             <!-- 멘트 -->
-                            <div style="font-weight:bold; font-size:medium;">${ loginUser.userName } 님의 주문이 완료되었습니다.</div><!-- ${m.userName} -->
-                            <br>
+                            <div style="font-weight:bold; font-size:large;">
+                            	${ loginUser.userName } 님의 주문이 완료되었습니다.
+                            </div><br>
 
                             <!-- 주문번호 -->
-                            <div class="complete-graybox-num">주문번호 : ${ orderNo }</div> <!-- ${o.orderNo} -->
-	
+                            <div class="complete-graybox-num">
+                            	주문번호 : ${ orderNo }
+                            </div>
+
                         </div> 
 
                     </div>
 
                     <!-- 회색박스 아래 멘트 -->
-                    <p>- 주문 상세내역은 [마이페이지 > 주문내역] 에서 조회 가능합니다.</p>
-
-                    <br>
+                    <p>- 주문 상세내역은 [마이페이지 > 주문내역] 에서 조회 가능합니다.</p><br>
 
                     <!-- 버튼 두개 -->
                     <div class="complete-two-btn">

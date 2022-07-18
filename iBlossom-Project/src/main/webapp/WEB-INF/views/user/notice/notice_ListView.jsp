@@ -107,7 +107,7 @@
         <p style="font-size: 23px; font-weight: 700;">공지사항</p>
 <c:forEach var="n" items="${ list }">
         <div class="title"><p style="font-size: 17px; font-weight: 600; width: 860px;
-        height: 35px;
+        height: 25px;
         line-height : 30px;
         margin-top: 10px;
         padding-bottom: 7px;
@@ -120,7 +120,7 @@ ${ n.noticeContent }
 </c:forEach>
 
         <div class="title"><p style="font-size: 17px; font-weight: 600; width: 860px;
-        height: 35px;
+        height: 25px;
         line-height : 30px;
         margin-top: 10px;
         padding-bottom: 7px;
@@ -132,16 +132,14 @@ ${ n.noticeContent }
 어버이날 EDITION 배송 관련 공지드립니다.
         
 기온과 습도에 따른 최고의 꽃 품질을 위하여, I Blossom에서는 단열재 포장의 유무를 
-자체적으로 판단하여 배송 할 예정입니다. (*습도 통풍 조절)
-        
+자체적으로 판단하여 배송 할 예정입니다. (*습도 통풍 조절)     
 소중한 분을 위한 꽃이니만큼 높은 품질의 꽃이 배송 될 수 있도록 계속 고민하겠습니다.
-        
-        
+              
 TIME TO BLOSSOM
 - I Blossom 드림.</pre>
 
         <div class="title"><p style="font-size: 17px; font-weight: 600;  width: 860px;
-        height: 35px;
+        height: 25px;
         line-height : 30px;
         margin-top: 10px;
         padding-bottom: 7px;
@@ -157,7 +155,7 @@ TIME TO BLOSSOM
         </pre>
 
         <div class="title"><p style="font-size: 17px; font-weight: 600; width: 860px;
-        height: 35px;
+        height: 25px;
         line-height : 30px;
         margin-top: 10px;
         padding-bottom: 7px;
@@ -173,10 +171,6 @@ TIME TO BLOSSOM
 기반으로, 서로가 서로에게, 그리고 무엇보다 나 자신에게 좀 더 쉽고 편하게 즐거움과 행복함을 선물해주는 
 문화를 지향합니다.
         
-새로워진 #온라인정기구독 서비스와 더불어, 단일꽃으로 구성 된 싱글라인, 믹스 된 부케라인, 
-그리고 100송이 규모의 자이언트 파트, 수입꽃 등 프리미엄 파트, 그리고 IBlossom의 시그니처 디자인을 담은 
-비스포크 파트가 포함 된 블랙라인까지, 리뉴얼 된 패키지와 함께 다채로워진 2022 신규 IBlossom 플라워 디자인을 
-지금 바로 리뉴얼 홈페이지를 통해 만나보시기 바랍니다.
     </pre>
     
     </div>

@@ -89,4 +89,22 @@ public class ProductServiceImpl implements ProductService{
 		return productDao.selectSearchList(sqlSession, pi, map);
 	}
 
+	@Override
+	public int selectSearchCount(String keyword) {
+	
+	  return productDao.selectSearchCount(sqlSession,keyword);
+	}
+
+	@Override
+	public ArrayList<Product> selectSearchList(String keyword) {
+
+	  return productDao.selectSearchList(sqlSession, keyword);
+	}
+
+@Override
+public ArrayList<Product> selectTagProduct(Product p) {
+	return productDao.selectTagProduct(sqlSession, p);
+}
+
+
 }

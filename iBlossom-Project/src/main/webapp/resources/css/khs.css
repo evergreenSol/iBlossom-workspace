@@ -203,7 +203,7 @@ height: 97%;
 
 /* 마이페이지 메인 시작*/
 
-#mainView-title{
+.mainView-title{
 	font-size : 24px;
 	font-weight : 700;
 }
@@ -424,6 +424,27 @@ height: 97%;
 	cursor : pointer; 
 }
 
+.close-sub {
+	margin-top: 75px;
+}
+
+.close-sub-btn {
+	width: 100px;
+    height: 100%;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: normal;
+    padding :7px 12px;
+    margin: 0px 10px;
+    
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255/var(--tw-text-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(21 21 21/var(--tw-bg-opacity));
+    border-radius: 3px;
+}
+
+
 
 
 /* 마이페이지 나의 구독정보 끝 */
@@ -562,6 +583,12 @@ height: 97%;
 	
 }
 
+tbody#qnaTbody tr:hover {
+	cursor: pointer;
+	background-color: lightgray;
+}
+
+
 .balloon {
     position: relative;
     display: inline-block;
@@ -618,6 +645,9 @@ height: 97%;
 	font-weight: 600;
 }
 
+
+/* 마이페이지 리뷰 시작 */
+
 .mypage-review-wrap {
 	
 	margin-top: 50px;
@@ -642,4 +672,7 @@ height: 97%;
     border-radius: 3px;
 }
 
-
+tbody#reviewTbody tr:hover {
+	cursor: pointer;
+	background-color: lightgray;
+}

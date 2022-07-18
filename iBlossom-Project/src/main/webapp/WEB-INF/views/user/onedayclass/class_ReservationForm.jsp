@@ -23,17 +23,17 @@
             <div class='pay-info1'>
                 <div id="pay-content1">주문 상품 정보</div>
                 <div id="pay-image"><img src="resources/images/onedayclass_main.jpg" width="120px" style="float:left;"></div>
-                <div id="pay-content1_1" name="className">${ oc.className }</div>
-                <div id="pay-content1_2" name="classNo">${ oc.classDate }</div>
-                <div id="pay-content1_3" name="price">${ oc.price }원</div>
+                <div id="pay-content1_1">${ oc.className }</div>
+                <div id="pay-content1_2">${ oc.classDate }</div>
+                <div id="pay-content1_3">${ oc.price }원</div>
                 <input type="hidden" id="classNo" value="${ oc.classNo }">
             </div>
             <div class='pay-info2'>
                 <div id="pay-content2">주문자 정보</div>
-                <div id="pay-content2_1" name="user_name">${ loginUser.userName }</div>
+                <div id="pay-content2_1" >${ loginUser.userName }</div>
                 
-                <div id="pay-content2_3" name="email">${ loginUser.email }</div>     
-                <div id="pay-content2_2" name="phone">${ loginUser.phone }</div> 
+                <div id="pay-content2_3" >${ loginUser.email }</div>     
+                <div id="pay-content2_2" >${ loginUser.phone }</div> 
                           
             </div>            
         </div>
@@ -66,7 +66,7 @@
             <input type="hidden" id="email" value="${ loginUser.email }">
             <input type="hidden" id="phone" value="${ loginUser.phone }">
             <input type="hidden" id="price" value="${ oc.price }">
-            <input type="text" id="classDate" value="${ oc.classDate }">
+            <input type="text" id="classDate2" value="${ oc.classDate2 }">
             <input type="text" id="className" value="${ oc.className }">
 			<input type="hidden" id="userNo" name="userNo" value="${ loginUser.userNo }">
 	    </div>
@@ -161,7 +161,7 @@
 				$.ajax({
     				url:"sendOnedayClassMessage.do",
     				data : {
-    					classDate : $("#classDate").val(),
+    					classDate2 : $("#classDate2").val(),
     					className : $("#className").val(),
     					price : $("#price").val()
     				},

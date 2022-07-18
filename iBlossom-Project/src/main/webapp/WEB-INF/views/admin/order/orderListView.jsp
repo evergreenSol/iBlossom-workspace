@@ -34,7 +34,7 @@
                 <span id="admin-login-text">admin</span>
 
                 <!-- 로그인 아이콘  -->
-                <a href="" id="admin-login-a">
+                <a href="logout.me" id="admin-login-a">
                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-person-fill" viewBox="0 0 16 16">
                         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                     </svg>
@@ -55,19 +55,11 @@
                 <!-- 메뉴 -->
                 <ul id="admin-navi">
                     <li><a href="list.me" class="admin-navi-menu">회원관리</a></li>
-                    
                     <li>
-                        <a href="adminList.or" class="admin-navi-menu" style="font-weight: 700;">주문정보관리</a>
-						<!--  회원번호로 정보를 받아야 하기 때문에 필요 없음 ! 
-	                       <ul class="admin-navi-ul">
-	                           <li><a href="adminList.or">전체주문내역</a></li>
-	                           <li><a href="adminDetail.or">개별주문내역</a></li>
-	                       </ul>
-                        -->
+                        <a href="adminList.or?cpage=1" class="admin-navi-menu" style="font-weight: 700;">주문정보관리</a>
                     </li>
-                    
                     <li>
-                        <a href="" class="admin-navi-menu">정기구독관리</a>
+                        <a href="subMemberListView.su" class="admin-navi-menu">정기구독관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="subMemberListView.su">구독회원관리</a></li>
                             <li><a href="listView.sp">구독상품관리</a></li>
@@ -75,15 +67,22 @@
                     </li>
                     <li><a href="list.pr" class="admin-navi-menu">상품관리</a></li>
                     <li><a href="reviewList.pr" class="admin-navi-menu">리뷰관리</a></li>
-                    <li><a href="" class="admin-navi-menu">클래스관리</a></li>
-                    <li>
-                        <a href="" class="admin-navi-menu">고객센터관리</a>
-                        <ul class="admin-navi-ul">
-                            <li><a href="">1:1 문의</a></li>
-                            <li><a href="">FAQ</a></li>
+                    <li><a href="classList.ad" class="admin-navi-menu">클래스관리</a>
+                    	<ul class="admin-navi-ul">
+                            <li><a href="classAddForm.ad">클래스 추가</a></li>
+                            <li><a href="classList.ad">클래스 예약내역</a></li>
                         </ul>
                     </li>
-                    <li><a href="" class="admin-navi-menu" id="admin-navi-chat">채팅관리</a></li>
+                    <li>
+                        <a href="qnaList.ad" class="admin-navi-menu">고객센터관리</a>
+                        <ul class="admin-navi-ul">
+                            <li><a href="qnaList.ad">1:1 문의</a></li>
+                            <li><a href="noticeList.ad">공지사항</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                    	<a href="https://dashboard.tawk.to/#/monitoring" target="_blank" class="admin-navi-menu" id="admin-navi-chat">채팅관리</a>
+                   	</li>
                 </ul>
 
             </div>
@@ -110,97 +109,85 @@
             
             <table class="admin-order-list-table">
             
-                <!-- 메뉴바 -->
+                <!-- 전체 주문 내역 > 메뉴바 -->
                 <thead id="admin-order-list-thead">
-
                     <tr>
-                        <th style="width:47px;">주문번호</th>
-                        <th style="width:47px;">회원번호</th>
-                        <th style="width:35px;">주문자</th>
-                        <th style="width:35px;">주문일</th>
-                        <th style="width:35px;">수령자</th>
-                        <th style="width:35px;">수령일</th>
-                        <th>수령자 연락처</th>
-                        <th style="width:155px;">배송지</th>
-                        <th style="width:47px;">우편번호</th>
-                        <th style="width:58px;">총결제금액</th>
-                        <th style="width:47px;">결제번호</th>
-                        <th style="width:47px;">주문상태</th>
-                        <th style="width:47px;">배송상태</th>
+                        <th width="50px;">주문번호</th>
+                        <th width="50px;">회원번호</th>
+                        <th width="100px;">주문자</th>
+                        <th width="100px;">주문일</th>
+                        <th width="100px;">수령일</th>
+                        <!-- <th>수령자 연락처</th> -->
+                        <!-- <th>배송지</th> -->
+                        <!-- <th>우편번호</th> -->
+                        <th width="100px;">총결제금액</th>
+                        <!-- <th>결제번호</th> -->
+                        <th width="100px;">주문상태</th>
+                        <th width="100px;">배송상태</th>
                     </tr>
-
                 </thead>
 
-                <!-- 전체 주문 내역 내용 -->
-                <tbody>
-
-                    <!-- <c:forEach var="o" items="${ list }">  -->  
-                    <tr>
-                        <td>
-                        	<button type="button" class="admin-table-btn" onclick="location.href=''">1</button>
-                        </td>
-                        <td>001</td>
-                        <td>아무개</td>
-                        <td>20220621</td>
-                        <td>아무개</td>
-                        <td>20220623</td>
-                        <td>010-0000-0000</td>
-                        <td>서울시 영등포구</td>
-                        <td>00123</td>
-                        <td>31,900원</td>
-                        <td>1</td>
-                        <td>결제완료</td>
-                        <td>배송중</td>
-                    </tr>
-                    <!-- </c:forEach>  -->
-
-                    <!-- 2 -->
-                    <tr>
-                        <td>
-                        	<button type="button" class="admin-table-btn" onclick="location.href=''">2</button>
-                        </td>
-                        <td>002</td>
-                        <td>박말똥</td>
-                        <td>20220622</td>
-                        <td>박말똥</td>
-                        <td>20220624</td>
-                        <td>010-0000-0000</td>
-                        <td>서울시 강서구</td>
-                        <td>00456</td>
-                        <td>24,900원</td>
-                        <td>2</td>
-                        <td>결제완료</td>
-                        <td>배송완료</td>
-                    </tr>
-
-                    <!-- 3 -->
+                <!-- 전체 주문 내역 > 내용 -->
+                <tbody> 
+                <c:forEach var="o" items="${ list }">
 		            <c:choose>
-			            <c:when test="${ empty list }">
-			                 <p style="text-align:center; font-size:20px;">존재하는 주문 내역이 없습니다.</p>
-			            </c:when>
-			            <c:otherwise>
-			            	<c:forEach var="o" items="${ list }">
-			                    <tr>
-			                        <td>
-			                        	<button type="button" class="admin-table-btn" onclick="location.href=''">${ o.orderNo }</button>
-			                        </td>
-			                        <td>002</td>
-			                        <td>고영희</td>
-			                        <td>20220622</td>
-			                        <td>고영희</td>
-			                        <td>20220624</td>
-			                        <td>010-0000-0000</td>
-			                        <td>서울시 양천구</td>
-			                        <td>00456</td>
-			                        <td>22,900원</td>
-			                        <td>3</td>
-			                        <td>결제완료</td>
-			                        <td>배송완료</td>                       
-			                    </tr>
-				             </c:forEach>                 
-				        </c:otherwise>   
-		                </c:choose>
-                </tbody>
+				        <c:when test="${ empty list }">
+				        	<p style="text-align:center; font-size:20px;">존재하는 주문 내역이 없습니다.</p>
+				        </c:when>
+				        <c:otherwise>
+				        <tr>
+	                    	<!-- 주문번호 -->
+	                        <td>
+	                        	<button type="button" class="admin-table-btn" 
+	                        	onclick="location.href='adminDetail.or?orderNo=${o.orderNo}'">${o.orderNo}</button>
+	                        </td>
+	                        
+	                        <!-- 회원번호 -->
+	                        <td>${ o.userNo }</td>
+	                        
+	                        <!-- 주문자 -->
+	                        <td>${ o.receiveUser }</td>
+	                        
+	                        <!-- 주문일 -->
+	                        <td>${ o.orderDate }</td>
+	                        
+	                        <!-- 수령일 -->
+	                        <td>${ o.receiveDate }</td>
+	                        
+	                        <!-- 수령자 연락처 -->
+	                        <!-- <td>010-0000-0000</td> -->
+	                        
+	                        <!-- 배송지 -->
+	                        <!-- <td>서울시 영등포구</td> -->
+	                        
+	                        <!-- 우편번호 -->
+	                        <!-- <td>00123</td> -->
+	                        
+	                        <!-- 총결제금액 -->
+	                        <td>${ o.totalPrice }원</td>
+	                        
+	                        <!-- 결제번호 -->
+	                        <!-- <td>1</td> -->
+	                        
+	                        <!-- 주문상태 -->
+	                        <td>${ o.orderStatus }</td>
+	                        
+	                        <!-- 배송상태 -->
+	                        <td>${ o.deliveryStatus }</td>
+	                        <!--  
+	                        <c:if test="${ (o.deliveryStatus ne '배송완료') or (o.deliveryStatus ne '배송중') }">
+                               	<td style="text-align: right; padding-right: 10px;" width="300">
+                               		<button class="mypage-pay-cancel" >취소하기</button>
+                               		<input type="hidden" value="${o.receiptId}">
+                               		<input type="hidden" value="${o.totalPrice}">
+                               	</td>
+                            </c:if>
+                            -->
+                    	</tr>         
+						</c:otherwise>
+		        	</c:choose>
+		        </c:forEach> 
+            </tbody>
 
             </table>
             
@@ -216,41 +203,51 @@
 		
 	<!------------------------------------------------------------------->
 
-    <!-- 페이징 처리 -->
-    
-    <div id="pagingArea">
-		<ul class="pagination">
+    <!-- 페이징 처리  -->
+   	<div id="pagingArea">
+      <ul class="pagination">
 
-			<c:choose>
-				<c:when test="${ pi.currentPage eq 1 }">
-					<li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
-				</c:when>
-				<c:otherwise>
-					<li class="page-item"><a class="page-link"
-						href="adminList.or?cpage=${ pi.currentPage - 1 }">◀</a></li>
-				</c:otherwise>
-			</c:choose>
+         <c:choose>
+            <c:when test="${ pi.currentPage eq 1 }">
+               <li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
+            </c:when>
+            <c:otherwise>
+               <li class="page-item"><a class="page-link"
+                  href="adminList.or?cpage=${ pi.currentPage - 1 }">◀</a></li>
+            </c:otherwise>
+         </c:choose>
 
-			
+		<%--
 			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-				<li class="page-item"><a class="page-link"
-					href="adminList.or?cpage=${ p }">${ p }</a></li>
-			</c:forEach>
+	           <li class="page-item"><a class="page-link" href="list.me?cpage=${ p }">${ p }</a></li>
+	        </c:forEach>
+	    --%>
+         
+          <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	      	  <c:choose>
+		       	  <c:when test="${ pi.currentPage eq p }">
+		              <li class="page-item"><a class="page-link"  style="color : #ff2393; font-weight:700;"
+		           	      href="adminList.or?cpage=${ p }">${ p }</a></li>
+		          </c:when>
+		          <c:otherwise>
+		              <li class="page-item"><a class="page-link" 
+		                  href="adminList.or?cpage=${ p }">${ p }</a></li>
+		          </c:otherwise>
+	          </c:choose>
+     	  </c:forEach>
 
-
-			<c:choose>
-				<c:when test="${ pi.currentPage eq pi.maxPage }">
-					<li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
-				</c:when>
-				<c:otherwise>
-					<li class="page-item"><a class="page-link"
-						href="adminList.or?cpage=${ pi.currentPage + 1 }">▶</a></li>
-				</c:otherwise>
-			</c:choose>
-
-		</ul>
-	       
-    </div>
+	         <c:choose>
+	            <c:when test="${ pi.currentPage eq pi.maxPage }">
+	               <li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
+	            </c:when>
+	            <c:otherwise>
+	               <li class="page-item"><a class="page-link"
+	                   href="adminList.or?cpage=${ pi.currentPage + 1 }">▶</a></li>
+	            </c:otherwise>
+	         </c:choose>
+	         
+      	</ul>
+	 </div>
     
 </body>
 </html>

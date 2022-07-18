@@ -49,6 +49,9 @@ public class MemberController {
 	private OrderService orderService;
 
 	@Autowired
+	private ProductService productService;
+	
+	@Autowired
 	private OnedayClassService onedayclassService;
 
 	@Autowired
@@ -431,79 +434,105 @@ public class MemberController {
 			return "user/member/deleteForm";
 		}
 
-
+		
 	}
+   
+   @RequestMapping(value="onedayClass.me")
+   public String myPageOneDayClass(HttpSession session, Model model) {
+      
+      
+      int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+      
+      ArrayList<OnedayClass> list = onedayclassService.selectMyOnedayClass(userNo);
+      
+      model.addAttribute("list", list);
+      
+      return "user/member/myPage_OnedayClass";
+   }
+   
+   // 나의 리뷰
+   @RequestMapping(value="reviewListView.me")
+   public String myPageReviewListView(HttpSession session, Model model) {
+      
+      int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+      
+      ArrayList<Review> list = reviewService.selectMyReview(userNo);
+      
+      model.addAttribute("list", list);
+      
+      return "user/member/myPage_ReviewListView";
+   }
+   
+    // 나의 리뷰 상세 보기
+   @RequestMapping(value="reviewDetailView.me")
+   public String myPageReviewDetailView(int reviewNo, Model model) {
+	   
+	   if(reviewNo == 0) {
+		   return "redirect:flowerList.pr";
+		   
+	   }
+	   
+	   Review r = reviewService.selectReview(reviewNo);
+	   
+	   System.out.println(r);
+	   
+	   model.addAttribute("r", r);
+	   
+	   return "user/member/myPage_ReviewDetailView";
+   }
+   
+   // 마이페이지 1대1문의
+   @RequestMapping(value="qnaListView.me")
+   public String myPageQnaListView(HttpSession session, Model model) {
+      
+      int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+      
+      ArrayList<Qna> list = qnaService.selectMyQnaList(userNo);
+      
+      // System.out.println(list);
+      
+      model.addAttribute("list", list);
 
-	@RequestMapping(value="onedayClass.me")
-	public String myPageOneDayClass(HttpSession session, Model model) {
-
-
-		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
-
-		ArrayList<OnedayClass> list = onedayclassService.selectMyOnedayClass(userNo);
-
-		model.addAttribute("list", list);
-
-		return "user/member/myPage_OnedayClass";
-	}
-
-	// 나의 리뷰
-	@RequestMapping(value="reviewListView.me")
-	public String myPageReviewListView(HttpSession session, Model model) {
-
-		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
-
-		ArrayList<Review> list = reviewService.selectMyReview(userNo);
-
-		model.addAttribute("list", list);
-
-		return "user/member/myPage_ReviewListView";
-	}
-
-	// 나의 리뷰 상세 보기
-	@RequestMapping(value="reviewDetailView.me")
-	public String myPageReviewDetailView(int reviewNo, Model model) {
-
-		Review r = reviewService.selectReview(reviewNo);
-
-		System.out.println(r);
-
-		model.addAttribute("r", r);
-
-		return "user/member/myPage_ReviewDetailView";
-	}
-
-	// 마이페이지 1대1문의
-	@RequestMapping(value="qnaListView.me")
-	public String myPageQnaListView(HttpSession session, Model model) {
-
-		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
-
-		ArrayList<Qna> list = qnaService.selectMyQnaList(userNo);
-
-		// System.out.println(list);
-
-		model.addAttribute("list", list);
-
-		return "user/member/myPage_QnaListView";
-	}
-
-	// 1대1문의 상세보기
-	@RequestMapping(value="qnaDetailView.me")
-	public String myPageQnaDetailView(int qnaNo, Model model) {
-
-		// System.out.println(qnaNo);
-
-		Qna q = qnaService.selectQna(qnaNo);
-		System.out.println(q);
-		model.addAttribute("q", q);
-
-		return "user/member/myPage_QnaDetailView";
-
-	}
-
-
-	// 날짜에 따른 배송상태 변경하기
+      return "user/member/myPage_QnaListView";
+   }
+   
+   // 1대1문의 상세보기
+   @RequestMapping(value="qnaDetailView.me")
+   public String myPageQnaDetailView(int qnaNo, Model model) {
+	   
+	   // System.out.println(qnaNo);
+	   
+	   if(qnaNo == 0) {
+		   return "redirect:qnaForm.qu";
+	   }
+	   
+	   Qna q = qnaService.selectQna(qnaNo);
+	   System.out.println(q);
+	   model.addAttribute("q", q);
+	   
+	   return "user/member/myPage_QnaDetailView";
+	   
+   }
+   
+   
+   // 날짜에 따른 배송상태 변경하기
+   @ResponseBody
+   @RequestMapping(value="checkDate.me")
+   public String updateDeliverStatus() {
+	   
+	   int result1 = subscribeService.updateDeliverStatus();
+	   
+	   int result2 = orderService.updateDeliveryStatus();
+	   
+	   if(result1 * result2 > 0) {
+		   return "1";
+	   }
+	   else {
+		   return "0";
+	   }
+   }
+   
+	// 누적금에 따른 회원 등급 변경하기
 	@ResponseBody
 	@RequestMapping(value="checkDate.me")
 	public String updateDeliverStatus() {
@@ -705,4 +734,38 @@ public class MemberController {
 }
 
 
+	
+	// 구독 취소 시 DB 환불 반영
+	
+	
+	
+	
+	// 검색용 메소드
+	@RequestMapping("search.me")
+	public String tagSearch(String keyword, Model model) {
+		
+		String modifiedKeyword = keyword.trim().replace(" ", "");
+		
+		System.out.println(modifiedKeyword);
+		
+		int searchCount = productService.selectSearchCount(modifiedKeyword); // 현재 검색결과에 맞는 게시글의 총 갯수
+		
+		// 조회 요청
+		ArrayList<Product> list = productService.selectSearchList(modifiedKeyword);
+		
+		System.out.println(list);
+
+		model.addAttribute("count",searchCount);
+		model.addAttribute("list", list);
+		model.addAttribute("keyword", modifiedKeyword);
+		
+
+		return "common/searchResultView";
+
+	}
+ 
+   
+}
+	
+	
 

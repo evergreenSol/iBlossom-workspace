@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,9 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.common.template.Pagination;
 import com.kh.iblossom.product.model.service.ProductService;
@@ -350,6 +354,49 @@ public class ProductController {
 			
 			return "admin/product/admin_product_ListView";
 		}
+	
+	// 이달의 꽃
+	@ResponseBody
+	@RequestMapping(value="flowerOfTheMonth.pr", produces="application/json; charset=UTF-8")
+	public String selectTagProduct(@RequestParam(value="keywords[]") ArrayList<String> keywords, HttpSession session) {
+		
+		System.out.println(keywords);
+		
+		ArrayList<String> list = keywords;
+		
+		ArrayList<Product> result = new ArrayList<>();
+		
+		
+		ArrayList<Product> resultP = new ArrayList<>();
+		
+		for(int i = 0; i < keywords.size(); i++) {
+			System.out.println(list.get(i));
+			
+			Product p = new Product();
+			
+			p.setTag(list.get(i));
+			
+			resultP = productService.selectTagProduct(p);
+			
+			result.addAll(resultP);
+			
+		}
+		
+		System.out.println(result);
+		
+		result.removeAll(Arrays.asList("", null));
+		
+		ArrayList<Product> selectList = (ArrayList<Product>) result.stream().distinct().collect(Collectors.toList());
+		
+		System.out.println(selectList);
+		
+		// session.setAttribute("selectList", selectList);
+		
+		return new Gson().toJson(selectList);
+		
+	}
+	
+	
 	
 
 	public String saveFile(MultipartFile thumNail, HttpSession session) {

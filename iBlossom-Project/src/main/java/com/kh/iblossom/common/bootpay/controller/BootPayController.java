@@ -1,11 +1,12 @@
 package com.kh.iblossom.common.bootpay.controller;
 
-import java.awt.Dimension;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import com.kh.iblossom.common.bootpay.model.vo.request.Cancel;
 import com.kh.iblossom.common.bootpay.model.vo.request.SubscribePayload;
 import com.kh.iblossom.common.bootpay.model.vo.response.ResDefault;
 import com.kh.iblossom.member.model.service.MemberService;
+import com.kh.iblossom.member.model.vo.Member;
 import com.kh.iblossom.subscribe.model.service.SubscribeService;
 import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
@@ -78,7 +80,7 @@ public class BootPayController {
 	
 	@ResponseBody
 	@RequestMapping("subscribe.do")
-	public void subscribe(String billingKey, Date executeAt, int miliperiod, int totalPrice, String subProductName, Subscribe s, int numOfPay) { 
+	public void subscribe(String billingKey, Date executeAt, int miliperiod, int totalPrice, String subProductName, Subscribe s, int numOfPay,HttpSession session) { 
 
 	int period = 1000*miliperiod;	
 	
@@ -92,7 +94,7 @@ public class BootPayController {
 				if(cancelParam==0) {	
 					goGetToken();
 					requestSubscribe(billingKey, totalPrice, subProductName);
-					insertSubscribe(s, numOfPay, totalPrice);
+					insertSubscribe(s, numOfPay, totalPrice, session);
 					
 					Calendar cal = Calendar.getInstance();
 					cal.setTime(s.getDeliverAt()); // 시간 설정
@@ -112,7 +114,12 @@ public class BootPayController {
 	
 	@ResponseBody
 	@RequestMapping(value="insert.su", produces="text/html; charset=UTF-8")
-	public String insertSubscribe(Subscribe s, int numOfPay, int totalPrice) {
+	public String insertSubscribe(Subscribe s, int numOfPay, int totalPrice, HttpSession session) {
+		
+		String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+		
+		Member m = new Member();
+		m.setUserId(userId);
 
 		int result = 0;
 		
@@ -160,8 +167,12 @@ public class BootPayController {
 				if (result < 1) {
 					break;
 				}
-			} 
+			}
+			
+			
 		}
+		Member updateMem = memberService.login(m);
+		session.setAttribute("loginUser", updateMem);
 		
 		return (result > 0) ? "iBlossom 상품 구독 등록 : 매달 싱싱하고 예쁜 꽃을 보내드릴게요 :)" : "상품 구독에 실패하였습니다 :(";
 

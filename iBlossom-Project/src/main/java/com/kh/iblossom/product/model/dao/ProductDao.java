@@ -75,6 +75,23 @@ public class ProductDao {
 
 		return (ArrayList)sqlSession.selectList("productMapper.selectListBase");
 	}
+
+
+	public int selectSearchCount(SqlSessionTemplate sqlSession, String keyword) {
+
+		return sqlSession.selectOne("productMapper.selectSearchCount", keyword);
+	}
+
+
+	public ArrayList<Product> selectSearchList(SqlSessionTemplate sqlSession, String keyword) {
+
+		return (ArrayList)sqlSession.selectList("productMapper.selectSearchList", keyword);
+	}
+	
+	// 이달의 꽃
+	public ArrayList<Product> selectTagProduct(SqlSessionTemplate sqlSession, Product p) {
+		return (ArrayList)sqlSession.selectList("productMapper.selectTagProduct", p);
+	}
 	
 	// 검색
 		public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {

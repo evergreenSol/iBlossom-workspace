@@ -45,4 +45,15 @@ public interface ProductService {
 	
 	// 구독 회원 검색용 메소드
 	ArrayList<Product> selectSearchList(PageInfo pi, HashMap<String, String> map);
+	// 검색용
+	int selectSearchCount(String keyword);
+	
+	// 검색 결과 조회용
+	ArrayList<Product> selectSearchList(String keyword);
+
+	// 이달의 꽃
+	ArrayList<Product> selectTagProduct(Product p);
+	
+
+	
 }

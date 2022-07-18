@@ -11,7 +11,7 @@
     <link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
     <script src="https://kit.fontawesome.com/c8ea39d107.js" crossorigin="anonymous"></script>
     <title>header</title>
-    <link href="resources/css/header.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
@@ -30,16 +30,16 @@
 
         <!-- 로고 -->
         <div id="header-logo-warp">
-            <a href="${ pageContext.request.contextPath }/"><img src="resources/images/iBlossom_logo_black.png" id="header-logo"></a>
+            <a href="${ pageContext.request.contextPath }/"><img src="${pageContext.request.contextPath}/resources/images/iBlossom_logo_black.png" id="header-logo"></a>
         </div>
 
       <!-- 로그인 완성 전까지 마이페이지 링크 로고에 걸어두겠습니다 : 2022-06-30 한솔 -->
 
         <!-- 검색창 -->
         <div id="header-search" style="position: relative;">
-            <form action="">
-                <button class="btn_search" style="position: absolute;"></button>
-                <input class="btn_text" type="text" placeholder="검색어를 입력하세요." style="border:0 solid black; border-radius: 30px; padding-left: 21px;">
+            <form action="search.me" method="post">
+                <button type="submit" class="btn_search" style="position: absolute;" onclick="return validate();"></button>
+                <input class="btn_text" type="text" placeholder="검색어를 입력하세요." name="keyword" value="${ keyword }" style="border:0 solid black; border-radius: 30px; padding-left: 21px;">
             </form>
         </div>
 
@@ -103,6 +103,9 @@
     
     
         <script>
+        
+        
+        
     	$(function () {
     		
     		$.ajax({
@@ -121,26 +124,43 @@
     			
     		});
     		
-    		$.ajax({
-    			url : "checkPurchase.me",
-    			success : function (result) {
-    				if(result == "1") {
-    					console.log("있음");
-    				}
-    				else {
-    					console.log("없음");
-    				}
-    			},
-    			error : function () {
-    				console.log("땡");
-    			}
+    		if(${ not empty loginUser }) {
     			
-    		});
+    			console.log(${loginUser.userNo})
+    			
+    			$.ajax({
+        			url : "checkPurchase.me",
+        			success : function (result) {
+        				if(result == "1") {
+        					console.log("있음");
+        				}
+        				else {
+        					console.log("없음");
+        				}
+        			},
+        			error : function () {
+        				console.log("땡");
+        			}
+        			
+        		});	
+    		}
     		
     		
     		
     	});
-    
+    	
+    	function validate() {
+	    	
+			var keyword = $(".btn_text").val();
+    		console.log(keyword);
+    		
+    		if(keyword=="") {
+    			return false
+			}
+    		
+			return true;
+    	}
+
     </script>
    
     

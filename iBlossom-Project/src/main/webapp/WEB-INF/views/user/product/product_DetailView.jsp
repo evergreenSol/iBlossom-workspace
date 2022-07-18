@@ -75,11 +75,9 @@
 										value="${p.flowerName }"
 										style="border: none; padding-left: 10px; outline: none; padding-top: 5px;"><br>
 									<br> <input type=hidden id="sell_price"
-										value="${ p.price }"> <input type="button" value=" - "
-										onclick="del();" style="margin-left: 10px;" class="detailBtn">
-									<input type="text" name="amount" value="1" size="1"
-										disabled="disabled"
-										style="background-color: white; border: 1px solid gray; height: 20px; text-align: center"
+										value="${ p.price }"> <input type="button"  value=" - "
+										onclick="del();" style="margin-left: 10px;" class="detailBtn"> 
+										<input type="text" name="productCount" value="1" size="1" readonly style="background-color: white; border: 1px solid gray; height:20px; text-align: center" 
 										onchange="change();"> <input type="button" value=" + "
 										onclick="add();" class="detailBtn"><br> <br>
 									<br> 배송비: <span style="padding-left: 200px"> 3,000
@@ -164,13 +162,13 @@
 
         function init() {
             sell_price = document.form.sell_price.value;
-            amount = document.form.amount.value;
+            amount = document.form.productCount.value;
             document.form.sum.value = sell_price;
             change();
         }
 
         function add() {
-            hm = document.form.amount;
+            hm = document.form.productCount;
             sum = document.form.sum;
             if(hm.value < 15){
            	 hm.value++;
@@ -182,7 +180,7 @@
         }
 
         function del() {
-            hm = document.form.amount;
+            hm = document.form.productCount;
             sum = document.form.sum;
             if (hm.value > 1) {
                 hm.value--;
@@ -191,7 +189,7 @@
         }
 
         function change() {
-            hm = document.form.amount;
+            hm = document.form.productCount;
             sum = document.form.sum;
 
             if (hm.value < 0) {

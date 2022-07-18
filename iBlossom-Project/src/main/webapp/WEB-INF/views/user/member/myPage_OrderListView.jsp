@@ -27,8 +27,9 @@
             	</td>
                 <td class="body_r" width="900" style="vertical-align: top;">
                     <div class="delete">
-						
-                        <h2>나의주문내역</h2>
+						<div style="margin : 20px 0px;">
+                        <span class="mainView-title">나의 주문 내역</span>
+                        </div>
                         <!-- <hr color="lightgray"> -->
                         <!--
                         <table style="text-align: center">
@@ -87,7 +88,7 @@
                                 <th>배송상태</th>
                                 <td></td>
                                 <td>${ o.deliveryStatus }</td>
-                                <c:if test="${ (o.deliveryStatus ne '배송완료') or (o.deliveryStatus ne '배송중') }">
+                                <c:if test="${ (o.deliveryStatus ne '배송완료') and (o.deliveryStatus ne '배송중') }">
                                 	<td style="text-align: right; padding-right: 10px;" width="300">
                                 		<button class="mypage-pay-cancel" >취소하기</button>
                                 		<input type="hidden" value="${o.receiptId}">

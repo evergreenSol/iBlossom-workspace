@@ -27,10 +27,11 @@
             	</td>
                 <td class="body_r" width="900" style="vertical-align: top;">
                     <div class="delete">
-                    	<h2>1대1 문의내역</h2>
-                    
+	                    <div style="margin : 20px 0px;">
+	                    	<span class="mainView-title">1대1 문의내역</span>
+	                    </div>
                    		<div style="width: 100%">
-                            <table align="center" style="text-align: center; font-size: 14px; width: 100%; border-collapse: collapse;" id="qnaTable">
+                            <table align="center" style="text-align: center; font-size: 16px; width: 100%; border-collapse: collapse;" id="qnaTable">
                                 <thead style="background: rgb(248, 248, 248); border-style: none;">
                                     <tr height="40">
                                     	<th width="50">번호</th>
@@ -39,11 +40,12 @@
                                         <th width="150">문의 상태</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="qnaTbody">
                                 <c:if test="${ not empty list }">
                                 
                                 <c:forEach var="q" items="${ list }">
                                     <tr height="40">
+                                   		<input type="hidden" value="${ q.qnaNo }">
                                     	<td>${ q.qnaNo }</td>
                                         <td>${ q.qnaDate }</td>
                                         <td>${ q.qnaTitle }</td>
@@ -61,11 +63,14 @@
                                 </c:forEach>
                                 </c:if>
                                 <c:if test="${ empty list }">
-                                	
-                                	<td height="300" width="900" colspan="4" id="no-qna">
-                                		회원님께서 남기신 문의가 없습니다.
-                                	</td>
-                               
+                                	<tr>
+                                		<input type="hidden" value="0">
+	                                	<td height="300" width="900" colspan="4" id="no-qna">
+	                                		회원님께서 남기신 문의가 없습니다.<br><br>
+	                                		[ 1대1문의 작성하러 가기 ]
+	                                	</td>
+                              		 </tr>
+                              		 
                                 </c:if>
                                 </tbody>
                             </table>
@@ -86,8 +91,9 @@
 	<script>
 		$(function () {
 			$("#qnaTable>tbody").on("click", "tr", function () {
-				console.log($(this).children().eq(0).text());
-				location.href="qnaDetailView.me?qnaNo=" + $(this).children().eq(0).text();
+				console.log($(this).children().eq(0).val());
+				
+				location.href="qnaDetailView.me?qnaNo=" + $(this).children().eq(0).val();
 			});
 		
 			$("#category-qna").css("font-weight", "700");
