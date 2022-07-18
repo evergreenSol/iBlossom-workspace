@@ -542,7 +542,8 @@ public class MemberController {
 		}
 	}
    
-	@RequestMapping(value="refund.me", method=RequestMethod.POST) 
+	// 구매 취소 시 DB 환불 반영
+	@RequestMapping(value="refund.me") 
 	public String refundPurchase(Order o, HttpSession session) {
 		
 		System.out.println("refund.me 로 넘어옴");
@@ -579,6 +580,11 @@ public class MemberController {
 			return "redirect:orderListView.me";
 		}
 	}
+	
+	// 구독 취소 시 DB 환불 반영
+	
+	
+	
 	
 	// 검색용 메소드
 	@RequestMapping("search.me")

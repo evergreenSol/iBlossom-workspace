@@ -236,8 +236,22 @@
 									success : function(result) {
 
 										// alert("구독 취소되었습니다.");
+										$.ajax({
+											url : "refund.me",
+											data : {
+												totalPrice : refundPrice
+											},
+											success: function () {
+												location.reload();
+											},
+											error : function () {
+												
+											}
+											
+										});
 										
-										location.reload();
+										
+										
 									
 									}, error : function() {
 										console.log("안되면 집ㄱ");
