@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,12 +75,12 @@
                                 <th>수업일</th>
                                 <td></td>
                                
-                                <td>${c.classDate }</td>
+                                <td>${c.classDate2 }</td>
                             </tr>
                             <tr>
                                 <th>수업료</th>
                                 <td></td>
-                                <td>${c.price}원</td>
+                                <td><fmt:formatNumber value="${ c.price }" pattern="###,###"/>원</td>
                             </tr>
                             <tr>
                                 <th>진행여부</th>

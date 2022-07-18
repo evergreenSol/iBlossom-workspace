@@ -187,9 +187,10 @@
 			var refundPrice;
 			
 			var subPrice = ${ list[0].subPrice }
-			var receiptId = $(this).next().val()
 			
 			$(".mypage-subscribe-cancel").click(function () { 
+			var receiptId = $(this).next().val()
+			console.log(receiptId);
 				
 				console.log("클릭됨");
 		

@@ -11,7 +11,7 @@
     <link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
     <script src="https://kit.fontawesome.com/c8ea39d107.js" crossorigin="anonymous"></script>
     <title>header</title>
-    <link href="resources/css/header.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
@@ -30,7 +30,7 @@
 
         <!-- 로고 -->
         <div id="header-logo-warp">
-            <a href="${ pageContext.request.contextPath }/"><img src="resources/images/iBlossom_logo_black.png" id="header-logo"></a>
+            <a href="${ pageContext.request.contextPath }/"><img src="${pageContext.request.contextPath}/resources/images/iBlossom_logo_black.png" id="header-logo"></a>
         </div>
 
       <!-- 로그인 완성 전까지 마이페이지 링크 로고에 걸어두겠습니다 : 2022-06-30 한솔 -->

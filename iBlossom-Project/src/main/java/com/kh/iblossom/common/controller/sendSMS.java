@@ -31,7 +31,7 @@ public class sendSMS {
 	    
 	    phone = phone.replace("-", "");
 	    
-	    String classDate = o.getClassDate();
+	    String classDate = o.getClassDate2();
 	    String className = o.getClassName();
 	    int price = o.getPrice();
 	    
