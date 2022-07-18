@@ -152,7 +152,7 @@ div { box-sizing: border-box; }
         display: flex;
         justify-content: space-between; 
         height: 400px;
-        padding: 5px;
+        padding: 25px;
     }
     
     /* 세로 정렬 */
@@ -168,9 +168,10 @@ div { box-sizing: border-box; }
     
     /* 장바구니 이미지 사이즈 */
     .cart-content2>img {
-    	 width: 300px; 
-    	 height: 300px;
+    	 width: 290px; 
+    	 height: 100%;
     	 padding: 25px;
+    	 margin-top: 30px;
     }
     
     /* 세로정렬 flex 제외 */
@@ -276,7 +277,7 @@ div { box-sizing: border-box; }
 	
 	.cart-content5 {
 		width: 60px;
-		margin-left: -25px;
+		margin-left: -23px;
 	}
 
 	
@@ -556,8 +557,8 @@ div { box-sizing: border-box; }
     
     /* 주문내역확인 - 상품이미지 */
     .order-check-content>span>img {
-    	width: 250px; 
-    	height: 250px;
+    	width: 290px; 
+    	height: 100%;
     }
 
 

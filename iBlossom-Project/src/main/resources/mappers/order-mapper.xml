@@ -18,6 +18,7 @@
 		<result column="THUMBNAIL" property="thumbnail"/> <!-- 대표사진 -->
 	</resultMap>
 	
+	
 	<resultMap id="detailOrderResultSet" type="detailOrder">
 		<result column="DORDER_NO" property="dorderNo"/>
 		<result column="ORDER_NO" property="orderNo"/>
@@ -27,32 +28,7 @@
 		<result column="FLOWER_NAME" property="flowerName"/>
 		<result column="THUMBNAIL" property="thumbnail"/>
 	</resultMap>
-	<!--
-	<select id="selectOrderListCount" resultType="_int">
-		SELECT COUNT(*)
-		FROM ORDER_TBL
-		WHERE ORDER_STATUS = 'Y'
-	</select>
-	-->
-	
-	<!--
-	<select id="selectOrderList" resultMap="orderResultSet">
-		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, PRICE, 
-		       TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE",
-		       TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", ORDER_STATUS
-		FROM ORDER_TBL
-		WHERE ORDER_STATUS = 'Y'
-		ORDER BY ORDER_DATE DESC, ORDER_NO DESC
-	</select>
-	-->
-	<!-- 
-  	<select id="selectCart" resultMap="cartResultSet">
-  		SELECT CART_NO, USER_NO, PRODUCT_NO, FLOWER_NAME, PRODUCT_PRICE, PRODUCT_COUNT, THUMBNAIL
-  		FROM CART
-		JOIN PRODUCT USING (PRODUCT_NO)
-		WHERE USER_NO = #{userNo}
-  	</select>
-  	 -->
+
 
   	<insert id="insertOrder" parameterType="order">
   		INSERT INTO ORDER_TBL (ORDER_NO
@@ -82,6 +58,7 @@
 		     )
   	</insert>
   	
+  	
   	<insert id="insertDetailOrder" parameterType="detailOrder">
   		INSERT INTO DETAIL_ORDER(DORDER_NO, ORDER_NO, PRODUCT_NO, ONE_PRICE, ONE_QUANTITY)
   		VALUES(SEQ_DORNO.NEXTVAL,
@@ -92,11 +69,13 @@
   			   )
   	</insert>
   	
+  	
   	<select id="selectOrder" parameterType="string" resultMap="orderResultSet">
   		SELECT *
   		FROM ORDER_TBL
   		WHERE RECEIPT_ID = '${receiptId}'
    	</select>
+	
 	
 	<select id="selectMyOrderList" parameterType="_int" resultMap="orderResultSet">
 		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE", TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", RECEIVE_USER, RECEIVE_PHONE, ORDER_ADDRESS
@@ -108,6 +87,7 @@
 		  ORDER BY ORDER_NO DESC
 	</select>
 	
+	
 	<select id="selectMyOrderCancelList" parameterType="_int" resultMap="orderResultSet">
 		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE", TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", RECEIVE_USER, RECEIVE_PHONE, ORDER_ADDRESS
   			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL
@@ -118,12 +98,14 @@
 		  ORDER BY ORDER_NO DESC
 	</select>
 	
+	
 	<update id="cancelMyPay" parameterType="string">
 		UPDATE ORDER_TBL
 		   SET ORDER_STATUS = '결제취소',
 		   	   DELIVERY_STATUS = '결제취소'
 		 WHERE RECEIPT_ID = '${receiptId}'
 	</update>
+	
 	
 	<select id="selectMyDetailOrderList" parameterType="_int" resultMap="detailOrderResultSet">
 		SELECT DORDER_NO, ORDER_NO, DO.PRODUCT_NO, ONE_PRICE, ONE_QUANTITY, FLOWER_NAME, THUMBNAIL
@@ -132,12 +114,14 @@
 		WHERE ORDER_NO = #{orderNo}
 	</select>
 	
+	
 	<select id="selectMyOneOrder" parameterType="_int" resultMap="orderResultSet">
 		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE", TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", RECEIVE_USER, RECEIVE_PHONE, ORDER_ADDRESS
   			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL
 		FROM ORDER_TBL
 		WHERE ORDER_NO = #{orderNo}
 	</select>
+
 
 	<select id="countReady" parameterType="_int" resultType="_int">
 		SELECT COUNT(*)
@@ -150,6 +134,7 @@
 		   
 	</select>
 
+
 	<select id="countShipping" parameterType="_int" resultType="_int">
 		SELECT COUNT(*)
 		  FROM ORDER_TBL
@@ -159,6 +144,7 @@
 		   AND ADD_MONTHS(SYSDATE, -1) <= ORDER_DATE
 		   ]]-->
 	</select>
+
 
 	<select id="countComplete" parameterType="_int" resultType="_int">
 		SELECT COUNT(*)
@@ -171,6 +157,7 @@
 		   
 	</select>
 	
+	
 	<select id="selectMyOrderAllList" parameterType="_int" resultMap="orderResultSet">
 		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE", TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", RECEIVE_USER, RECEIVE_PHONE, ORDER_ADDRESS
   			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL
@@ -181,6 +168,7 @@
 	    ]]-->
 	    ORDER BY ORDER_NO DESC
 	</select>
+	
 	
 	<!-- (자동) 배송상태 변경하기 -->
   	<update id="updateDeliveryStatus">
@@ -196,6 +184,7 @@
 		WHERE NOT DELIVERY_STATUS IN('결제취소')
   	</update> 
 
+
 	<!--  지승아 리뷰 오더 검사-->
 	<select id="selectOrderReview" parameterType="review" resultMap="orderResultSet">
 		SELECT *
@@ -205,6 +194,60 @@
 		WHERE PRODUCT_NO = #{productNo}
 		AND USER_NO = #{userNo}
 	</select>
+	
+	
+	<!-- 관리자 - 개별주문내역 조회용 메소드 (상세보기) -->
+	<select id="adminSelectDetail" parameterType="_int" resultMap="detailOrderResultSet">
+		SELECT DORDER_NO, ORDER_NO, DO.PRODUCT_NO, ONE_PRICE, ONE_QUANTITY, FLOWER_NAME, THUMBNAIL
+		  FROM DETAIL_ORDER DO
+		  JOIN PRODUCT P ON (DO.PRODUCT_NO = P.PRODUCT_NO)
+		WHERE ORDER_NO = #{orderNo}
+	</select>
+	
+	
+	<!-- 관리자 - 개별주문내역 조회용 메소드 (주문한개) -->
+	<select id="selectOneOrder" parameterType="_int" resultMap="orderResultSet">
+		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE", TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", RECEIVE_USER, RECEIVE_PHONE, ORDER_ADDRESS
+  			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL
+		FROM ORDER_TBL
+		WHERE ORDER_NO = #{orderNo}
+	</select>
+	
+	
+	<select id="selectOrderListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM ORDER_TBL
+	</select>
+	
+
+	<!-- 관리자 - 전체주문내역 조회용 메소드 + 페이징처리 -->
+	<select id="adminSelectList" resultMap="orderResultSet">
+		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE", TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", RECEIVE_USER, RECEIVE_PHONE, ORDER_ADDRESS
+  			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL
+		FROM ORDER_TBL
+	</select>
+	
+	  	 
+	<!-- 관리자 - 전체주문내역 조회용 메소드 -->
+	<!--  
+	<select id="adminSelectList" resultMap="orderResultSet">
+		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE", TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", RECEIVE_USER, RECEIVE_PHONE, ORDER_ADDRESS
+  			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL
+		FROM ORDER_TBL
+		WHERE ORDER_STATUS = 'Y'
+		ORDER BY ORDER_DATE DESC, ORDER_NO DESC
+	</select>
+	-->
+
+	<!-- 
+  	<select id="selectCart" resultMap="cartResultSet">
+  		SELECT CART_NO, USER_NO, PRODUCT_NO, FLOWER_NAME, PRODUCT_PRICE, PRODUCT_COUNT, THUMBNAIL
+  		FROM CART
+		JOIN PRODUCT USING (PRODUCT_NO)
+		WHERE USER_NO = #{userNo}
+  	</select>
+  	 -->
+
 
 
 </mapper>

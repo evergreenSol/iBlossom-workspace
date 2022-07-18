@@ -35,11 +35,22 @@ public class OrderServiceImpl implements OrderService{
 		return orderDao.selectOrderListCount(sqlSession);
 	}
 
+	// 페이징처리 (메소드이름은 관리자 - 전체주문내역 )
 	@Override
-	public ArrayList<Order> selectOrderList(PageInfo pi) {
+	public ArrayList<Order> adminSelectList(PageInfo pi) {
 		
-		return orderDao.selectOrderList(sqlSession, pi);
+		return orderDao.adminSelectList(sqlSession, pi);
 	}
+	
+
+	// 관리자 - 전체주문내역 조회용 메소드
+	/*
+	@Override
+	public ArrayList<Order> adminSelectList() {
+		
+		return orderDao.adminSelectList(sqlSession);
+	}
+	*/
 
 	@Override
 	public int insertOrder(Order o) {
@@ -113,11 +124,25 @@ public class OrderServiceImpl implements OrderService{
 		return  orderDao.updateDeliveryStatus(sqlSession);
 	}
 
-	//승아 리뷰
+	// 승아 리뷰
 	@Override
 	public ArrayList<Order> selectOrderReview(Review r) {
 		
 		return orderDao.selectOrderReview(sqlSession,r);
+	}
+
+	// 관리자 - 개별주문내역 조회용 메소드 (상세보기)
+	@Override
+	public ArrayList<DetailOrder> adminSelectDetail(int orderNo) {
+
+		return orderDao.adminSelectDetail(sqlSession, orderNo);
+	}
+
+	// 관리자 - 개별주문내역 조회용 메소드 (주문한개)
+	@Override
+	public Order selectOneOrder(int orderNo) {
+		
+		return orderDao.selectOneOrder(sqlSession, orderNo);
 	}
 	
 	

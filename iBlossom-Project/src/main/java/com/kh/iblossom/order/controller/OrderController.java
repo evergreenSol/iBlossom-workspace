@@ -41,8 +41,8 @@ public class OrderController {
 	@RequestMapping("detail.or")
 	public String DetailOrder(CartCommand cartCommand, HttpSession session, Model model) {
 		
-		System.out.println("옴");
-		System.out.println(cartCommand);
+		// System.out.println("옴");
+		// System.out.println(cartCommand);
 		
 		ArrayList<Cart> list = (ArrayList<Cart>)cartCommand.getCartList();
 		
@@ -56,8 +56,8 @@ public class OrderController {
 			
 			ArrayList<Cart> selectList = new ArrayList<>();
 			
-			System.out.println("list: " + list);
-			System.out.println("크기: " + list.size());
+			// System.out.println("list: " + list);
+			// System.out.println("크기: " + list.size());
 			
 			for(int i = 0; i < list.size(); i++) {
 				
@@ -83,7 +83,7 @@ public class OrderController {
 				}
 			}
 			
-			System.out.println(selectList);
+			// System.out.println(selectList);
 			
 			model.addAttribute("selectList", selectList);
 			
@@ -106,7 +106,7 @@ public class OrderController {
 	@RequestMapping("insert.or")
 	public String insertOrder(Order o, HttpSession session, Model model) {
 		
-		System.out.println(o);
+		// System.out.println(o);
 		
 		String receiptId = o.getReceiptId();
 		int oNo;
@@ -114,8 +114,8 @@ public class OrderController {
 		// 오더 테이블 만들기(주문)
 		int result = orderService.insertOrder(o);
 		
-		System.out.println("result = " + result);
-		System.out.println("receiptId = " + receiptId);
+		// System.out.println("result = " + result);
+		// System.out.println("receiptId = " + receiptId);
 		
 		if(result > 0) { // 오더테이블이 만들어짐
 			
@@ -138,8 +138,8 @@ public class OrderController {
 	public String insertDetailOrder(DetailOrderCommand detailOrderCommand, int orderNo, HttpSession session, Model model) {
 		// 디테일 오더 테이블 만들기(주문상세)
 		
-		System.out.println("트리거 실행");
-		System.out.println(detailOrderCommand);
+		// System.out.println("트리거 실행");
+		// System.out.println(detailOrderCommand);
 		
 		ArrayList<DetailOrder> list = (ArrayList<DetailOrder>)detailOrderCommand.getDetailOrderList();
 		
@@ -191,6 +191,84 @@ public class OrderController {
 	
 	// 관리자 영역
 	
+	// 관리자 페이지에서 쓰일 < 페이징 처리 >
+	// 페이징처리를 위한 변수들 셋팅 => PageInfo 객체
+	@RequestMapping("adminList.or") /**/
+	public String selectOrderList(
+			@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model) {
+
+		int listCount = orderService.selectOrderListCount();
+
+		int pageLimit = 10;
+		int boardLimit = 5;
+
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+
+		// * 이슈발생 *
+		// 왜 메소드이름이 adminSelectList 이냐 ?
+		// 관리자 전체주문내역 조회용 메소드의 내용을 불러오기 위해서이다.
+		ArrayList<Order> list = orderService.adminSelectList(pi);
+		
+		System.out.println(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+
+		// 전체주문내역 화면 포워딩
+		return "admin/order/orderListView";
+		
+	}
+	
+	/*
+	 * // 관리자 - 전체주문내역 조회용 메소드
+	 * 
+	 * @RequestMapping(value="adminList.or") public String adminSelectList(Model
+	 * model) {
+	 * 
+	 * ArrayList<Order> list = orderService.adminSelectList();
+	 * 
+	 * System.out.println(list);
+	 * 
+	 * model.addAttribute("list", list);
+	 * 
+	 * return "admin/order/orderListView";
+	 * 
+	 * }
+	 */
+	
+    // 관리자 - 개별주문내역 조회용 메소드 (상세보기)
+    @RequestMapping(value="adminDetail.or")
+    public String adminSelectDetail(int orderNo, Model model) {
+ 	   
+ 	  ArrayList<DetailOrder> list = orderService.adminSelectDetail(orderNo);
+ 	  
+ 	  // 주문 한개
+ 	  Order o = orderService.selectOneOrder(orderNo);
+ 	  
+ 	  System.out.println(list);
+ 	  System.out.println(o);
+ 	  
+ 	  model.addAttribute("list", list);
+ 	  model.addAttribute("o", o);
+ 	  
+       // 매개변수로 주문 번호 가져오기
+       // DB에서 해당 주문의 상세내역을 ArrayList로 받아오기
+       
+       return "admin/order/orderDetailView";
+    }
+    
+    
+	/*
+	// 기존에 연결을 위해 쓴거 
+	// 주문
+	@RequestMapping("detailView.or")
+	public String DetailOrderList() {
+		return "user/order/order_DetailView";
+		// /WEB-INF/views/user/order/order_DetailView.jsp
+	}*/
+    
+	
+	/*
 	// 관리자 - 전체주문내역
 	@RequestMapping("adminList.or")
 	public String orderListView() { 
@@ -202,56 +280,6 @@ public class OrderController {
 	public String orderDetailView() { 
 		return "admin/order/orderDetailView"; 
 	}
-	
-	// 관리자 페이지에서 쓰일 < 페이징 처리 >
-	
-	// 페이징처리를 위한 변수들 셋팅 => PageInfo 객체
-	@RequestMapping("list.or") /**/
-	public String selectOrderList(
-			@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model) {
-
-		int listCount = orderService.selectOrderListCount();
-
-		int pageLimit = 10;
-		int boardLimit = 5;
-
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
-
-		ArrayList<Order> list = orderService.selectOrderList(pi);
-
-		model.addAttribute("pi", pi);
-		model.addAttribute("list", list);
-
-		// 전체주문내역 화면 포워딩
-		return "admin/order/orderListView";
-		
-	}
-	
-	// 관리자 - 전체주문내역 조회용 메소드
-    @RequestMapping(value="adminSelectList.or")
-    public String adminSelectList(HttpSession session, Model model) {
-      
-       int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
-	   
-       ArrayList<Order> list = orderService.adminSelectList(userNo);
-	   
-       System.out.println(list);
-      
-       model.addAttribute("list", list);
-      
-       // DB에서 주문내역을 ArrayList로 받아오기. 
-      
-       return "admin/order/orderListView"; 
-	      
-	 }
-	
-	/*
-	// 기존에 연결을 위해 쓴거 
-	// 주문
-	@RequestMapping("detailView.or")
-	public String DetailOrderList() {
-		return "user/order/order_DetailView";
-		// /WEB-INF/views/user/order/order_DetailView.jsp
-	}*/
+	*/
 	
 }
