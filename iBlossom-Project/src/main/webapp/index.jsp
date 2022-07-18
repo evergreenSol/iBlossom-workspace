@@ -210,7 +210,7 @@
 				var resultArr=[];
 				for(var i = 0; i < result.length; i++) {
 					
-					resultStr += '<div class="swiper-slide">\r\n<img src="'+ result[i].thumbNail +'">\r\n<span class="main-slider-text" id="main-slider-Gangneung-text">'+ result[i].flowerName +'</span>\r\n</div>\r\n';
+					resultStr += '<div class="swiper-slide"><input type="hidden" value="'+ result[i].productNo +'">\r\n<img src="'+ result[i].thumbNail +'">\r\n<span class="main-slider-text" id="main-slider-Gangneung-text">'+ result[i].flowerName +'</span>\r\n</div>\r\n';
 							   // resultStr += "<div class=\"swiper-slide\">result[i].thumbNail</div>";
 					// resultArr.push(resultStr);
 					
@@ -228,6 +228,15 @@
 			error : function () {
 				
 			}
+			
+		});
+		
+		// 문제는 조합형의 경우, 맵핑값이 달라서 에러가 날 수 있을 것 같다.
+		$(".swiper-wrapper").on("click", "div", function () {
+			
+			console.log("클릭됨");
+			console.log($(this).children().eq(0).val());
+			location.href="detailList.pr?pno="+$(this).children().eq(0).val();
 			
 		});
 		
