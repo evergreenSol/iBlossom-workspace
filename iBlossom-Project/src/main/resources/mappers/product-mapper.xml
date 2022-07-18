@@ -140,6 +140,6 @@
 	<select id="selectTagProduct" parameterType="product" resultMap="productResultSet">
 		SELECT *
 		FROM PRODUCT
-		WHERE TAG LIKE '%${tag}%' 
+		WHERE TAG LIKE '%${tag}%'
 	</select>
 </mapper>
