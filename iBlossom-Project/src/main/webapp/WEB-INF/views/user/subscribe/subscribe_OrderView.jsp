@@ -457,10 +457,10 @@
 			async : true
 		}).error(function (data) {
 			//결제 진행시 에러가 발생하면 수행됩니다.
-			console.log(data);
+			alert(data.message);
 		}).cancel(function (data) {
-			//결제가 취소되면 수행됩니다.
-			console.log(data);
+			//결제가 취소되면 수행됩니다.	
+			alert(data.message);
 		}).done(function (data) {
 			var totalPrice = $('#totalPrice').val();
 
