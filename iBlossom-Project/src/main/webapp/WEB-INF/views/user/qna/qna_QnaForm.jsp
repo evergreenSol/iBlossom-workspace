@@ -56,35 +56,30 @@
         </div>
 	
 		<form id="answer-container" method="post" action="insert.qu">
-			<p id="ans" style="font-size: 23px; font-weight: 700;">문의하기</p>
-			<table id="anwcontent" border="1" style="border-collapse: collapse;">
-				<tr>
-					<th width="120" height="40" style="font-size: 16px;"><label for="title">제목</label></th>
-					<td width="720" ><input type="text" id="qnaTitle" name="qnaTitle" style="border:none; outline:none; width:700px; height:35px; font-size:15px;" maxlength="50" required></td>
+			<p id="ans" style="font-size: 23px; font-weight: 700;">문의하기</p><br>
+			<table id="anwcontent" border="1" style="border-collapse: collapse; ">
+			 <div>
+					<label for="title" style="font-size: 18px; font-weight: 700;">제목</label><br><br>
+					<input type="text" id="qnaTitle" name="qnaTitle" style=" width:695px; height:35px; font-size:16px;" maxlength="50" required>
 
-				</tr>
-				<tr>
+			</div>
+            <br>
+				<div id="anwcontent">
 				<c:choose>
                     <c:when test="${ empty loginUser }">
-		            	<th style="font-size: 16px;"><label for="content">내용</label></th>
-							<td id="anwcontent" colspan="3">
+		            	<label for="content" style="font-size: 18px; font-weight: 700;">내용</label><br><br>	
 								<p style="height:200px; margin:0px; padding:0px;"><textarea id="qnaContent" name="qnaContent"  cols="87" rows="10.5" maxlength="700"
-									style="resize:none;border: none; font-size:15px;" readonly>로그인한 사용자만 이용 가능한 서비스입니다. 로그인 후 이용 바랍니다.</textarea></p>
-							</td>
+									style="resize:none; font-size:16px; width:695px;" readonly>로그인한 사용자만 이용 가능한 서비스입니다. 로그인 후 이용 바랍니다.</textarea></p>
+                        </div>
                   		</c:when>
              		<c:otherwise>
-						<th style="font-size: 16px;"><label for="content">내용</label></th>
-							<td id="anwcontent" colspan="3">
+		            	<label for="content" style="font-size: 18px; font-weight: 700;">내용</label><br><br>	
 								<p style="height:200px; margin:0px; padding:0px;"><textarea id="qnaContent" name="qnaContent"  cols="87" rows="10.5" maxlength="700"
-									style="resize:none; border: none; outline:none; font-size: 15px;" required></textarea></p>
-							</td>	
+									style="resize:none; font-size:16px; width:695px;" required></textarea></p>
+                        </div>	
                		</c:otherwise>
                	</c:choose>
-				</tr>
-				<tr>
-					<th height="30">답변</th>
-					<td colspan="3"></td>               
-				</tr>           
+				</tr>         
 			</table>
 			<c:if test="${ loginUser != null }">
 				<button id="questionBtn" type="submit">작성하기</button>
