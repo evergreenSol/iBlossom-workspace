@@ -29,92 +29,92 @@
 	<div id="wrap_detail">
 		<div style="width: 1000px; margin: auto;">
 			<br>
-			<form name="form" method="get" action="insert.ca" id="cartInfo">
-				<input type="hidden" name="productNo" value="${ p.productNo }">
-				<input type="hidden" name="userNo" value="${ loginUser.userNo }">
-				<table>
 
-					<tr>
-						<td rowspan="6"><img src="${p.thumbNail }" width="500px"></td>
-						<td class="pp" >
-						<b style="font-size: 25px; margin-bottom:-30px "><c:out value="${p.flowerName}">
-								</c:out></b></td>
 
-					</tr>
+			<table>
 
-					<tr>
-						<td class="pp"><input type="text" name="productPrice"
-							id="price" style="border: none; font-size:20px;"size="1" readonly
-							value="${ p.price }">원
+				<tr>
+					<td rowspan="6"><img src="${p.thumbNail }" width="500px"></td>
+					<td class="pp"><b
+						style="font-size: 25px; margin-bottom: -30px"><c:out
+								value="${p.flowerName}">
+							</c:out></b></td>
 
-							<hr></td>
-					</tr>
-					<tr>
-						<td class="pp" style="font-size: 15px; font-weight: 700px;">"${p.flowerInfo}"
-							<br> <br>
-							<hr style="margin-bottom: 10px;">
-						</td>
-					</tr>
-					<tr>
-						<td class="pp">
-							<!-- <p>수령일 : <input type="text" class="datepicker" id="datepicker"></p>
+				</tr>
+
+				<tr>
+					<td class="pp"><input type="text" name="productPrice"
+						id="price" style="border: none; font-size: 20px;" size="1"
+						readonly value="${ p.price }">원
+
+						<hr></td>
+				</tr>
+				<tr>
+					<td class="pp" style="font-size: 15px; font-weight: 700px;">"${p.flowerInfo}"
+						<br> <br>
+						<hr style="margin-bottom: 10px;">
+					</td>
+				</tr>
+				<tr>
+					<td class="pp">
+						<!-- <p>수령일 : <input type="text" class="datepicker" id="datepicker"></p>
  -->
 
-							</div>
-						</td>
-					</tr>
+						</div>
+					</td>
+				</tr>
 
-					<tr>
-						<td>
-							<div id="countBox">
-								<div id="countWrite">
-
-
-
-									<input type="text" value="${p.flowerName }"
-										style="border: none; padding-left: 10px; outline:none; padding-top: 5px;"><br>
+				<tr>
+					<td>
+						<div id="countBox">
+							<div id="countWrite">
+								<form name="form" method="post" action="insert.ca" id="cartInfo">
+									<input type="hidden" name="productNo" value="${ p.productNo }">
+									<input type="hidden" name="userNo"
+										value="${ loginUser.userNo }"> <input type="text"
+										value="${p.flowerName }"
+										style="border: none; padding-left: 10px; outline: none; padding-top: 5px;"><br>
 									<br> <input type=hidden id="sell_price"
 										value="${ p.price }"> <input type="button"  value=" - "
 										onclick="del();" style="margin-left: 10px;" class="detailBtn"> 
 										<input type="text" name="productCount" value="1" size="1" readonly style="background-color: white; border: 1px solid gray; height:20px; text-align: center" 
 										onchange="change();"> <input type="button" value=" + "
-										onclick="add();" class="detailBtn"><br> <br> <br> 배송비: <span
-										style="padding-left: 200px"> 3,000 원</span><br> <br>
-									총 주문금액 : <input type="text"
-										style="border: none; outline:none; background-color: rgba(224, 224, 224, 0.001); padding-left: 150px; width: 60px;"
-										name="sum" size="11" readonly >원
-
-
-								</div>
-
+										onclick="add();" class="detailBtn"><br> <br>
+									<br> 배송비: <span style="padding-left: 200px"> 3,000
+										원</span><br> <br> 총 주문금액 : <input type="text"
+										style="border: none; outline: none; background-color: rgba(224, 224, 224, 0.001); padding-left: 150px; width: 60px;"
+										name="sum" size="11" readonly>원
+								</form>
 
 							</div>
 
-						</td>
 
-					</tr>
+						</div>
 
-					<tr>
-						<c:choose>
-							<c:when test="${empty loginUser}">
-								<td>
-								<button onclick="alert('로그인이 필요한 서비스!'); location.href='loginForm.me';" id="btn1">
-								  장바구니
-								</button>
-								</td>
-							</c:when>
-							<c:otherwise>
-								<td>
-								<button onclick="cartbtn" id="btn1">장바구니</button>
-								<!-- <input type="submit" value="장바구니" id="btn1"> -->
-								</td>
-							</c:otherwise>
-						</c:choose>
+					</td>
 
-					</tr>
+				</tr>
+				
+				<tr>
+					<c:choose>
+						<c:when test="${ empty loginUser }">
+							<td>
+								<button
+									onclick="alert('로그인이 필요한 서비스!'); location.href='loginForm.me';"
+									id="btn1">장바구니</button>
+							</td>
+						</c:when>
+						<c:otherwise>
+							<td>
+								<button onclick="cartbtn();" id="btn1">장바구니</button> <!-- <input type="submit" value="장바구니" id="btn1"> -->
+							</td>
+						</c:otherwise>
+					</c:choose>
 
-				</table>
-			</form>
+				</tr>
+
+			</table>
+			
 			<!--상세 정보 버튼 시작-->
 			<div class="categorize review-box"
 				style="height: 100px; margin-top: 30px;">
@@ -142,7 +142,7 @@
 		</div>
 	</div>
 	<script>
-		function cartbtn(){
+		function cartbtn() {
 			$('#cartInfo').submit();
 		}
 	</script>
@@ -333,14 +333,15 @@
 
 
 	<div id="modal" class="modal-overlay">
-		<form action="insert.re" method="post" enctype="multipart/form-data">
+		<div class="modal-window" style="height: 550px">
+			<form action="insert.re" method="post" enctype="multipart/form-data">
 
-			<div class="modal-window" style="height: 550px">
-				<input type="hidden" name="productNo" value="${ p.productNo }">
-				<input type="hidden" name="userNo" value="${loginUser.userNo}">
+
+
 				<div class="title">
-				<br>
-					<span style="font-size: 20px; margin-top: 10px; margin-left:10px">구매평 작성</span>
+					<br> <span
+						style="font-size: 20px; margin-top: 10px; margin-left: 10px">
+						구매평 작성</span>
 				</div>
 				<div class="close-area">
 					<img src="resources/images/x.png" style="width: 15px;">
@@ -356,7 +357,8 @@
 					<br>
 					<div>
 						<input type="text" name="reviewTitle"
-							style="width: 370px; height: 30px; border: 1px solid gainsboro;" placeholder="제목을 작성해주세요.">
+							style="width: 370px; height: 30px; border: 1px solid gainsboro;"
+							placeholder="제목을 작성해주세요.">
 					</div>
 					<br>
 					<textarea rows="2" cols="10" onkeyup="counter(this,150)"
@@ -367,81 +369,29 @@
 					</div>
 
 					<br> <br> <input type="file" name="upReviewPhoto">
-					<div class="modal-button-area" align="center">
-
-						<!--<button onclick="modalOff()">취소</button>-->
-						<button type="submit" id="sign">등록</button>
-					</div>
-				</div>
-
-				<script>
-            function counter(text,length){
-                var limit = length;
-                var str = text.value.length;
-                if(str>limit){
-                    alert("최대 150자까지 입력 가능합니다.");
-                    text.value = text.value.substring(0,limit);
-                    text.focus();
-                }
-                document.getElementById("reCount").innerHTML = text.value.length + " / " + limit;
-            }
-        </script>
-
-
-
-
-
-			</div>
-		</form>
+					<input type="hidden" name="productNo" value="${ p.productNo }">
+					<input type="hidden" name="userNo" value="${loginUser.userNo}">
+			
+		</div>
+		<div class="modal-button-area" align="center">
+			<c:choose>
+				<c:when test="${empty loginUser}">
+					<button type="reset"
+						onclick="alert('로그인이 필요한 서비스!'); location.href='loginForm.me';"
+						id="sign">등록</button>
+				</c:when>
+				<c:otherwise>
+					<!--<button onclick="modalOff()">취소</button>-->
+					<button type="submit" id="sign">등록</button>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</form>
 	</div>
 
+	</div>
 
-
-
-
-	<%-- <!-- 리뷰 수정 모달 -->
-	<div id="modal" class="modal-overlay reviewModal">
-		<form action="update.re" method="post" enctype="multipart/form-data">
-			
-			<div class="modal-window" style="height: 550px">
-				<input type="text" name="reviewNo" value="">
-				<input type="text" name="userNo" value="${loginUser.userNo}">
-				<div class="title">
-					<span style="font-size: 20px; margin-top: 10px;">리뷰 확인</span>
-				</div>
-				<div class="close-area">
-					<img src="resources/images/x.png" style="width: 15px;">
-				</div>
-
-				<div class="content">
-					<hr>
-
-					<div
-						style="height: 50px; border: 1px solid gainsboro; margin-top: 40px; text-align: center;">
-						<p>${p.flowerName}</p>
-					</div>
-					<br>
-					<div>
-						<input type="text" name="reviewTitle"
-							style="width: 370px; height: 30px; border: 1px solid gray;">
-					</div>
-					<br>
-					<textarea rows="2" cols="10" onkeyup="counter(this,150)"
-						name="reviewContent"
-						placeholder="꽃 파손이나 배송등 문제사항은 구매평에 남겨주시면 확인이 어렵습니다."></textarea>
-					<div style="text-align: right;">
-						<span id="reCount">0 / 150</span>
-					</div>
-
-					<br> <br> <input type="file" name="upReviewPhoto">
-					<div class="modal-button-area" align="center">
-
-						<!--<button onclick="modalOff()">취소</button>-->
-						<button type="submit" id="sign">등록</button>
-					</div>
-				</div>
-
-				<script>
+	<script>
             function counter(text,length){
                 var limit = length;
                 var str = text.value.length;
@@ -453,16 +403,6 @@
                 document.getElementById("reCount").innerHTML = text.value.length + " / " + limit;
             }
         </script>
-        
-        
-
-
-
-			</div>
-		</form>
-	</div> --%>
-
-
 	<script>
     const btnModal = document.querySelector('.insertReview');
 	

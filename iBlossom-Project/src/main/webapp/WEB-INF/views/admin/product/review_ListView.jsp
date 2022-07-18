@@ -8,8 +8,10 @@
 <title>admin | 리뷰</title>
 <link href="resources/css/jsa.css" rel="stylesheet">
 <!-- 파비콘 -->
-<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
-<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico"
+	type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico"
+	type="image/x-icon">
 <style>
 #pagingArea {
 	width: fit-content;
@@ -47,11 +49,11 @@
 .pagination li {
 	float: left;
 }
-
 </style>
 
 <link href="resources/css/jsa.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 
@@ -102,7 +104,7 @@
 						</ul></li>
 					<li><a href="" class="admin-navi-menu">정기구독관리</a>
 						<ul class="admin-navi-ul">
-							<li><a href="">구독회원관리</a></li>
+							<li><a href="subMemberListView.su">구독회원관리</a></li>
 							<li><a href="">구독상품관리</a></li>
 						</ul></li>
 					<li><a href="list.pr" class="admin-navi-menu">상품관리</a></li>
@@ -131,15 +133,15 @@
 
 		<!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
 		<div style="padding-top: 40px;" align="center">
-			<form name="form1" method="post" action="">
+			<form method="post" action="search.re">
+				<input type="hidden" name="currentPage" value="1"> <select
+					id="selectReview" name="condition">
+					<option value="FLOWER_NAME">상품명</option>
 
-				<select id="selectReview" name="search_option">
-					<option value="product_id">상품명</option>
+					<option value="USER_ID">아이디</option>
 
-					<option value="user_id">아이디</option>
-
-					<option value="title">제목</option>
-				</select> <input id="inputBox" name="keyword" value=""> <input
+					<option value="REVIEW_TITLE">제목</option>
+				</select> <input id="inputBox" name="keyword" value="${ keyword }"> <input
 					type="submit" id="selectbtn" value="검색">
 			</form>
 		</div>
@@ -155,20 +157,77 @@
 					<th>상태값</th>
 				</thead>
 				<tbody style="height: 40px;">
-					<c:forEach var="r" items="${ list }">
-						<tr>
-							<td class="rno">${r.reviewNo }</td>
-							<td>${r.flowerName}</td>
-							<td>${r.userId}</td>
-							<td>${r.reviewTitle }</td>
-							<td>${r.createDate }</td>
-							<td>${r.reviewStatus }</td>
-						</tr>
-					</c:forEach>
+					<c:choose>
+						<c:when test="${ empty list }">
+
+							<h4>아직 진열된 상품이 없습니다.</h4>
+						</c:when>
+					  <c:otherwise>
+							<c:forEach var="r" items="${ list }">
+								<tr>
+									<td class="rno">${r.reviewNo }</td>
+									<td>${r.flowerName}</td>
+									<td>${r.userId}</td>
+									<td>${r.reviewTitle }</td>
+									<td>${r.createDate }</td>
+									<td>${r.reviewStatus }</td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</tbody>
 			</table>
 		</div>
-		<script>
+	
+				<!-- 페이징 처리  -->
+       	<div id="pagingArea">
+	         <ul class="pagination">
+	
+	            <c:choose>
+	               <c:when test="${ pi.currentPage eq 1 }">
+	                  <li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
+	               </c:when>
+	               <c:otherwise>
+	               <c:choose>
+	            	   <c:when test="${ empty condition }">
+		                	<li class="page-item"><a class="page-link" href="list.re?cpage=${ pi.currentPage - 1 }">◀</a></li>
+		               </c:when>
+		               <c:otherwise>
+		                	<li class="page-item"><a class="page-link"href="list.re?cpage=${ pi.currentPage - 1 }&condition=${ condition }&keyword=${ keyword }">◀</a></li>
+		               </c:otherwise>
+            	   </c:choose>
+	               </c:otherwise>
+	            </c:choose>
+	
+	            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	               <li class="page-item"><a class="page-link"
+	                 href="list.re?cpage=${ p }">${ p }</a></li>
+	            </c:forEach>
+	
+	            <c:choose>
+	               <c:when test="${ pi.currentPage eq pi.maxPage }">
+	                  <li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
+	               </c:when>
+	               <c:otherwise>
+		               <c:choose>
+		            	   <c:when test="${ empty condition }">
+			                   <li class="page-item"><a class="page-link"
+			                  href="list.re?cpage=${ pi.currentPage + 1 }">▶</a></li>
+		            	   </c:when>
+		            	   <c:otherwise>
+		            	   	   <li class="page-item"><a class="page-link" href="list.re?cpage=${ pi.currentPage + 1 }&condition=${ condition }&keyword=${ keyword }">▶</a></li>
+		           		   </c:otherwise>
+			           </c:choose>
+		           </c:otherwise>
+	            </c:choose>
+	         </ul>
+	    </div>
+
+
+	</div>
+
+
+	<script>
             	$(function() {
             		
             		$("#reviewTable>tbody tr").on("click", function() {
@@ -177,42 +236,5 @@
             		});
             	});
             </script>
-		<div id="pagingArea">
-			<ul class="pagination">
-
-				<c:choose>
-					<c:when test="${ pi.currentPage eq 1 }">
-						<li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link"
-							href="list.re?cpage=${ pi.currentPage - 1 }">◀</a></li>
-					</c:otherwise>
-				</c:choose>
-
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-					<li class="page-item"><a class="page-link"
-						href="list.re?cpage=${ p }">${ p }</a></li>
-				</c:forEach>
-
-				<c:choose>
-					<c:when test="${ pi.currentPage eq pi.maxPage }">
-						<li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link"
-							href="list.re?cpage=${ pi.currentPage + 1 }">▶</a></li>
-					</c:otherwise>
-				</c:choose>
-
-
-			</ul>
-		</div>
-
-
-	</div>
-
-
-
 </body>
 </html>

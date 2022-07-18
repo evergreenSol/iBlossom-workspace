@@ -109,28 +109,37 @@
 
 					<h3>태그</h3>
 					<input type="text" id="admin_tag_name" name="tag"
-						value="${p.tag}">
+						value="${ p.tag }">
 
 					<br><br><br>
 					<table class="admin_product">
 						<tr>
 							<h3 style="display:inline-block;">썸네일</h3>
 							<td>
-							<input type="file" name="reThumbNail" id="admin_product-img" value="${p.thumbNail }">
-							<label for="thumbnail"></label> 
+							 <input type="file" id="upfile" class="form-control-file border" name="reThumbNail">
+                       
+                            <c:if test="${ not empty p.thumbNail }"> <!-- 썸네일이 비어있지 않을 경우 -->      
+	                            <input type="hidden" name="thumbNail" value="${ p.thumbNail }"> <!-- 기존파일을 검사할용도 -->
+                            </c:if>
+							<%-- <input type="file" name="thumbNail" id="admin_product-img" value="${ p.thumbNail }">
+							<label for="thumbnail"></label>  --%>
 							</td>
 							
 							
 							<h3 style="display:inline-block;margin-left:200px">상세사진</h3>
 							<td>
-							<input type="file" name="reContentPhoto" id="admin_product-img" value="${p.contentPhoto }">
-							<label for="contentPhoto"></label>
+						<%-- 	<input type="file" name="contentPhoto" id="admin_product-img" value="${ p.contentPhoto }">
+							<label for="contentPhoto"></label> --%>
+							 <input type="file" id="upfile" class="form-control-file border" name="reContentPhoto">
+                            <c:if test="${ not empty p.contentPhoto }"> <!-- 상세사진이 비어있지 않을 경우 -->     
+	                            <input type="hidden" name="contentPhoto" value="${ p.contentPhoto }"> <!-- 기존파일을 검사할용도 -->
+                            </c:if>
 							</td> 
 						
 							
 							
 							<td width="60%"><textarea id="admin_product-description"
-									name="flowerInfo">${p.flowerInfo }</textarea></td>
+									name="flowerInfo">${ p.flowerInfo }</textarea></td>
 						</tr>
 					</table>
 					<h3>가격</h3>

@@ -7,16 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <link href="resources/css/jsa.css" rel="stylesheet">
- <!-- 파비콘 -->
-<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
-<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
- <style>
-	input[type="number"]::-webkit-outer-spin-button,
-	input[type="number"]::-webkit-inner-spin-button {
-	    -webkit-appearance: none;
-	    margin: 0;
-	}
+<link href="resources/css/jsa.css" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico"
+	type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico"
+	type="image/x-icon">
+<style>
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
+	{
+	-webkit-appearance: none;
+	margin: 0;
+}
 </style>
 </head>
 <body>
@@ -55,21 +57,28 @@
 				<tr>
 					<td>
 						<form id="cartItems" method="post" action="">
+							<input type="hidden" name="categoryName" id="categoryName"
+								value="${p.categoryName }">
 							<div id="countBox1" align="center" style="overflow: auto">
 								<c:forEach var="p" items="${ list }" varStatus="status">
 									<div class="item${ status.count }" hidden>
 										<div onclick="removeItem(${ status.count })" id="removeItem">
-											<img src="resources/images/x.png" style="width: 13px;float: right; cursor:pointer;margin: 8px 8px 0px 0px;">
+											<img src="resources/images/x.png"
+												style="width: 13px; float: right; cursor: pointer; margin: 8px 8px 0px 0px;">
 										</div>
 										<input type="hidden" id="index" value=${ status.count }>
 										<input type="hidden" id="userNo" value="${ loginUser.userNo }">
 										<input type="hidden" id="productNo" value="${ p.productNo }">
-										<div style="background-color: white;height: 40px;padding-top: 20px;margin-top:10px;" >
-											<span>${ p.flowerName }</span>
-											<input type="button" value="-" onclick="count('minus',${ status.count })" class="input-button1">
-											<input type="number" id="productCount${ status.count }" value="1" class="input-productCount">
-											<input type="button" value="+" onclick="count('plus',${ status.count })" class="input-button2">
-											<input type="hidden" id="productPrice${ status.count }" value="${ p.price }">
+										<div
+											style="background-color: white; height: 40px; padding-top: 20px; margin-top: 10px;">
+											<span>${ p.flowerName }</span> <input type="button" value="-"
+												onclick="count('minus',${ status.count })"
+												class="input-button1"> <input type="number"
+												id="productCount${ status.count }" value="1"
+												class="input-productCount"> <input type="button"
+												value="+" onclick="count('plus',${ status.count })"
+												class="input-button2"> <input type="hidden"
+												id="productPrice${ status.count }" value="${ p.price }">
 											<input type="hidden" id="sum${ status.count }">
 										</div>
 									</div>
@@ -78,22 +87,21 @@
 						</form> <br>
 						<div style="margin-left: 20px">
 							<div>
-								배송비: 
-								<span style="margin-left:300px">3,000 원</span>
-								<br>
-								<br>
+								배송비: <span style="margin-left: 300px">3,000 원</span> <br> <br>
 							</div>
 							<div>
 								총 주문금액 : <input type="text" id="sumAll"
 									style="border: none; font-weight: 700; font-size: 15px; background-color: rgba(224, 224, 224, 0.001); padding-left: 60px; width: 50px;"
-									name="sum" size="11" id="sum" readonly value=""><span style="margin-left: 200px"> 원</span>
+									name="sum" size="11" id="sum" readonly value=""><span
+									style="margin-left: 200px"> 원</span>
 							</div>
 						</div>
 					</td>
 				</tr>
 
 				<tr>
-					<td><br> <br> <c:choose>
+					<td><br> <br> 
+					<c:choose>
 							<c:when test="${ loginUser eq null }">
 								<input value="장바구니" type="button" id="btn1"
 									onclick="alert('로그인이 필요한 서비스 입니다!'); location.href='loginForm.me';">
@@ -107,52 +115,123 @@
 
 			</table>
 
+			<div id="modal" class="modal-overlay">
+				<div class="modal-window" style="height: 550px">
+					<form action="coInsert.re" method="post"
+						enctype="multipart/form-data">
+						<input type="hidden" name="productNo" value="17"> <input
+							type="hidden" name="userNo" value="${ loginUser.userNo }">
 
-			<!--상세 정보 버튼 시작-->
-			<div class="categorize review-box"
-				style="height: 100px; margin-top: 30px;">
-				<div class="reviewBox" id="combination_content"
-					onclick="showDetail();">상세정보</div>
-				<div class="reviewBox" id="combination_review"
-					onclick="showReview();">리뷰</div>
+						<div class="title">
+							<br> <span
+								style="font-size: 20px; margin-top: 10px; margin-left: 10px">구매평
+								작성</span>
+						</div>
+						<div class="close-area">
+							<img src="resources/images/x.png" style="width: 15px;">
+						</div>
+
+						<div class="content">
+							<hr>
+
+							<div
+								style="height: 50px; border: 1px solid gainsboro; margin-top: 40px; text-align: center;">
+								<p>조합형</p>
+							</div>
+							<br>
+							<div>
+								<input type="text" name="reviewTitle"
+									style="width: 370px; height: 30px; border: 1px solid gainsboro;"
+									placeholder="제목을 작성해주세요.">
+							</div>
+							<br>
+							<textarea rows="2" cols="10" onkeyup="counter(this,150)"
+								name="reviewContent"
+								placeholder="꽃 파손이나 배송등 문제사항은 구매평에 남겨주시면 확인이 어렵습니다."></textarea>
+							<div style="text-align: right;">
+								<span id="reCount">0 / 150</span>
+							</div>
+
+							<br> <br> <input type="file" name="upReviewPhoto">
+					
+				</div>
+				<div class="modal-button-area" align="center">
+					<c:choose>
+						<c:when test="${empty loginUser}">
+							<button id="sign" type="reset"
+								onclick="alert('로그인이 필요한 서비스!'); location.href='loginForm.me';">
+								등록</button>
+						</c:when>
+						<c:otherwise>
+							<!--<button onclick="modalOff()">취소</button>-->
+							<button type="submit" id="sign">등록</button>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				</form>
 			</div>
 
-			<!-- 상세정보 폼-->
 
-			<div id="flowerDetailList">
-				<c:forEach var="p" items="${ list }">
-					<table style="overflow: hidden;">
-						
-						<tr>
-							<td>
-							<img src="${ p.thumbNail }">
-							</td>
-						</tr>
-						<tr>  
-							<td>${ p.flowerName }</td>
-						</tr>
-					</table>
-				</c:forEach>
-			</div>
 
 		</div>
 
 
-    <script>
+		<!--상세 정보 버튼 시작-->
+		<div class="categorize review-box"
+			style="height: 100px; margin-top: 30px;">
+			<div class="reviewBox" id="combination_content"
+				onclick="showDetail();">상세정보</div>
+			<div class="reviewBox" id="combination_review"
+				onclick="showReview();">리뷰</div>
+		</div>
+
+		<!-- 상세정보 폼-->
+
+		<div id="flowerDetailList">
+			<c:forEach var="p" items="${ list }">
+				<table style="overflow: hidden;">
+
+					<tr>
+						<td><img src="${ p.thumbNail }"></td>
+					</tr>
+					<tr>
+						<td>${ p.flowerName }</td>
+					</tr>
+				</table>
+			</c:forEach>
+		</div>
+
+	</div>
+
+
+	<script>
         $(document).ready(function(){
         	showDetail();
         });
     </script>
 
-		<!-- 리뷰 작성폼-->
+	<!-- 리뷰 작성폼-->
 
-		<div id="reviewList" hidden>
-		
-		</div>
+	<div>
 
-
+		<input type='button' id='btn_rv' value='구매평 작성'
+			class="ComInsertReview">
+		<div id="reviewList" hidden></div>
 	</div>
 
+	</div>
+	<script>
+            function counter(text,length){
+                var limit = length;
+                var str = text.value.length;
+                if(str>limit){
+                    alert("최대 150자까지 입력 가능합니다.");
+                    text.value = text.value.substring(0,limit);
+                    text.focus();
+                }
+                document.getElementById("reCount").innerHTML = text.value.length + " / " + limit;
+            }
+        </script>
 	<script>
 	// 빈 배열 만들기
 	var items = [];
@@ -257,61 +336,70 @@
          $('#combination_content').css("background-color","white");
          $('#combination_content').css("color","rgb(190, 190, 190)");
          
-         var combinationreview;
-
-         combinationreview = '<input type="button" id="btn_rv" value="구매평 작성" onclick="modalOn();">';
-         combinationreview += ' <br><br>';
-         combinationreview += ' <hr>';
-         combinationreview += '<div class="reviewbb">';
-         combinationreview += '<img class="img2" src="resources/images/flower1.jpg">';
-         combinationreview += '<text class="text1">진짜 마음에 들어요</text>';
-         combinationreview += '<span class="span1">우와 이쁘다 진짜 제 마음에 속 들어요</span>';
-         combinationreview += '</div>';
+         $.ajax({
+       	  url: "reviewList.re",
+       	  data : {productNo : 17},
+       	  success : function(result){
+       		  
+       		  console.log(result);
+       		var review = "";
          
-         $('#reviewList').append(combinationreview);
-     }
+       	for(var i in result){
+         
+
+       		review += "<br><br>";
+       		review += "<hr>";
+       		review += "<div class='reviewbb'>";
+       		review += "<input type='hidden' value="+ result[i].reviewNo +">"
+       		review +="<div class='divBox'>"
+       		review += "<img class='img1' src='" + result[i].reviewPhoto + "' style='width: 190px; height:190px;  margin-left: 20px;margin-top: 10px; float: left;'>";
+       		review += "<p class='text3'>" + result[i].userId + "</p>";
+	       	review += "<p class='text4'>" + result[i].createDate + "</p>";
+	       	review += "<p class='text1'>" + result[i].reviewTitle + "</p>";
+	       	review += "<p class='text2'>" + result[i].reviewContent + "</p>";
+	       	review += "</div>";
+	       	 review += "</div>";
+		  }
+       		review += "<br><br><br><br><br>";
+         
+      	
+         
+         $("#reviewList").html(review);
+     },
+       	
+        error:function(){
+  		  console.log("에러발생");
+       	  }
+   		
+     	 
+         });
+       }
  	</script>
- 	
+
+
 	<script>
-        function showReview() {
+    const btnModal = document.querySelector('.ComInsertReview');
+	
+    function modalOn() {
+    modal.style.display = "flex"
+    }
+    function isModalOn() {
+        return modal.style.display === "flex"
+    }
+    function modalOff() {
+        modal.style.display = "none"
+    }
+    
+    btnModal.addEventListener("click", e => {
+        modal.style.display = "flex"
+    })
 
-          $.ajax({
-        	  url: "reviewList.re",
-        	  data : {productNo : ${ p.productNo }},
-        	  success : function(result){
-        		  
-        		  console.log(result);
-        		  var review = "";
-        		  
-        		  
-        		  for(var i in result){
-        			  
-                      review += "<br><br>";
-                      review += "<hr>";
-                      review += "<div class='reviewbb'>";
-                      review += "<input type='hidden' value="+ result[i].reviewNo +">"
-                      review +="<div class='divBox'>"
-                      review += "<img class='img1' src='" + result[i].reviewPhoto + "' style='width: 190px; height:190px;  margin-left: 20px;margin-top: 10px; float: left;'>";
-                      review += "<p class='text3'>" + result[i].userId + "</p>";
-                      review += "<p class='text4'>" + result[i].createDate + "</p>";
-                      review += "<p class='text1'>" + result[i].reviewTitle + "</p>";
-                      review += "<p class='text2'>" + result[i].reviewContent + "</p>";
-                      review += "</div>";
-                      review += "</div>";
-        		  }
-        		  review += "<br><br><br><br><br>";
-        		  
-        		  $("#detailReview").html(review);
-        	  },
-        	  error:function(){
-        		  console.log("에러발생");
-        	  }
-         		
-        	 
-          });
-        }
-    </script>
-
+    const closeBtn = modal.querySelector(".close-area")
+    closeBtn.addEventListener("click", e => {
+        modal.style.display = "none"
+    })
+    
+</script>
 
 	<jsp:include page="../../common/footer.jsp" />
 </body>
