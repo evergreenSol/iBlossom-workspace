@@ -113,7 +113,7 @@
             </tr>   
             <tr>
             	<th>수업일</th>
-                <td height="60"><input type="text" id="classAdd" name="classDate" style="border:none; width:350px; height:50px; font-size:18px;" maxlength="40" placeholder="날짜(yyyy-mm-dd 형식)"></td>
+                <td height="60"><input type="date" id="classAdd" name="classDate" style="border:none; width:350px; height:50px; font-size:18px;" maxlength="40" placeholder="날짜(yyyy-mm-dd 형식)"></td>
             </tr>   
             <tr>
             	<th>정원</th>
