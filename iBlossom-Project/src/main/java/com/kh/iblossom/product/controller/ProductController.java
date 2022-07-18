@@ -311,7 +311,7 @@ public class ProductController {
 		ArrayList<Product> result = new ArrayList<>();
 		
 		
-		Product resultP = new Product();
+		ArrayList<Product> resultP = new ArrayList<>();
 		
 		for(int i = 0; i < keywords.size(); i++) {
 			System.out.println(list.get(i));
@@ -322,7 +322,7 @@ public class ProductController {
 			
 			resultP = productService.selectTagProduct(p);
 			
-			result.add(resultP);
+			result.addAll(resultP);
 			
 		}
 		

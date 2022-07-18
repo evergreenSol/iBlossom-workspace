@@ -88,8 +88,8 @@ public class ProductDao {
 	}
 	
 	// 이달의 꽃
-	public Product selectTagProduct(SqlSessionTemplate sqlSession, Product p) {
-		return sqlSession.selectOne("productMapper.selectTagProduct", p);
+	public ArrayList<Product> selectTagProduct(SqlSessionTemplate sqlSession, Product p) {
+		return (ArrayList)sqlSession.selectList("productMapper.selectTagProduct", p);
 	}
 	
 	

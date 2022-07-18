@@ -46,7 +46,7 @@ public interface ProductService {
 	ArrayList<Product> selectSearchList(String keyword);
 
 	// 이달의 꽃
-	Product selectTagProduct(Product p);
+	ArrayList<Product> selectTagProduct(Product p);
 	
 
 	

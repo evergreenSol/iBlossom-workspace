@@ -87,7 +87,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 @Override
-public Product selectTagProduct(Product p) {
+public ArrayList<Product> selectTagProduct(Product p) {
 	return productDao.selectTagProduct(sqlSession, p);
 }
 
