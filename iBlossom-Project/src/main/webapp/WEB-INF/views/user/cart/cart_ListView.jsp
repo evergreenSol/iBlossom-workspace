@@ -30,7 +30,8 @@
 	
 	        <!-- 전체선택, 선택삭제 div -->
             <div class="cart-choice">
-                <div><input type="checkbox" id="checkAll" checked style="margin:auto 0;">
+            	
+                <div><input type="checkbox" id="checkAll" checked style="margin:auto 0;" >
                 	<label for="checkAll" id="checkAllLabel">&nbsp;전체선택</label><span></span>
                 </div>
 	            <div>
@@ -75,8 +76,12 @@
 			                         
 			                        <!-- 가격 -->   
 			                        <div class="basketprice">
-			                        	<input type="text" id="price${ status.count }" id="resizable1" class="price" 
-			                        		   onkeyup="javascript:CheckSize();" value="${ list[c].productPrice }" readonly>원
+
+			                        	<input type="text" id="price${ status.count }" id="resizable1" class="price" onkeyup="javascript:CheckSize();"
+			                        			value="${ list[c].productPrice }" readonly>원
+			                        	<input type="hidden" id="prevPrice${ status.count }" value="${ list[c].productPrice }">
+			                        	
+
 			                        </div><br>
 	
 						            <!-- 장바구니 수량 변경 -->
@@ -218,9 +223,26 @@
         	if($('input[class=cartCheck]:checked').length==$('.cartCheck').length){         
         		$('#checkAll').prop('checked',true);     
         	} else {        
-        		$('#checkAll').prop('checked',false);     
+        		$('#checkAll').prop('checked',false);   
         } });
-	    
+        
+        $(document).ready(function(){	
+	    	$("#checkAll").on('click',function() {
+	    		if($(this).prop('checked')) {
+	    			var listSize = $('#listSize').val(); // 상품 리스트 사이즈 (상품이 3개면 3개)
+	           		for(var i = 0; i < listSize; i++) { // 상품 리스트를 돌면서
+	           			$('#price'+(i+1)+'').attr("value", $("#prevPrice"+(i+1)+"").val()); // 각 상품 원래 가격	
+	           		}
+	           		
+	           		getSum();
+	    		} else {
+	    			$(".price").attr("value", 0);
+	   				getSum()
+	    		}
+	    	})
+    	});
+        
+        
 	    // 체크박스 1개 선택시 해당 가격 뜨고, 해제시 해당 가격 0원으로 변경
 	    $(document).ready(function(){	
 	    	$(".cartCheck").on('click',function() {
@@ -262,7 +284,6 @@
     		var sumAll = 0;
     		for(var i = 0; i < listSize; i++) { // 상품 리스트를 돌면서
     			var price = $('#price'+(i+1)+'').val(); // 각 상품 가격
-    			console.log(price)
     			var productCount = $('#productCount'+(i+1)+'').val(); // 각 상품 수량
     			$('#sum'+(i+1)+'').attr("value",price*productCount); // sum1, sum2, ... 에 전달
     			
