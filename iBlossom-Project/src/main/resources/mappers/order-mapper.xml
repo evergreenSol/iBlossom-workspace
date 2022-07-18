@@ -154,7 +154,6 @@
 		   <!--[CDATA[
 		   AND ADD_MONTHS(SYSDATE, -1) <= ORDER_DATE
 		   ]]-->
-		   
 	</select>
 	
 	
@@ -247,7 +246,5 @@
 		WHERE USER_NO = #{userNo}
   	</select>
   	 -->
-
-
 
 </mapper>
