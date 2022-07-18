@@ -48,7 +48,25 @@ public class OrderController {
 		
 		// int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
 		
-		if(list == null) {
+		System.out.println(list);
+		
+		int num = 0;
+		int num2;
+		
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).getCartNo() == 0) {
+				System.out.println("넘버 "+list.get(i).getCartNo());
+				num2 = 0;
+			}
+			else {
+				num2 = 1;
+			}
+			
+			num += num2;
+			System.out.println("num: " + num);
+		}
+		
+		if(num == 0) {
 			session.setAttribute("alertMsg", "결제할 항목을 선택해주세요.");
 			return "redirect:list.ca";
 		}

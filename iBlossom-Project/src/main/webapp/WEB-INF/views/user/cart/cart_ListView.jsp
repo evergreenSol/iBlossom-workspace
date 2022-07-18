@@ -171,7 +171,7 @@
 	
 	        <!-- 결제하기 버튼 -->
 	        <div>
-	            <button class="cart-btn" type="button" onclick="cartBtn();">결제하기</button>
+	            <button class="cart-btn" type="button">결제하기</button>
 	        </div>
 
 	    </div> <!-- class="cart-right" -->
@@ -364,16 +364,7 @@
 		    })
 		};
 		
-		// 결제버튼 눌렀을시 확인/취소 알람창 띄우기
-		function cartBtn() {
-			if (confirm("주문하신 상품을 결제하시겠습니까?") == true){ 
-				   console.log("완료되었습니다.");
-			} else {
-			   // false는 취소버튼을 눌렀을 때, 취소됨
-			   console.log("취소되었습니다");
-			   return false;
-		 	}
-		}
+
 
 	</script>
 
