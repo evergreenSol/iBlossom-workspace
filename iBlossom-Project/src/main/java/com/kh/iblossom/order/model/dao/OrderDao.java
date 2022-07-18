@@ -101,9 +101,14 @@ public class OrderDao {
 	}
 
 	//승아
-	//리뷰
+	//리뷰(꽃다발 / 꽃대)
 	public ArrayList<Order>selectOrderReview(SqlSessionTemplate sqlSession, Review r){
 		return (ArrayList)sqlSession.selectList("orderMapper.selectOrderReview",r);
 	}
+	
+	//승아 리뷰(조합형)
+	public ArrayList<Order>selectComOrderReview(SqlSessionTemplate sqlSession, Review r){
+		return (ArrayList)sqlSession.selectList("orderMapper.selectComOrderReview",r);
+	} 
 
 }

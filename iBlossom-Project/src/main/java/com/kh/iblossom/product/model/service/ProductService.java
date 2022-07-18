@@ -1,9 +1,11 @@
 package com.kh.iblossom.product.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.product.model.vo.Product;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 public interface ProductService {
 
@@ -38,4 +40,9 @@ public interface ProductService {
 	//상품 마켓 전체 조회(꽃병)
 	ArrayList<Product> selectListBase();
 	
+	// 검색용 메소드
+	int selectSearchCount(HashMap<String, String> map);
+	
+	// 구독 회원 검색용 메소드
+	ArrayList<Product> selectSearchList(PageInfo pi, HashMap<String, String> map);
 }

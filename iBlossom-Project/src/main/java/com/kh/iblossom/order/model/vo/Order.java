@@ -1,7 +1,6 @@
 package com.kh.iblossom.order.model.vo;
 
 import java.sql.Date;
-
 import lombok.Data;
 
 @Data

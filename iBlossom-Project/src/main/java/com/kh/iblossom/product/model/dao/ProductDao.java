@@ -1,6 +1,7 @@
 package com.kh.iblossom.product.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.product.model.vo.Product;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Repository
 public class ProductDao {
@@ -73,6 +75,27 @@ public class ProductDao {
 
 		return (ArrayList)sqlSession.selectList("productMapper.selectListBase");
 	}
+	
+	// 검색
+		public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+			
+			return sqlSession.selectOne("productMapper.selectSearchCount", map);
+		}
+		
+	// 상품 등록 검색
+		public ArrayList<Product> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi,
+				HashMap<String, String> map) {
+			
+			int limit = pi.getBoardLimit();
+			int offset = (pi.getCurrentPage() - 1) * limit;
+			
+			RowBounds rowBounds = new RowBounds(offset, limit);
+			
+			return (ArrayList)sqlSession.selectList("productMapper.selectSearchList", map, rowBounds);
+		}
+		
+		
+		
 	
 	
 }

@@ -128,11 +128,19 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 
-	//승아 리뷰
+	//승아 리뷰(꽃다발/꽃대)
 	@Override
 	public ArrayList<Order> selectOrderReview(Review r) {
 		
 		return orderDao.selectOrderReview(sqlSession,r);
+	}
+
+
+	//승아리뷰(조합형)
+	@Override
+	public ArrayList<Order> selectComOrderReview(Review r) {
+		
+		return orderDao.selectComOrderReview(sqlSession,r);
 	}
 	
 	

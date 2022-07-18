@@ -52,7 +52,10 @@ public interface OrderService {
 	int updateDeliveryStatus();
 	
 	//승아
-	//리뷰
+	//리뷰(꽃다발/ 꽃대)
 	ArrayList<Order> selectOrderReview(Review r);
 	
+	//승아
+	//리뷰(조합형)
+	ArrayList<Order> selectComOrderReview(Review r);
 }

@@ -192,7 +192,7 @@
 		WHERE NOT DELIVERY_STATUS IN('결제취소')
   	</update> 
 
-	<!--  지승아 리뷰 오더 검사-->
+	<!--  지승아 리뷰 오더 검사 (꽃다발 / 꽃대 )--> 
 	<select id="selectOrderReview" parameterType="review" resultMap="orderResultSet">
 		SELECT *
 		FROM ORDER_TBL
@@ -201,6 +201,15 @@
 		WHERE PRODUCT_NO = #{productNo}
 		AND USER_NO = #{userNo}
 	</select>
-
+	
+	<!--  지승아 리뷰 오더 검사(조합형)-->
+	<select id="selectComOrderReview" parameterType="review" resultMap="orderResultSet">
+      SELECT *
+		FROM ORDER_TBL
+		JOIN DETAIL_ORDER USING (ORDER_NO)
+		JOIN MEMBER USING(USER_NO)
+		WHERE PRODUCT_NO IN (8,9,11)
+		AND USER_NO = #{userNo}
+	</select>
 
 </mapper>
