@@ -59,6 +59,13 @@
                             </tr>
                         </table>
                         -->
+                        <c:if test="${ empty list }">
+						<table style="text-align: center">
+                            <tr>
+                                <td height="300" width="900" style="text-align: center; font-size: 20px; font-weight: 600;">최근 주문내역이 존재하지 않습니다.</td>
+                            </tr>
+                        </table>
+						</c:if>
 
                         <table>
                         <c:forEach var="o" items="${list}">
