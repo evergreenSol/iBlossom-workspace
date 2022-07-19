@@ -34,6 +34,11 @@ public class ProductServiceImpl implements ProductService{
    }
    
    @Override
+   public int countProduct(Product p) {
+   	return productDao.countProduct(sqlSession,p);
+   }
+   
+   @Override
    public ArrayList<Product> selectList(PageInfo pi) {
 
       return productDao.selectList(sqlSession, pi);
@@ -105,6 +110,8 @@ public class ProductServiceImpl implements ProductService{
 public ArrayList<Product> selectTagProduct(Product p) {
 	return productDao.selectTagProduct(sqlSession, p);
 }
+
+
 
 
 }

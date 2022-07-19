@@ -375,20 +375,29 @@ html, body {
 /*reviewTitle*/
 .text1 {
 
-	font-size: 25px;
-	/* border: 1px solid black;   */
-	width: 800px;
-	text-align: center;
+font-size: 25px;
+
+/* border: 1px solid black;   */
+
+width: 800px;
+
+text-align: center;
+
+
+
+transform: translateY(-90px);
 }
 
 /*reviewContent*/
 .text2 {
 	font-size: 15px;
-/* 	 border: 1px solid orange;  */
-	margin:auto;
-	width: 900px;
+	/* 	 border: 1px solid orange;  */
+	margin:
+	auto;
+	width: 500px;
 	text-align: center;
-	
+	word-break: break-all;
+	transform: translateY(-70px);
 }
 
 /*userId*/

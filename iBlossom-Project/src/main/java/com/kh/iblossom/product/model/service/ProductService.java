@@ -19,6 +19,9 @@ public interface ProductService {
 	// 상품 등록하기 서비스
 	int insertProduct(Product p);
 	
+	//에러페이지를 위한 카운트 서비스
+	int countProduct(Product p);
+	
 	//상품 상세 조회 서비스(admin)
 	Product selectProduct(int productNo);
 	

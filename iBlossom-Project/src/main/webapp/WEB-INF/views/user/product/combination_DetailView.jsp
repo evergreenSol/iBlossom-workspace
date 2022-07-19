@@ -30,7 +30,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	<br>
 
 	<div id="wrap_detail1">
-		<div style="width: 1000px; margin: auto;">
+		<!-- <div style="width: 1000px; margin: auto;"> -->
+		<div style="width: 1000px;margin:auto;">
 			<table>
 				<tr class="tr1" valign="top">
 					<td rowspan="6"><img src="resources/images/flower3.PNG">
@@ -40,12 +41,12 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 								---------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								---------</option>
 							<c:forEach var="p" items="${ list }" varStatus="status">
-								<option id="option_flower${ status.count }"
-									value="${ status.count }">${ p.flowerName }</option>
+								<option id="option_flower${ status.count }" value="${ status.count }">${ p.flowerName }</option>
 							</c:forEach>
-					</select></td>
-					<td class="pp" style="padding-top: 20px;"><b
-						style="font-size: 25px;">조합형</b></td>
+						</select></td>
+					<td class="pp" style="padding-top: 20px;">
+						<b style="font-size: 25px;">조합형</b>
+					</td>
 				</tr>
 				<tr>
 					<td class="pp"><hr></td>
@@ -66,19 +67,15 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 											<img src="resources/images/x.png"
 												style="width: 13px; float: right; cursor: pointer; margin: 8px 8px 0px 0px;">
 										</div>
-										<input type="hidden" id="index" value=${ status.count }>
+										<input type="hidden" id="index" value="${ status.count }">
 										<input type="hidden" id="userNo" value="${ loginUser.userNo }">
 										<input type="hidden" id="productNo" value="${ p.productNo }">
-										<div
-											style="background-color: white; height: 40px; padding-top: 20px; margin-top: 10px;">
-											<span>${ p.flowerName }</span> <input type="button" value="-"
-												onclick="count('minus',${ status.count })"
-												class="input-button1"> <input type="number"
-												id="productCount${ status.count }" value="1"
-												class="input-productCount"> <input type="button"
-												value="+" onclick="count('plus',${ status.count })"
-												class="input-button2"> <input type="hidden"
-												id="productPrice${ status.count }" value="${ p.price }">
+										<div style="background-color: white; height: 40px; padding-top: 20px; margin-top: 10px;">
+											<span>${ p.flowerName }</span> 
+											<input type="button" value="-" onclick="count('minus',${ status.count })" class="input-button1"> 
+											<input type="number" id="productCount${ status.count }" value="1" class="input-productCount">
+											<input type="button" value="+" onclick="count('plus',${ status.count })" class="input-button2">
+											<input type="hidden" id="productPrice${ status.count }" value="${ p.price }">
 											<input type="hidden" id="sum${ status.count }">
 										</div>
 									</div>
@@ -119,7 +116,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 				<div class="modal-window" style="height: 550px">
 					<form action="coInsert.re" method="post"
 						enctype="multipart/form-data">
-						<input type="hidden" name="productNo" value="17"> <input
+						<input type="hidden" name="productNo" value="0"> <input
 							type="hidden" name="userNo" value="${ loginUser.userNo }">
 
 						<div class="title">
@@ -187,9 +184,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 		<!-- 상세정보 폼-->
 
-		<div id="flowerDetailList">
+		<div id="flowerDetailList" style="height: 1500px;">
 			<c:forEach var="p" items="${ list }">
-				<table style="overflow: hidden;">
+				<table style="overflow: hidden; hidden;width: 200px;float: left;margin:10px;">
 
 					<tr>
 						<td><img src="${ p.thumbNail }"></td>
@@ -318,7 +315,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	    			$(".item"+ items[i] + "").children().children("#productPrice"+items[i]+"").attr("name","cartList[" + i + "].productPrice")
 	    			$(".item"+ items[i] + "").children().children("#productCount"+items[i]+"").attr("name","cartList[" + i + "].productCount")	
 	 		}
-	    	 $('#cartItems').attr("action", "insertCo.ca").submit(); 
+	    	 	$('#cartItems').attr("action", "insertCo.ca").submit();
 		}
      }
      
@@ -338,7 +335,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
          
          $.ajax({
        	  url: "reviewList.re",
-       	  data : {productNo : 17},
+       	  data : {productNo : 0},
        	  success : function(result){
        		  
        		  console.log(result);

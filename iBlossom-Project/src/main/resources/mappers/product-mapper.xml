@@ -76,7 +76,15 @@
 		, #{contentPhoto}
 		, #{flowerInfo}
 		, #{tag})
+	
 	</insert>
+	
+	<!-- 상품 카운트 --> 
+	<select id="countProduct" parameterType="Product" resultType="_int">
+		SELECT COUNT(*)
+		FROM PRODUCT
+		WHERE FLOWER_NAME = #{flowerName}
+	</select>
 
 	<!-- 상품 상세보기(admin)-->
 	<select id="selectProduct" parameterType="_int"

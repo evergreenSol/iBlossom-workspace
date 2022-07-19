@@ -276,6 +276,8 @@ public class ReviewController {
 		System.out.println("Controller:" + list);
 		return new Gson().toJson(list);
 	}
+	
+	//리
 
 	
 	// admin 리뷰 상세보기
