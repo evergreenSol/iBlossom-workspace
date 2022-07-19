@@ -175,10 +175,10 @@
 	        </div>
 
 	    </div> <!-- class="cart-right" -->
-	    
+   
     </div> <!-- id="cartMainOuter" -->
     
-    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 
 	<!------------------------------------------------------------------->
 	
