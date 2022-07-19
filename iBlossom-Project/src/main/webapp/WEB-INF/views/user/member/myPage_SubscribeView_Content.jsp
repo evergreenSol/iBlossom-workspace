@@ -238,6 +238,7 @@
 										// alert("구독 취소되었습니다.");
 										$.ajax({
 											url : "refund.me",
+											type:"post",
 											data : {
 												totalPrice : refundPrice
 											},
@@ -248,6 +249,17 @@
 												
 											}
 											
+										});
+										
+										$.ajax({
+											url : "resetSubscribe.do",
+											type : "post",
+											success : function(data) {
+												console.log("스케줄러 중지");
+												
+											}, error : function() {
+												console.log("resetSubscribe fail");
+											}
 										});
 										
 										

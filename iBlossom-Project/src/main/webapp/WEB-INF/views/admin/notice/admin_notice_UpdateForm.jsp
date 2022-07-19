@@ -7,10 +7,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>member</title>
+    <title>admin | 공지사항</title>
     <link href="resources/css/shj.css" rel="stylesheet">
     <link href="resources/css/kms.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- 파비콘 -->
+	<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+	<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -85,7 +88,7 @@
     <div id="admin-member-wrap">
 
         <span id="admin-member-title">공지사항 수정하기</span>
-        <hr id="admin-member-hr">
+        <hr id="admin-member-hr" style="border-width:1px 0px 0px 0px;">
 
      <form id="admin-notice-container" action="updateNotice.ad" method="post">
         <table id="noticeContent" border="1">

@@ -80,7 +80,7 @@ public class BootPayController {
 	
 	@ResponseBody
 	@RequestMapping("subscribe.do")
-	public void subscribe(String billingKey, Date executeAt, int miliperiod, int totalPrice, String subProductName, Subscribe s, int numOfPay,HttpSession session) { 
+	public void subscribe(String billingKey, Date executeAt, int miliperiod, int totalPrice, String subProductName, Subscribe s, int numOfPay, HttpSession session) { 
 
 	int period = 1000*miliperiod;	
 	

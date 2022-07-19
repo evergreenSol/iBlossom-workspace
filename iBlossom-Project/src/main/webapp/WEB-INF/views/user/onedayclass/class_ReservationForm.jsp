@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
-<title>iBlossom | Class</title>
+<title>iBlossom | OneDayClass</title>
 <link href="resources/css/kms.css" rel="stylesheet">
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
 <!-- 파비콘 -->
@@ -37,17 +37,6 @@
                           
             </div>            
         </div>
-        <!-- 
-        <div id='pay-right'>
-            <div class='pay'>
-                <div id="pay-content3">결제수단</div>
-                <div id="pay-content3_1"><input type="radio" style="width:15px;height:15px;border:1px;" checked> 카드결제</div>
-                <div id="pay-content3_2"><input type="checkbox" checked>구매조건 확인 및 결제 진행에 동의</div>
-            </div>
-            
-            <button type="submit" id="pay-btn" class="">결제하기</button>
-        </div>
-         -->
          
     <div>
 	    <div id='pay-right'>

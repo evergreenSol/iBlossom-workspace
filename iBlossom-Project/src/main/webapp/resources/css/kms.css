@@ -65,7 +65,8 @@
 
     /*가로선*/
     hr{
-        margin-left : 0;   
+        margin-left : 0;  
+        border-width:1px 0px 0px 0px;
     }
 
 
@@ -441,7 +442,8 @@
 
 /*가로선*/
 hr{
-    margin-left : 0;   
+    margin-left : 0;  
+    border-width:1px 0px 0px 0px; 
 }
 
 
@@ -495,6 +497,7 @@ hr{
 #admin-order-hr {
     margin-top: 15px;
     margin-bottom: 50px;
+    border-width:1px 0px 0px 0px; 
 }
 
 /* admin 관리자 페이지 전체주문내역 table */
