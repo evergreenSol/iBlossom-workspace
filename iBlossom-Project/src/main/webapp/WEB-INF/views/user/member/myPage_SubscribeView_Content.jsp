@@ -88,7 +88,7 @@
 				<span style="font-size: 18px; font-weight: 600;">나의 구독 일정</span>
 				<div class="mypage-subscribe-cancel-area" style="display:inline; margin-left: 595px;">
 					<button type="button" class="mypage-subscribe-cancel">구독취소</button>
-					<input type="hidden" value="${ list[0].receiptId }" name="receiptId">
+					<input type="text" value="${ list[0].receiptId }" name="receiptId">
 				</div>
 			</div>
 			<div style="width: 100%">
@@ -190,8 +190,10 @@
 			
 			$(".mypage-subscribe-cancel").click(function () { 
 			var receiptId = $(this).next().val()
+			$(this).attr("disabled", true);
+			
 			console.log(receiptId);
-				
+			
 				console.log("클릭됨");
 		
 				$.ajax({
@@ -210,7 +212,7 @@
 					data : {
 						receiptId : receiptId
 					},
-					type : "POST",
+					type : "post",
 					success : function (result) {
 						
 							console.log("수정이 되었음");
@@ -242,16 +244,18 @@
 											data : {
 												totalPrice : refundPrice
 											},
+											type : "post",
 											success: function () {
+												setTimeout(function() {
 												location.reload();
+												},5000)
 											},
 											error : function () {
 												
 											}
 											
 										});
-										
-									
+
 									}, error : function() {
 										console.log("안되면 집ㄱ");
 									}

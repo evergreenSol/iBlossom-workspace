@@ -117,12 +117,12 @@
 						<tr>
 							<td><label for="thumbnail" style="font-size:20px; font-weight:700px">썸네일</label>
 							
-							<input type="file" name="upThumbNail" id="admin_product-img" required style="margin-top:15px"></td>
+							<input type="file" name="upThumbNail" class="admin_product-img" required style="margin-top:15px"></td>
 
 							<td><label for="contentPhoto"
 									style="font-size:20px; font-weight:700px">상세사진</label>
 									<br>
-									 <input type="file" name="upContentPhoto" id="admin_product-img" style="margin-top:15px"></td>
+									 <input type="file" name="upContentPhoto" class="admin_product-img" style="margin-top:15px"></td>
 								
 							<td width="60%"><textarea id="admin_product-description"
 									name="flowerInfo"></textarea></td>

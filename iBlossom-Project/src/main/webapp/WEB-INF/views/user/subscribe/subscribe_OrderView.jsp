@@ -510,8 +510,11 @@
 				numOfPay : numOfPay
 				},
 			success : function(data) {
-				alert("iBlossom 상품 구독 등록 : 매달 싱싱하고 예쁜 꽃을 보내드릴게요 :)");
-				location.href="subscribeView.me"
+				alert("iBlossom 상품 구독 등록중 : 잠시만 대기해주시면 자동으로 진행됩니다");
+				setTimeout(function() {
+					alert("iBlossom 상품 구독 등록 성공 : 매달 싱싱하고 예쁜 꽃을 보내드릴게요 :)");
+					location.href="subscribeView.me"	
+				}, 3000);	
 			}, error : function() {
 				alert("상품 구독에 실패하였습니다 :(");
 			}
