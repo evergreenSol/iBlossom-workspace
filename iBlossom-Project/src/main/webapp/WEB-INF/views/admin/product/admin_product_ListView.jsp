@@ -163,11 +163,11 @@
 		</div>
 
 		<div style="padding-top: 100px;">
-			<table id="productTable" border="1px solid " align="center">
-				<thead style="height: 50px; font-weight: 700;">
-					<th>상품번호</th>
+			<table id="productTable" border="1px solid " align="center" >
+				<thead style="height: 50px; font-weight: 700; background-color : #444444;; color:white;">
+					<th >상품번호</th>
 					<th>카테고리명</th>
-					<th>상품명</th>
+					<th style="width:150px">상품명</th>
 					<th>가격</th>
 					<th>상품 등록일</th>
 					<th>태그</th>

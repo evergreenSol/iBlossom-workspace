@@ -73,7 +73,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 										<div style="background-color: white; height: 40px; padding-top: 20px; margin-top: 10px;">
 											<span>${ p.flowerName }</span> 
 											<input type="button" value="-" onclick="count('minus',${ status.count })" class="input-button1"> 
-											<input type="number" id="productCount${ status.count }" value="1" class="input-productCount">
+											<input type="number" id="productCount${ status.count }" value="1" class="input-productCount" readonly>
 											<input type="button" value="+" onclick="count('plus',${ status.count })" class="input-button2">
 											<input type="hidden" id="productPrice${ status.count }" value="${ p.price }">
 											<input type="hidden" id="sum${ status.count }">
@@ -88,7 +88,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							</div>
 							<div>
 								총 주문금액 : <input type="text" id="sumAll"
-									style="border: none; font-weight: 700; font-size: 15px; background-color: rgba(224, 224, 224, 0.001); padding-left: 60px; width: 50px;"
+									style="border: none; font-weight: 700; font-size: 15px; background-color: rgba(224, 224, 224, 0.001); padding-left: 56px; width: 50px;"
 									name="sum" size="11" id="sum" readonly value=""><span
 									style="margin-left: 200px"> 원</span>
 							</div>
@@ -137,9 +137,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							</div>
 							<br>
 							<div>
-								<input type="text" name="reviewTitle"
+								<input type="text" name="reviewTitle" maxlength="20"
 									style="width: 370px; height: 30px; border: 1px solid gainsboro;"
-									placeholder="제목을 작성해주세요.">
+									placeholder="제목을 입력해주세요.(최대 20자까지 가능합니다)">
 							</div>
 							<br>
 							<textarea rows="2" cols="10" onkeyup="counter(this,150)"
@@ -211,8 +211,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 	<div>
 
-		<input type='button' id='btn_rv' value='구매평 작성'
-			class="ComInsertReview">
+		<input type='button' id='btn_rv' value='구매평 작성' style="margin-left:50px"
+			class="ComInsertReview" hidden>
 		<div id="reviewList" hidden></div>
 	</div>
 
@@ -228,6 +228,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                 }
                 document.getElementById("reCount").innerHTML = text.value.length + " / " + limit;
             }
+            
+            
+            
         </script>
 	<script>
 	// 빈 배열 만들기
@@ -325,6 +328,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
      }
      
      function showReview() { // 리뷰 열기
+    	 $('#btn_rv').removeAttr("hidden");
     	 $('#reviewList').removeAttr("hidden");
     	 $('#flowerDetailList').attr("hidden","true");
     	 
@@ -344,18 +348,27 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
        	for(var i in result){
          
 
-       		review += "<br><br>";
-       		review += "<hr>";
-       		review += "<div class='reviewbb'>";
-       		review += "<input type='hidden' value="+ result[i].reviewNo +">"
-       		review +="<div class='divBox'>"
-       		review += "<img class='img1' src='" + result[i].reviewPhoto + "' style='width: 190px; height:190px;  margin-left: 20px;margin-top: 10px; float: left;'>";
-       		review += "<p class='text3'>" + result[i].userId + "</p>";
-	       	review += "<p class='text1'>" + result[i].reviewTitle + "</p>";
-	     	review += "<p class='text4'>" + result[i].createDate + "</p>";
-	       	review += "<p class='text2'>" + result[i].reviewContent + "</p>";
-	       	review += "</div>";
-	       	 review += "</div>";
+       	   review += "<hr style='border-width:1px 0px 0px 0px; width:1110px;'>";
+            review += "<div class='reviewbb'>";
+            review += "<input type='hidden' value="+ result[i].reviewNo +">"
+            
+            review +="<div class='divBox'>"
+            
+            	  review +="<div class='divBox1'>"
+                    	review += "<img class='img1' src='" + result[i].reviewPhoto + "' style='margin-left:50px;'>";
+                    review += "</div>";
+                    
+                    review +="<div class='divBox2'>"
+	                      review += "<div class='text1'>" + result[i].reviewTitle + "</div>";
+	                      review += "<div class='text2'>" + result[i].reviewContent + "</div>";
+                    review += "</div>";
+                    
+                    review +="<div class='divBox3'>"
+	                      review += "<div class='text3'>" + result[i].userId + "</div>";
+	                      review += "<div class='text4'>" + result[i].createDate + "</div>";
+                    review += "</div>";
+                
+                review += "</div>";
 		  }
        		review += "<br><br><br><br><br>";
          
