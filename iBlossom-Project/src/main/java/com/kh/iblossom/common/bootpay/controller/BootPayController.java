@@ -91,15 +91,18 @@ public class BootPayController {
 			
 			@Override
 			public void run() {
-				if(cancelParam==0) {	
+				if(cancelParam==0) {
+					System.out.println("타이머실행중" + cancelParam);
 					goGetToken();
 					requestSubscribe(billingKey, totalPrice, subProductName);
 					insertSubscribe(s, numOfPay, totalPrice, session);
 					
 				}
 				else {
+					System.out.println("타이머 취소됨" + cancelParam);
 					timer.cancel();
-					cancelParam--;
+					cancelParam=0;
+					System.out.println("cancelParam 리셋" + cancelParam);
 				}
 			}
 			
