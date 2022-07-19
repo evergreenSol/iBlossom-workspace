@@ -171,7 +171,7 @@
                                 <p>
                                     <c:choose>
 										<c:when test="${ (empty loginUser.phone) }">
-											<span><span style="color:gray;">${ loginUser.userName }, &nbsp; 000-0000-0000&nbsp;&nbsp;</span> ∨ &nbsp;</span>
+											<span><span>${ loginUser.userName }, &nbsp; 000-0000-0000&nbsp;&nbsp;</span> ∨ &nbsp;</span>
 										</c:when>
 										<c:otherwise>
 											<span><span>${ loginUser.userName }, &nbsp; ${ loginUser.phone }&nbsp;&nbsp;</span> ∨ &nbsp;</span>
