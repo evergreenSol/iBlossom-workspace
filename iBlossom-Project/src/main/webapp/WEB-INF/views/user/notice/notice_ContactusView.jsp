@@ -64,7 +64,7 @@
     <div id="contact">
         <p style="font-size: 23px; font-weight: 700;">Contact Us</p>
         <pre style="font-size: 15px;">
-법인명(상호) : (주)나블러썸 
+법인명(상호) : (주)아이블러썸 
 
 대표자(성명) : 김한솔
 
