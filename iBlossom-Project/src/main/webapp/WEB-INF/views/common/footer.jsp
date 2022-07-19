@@ -32,7 +32,7 @@
         <div id="footer-text">
             <!-- 로고 -->
             <img src="${pageContext.request.contextPath}/resources/images/iBlossom_logo_white.png" id="footer-logo">
-            <p>아이블라썸(iBlossom) | 대표자 김한솔 | 사업자 등록번호 000-00-00000 | 서울특별시 영등포구 선유동2로 57 이레빌딩 19층 iBlossom<br>
+            <p>아이블라썸(iBlossom) | 대표자 김한솔 | 사업자 등록번호 110-38-150680 | 서울특별시 영등포구 선유동2로 57 이레빌딩 19층 iBlossom<br>
             © iBlossom, Inc. All rights reserved.</p>
         </div>
     </div>

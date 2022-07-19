@@ -240,6 +240,7 @@
 										// alert("구독 취소되었습니다.");
 										$.ajax({
 											url : "refund.me",
+											type:"post",
 											data : {
 												totalPrice : refundPrice
 											},
@@ -254,7 +255,6 @@
 											}
 											
 										});
-
 									}, error : function() {
 										console.log("안되면 집ㄱ");
 									}
