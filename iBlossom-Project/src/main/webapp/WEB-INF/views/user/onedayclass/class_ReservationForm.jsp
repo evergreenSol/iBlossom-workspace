@@ -66,8 +66,8 @@
             <input type="hidden" id="email" value="${ loginUser.email }">
             <input type="hidden" id="phone" value="${ loginUser.phone }">
             <input type="hidden" id="price" value="${ oc.price }">
-            <input type="text" id="classDate2" value="${ oc.classDate2 }">
-            <input type="text" id="className" value="${ oc.className }">
+            <input type="hidden" id="classDate2" value="${ oc.classDate2 }">
+            <input type="hidden" id="className" value="${ oc.className }">
 			<input type="hidden" id="userNo" name="userNo" value="${ loginUser.userNo }">
 	    </div>
      
