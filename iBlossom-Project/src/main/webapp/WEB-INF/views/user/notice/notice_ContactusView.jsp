@@ -73,7 +73,7 @@
 통신판매번호 : 2022-서울당산-3333<br>
 OPEN HOURS AM 09:30 - PM 18:20 | LUNCH TIME PM 12:20 - PM 13:30 | OFFICE DAY MON - FRI
         </pre>
-	<p id="mapTitle" style="font-size: 20px; font-weight: 700;">찾아오시는 길</p>
+	<p id="mapTitle" style="font-size: 23px; font-weight: 700;">찾아오시는 길</p>
 	<div id="map" style="width:700px;height:400px;"></div>
     </div>
 </div>    
