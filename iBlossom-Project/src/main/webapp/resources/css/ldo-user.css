@@ -12,9 +12,9 @@ div { box-sizing: border-box; }
     
     /* 전체 */
     #cartMainOuter {
-       width: 1200px;
-       height: 2000px;
-       margin: auto;
+    	width: 1200px;
+        height: 2000px;
+    	margin: auto;
     }
      
     /* 왼쪽 섹션 */ 
@@ -686,8 +686,9 @@ div { box-sizing: border-box; }
     
     /* 전체 옵션 */
     .order-right-wrap {
-       background-color:white;
-       padding: 5px;
+
+    	background-color:white;
+    	padding: 5px;
     }
     
     /* 총 주문 금액, 배송비, 등급할인 */
@@ -709,7 +710,7 @@ div { box-sizing: border-box; }
         justify-content: space-between;
         padding: 10px;
         font-weight: bold;
-        margin: 25px 15px 1px 15px;
+        margin: 25px 10px 1px 10px;
     }
 
     /* 이용약관 네모박스 */

@@ -79,12 +79,10 @@
                         <div class="order-check">
                             <button id="CheckBtn">
                                 <p>주문내역 확인</p>
-                                <p><span>∨&nbsp;&nbsp;</span></p>
+                                <p><span>∨ &nbsp;</span></p>
                             </button>
 
-                        </div>
-
-                        <hr>
+                        </div><hr>
 
                         <!-- 내용 -->
                         <div id="CheckBox" class="order-check-contentbox">
@@ -94,8 +92,7 @@
 
                                 <!-- 상품 이미지 -->
                                 <span>
-                                    <img src="${ sp.subChangeName }"
-                                    	 style="width:250px; height:250px;">
+                                    <img src="${ sp.subChangeName }">
                                 </span>
 
                                 <!-- 상품 옵션 확인란 -->
@@ -143,13 +140,18 @@
                         <!-- 타이틀 -->
                         <div class="order-orderer">
                             <button id="OrdererBtn">
-
                                 <p>주문자 정보</p>
                                 <!-- 입력내용 보여지는 태그-->
                                 <p>
-                                    <span>${ loginUser.userName } &nbsp;&nbsp; ${ loginUser.phone }</span>&nbsp;&nbsp;&nbsp;∨&nbsp; 
+                                    <c:choose>
+										<c:when test="${ (empty loginUser.phone) }">
+											<span><span style="color:gray;">${ loginUser.userName }, &nbsp; 000-0000-0000&nbsp;&nbsp;</span> ∨ &nbsp;</span>
+										</c:when>
+										<c:otherwise>
+											<span><span>${ loginUser.userName }, &nbsp; ${ loginUser.phone }&nbsp;&nbsp;</span> ∨ &nbsp;</span>
+										</c:otherwise>
+									</c:choose>
                                 </p>
-
                             </button>
                         </div>
 
@@ -159,14 +161,21 @@
                         <div id="OrdererBox" class="order-orderer-content" >
 
                             <p>&nbsp;이름</p>
-                            <p class="orderer-name">${ loginUser.userName }<p>
+                            <p class="orderer-name">&nbsp;${ loginUser.userName }</p>
 
                             <p>&nbsp;연락처</p>
-                            <p class="orderer-phone">${ loginUser.phone }</p>
+                            <c:choose>
+								<c:when test="${ (empty loginUser.phone) }">
+									<p class="orderer-phone">&nbsp;개인정보에서 연락처가 입력되지 않았습니다. 배송지 추가를 통해 입력해주시기 바랍니다.</p>
+								</c:when>
+								<c:otherwise>
+									<p class="orderer-phone">${ loginUser.phone }</p>
+								</c:otherwise>
+							</c:choose>
 
                             <!-- 안내문구 -->
-                            <p class="orderer-guide" style="font-size:small">
-                                * 주문자 정보변경은 마이페이지 > 개인정보수정에서 가능합니다.
+                            <p class="orderer-guide" style="font-size: small">
+                                &nbsp;* 주문자 정보변경은 마이페이지 > 개인정보수정에서 가능합니다.
                             </p>
                             <br>
                         </div>
@@ -175,7 +184,7 @@
                     <div>
                         <div class="order-sender">
                             <button id="SenderBtn">
-                                <p>발신인 이름</p><p><span>∨</span></p>
+                                <p>발신인 이름</p><p><span>∨ &nbsp;</span></p>
                             </button>
                         </div>
 
@@ -352,7 +361,7 @@
                 <!-- 총 주문 금액 -->
                 <div class="order-price">
                     <span>총 주문 금액</span>
-                    <span>${ subLevel * sp.subPrice }</span>
+                    <span>${ subLevel * sp.subPrice }원</span>
                 </div>
 
                 <!-- 배송비 -->
