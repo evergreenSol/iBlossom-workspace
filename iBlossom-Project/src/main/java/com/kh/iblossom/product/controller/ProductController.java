@@ -111,20 +111,26 @@ public class ProductController {
 	@RequestMapping("insert.pr")
 	public String insertProduct(Product p, MultipartFile upThumbNail,MultipartFile upContentPhoto ,HttpSession session, Model model) {
 
-		//		System.out.println(p);
+				System.out.println(p);
 		//		System.out.println(contentPhoto);
-		//		
+		System.out.println(upContentPhoto);
+		
+		System.out.println("insert1 +: " + p.getContentPhoto());
+		
 		if(!upThumbNail.getOriginalFilename().equals("")) {
 
 			String changeName = saveFile(upThumbNail, session);
 			p.setThumbNail("resources/uploadFiles/" + changeName);
+			
+			//System.out.println("insert2 +: " + p.getContentPhoto());
 
 		}
-		else if(!upContentPhoto.getOriginalFilename().equals("")) {
+		if(!upContentPhoto.getOriginalFilename().equals("")) {
 
 			String changeName1 = saveFile(upContentPhoto, session);
 			p.setContentPhoto("resources/uploadFiles/" + changeName1);
 		}
+
 
 		// : 상품명, 카테고리명, 가격, 수량(0),썸네일, 상품상세사진, 꽃상세내용, 태그
 		int result = productService.insertProduct(p);
