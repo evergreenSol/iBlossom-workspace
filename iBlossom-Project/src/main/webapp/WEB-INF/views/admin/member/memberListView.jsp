@@ -138,8 +138,8 @@
 
         <div id="admin-memberList-wrap">
 
-            <table id="admin-member-table" border="1">
-            	<thead style="background-color : black; color:white; height : 50px; font-weight : 700;">
+            <table id="admin-member-table" border="1" style="border-collapse: collapse;">
+            	<thead style="background-color : #444444;; color:white; height : 50px; font-weight : 700;">
             
                     <th style="width:60px;">회원번호</th>
                     <th style="width:100px;">아이디</th>
@@ -153,7 +153,7 @@
                     <th style="width:40px;">등급</th>
                 
                 </thead>
-                <tbody>
+                <tbody style="border: 1px solid rgba(226, 226, 226, 0.982);">
                 <c:forEach var="me" items="${list}">	
                     <tr style="height : 40px;">
                         <td class="mno">${me.userNo}</td>
