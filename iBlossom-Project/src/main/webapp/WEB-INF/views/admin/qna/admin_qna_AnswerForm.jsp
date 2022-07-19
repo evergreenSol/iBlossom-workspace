@@ -111,8 +111,8 @@
                 <tr>
                     <th height="140">답변</th>
                     <td colspan="5">
-                        <p style="height:80px;"><textarea name="answer" id="answer" cols="75" rows="6"  maxlength="400"
-                            style="resize:none; border: none;" required></textarea></p>
+                        <p style="height:80px;"><textarea name="answer" id="answer" cols="75" rows="5"  maxlength="400"
+                            style="resize:none; border: none; font-size:16px;" required>${ q.answer }</textarea></p>
                     </td>              
                 </tr>           
             </table>

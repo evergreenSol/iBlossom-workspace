@@ -84,7 +84,7 @@
     <!-- admin 관리자페이지 회원관리 -->
     <div id="admin-member-wrap">
 
-        <span id="admin-member-title">공지사항 작성하기</span>
+        <span id="admin-member-title">공지사항 수정하기</span>
         <hr id="admin-member-hr">
 
      <form id="admin-notice-container" action="updateNotice.ad" method="post">

@@ -139,8 +139,9 @@
                     <tr>
                         <th width="100">글번호</th>
                         <th width="400">제목</th>
-                        <th width="100">작성자</th>
-                        <th width="120">작성일</th>
+                        <th width="130">작성자</th>
+                        <th width="180">작성일</th>
+                        <th width="150">문의 상태</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -150,8 +151,16 @@
 	                        <td>${ q.qnaTitle }</td>
 	                        <td>${ q.userNo }</td>
 	                        <td>${ q.qnaDate }</td>
-	                    </tr>
-	                </c:forEach>   
+                      	<c:choose>
+                            <c:when test="${ q.answerStatus eq 'Y'}">
+                                <td>답변완료</td>
+                            </c:when>
+                           <c:otherwise>
+                           		<td>답변대기</td>
+                           </c:otherwise>
+                        </c:choose>
+                  	  </tr>
+	                </c:forEach>  
                 </tbody>
             </table>
         </div>
