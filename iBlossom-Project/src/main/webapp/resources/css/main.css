@@ -74,12 +74,11 @@
 
 .main-slider-text {
     position: absolute;
-    color : white;
+    color: black;
     bottom: 35px;
-    left: 40px;
-    font-size: 23px;
-    font-weight: 500;
-    font-family: 'IBM Plex Sans KR';
+    left: 25px;
+    font-size: 21px;
+    font-weight: 600;
 }
 
 .swiper-vertical>.swiper-wrapper{
