@@ -366,40 +366,44 @@ html, body {
 }
 
 .img1 {
-	width: 90px;
+	width: 80px;
 	display: inline-block;
 	margin-left: 20px;
 	margin-top: 10px;
 	float: left;
 }
-
+/*reviewTitle*/
 .text1 {
 
 	font-size: 25px;
-	border: 1px solid black; 
-	margin:auto;
+	/* border: 1px solid black;   */
+	width: 800px;
+	text-align: center;
 }
 
+/*reviewContent*/
 .text2 {
 	font-size: 15px;
-	 border: 1px solid orange; 
+/* 	 border: 1px solid orange;  */
 	margin:auto;
-	width: 870px;
+	width: 900px;
 	text-align: center;
 	
 }
 
+/*userId*/
 .text3 {
 	font-size: 15px;
-	border: 1px solid red; 
+	/* border: 1px solid red;  */
 	text-align: right;
 	display: inline-block;
 	margin-left: 700px;
 }
 
+/*createDate*/
 .text4 {
 	font-size: 15px;
-	 border: 1px solid green;
+	/*  border: 1px solid green; */
 	text-align: right;
 	margin-left: 400px;
 
