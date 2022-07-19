@@ -63,7 +63,7 @@
 			<table id="anwcontent" border="1" style="border-collapse: collapse; ">
 			 <div>
 					<label for="title" style="font-size: 18px; font-weight: 700;">제목</label><br><br>
-					<input type="text" id="qnaTitle" name="qnaTitle" style=" width:695px; height:35px; font-size:16px;" maxlength="50" required>
+					<input type="text" id="qnaTitle" name="qnaTitle" style="width:695px; height:35px; font-size:16px; outline:none;" maxlength="50" required>
 
 			</div>
             <br>
