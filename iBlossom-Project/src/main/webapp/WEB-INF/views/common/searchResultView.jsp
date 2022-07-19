@@ -18,6 +18,12 @@
 		margin-top: 53px;
 	}
 	
+	/* 가운데로 와주세요 제발 */
+	.empty_result {
+
+		height : 600px;
+	}
+	
 	/* 페이지 타이틀  */
 	.searchTitle {
 		 font-weight:700; 
@@ -28,6 +34,7 @@
 	
 	/* 검색 결과 없을 시 이미지 */
 	#searchResultImg {
+		margin-top : 250px;
 		width:50px; 
 		height:50px; 
 		margin-bottom: 15px;
@@ -47,23 +54,27 @@
 		cursor: pointer;
 	}
 	
+	/* 검색 결과창 */
 	.result_list {
 		width : 1200px;
 		
 	}
 	
+	/* 검색 결과 목록 */
 	.result_product {
 		margin : 2px;
 		display : inline-block;
 		text-align : center;
 	}
 
+	/* 꽃 이름 */
 	#flower_name {
 		font-size : 14px;
 		font-weight : 500;
 		margin-bottom : 15px;
 	}
 	
+	/* 검색 결과창에 이미지틀 */
 	.result_img_div {
 		width : 290px;
 		height : 400px;
@@ -73,19 +84,19 @@
 		margin : auto;
 	}
 	
+	/* 이미지 호버시 */
 	.result_img_div:hover {
 		cursor : pointer;
+		width : 97%;
+		height : 97%;
 	}
 	
+	/* 이미지 css */
 	.result_img {
 		width : 95%;
 		height : 95%;
 	}
 	
-	.result_img:hover {
-		width : 97%;
-		height : 97%;
-	}
 	
 </style>
 </head>
@@ -102,20 +113,22 @@
 	    	
 	    	<hr>
 	    	
-			    <div class="searchResult">
+			    <div class="searchResult" style="width:100%; ">
 			    
 				    <!-- 검색 결과가 없다면 --> 
 				    <c:choose>
 					    <c:when test="${ empty list }">
-						    <div>
-			                    <img src="resources/images/cart_zero_img.png" id="searchResultImg">
-			                </div>
-						    
-						    
-						    <div style="font-size:large; margin-bottom:27px;">검색 결과가 없습니다.</div>
-						    
-						    <div>
-						    	<button class="" type="button" onclick="location.href='${ pageContext.request.contextPath }/'">홈으로</button>
+						    <div class="empty_result" align="center">
+							    <div>
+				                    <img src="resources/images/cart_zero_img.png" id="searchResultImg">
+				                </div>
+							    
+							    
+							    <div style="font-size:large; margin-bottom:27px;">검색 결과가 없습니다.</div>
+							    
+							    <div>
+							    	<button class="" type="button" onclick="location.href='${ pageContext.request.contextPath }/'">홈으로</button>
+							    </div>
 						    </div>
 					    </c:when>
 					    <c:otherwise>
