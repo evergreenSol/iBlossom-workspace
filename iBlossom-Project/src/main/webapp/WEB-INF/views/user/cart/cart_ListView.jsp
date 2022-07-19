@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>iBlossom | 장바구니</title>
+<title>iBlossom | Cart</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <link href="resources/css/ldo-user.css" rel="stylesheet">
@@ -123,7 +123,7 @@
 
 	    
 	    <!------------------------------------------------------------------->
-	
+
 	    <div class="cart-right">
 
 		    <!-- 사용자 장바구니 페이지 오른쪽 영역-->
@@ -334,14 +334,24 @@
 		$(window).scroll(function(){
         	var scrollTop = $(document).scrollTop();
 	        if (scrollTop < 180) {
-	        	scrollTop = 20; 
+	        	scrollTop = -30; 
 
 	        }
 	        $(".cart-right").stop();
 	        $(".cart-right").animate( { "top" : scrollTop }
         	);
      	});
-	
+		
+		/*
+		$(document).ready(function(){
+			  var currentPosition = parseInt($(".cart-right").css("top"));
+			  $(window).scroll(function() {
+			    var position = $(window).scrollTop(); 
+			    $(".cart-right").stop().animate({"top":position+currentPosition+"px"},1000);
+			  });
+			});
+		*/
+		
 		$(function () {
 			$(".cart-btn").click(function () {
 				$("#real-submit-button").trigger("click");

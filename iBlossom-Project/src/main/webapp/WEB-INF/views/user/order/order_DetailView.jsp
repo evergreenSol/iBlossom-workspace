@@ -420,7 +420,7 @@
                     <!-- <span>- ${ total * (1 - discount) }원</span> -->
                     <span>-&nbsp;<fmt:formatNumber value="${ total * (1 - discount) }" pattern="###,###"/>원</span>
                 </div>
-                <hr>
+                <hr style="width: 90%;">
 
                 <!-- 총 결제 금액 -->    
                 <div class="order-tprice">
