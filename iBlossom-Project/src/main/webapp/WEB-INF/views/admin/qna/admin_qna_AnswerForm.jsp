@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin | member</title>
+    <title>admin | 1대1 문의</title>
     <link href="resources/css/shj.css" rel="stylesheet">
     <link href="resources/css/kms.css" rel="stylesheet">
 	<!-- 파비콘 -->
@@ -90,7 +90,7 @@
     <div id="admin-member-wrap">
 
         <span id="admin-member-title">1대1 문의관리</span>
-        <hr id="admin-member-hr">
+        <hr id="admin-member-hr" style="border-width:1px 0px 0px 0px;">
 
 
         <form id="admin-answer-container" method="post" action="answerUpdate.ad">

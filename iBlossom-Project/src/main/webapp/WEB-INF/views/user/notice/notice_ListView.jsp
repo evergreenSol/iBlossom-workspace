@@ -108,11 +108,11 @@
 <c:forEach var="n" items="${ list }">
         <div class="title"><p style="font-size: 17px; font-weight: 600; width: 860px;
         height: 25px;
-        line-height : 30px;
+        line-height : 20px;
         margin-top: 10px;
-        padding-bottom: 7px;
+        padding-bottom: 10px;
         border-bottom: 1px solid lightgray;">${ n.noticeTitle }</p>
-            <div class="notice-date" name="noticeDate" style="margin-top: -50px;">${ n.noticeDate }</div>
+            <div class="notice-date" name="noticeDate" style="margin-top: -53px;">${ n.noticeDate }</div>
         </div>
         <pre class="content1" style="font-size: 15px;"> 
 ${ n.noticeContent }
@@ -121,11 +121,11 @@ ${ n.noticeContent }
 
         <div class="title"><p style="font-size: 17px; font-weight: 600; width: 860px;
         height: 25px;
-        line-height : 30px;
+        line-height : 20px;
         margin-top: 10px;
-        padding-bottom: 7px;
+        padding-bottom: 10px;
         border-bottom: 1px solid lightgray;">어버이날 배송 안내</p>
-            <div class="notice-date" name="" style="margin-top: -50px;">2022-05-02</div>
+            <div class="notice-date" name="" style="margin-top: -53px; margin-right: -4px;">2022-05-02</div>
         </div>
         <pre class="content1" style="font-size: 15px;"> 
 안녕하세요 고객님 I Blossom입니다.
@@ -140,11 +140,11 @@ TIME TO BLOSSOM
 
         <div class="title"><p style="font-size: 17px; font-weight: 600;  width: 860px;
         height: 25px;
-        line-height : 30px;
+        line-height : 20px;
         margin-top: 10px;
-        padding-bottom: 7px;
+        padding-bottom: 10px;
         border-bottom: 1px solid lightgray;">원데이 클래스 관련 공지</p>
-            <div class="notice-date" name="" style="margin-top: -55px;">2022-04-18</div>
+            <div class="notice-date" name="" style="margin-top: -53px; margin-right: -2px;">2022-04-18</div>
         </div>
         <pre class="content1" style="font-size: 15px;">
 - 꽃은 시장 상황에 따라 달라질 수 있습니다.
@@ -156,11 +156,11 @@ TIME TO BLOSSOM
 
         <div class="title"><p style="font-size: 17px; font-weight: 600; width: 860px;
         height: 25px;
-        line-height : 30px;
+        line-height : 20px;
         margin-top: 10px;
-        padding-bottom: 7px;
+        padding-bottom: 10px;
         border-bottom: 1px solid lightgray;">#IBlossom #2022</p>
-            <div class="notice-date" name=""  style="margin-top: -55px;">2022-04-05</div>
+            <div class="notice-date" name=""  style="margin-top: -53px; margin-right: -4px;">2022-04-05</div>
         </div>
         <pre class="content1" style="font-size: 15px;">
 '꽃이 필 시간'라는 메시지로 꾸준히 일상 에서 꽃을 전해온 IBlossom가
