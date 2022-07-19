@@ -146,8 +146,8 @@
 
         <!-- 여기서부터는, 훈련생 여러분들 각자 작업 하면 된다 실시 -->
         <!-- 셀렉트 + 검색창  -->
-        <div style="padding-top:40px;" align="center">
-            <form method="post" action="search.su">
+        <div  id="search-area" style="padding-top:40px;" align="center">
+            <form method="get" action="search.su">
  				<input type="hidden" name="currentPage" value="1">
                 <select name="condition">
                     <option value="USER_ID">아이디</option>
@@ -160,6 +160,14 @@
                 <input type="submit" id="selectbtn" value="검색">
             </form>
         </div>
+        
+        <c:if test="${ not empty condition }">
+	        <script>
+	        	$(function() {
+	        		$("#search-area option[value=${ condition }]").attr("selected", true);
+	        	});
+	        </script>
+        </c:if>
         
         <!-- 구독한 회원들 리스트 조회용 테이블  -->
         <div style="padding-top: 100px;">
