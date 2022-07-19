@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +57,8 @@
                 <ul id="admin-navi">
                     <li><a href="list.me" class="admin-navi-menu">회원관리</a></li>
                     <li>
-                        <a href="adminList.or?cpage=1" class="admin-navi-menu" style="font-weight: 700;">주문정보관리</a>
+                        <a href="adminList.or" class="admin-navi-menu" style="font-weight: 700;">주문정보관리</a>
+                        <!-- <a href="adminList.or?cpage=1" class="admin-navi-menu" style="font-weight: 700;"> -->
                     </li>
                     <li>
                         <a href="subMemberListView.su" class="admin-navi-menu">정기구독관리</a>
@@ -105,25 +107,25 @@
         <!-- 전체 주문 내역 메뉴바 항목 14개 -->
         <!-- 주문번호, 회원번호, 주문자, 주문일, 수령자, 수령일, 수령자 전화번호, 
         	  배송지, 우편번호, 총결제금액, 결제번호, 주문상태, 배송상태, 상세보기 -->
-        <div class="admin-list-wrap">
-            
+        <div class="admin-list-wrap"><br>
+		
             <table class="admin-order-list-table">
             
                 <!-- 전체 주문 내역 > 메뉴바 -->
                 <thead id="admin-order-list-thead">
                     <tr>
-                        <th width="50px;">주문번호</th>
-                        <th width="50px;">회원번호</th>
-                        <th width="100px;">주문자</th>
-                        <th width="100px;">주문일</th>
-                        <th width="100px;">수령일</th>
+                        <th width="70px;">주문번호</th>
+                        <th width="70px;">회원번호</th>
+                        <th width="110px;">주문자</th>
+                        <th width="110px;">주문일</th>
+                        <th width="110px;">수령일</th>
                         <!-- <th>수령자 연락처</th> -->
                         <!-- <th>배송지</th> -->
                         <!-- <th>우편번호</th> -->
-                        <th width="100px;">총결제금액</th>
+                        <th width="110px;">총결제금액</th>
                         <!-- <th>결제번호</th> -->
-                        <th width="100px;">주문상태</th>
-                        <th width="100px;">배송상태</th>
+                        <th width="110px;">주문상태</th>
+                        <th width="110px;">배송상태</th>
                     </tr>
                 </thead>
 
@@ -164,7 +166,8 @@
 	                        <!-- <td>00123</td> -->
 	                        
 	                        <!-- 총결제금액 -->
-	                        <td>${ o.totalPrice }원</td>
+	                        <!-- <td>${ o.totalPrice }원</td> -->
+	                        <td><fmt:formatNumber value="${ o.totalPrice }" pattern="###,###"/>원</td>
 	                        
 	                        <!-- 결제번호 -->
 	                        <!-- <td>1</td> -->
@@ -174,8 +177,8 @@
 	                        
 	                        <!-- 배송상태 -->
 	                        <td>${ o.deliveryStatus }</td>
-	                        <!--  
-	                        <c:if test="${ (o.deliveryStatus ne '배송완료') or (o.deliveryStatus ne '배송중') }">
+							<!--  
+	                        <c:if test="${ (o.deliveryStatus ne '배송완료') and (o.deliveryStatus ne '배송중') }">
                                	<td style="text-align: right; padding-right: 10px;" width="300">
                                		<button class="mypage-pay-cancel" >취소하기</button>
                                		<input type="hidden" value="${o.receiptId}">
@@ -205,6 +208,7 @@
 
     <!-- 페이징 처리  -->
    	<div id="pagingArea">
+   	
       <ul class="pagination">
 
          <c:choose>
@@ -247,7 +251,10 @@
 	         </c:choose>
 	         
       	</ul>
+      	
 	 </div>
+	 
+	 <br><br><br><br><br><br>
     
 </body>
 </html>

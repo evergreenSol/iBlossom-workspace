@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,9 +56,7 @@
                 <!-- 메뉴 -->
                 <ul id="admin-navi">
                     <li><a href="list.me" class="admin-navi-menu">회원관리</a></li>
-                    <li>
-                        <a href="adminList.or" class="admin-navi-menu" style="font-weight: 700;">주문정보관리</a>
-                    </li>
+                    <li><a href="adminList.or" class="admin-navi-menu" style="font-weight: 700;">주문정보관리</a></li>
                     <li>
                         <a href="subMemberListView.su" class="admin-navi-menu">정기구독관리</a>
                         <ul class="admin-navi-ul">
@@ -100,12 +101,12 @@
 
         <br>
 
-		<div class="detail-wrap">
+		<div class="detail-wrap"><br>
 				
 	         <!-- 주문정보 영역 -->
 	         <table class="admin-order-detail-table">
 	
-	            <caption class="table-caption">주문정보</caption>
+	            <caption class="table-caption">&nbsp;주문정보</caption>
 	            
 	            <tr>
 	                <td class="admin-table-head">주문번호</td>
@@ -135,7 +136,7 @@
 	        <!-- 배송정보 영역 -->
 	        <table class="admin-order-detail-table">
 	
-	            <caption class="table-caption">배송정보</caption>
+	            <caption class="table-caption">&nbsp;배송정보</caption>
 	            
 	            <tr>
 	                <td class="admin-table-head">배송주소</td>
@@ -151,11 +152,13 @@
 	        <!-- 결제정보 영역 -->
 	        <table class="admin-order-detail-table">
 	
-	            <caption class="table-caption">결제정보</caption>
+	            <caption class="table-caption">&nbsp;결제정보</caption>
 	            
 	            <tr>
 	                <td class="admin-table-head">주문금액</td>
-	                <td class="admin-table-content">${ o.totalPrice }원</td>
+	                <td class="admin-table-content">
+						<fmt:formatNumber value="${ o.totalPrice }" pattern="###,###"/>원
+					</td>
 	                <td class="admin-table-head">배송비</td>
 	                <td class="admin-table-content">3,000원</td>
 	            </tr>
@@ -167,30 +170,31 @@
 	        <!-- 상세정보 영역 -->
 	        <table class="admin-order-detail-table">
 	            
-	            <caption class="table-caption">상세정보</caption>
+	            <caption class="table-caption">&nbsp;상세정보</caption>
 	            
 	            <tr class="admin-table-head detail-th">
-	                <th class="detail-th-1">상품번호</th>
-	                <th class="detail-th-2">카테고리</th>
+	                <th class="detail-th-1">상세주문번호</th>
+	                <th class="detail-th-2">상품번호</th>
 	                <th class="detail-th-3">상품명</th>
 	                <th class="detail-th-4">수량</th>
 	                <th class="detail-th-5">가격</th>
 	            </tr>
 	
-	            <c:forEach var="d" items="${list}">
-	            
+	            <c:forEach var="d" items="${ list }">
 		            <tr class="admin-table-content">
-		                <td>001</td>
-		                <td>꽃다발</td>
+		                <td>${ d.dorderNo }</td>
+		                <td>${ d.productNo }</td>
 		                <td>${ d.flowerName }</td>
 		                <td>${ d.oneQuantity }개</td>
-		                <td>${ d.onePrice }원</td>
+		                <td>
+		                	<fmt:formatNumber value="${ d.onePrice }" pattern="###,###"/>원
+		                </td>
 		            </tr>
-	
 	        	</c:forEach>
+	        	
 	        </table>
         
-            <br><br><br>
+            <br><br>
     
 		    <div>
 		    	<a href="adminList.or" id="admin-order-pre-btn">&lt; 이전으로</a>    	
@@ -199,8 +203,6 @@
         </div>
 
     </div>
-    
-
 
 	<br><br><br><br><br>
 
