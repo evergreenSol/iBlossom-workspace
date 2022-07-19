@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>iBlossom | FlowerMarket</title>
 <link href="resources/css/jsa.css" rel="stylesheet">
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico"
@@ -83,7 +83,7 @@
 									<br> 배송비: <span style="padding-left: 200px"> 3,000
 										원</span><br> <br> 총 주문금액 : <input type="text"
 										style="border: none; outline: none; background-color: rgba(224, 224, 224, 0.001); padding-left: 150px; width: 60px;"
-										name="sum" size="11" readonly>원
+										name="productPrice" size="11" readonly>원
 								</form>
 
 							</div>
@@ -158,21 +158,22 @@
 	<!-- 수량 올릴 시 가격 변동-->
 	<script>
         var sell_price;
-        var amount;
+        var productCount;
+        var productPrice;
 
         function init() {
-            sell_price = document.form.sell_price.value;
-            amount = document.form.productCount.value;
-            document.form.sum.value = sell_price;
+        	sell_price = document.form.sell_price.value;
+            productCount = document.form.productCount.value;
+            document.form.productPrice.value = sell_price;
             change();
         }
 
         function add() {
             hm = document.form.productCount;
-            sum = document.form.sum;
+            productPrice = document.form.productPrice;
             if(hm.value < 15){
            	 hm.value++;
-           	sum.value = (parseInt(hm.value) * sell_price) + 3000;
+           	 productPrice.value = (parseInt(hm.value) * sell_price);
             }else{
             	 alert("개당 최대 15개까지 구매 가능합니다.");
             }
@@ -181,43 +182,23 @@
 
         function del() {
             hm = document.form.productCount;
-            sum = document.form.sum;
+            productPrice = document.form.productPrice;
             if (hm.value > 1) {
                 hm.value--;
-                sum.value = parseInt(hm.value) * sell_price + 3000;
+                productPrice.value = parseInt(hm.value) * sell_price;
             }
         }
 
         function change() {
             hm = document.form.productCount;
-            sum = document.form.sum;
+            productPrice = document.form.productPrice;
 
             if (hm.value < 0) {
                 hm.value = 0;
             }
-            sum.value = parseInt(hm.value) * sell_price + 3000;
+            productPrice.value = parseInt(hm.value) * sell_price;
         }  
     </script>
-	<!-- <script>
-        $.datepicker.setDefaults({
-            dateFormat: 'yy-mm-dd',
-            prevText: '<',
-            nextText: '>',
-            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-            showMonthAfterYear: true,
-            yearSuffix: '년',
-            minDate: "+1D", //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-            maxDate: "+1M"
-        });
-
-        $(function () {
-            $('.datepicker').datepicker();
-        });
-    </script> -->
 
 	<script>
         $(document).ready(function(){
