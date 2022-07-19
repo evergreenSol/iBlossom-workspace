@@ -251,19 +251,6 @@
 											
 										});
 										
-										$.ajax({
-											url : "resetSubscribe.do",
-											type : "post",
-											success : function(data) {
-												console.log("스케줄러 중지");
-												
-											}, error : function() {
-												console.log("resetSubscribe fail");
-											}
-										});
-										
-										
-										
 									
 									}, error : function() {
 										console.log("안되면 집ㄱ");
