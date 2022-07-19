@@ -504,14 +504,14 @@
 				subReceiverPhone : $('#subReceiverPhone').val(),
 				subReceiverPostcode : $('#zipcode').val(),
 				deliverAt : new Date($('#deliverAt').val()),
-				deliverTo : $('#address1').val() + $('#address2').val(),
+				deliverTo : $('#address1').val() + " " +  $('#address2').val(),
 				deliverStatus : "배송준비",
 				receiptId : receiptId,
 				numOfPay : numOfPay
 				},
 			success : function(data) {
 				alert("iBlossom 상품 구독 등록 : 매달 싱싱하고 예쁜 꽃을 보내드릴게요 :)");
-				
+				location.href="subscribeView.me"
 			}, error : function() {
 				alert("상품 구독에 실패하였습니다 :(");
 			}
@@ -564,7 +564,7 @@
 				alert(result);
 				location.href="subscribeView.me"
 			}, error : function() {
-				alert(result)
+				alert(result);
 			}
 		});
 	}
