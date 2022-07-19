@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>iBlossom | FlowerMarket</title>
 <link href="resources/css/jsa.css" rel="stylesheet">
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico"
@@ -43,7 +43,7 @@
 				</tr>
 
 				<tr>
-					<td class="pp"><input type="text" name="productPrice"
+					<td class="pp"><input type="text"
 						id="price" style="border: none; font-size: 20px;" size="1"
 						readonly value="${ p.price }">원
 
@@ -71,7 +71,9 @@
 								<form name="form" method="post" action="insert.ca" id="cartInfo">
 									<input type="hidden" name="productNo" value="${ p.productNo }">
 									<input type="hidden" name="userNo"
-										value="${ loginUser.userNo }"> <input type="text"
+										value="${ loginUser.userNo }"> 
+										<input type="hidden" name="productPrice" value=${ p.price }>
+										<input type="text"
 										value="${p.flowerName }"
 										style="border: none; padding-left: 10px; outline: none; padding-top: 5px;"><br>
 									<br> <input type=hidden id="sell_price"
@@ -158,11 +160,12 @@
 	<!-- 수량 올릴 시 가격 변동-->
 	<script>
         var sell_price;
-        var amount;
+        var productCount;
+        var sum;
 
         function init() {
-            sell_price = document.form.sell_price.value;
-            amount = document.form.productCount.value;
+        	sell_price = document.form.sell_price.value;
+            productCount = document.form.productCount.value;
             document.form.sum.value = sell_price;
             change();
         }
@@ -172,7 +175,7 @@
             sum = document.form.sum;
             if(hm.value < 15){
            	 hm.value++;
-           	sum.value = (parseInt(hm.value) * sell_price) + 3000;
+           	 sum.value = (parseInt(hm.value) * sell_price);
             }else{
             	 alert("개당 최대 15개까지 구매 가능합니다.");
             }
@@ -184,7 +187,7 @@
             sum = document.form.sum;
             if (hm.value > 1) {
                 hm.value--;
-                sum.value = parseInt(hm.value) * sell_price + 3000;
+                sum.value = parseInt(hm.value) * sell_price;
             }
         }
 
@@ -195,29 +198,9 @@
             if (hm.value < 0) {
                 hm.value = 0;
             }
-            sum.value = parseInt(hm.value) * sell_price + 3000;
+            sum.value = parseInt(hm.value) * sell_price;
         }  
     </script>
-	<!-- <script>
-        $.datepicker.setDefaults({
-            dateFormat: 'yy-mm-dd',
-            prevText: '<',
-            nextText: '>',
-            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-            showMonthAfterYear: true,
-            yearSuffix: '년',
-            minDate: "+1D", //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-            maxDate: "+1M"
-        });
-
-        $(function () {
-            $('.datepicker').datepicker();
-        });
-    </script> -->
 
 	<script>
         $(document).ready(function(){
