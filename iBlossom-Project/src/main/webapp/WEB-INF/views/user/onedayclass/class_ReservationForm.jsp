@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
-<title>iBlossom | Class</title>
+<title>iBlossom | 원데이클래스</title>
 <link href="resources/css/kms.css" rel="stylesheet">
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
 <!-- 파비콘 -->

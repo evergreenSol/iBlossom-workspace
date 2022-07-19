@@ -11,7 +11,7 @@
     <!-- 파비콘 -->
 	<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 	<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
-    <title>iBlossom | Class</title>
+    <title>iBlossom | 원데이클래스</title>
     <style>
 
     </style>
