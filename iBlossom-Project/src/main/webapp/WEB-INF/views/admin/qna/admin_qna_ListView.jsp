@@ -130,7 +130,7 @@
     
     <div id="admin-member-wrap">
         <span id="admin-member-title">1대1 문의관리</span>
-        <hr id="admin-member-hr">
+        <hr id="admin-member-hr" style="border-width:1px 0px 0px 0px;">
 
         <div id="admin-list-container">
 

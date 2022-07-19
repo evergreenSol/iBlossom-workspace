@@ -87,7 +87,7 @@
     <div id="admin-member-wrap">
 
         <span id="admin-member-title">클래스별 예약자 리스트</span>
-        <hr id="admin-member-hr">
+        <hr id="admin-member-hr" style="border-width:1px 0px 0px 0px;">
 
         <div>
             

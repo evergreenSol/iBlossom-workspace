@@ -88,7 +88,7 @@
     <div id="admin-member-wrap">
 
         <span id="admin-member-title">공지사항 수정하기</span>
-        <hr id="admin-member-hr">
+        <hr id="admin-member-hr" style="border-width:1px 0px 0px 0px;">
 
      <form id="admin-notice-container" action="updateNotice.ad" method="post">
         <table id="noticeContent" border="1">

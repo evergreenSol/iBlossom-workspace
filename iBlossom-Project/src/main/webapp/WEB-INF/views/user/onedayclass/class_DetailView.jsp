@@ -11,7 +11,7 @@
     <!-- 파비콘 -->
 	<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 	<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
-    <title>iBlossom | 원데이클래스</title>
+    <title>iBlossom | OneDayClass</title>
     <style>
 
     </style>
@@ -48,8 +48,6 @@
 				                	<option value="${ c.classNo }">${ c.classDate }</option>
 				                </c:otherwise>
 			                </c:choose>
-
-			                <!-- 리스트에 클래스 정보 담아서 (게시판 내용과 같음) 반복문으로 돌리기(?) -->
 			                 </c:forEach>
 			            </select>
 			        </div>

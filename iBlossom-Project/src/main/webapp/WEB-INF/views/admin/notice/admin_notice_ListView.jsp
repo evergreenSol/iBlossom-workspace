@@ -88,7 +88,7 @@
     <div id="admin-member-wrap">
 
         <span id="admin-member-title">공지사항 리스트</span>
-        <hr id="admin-member-hr">
+        <hr id="admin-member-hr" style="border-width:1px 0px 0px 0px;">
 
         <div>                
             <table id="admin-order-list-table">

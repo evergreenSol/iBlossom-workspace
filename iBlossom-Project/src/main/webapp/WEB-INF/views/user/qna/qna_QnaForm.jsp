@@ -11,7 +11,7 @@
     <!-- 파비콘 -->
 	<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 	<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
-    <title>admin | 1:1 문의</title>
+    <title>admin | 1:1 Inquiry</title>
     <style>
 
     </style>
