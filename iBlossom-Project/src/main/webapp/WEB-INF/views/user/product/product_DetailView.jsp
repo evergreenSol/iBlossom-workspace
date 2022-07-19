@@ -43,7 +43,7 @@
 				</tr>
 
 				<tr>
-					<td class="pp"><input type="text" name="productPrice"
+					<td class="pp"><input type="text"
 						id="price" style="border: none; font-size: 20px;" size="1"
 						readonly value="${ p.price }">원
 
@@ -71,7 +71,9 @@
 								<form name="form" method="post" action="insert.ca" id="cartInfo">
 									<input type="hidden" name="productNo" value="${ p.productNo }">
 									<input type="hidden" name="userNo"
-										value="${ loginUser.userNo }"> <input type="text"
+										value="${ loginUser.userNo }"> 
+										<input type="hidden" name="productPrice" value=${ p.price }>
+										<input type="text"
 										value="${p.flowerName }"
 										style="border: none; padding-left: 10px; outline: none; padding-top: 5px;"><br>
 									<br> <input type=hidden id="sell_price"
@@ -83,7 +85,7 @@
 									<br> 배송비: <span style="padding-left: 200px"> 3,000
 										원</span><br> <br> 총 주문금액 : <input type="text"
 										style="border: none; outline: none; background-color: rgba(224, 224, 224, 0.001); padding-left: 150px; width: 60px;"
-										name="productPrice" size="11" readonly>원
+										name="sum" size="11" readonly>원
 								</form>
 
 							</div>
@@ -159,21 +161,21 @@
 	<script>
         var sell_price;
         var productCount;
-        var productPrice;
+        var sum;
 
         function init() {
         	sell_price = document.form.sell_price.value;
             productCount = document.form.productCount.value;
-            document.form.productPrice.value = sell_price;
+            document.form.sum.value = sell_price;
             change();
         }
 
         function add() {
             hm = document.form.productCount;
-            productPrice = document.form.productPrice;
+            sum = document.form.sum;
             if(hm.value < 15){
            	 hm.value++;
-           	 productPrice.value = (parseInt(hm.value) * sell_price);
+           	 sum.value = (parseInt(hm.value) * sell_price);
             }else{
             	 alert("개당 최대 15개까지 구매 가능합니다.");
             }
@@ -182,21 +184,21 @@
 
         function del() {
             hm = document.form.productCount;
-            productPrice = document.form.productPrice;
+            sum = document.form.sum;
             if (hm.value > 1) {
                 hm.value--;
-                productPrice.value = parseInt(hm.value) * sell_price;
+                sum.value = parseInt(hm.value) * sell_price;
             }
         }
 
         function change() {
             hm = document.form.productCount;
-            productPrice = document.form.productPrice;
+            sum = document.form.sum;
 
             if (hm.value < 0) {
                 hm.value = 0;
             }
-            productPrice.value = parseInt(hm.value) * sell_price;
+            sum.value = parseInt(hm.value) * sell_price;
         }  
     </script>
 
