@@ -4,8 +4,6 @@
 * { font-family: Pretendard;
     text-decoration: none; }
    
-
-    // 복사(드래그) 금지
     * {
 	-webkit-user-select: none;
 	-moz-user-select: none;
