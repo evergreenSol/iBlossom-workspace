@@ -366,7 +366,7 @@ html, body {
 }
 
 .img1 {
-	width: 100px;
+	width: 90px;
 	display: inline-block;
 	margin-left: 20px;
 	margin-top: 10px;
@@ -377,13 +377,11 @@ html, body {
 
 	font-size: 25px;
 	border: 1px solid black; 
-	text-align: center;
-	display: inline-block;
-	transform : translate ( 100px, 100px )
+	margin:auto;
 }
 
 .text2 {
-	font-size: 20px;
+	font-size: 15px;
 	 border: 1px solid orange; 
 	margin:auto;
 	width: 870px;
@@ -403,8 +401,8 @@ html, body {
 	font-size: 15px;
 	 border: 1px solid green;
 	text-align: right;
-	display: inline-block;
-	margin-left: 700px;
+	margin-left: 400px;
+
 	
 }
 

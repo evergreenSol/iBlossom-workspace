@@ -354,8 +354,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
        		review +="<div class='divBox'>"
        		review += "<img class='img1' src='" + result[i].reviewPhoto + "' style='width: 190px; height:190px;  margin-left: 20px;margin-top: 10px; float: left;'>";
        		review += "<p class='text3'>" + result[i].userId + "</p>";
-	       	review += "<p class='text4'>" + result[i].createDate + "</p>";
 	       	review += "<p class='text1'>" + result[i].reviewTitle + "</p>";
+	     	review += "<p class='text4'>" + result[i].createDate + "</p>";
 	       	review += "<p class='text2'>" + result[i].reviewContent + "</p>";
 	       	review += "</div>";
 	       	 review += "</div>";
