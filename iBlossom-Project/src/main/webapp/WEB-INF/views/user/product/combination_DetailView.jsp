@@ -192,7 +192,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<td><img src="${ p.thumbNail }"></td>
 					</tr>
 					<tr>
-						<td>${ p.flowerName }</td>
+						<td style="text-align: center">${ p.flowerName }(${p.price})원</td>
 					</tr>
 				</table>
 			</c:forEach>
