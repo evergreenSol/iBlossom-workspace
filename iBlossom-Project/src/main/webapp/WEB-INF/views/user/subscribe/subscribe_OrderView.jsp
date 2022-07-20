@@ -17,7 +17,9 @@
 <link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 <style>
 
-    
+    input {
+    	outline:none;
+    }
 
 </style>
 </head>
@@ -269,7 +271,6 @@
 		                                    <input type="text" name="address" id="address1" size="70" value="${ loginUser.address1 }" onfocus="this.value=''" required><br>
 		                                    <hr>
 		                                    <input type="text" name="address" id="address2" size="70" value="${ loginUser.address2 }" onfocus="this.value=''" required><br>
-		                                    <hr>
 	                                    </c:otherwise>
                                     </c:choose>
                   
