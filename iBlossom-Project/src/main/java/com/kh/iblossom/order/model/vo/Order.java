@@ -18,7 +18,6 @@ public class Order {
 	private String deliveryStatus; // DELIVERY_STATUS VARCHAR2(12) NOT NULL,		
 	private String receiptId; // RECEIPT_ID VARCHAR2(32) NOT NULL,
 	private String thumbnail;
-	private int discount;
 	/*
 	private String flowerName; 
 	private String thumbnail; 

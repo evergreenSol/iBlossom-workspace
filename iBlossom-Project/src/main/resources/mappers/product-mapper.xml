@@ -8,6 +8,7 @@
 		<result column="CATEGORY_NAME" property="categoryName" />
 		<result column="FLOWER_NAME" property="flowerName" />
 		<result column="PRICE" property="price" />
+		<result column="SALES_AMOUNT" property="salesAmount" />
 		<result column="THUMBNAIL" property="thumbNail" />
 		<result column="CONTENT_PHOTO" property="contentPhoto" />
 		<result column="FLOWER_INFO" property="flowerInfo" />
@@ -15,6 +16,7 @@
 		<result column="TAG" property="tag" />
 		<result column="STATUS" property="status" />
 	</resultMap>
+
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM
@@ -60,6 +62,7 @@
 		, CATEGORY_NAME
 		, FLOWER_NAME
 		, PRICE
+		, SALES_AMOUNT
 		, THUMBNAIL
 		, CONTENT_PHOTO
 		, FLOWER_INFO
@@ -68,6 +71,7 @@
 		, #{categoryName}
 		, #{flowerName}
 		, #{price}
+		, #{salesAmount}
 		, #{thumbNail}
 		, #{contentPhoto}
 		, #{flowerInfo}
