@@ -18,13 +18,11 @@
  /* 페이징바 */
 
  #pagingArea {
-
 	width: fit-content;
     margin: auto;
     position: absolute;
     margin-top: -100px;
     margin-left: 650px;
-
 }
 
 .page-link {
@@ -176,9 +174,9 @@ TIME TO BLOSSOM
     </pre>
     
     </div>
-
+    
+    
     <div id="pagingArea">
-
         <ul class="pagination">
 
             <c:choose>
@@ -224,7 +222,7 @@ TIME TO BLOSSOM
 	            </c:choose>	
 	         </ul>
    		 </div>
-
+</div>
 
     <script>
         $(function() {
@@ -244,6 +242,10 @@ TIME TO BLOSSOM
             });
         });
     </script>
+
+   
+
+    
 
     
     	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -108,7 +108,7 @@
                         </ul>
                     </li>
                     <li><a href="list.pr" class="admin-navi-menu">상품관리</a></li>
-                    <li><a href="reviewList.re" class="admin-navi-menu">리뷰관리</a></li>
+                    <li><a href="reviewList.pr" class="admin-navi-menu">리뷰관리</a></li>
                     <li><a href="classList.ad" class="admin-navi-menu">클래스관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="classAddForm.ad">클래스 추가</a></li>
@@ -134,8 +134,8 @@
 
         <div id="admin-list-container">
 
-            <table id="admin-order-list-table" style="font-size: 16px;">
-                <thead id="admin-order-list-thead">
+            <table id="admin-list-table" style="font-size: 16px;">
+                <thead>
                     <tr>
                         <th width="100">글번호</th>
                         <th width="400">제목</th>
@@ -169,7 +169,7 @@
 		<script>
         	$(function() {
         		
-        		$("#admin-order-list-table>tbody>tr").click(function(){
+        		$("#admin-list-table>tbody>tr").click(function(){
         			console.log("클릭됨");
         			console.log($(this).children().eq(0).text());
         			location.href = "qnaDetail.ad?qnaNo=" + $(this).children().eq(0).text();
