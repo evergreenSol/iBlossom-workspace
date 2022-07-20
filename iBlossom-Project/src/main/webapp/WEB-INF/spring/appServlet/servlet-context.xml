@@ -50,11 +50,20 @@
 	 		<mapping path="/qnaDetailView.me"/>
 	 		<!-- 정기구독 -->
 	 		<mapping path="/orderView.su"/>
-	 		
+	 		<!-- 장바구니 -->
+	 		<mapping path="/list.ca"/>
+	 		<mapping path="/detail.or"/>
+	 		<mapping path="/list.ca"/>
 	 		<!-- 상품페이지 -->
 	 		<!-- 클래스 페이지 -->
+	 		<mapping path="/resForm.cl"/>
 	 		<!-- 고객센터페이지 -->
+	 		<!-- 주문완료 페이지 -->
+	 		<mapping path="/resForm.cl"/>
+	 		<mapping path="/complete.or"/>
+	 		
 	 		<beans:bean class="com.kh.iblossom.common.interceptor.LoginInterceptor" id="loginInterceptor"/>
+	 		
 	 	</interceptor>
 	 	<interceptor>
 	 		<!-- 관리자: 회원관리 -->
@@ -62,6 +71,18 @@
 	 		<!-- 관리자: 구독 -->
 		 	<mapping path="/subMemberListView.su"/>
 	 		<mapping path="/listView.sp"/>
+	 		<!-- 관리자: 고객센터 -->
+	 		<mapping path="/resList.ad"/>
+	 		<mapping path="/classAddForm.ad"/>
+	 		<mapping path="/noticeList.ad"/>
+	 		<mapping path="/detailNotice.ad"/>
+	 		<mapping path="/noticeForm.ad"/>
+	 		<mapping path="/qnaList.ad"/>
+	 		<mapping path="/qnaDetail.ad"/>
+	 		<mapping path="/answerUpdate.ad"/>
+	 		<!-- 관리자: 주문 관리 -->
+	 		<mapping path="/adminList.or"/>
+	 		<mapping path="/adminDetail.or"/>
 	 		<beans:bean class="com.kh.iblossom.common.interceptor.AdminInterceptor" id="adminInterceptor"/>
 	 	</interceptor>
 	 </interceptors>

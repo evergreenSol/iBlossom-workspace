@@ -109,7 +109,7 @@
 
                         <!-- 내용 -->
                         <div id="CheckBox" class="order-check-contentbox">
-							<form action="insertDetailOrder.or"  id="real-submit">
+							<form action="insertDetailOrder.or"  id="real-submit" method="post">
 							
 	                            <c:forEach var="i" begin="0" end="${ selectList.size() - 1 }">
 	                            
@@ -416,7 +416,10 @@
                 <div class="order-grade">
                     <span>등급할인</span>
                     <!-- <span>- ${ total * (1 - discount) }원</span> -->
-                    <span>-&nbsp;<fmt:formatNumber value="${ total * (1 - discount) }" pattern="###,###"/>원</span>
+                    <fmt:formatNumber var="resultDiscount1" type="number" value="${ total * (1 - discount) }" pattern="###,###"/>
+                    <fmt:parseNumber var="resultDiscount2" integerOnly="true" type="number" value="${ total * (1 - discount) }" />
+                    <span>-&nbsp;${ resultDiscount1 }원</span>
+                    <input type="hidden" id="discount" value="${ resultDiscount2}">
                 </div>
                 <hr style="width: 90%;">
 
@@ -587,7 +590,8 @@
 						postcode : $('#zipcode').val(),
 						orderStatus : '결제완료',
 						deliveryStatus : '배송준비',
-						thumbnail : $("#thumbnailForOrder").val()
+						thumbnail : $("#thumbnailForOrder").val(),
+						discount : $("#discount").val()
 					},
 					success : function(result) {
 						

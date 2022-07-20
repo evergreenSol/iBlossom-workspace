@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>admin | 상품관리</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico"
 	type="image/x-icon">
@@ -105,15 +106,11 @@
 					<!-- 메뉴 -->
 				<ul id="admin-navi">
 					<li><a href="list.me" class="admin-navi-menu">회원관리</a></li>
-					<li><a href="adminList.or" class="admin-navi-menu">주문정보관리</a>
-						<ul class="admin-navi-ul">
-							<li><a href="adminList.or">전체주문내역</a></li>
-							<li><a href="adminDetail.or">개별주문내역</a></li>
-						</ul></li>
+					<li><a href="adminList.or" class="admin-navi-menu">주문정보관리</a></li>
 
-					<li><a href="subMemberListView.su" class="admin-navi-menu">정기구독관리</a>
+					<li><a href="list.pr" class="admin-navi-menu">정기구독관리</a>
 						<ul class="admin-navi-ul">
-							<li><a href="subMemberListView.su">구독회원관리</a></li>
+							<li><a href="list.pr">구독회원관리</a></li>
 							<li><a href="listView.sp">구독상품관리</a></li>
 						</ul></li>
 					<li><a href="list.pr" class="admin-navi-menu"
@@ -199,51 +196,69 @@
 		</div>
 		<br> <br>
 		<!-- 페이징 처리  -->
-		<div id="pagingArea">
-			<ul class="pagination">
-
-				<c:choose>
-					<c:when test="${ pi.currentPage eq 1 }">
-						<li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
-					</c:when>
-					<c:otherwise>
-						<c:choose>
-							<c:when test="${ empty condition }">
-								<li class="page-item"><a class="page-link"
-									href="list.pr?cpage=${ pi.currentPage - 1 }">◀</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="page-item"><a class="page-link"
-									href="list.pr?cpage=${ pi.currentPage - 1 }&condition=${ condition }&keyword=${ keyword }">◀</a></li>
-							</c:otherwise>
-						</c:choose>
-					</c:otherwise>
-				</c:choose>
-
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-					<li class="page-item"><a class="page-link"
-						href="list.pr?cpage=${ p }">${ p }</a></li>
-				</c:forEach>
-
-				<c:choose>
-					<c:when test="${ pi.currentPage eq pi.maxPage }">
-						<li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
-					</c:when>
-					<c:otherwise>
-						<c:choose>
-							<c:when test="${ empty condition }">
-								<li class="page-item"><a class="page-link"
-									href="list.pr?cpage=${ pi.currentPage + 1 }">▶</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="page-item"><a class="page-link"
-									href="list.pr?cpage=${ pi.currentPage + 1 }&condition=${ condition }&keyword=${ keyword }">▶</a></li>
-							</c:otherwise>
-						</c:choose>
-					</c:otherwise>
-				</c:choose>
-			</ul>
-		</div>
+       	<div id="pagingArea">
+	         <ul class="pagination">
+	
+	            <c:choose>
+	               <c:when test="${ pi.currentPage eq 1 }"> <!-- 현재 페이지가 1이라면 -->
+	                  <li class="page-item disabled"><a class="page-link" href="#">◀</a></li> <!-- 이전버튼 클릭 불가 -->
+	               </c:when>
+	               <c:otherwise> <!-- 현재 페이지가 1이 아니라면 -->
+		               <c:choose>
+		            	   <c:when test="${ empty condition }"> <!-- 컨디션이 비어있다면 -->
+			                   <li class="page-item"><a class="page-link" href="list.pr?cpage=${ pi.currentPage - 1 }">◀</a></li>
+		            	   </c:when>
+		            	   <c:otherwise> <!-- 컨디션이 비어있지 않다면 -->
+		            	   	   <li class="page-item"><a class="page-link" href="search.pr?currentPage=${ pi.currentPage - 1 }&condition=${ condition }&keyword=${ keyword }">◀</a></li>
+		           		   </c:otherwise>
+	            	   </c:choose>
+	               </c:otherwise>
+	            </c:choose>
+	
+	            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }"> <!-- 첫페이지에서 마지막 페이지까지 돌면서 -->
+		            <c:choose>
+			            <c:when test="${ empty condition }"> <!-- 컨디션이 비어있다면 -->
+			            	<c:choose>
+						        <c:when test="${ pi.currentPage eq p }"> <!-- 해당 페이지만 글씨에 핑크색 주기용 조건 -->
+						        	<li class="page-item"><a class="page-link"  style="color : #ff2393; font-weight:700;" href="list.pr?cpage=${ p }">${ p }</a></li>
+						        </c:when>
+						        <c:otherwise>
+									<li class="page-item"><a class="page-link" href="list.pr?cpage=${ p }">${ p }</a></li>
+						        </c:otherwise>
+					        </c:choose> 
+		                </c:when>
+		                <c:otherwise> <!-- 컨디션이 비어있지 않다면 -->
+		                	<c:choose>
+						        <c:when test="${ pi.currentPage eq p }"> <!-- 해당 페이지만 글씨에 핑크색 주기용 조건 -->
+						        	<li class="page-item"><a class="page-link" style="color : #ff2393; font-weight:700;" href="search.pr?currentPage=${ p }&condition=${ condition }&keyword=${ keyword }">${ p }</a></li>
+						        </c:when>
+						        <c:otherwise>
+									<li class="page-item"><a class="page-link" href="search.pr?currentPage=${ p }&condition=${ condition }&keyword=${ keyword }">${ p }</a></li>
+						        </c:otherwise>
+					        </c:choose>
+		            	</c:otherwise>
+	            	</c:choose>   
+	            </c:forEach>
+	
+	            <c:choose>
+	               <c:when test="${ pi.currentPage eq pi.maxPage }"> <!-- 현재 페이지가 마지막 페이지라면 -->
+	                  <li class="page-item disabled"><a class="page-link" href="#">▶</a></li> <!-- 다음 페이지로 가는 버튼 클릭 불가 -->
+	               </c:when>
+	               <c:otherwise> <!-- 현재 페이지가 마지막 페이지가 아니라면 -->
+		               <c:choose>
+		            	   <c:when test="${ empty condition }"> <!-- 컨디션이 비어있다면 -->
+			                   <li class="page-item"><a class="page-link"
+			                   href="list.pr?cpage=${ pi.currentPage + 1 }">▶</a></li>
+		            	   </c:when>
+		            	   <c:otherwise> <!-- 컨디션이 비어있지 않다면 -->
+		            	   	   <li class="page-item"><a class="page-link" href="search.pr?currentPage=${ pi.currentPage + 1 }&condition=${ condition }&keyword=${ keyword }">▶</a></li>
+		           		   </c:otherwise>
+			           </c:choose>
+		           </c:otherwise>
+	            </c:choose>
+	         </ul>
+	    </div>
+	    <br><br><br><br>
 
 		<div align="center" style="padding-top: 100px;">
 			<a href="productEnroll.pr"><button id="insertBtn">등록</button></a>

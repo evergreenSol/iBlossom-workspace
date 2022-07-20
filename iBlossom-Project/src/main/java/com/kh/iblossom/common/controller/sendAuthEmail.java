@@ -56,10 +56,10 @@ public class sendAuthEmail {
 	        String recipient = request.getParameter("recipient");
 	        String subject = request.getParameter("subject");
 	        String body = request.getParameter("body") + authKey 
-	        			+ "\r"
-	        			+ "\r" + "서울특별시 영등포구 선유동2로 57 이레빌딩 19층 iBlossom"
-	        		    + "\r" + "Tel: 010-5273-5545 / Email: craft0427@naver.com"
-	        			+ "\r" + "© iBlossom | Time To Blossom ";
+	        			+ "\r\n"
+	        			+ "\r\n" + "서울특별시 영등포구 선유동2로 57 이레빌딩 19층 iBlossom"
+	        		    + "\r\n" + "Tel: 010-5273-5545 / Email: craft0427@naver.com"
+	        			+ "\r\n" + "© iBlossom | Time To Blossom ";
 	        
 	        
 	        System.out.println(recipient);
@@ -102,6 +102,7 @@ public class sendAuthEmail {
 	        
 			randomKey();
 			HashMap<String, String> map = new HashMap<>();
+			
 			String encPwd = bCryptPasswordEncoder.encode(String.valueOf(authKey));
 			map.put("userId",request.getParameter("Id"));
 			map.put("userPw", encPwd);
@@ -126,12 +127,12 @@ public class sendAuthEmail {
 	        String recipient = mail;
 	        String subject = request.getParameter("subject");
 	        String body = request.getParameter("body") + authKey + request.getParameter("endBody")
-	        		+ "\r"  
-	        		+ "\r" + "로그인 후 반드시 비밀번호를 변경해주세요"
-	        		+ "\r"
-        			+ "\r" + "서울특별시 영등포구 선유동2로 57 이레빌딩 19층 iBlossom"
-        		    + "\r" + "Tel: 010-5273-5545 / Email: craft0427@naver.com"
-        			+ "\r" 
+	        		+ "\r\n"  
+	        		+ "\r\n" + "로그인 후 반드시 마이페이지에서 비밀번호를 변경해주세요"
+	        		+ "\r\n"
+        			+ "\r\n" + "서울특별시 영등포구 선유동2로 57 이레빌딩 19층 iBlossom"
+        		    + "\r\n" + "Tel: 010-5273-5545 / Email: craft0427@naver.com"
+        			+ "\r\n" 
         		    + "© iBlossom | Time To Blossom ";
 	        System.out.println(recipient);
 	        System.out.println(subject);
@@ -190,10 +191,10 @@ public class sendAuthEmail {
 	        String recipient = request.getParameter("recipient"); // "wjdgp1156@naver.com";
 	        String subject = request.getParameter("subject");
 	        String body = request.getParameter("body") + userId + request.getParameter("endBody")
-				        + "\r" 
-						+ "\r" + "서울특별시 영등포구 선유동2로 57 이레빌딩 19층 iBlossom"
-					    + "\r" + "Tel: 010-5273-5545 / Email: craft0427@naver.com"
-						+ "\r" + "© iBlossom | Time To Blossom ";
+				        + "\r\n" 
+						+ "\r\n" + "서울특별시 영등포구 선유동2로 57 이레빌딩 19층 iBlossom"
+					    + "\r\n" + "Tel: 010-5273-5545 / Email: craft0427@naver.com"
+						+ "\r\n" + "© iBlossom | Time To Blossom ";
 	        
 	        System.out.println(recipient);
 	        System.out.println(subject);
