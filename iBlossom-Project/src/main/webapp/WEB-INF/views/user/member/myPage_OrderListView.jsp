@@ -51,6 +51,12 @@
                         </div>
 
                         <table id="mypage-view-order">
+                        <c:if test="${ empty list }">
+                            <tr>
+                                <td height="300" width="900" style="text-align: center; font-size: 20px; font-weight: 600;">최근 주문 / 배송 내역이 존재하지 않습니다.</td>
+                            </tr>
+						</c:if>
+                        
                         <c:forEach var="o" items="${list}">
                         
                             <tr>  
@@ -109,6 +115,14 @@
 
 
                         <table id="mypage-view-cancel">
+                        
+                        <c:if test="${ empty cancelList }">
+                            <tr>
+                                <td height="300" width="900" style="text-align: center; font-size: 20px; font-weight: 600;">최근 취소 / 환불 내역이 존재하지 않습니다.</td>
+                            </tr>
+						</c:if>
+                        
+                        
                         <c:forEach var="o" items="${cancelList}">
                             <tr >
                                 <td colspan="2" ><p style="font-size: 18px; font-weight: 600; margin-top: 18px; margin-bottom: 10px;">${ o.orderDate }</p></td>

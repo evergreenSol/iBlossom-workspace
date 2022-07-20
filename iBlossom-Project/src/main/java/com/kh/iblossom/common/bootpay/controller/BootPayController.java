@@ -91,19 +91,18 @@ public class BootPayController {
 			
 			@Override
 			public void run() {
-				if(cancelParam==0) {	
+				if(cancelParam==0) {
+					System.out.println("타이머실행중" + cancelParam);
 					goGetToken();
 					requestSubscribe(billingKey, totalPrice, subProductName);
 					insertSubscribe(s, numOfPay, totalPrice, session);
 					
-					Calendar cal = Calendar.getInstance();
-					cal.setTime(s.getDeliverAt()); // 시간 설정
-					cal.add(Calendar.MONTH, 1); // 월 연산
-					s.setDeliverAt(cal.getTime());
-					
 				}
 				else {
+					System.out.println("타이머 취소됨" + cancelParam);
 					timer.cancel();
+					cancelParam=0;
+					System.out.println("cancelParam 리셋" + cancelParam);
 				}
 			}
 			
@@ -132,11 +131,15 @@ public class BootPayController {
 			
 			HashMap<String, Integer> map = new HashMap<>();
 			map.put("userNo", userNo);
-			map.put("purchase", totalPrice);
-			
-			
+			map.put("purchase", purchase);
 			
 			int purchaseResult = memberService.updateSubPurchase(map);
+			
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(s.getDeliverAt()); // 시간 설정
+			cal.add(Calendar.MONTH, 1); // 월 연산
+			s.setDeliverAt(cal.getTime());
+			
 		}
 		else {
 			for(int i = 0; i < numOfPay; i++) {
@@ -155,9 +158,6 @@ public class BootPayController {
 				map.put("purchase", purchase);
 				
 				int purchaseResult = memberService.updateSubPurchase(map);
-				
-
-				System.out.println(purchaseResult);
 				
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(s.getDeliverAt()); // 시간 설정
@@ -197,6 +197,7 @@ public class BootPayController {
 //        refund.accountholder = "홍길동"; //환불계좌주
 //        refund.bankcode = BankCode.getCode("국민은행");//은행코드
 //        cancel.refund = refund;
+        
         
 	    ResDefault<HashMap<String, Object>> res = null;
 
