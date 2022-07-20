@@ -130,7 +130,7 @@ public class ProductController {
 			String changeName1 = saveFile(upContentPhoto, session);
 			p.setContentPhoto("resources/uploadFiles/" + changeName1);
 		}
-		System.out.println(p.getFlowerName());
+		//System.out.println(p.getFlowerName());
 		int cnt =productService.countProduct(p);
 		System.out.println(cnt);
 		if(cnt>0) {
@@ -343,7 +343,7 @@ public class ProductController {
 
 	// 상품 검색 (관리자)
 	@RequestMapping("search.pr")
-	public String subMemberSearch(@RequestParam(value="cpage", defaultValue="1") int currentPage, String condition, String keyword, Model model) {
+	public String subMemberSearch(@RequestParam(value="currentPage", defaultValue="1") int currentPage, String condition, String keyword, Model model) {
 
 		HashMap<String, String> map = new HashMap<>();
 		map.put("condition", condition);

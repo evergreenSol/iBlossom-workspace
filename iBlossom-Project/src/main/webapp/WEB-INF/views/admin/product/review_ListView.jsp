@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>admin | 리뷰관리</title>
 <link href="resources/css/jsa.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico"
 	type="image/x-icon">
@@ -182,48 +183,70 @@
 		</div>
 	
 				<!-- 페이징 처리  -->
+       	<!-- 페이징 처리  -->
        	<div id="pagingArea">
 	         <ul class="pagination">
 	
 	            <c:choose>
-	               <c:when test="${ pi.currentPage eq 1 }">
-	                  <li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
+	               <c:when test="${ pi.currentPage eq 1 }"> <!-- 현재 페이지가 1이라면 -->
+	                  <li class="page-item disabled"><a class="page-link" href="#">◀</a></li> <!-- 이전버튼 클릭 불가 -->
 	               </c:when>
-	               <c:otherwise>
-	               <c:choose>
-	            	   <c:when test="${ empty condition }">
-		                	<li class="page-item"><a class="page-link" href="list.re?cpage=${ pi.currentPage - 1 }">◀</a></li>
-		               </c:when>
-		               <c:otherwise>
-		                	<li class="page-item"><a class="page-link"href="list.re?cpage=${ pi.currentPage - 1 }&condition=${ condition }&keyword=${ keyword }">◀</a></li>
-		               </c:otherwise>
-            	   </c:choose>
+	               <c:otherwise> <!-- 현재 페이지가 1이 아니라면 -->
+		               <c:choose>
+		            	   <c:when test="${ empty condition }"> <!-- 컨디션이 비어있다면 -->
+			                   <li class="page-item"><a class="page-link" href="list.re?cpage=${ pi.currentPage - 1 }">◀</a></li>
+		            	   </c:when>
+		            	   <c:otherwise> <!-- 컨디션이 비어있지 않다면 -->
+		            	   	   <li class="page-item"><a class="page-link" href="search.re?currentPage=${ pi.currentPage - 1 }&condition=${ condition }&keyword=${ keyword }">◀</a></li>
+		           		   </c:otherwise>
+	            	   </c:choose>
 	               </c:otherwise>
 	            </c:choose>
 	
-	            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-	               <li class="page-item"><a class="page-link"
-	                 href="list.re?cpage=${ p }">${ p }</a></li>
+	            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }"> <!-- 첫페이지에서 마지막 페이지까지 돌면서 -->
+		            <c:choose>
+			            <c:when test="${ empty condition }"> <!-- 컨디션이 비어있다면 -->
+			            	<c:choose>
+						        <c:when test="${ pi.currentPage eq p }"> <!-- 해당 페이지만 글씨에 핑크색 주기용 조건 -->
+						        	<li class="page-item"><a class="page-link"  style="color : #ff2393; font-weight:700;" href="list.re?cpage=${ p }">${ p }</a></li>
+						        </c:when>
+						        <c:otherwise>
+									<li class="page-item"><a class="page-link" href="list.re?cpage=${ p }">${ p }</a></li>
+						        </c:otherwise>
+					        </c:choose> 
+		                </c:when>
+		                <c:otherwise> <!-- 컨디션이 비어있지 않다면 -->
+		                	<c:choose>
+						        <c:when test="${ pi.currentPage eq p }"> <!-- 해당 페이지만 글씨에 핑크색 주기용 조건 -->
+						        	<li class="page-item"><a class="page-link" style="color : #ff2393; font-weight:700;" href="search.re?currentPage=${ p }&condition=${ condition }&keyword=${ keyword }">${ p }</a></li>
+						        </c:when>
+						        <c:otherwise>
+									<li class="page-item"><a class="page-link" href="search.re?currentPage=${ p }&condition=${ condition }&keyword=${ keyword }">${ p }</a></li>
+						        </c:otherwise>
+					        </c:choose>
+		            	</c:otherwise>
+	            	</c:choose>   
 	            </c:forEach>
 	
 	            <c:choose>
-	               <c:when test="${ pi.currentPage eq pi.maxPage }">
-	                  <li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
+	               <c:when test="${ pi.currentPage eq pi.maxPage }"> <!-- 현재 페이지가 마지막 페이지라면 -->
+	                  <li class="page-item disabled"><a class="page-link" href="#">▶</a></li> <!-- 다음 페이지로 가는 버튼 클릭 불가 -->
 	               </c:when>
-	               <c:otherwise>
+	               <c:otherwise> <!-- 현재 페이지가 마지막 페이지가 아니라면 -->
 		               <c:choose>
-		            	   <c:when test="${ empty condition }">
+		            	   <c:when test="${ empty condition }"> <!-- 컨디션이 비어있다면 -->
 			                   <li class="page-item"><a class="page-link"
-			                  href="list.re?cpage=${ pi.currentPage + 1 }">▶</a></li>
+			                   href="list.re?cpage=${ pi.currentPage + 1 }">▶</a></li>
 		            	   </c:when>
-		            	   <c:otherwise>
-		            	   	   <li class="page-item"><a class="page-link" href="list.re?cpage=${ pi.currentPage + 1 }&condition=${ condition }&keyword=${ keyword }">▶</a></li>
+		            	   <c:otherwise> <!-- 컨디션이 비어있지 않다면 -->
+		            	   	   <li class="page-item"><a class="page-link" href="search.re?currentPage=${ pi.currentPage + 1 }&condition=${ condition }&keyword=${ keyword }">▶</a></li>
 		           		   </c:otherwise>
 			           </c:choose>
 		           </c:otherwise>
 	            </c:choose>
 	         </ul>
 	    </div>
+	    <br><br><br><br>
 
 
 	</div>

@@ -103,7 +103,7 @@ public class ReviewController {
 			if(result > 0) {
 
 				
-				session.setAttribute("alertMsg", "성공적으로  리뷰이 등록되었습니다.");
+				session.setAttribute("alertMsg", "성공적으로 리뷰가 작성되었습니다.");
 
 				return "redirect:detailList.pr?pno=" + r.getProductNo();
 		
@@ -161,7 +161,7 @@ public class ReviewController {
 				if(result > 0) {
 
 					
-					session.setAttribute("alertMsg", "성공적으로  리뷰이 등록되었습니다.");
+					session.setAttribute("alertMsg", "성공적으로 리뷰가 작성되었습니다.");
 
 					return "redirect:combinationDetailList.pr";
 			
@@ -296,7 +296,7 @@ public class ReviewController {
 	
 	// 리뷰 검색 (관리자)
 		@RequestMapping("search.re")
-		public String subMemberSearch(@RequestParam(value="cpage", defaultValue="1") int currentPage, String condition, String keyword, Model model) {
+		public String subMemberSearch(@RequestParam(value="currentPage", defaultValue="1") int currentPage, String condition, String keyword, Model model) {
 			
 			HashMap<String, String> map = new HashMap<>();
 			map.put("condition", condition);

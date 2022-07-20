@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>iBlossom | 주문상세내역</title>
+<title>iBlossom | My Order</title>
 <link href="resources/css/khs.css" rel="stylesheet">
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
@@ -16,9 +16,10 @@
 <body>
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<!-- 
 	<c:choose>
 		<c:when test="${ loginUser.grLevel == 1 }">
-			<c:set var="discount" value="0"/>
+			<c:set var="discount" value="1"/>
 		</c:when>
 		<c:when test="${ loginUser.grLevel == 2 }">
 			<c:set var="discount" value="0.9"/>
@@ -30,6 +31,7 @@
 			<c:set var="discount" value="0.8"/>
 		</c:otherwise>
 	</c:choose>
+	-->
 
 	<div class="mypage-wrap">
 	
@@ -128,7 +130,7 @@
 								<td>등 급 할 인</td>
 								<td></td>
 								<!--  <td>-<span>${o.totalPrice * (1- discount)}</span><span>원</span></td> -->
-								<td>-<span><fmt:formatNumber value="${ sum * (1 - discount) }" pattern="###,###"/></span><span>원</span></td>
+								<td>-<span><fmt:formatNumber value="${o.discount}" pattern="###,###"/></span><span>원</span></td>
 							</tr>
 							<tr height="20"></tr>
 							<tr>
