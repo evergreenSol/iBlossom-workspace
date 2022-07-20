@@ -4,8 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>iBlossom | 장바구니</title>
-<link href="resources/css/ldo-user.css" rel="stylesheet"><!-- 파비콘 -->
+<title>iBlossom | Empty Cart</title>
+<link href="resources/css/ldo-user.css" rel="stylesheet">
+<!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 <link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 </head>

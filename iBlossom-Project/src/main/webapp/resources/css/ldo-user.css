@@ -5,6 +5,8 @@
 
 div { box-sizing: border-box; }
 
+hr { border-width: 1px 0px 0px 0px; }
+
 /*-----------------------------------------------------------------------------------------------*/
 /*-------------------------------------- cart_ListView.jsp --------------------------------------*/
 
@@ -22,8 +24,11 @@ div { box-sizing: border-box; }
         width: 63%;
         height: 95%;
         float: left;
-        box-sizing: border-box;
+        position:relative;
+        
+        /* 스크롤바 */
         overflow: auto;
+        
     }
 
     /* 오른쪽 섹션 */
@@ -31,16 +36,14 @@ div { box-sizing: border-box; }
         width: 33%;
 		/*height: 2000px;*/
         float: right;
-        box-sizing: border-box;
         
         /* sticky*/
-        position: relative;
-        top: 20px;
-        right: 57%; 
-        margin-right:-670px;
+        position : sticky;
+        right: 2%; 
+        /*top: 20px;*/
     }
 
-
+	
 
     /* ----------------------------------------------------------- */   
     /* 사용자 장바구니 페이지 왼쪽 영역 */
@@ -285,26 +288,26 @@ div { box-sizing: border-box; }
     /* 장바구니 스크롤바 스타일 */
 	.cart-left::-webkit-scrollbar {
 	    width: 8px;
-	  }
+	}
 	
-	  .cart-left::-webkit-scrollbar-corner {
+	.cart-left::-webkit-scrollbar-corner {
 	    background-color: white;
 	    border-radius: 10px;
-	  }
+	}
 	
-	  .cart-left::-webkit-scrollbar-thumb {
+	.cart-left::-webkit-scrollbar-thumb {
 	    background-color: lightgrey;
 	    border-radius: 10px;
-	  }
+	}
 	
-	 .cart-left::-webkit-scrollbar-thumb:hover {
+	.cart-left::-webkit-scrollbar-thumb:hover {
 	    background-color: gray;
-	  }
+	}
 	
-	 .cart-left::-webkit-scrollbar-track {
+	.cart-left::-webkit-scrollbar-track {
 	    border-radius: 10px;
 	    box-shadow: inset 0px 0px 5px white;
-	  }
+	}
 	  
 	  
    
@@ -330,10 +333,10 @@ div { box-sizing: border-box; }
     /* 3. 총 결제 금액  div */
     .total-price {
        display: flex; 
-        justify-content: space-between;  
-        padding: 5px;
-        margin: 30px 15px 10px 15px; 
-        font-weight: bold; 
+       justify-content: space-between;  
+       padding: 5px;
+       margin: 30px 15px 10px 15px; 
+       font-weight: bold; 
     }
     
     /* 총 결제 금액 옆에 가격 부분 */
@@ -363,7 +366,7 @@ div { box-sizing: border-box; }
         border-radius: 3px;
     }
     
-    .cart-btn:hover {
+    .cart-btn.cart-right:hover {
        cursor: pointer;
     }
 
@@ -398,8 +401,8 @@ div { box-sizing: border-box; }
    
    /* 이미지 */
    .emptyWrap img {
-      width: 50px; 
-      height: 50px; 
+      width: 55px; 
+      height: 55px; 
       margin-bottom: 15px;
    }
    
@@ -426,14 +429,14 @@ div { box-sizing: border-box; }
     /* 전체 배경 색상 */
     #orderMainOuter {
        width: 100%;
-       height: 3000px;
+       height: 1370px;
        background-color: whitesmoke;
     }
     
     /* 내용 감싸는 전체 레이아웃 */
     #orderMainWrap {
        width: 1200px;
-       height: 1400px;
+       height: 1200px;
        margin: auto;
     }
     
@@ -443,6 +446,9 @@ div { box-sizing: border-box; }
         height: 100%;
         float: left;
         box-sizing: border-box;
+        
+        /* 스크롤바 */
+        overflow: auto;
     }
 
     /* 오른쪽 섹션 */
@@ -451,13 +457,45 @@ div { box-sizing: border-box; }
         float: right;
         
         /* sticky*/
-        position: relative;
+        position : sticky;
         top: -30px;
-        right: 57%; 
-        margin-right:-670px;
+        right: 2%;
+        margin-right: 30px;
+        
+
+ 
     }
 
-
+	/*------------------------------------*/
+	
+	/**/
+	.order-check-contentbox {
+		overflow: auto;
+	}
+	
+	/* 장바구니 스크롤바 스타일 */
+	.order-left::-webkit-scrollbar {
+	    width: 8px;
+	}
+	
+	.order-left::-webkit-scrollbar-corner {
+	    background-color: white;
+	    border-radius: 10px;
+	}
+	
+	.order-left::-webkit-scrollbar-thumb {
+	    background-color: lightgrey;
+	    border-radius: 10px;
+	}
+	
+	.order-left::-webkit-scrollbar-thumb:hover {
+	    background-color: gray;
+	}
+	
+	.order-left::-webkit-scrollbar-track {
+	    border-radius: 10px;
+	    box-shadow: inset 0px 0px 5px white;
+	}
 
    /* ----------------------------------------------------------- */
     /* 사용자 주문 페이지 왼쪽 영역 */
@@ -662,7 +700,12 @@ div { box-sizing: border-box; }
         /* text-shadow: 1px 1px 2px gray; */
         color: black;
     }
-
+    
+    /* 모달 내용 안에 hr 스타일 */
+	#modal .address-content hr {
+		border-color: black;
+	}
+	
     .address-footer button {
         border-radius: 3px;
     }
@@ -671,7 +714,8 @@ div { box-sizing: border-box; }
         width: 50px;
     }
     
-    
+    /* 모달창 안에 placeholder 색상 */
+    input::placeholder { color:#383838; background-color: white;}
     
     /* ----------------------------------------------------------- */
     /* 슬라이드 업/다운 요소 버튼 */
@@ -715,9 +759,9 @@ div { box-sizing: border-box; }
     
     /* 전체 옵션 */
     .order-right-wrap {
-
     	background-color:white;
     	padding: 5px;
+    	margin-top: 10px;
     }
     
     /* 총 주문 금액, 배송비, 등급할인 */
