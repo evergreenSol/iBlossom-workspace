@@ -123,7 +123,7 @@
         	var name = document.getElementById("name").value;
         	var phone = document.getElementById("phone").value;
         	var newUserPwd = document.getElementById("newUserPwd").value;
-			console.log(phone);
+			//console.log(phone);
 			
 			// 이름 검사
 			if(name != "") {
@@ -201,7 +201,7 @@
 						
 						// userPwd 값에 대입
 						$("input[name=userPwd]").val($("input[name=chkPwd]").val());
-						console.log($("input[name=userPwd]").val());
+						// console.log($("input[name=userPwd]").val());
 						return true;
 					}
 					

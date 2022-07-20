@@ -287,7 +287,7 @@
                       review +="<div class='divBox'>"
                       
 	                      review +="<div class='divBox1'>"
-	                    	  review += "<img class='img1' src='" + result[i].reviewPhoto + "' onerror=\"this.src='resources/images/iBlossom_logo_black.png' \">";
+	                    	  review += "<img class='img1' src='" + result[i].reviewPhoto + "' onerror=\"this.src='resources/images/non-image-review-border.jpg' \">";
 	                      review += "</div>";
 	                      
 	                      review +="<div class='divBox2'>"
