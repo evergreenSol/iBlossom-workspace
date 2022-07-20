@@ -37,7 +37,9 @@
 
                             <!-- 체크 이미지 -->
                             <div>
-                           		<img src="resources/images/iBlossom-error.jpg" style="width:52px; height:52px;">
+
+                           		<img src="resources/images/order_complete_check.jpg" style="width:52px; height:52px;">
+
                             </div>
 
                             <!-- 멘트 -->

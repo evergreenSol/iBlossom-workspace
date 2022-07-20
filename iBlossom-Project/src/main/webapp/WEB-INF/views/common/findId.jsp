@@ -52,7 +52,7 @@
                url : "sendId.do",
                data : {
                   recipient : email,
-                  subject : "[iBlossom] 아이디 찾기 서비스",
+                  subject : "[iBlossom] 회원 아이디 찾기 서비스",
                   body : " 아이디는 : [ ",
                   endBody : " ] 입니다."
                },
