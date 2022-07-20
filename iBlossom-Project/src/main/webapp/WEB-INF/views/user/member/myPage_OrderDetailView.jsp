@@ -56,7 +56,11 @@
                             </tr>
                         </table>
                         -->
-                        
+                        <!-- 총합 -->
+                        <c:set var="sum" value="0"/>
+                        <c:forEach var="i" items="${list}" >
+                        <c:set var="sum" value="${sum + i.oneQuantity * i.onePrice}"/>
+                        </c:forEach>
                        
                         
                         <table>
@@ -117,14 +121,14 @@
                             <tr>
 								<td width="120">주 문 금 액</td>
 								<td width="680"></td>
-								<td width="100"><span><fmt:formatNumber value="${ o.totalPrice }" pattern="###,###"/></span><span>원</span></td>
+								<td width="100"><span><fmt:formatNumber value="${sum}" pattern="###,###"/></span><span>원</span></td>
 							</tr>
 							<tr height="20"></tr>
 							<tr>
 								<td>등 급 할 인</td>
 								<td></td>
 								<!--  <td>-<span>${o.totalPrice * (1- discount)}</span><span>원</span></td> -->
-								<td>-<span><fmt:formatNumber value="${ o.totalPrice * (1 - discount) }" pattern="###,###"/></span><span>원</span></td>
+								<td>-<span><fmt:formatNumber value="${ sum * (1 - discount) }" pattern="###,###"/></span><span>원</span></td>
 							</tr>
 							<tr height="20"></tr>
 							<tr>
@@ -148,7 +152,7 @@
 							<tr>
 								<td>총 결 제 금 액</td>
 								<td></td>
-								<td><span><fmt:formatNumber value="${ o.totalPrice * discount + 3000 }" pattern="###,###"/></span><span>원</span></td>
+								<td><span><fmt:formatNumber value="${ sum * discount + 3000 }" pattern="###,###"/></span><span>원</span></td>
 							</tr>
                         
                         

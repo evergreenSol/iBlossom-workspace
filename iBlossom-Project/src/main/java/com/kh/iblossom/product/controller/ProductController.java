@@ -109,35 +109,51 @@ public class ProductController {
 	}
 
 	@RequestMapping("insert.pr")
-	public String insertProduct(Product p, MultipartFile upThumbNail,MultipartFile upContentPhoto ,HttpSession session, Model model) {
+	public String insertProduct(Product p, MultipartFile upThumbNail,MultipartFile upContentPhoto ,HttpSession session) {
 
-		//		System.out.println(p);
+		//System.out.println(p);
 		//		System.out.println(contentPhoto);
-		//		
+		//System.out.println(upContentPhoto);
+
+		//System.out.println("insert1 +: " + p.getContentPhoto());
+
 		if(!upThumbNail.getOriginalFilename().equals("")) {
 
 			String changeName = saveFile(upThumbNail, session);
 			p.setThumbNail("resources/uploadFiles/" + changeName);
 
+			//System.out.println("insert2 +: " + p.getContentPhoto());
+
 		}
-		else if(!upContentPhoto.getOriginalFilename().equals("")) {
+		if(!upContentPhoto.getOriginalFilename().equals("")) {
 
 			String changeName1 = saveFile(upContentPhoto, session);
 			p.setContentPhoto("resources/uploadFiles/" + changeName1);
 		}
+		System.out.println(p.getFlowerName());
+		int cnt =productService.countProduct(p);
+		System.out.println(cnt);
+		if(cnt>0) {
 
-		// : 상품명, 카테고리명, 가격, 수량(0),썸네일, 상품상세사진, 꽃상세내용, 태그
-		int result = productService.insertProduct(p);
+			session.setAttribute("alertMsg", " 상품 등록이 실패되었습니다.");
 
-		if (result > 0) {
-
-			session.setAttribute("alertMsg", "성공적으로 상품이 등록되었습니다.");
 
 			return "redirect:list.pr";
-		} else {// 실패 => 에러페이지 포워딩
-			model.addAttribute("errorMsg", "게시글 등록 실패");
+		}else {
+			// : 상품명, 카테고리명, 가격, 수량(0),썸네일, 상품상세사진, 꽃상세내용, 태그
+			int result = productService.insertProduct(p);
+
+
+
+			if (result > 0) {
+
+				session.setAttribute("alertMsg", "성공적으로 상품이 등록되었습니다.");
+
+				return "redirect:list.pr";
+
+			} 
+			return "redirect:list.pr";
 		}
-		return "common/errorPage";
 	}
 
 	//상품 상세보기(admin)
@@ -175,14 +191,15 @@ public class ProductController {
 
 		ArrayList<Product> list = productService.selectDetailList();
 
-		
+
 		model.addAttribute("list",list);
-		
+
 		System.out.println(list);
 
 		return "user/product/combination_DetailView";
 
 	}
+	
 
 	// 상품관리 (상품 삭제) -admin
 	@RequestMapping("delete.pr")
@@ -274,7 +291,7 @@ public class ProductController {
 
 				//p에 새로운 넘어온 상세사진 첨부파일
 				p.setContentPhoto("resources/uploadFiles/" + changeName1);
-				
+
 			}else if(p.getContentPhoto() == null) {
 				//기존의 첨부파일 X 새로운 첨부파일 O
 				String changeName1 = saveFile(reContentPhoto,session);
@@ -323,81 +340,81 @@ public class ProductController {
 	 * 
 	 * return "product/admin_product_ListView"; }
 	 */
-	
-	// 상품 검색 (관리자)
-		@RequestMapping("search.pr")
-		public String subMemberSearch(@RequestParam(value="cpage", defaultValue="1") int currentPage, String condition, String keyword, Model model) {
-			
-			HashMap<String, String> map = new HashMap<>();
-			map.put("condition", condition);
-			map.put("keyword", keyword);
-			
-			// 페이징 처리를 위한 pi 객체 만들기
-			// => Pagination 클래스에 getPageInfo(listCount, currentPage, pageLimit, boardLimit) 메소드를 호출
-			int searchCount = productService.selectSearchCountFlower(map); // 현재 검색결과에 맞는 게시글의 총 갯수
-			
-			int pageLimit = 10;
-			int boardLimit = 5;
-			
-			PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, pageLimit, boardLimit);
-			
-			// 조회 요청
-			ArrayList<Product> list = productService.selectSearchListFlower(pi, map);
 
-			model.addAttribute("pi", pi);
-			model.addAttribute("list", list);
-			
-			// 이슈 : 검색이 진행된 후 검색 조건과 검색어가 유지되지 않음
-			//		 페이징바를 눌러서 이동시 list.bo 로 요청이 들어가는 이슈
-			model.addAttribute("condition", condition);
-			model.addAttribute("keyword", keyword);
-			
-			return "admin/product/admin_product_ListView";
-		}
-	
+	// 상품 검색 (관리자)
+	@RequestMapping("search.pr")
+	public String subMemberSearch(@RequestParam(value="cpage", defaultValue="1") int currentPage, String condition, String keyword, Model model) {
+
+		HashMap<String, String> map = new HashMap<>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+
+		// 페이징 처리를 위한 pi 객체 만들기
+		// => Pagination 클래스에 getPageInfo(listCount, currentPage, pageLimit, boardLimit) 메소드를 호출
+		int searchCount = productService.selectSearchCountFlower(map); // 현재 검색결과에 맞는 게시글의 총 갯수
+
+		int pageLimit = 10;
+		int boardLimit = 5;
+
+		PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, pageLimit, boardLimit);
+
+		// 조회 요청
+		ArrayList<Product> list = productService.selectSearchListFlower(pi, map);
+
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+
+		// 이슈 : 검색이 진행된 후 검색 조건과 검색어가 유지되지 않음
+		//		 페이징바를 눌러서 이동시 list.bo 로 요청이 들어가는 이슈
+		model.addAttribute("condition", condition);
+		model.addAttribute("keyword", keyword);
+
+		return "admin/product/admin_product_ListView";
+	}
+
 	// 이달의 꽃
 	@ResponseBody
 	@RequestMapping(value="flowerOfTheMonth.pr", produces="application/json; charset=UTF-8")
 	public String selectTagProduct(@RequestParam(value="keywords[]") ArrayList<String> keywords, HttpSession session) {
-		
+
 		System.out.println(keywords);
-		
+
 		ArrayList<String> list = keywords;
-		
+
 		ArrayList<Product> result = new ArrayList<>();
-		
-		
+
+
 		ArrayList<Product> resultP = new ArrayList<>();
-		
+
 		for(int i = 0; i < keywords.size(); i++) {
 			System.out.println(list.get(i));
-			
+
 			Product p = new Product();
-			
+
 			p.setTag(list.get(i));
-			
+
 			resultP = productService.selectTagProduct(p);
-			
+
 			result.addAll(resultP);
-			
+
 		}
-		
+
 		System.out.println(result);
-		
+
 		result.removeAll(Arrays.asList("", null));
-		
+
 		ArrayList<Product> selectList = (ArrayList<Product>) result.stream().distinct().collect(Collectors.toList());
-		
+
 		System.out.println(selectList);
-		
+
 		// session.setAttribute("selectList", selectList);
-		
+
 		return new Gson().toJson(selectList);
-		
+
 	}
-	
-	
-	
+
+
+
 
 	public String saveFile(MultipartFile thumNail, HttpSession session) {
 
@@ -434,6 +451,9 @@ public class ProductController {
 
 		return changeName;
 	}
+
+	// 에러알람을 위한 count메소드
+
 
 
 }

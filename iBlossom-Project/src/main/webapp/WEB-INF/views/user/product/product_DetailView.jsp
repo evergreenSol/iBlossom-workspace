@@ -136,7 +136,7 @@
 
 			<!-- 리뷰 폼 -->
 			<div>
-				<input type='button' id='btn_rv' value='구매평 작성' class="insertReview">
+				<input type='button' id='btn_rv' value='구매평 작성' class="insertReview" hidden>
 				<div id="detailReview"></div>
 			</div>
 
@@ -229,7 +229,7 @@
           html +=                '<tr>';
           html +=                    '<td>상품정보</td>';
           html +=                       '<td>꽃을 더 오래 보실 수 있도록 일부 꽃은 꽃봉오리 상태로 보내드립니다꽃 시장 수급 상황에 따라 일부 구성이 공지없이 변경될 수 있습니다.<br>';
-          html +=                      '<text style="font-weight:50; font-size:20px;">';
+          html +=                      '<text>';
           html +=                           '(구성된 꽃의 수급이 일시적으로 불가하여 대체되거나 수급된 꽃의 검수 과정에서 대체되는 상황 발생 시 기존 단가에서 크게 벗어나지 않는 범위를 철저히 고려하여 대체해드리도록 노력하겠습니다.)<br>';
           html +=                       '</text>';
           html +=                  '꽃은 가능한 꽃의 키를 비슷하게 맞춰 보내드립니다. 모니터 사양과 해상도에 따라 색상의 차이가 있을 수 있습니다.';
@@ -245,13 +245,7 @@
           html +=    '<tr>';
           html +=    '<td>교환/반품 회수</td>';
           html +=    '<td>';
-          html +=    '생화 특성상 변심으로 인한 반품은 불가함 <br>주문후 수작업으로 만들어지는 제품으로주문 확정 후에는 주문취소 불가함<br>홈페이지 1대 1 문의에 남겨주세요';
-          html +=    '</td>';
-          html +=    '</tr>';
-          html +=    '<tr>';
-          html +=    '<td>중도해지</td>';
-          html +=    '<td>';
-          html +=    '중도해지시에서는 총 결제금액에서 <br>';
+          html +=    '생화 특성상 변심으로 인한 반품은 불가함.<br>주문후 수작업으로 만들어지는 제품으로 주문 확정 후에는 주문취소 불가함.<br>홈페이지 1:1대 문의에 남겨주세요.';
           html +=    '</td>';
           html +=    '</tr>';
           html +=    '</table>';
@@ -285,18 +279,27 @@
         		  
         		  
         		  for(var i in result){
-        			  
-                      review += "<br><br>";
-                      review += "<hr>";
+        			  // 220720 div 새로 만들어서 감쌈
+                      review += "<hr style='border-width:1px 0px 0px 0px; width:100%;'>";
                       review += "<div class='reviewbb'>";
                       review += "<input type='hidden' value="+ result[i].reviewNo +">"
+                      
                       review +="<div class='divBox'>"
-                      review += "<img class='img1' src='" + result[i].reviewPhoto + "' style='width: 190px; height:190px;  margin-left: 20px;margin-top: 10px; float: left;'>";
-                      review += "<p class='text3'>" + result[i].userId + "</p>";
-                      review += "<p class='text4'>" + result[i].createDate + "</p>";
-                      review += "<p class='text1'>" + result[i].reviewTitle + "</p>";
-                      review += "<p class='text2'>" + result[i].reviewContent + "</p>";
-                      review += "</div>";
+                      
+	                      review +="<div class='divBox1'>"
+	                      	review += "<img class='img1' src='" + result[i].reviewPhoto + "'>";
+	                      review += "</div>";
+	                      
+	                      review +="<div class='divBox2'>"
+		                      review += "<div class='text1'>" + result[i].reviewTitle + "</div>";
+		                      review += "<div class='text2'>" + result[i].reviewContent + "</div>";
+	                      review += "</div>";
+	                      
+	                      review +="<div class='divBox3'>"
+		                      review += "<div class='text3'>" + result[i].userId + "</div>";
+		                      review += "<div class='text4'>" + result[i].createDate + "</div>";
+	                      review += "</div>";
+                      
                       review += "</div>";
         		  }
         		  review += "<br><br><br><br><br>";
@@ -339,9 +342,9 @@
 					</div>
 					<br>
 					<div>
-						<input type="text" name="reviewTitle"
+						<input type="text" name="reviewTitle" maxlength="20"
 							style="width: 370px; height: 30px; border: 1px solid gainsboro;"
-							placeholder="제목을 작성해주세요.">
+							placeholder="제목을 입력해주세요.(최대 20자까지 가능합니다)">
 					</div>
 					<br>
 					<textarea rows="2" cols="10" onkeyup="counter(this,150)"

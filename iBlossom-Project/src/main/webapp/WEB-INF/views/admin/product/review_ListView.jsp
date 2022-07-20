@@ -153,10 +153,10 @@
 
 		<div style="padding-top: 100px;">
 			<table id="reviewTable" border="1px solid" align="center">
-				<thead style="height: 50px; font-weight: 700;">
+				<thead style="height: 50px; font-weight: 700; background-color : #444444; color:white;">
 					<th>리뷰번호</th>
-					<th>상품명</th>
 					<th>아이디</th>
+					<th style="width:190px">상품명</th>
 					<th>제목</th>
 					<th>작성일</th>
 					<th>상태값</th>
@@ -171,8 +171,9 @@
 							<c:forEach var="r" items="${ list }">
 								<tr>
 									<td class="rno">${r.reviewNo }</td>
-									<td>${r.flowerName}</td>
 									<td>${r.userId}</td>
+									<td>${r.flowerName}</td>
+									
 									<td>${r.reviewTitle }</td>
 									<td>${r.createDate }</td>
 									<td>${r.reviewStatus }</td>

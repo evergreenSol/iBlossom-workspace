@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>iBlossom | Search Result</title>
+<title>iBlossom | Search</title>
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 <link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
@@ -111,7 +111,7 @@
 	    
 	    	<br><br><br>
 	    	
-	    	<hr>
+	    	<hr  style="border-width:1px 0px 0px 0px;">
 	    	
 			    <div class="searchResult" style="width:100%; ">
 			    
@@ -120,7 +120,7 @@
 					    <c:when test="${ empty list }">
 						    <div class="empty_result" align="center">
 							    <div>
-				                    <img src="resources/images/cart_zero_img.png" id="searchResultImg">
+				                    <img src="resources/images/iBlossom-error.jpg" id="searchResultImg">
 				                </div>
 							    
 							    
@@ -148,7 +148,7 @@
 				    </c:choose> 	    	
 			    </div>
 			    
-		    <hr>
+		    <hr style="border-width:1px 0px 0px 0px;">
 		    <br>
 		    <br>
 		    <br>	    
