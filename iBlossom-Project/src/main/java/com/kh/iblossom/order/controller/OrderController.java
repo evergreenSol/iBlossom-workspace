@@ -119,7 +119,7 @@ public class OrderController {
 	@RequestMapping("insert.or")
 	public String insertOrder(Order o, HttpSession session, Model model) {
 		
-		// System.out.println(o);
+		System.out.println(o);
 		
 		String receiptId = o.getReceiptId();
 		int oNo;

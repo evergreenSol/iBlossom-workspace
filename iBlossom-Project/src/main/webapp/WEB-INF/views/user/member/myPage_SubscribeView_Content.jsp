@@ -88,7 +88,7 @@
 				<span style="font-size: 18px; font-weight: 600;">나의 구독 일정</span>
 				<div class="mypage-subscribe-cancel-area" style="display:inline; margin-left: 595px;">
 					<button type="button" class="mypage-subscribe-cancel">구독취소</button>
-					<input type="text" value="${ list[0].receiptId }" name="receiptId">
+					<input type="hidden" value="${ list[0].receiptId }" name="receiptId">
 				</div>
 			</div>
 			<div style="width: 100%">

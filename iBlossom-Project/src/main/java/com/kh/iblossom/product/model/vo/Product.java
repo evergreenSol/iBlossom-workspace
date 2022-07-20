@@ -12,7 +12,6 @@ public class Product {
 	private String categoryName;	//	CATEGORY_NAME
     private String flowerName;		//	FLOWER_NAME
 	private int price;				//	PRICE
-	private int salesAmount;		//	SALES_AMOUNT
 	private String thumbNail;		//	THUMBNAIL
     private String contentPhoto;	//	CONTENT_PHOTO
 	private String flowerInfo;		//	FLOWER_INFO
