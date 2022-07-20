@@ -103,7 +103,7 @@ public class ReviewController {
 			if(result > 0) {
 
 				
-				session.setAttribute("alertMsg", "성공적으로  리뷰이 등록되었습니다.");
+				session.setAttribute("alertMsg", "성공적으로 리뷰가 작성되었습니다.");
 
 				return "redirect:detailList.pr?pno=" + r.getProductNo();
 		
@@ -161,7 +161,7 @@ public class ReviewController {
 				if(result > 0) {
 
 					
-					session.setAttribute("alertMsg", "성공적으로  리뷰이 등록되었습니다.");
+					session.setAttribute("alertMsg", "성공적으로 리뷰가 작성되었습니다.");
 
 					return "redirect:combinationDetailList.pr";
 			
