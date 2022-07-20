@@ -95,10 +95,10 @@
                 <!-- 메뉴바 -->
                 <thead id="admin-order-list-thead">                
                     <tr>
-                        <th width="80">번호</th>
-                        <th width="300">제목</th>
-                        <th width="150">작성일</th>
-                        <th width="80">삭제</th>
+                        <th width="150">번호</th>
+                        <th width="400">제목</th>
+                        <th width="300">작성일</th>
+                        <th width="100">삭제</th>
                     </tr>
                 </thead>
                 <tbody>

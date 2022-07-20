@@ -584,9 +584,9 @@ hr{
 	/*admin 문의게시판 리스트*/
 	#admin-list-container{
 	     position:absolute;
-	     width: 800px;
-	     margin-left: 200px;
-	     margin-top: 10px;
+	     width: 1000px;
+	     margin-left: 100px;
+	     margin-top: -10px;
 	}
 	
 	#admin-list-table tr {
@@ -636,7 +636,7 @@ hr{
 	    cursor: pointer; 
 	    text-decoration: none; 
 	    padding: 7px 12px; 
-	    margin-left: 876px;
+	    margin-left: 1050px;
 	        position: fixed;
     margin-top: 10px;
 
