@@ -98,14 +98,10 @@
 				<!-- 메뉴 -->
 				<ul id="admin-navi">
 					<li><a href="list.me" class="admin-navi-menu">회원관리</a></li>
-					<li><a href="adminList.or" class="admin-navi-menu">주문정보관리</a>
+					<li><a href="adminList.or" class="admin-navi-menu">주문정보관리</a></li>
+					<li><a href="subMemberListView.su" class="admin-navi-menu">정기구독관리</a>
 						<ul class="admin-navi-ul">
-							<li><a href="adminList.or">전체주문내역</a></li>
-							<li><a href="adminDetail.or">개별주문내역</a></li>
-						</ul></li>
-					<li><a href="list.re" class="admin-navi-menu">정기구독관리</a>
-						<ul class="admin-navi-ul">
-							<li><a href="list.re">구독회원관리</a></li>
+							<li><a href="subMemberListView.su">구독회원관리</a></li>
 							<li><a href="listView.sp">구독상품관리</a></li>
 						</ul></li>
 					<li><a href="list.pr" class="admin-navi-menu"

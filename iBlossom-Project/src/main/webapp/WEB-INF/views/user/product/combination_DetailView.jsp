@@ -34,8 +34,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		<div style="width: 1000px;margin:auto;">
 			<table>
 				<tr class="tr1" valign="top">
-					<td rowspan="6"><img src="resources/images/flower3.PNG">
-						<select id="select_flower" name="select_flower"
+					<td rowspan="6"><img src="resources/images/combinationThumbnail.jpg" width="500px"; >
+						<select id="select_flower" name="select_flower" style="width:500px"
 						onchange="selectFlower()">
 							<option selected disabled>
 								---------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -52,7 +52,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					<td class="pp"><hr></td>
 				</tr>
 				<tr>
-					<td class="pp"><b>내가 직접 고르고 선물해보세요~ </b> <br> 감동이 2배 <br>
+					<td class="pp"><b>커피 한잔 가격으로 계절을 받아 보세요.</b> 
+					<br> <br><p style="font-size:14px">"iBlossom" 의 목표는 부담 없는 가격으로 많은 분들이 아름다운 꽃을 만나봐요!<p>
 						<hr style="margin-bottom: 10px;"></td>
 				</tr>
 				<tr>
@@ -60,7 +61,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<form id="cartItems" method="post" action="">
 							<input type="hidden" name="categoryName" id="categoryName"
 								value="${p.categoryName }">
-							<div id="countBox1" align="center" style="overflow: auto">
+							<div id="countBox1" align="center" style="overflow: auto; ">
 								<c:forEach var="p" items="${ list }" varStatus="status">
 									<div class="item${ status.count }" hidden>
 										<div onclick="removeItem(${ status.count })" id="removeItem">
