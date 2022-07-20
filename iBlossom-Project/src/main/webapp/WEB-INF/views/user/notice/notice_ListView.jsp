@@ -18,9 +18,13 @@
  /* 페이징바 */
 
  #pagingArea {
-     width: fit-content;
-     margin: auto;
-     margin-top: 180px;
+
+	width: fit-content;
+    margin: auto;
+    position: absolute;
+    margin-top: -100px;
+    margin-left: 650px;
+
 }
 
 .page-link {
@@ -104,7 +108,7 @@
         <div id="notice-content">
         <p style="font-size: 23px; font-weight: 700;">공지사항</p>
 <c:forEach var="n" items="${ list }">
-        <div class="title"><p style="font-size: 17px; font-weight: 600; width: 860px;
+        <div class="title"><p style="font-size: 17px; font-weight: 600; width: 850px;
         height: 25px;
         line-height : 20px;
         margin-top: 10px;
@@ -117,7 +121,7 @@ ${ n.noticeContent }
 </pre>
 </c:forEach>
 
-        <div class="title"><p style="font-size: 17px; font-weight: 600; width: 860px;
+        <div class="title"><p style="font-size: 17px; font-weight: 600; width: 850px;
         height: 25px;
         line-height : 20px;
         margin-top: 10px;
@@ -136,7 +140,7 @@ ${ n.noticeContent }
 TIME TO BLOSSOM
 - I Blossom 드림.</pre>
 
-        <div class="title"><p style="font-size: 17px; font-weight: 600;  width: 860px;
+        <div class="title"><p style="font-size: 17px; font-weight: 600;  width: 850px;
         height: 25px;
         line-height : 20px;
         margin-top: 10px;
@@ -152,7 +156,7 @@ TIME TO BLOSSOM
 - 단체수업 및 다른 장소로 출장을 원하실 경우 별도 문의 부탁드립니다.
         </pre>
 
-        <div class="title"><p style="font-size: 17px; font-weight: 600; width: 860px;
+        <div class="title"><p style="font-size: 17px; font-weight: 600; width: 850px;
         height: 25px;
         line-height : 20px;
         margin-top: 10px;
@@ -172,8 +176,9 @@ TIME TO BLOSSOM
     </pre>
     
     </div>
-    
-      <div id="pagingArea">
+
+    <div id="pagingArea">
+
         <ul class="pagination">
 
             <c:choose>
@@ -219,8 +224,7 @@ TIME TO BLOSSOM
 	            </c:choose>	
 	         </ul>
    		 </div>
-       
-</div>
+
 
     <script>
         $(function() {

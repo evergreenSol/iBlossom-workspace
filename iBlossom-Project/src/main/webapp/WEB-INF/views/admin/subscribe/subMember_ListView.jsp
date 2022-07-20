@@ -7,46 +7,43 @@
 <head>
 <meta charset="UTF-8">
 <title>admin | 구독회원</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link href="resources/css/kdh.css" rel="stylesheet">
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 <link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 <style>
 #pagingArea {
-	width: fit-content;
-	margin: auto;
+   width: fit-content;
+   margin: auto;
 }
 
 .page-link {
-	font-size : 14px;
-	width : 35px;
-	height: 25px;
-	background-color : white;
-	border : 1px solid lightgray;
-	color : black;
-	display: inline-block;
-	margin-left : 10px;
-	text-decoration : none;
-	text-align : center;
-	border-radius : 3px;
-	padding-top: 5px;
-}
-
-.page-link:active:focus 
-.page-item:active {
-	color : #ff2393;
+   font-size : 14px;
+   width : 35px;
+   height: 25px;
+   background-color : white;
+   border : 1px solid lightgray;
+   color : black;
+   display: inline-block;
+   margin-left : 10px;
+   text-decoration : none;
+   text-align : center;
+   border-radius : 3px;
+   padding-top: 5px;
 }
 
 .page-link:hover {
-	color : #ff2393;
+   color : #ff2393;
+   font-weight:700;
 }
 
 .pagination {
-	list-style-type : none;
+   list-style-type : none;
 }
 
 .pagination li {
-	float : left;
+   float : left;
 }
 
 #admin-member-table {
@@ -58,6 +55,32 @@
     margin-bottom : 50px;
 }
 
+	.admin-product-list-table {
+	    margin: auto; /* 표 중간 */
+	    text-align: center; /* 글자 가운데 정렬 */
+	    border-collapse: collapse; /* 테두리 사이의 간격을 없애고 싶다면 */
+		width: 1100px;
+	}
+	
+	/* 전체리스트 - thead */
+	#admin-product-list-thead {
+	    background-color: #444444;
+	    color : white;
+	}
+	
+	/* 전체리스트 - th */
+	.admin-product-list-table>thead>tr>th {
+	    border: 1px solid black;
+	    padding: 15px;
+	    font-size: medium;
+	}
+	
+	/* 전체주문내역 - td */
+	.admin-product-list-table>tbody>tr>td {
+	    border: 1px solid rgba(226, 226, 226, 0.982);
+	    padding: 18px;
+	    font-size: medium;
+	}
 
 </style>
 </head>
@@ -115,7 +138,7 @@
                         </ul>
                     </li>
                     <li><a href="list.pr" class="admin-navi-menu">상품관리</a></li>
-                    <li><a href="reviewList.pr" class="admin-navi-menu">리뷰관리</a></li>
+                    <li><a href="list.re" class="admin-navi-menu">리뷰관리</a></li>
                     <li><a href="classList.ad" class="admin-navi-menu">클래스관리</a>
                        <ul class="admin-navi-ul">
                             <li><a href="classAddForm.ad">클래스 추가</a></li>
@@ -171,8 +194,8 @@
         
         <!-- 구독한 회원들 리스트 조회용 테이블  -->
         <div style="padding-top: 100px;">
-            <table id="productTable" border="1px solid" align="center">
-                <thead>
+            <table class="admin-product-list-table">
+                <thead id="admin-product-list-thead">
                 	<tr>
 	                    <th>주문번호</th>
 	                    <th>아이디</th>
@@ -217,37 +240,57 @@
 	         <ul class="pagination">
 	
 	            <c:choose>
-	               <c:when test="${ pi.currentPage eq 1 }">
-	                  <li class="page-item disabled"><a class="page-link" href="#">◀</a></li>
+	               <c:when test="${ pi.currentPage eq 1 }"> <!-- 현재 페이지가 1이라면 -->
+	                  <li class="page-item disabled"><a class="page-link" href="#">◀</a></li> <!-- 이전버튼 클릭 불가 -->
 	               </c:when>
-	               <c:otherwise>
-	               <c:choose>
-	            	   <c:when test="${ empty condition }">
-		                	<li class="page-item"><a class="page-link" href="subMemberListView.su?currentPage=${ pi.currentPage - 1 }">◀</a></li>
-		               </c:when>
-		               <c:otherwise>
-		                	<li class="page-item"><a class="page-link" href="search.su?currentPage=${ pi.currentPage - 1 }&condition=${ condition }&keyword=${ keyword }">◀</a></li>
-		               </c:otherwise>
-            	   </c:choose>
+	               <c:otherwise> <!-- 현재 페이지가 1이 아니라면 -->
+		               <c:choose>
+		            	   <c:when test="${ empty condition }"> <!-- 컨디션이 비어있다면 -->
+			                   <li class="page-item"><a class="page-link" href="subMemberListView.su?cpage=${ pi.currentPage - 1 }">◀</a></li>
+		            	   </c:when>
+		            	   <c:otherwise> <!-- 컨디션이 비어있지 않다면 -->
+		            	   	   <li class="page-item"><a class="page-link" href="search.su?currentPage=${ pi.currentPage - 1 }&condition=${ condition }&keyword=${ keyword }">◀</a></li>
+		           		   </c:otherwise>
+	            	   </c:choose>
 	               </c:otherwise>
 	            </c:choose>
 	
-	            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-	               <li class="page-item"><a class="page-link"
-	                  href="subMemberListView.su?cpage=${ p }">${ p }</a></li>
+	            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }"> <!-- 첫페이지에서 마지막 페이지까지 돌면서 -->
+		            <c:choose>
+			            <c:when test="${ empty condition }"> <!-- 컨디션이 비어있다면 -->
+			            	<c:choose>
+						        <c:when test="${ pi.currentPage eq p }"> <!-- 해당 페이지만 글씨에 핑크색 주기용 조건 -->
+						        	<li class="page-item"><a class="page-link"  style="color : #ff2393; font-weight:700;" href="subMemberListView.su?cpage=${ p }">${ p }</a></li>
+						        </c:when>
+						        <c:otherwise>
+									<li class="page-item"><a class="page-link" href="subMemberListView.su?cpage=${ p }">${ p }</a></li>
+						        </c:otherwise>
+					        </c:choose> 
+		                </c:when>
+		                <c:otherwise> <!-- 컨디션이 비어있지 않다면 -->
+		                	<c:choose>
+						        <c:when test="${ pi.currentPage eq p }"> <!-- 해당 페이지만 글씨에 핑크색 주기용 조건 -->
+						        	<li class="page-item"><a class="page-link" style="color : #ff2393; font-weight:700;" href="search.su?currentPage=${ p }&condition=${ condition }&keyword=${ keyword }">${ p }</a></li>
+						        </c:when>
+						        <c:otherwise>
+									<li class="page-item"><a class="page-link" href="search.su?currentPage=${ p }&condition=${ condition }&keyword=${ keyword }">${ p }</a></li>
+						        </c:otherwise>
+					        </c:choose>
+		            	</c:otherwise>
+	            	</c:choose>   
 	            </c:forEach>
 	
 	            <c:choose>
-	               <c:when test="${ pi.currentPage eq pi.maxPage }">
-	                  <li class="page-item disabled"><a class="page-link" href="#">▶</a></li>
+	               <c:when test="${ pi.currentPage eq pi.maxPage }"> <!-- 현재 페이지가 마지막 페이지라면 -->
+	                  <li class="page-item disabled"><a class="page-link" href="#">▶</a></li> <!-- 다음 페이지로 가는 버튼 클릭 불가 -->
 	               </c:when>
-	               <c:otherwise>
+	               <c:otherwise> <!-- 현재 페이지가 마지막 페이지가 아니라면 -->
 		               <c:choose>
-		            	   <c:when test="${ empty condition }">
+		            	   <c:when test="${ empty condition }"> <!-- 컨디션이 비어있다면 -->
 			                   <li class="page-item"><a class="page-link"
 			                   href="subMemberListView.su?cpage=${ pi.currentPage + 1 }">▶</a></li>
 		            	   </c:when>
-		            	   <c:otherwise>
+		            	   <c:otherwise> <!-- 컨디션이 비어있지 않다면 -->
 		            	   	   <li class="page-item"><a class="page-link" href="search.su?currentPage=${ pi.currentPage + 1 }&condition=${ condition }&keyword=${ keyword }">▶</a></li>
 		           		   </c:otherwise>
 			           </c:choose>
@@ -255,6 +298,7 @@
 	            </c:choose>
 	         </ul>
 	    </div>
+	    <br><br><br><br>
        	
     </div>
     
