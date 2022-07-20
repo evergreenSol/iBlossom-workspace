@@ -83,6 +83,13 @@
 	 		<!-- 관리자: 주문 관리 -->
 	 		<mapping path="/adminList.or"/>
 	 		<mapping path="/adminDetail.or"/>
+	 		<!-- 관리자: 상품관리 -->
+	 		<mapping path="/list.pr"/>
+	 		<mapping path="/detail.pr"/>
+	 		<mapping path="/productUpdate.pr"/>
+	 		<mapping path="/productEnroll.pr"/>
+	 		<mapping path="/list.re"/>
+	 		<mapping path="/detail.re"/>
 	 		<beans:bean class="com.kh.iblossom.common.interceptor.AdminInterceptor" id="adminInterceptor"/>
 	 	</interceptor>
 	 </interceptors>

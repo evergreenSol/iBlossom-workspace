@@ -21,7 +21,7 @@
 	width: fit-content;
     margin: auto;
     position: absolute;
-    margin-top: 150px;
+    margin-top: 30px;
     margin-left: 650px;
 }
 
@@ -175,7 +175,9 @@ TIME TO BLOSSOM
     
     </div>
     
-      <div id="pagingArea">
+
+    <div id="pagingArea">
+
         <ul class="pagination">
 
             <c:choose>
@@ -221,8 +223,9 @@ TIME TO BLOSSOM
 	            </c:choose>	
 	         </ul>
    		 </div>
-       
-</div>
+
+	</div>
+
 
     <script>
         $(function() {
@@ -243,8 +246,7 @@ TIME TO BLOSSOM
         });
     </script>
 
-    
-    	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+   	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
 
 </body>

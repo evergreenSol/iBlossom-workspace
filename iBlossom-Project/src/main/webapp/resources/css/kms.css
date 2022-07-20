@@ -243,8 +243,9 @@
 
     /*공지전체 틀*/       
     #notice-content{
-        width: 860px;
-        height: 410px;
+
+        width: 850px;
+        height: 100%;
         margin: auto;
         margin-left: 350px;
         margin-top: 40px;

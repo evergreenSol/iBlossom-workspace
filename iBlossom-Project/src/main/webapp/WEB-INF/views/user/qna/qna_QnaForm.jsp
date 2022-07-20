@@ -62,8 +62,8 @@
 			<p id="ans" style="font-size: 23px; font-weight: 700;">문의하기</p><br>
 			<table id="anwcontent" border="1" style="border-collapse: collapse; ">
 			 <div>
-			 	<c:choose>
-                    <c:when test="${ empty loginUser }">
+			 <c:choose>
+             <c:when test="${ empty loginUser }">
 						<label for="title" style="font-size: 18px; font-weight: 700;">제목</label><br><br>
 						<input type="text" id="qnaTitle" name="qnaTitle" style="width:695px; height:35px; font-size:16px; outline:none;" maxlength="30" readonly>
 			 </div>
