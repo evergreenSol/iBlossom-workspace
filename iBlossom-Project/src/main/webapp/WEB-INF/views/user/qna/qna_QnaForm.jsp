@@ -65,12 +65,12 @@
 			 	<c:choose>
                     <c:when test="${ empty loginUser }">
 						<label for="title" style="font-size: 18px; font-weight: 700;">제목</label><br><br>
-						<input type="text" id="qnaTitle" name="qnaTitle" style="width:695px; height:35px; font-size:16px; outline:none;" maxlength="50" readonly>
+						<input type="text" id="qnaTitle" name="qnaTitle" style="width:695px; height:35px; font-size:16px; outline:none;" maxlength="30" readonly>
 			 </div>
 		      </c:when>
             <c:otherwise>	
             			<label for="title" style="font-size: 18px; font-weight: 700;">제목</label><br><br>
-						<input type="text" id="qnaTitle" name="qnaTitle" style="width:695px; height:35px; font-size:16px; outline:none;" maxlength="50" required>
+						<input type="text" id="qnaTitle" name="qnaTitle" style="width:695px; height:35px; font-size:16px; outline:none;" maxlength="30" required>
 				 </div>
 			  </c:otherwise>
             </c:choose>
