@@ -63,7 +63,7 @@
                         </ul>
                     </li>
                     <li><a href="list.pr" class="admin-navi-menu">상품관리</a></li>
-                    <li><a href="reviewList.re" class="admin-navi-menu">리뷰관리</a></li>
+                    <li><a href="list.re" class="admin-navi-menu">리뷰관리</a></li>
                     <li><a href="classList.ad" class="admin-navi-menu" style="font-weight: 700;">클래스관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="classAddForm.ad">클래스 추가</a></li>
