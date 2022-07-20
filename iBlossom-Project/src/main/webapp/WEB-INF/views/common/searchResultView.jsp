@@ -85,7 +85,7 @@
 	}
 	
 	/* 이미지 호버시 */
-	.result_img_div:hover {
+	.result_img:hover {
 		cursor : pointer;
 		width : 97%;
 		height : 97%;
