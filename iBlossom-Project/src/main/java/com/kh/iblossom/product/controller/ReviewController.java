@@ -89,6 +89,7 @@ public class ReviewController {
 
 			// model.addAttribute("errorMsg","해당 상품을 구매 후 작성해주세요");
 			session.setAttribute("alertMsg", "해당 상품을 구매 후 작성해주세요.");
+			return "redirect:detailList.pr?pno=" + r.getProductNo();
 
 
 		} else {
@@ -116,7 +117,6 @@ public class ReviewController {
 			return "common/error"; 
 		}
 
-		return "common/error";
 
 	}
 	
