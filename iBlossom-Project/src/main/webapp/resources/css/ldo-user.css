@@ -24,8 +24,11 @@ hr { border-width: 1px 0px 0px 0px; }
         width: 63%;
         height: 95%;
         float: left;
-        box-sizing: border-box;
+        position:relative;
+        
+        /* 스크롤바 */
         overflow: auto;
+        
     }
 
     /* 오른쪽 섹션 */
@@ -33,13 +36,15 @@ hr { border-width: 1px 0px 0px 0px; }
         width: 33%;
 		/*height: 2000px;*/
         float: right;
-        box-sizing: border-box;
         
         /* sticky*/
         position: relative;
         top: 20px;
         right: 57%; 
         margin-right:-670px;
+        /*position:absolute;
+        top: 200px;
+        */
     }
 
 	
@@ -695,7 +700,12 @@ hr { border-width: 1px 0px 0px 0px; }
         /* text-shadow: 1px 1px 2px gray; */
         color: black;
     }
-
+    
+    /* 모달 내용 안에 hr 스타일 */
+	#modal .address-content hr {
+		border-color: black;
+	}
+	
     .address-footer button {
         border-radius: 3px;
     }
@@ -704,7 +714,8 @@ hr { border-width: 1px 0px 0px 0px; }
         width: 50px;
     }
     
-    
+    /* 모달창 안에 placeholder 색상 */
+    input::placeholder { color:#383838; background-color: white;}
     
     /* ----------------------------------------------------------- */
     /* 슬라이드 업/다운 요소 버튼 */

@@ -271,9 +271,9 @@
                                     <!-- 이름 -->
                                     <input type="text" id="subReceiverUser" size="70" value="${ loginUser.userName }" onfocus="this.value=''" onblur="this.placeholder='이름을 입력해주세요.'" required><br>
                                     
-                                    <hr>
+                                    <hr style="border-color:black;">
                                     <!-- 연락처 -->
-                                    <input type="tel" id="subReceiverPhone" size="70" placeholder="010-0000-0000" value="${ loginUser.phone }" onfocus="this.value=''" onblur="this.placeholder='010-0000-0000'" required><br> 
+                                    <input type="tel" id="subReceiverPhone" size="70" placeholder="&nbsp;010-0000-0000" value="${ loginUser.phone }" onfocus="this.value=''" onblur="this.placeholder='010-0000-0000'" required><br> 
                                     <hr>
 
                                     <p>주소</p>
@@ -446,22 +446,23 @@
             </div>
             
             <!-- follow quick menu -->
-            <script>  
-       
-             $(window).scroll(function(){
-                
-                var scrollTop = $(document).scrollTop();
-                
-                if (scrollTop < 180) {
-                	scrollTop = -30; 
-                }
-                
-                $(".order-right").stop();
-                $(".order-right").animate( { "top" : scrollTop }
-                );
-                
-             });
-            </script>
+	    	<script>  
+	    
+			    $(window).scroll(function(){
+			    	
+			    	var scrollTop = $(document).scrollTop();
+			    	
+				    if (scrollTop < 180) {
+				     scrollTop = -30; 
+				    }
+				    
+				    $(".order-right").stop();
+				    $(".order-right").animate( { "top" : scrollTop }
+				    );
+				    
+			    });
+	    
+	    	</script>
             
             <!-- 상품 결제용 필요 변수들 미리 세팅 -->
             <input type="hidden" name="userNo" id="userNo" value="${ loginUser.userNo }">
