@@ -128,7 +128,7 @@
               	                   url : "sendEmail.do",
               	                   data : {
               	                      recipient : $('#signUp-input-email').val(),
-              	                      subject : "iBlossom 이메일 인증 메일입니다.",
+              	                      subject : "[iBlossom] 이메일 인증 메일입니다.",
               	                      body : "이메일 인증 코드 : "
               	                   },
               	                   success : function (result) {
