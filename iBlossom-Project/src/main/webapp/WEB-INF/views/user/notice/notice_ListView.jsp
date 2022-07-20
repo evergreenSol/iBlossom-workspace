@@ -18,11 +18,9 @@
  /* 페이징바 */
 
  #pagingArea {
-	width: fit-content;
-    margin: auto;
-    position: absolute;
-    margin-top: -100px;
-    margin-left: 700px;
+     width: fit-content;
+     margin: auto;
+     margin-top: 180px;
 }
 
 .page-link {
@@ -174,28 +172,8 @@ TIME TO BLOSSOM
     </pre>
     
     </div>
-</div>
-
-    <script>
-        $(function() {
-
-            $(".title").click(function() {
-
-                var $pre = $(this).next(); 
-                if($pre.css("display") == "none") {
-
-                    $(this).siblings("pre").slideUp(100);
-
-                    $pre.slideDown(100);
-                }
-                else { 
-                    $pre.slideUp(100);
-                }
-            });
-        });
-    </script>
-
-   <div id="pagingArea">
+    
+      <div id="pagingArea">
         <ul class="pagination">
 
             <c:choose>
@@ -241,8 +219,27 @@ TIME TO BLOSSOM
 	            </c:choose>	
 	         </ul>
    		 </div>
+       
+</div>
 
-    
+    <script>
+        $(function() {
+
+            $(".title").click(function() {
+
+                var $pre = $(this).next(); 
+                if($pre.css("display") == "none") {
+
+                    $(this).siblings("pre").slideUp(100);
+
+                    $pre.slideDown(100);
+                }
+                else { 
+                    $pre.slideUp(100);
+                }
+            });
+        });
+    </script>
 
     
     	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
