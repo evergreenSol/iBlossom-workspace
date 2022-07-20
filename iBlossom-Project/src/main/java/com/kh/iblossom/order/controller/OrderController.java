@@ -113,11 +113,6 @@ public class OrderController {
 		}
 	}
 	
-	// 결제완료 페이지 이동
-	@RequestMapping("complete.or")
-	public String orderComplete() {
-		return "user/order/order_Complete";
-	}
 	
 	// 주문결제 페이지에서 데이터 추가
 	@ResponseBody
