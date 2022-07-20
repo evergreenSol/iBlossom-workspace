@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>iBlossom | 장바구니</title>
+<title>iBlossom | Cart</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <link href="resources/css/ldo-user.css" rel="stylesheet">
@@ -123,7 +123,7 @@
 
 	    
 	    <!------------------------------------------------------------------->
-	
+		<br>
 	    <div class="cart-right">
 
 		    <!-- 사용자 장바구니 페이지 오른쪽 영역-->
@@ -178,23 +178,45 @@
    
     </div> <!-- id="cartMainOuter" -->
     
+    <br>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 
 	<!------------------------------------------------------------------->
 	
+	<script>
+	
+		<!-- follow quick menu -->
+		// 스크롤 이벤트가 발생했을시
+	    $(window).scroll(function(){
+	    	
+	    	// 현재 스크롤바의 위치값을 반환
+	    	var scrollTop = $(document).scrollTop(); 
+	    	/*var scrollTop = $(window).scrollTop();*/
+	    	
+		    if (scrollTop < 180) {
+		     	scrollTop = -30; 
+		    }
+		    
+		    $(".cart-right").stop();
+		    $(".cart-right").animate( { "top" : scrollTop } );
+		    
+	    });
+		
+	</script>
+		
 	<!-- 글자수에 따라 증감 -->
 	<script type="text/javascript">
 		
-	function CheckSize() {
-			var textObj = document.getElementById('resizable1');
+		function CheckSize() {
+				var textObj = document.getElementById('resizable1');
+				var resize = textObj.value.length;
+				textObj.setAttribute('size',resize);
+			}	
+		function CheckSize() {
+			var textObj = document.getElementById('resizable2');
 			var resize = textObj.value.length;
 			textObj.setAttribute('size',resize);
 		}	
-	function CheckSize() {
-		var textObj = document.getElementById('resizable2');
-		var resize = textObj.value.length;
-		textObj.setAttribute('size',resize);
-	}
 		
 	</script>
 	
@@ -329,19 +351,7 @@
  			var sumAll = document.getElementById('sumAll');
  		}
  		*/
- 		
-		// follow quick menu
-		$(window).scroll(function(){
-        	var scrollTop = $(document).scrollTop();
-	        if (scrollTop < 180) {
-	        	scrollTop = 20; 
-
-	        }
-	        $(".cart-right").stop();
-	        $(".cart-right").animate( { "top" : scrollTop }
-        	);
-     	});
-	
+		
 		$(function () {
 			$(".cart-btn").click(function () {
 				$("#real-submit-button").trigger("click");
@@ -363,11 +373,8 @@
 		        }
 		    })
 		};
-		
-
 
 	</script>
-
 
 </body>
 </html>
