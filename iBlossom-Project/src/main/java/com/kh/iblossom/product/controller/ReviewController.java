@@ -296,7 +296,7 @@ public class ReviewController {
 	
 	// 리뷰 검색 (관리자)
 		@RequestMapping("search.re")
-		public String subMemberSearch(@RequestParam(value="cpage", defaultValue="1") int currentPage, String condition, String keyword, Model model) {
+		public String subMemberSearch(@RequestParam(value="currentPage", defaultValue="1") int currentPage, String condition, String keyword, Model model) {
 			
 			HashMap<String, String> map = new HashMap<>();
 			map.put("condition", condition);
