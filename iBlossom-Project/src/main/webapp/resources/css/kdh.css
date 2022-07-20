@@ -174,15 +174,16 @@
     /* product 이미지 속성 css*/
     #list_img {
       margin-top : 10px;
-      width : 230px;
-      height : 230px;
+      width : 270px;
+      height : 270px;
       object-fit: cover;
       -webkit-user-drag: none;
+      border-radius : 50%;
     }
     
     #list_img:hover {
-        width : 250px;
-        height : 250px;
+        width : 280px;
+        height : 280px;
         cursor : pointer;
     }
     
