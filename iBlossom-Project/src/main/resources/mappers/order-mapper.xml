@@ -114,6 +114,7 @@
 		  FROM DETAIL_ORDER DO
 		  JOIN PRODUCT P ON (DO.PRODUCT_NO = P.PRODUCT_NO)
 		WHERE ORDER_NO = #{orderNo}
+		
 	</select>
 	
 	
@@ -211,6 +212,7 @@
 		  FROM DETAIL_ORDER DO
 		  JOIN PRODUCT P ON (DO.PRODUCT_NO = P.PRODUCT_NO)
 		WHERE ORDER_NO = #{orderNo}
+		ORDER BY DORDER_NO ASC
 	</select>
 	
 	
