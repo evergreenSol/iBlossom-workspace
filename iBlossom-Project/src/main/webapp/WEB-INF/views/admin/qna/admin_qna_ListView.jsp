@@ -108,7 +108,7 @@
                         </ul>
                     </li>
                     <li><a href="list.pr" class="admin-navi-menu">상품관리</a></li>
-                    <li><a href="reviewList.re" class="admin-navi-menu">리뷰관리</a></li>
+                    <li><a href="list.re" class="admin-navi-menu">리뷰관리</a></li>
                     <li><a href="classList.ad" class="admin-navi-menu">클래스관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="classAddForm.ad">클래스 추가</a></li>
@@ -137,11 +137,11 @@
             <table id="admin-order-list-table" style="font-size: 16px;">
                 <thead id="admin-order-list-thead">
                     <tr>
-                        <th width="100">글번호</th>
-                        <th width="400">제목</th>
-                        <th width="130">작성자</th>
-                        <th width="180">작성일</th>
-                        <th width="150">문의 상태</th>
+                        <th width="200">글번호</th>
+                        <th width="600">제목</th>
+                        <th width="300">작성자</th>
+                        <th width="350">작성일</th>
+                        <th width="300">문의 상태</th>
                     </tr>
                 </thead>
                 <tbody>

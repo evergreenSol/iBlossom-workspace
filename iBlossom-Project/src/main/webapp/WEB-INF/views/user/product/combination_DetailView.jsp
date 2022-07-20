@@ -193,7 +193,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<td><img src="${ p.thumbNail }"></td>
 					</tr>
 					<tr>
+
 						<td style="text-align: center">${ p.flowerName }(${p.price}원)</td>
+
 					</tr>
 				</table>
 			</c:forEach>
@@ -242,7 +244,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		
 		var selectFlower = $("#select_flower").val(); // 해당 상품의 인덱스 가져오기
 		$(".item"+ selectFlower +"").removeAttr("hidden"); // class="item + 해당 인덱스" 인 div hidden 제거 
-
+		
 		// var index = $(".item"+ selectFlower +"").children("#index").val(); // index
 		items.push(selectFlower); // 아까 생성한 빈 배열에 인덱스 밀어넣어주기
 
@@ -293,14 +295,15 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
      
      function getSum() { // 이름을 주게 되면 그 실행해달라고 하는 곳에서 실행됨
 			
-		var listSize = items.length; // 상품 리스트 사이즈 (상품이 3개면 3개))
+		var listSize = items.length; // 상품 리스트 사이즈 (상품이 3개면 3개)
  		var sumAll = 0;
  		for(var i = 0; i < listSize; i++) { // 상품 리스트를 돌면서
- 			var price = $('#productPrice'+(items[i])+'').val(); // 각 상품 가격
- 			var productCount = $('#productCount'+(items[i])+'').val(); // 각 상품 수량
- 			$('#sum'+(items[i])+'').attr("value",price*productCount); // sum1, sum2, ... 에 전달
+ 			var price = $('#productPrice'+(i+1)+'').val(); // 각 상품 가격
+ 			console.log(price)
+ 			var productCount = $('#productCount'+(i+1)+'').val(); // 각 상품 수량
+ 			$('#sum'+(i+1)+'').attr("value",price*productCount); // sum1, sum2, ... 에 전달
  			
- 			sumAll += parseInt($('#sum'+(items[i])+'').val()); // sumAll = sum1 + sum2 + ...
+ 			sumAll += parseInt($('#sum'+(i+1)+'').val()); // sumAll = sum1 + sum2 + ...
  		}
  		
 			$('#sumAll').attr("value",(sumAll+3000)); // sumAll input에 sumAll 값 전달
