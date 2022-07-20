@@ -109,7 +109,7 @@
 
                         <!-- 내용 -->
                         <div id="CheckBox" class="order-check-contentbox">
-							<form action="insertDetailOrder.or"  id="real-submit">
+							<form action="insertDetailOrder.or"  id="real-submit" method="post">
 							
 	                            <c:forEach var="i" begin="0" end="${ selectList.size() - 1 }">
 	                            
@@ -271,9 +271,9 @@
                                     <!-- 이름 -->
                                     <input type="text" id="subReceiverUser" size="70" value="${ loginUser.userName }" onfocus="this.value=''" onblur="this.placeholder='이름을 입력해주세요.'" required><br>
                                     
-                                    <hr>
+                                    <hr style="border-color:black;">
                                     <!-- 연락처 -->
-                                    <input type="tel" id="subReceiverPhone" size="70" placeholder="010-0000-0000" value="${ loginUser.phone }" onfocus="this.value=''" onblur="this.placeholder='010-0000-0000'" required><br> 
+                                    <input type="tel" id="subReceiverPhone" size="70" placeholder="&nbsp;010-0000-0000" value="${ loginUser.phone }" onfocus="this.value=''" onblur="this.placeholder='010-0000-0000'" required><br> 
                                     <hr>
 
                                     <p>주소</p>
@@ -394,8 +394,6 @@
 
             <!-- 사용자 주문 페이지 오른쪽 영역 -->
 
-            <br><br>
-
             <div class="order-right-wrap">
 
                 <!-- 총 주문 금액 -->
@@ -418,9 +416,12 @@
                 <div class="order-grade">
                     <span>등급할인</span>
                     <!-- <span>- ${ total * (1 - discount) }원</span> -->
-                    <span>-&nbsp;<fmt:formatNumber value="${ total * (1 - discount) }" pattern="###,###"/>원</span>
+                    <fmt:formatNumber var="resultDiscount1" type="number" value="${ total * (1 - discount) }" pattern="###,###"/>
+                    <fmt:parseNumber var="resultDiscount2" integerOnly="true" type="number" value="${ total * (1 - discount) }" />
+                    <span>-&nbsp;${ resultDiscount1 }원</span>
+                    <input type="hidden" id="discount" value="${ resultDiscount2 + 1}">
                 </div>
-                <hr>
+                <hr style="width: 90%;">
 
                 <!-- 총 결제 금액 -->    
                 <div class="order-tprice">
@@ -446,22 +447,23 @@
             </div>
             
             <!-- follow quick menu -->
-            <script>  
-       
-             $(window).scroll(function(){
-                
-                var scrollTop = $(document).scrollTop();
-                
-                if (scrollTop < 180) {
-                	scrollTop = -30; 
-                }
-                
-                $(".order-right").stop();
-                $(".order-right").animate( { "top" : scrollTop }
-                );
-                
-             });
-            </script>
+	    	<script>  
+	    
+			    $(window).scroll(function(){
+			    	
+			    	var scrollTop = $(document).scrollTop();
+			    	
+				    if (scrollTop < 180) {
+				     scrollTop = -20; 
+				    }
+				    
+				    $(".order-right").stop();
+				    $(".order-right").animate( { "top" : scrollTop }
+				    );
+				    
+			    });
+	    
+	    	</script>
             
             <!-- 상품 결제용 필요 변수들 미리 세팅 -->
             <input type="hidden" name="userNo" id="userNo" value="${ loginUser.userNo }">
@@ -588,7 +590,8 @@
 						postcode : $('#zipcode').val(),
 						orderStatus : '결제완료',
 						deliveryStatus : '배송준비',
-						thumbnail : $("#thumbnailForOrder").val()
+						thumbnail : $("#thumbnailForOrder").val(),
+						discount : $("#discount").val()
 					},
 					success : function(result) {
 						

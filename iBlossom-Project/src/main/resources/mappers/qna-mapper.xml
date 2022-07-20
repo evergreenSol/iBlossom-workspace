@@ -41,6 +41,7 @@
   	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM QNA
+		WHERE ANSWER_STATUS = 'Y'
 	</select>
 
   	<select id="selectMyQnaList" parameterType="_int" resultMap="qnaResultSet">

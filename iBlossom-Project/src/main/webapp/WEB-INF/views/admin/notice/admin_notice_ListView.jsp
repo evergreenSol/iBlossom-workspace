@@ -64,7 +64,7 @@
                         </ul>
                     </li>
                     <li><a href="list.pr" class="admin-navi-menu">상품관리</a></li>
-                    <li><a href="list.re" class="admin-navi-menu">리뷰관리</a></li>
+                    <li><a href="reviewList.re" class="admin-navi-menu">리뷰관리</a></li>
                     <li><a href="classList.ad" class="admin-navi-menu">클래스관리</a>
                         <ul class="admin-navi-ul">
                             <li><a href="classAddForm.ad">클래스 추가</a></li>
@@ -95,10 +95,10 @@
                 <!-- 메뉴바 -->
                 <thead id="admin-order-list-thead">                
                     <tr>
-                        <th width="150">번호</th>
-                        <th width="400">제목</th>
-                        <th width="300">작성일</th>
-                        <th width="100">삭제</th>
+                        <th width="80">번호</th>
+                        <th width="300">제목</th>
+                        <th width="150">작성일</th>
+                        <th width="80">삭제</th>
                     </tr>
                 </thead>
                 <tbody>

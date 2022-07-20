@@ -12,9 +12,14 @@
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.3.min.js" type="application/javascript"></script>
 <link href="resources/css/ldo-user.css" rel="stylesheet"> 
 <!-- <link href="resources/css/kdh.css" rel="stylesheet"> -->
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 <style>
 
-    
+    input {
+    	outline:none;
+    }
 
 </style>
 </head>
@@ -266,7 +271,6 @@
 		                                    <input type="text" name="address" id="address1" size="70" value="${ loginUser.address1 }" onfocus="this.value=''" required><br>
 		                                    <hr>
 		                                    <input type="text" name="address" id="address2" size="70" value="${ loginUser.address2 }" onfocus="this.value=''" required><br>
-		                                    <hr>
 	                                    </c:otherwise>
                                     </c:choose>
                   
@@ -510,7 +514,7 @@
 				numOfPay : numOfPay
 				},
 			success : function(data) {
-				alert("iBlossom 상품 구독 등록중 : 잠시만 대기해주시면 자동으로 진행됩니다");
+				alert("iBlossom 상품 구독 등록중 : 확인을 누르시고 잠시만 대기해주시면 자동으로 진행됩니다");
 				setTimeout(function() {
 					alert("iBlossom 상품 구독 등록 성공 : 매달 싱싱하고 예쁜 꽃을 보내드릴게요 :)");
 					location.href="subscribeView.me"	

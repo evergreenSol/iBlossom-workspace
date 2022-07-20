@@ -63,9 +63,9 @@ div { box-sizing: border-box; }
 	}
 	
 	.page-link {
-	   font-size : 10px;
-	   width : 30px;
-	   height: 20px;
+	   font-size : 14px;
+	   width : 35px;
+	   height: 25px;
 	   background-color : white;
 	   border : 1px solid lightgray;
 	   color : black;
@@ -74,16 +74,12 @@ div { box-sizing: border-box; }
 	   text-decoration : none;
 	   text-align : center;
 	   border-radius : 3px;
-	   padding-top: 7px;
-	}
-	
-	.page-link:active:focus 
-	.page-item:active {
-	   color : #ff2393;
+	   padding-top: 5px;
 	}
 	
 	.page-link:hover {
 	   color : #ff2393;
+	   font-weight:700;
 	}
 	
 	.pagination {
@@ -93,7 +89,7 @@ div { box-sizing: border-box; }
 	.pagination li {
 	   float : left;
 	}
-
+	
 
 
 /*-----------------------------------------------------------------------------------------------*/

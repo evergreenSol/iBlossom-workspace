@@ -117,6 +117,7 @@
 		FROM SUBSCRIBE S, MEMBER M, SUB_PRODUCT SP
         WHERE S.USER_NO = M.USER_NO(+)
           AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
+        ORDER BY SUBSCRIBE_NO DESC
   	</select>
   	
   	<!-- 검색 -->
@@ -135,6 +136,7 @@
         WHERE S.USER_NO = M.USER_NO(+)
           AND S.SUBPRODUCT_NO = SP.SUBPRODUCT_NO
 		  AND ${condition} LIKE '%' || #{keyword} || '%'
+		ORDER BY SUBSCRIBE_NO DESC
 	</select>
   	
   	<!-- 구독 취소 -->
