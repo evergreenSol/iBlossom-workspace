@@ -21,7 +21,7 @@
 	width: fit-content;
     margin: auto;
     position: absolute;
-    margin-top: -100px;
+    margin-top: 20px;
     margin-left: 650px;
 }
 
