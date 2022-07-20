@@ -48,7 +48,7 @@
 	        </div>
 	
 	        <!-- 장바구니 내용 -->
-			<form action="detail.or">
+			<form action="detail.or" method="post">
 	        	
 	        	<div style="padding:0px;">
 	        		        

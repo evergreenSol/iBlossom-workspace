@@ -130,7 +130,7 @@ public class ProductController {
 			String changeName1 = saveFile(upContentPhoto, session);
 			p.setContentPhoto("resources/uploadFiles/" + changeName1);
 		}
-		System.out.println(p.getFlowerName());
+		//System.out.println(p.getFlowerName());
 		int cnt =productService.countProduct(p);
 		System.out.println(cnt);
 		if(cnt>0) {

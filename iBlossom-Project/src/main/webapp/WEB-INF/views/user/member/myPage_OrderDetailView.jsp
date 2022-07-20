@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>iBlossom | 주문상세내역</title>
+<title>iBlossom | My Order</title>
 <link href="resources/css/khs.css" rel="stylesheet">
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
@@ -18,7 +18,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<c:choose>
 		<c:when test="${ loginUser.grLevel == 1 }">
-			<c:set var="discount" value="0"/>
+			<c:set var="discount" value="1"/>
 		</c:when>
 		<c:when test="${ loginUser.grLevel == 2 }">
 			<c:set var="discount" value="0.9"/>

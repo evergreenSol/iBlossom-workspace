@@ -109,7 +109,7 @@
 
                         <!-- 내용 -->
                         <div id="CheckBox" class="order-check-contentbox">
-							<form action="insertDetailOrder.or"  id="real-submit">
+							<form action="insertDetailOrder.or"  id="real-submit" method="post">
 							
 	                            <c:forEach var="i" begin="0" end="${ selectList.size() - 1 }">
 	                            
