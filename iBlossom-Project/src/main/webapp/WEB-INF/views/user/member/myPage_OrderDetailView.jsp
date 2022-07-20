@@ -154,7 +154,7 @@
 							<tr>
 								<td>총 결 제 금 액</td>
 								<td></td>
-								<td><span><fmt:formatNumber value="${ sum * discount + 3000 }" pattern="###,###"/></span><span>원</span></td>
+								<td><span><fmt:formatNumber value="${ sum - o.discount + 3000 }" pattern="###,###"/></span><span>원</span></td>
 							</tr>
                         
                         

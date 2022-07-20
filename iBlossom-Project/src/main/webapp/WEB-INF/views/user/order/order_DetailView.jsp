@@ -419,7 +419,7 @@
                     <fmt:formatNumber var="resultDiscount1" type="number" value="${ total * (1 - discount) }" pattern="###,###"/>
                     <fmt:parseNumber var="resultDiscount2" integerOnly="true" type="number" value="${ total * (1 - discount) }" />
                     <span>-&nbsp;${ resultDiscount1 }원</span>
-                    <input type="hidden" id="discount" value="${ resultDiscount2}">
+                    <input type="hidden" id="discount" value="${ resultDiscount2 + 1}">
                 </div>
                 <hr style="width: 90%;">
 
