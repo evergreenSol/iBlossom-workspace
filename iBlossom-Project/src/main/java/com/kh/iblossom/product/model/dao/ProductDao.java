@@ -34,6 +34,14 @@ public class ProductDao {
 
 		return sqlSession.insert("productMapper.insertProduct", p);
 	}
+	
+	//count 에러페이지
+	public int countProduct(SqlSessionTemplate sqlSession, Product p) {
+		
+		
+		return sqlSession.selectOne("productMapper.countProduct", p);
+		
+	}
 
 	//상품상세조회(admin)
 	public Product selectProduct(SqlSessionTemplate sqlSession, int productNo) {

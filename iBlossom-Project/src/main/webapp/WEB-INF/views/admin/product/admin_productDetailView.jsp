@@ -21,7 +21,7 @@
 #btnDanger{
 	width: 130px;
     height: 50px;
-    background-color:#ff2393;
+    background-color: black;
     color: white;
     font-weight: 700;
     border: #ff2393;
@@ -119,15 +119,15 @@
 			<div class="admin_sub_product">
 				<h3>카테고리명</h3>
 				<input type="text" id="admin_category_name"
-					name="category_name" value="${p.categoryName}" readonly>
+					name="category_name" value="${p.categoryName}" style="width:500px; font-size: 16px; text-align: left" readonly>
 
 				<h3>상품명</h3>
 				<input type="text" id="admin_product_name" name="flowerName"
-					value="${p.flowerName}" readonly>
+					value="${p.flowerName}"  style="width:500px; font-size: 16px; text-align: left" readonly>
 
 				<h3>태그</h3>
 				<input type="text" id="admin_tag_name" name="tag"
-					value="${p.tag}" readonly>
+					value="${p.tag}"  style="width:500px; font-size: 16px; text-align: left" readonly>
 
 				
 				<table class="admin_product">
@@ -142,7 +142,7 @@
 							
 						<td width="60%">
 						<textarea id="admin_product-description"
-								name="flowerInfo" readonly>${p.flowerInfo}</textarea></td>
+								name="flowerInfo" style="font-size: 19px;" readonly>${p.flowerInfo}</textarea></td>
 					</tr>
 				</table>
 				<h3>가격</h3>
@@ -157,7 +157,7 @@
 				<div align="center">
 	                <!-- 수정하기, 삭제하기 버튼은 이 글이 본인이 작성한 글일 경우에만 보여져야 함 -->
 	                <button id="btnDanger" onclick="postFormSubmit(2);">삭제하기</button>
-	                <button id="btnPrimary"   onclick="postFormSubmit(1);">수정하기</button>
+	                <button id="btnPrimary"  onclick="postFormSubmit(1);">수정하기</button>
 	                
 	            </div>
 	            <br><br>

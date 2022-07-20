@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>admin | 리뷰관리</title>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
+<link rel="icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
 <style>
 #btnPrimary {
 	background-color: black;
@@ -18,7 +21,7 @@
 #btnDanger {
 	width: 130px;
 	height: 50px;
-	background-color: #ff2393;
+	background-color: black;
 	color: white;
 	font-weight: 700;
 	border: #ff2393;
@@ -116,11 +119,11 @@
 				<div class="admin_sub_product">
 					<h3>리뷰번호</h3>
 					<input type="text" id="admin_category_name" name="rno"
-						value="${r.reviewNo}" readonly>
+						value="${r.reviewNo}" style="width:500px; font-size: 16px; text-align: left" readonly>
 
 					<h3>리뷰 제목</h3>
 					<input type="text" id="admin_product_name" name="reviewTitle"
-						value="${r.reviewTitle}" readonly>
+						value="${r.reviewTitle}" style="width:500px; font-size: 16px; text-align: left" readonly>
 
 					<%-- <h3>아이디</h3>
 				<input type="text" id="admin_product_name" name="userId" value="${r.userz }"> --%>
@@ -147,7 +150,7 @@
 
 				<div align="center">
 
-					<button id="btnDanger" type="submit">삭제하기</button>
+					<button id="btnDanger" type="submit" style="margin-right: 10px">삭제하기</button>
 				</div>
 				<br>
 				<br>

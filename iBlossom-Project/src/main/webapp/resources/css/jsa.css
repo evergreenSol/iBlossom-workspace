@@ -351,72 +351,96 @@ html, body {
 	overflow: hidden;
 }
 
+/* ------------------------ */
+/* 220720 리뷰작성칸 수정 */
+
 .reviewbb {
-	margin-top: 2px;
-	height: 200px;
+	margin: 0 auto;
+	/*margin-top: 2px;
+	height: 200px;*/
 }
 
-.img{
-	border: 5px solid black;
-	
+.divBox { 
+	width: 1000px; 
+	height: 210px;
+	margin:10px;
 }
+
+.divBox, .divBox1 {
+	display: flex;
+}
+
+.divBox2 { width: 680px; }
+
+.divBox3  {
+  justify-content: space-around;
+  float: right;
+}
+
+.img{ border: 5px solid black; }
 
 #detailContent1 {
 	height: 500px;
 }
 
 .img1 {
-	width: 80px;
+	width: 190px;
+	height: 190px;
 	display: inline-block;
-	margin-left: 20px;
-	margin-top: 10px;
+	margin: 10px;
 	float: left;
+	/*margin-left: 20px;*/
+	/*margin-top: 10px;*/
 }
+
 /*reviewTitle*/
 .text1 {
-
 	font-size: 25px;
-	/* border: 1px solid black;   */
-	width: 800px;
-	text-align: center;
+	margin: 15px;
+	/*width: 800px;
+	text-align: center;*/
 }
 
 /*reviewContent*/
 .text2 {
 	font-size: 15px;
-/* 	 border: 1px solid orange;  */
-	margin:auto;
+	margin: 15px;
+	width: 500px;
+	word-break: break-all;
+	/*margin:auto;
 	width: 900px;
-	text-align: center;
-	
+	text-align: center;*/	
 }
 
 /*userId*/
 .text3 {
 	font-size: 15px;
-	/* border: 1px solid red;  */
-	text-align: right;
-	display: inline-block;
-	margin-left: 700px;
+	height: 20px;
+	margin: 5px;
+	margin-top: 15px;
+	float: right;
+	/* text-align: right;
+	margin-left: 700px;*/
 }
 
 /*createDate*/
 .text4 {
 	font-size: 15px;
-	/*  border: 1px solid green; */
 	text-align: right;
-	margin-left: 400px;
-
-	
+	height: 20px;
+	margin: 5px;
+	/* text-align: right;
+	margin-left: 400px;*/
 }
 
-
+/* ------------------------ */
 
 
 #btn_rv {
 	border: 1px solid gainsboro;
 	background-color: white;
 	padding: 10px;
+	margin-bottom: 25px; /* 220720 추가 */
 }
 
 #btn_rv:hover {
@@ -816,10 +840,13 @@ html, body {
 }
 
 #reviewTable th {
-	background-color: #c5c5c5;
 	width: 50px;
 	height: 40px;
 }
+
+#reviewTable tbody:hover{
+	cursor : pointer;
+} 
 
 #productTable {
 	width: 100%;
@@ -836,10 +863,13 @@ html, body {
 }
 
 #productTable th {
-	background-color: #c5c5c5;
 	width: 50px;
 	height: 40px;
 }
+
+#productTable tbody:hover{
+	cursor : pointer;
+} 
 
 #insertBtn {
 	background-color: rgb(94, 94, 94);
@@ -914,7 +944,6 @@ html, body {
 	width: 200px;
 	height: 200px;
 	object-fit: cover;
-	"
 }
 
 #select_flower {
@@ -938,3 +967,4 @@ html, body {
 .input-button2 {
 	cursor : pointer;
 }
+
