@@ -18,9 +18,11 @@
  /* 페이징바 */
 
  #pagingArea {
-     width: fit-content;
-     margin: auto;
-     margin-top: 180px;
+	width: fit-content;
+    margin: auto;
+    position: absolute;
+    margin-top: 150px;
+    margin-left: 650px;
 }
 
 .page-link {
