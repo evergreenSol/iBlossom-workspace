@@ -188,7 +188,7 @@
 			keywords[8] = "7월";
 			
 		}
-		console.log(keywords);
+		// console.log(keywords);
 		
 		swiper.removeAllSlides();
 		//var resultStr = "<div class='swiper-slide'><img src='" + "resources/uploadFiles/2022071810025028050.jpg'" +"><span class=\"main-slider-text\" id=\"main-slider-Gangneung-text\">상품7</span></div>";
@@ -202,9 +202,9 @@
 			},
 			success : function (result) {
 				
-				console.log(result);
-				console.log(result[0].thumbNail);
-				console.log(result.length)
+				//console.log(result);
+				//console.log(result[0].thumbNail);
+				//console.log(result.length)
 				
 				var resultStr = "";
 				var resultArr=[];
@@ -217,7 +217,7 @@
 					
 				}
 				swiper.appendSlide(resultStr);
-				console.log(resultStr);
+				// console.log(resultStr);
 				
 				//console.log(resultStr);
 				//$("#test").html(resultStr);
@@ -234,8 +234,8 @@
 		// 문제는 조합형의 경우, 맵핑값이 달라서 에러가 날 수 있을 것 같다.
 		$(".swiper-wrapper").on("click", "div", function () {
 			
-			console.log("클릭됨");
-			console.log($(this).children().eq(0).val());
+			// console.log("클릭됨");
+			// console.log($(this).children().eq(0).val());
 			location.href="detailList.pr?pno="+$(this).children().eq(0).val();
 			
 		});

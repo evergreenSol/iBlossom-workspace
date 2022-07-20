@@ -58,7 +58,7 @@
 	           data : {
 	              recipient : $('#pwd-search-email-input').val(),
 	              Id : $("#pwd-search-email-input").val(),
-	              subject : "iBlossom 임시 비밀번호입니다.",
+	              subject : "[iBlossom] 회원 임시 비밀번호입니다.",
 	              body : "임시비밀번호 : [ ",
 	              endBody : " ] 입니다."
 	           },
