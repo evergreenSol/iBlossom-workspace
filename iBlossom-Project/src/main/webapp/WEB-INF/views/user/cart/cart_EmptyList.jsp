@@ -29,7 +29,7 @@
 			    
 				    <!-- 이미지 -->
 	                <div>
-	                    <img src="resources/images/cart_zero_img.png">
+	                    <img src="resources/images/iBlossom-error.jpg">
 	                </div>
 				    
 				    <!-- 멘트 -->  
