@@ -29,7 +29,7 @@
                 
                 var whichquote=Math.floor(Math.random()*(mb.length))
                 document.write(mb[whichquote])
-                </script>
+            </script>
 
         </div>
         
@@ -76,7 +76,6 @@
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
-
     <script>
     var key;
     var regExp;
@@ -88,7 +87,6 @@
     
     $(function () {
 
-    	
     	$("#signUp-loginbutton").click(function () {
     		location.href="loginForm.me";
     	});
@@ -157,7 +155,6 @@
             else {
                alert("이메일을 입력해주세요.");
             }
-            
           
          });
          
@@ -240,8 +237,6 @@
                 }
                 });
 
-
-
        });
        
        $("#customer_pwd").keyup(function () {
@@ -256,7 +251,6 @@
           }
           // console.log(pwdChk)
        });
-       
        
        $("#customer_chkpwd").keyup(function () {
           // regExp = /^[a-zA-Z0-9`~!@#$%^&*+=_-|₩';:₩"/?]{4,16}$/i;
@@ -301,7 +295,7 @@
           }
           
           if(idChk != 1) {
-             alert("아이디는 영문자(소문자), 숫자로 총 6~12글자로 입력해주세요.");
+             alert("아이디는 영문자, 숫자로 총 6~12글자로 입력해주세요.");
           }
           
           if(pwdChk1 != 1) {
@@ -324,14 +318,6 @@
     }
     
     </script>
-    
-    
-
-  
-
-    
-
-
 
 </body>
 </html>

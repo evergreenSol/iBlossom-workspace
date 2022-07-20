@@ -13,22 +13,23 @@ div { box-sizing: border-box; }
     /* 전체 */
     #cartMainOuter {
     	width: 1200px;
-    	height: 2000px;
+        height: 2000px;
     	margin: auto;
     }
      
     /* 왼쪽 섹션 */ 
     .cart-left {
         width: 63%;
-        height: 100%;
+        height: 95%;
         float: left;
         box-sizing: border-box;
+        overflow: auto;
     }
 
     /* 오른쪽 섹션 */
     .cart-right {
         width: 33%;
-        /*height: 100%;*/
+		/*height: 2000px;*/
         float: right;
         box-sizing: border-box;
         
@@ -46,9 +47,9 @@ div { box-sizing: border-box; }
     
     /* 쇼핑백 title */
     #cartMainOuter>#CartTitle {
-    	font-weight:700; 
-    	font-size:31px; 
-    	margin-bottom:15px;
+       font-weight:700; 
+       font-size:31px; 
+       margin-bottom:15px;
     }
 
     /* 전체선택, 선택삭제 div  */
@@ -62,12 +63,12 @@ div { box-sizing: border-box; }
     
     /* 전체선택 label 태그 호버 */
     #checkAllLabel:hover {
-    	cursor: pointer;
+       cursor: pointer;
     }
     
     /* checkbox 스타일 */
     /* 장바구니 체크박스 */
-	input[type="checkbox"] {
+   input[type="checkbox"] {
         -webkit-appearance: none;
         position: relative;
         width: 16px;
@@ -120,9 +121,9 @@ div { box-sizing: border-box; }
     
     /* 선택삭제 버튼 호버시 */
     .choice-delete-btn:hover {
-    	cursor: pointer;
-		font-weight: 600;
-		color: black;
+       cursor: pointer;
+      font-weight: 600;
+      color: black;
     }
     
     /* 장바구니 메뉴바 */
@@ -139,12 +140,12 @@ div { box-sizing: border-box; }
 
     /* 장바구니 메뉴바 두개 항목 비율 */
     .cart-menu1 { 
-	    flex-basis: 38%; 
-	    margin:auto; 
-	    
+       flex-basis: 38%; 
+       margin:auto; 
+       
     }
     .cart-menu2 { 
-    	flex-basis: 12%;
+       flex-basis: 12%;
     }
 
     /* 장바구니 내용 */ 
@@ -153,12 +154,13 @@ div { box-sizing: border-box; }
         justify-content: space-between; 
         height: 400px;
         padding: 5px;
+        margin-bottom: 15px;
     }
     
     /* 세로 정렬 */
     /* 라디오버튼, 이미지 div, x 표시 */
     .cart-content1, .cart-content2, .cart-content5 {
-	     display: flex;
+        display: flex;
          height: 100%;
          flex-direction: column;
          align-items: center;
@@ -168,118 +170,144 @@ div { box-sizing: border-box; }
     
     /* 장바구니 이미지 사이즈 */
     .cart-content2>img {
-    	 width: 300px; 
-    	 height: 300px;
-    	 padding: 25px;
+        width: 290px; 
+        height: 100%;
+        padding: 25px;
+        margin-top: 30px;
     }
     
     /* 세로정렬 flex 제외 */
-    /* 금액 input */	
-	.cart-content4 {
-		display: flex;
+    /* 금액 input */   
+   .cart-content4 {
+      	display: flex;
         height: 100%;
         align-items: center;
-	}
-	
+   }
+   
     /* 이미지 감싸는 div */
     .cart-content2 {
-     	margin-left: -15px;
-     	width: 350px;
+        margin-left: -15px;
+        width: 350px;
     }
 
     /* 장바구니 상세옵션  내용 */
     .cart-content3 {
-    	margin:auto 0;
-    	font-size: 19px;
-    	width: 200px;
-    	margin-left: 20px;
+       margin:auto 0;
+       font-size: 19px;
+       width: 200px;
+       margin-left: 20px;
     }
     
     /* 장바구니 상세옵션 > 꽃 이름 */
     .cartFlowerName {
-    	font-weight: 500;
+       font-weight: 500;
     }
     
     /* 장바구니 상세옵션 > 가격 */
     .basketprice {
-    	text-align: left;
+       text-align: left;
     }
     
     /* 장바구니 상세옵션>가격 */
     .price {
         width: 52px;
-    	text-align: center;
-    	border: none;
-    	font-size: 17px;
-    	background-color: white;
-    	color: black;
+       text-align: center;
+       border: none;
+       font-size: 17px;
+       background-color: white;
+       color: black;
     }
     
     /* 수량 버튼 +, - */
     .basketnum input[type="button"] {
-    	width: 23px;
-    	height: 23px;
-    	background-color: whitesmoke;
-    	border-radius: 3px;
-    	border: none;
+       width: 23px;
+       height: 23px;
+       background-color: whitesmoke;
+       border-radius: 3px;
+       border: none;
     }
 
     /* 수량 버튼 호버시 */
     .basketnum input[type="button"]:hover {
-    	font-weight:bolder;
-    	cursor: pointer;
+       font-weight:bolder;
+       cursor: pointer;
     }
     
     /* 수량 올라가는 input */
     .basketnum input[type="text"] {
-    	text-align: center;
-    	border-radius: 3px;
-    	width: 20px;
-    	height: 20px;
-    	border: 1px solid rgba(170, 170, 170, 0.5);
-    	background-color: white;
-    	color: black;
+       text-align: center;
+       border-radius: 3px;
+       width: 20px;
+       height: 20px;
+       border: 1px solid rgba(170, 170, 170, 0.5);
+       background-color: white;
+       color: black;
     }
  
     /* 수량 버튼 */
     .cart-num-btn { 
-	    background-color: whitesmoke; 
-	    border:0; 
-	    font-weight: 600; 
-	    width:25px; 
-	    height: 25px;
-	    border-radius: 3px;
+       background-color: whitesmoke; 
+       border:0; 
+       font-weight: 600; 
+       width:25px; 
+       height: 25px;
+       border-radius: 3px;
     }
     
     /* 장바구니 가격*수량 합한 금액 */
     .cart-content4>input {
-    	border:none; 
-    	font-size:17px; 
-    	text-align:right; 
-    	background-color: white;
-    	color: black;
-    	width: 80px;
+       border:none; 
+       font-size:17px; 
+       text-align:right; 
+       background-color: white;
+       color: black;
+       width: 80px;
     }
     
     /* 총주문금액 X 마우스 hover */
     .abutton:hover { 
-    	font-weight: 600;
-    	cursor: pointer;
-    	/* color: #ff2393; */ 
+       font-weight: 600;
+       cursor: pointer;
+       /* color: #ff2393; */ 
     }
 
-	/* 총주문금액 X */
-	.abutton {
-		 text-decoration: none;
-		 font-size: 20px;
-	}
+   /* 총주문금액 X */
+   .abutton {
+       text-decoration: none;
+       font-size: 20px;
+   }
+   
+   .cart-content5 {
+      width: 60px;
+      margin-left: -23px;
+   }
+	    
+    /* 장바구니 스크롤바 스타일 */
+	.cart-left::-webkit-scrollbar {
+	    width: 8px;
+	  }
 	
-	.cart-content5 {
-		width: 60px;
-		margin-left: -25px;
-	}
-
+	  .cart-left::-webkit-scrollbar-corner {
+	    background-color: white;
+	    border-radius: 10px;
+	  }
 	
+	  .cart-left::-webkit-scrollbar-thumb {
+	    background-color: lightgrey;
+	    border-radius: 10px;
+	  }
+	
+	 .cart-left::-webkit-scrollbar-thumb:hover {
+	    background-color: gray;
+	  }
+	
+	 .cart-left::-webkit-scrollbar-track {
+	    border-radius: 10px;
+	    box-shadow: inset 0px 0px 5px white;
+	  }
+	  
+	  
+   
     /* ----------------------------------------------------------- */
     /* 사용자 장바구니 페이지 오른쪽 영역 */
 
@@ -293,24 +321,25 @@ div { box-sizing: border-box; }
     
     /* 총 주문 금액 input 타입 */
     .cart-price1>input {
-    	margin-right: -40px;
-    	border: none;
-    	text-align: right;
-    	font-size: 16px;
+       margin-right: -40px;
+       border: none;
+       text-align: right;
+       font-size: 16px;
     }
       
     /* 3. 총 결제 금액  div */
     .total-price {
-    	display: flex; 
+       display: flex; 
         justify-content: space-between;  
         padding: 5px;
         margin: 30px 15px 10px 15px; 
         font-weight: bold; 
     }
     
+    /* 총 결제 금액 옆에 가격 부분 */
     #totalPrice {
-    	float: right;
-    	margin-left: 200px;
+       float: right;
+       margin-left: 200px;
     }
 
     /* 안내사항 네모박스 div */
@@ -322,7 +351,7 @@ div { box-sizing: border-box; }
     
     /* 안내사항 네모박스 div > li */
     .cart-div>li {
-     	margin: 6px;
+        margin: 6px;
     }
     
     /* 결제하기 버튼 */
@@ -335,7 +364,7 @@ div { box-sizing: border-box; }
     }
     
     .cart-btn:hover {
-    	cursor: pointer;
+       cursor: pointer;
     }
 
 
@@ -343,50 +372,50 @@ div { box-sizing: border-box; }
 /*-----------------------------------------------------------------------------------------------*/
 /*-------------------------------------- cart_EmptyList.jsp --------------------------------------*/
 
-	/* 사용자 장바구니 빈 페이지 */
-	
-	/* 전체 */
-	.cartEmptyOuter {
-		width: 1200px; 
-		height: 760px; 
-		margin: auto;
-		margin-top: 53px;
-	}
-	
-	/* 장바구니 타이틀 : 쇼핑백 */
-	.emptyTitle {
-		 font-weight:700; 
-		 font-size:34px; 
-		 margin-bottom:15px; 
-		 float:left;
-	}
-	
-	/* 감싸주는 div */
-	.emptyWrap {
-		padding:210px; 
-		text-align: center;
-	}
-	
-	/* 이미지 */
-	.emptyWrap img {
-		width:50px; 
-		height:50px; 
-		margin-bottom: 15px;
-	}
-	
-	/* 쇼핑하러가기 버튼 */
-	.emptyWrap button {
-		width:320px; 
-		height:50px; 
-		background-color:black; 
-		color:white; 
-		border-radius:3px;
-	}
-	
-	/* 쇼핑하러가기 버튼 hover */
-	.emptyWrap button:hover {
-		cursor: pointer;
-	}
+   /* 사용자 장바구니 빈 페이지 */
+   
+   /* 전체 */
+   .cartEmptyOuter {
+      width: 1200px; 
+      height: 760px; 
+      margin: auto;
+      margin-top: 53px;
+   }
+   
+   /* 장바구니 타이틀 : 쇼핑백 */
+   .emptyTitle {
+       font-weight: 700; 
+       font-size: 34px; 
+       margin-bottom: 15px; 
+       float: left;
+   }
+   
+   /* 감싸주는 div */
+   .emptyWrap {
+      padding: 210px; 
+      text-align: center;
+   }
+   
+   /* 이미지 */
+   .emptyWrap img {
+      width: 50px; 
+      height: 50px; 
+      margin-bottom: 15px;
+   }
+   
+   /* 쇼핑하러가기 버튼 */
+   .emptyWrap button {
+      width: 320px; 
+      height: 50px; 
+      background-color: black; 
+      color: white; 
+      border-radius: 3px;
+   }
+   
+   /* 쇼핑하러가기 버튼 hover */
+   .emptyWrap button:hover {
+      cursor: pointer;
+   }
 
 
 
@@ -396,16 +425,16 @@ div { box-sizing: border-box; }
   /* 사용자 주문 페이지 레이아웃 */    
     /* 전체 배경 색상 */
     #orderMainOuter {
-    	width: 100%;
-    	height: 3000px;
-    	background-color: whitesmoke;
+       width: 100%;
+       height: 3000px;
+       background-color: whitesmoke;
     }
     
     /* 내용 감싸는 전체 레이아웃 */
     #orderMainWrap {
-    	width: 1200px;
-    	height: 1400px;
-    	margin: auto;
+       width: 1200px;
+       height: 1400px;
+       margin: auto;
     }
     
     /* 왼쪽 섹션 */ 
@@ -430,22 +459,22 @@ div { box-sizing: border-box; }
 
 
 
-	/* ----------------------------------------------------------- */
+   /* ----------------------------------------------------------- */
     /* 사용자 주문 페이지 왼쪽 영역 */
     
     /* 주문내역 확인, 주문자 정보, 발신인 이름 펼친 페이지 */
 
     /* 전체 배경 색입히기 */
     .order-outer { 
-    	background-color: whitesmoke;
+       background-color: whitesmoke;
         width : 100%; 
     }
     
     /* 주문/결제 title */
     #orderMainWrap>#MainWrapTitle {
-    	font-weight:700; 
-    	font-size:31px; 
-    	margin-bottom:15px;
+       font-weight:700; 
+       font-size:31px; 
+       margin-bottom:15px;
     }
 
     /* 하얀 네모박스 영역 */
@@ -469,7 +498,7 @@ div { box-sizing: border-box; }
     
     /* 결제수단 클래스에 주소 데이터값 뽑는 용도로 사용 */
     .order-payment {
-    	padding: 10px; 
+       padding: 10px; 
     }
 
     /* 배송지 추가, 카카오페이 버튼 */
@@ -484,8 +513,8 @@ div { box-sizing: border-box; }
     
     /* 위 버튼 마우스 호버시 */
     .address-btn:hover, .kakao-btn:hover {
-    	font-weight: 600;
-    	cursor: pointer;
+       font-weight: 600;
+       cursor: pointer;
     } 
 
     /* 버튼 두개 */
@@ -507,8 +536,8 @@ div { box-sizing: border-box; }
     /* 이전으로 가기 버튼 호버시 */
     .pre-btn:hover { 
         cursor: pointer;
-		font-weight: 600;
-		color: black;  
+      font-weight: 600;
+      color: black;  
     }
     
     /* 결제하기 버튼 */
@@ -521,13 +550,13 @@ div { box-sizing: border-box; }
         border-radius: 3px;  
     }
 
-	/* 수령일 input 태그 */
-	#ReceiveBox>input {
-		padding: 17px; 
+   /* 수령일 input 태그 */
+   #ReceiveBox>input {
+      padding: 17px; 
         width: 160px;
         border-radius: 3px;
         font-size: 15px;   
-	}
+   }
 
     /* ----------------------------------------------------------- */
     /* 주문내역 확인 - 내용 */
@@ -556,8 +585,8 @@ div { box-sizing: border-box; }
     
     /* 주문내역확인 - 상품이미지 */
     .order-check-content>span>img {
-    	width: 250px; 
-    	height: 250px;
+       width: 290px; 
+       height: 100%;
     }
 
 
@@ -587,9 +616,9 @@ div { box-sizing: border-box; }
         
         /* 모달창 화면 정중앙에 띄우기 */
         position: fixed;
- 		top: 50%;
-  		left: 50%;
-  		transform: translate(-50%, -50%);
+       top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     #modal .modal-window {
@@ -670,15 +699,15 @@ div { box-sizing: border-box; }
     
     /* 모달창 안에 우편번호찾기 버튼 */
     .zipcodeBtn {
-    	 border:none; 
-    	 width:146px; 
-    	 height: 50px; 
-    	 font-size: 15px;
+        border:none; 
+        width:146px; 
+        height: 50px; 
+        font-size: 15px;
     }
-	
-	.zipcodeBtn:hover {
-		cursor: pointer;
-	}
+   
+   .zipcodeBtn:hover {
+      cursor: pointer;
+   }
 
 
     /* ----------------------------------------------------------- */
@@ -686,6 +715,7 @@ div { box-sizing: border-box; }
     
     /* 전체 옵션 */
     .order-right-wrap {
+
     	background-color:white;
     	padding: 5px;
     }
@@ -700,7 +730,7 @@ div { box-sizing: border-box; }
     
     /* 총 주문 금액 위에 공간 주기 */
     .order-price>span {
-    	margin-top: 10px;
+       margin-top: 10px;
     }
 
     /* 총 결제 금액 */
@@ -709,7 +739,7 @@ div { box-sizing: border-box; }
         justify-content: space-between;
         padding: 10px;
         font-weight: bold;
-        margin: 25px 15px 1px 15px;
+        margin: 25px 10px 1px 10px;
     }
 
     /* 이용약관 네모박스 */
@@ -730,7 +760,7 @@ div { box-sizing: border-box; }
     
     /* 결제하기 버튼 호버시 */   
     .order-btn:hover {
-    	cursor: pointer;	
+       cursor: pointer;   
     }
     
     /* 누를 슬라이드 헤드 부분 색상 변경 */
@@ -746,138 +776,138 @@ div { box-sizing: border-box; }
     /* 이름, 연락처, 주소, 상세주소 */
       .address-content>#subReceiverUser, .address-content>#subReceiverPhone, 
       .address-content>#address1, .address-content>#address2 { 
-		border:none; 
-		width:450px; 
-		height: 50px;
-		font-size: 18px; 
-	}
-	
-	/* 주소 p 태그 */
-	.address-content>p { font-weight: 600; }
-	
-	/* 우편번호 */
-	.address-content>#zipcode { 
-		border: none; 
-		width: 350px; 
-		height: 50px; 
-		display: inline-block; 
-		border: none; 
-		width: 310px; 
-		height: 40px; 
-		font-size: 18px;
-	}
-	
-	/* 우편번호 찾기 버튼*/
-	.zipcodeBtn {
-		border:none; 
-		width:146px; 
-		height: 50px; 
-		font-size: 15px;
-		border-radius: 3px;
-	}
-	
-	/* 우편번호 찾기 버튼 호버시 */
-	.zipcodeBtn:hover {
-		cursor: pointer;
-		font-weight: 500;
-	}
+      border: none; 
+      width: 450px; 
+      height: 50px;
+      font-size: 18px; 
+   }
+   
+   /* 주소 p 태그 */
+   .address-content>p { font-weight: 600; }
+   
+   /* 우편번호 */
+   .address-content>#zipcode { 
+      border: none; 
+      width: 350px; 
+      height: 50px; 
+      display: inline-block; 
+      border: none; 
+      width: 310px; 
+      height: 40px; 
+      font-size: 18px;
+   }
+   
+   /* 우편번호 찾기 버튼*/
+   .zipcodeBtn {
+      border:none; 
+      width:146px; 
+      height: 50px; 
+      font-size: 15px;
+      border-radius: 3px;
+   }
+   
+   /* 우편번호 찾기 버튼 호버시 */
+   .zipcodeBtn:hover {
+      cursor: pointer;
+      font-weight: 500;
+   }
 
-	/* 저장하기 버튼 */
-	.address-footer>button {
-		border:none;
-		width:465px; 
-		height: 50px; 
-		font-size: 18px;
-		border-radius: 3px;
-	}
-	
-	/* 저장하기 버튼 호버시 */
-	.address-footer>button:hover {
-		cursor: pointer;
-		font-weight: 500;
-	}
-	
-	
-	
-	/* ----------------------------------------------------------- */
-	/* 수령일 css */
-	
-	/*datepicker ui */
-	 .ui-widget-header { border: 0px solid #dddddd; background: #fff; } 
-	
-	 .ui-datepicker-calendar>thead>tr>th { font-size: 14px !important; } 
-	
-	 .ui-datepicker .ui-datepicker-header { position: relative; padding: 10px 0; } 
-	
-	 .ui-state-default,
-	 .ui-widget-content .ui-state-default,
-	 .ui-widget-header .ui-state-default,
-	 .ui-button,
-	 html .ui-button.ui-state-disabled:hover,
-	 html .ui-button.ui-state-disabled:active { border: 0px solid #c5c5c5; background-color: transparent; font-weight: normal; color: #454545; text-align: center; } 
-	
-	 .ui-datepicker .ui-datepicker-title { margin: 0 0em; line-height: 16px; text-align: center; font-size: 14px; padding: 0px; font-weight: bold; } 
-	
-	 .ui-datepicker { display: none; background-color: #fff; border-radius: 4px; margin-top: 10px; margin-left: 0px; margin-right: 0px; padding: 20px; padding-bottom: 10px; width: 300px; box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.1); } 
-	
-	 .ui-widget.ui-widget-content { border: 1px solid #eee; } 
-	
-	.ui-datepicker-prev ui-corner-all { font-family : auto; }
-	
-	 #datepicker:focus>.ui-datepicker { display: block; } 
-	
-	 .ui-datepicker-prev,
-	 .ui-datepicker-next { cursor: pointer; } 
-	
-	 .ui-datepicker-next { float: right; } 
-	
-	 .ui-state-disabled { cursor: auto; color: hsla(0, 0%, 80%, 1); } 
-	
-	 .ui-datepicker-title { text-align: center; padding: 10px; font-weight: 100; font-size: 20px; } 
-	
-	 .ui-datepicker-calendar { width: 100%; } 
-	
-	 .ui-datepicker-calendar>thead>tr>th { padding: 5px; font-size: 20px; font-weight: 400; } 
-	
-	 .ui-datepicker-calendar>tbody>tr>td>a { color: #000; font-size: 12px !important; font-weight: bold !important; text-decoration: none;}
-	
-	 .ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover { cursor: auto; background-color: #fff; } 
-	
-	 .ui-datepicker-calendar>tbody>tr>td { border-radius: 100%; width: 44px; height: 30px; cursor: pointer; padding: 5px; font-weight: 100; text-align: center; font-size: 12px; } 
-	
-	 .ui-datepicker-calendar>tbody>tr>td:hover { background-color: transparent; opacity: 0.6; } 
-	
-	 .ui-state-hover,
-	 .ui-widget-content .ui-state-hover,
-	 .ui-widget-header .ui-state-hover,
-	 .ui-state-focus,
-	 .ui-widget-content .ui-state-focus,
-	 .ui-widget-header .ui-state-focus,
-	 .ui-button:hover,
-	 .ui-button:focus { border: 0px solid #cccccc; background-color: transparent; font-weight: normal; color: #2b2b2b; } 
-	
-	 .ui-widget-header .ui-icon { background-image: url('./btns.png'); } 
-	
-	 .ui-icon-circle-triangle-e { background-position: -20px 0px; background-size: 36px; } 
-	
-	 .ui-icon-circle-triangle-w { background-position: -0px -0px; background-size: 36px; } 
-	
-	 .ui-datepicker-calendar>tbody>tr>td:first-child a { color: red !important; } 
-	
-	 .ui-datepicker-calendar>tbody>tr>td:last-child a { color: #0099ff !important; } 
-	
-	 .ui-datepicker-calendar>thead>tr>th:first-child { color: red !important; } 
-	
-	 .ui-datepicker-calendar>thead>tr>th:last-child { color: #0099ff !important; } 
-	
-	 .ui-state-highlight,
-	 .ui-widget-content .ui-state-highlight,
-	 .ui-widget-header .ui-state-highlight { border: 0px; background: #f1f1f1; border-radius: 50%; padding-top: 10px; padding-bottom: 10px; } 
-	
-	 .inp { padding: 10px 10px; background-color: #f1f1f1; border-radius: 4px; border: 0px; } 
-	
-	 .inp:focus { outline: none; background-color: #eee; }  	
-	   
+   /* 저장하기 버튼 */
+   .address-footer>button {
+      border:none;
+      width:465px; 
+      height: 50px; 
+      font-size: 18px;
+      border-radius: 3px;
+   }
+   
+   /* 저장하기 버튼 호버시 */
+   .address-footer>button:hover {
+      cursor: pointer;
+      font-weight: 500;
+   }
+   
+   
+   
+   /* ----------------------------------------------------------- */
+   /* 수령일 css */
+   
+   /*datepicker ui */
+    .ui-widget-header { border: 0px solid #dddddd; background: #fff; } 
+   
+    .ui-datepicker-calendar>thead>tr>th { font-size: 14px !important; } 
+   
+    .ui-datepicker .ui-datepicker-header { position: relative; padding: 10px 0; } 
+   
+    .ui-state-default,
+    .ui-widget-content .ui-state-default,
+    .ui-widget-header .ui-state-default,
+    .ui-button,
+    html .ui-button.ui-state-disabled:hover,
+    html .ui-button.ui-state-disabled:active { border: 0px solid #c5c5c5; background-color: transparent; font-weight: normal; color: #454545; text-align: center; } 
+   
+    .ui-datepicker .ui-datepicker-title { margin: 0 0em; line-height: 16px; text-align: center; font-size: 14px; padding: 0px; font-weight: bold; } 
+   
+    .ui-datepicker { display: none; background-color: #fff; border-radius: 4px; margin-top: 10px; margin-left: 0px; margin-right: 0px; padding: 20px; padding-bottom: 10px; width: 300px; box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.1); } 
+   
+    .ui-widget.ui-widget-content { border: 1px solid #eee; } 
+   
+   .ui-datepicker-prev ui-corner-all { font-family : auto; }
+   
+    #datepicker:focus>.ui-datepicker { display: block; } 
+   
+    .ui-datepicker-prev,
+    .ui-datepicker-next { cursor: pointer; } 
+   
+    .ui-datepicker-next { float: right; } 
+   
+    .ui-state-disabled { cursor: auto; color: hsla(0, 0%, 80%, 1); } 
+   
+    .ui-datepicker-title { text-align: center; padding: 10px; font-weight: 100; font-size: 20px; } 
+   
+    .ui-datepicker-calendar { width: 100%; } 
+   
+    .ui-datepicker-calendar>thead>tr>th { padding: 5px; font-size: 20px; font-weight: 400; } 
+   
+    .ui-datepicker-calendar>tbody>tr>td>a { color: #000; font-size: 12px !important; font-weight: bold !important; text-decoration: none;}
+   
+    .ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover { cursor: auto; background-color: #fff; } 
+   
+    .ui-datepicker-calendar>tbody>tr>td { border-radius: 100%; width: 44px; height: 30px; cursor: pointer; padding: 5px; font-weight: 100; text-align: center; font-size: 12px; } 
+   
+    .ui-datepicker-calendar>tbody>tr>td:hover { background-color: transparent; opacity: 0.6; } 
+   
+    .ui-state-hover,
+    .ui-widget-content .ui-state-hover,
+    .ui-widget-header .ui-state-hover,
+    .ui-state-focus,
+    .ui-widget-content .ui-state-focus,
+    .ui-widget-header .ui-state-focus,
+    .ui-button:hover,
+    .ui-button:focus { border: 0px solid #cccccc; background-color: transparent; font-weight: normal; color: #2b2b2b; } 
+   
+    .ui-widget-header .ui-icon { background-image: url('./btns.png'); } 
+   
+    .ui-icon-circle-triangle-e { background-position: -20px 0px; background-size: 36px; } 
+   
+    .ui-icon-circle-triangle-w { background-position: -0px -0px; background-size: 36px; } 
+   
+    .ui-datepicker-calendar>tbody>tr>td:first-child a { color: red !important; } 
+   
+    .ui-datepicker-calendar>tbody>tr>td:last-child a { color: #0099ff !important; } 
+   
+    .ui-datepicker-calendar>thead>tr>th:first-child { color: red !important; } 
+   
+    .ui-datepicker-calendar>thead>tr>th:last-child { color: #0099ff !important; } 
+   
+    .ui-state-highlight,
+    .ui-widget-content .ui-state-highlight,
+    .ui-widget-header .ui-state-highlight { border: 0px; background: #f1f1f1; border-radius: 50%; padding-top: 10px; padding-bottom: 10px; } 
+   
+    .inp { padding: 10px 10px; background-color: #f1f1f1; border-radius: 4px; border: 0px; } 
+   
+    .inp:focus { outline: none; background-color: #eee; }     
+      
 
 
 /*-----------------------------------------------------------------------------------------------*/
@@ -951,17 +981,16 @@ div { box-sizing: border-box; }
     }
     
     .complete-two-btn1:hover, .complete-two-btn2:hover {
-    	cursor: pointer;
+       cursor: pointer;
     }
     
     /* 주문/결제 타이틀 */
     .order-title {
-    	width: 1200px; 
-    	margin: auto; 
-    	margin-top: 30px; 
-    	font-weight: 700; 
-    	font-size: 31px; 
-    	margin-bottom: 20px;
+       width: 1200px; 
+       margin: auto; 
+       margin-top: 30px; 
+       font-weight: 700; 
+       font-size: 31px; 
+       margin-bottom: 20px;
     }
-
 

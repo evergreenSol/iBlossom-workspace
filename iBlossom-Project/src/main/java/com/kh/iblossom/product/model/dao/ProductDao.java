@@ -1,6 +1,7 @@
 package com.kh.iblossom.product.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -32,6 +33,14 @@ public class ProductDao {
 	public int insertProduct(SqlSessionTemplate sqlSession, Product p) {
 
 		return sqlSession.insert("productMapper.insertProduct", p);
+	}
+	
+	//count 에러페이지
+	public int countProduct(SqlSessionTemplate sqlSession, Product p) {
+		
+		
+		return sqlSession.selectOne("productMapper.countProduct", p);
+		
 	}
 
 	//상품상세조회(admin)
@@ -91,6 +100,27 @@ public class ProductDao {
 	public ArrayList<Product> selectTagProduct(SqlSessionTemplate sqlSession, Product p) {
 		return (ArrayList)sqlSession.selectList("productMapper.selectTagProduct", p);
 	}
+	
+	// 검색
+		public int selectSearchCountFlower(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+			
+			return sqlSession.selectOne("productMapper.selectSearchCountFlower", map);
+		}
+		
+	// 상품 등록 검색
+		public ArrayList<Product> selectSearchListFlower(SqlSessionTemplate sqlSession, PageInfo pi,
+				HashMap<String, String> map) {
+			
+			int limit = pi.getBoardLimit();
+			int offset = (pi.getCurrentPage() - 1) * limit;
+			
+			RowBounds rowBounds = new RowBounds(offset, limit);
+			
+			return (ArrayList)sqlSession.selectList("productMapper.selectSearchListFlower", map, rowBounds);
+		}
+		
+		
+		
 	
 	
 }

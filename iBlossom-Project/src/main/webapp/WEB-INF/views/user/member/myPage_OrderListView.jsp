@@ -51,6 +51,12 @@
                         </div>
 
                         <table id="mypage-view-order">
+                        <c:if test="${ empty list }">
+                            <tr>
+                                <td height="300" width="900" style="text-align: center; font-size: 20px; font-weight: 600;">최근 주문 / 배송 내역이 존재하지 않습니다.</td>
+                            </tr>
+						</c:if>
+                        
                         <c:forEach var="o" items="${list}">
                         
                             <tr>  
@@ -88,7 +94,7 @@
                                 <th>배송상태</th>
                                 <td></td>
                                 <td>${ o.deliveryStatus }</td>
-                                <c:if test="${ (o.deliveryStatus ne '배송완료') or (o.deliveryStatus ne '배송중') }">
+                                <c:if test="${ (o.deliveryStatus ne '배송완료') and (o.deliveryStatus ne '배송중') }">
                                 	<td style="text-align: right; padding-right: 10px;" width="300">
                                 		<button class="mypage-pay-cancel" >취소하기</button>
                                 		<input type="hidden" value="${o.receiptId}">
@@ -109,6 +115,14 @@
 
 
                         <table id="mypage-view-cancel">
+                        
+                        <c:if test="${ empty cancelList }">
+                            <tr>
+                                <td height="300" width="900" style="text-align: center; font-size: 20px; font-weight: 600;">최근 취소 / 환불 내역이 존재하지 않습니다.</td>
+                            </tr>
+						</c:if>
+                        
+                        
                         <c:forEach var="o" items="${cancelList}">
                             <tr >
                                 <td colspan="2" ><p style="font-size: 18px; font-weight: 600; margin-top: 18px; margin-bottom: 10px;">${ o.orderDate }</p></td>

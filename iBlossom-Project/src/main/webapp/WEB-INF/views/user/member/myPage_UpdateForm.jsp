@@ -41,7 +41,7 @@
                         <form id="update-form" action="update.me" method="post">
                         
 	                        <p class="revise-form-p">이름</p>
-	                        <input type="text" class="mypage-w" name="userName" value="${ loginUser.userName }">
+	                        <input type="text" class="mypage-w" id="name" name="userName" value="${ loginUser.userName }" required>
 	
 	                        <p class="revise-form-p">아이디</p>
 	                        <input type="text" class="mypage-w" name="userId" readonly value="${ loginUser.userId }">
@@ -64,7 +64,7 @@
 	                        <input type="text" class="mypage-w" id="address_kakao" name="address1" value="${ loginUser.address1 }" readonly>
 	
 	                        <p class="revise-form-p">상세주소</p>
-	                        <input type="text" class="mypage-w address_detail" name="address2" id="address_detail" onkeyup="eventKeyup(this.value)" value="${ loginUser.address2 }">
+	                        <input type="text" class="mypage-w address_detail" name="address2" id="address_detail" onkeyup="eventKeyup(this.value)" value="${ loginUser.address2 }" maxlength="12">
 	                        
 	                        <input type="hidden" name="address" id="address" value="${ loginUser.address }">
 	                        <input type="hidden" name="email"  value="${ loginUser.email }">
@@ -120,9 +120,28 @@
         
         function validate() {
         	
+        	var name = document.getElementById("name").value;
         	var phone = document.getElementById("phone").value;
         	var newUserPwd = document.getElementById("newUserPwd").value;
 			console.log(phone);
+			
+			// 이름 검사
+			if(name != "") {
+				
+				regExp = /^[가-힣]{2,6}$/;
+				if(!regExp.test(name)) {
+					
+					alert("유효한 이름의 양식이 아닙니다. 한글로 총 2~6글자로 입력해 주세요.");
+					
+					document.getElementById("name").value = name;
+					document.getElementById("name").focus();
+		
+					return false;
+					
+				}
+				
+			}
+			
 			
 			//핸드폰 검사
 			if(phone != "") {

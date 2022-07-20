@@ -59,8 +59,10 @@
                                 <c:if test="${ empty list }">
                                 	
                                 <tr>
-                                	<td height="300" width="900" colspan="4" id="no-qna">
-                                		회원님께서 남기신 리뷰가 없습니다.
+                                	<input type="hidden" value="0">
+                                	<td height="320" width="900" colspan="4" id="no-qna">
+                                		회원님께서 남기신 리뷰가 없습니다.<br><br>
+                                		[상품 구매하러 가기]
                                 	</td>
                                 </tr>	
                                

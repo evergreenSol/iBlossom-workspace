@@ -1,6 +1,7 @@
 package com.kh.iblossom.product.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.product.model.vo.Product;
@@ -17,6 +18,9 @@ public interface ProductService {
 
 	// 상품 등록하기 서비스
 	int insertProduct(Product p);
+	
+	//에러페이지를 위한 카운트 서비스
+	int countProduct(Product p);
 	
 	//상품 상세 조회 서비스(admin)
 	Product selectProduct(int productNo);
@@ -39,6 +43,11 @@ public interface ProductService {
 	//상품 마켓 전체 조회(꽃병)
 	ArrayList<Product> selectListBase();
 	
+	// 검색용 메소드
+	int selectSearchCountFlower(HashMap<String, String> map);
+	
+	// 구독 회원 검색용 메소드
+	ArrayList<Product> selectSearchListFlower(PageInfo pi, HashMap<String, String> map);
 	// 검색용
 	int selectSearchCount(String keyword);
 	

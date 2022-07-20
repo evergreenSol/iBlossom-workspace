@@ -1,6 +1,7 @@
 package com.kh.iblossom.product.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,11 @@ public class ProductServiceImpl implements ProductService{
    public int insertProduct(Product p) {
       
       return productDao.insertProduct(sqlSession,p);
+   }
+   
+   @Override
+   public int countProduct(Product p) {
+   	return productDao.countProduct(sqlSession,p);
    }
    
    @Override
@@ -73,6 +79,20 @@ public class ProductServiceImpl implements ProductService{
    public ArrayList<Product> selectDetailList() {
       return productDao.selectDetailList(sqlSession);
    }
+   
+	// 검색용 메소드
+	@Override
+	public int selectSearchCountFlower(HashMap<String, String> map) {
+		 
+		return productDao.selectSearchCountFlower(sqlSession, map);
+	}
+	
+	//상품 검색용 메소드
+	@Override
+	public ArrayList<Product> selectSearchListFlower(PageInfo pi, HashMap<String, String> map) {
+
+		return productDao.selectSearchListFlower(sqlSession, pi, map);
+	}
 
 	@Override
 	public int selectSearchCount(String keyword) {
@@ -90,6 +110,8 @@ public class ProductServiceImpl implements ProductService{
 public ArrayList<Product> selectTagProduct(Product p) {
 	return productDao.selectTagProduct(sqlSession, p);
 }
+
+
 
 
 }

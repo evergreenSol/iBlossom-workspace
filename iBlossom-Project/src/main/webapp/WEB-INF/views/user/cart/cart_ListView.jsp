@@ -30,10 +30,10 @@
 	
 	        <!-- 전체선택, 선택삭제 div -->
             <div class="cart-choice">
-                <div><input type="checkbox" id="checkAll" checked style="margin:auto 0;">
+            	
+                <div><input type="checkbox" id="checkAll" checked style="margin:auto 0;" >
                 	<label for="checkAll" id="checkAllLabel">&nbsp;전체선택</label><span></span>
                 </div>
-                
 	            <div>
 	            	<button type="button" id="cartChoiceCheck" class="choice-delete-btn" onclick="location.href=''"></button>
 	            </div>
@@ -76,22 +76,29 @@
 			                         
 			                        <!-- 가격 -->   
 			                        <div class="basketprice">
+
 			                        	<input type="text" id="price${ status.count }" id="resizable1" class="price" onkeyup="javascript:CheckSize();"
 			                        			value="${ list[c].productPrice }" readonly>원
+			                        	<input type="hidden" id="prevPrice${ status.count }" value="${ list[c].productPrice }">
 			                        	
+
 			                        </div><br>
 	
 						            <!-- 장바구니 수량 변경 -->
 						            <div class="basketnum">
 					                    <input type="button" value="-" onclick="count('minus',${ status.count })">
-				                        <input type="text" id="productCount${ status.count }" name="cartList[${c}].productCount" value="${ list[c].productCount }" size="1" readonly>
+
+				                        <input type="text" id="productCount${ status.count }" name="cartList[${c}].productCount"
+				                        	   value="${ list[c].productCount }" size="1" readonly>
+
 				                        <input type="button" value="+" onclick="count('plus',${ status.count })">
 			                        </div>					    
 			                </div>
 	
 			                <!-- 장바구니 상품 금액 -->
 				            <div class="cart-content4">
-						        <input type="text" id="sum${ status.count }" id="resizable2" name="sum" size="2" onkeyup="javascript:CheckSize();" readonly>원&nbsp;
+						        <input type="text" id="sum${ status.count }" id="resizable2" name="sum" size="2" 
+						        	   onkeyup="javascript:CheckSize();" readonly>원&nbsp;
 						               <!-- ${ list[c].productCount * list[c].productPrice }원 -->
 				            </div>
 							
@@ -164,14 +171,14 @@
 	
 	        <!-- 결제하기 버튼 -->
 	        <div>
-	            <button class="cart-btn" type="button" onclick="cartBtn();">결제하기</button>
+	            <button class="cart-btn" type="button">결제하기</button>
 	        </div>
 
 	    </div> <!-- class="cart-right" -->
-	    
+   
     </div> <!-- id="cartMainOuter" -->
     
-    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 
 	<!------------------------------------------------------------------->
 	
@@ -216,9 +223,26 @@
         	if($('input[class=cartCheck]:checked').length==$('.cartCheck').length){         
         		$('#checkAll').prop('checked',true);     
         	} else {        
-        		$('#checkAll').prop('checked',false);     
+        		$('#checkAll').prop('checked',false);   
         } });
-	    
+        
+        $(document).ready(function(){	
+	    	$("#checkAll").on('click',function() {
+	    		if($(this).prop('checked')) {
+	    			var listSize = $('#listSize').val(); // 상품 리스트 사이즈 (상품이 3개면 3개)
+	           		for(var i = 0; i < listSize; i++) { // 상품 리스트를 돌면서
+	           			$('#price'+(i+1)+'').attr("value", $("#prevPrice"+(i+1)+"").val()); // 각 상품 원래 가격	
+	           		}
+	           		
+	           		getSum();
+	    		} else {
+	    			$(".price").attr("value", 0);
+	   				getSum()
+	    		}
+	    	})
+    	});
+        
+        
 	    // 체크박스 1개 선택시 해당 가격 뜨고, 해제시 해당 가격 0원으로 변경
 	    $(document).ready(function(){	
 	    	$(".cartCheck").on('click',function() {
@@ -260,7 +284,6 @@
     		var sumAll = 0;
     		for(var i = 0; i < listSize; i++) { // 상품 리스트를 돌면서
     			var price = $('#price'+(i+1)+'').val(); // 각 상품 가격
-    			console.log(price)
     			var productCount = $('#productCount'+(i+1)+'').val(); // 각 상품 수량
     			$('#sum'+(i+1)+'').attr("value",price*productCount); // sum1, sum2, ... 에 전달
     			
@@ -311,7 +334,8 @@
 		$(window).scroll(function(){
         	var scrollTop = $(document).scrollTop();
 	        if (scrollTop < 180) {
-	        	scrollTop = -40; 
+	        	scrollTop = 20; 
+
 	        }
 	        $(".cart-right").stop();
 	        $(".cart-right").animate( { "top" : scrollTop }
@@ -326,8 +350,7 @@
 		
 		// 장바구니 삭제
 		function cartDelete(cartNo, value){
-
-		    $.ajax({		        
+		    $.ajax({
 		        url : 'cartDelete.ca',
 		        data : { cartNo : cartNo },
 		        success: function(result) {
@@ -337,21 +360,11 @@
 					location.reload();
 		        },
 		        error : function() {
-		        	
 		        }
 		    })
 		};
 		
-		// 결제버튼 눌렀을시 확인/취소 알람창 띄우기
-		function cartBtn() {
-			if (confirm("주문하신 상품을 결제하시겠습니까?") == true){ 
-				   console.log("완료되었습니다.");
-			} else {
-			   // false는 취소버튼을 눌렀을 때, 취소됨
-			   console.log("취소되었습니다");
-			   return false;
-		 	}
-		}
+
 
 	</script>
 

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>iBlossom | Flower Market</title>
+<title>iBlossom | FlowerMarket</title>
 <link href="resources/css/jsa.css" rel="stylesheet">
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
@@ -22,14 +22,19 @@ float : left;
 </style>
 </head>
 <body>
-	<jsp:include page="../../common/header.jsp" />
+
+<div style="margin-bottom:8px;"></div>
+ <!-- 헤더 -->
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
+
 	<!-- 지승아 만들기 -->
-	<div align="center" id="wrap" style="overflow: hidden;">
-		<img src="resources/images/flower1.jpg" height="300px" width="1200px"
-			style="margin-top: 30px; object-fit: cover;">
+	<div align="center" id="wrap" style="overflow: hidden; width:1200px; position:relative; margin:auto;">
+		<img src="resources/images/flower1.jpg" height="400px" width="1200px"
+			style="margin-top: 30px; object-fit: cover;  ">
+		<span style="font-size:50px; font-weight:700; color:white; position:absolute;top: 200px;left: 510px;">MARKET</span>
 	</div>
 	<br>
-	<div align="center">
+	<div align="center" style="margin-top:50px;">
 		<img src="resources/images/logo.png" width="150px"><big><b style="font-size: 27px;"> 플라워마켓</b></big><br>
 		<br> 꽃 가격의 한계를 깼습니다. <br> 누구나 꽃을 부담없이 편하게 즐길 수 있게합니다. <br>
 		<br>
@@ -105,6 +110,9 @@ float : left;
 
             </script>
 	</div>
-	<jsp:include page="../../common/footer.jsp" />
+	
+ <!-- 푸터 -->
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
 </body>
 </html>

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,6 +27,7 @@ import com.kh.iblossom.product.model.service.ProductService;
 import com.kh.iblossom.product.model.service.ReviewService;
 import com.kh.iblossom.product.model.vo.Product;
 import com.kh.iblossom.product.model.vo.Review;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Controller
 public class ReviewController {
@@ -61,7 +63,7 @@ public class ReviewController {
 		return "admin/product/review_ListView";
 	}
 
-	//리뷰 작성하기
+	//리뷰 작성하기(꽃다발 / 꽃대)
 	@RequestMapping("insert.re")
 	public String insertReview(Review r, MultipartFile upReviewPhoto, HttpSession session, Model model) {
 
@@ -100,6 +102,7 @@ public class ReviewController {
 
 			if(result > 0) {
 
+				
 				session.setAttribute("alertMsg", "성공적으로  리뷰이 등록되었습니다.");
 
 				return "redirect:detailList.pr?pno=" + r.getProductNo();
@@ -116,6 +119,64 @@ public class ReviewController {
 		return "common/error";
 
 	}
+	
+	
+	//리뷰 작성하기(조합형)
+		@RequestMapping("coInsert.re")
+		public String coInsertReview(Review r, MultipartFile upReviewPhoto, HttpSession session, Model model) {
+
+
+			ArrayList<Order> list = orderService.selectComOrderReview(r);
+			System.out.println(list);
+
+
+
+			/*
+			 * Product p = productService.selectProduct(pno);
+			 * 
+			 * System.out.println(p);
+			 */
+
+
+
+			System.out.println(r); System.out.println(list);
+			model.addAttribute("r",r);
+
+			if(list.isEmpty()) {
+
+
+				// model.addAttribute("errorMsg","해당 상품을 구매 후 작성해주세요");
+				session.setAttribute("alertMsg", "해당 상품을 구매 후 작성해주세요.");
+
+
+			} else {
+
+				if(!upReviewPhoto.getOriginalFilename().equals("")) { String changeName =
+						saveFile(upReviewPhoto,session);
+
+				r.setReviewPhoto("resources/uploadFiles/" + changeName); }
+
+				int result = reviewService.insertReview(r);
+
+				if(result > 0) {
+
+					
+					session.setAttribute("alertMsg", "성공적으로  리뷰이 등록되었습니다.");
+
+					return "redirect:combinationDetailList.pr";
+			
+
+				}else {
+
+					model.addAttribute("errorMsg","리뷰 등록 실패"); 
+				}
+
+				return "common/error"; 
+			}
+
+			return "common/error";
+
+		}
 
 
 
@@ -131,6 +192,18 @@ public class ReviewController {
 	 * 
 	 * //해당 상품의 상세조회 요청 Review r = reviewService.selectReview(rno); }
 	 */
+
+	// 마이페이지 리뷰 수정
+	@RequestMapping("reviewUpdate.pr")
+	public String reviewUpdateForm(int reviewNo, Model model) {
+		
+		//해당 리뷰의 상세요청
+		Review r = reviewService.selectReview(reviewNo);
+		
+		 model.addAttribute("r", r);
+		 
+		  return "user/member/myPage_ReviewDetailView";
+	}
 
 	//리뷰삭제
 	@RequestMapping("delete.re")
@@ -153,8 +226,6 @@ public class ReviewController {
 			return "common/errorPage";
 		}
 	}
-
-
 
 
 
@@ -196,7 +267,7 @@ public class ReviewController {
 	}
 
 
-	// 리뷰 띄우기
+	// 리뷰 띄우기(꽃대 / 꽃다발)
 	@ResponseBody
 	@RequestMapping(value="reviewList.re",produces = "application/json; charset=UTF-8")
 	public String ajaxReviewList(int productNo) {
@@ -205,6 +276,8 @@ public class ReviewController {
 		System.out.println("Controller:" + list);
 		return new Gson().toJson(list);
 	}
+	
+	//리
 
 	
 	// admin 리뷰 상세보기
@@ -220,4 +293,36 @@ public class ReviewController {
 
 		return mv;
 	}
+	
+	// 리뷰 검색 (관리자)
+		@RequestMapping("search.re")
+		public String subMemberSearch(@RequestParam(value="cpage", defaultValue="1") int currentPage, String condition, String keyword, Model model) {
+			
+			HashMap<String, String> map = new HashMap<>();
+			map.put("condition", condition);
+			map.put("keyword", keyword);
+			
+			// 페이징 처리를 위한 pi 객체 만들기
+			// => Pagination 클래스에 getPageInfo(listCount, currentPage, pageLimit, boardLimit) 메소드를 호출
+			int searchCount = reviewService.selectSearchCount(map); // 현재 검색결과에 맞는 게시글의 총 갯수
+			
+			int pageLimit = 10;
+			int boardLimit = 5;
+			
+			PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, pageLimit, boardLimit);
+			
+			// 조회 요청
+			ArrayList<Review> list = reviewService.selectSearchList(pi, map);
+
+			model.addAttribute("pi", pi);
+			model.addAttribute("list", list);
+			
+			// 이슈 : 검색이 진행된 후 검색 조건과 검색어가 유지되지 않음
+			//		 페이징바를 눌러서 이동시 list.bo 로 요청이 들어가는 이슈
+			model.addAttribute("condition", condition);
+			model.addAttribute("keyword", keyword);
+			
+			return "admin/product/review_ListView";
+		}
+	
 }

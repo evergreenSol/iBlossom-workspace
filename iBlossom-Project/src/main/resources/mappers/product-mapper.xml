@@ -30,7 +30,7 @@
 		FROM
 		PRODUCT
 		 WHERE STATUS = 'Y'
-		ORDER BY ENROLL_DATE DESC, PRODUCT_NO DESC
+		ORDER BY  PRODUCT_NO DESC,ENROLL_DATE DESC
 	</select>
 
 	<!-- 꽃다발 리스트 -->
@@ -41,7 +41,7 @@
 		PRODUCT
 		 WHERE STATUS = 'Y'
 		 AND CATEGORY_NAME ='꽃다발'
-		ORDER BY ENROLL_DATE DESC, PRODUCT_NO DESC
+		ORDER BY  PRODUCT_NO DESC,ENROLL_DATE DESC
 	</select>
 	
 	<!-- 꽃병 리스트 -->
@@ -52,7 +52,7 @@
 		PRODUCT
 		 WHERE STATUS = 'Y'
 		 AND CATEGORY_NAME ='꽃병'
-		ORDER BY ENROLL_DATE DESC, PRODUCT_NO DESC
+		ORDER BY  PRODUCT_NO DESC,ENROLL_DATE DESC
 	</select>
 
 
@@ -76,7 +76,15 @@
 		, #{contentPhoto}
 		, #{flowerInfo}
 		, #{tag})
+	
 	</insert>
+	
+	<!-- 상품 카운트 --> 
+	<select id="countProduct" parameterType="Product" resultType="_int">
+		SELECT COUNT(*)
+		FROM PRODUCT
+		WHERE FLOWER_NAME = #{flowerName}
+	</select>
 
 	<!-- 상품 상세보기(admin)-->
 	<select id="selectProduct" parameterType="_int"
@@ -122,12 +130,28 @@
 		WHERE CATEGORY_NAME = '조합형'
 	</select>
 	
-
+	 <!-- 검색 -->
+  	<select id="selectSearchCountFlower" parameterType="hashmap" resultType="_int">
+		SELECT COUNT(*)
+		FROM PRODUCT P 
+        WHERE  ${condition} LIKE '%' || #{keyword} || '%'
+        ORDER BY  PRODUCT_NO DESC,ENROLL_DATE DESC
+	</select>
+	
+	<!-- 상품 조회 -->
+	<select id="selectSearchListFlower" parameterType="hashmap" resultMap="productResultSet">
+		SELECT PRODUCT_NO, CATEGORY_NAME, FLOWER_NAME,PRICE, TO_CHAR(ENROLL_DATE,'YYYY-MM-DD') "ENROLL_DATE", TAG, STATUS 
+			FROM PRODUCT
+        WHERE ${condition} LIKE '%' || #{keyword} || '%'
+        ORDER BY  PRODUCT_NO DESC,ENROLL_DATE DESC
+	</select>
+	
 	<!-- 검색 -->
 	<select id="selectSearchCount" parameterType="String" resultType="_int">
 		SELECT COUNT(*)
 		FROM PRODUCT
         WHERE TAG LIKE '%' || #{keyword} || '%'
+        ORDER BY  PRODUCT_NO DESC,ENROLL_DATE DESC
 	</select>
 	
 	<select id="selectSearchList" parameterType="String" resultMap="productResultSet">

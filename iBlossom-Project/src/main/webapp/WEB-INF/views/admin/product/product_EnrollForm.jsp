@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>admin | 상품관리</title>
 <link href="resources/css/jsa.css" rel="stylesheet">
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/images/iBlossom-con4.ico" type="image/x-icon">
@@ -21,8 +21,8 @@
 
 			<!-- 로고 -->
 			<div id="admin-logo-div">
-				<a href="" id="admin-logo-a"> <img
-					src="resources/images/iBlossom_logo_black.png">
+				<a href="${ pageContext.request.contextPath }/" id="admin-logo-a">
+					<img src="resources/images/iBlossom_logo_black.png">
 				</a>
 			</div>
 
@@ -32,7 +32,7 @@
 				<span id="admin-login-text">admin</span>
 
 				<!-- 로그인 아이콘  -->
-				<a href="" id="admin-login-a"> <svg
+				<a href="logout.me" id="admin-login-a"> <svg
 						xmlns="http://www.w3.org/2000/svg" class="bi bi-person-fill"
 						viewBox="0 0 16 16">
                         <path
@@ -52,27 +52,32 @@
 
 				<!-- 메뉴 -->
 				<ul id="admin-navi">
-					<li><a href="" class="admin-navi-menu">회원관리</a></li>
-					<li><a href="" class="admin-navi-menu">주문정보관리</a>
+					<li><a href="list.me" class="admin-navi-menu">회원관리</a></li>
+					<li><a href="adminList.or" class="admin-navi-menu">주문정보관리</a>
 						<ul class="admin-navi-ul">
-							<li><a href="">전체주문내역</a></li>
-							<li><a href="">개별주문내역</a></li>
+							<li><a href="adminList.or">전체주문내역</a></li>
+							<li><a href="adminDetail.or">개별주문내역</a></li>
 						</ul></li>
-					<li><a href="" class="admin-navi-menu">정기구독관리</a>
+					<li><a href="subMemberListView.su" class="admin-navi-menu">정기구독관리</a>
 						<ul class="admin-navi-ul">
-							<li><a href="">구독회원관리</a></li>
-							<li><a href="">구독상품관리</a></li>
+							<li><a href="subMemberListView.su">구독회원관리</a></li>
+							<li><a href="listView.sp">구독상품관리</a></li>
 						</ul></li>
-					<li><a href="list.pr" class="admin-navi-menu"
-						style="font-weight: 700;">상품관리</a></li>
-					<li><a href="" class="admin-navi-menu">리뷰관리</a></li>
-					<li><a href="" class="admin-navi-menu">클래스관리</a></li>
-					<li><a href="" class="admin-navi-menu">고객센터관리</a>
+					<li><a href="list.pr" class="admin-navi-menu" style="font-weight: 700;"
+						>상품관리</a></li>
+					<li><a href="list.re" class="admin-navi-menu"  >리뷰관리</a></li>
+					<li><a href="classList.ad " class="admin-navi-menu">클래스관리</a>
 						<ul class="admin-navi-ul">
-							<li><a href="">1:1 문의</a></li>
-							<li><a href="">FAQ</a></li>
+							<li><a href="classAddForm.ad">클래스 추가</a></li>
+							<li><a href="classList.ad">클래스 예약내역</a></li>
 						</ul></li>
-					<li><a href="" class="admin-navi-menu" id="admin-navi-chat">채팅관리</a></li>
+					<li><a href="qnaList.ad" class="admin-navi-menu">고객센터관리</a>
+						<ul class="admin-navi-ul">
+							<li><a href="qnaList.ad">1:1 문의</a></li>
+							<li><a href="noticeList.ad">FAQ</a></li>
+						</ul></li>
+					<li><a href="https://dashboard.tawk.to/#/monitoring"
+						target="_blank" class="admin-navi-menu" id="admin-navi-chat">채팅관리</a></li>
 				</ul>
 
 			</div>
@@ -112,12 +117,12 @@
 						<tr>
 							<td><label for="thumbnail" style="font-size:20px; font-weight:700px">썸네일</label>
 							
-							<input type="file" name="upThumbNail" id="admin_product-img" required style="margin-top:15px"></td>
+							<input type="file" name="upThumbNail" class="admin_product-img" required style="margin-top:15px"></td>
 
 							<td><label for="contentPhoto"
 									style="font-size:20px; font-weight:700px">상세사진</label>
 									<br>
-									 <input type="file" name="upContentPhoto" id="admin_product-img" style="margin-top:15px"></td>
+									 <input type="file" name="upContentPhoto" class="admin_product-img" style="margin-top:15px"></td>
 								
 							<td width="60%"><textarea id="admin_product-description"
 									name="flowerInfo"></textarea></td>

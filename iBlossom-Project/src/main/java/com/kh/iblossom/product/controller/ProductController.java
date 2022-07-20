@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
@@ -24,6 +25,7 @@ import com.kh.iblossom.common.model.vo.PageInfo;
 import com.kh.iblossom.common.template.Pagination;
 import com.kh.iblossom.product.model.service.ProductService;
 import com.kh.iblossom.product.model.vo.Product;
+import com.kh.iblossom.subscribe.model.vo.Subscribe;
 
 @Controller
 public class ProductController {
@@ -68,16 +70,16 @@ public class ProductController {
 		//		// 게시판 리스트 화면 포워딩
 		return "user/product/product_ListView";
 	}
-	
+
 	//꽃마켓 main(꽃병)
 	@RequestMapping(value="baseList.pr")
 	public String selectListBase(Model model) {
 
 		ArrayList<Product> list = productService.selectListBase();
-		
+
 		model.addAttribute("baseList", list);
 		return "user/product/product_ListView";
-		
+
 	}
 
 	/*
@@ -107,35 +109,51 @@ public class ProductController {
 	}
 
 	@RequestMapping("insert.pr")
-	public String insertProduct(Product p, MultipartFile upThumbNail,MultipartFile upContentPhoto ,HttpSession session, Model model) {
+	public String insertProduct(Product p, MultipartFile upThumbNail,MultipartFile upContentPhoto ,HttpSession session) {
 
-		//		System.out.println(p);
+		//System.out.println(p);
 		//		System.out.println(contentPhoto);
-		//		
+		//System.out.println(upContentPhoto);
+
+		//System.out.println("insert1 +: " + p.getContentPhoto());
+
 		if(!upThumbNail.getOriginalFilename().equals("")) {
 
 			String changeName = saveFile(upThumbNail, session);
-			String changeName1 = saveFile(upContentPhoto, session);
-
 			p.setThumbNail("resources/uploadFiles/" + changeName);
-			p.setContentPhoto("resources/uploadFiles/" + changeName1);
-		}
 
+			//System.out.println("insert2 +: " + p.getContentPhoto());
+
+		}
 		if(!upContentPhoto.getOriginalFilename().equals("")) {
 
+			String changeName1 = saveFile(upContentPhoto, session);
+			p.setContentPhoto("resources/uploadFiles/" + changeName1);
 		}
-		// : 상품명, 카테고리명, 가격, 수량(0),썸네일, 상품상세사진, 꽃상세내용, 태그
-		int result = productService.insertProduct(p);
+		System.out.println(p.getFlowerName());
+		int cnt =productService.countProduct(p);
+		System.out.println(cnt);
+		if(cnt>0) {
 
-		if (result > 0) {
+			session.setAttribute("alertMsg", " 상품 등록이 실패되었습니다.");
 
-			session.setAttribute("alertMsg", "성공적으로 상품이 등록되었습니다.");
 
 			return "redirect:list.pr";
-		} else {// 실패 => 에러페이지 포워딩
-			model.addAttribute("errorMsg", "게시글 등록 실패");
+		}else {
+			// : 상품명, 카테고리명, 가격, 수량(0),썸네일, 상품상세사진, 꽃상세내용, 태그
+			int result = productService.insertProduct(p);
+
+
+
+			if (result > 0) {
+
+				session.setAttribute("alertMsg", "성공적으로 상품이 등록되었습니다.");
+
+				return "redirect:list.pr";
+
+			} 
+			return "redirect:list.pr";
 		}
-		return "common/errorPage";
 	}
 
 	//상품 상세보기(admin)
@@ -170,16 +188,18 @@ public class ProductController {
 	// 조합형
 	@RequestMapping("combinationDetailList.pr") 
 	public String selectDetailList(Model model) {
-		  
+
 		ArrayList<Product> list = productService.selectDetailList();
-		
+
+
 		model.addAttribute("list",list);
-		
+
 		System.out.println(list);
-		
+
 		return "user/product/combination_DetailView";
-	  
+
 	}
+	
 
 	// 상품관리 (상품 삭제) -admin
 	@RequestMapping("delete.pr")
@@ -220,6 +240,7 @@ public class ProductController {
 
 		//Model에 데이터 담기
 		model.addAttribute("p",p);
+		System.out.println(p);
 
 		return "admin/product/product_UpdateForm";
 
@@ -231,33 +252,55 @@ public class ProductController {
 
 		// 넘어온 첨부파일이 없을 경우 : filename이 속성값이 빈 문자열
 		// 넘어온 첨부파일이 있을 경우 : filename 속성값에 원본파일명이 들어있음
-		
-		if(!reThumbNail.getOriginalFilename().equals("") && !reContentPhoto.getOriginalFilename().equals("")) { //새로운 첨부파일이 있을경우
-			
-			// 새롭게 첨부된 파일 O, 기존 첨부파일 O
-			if(p.getThumbNail() != null && p.getContentPhoto() != null ) { //기존의 썸네일, 기존의 상세페이지
+
+		System.out.println(p);
+
+		//넘어온 썸네일이 있을 경우
+		if(!reThumbNail.getOriginalFilename().equals("")) {
+			// 썸네일
+			// 기존의 첨부파일 O / 새로운 첨부파일 O
+			//기존의 썸네일이 있을 경우
+			if(!p.getThumbNail().equals("")) { 
+
+
+				// 기존 첨부파일을 서버로부터 삭제 
 				String savePath = session.getServletContext().getRealPath(p.getThumbNail());
-				String savePath1 = session.getServletContext().getRealPath(p.getContentPhoto());
 				new File(savePath).delete();
-				new File(savePath1).delete();
+
+				// 새로운 썸네일로 바꾸고 싶을 경우
+				// 이 시점에서 서버에 파일 업로드 가능
+				String changeName = saveFile(reThumbNail,session);
+
+				// p에 새로운 넘어온 썸네일 첨부파일
+				p.setThumbNail("resources/uploadFiles/" + changeName);
 			}
-			
-			//이 시점에서 서버에 파일 업로드 가능
-			String changeName = saveFile(reThumbNail, session);
-			String changeName1 = saveFile(reContentPhoto, session);
-			
-			// p 에 새로 넘어온 첨부파일에 대한 원본명, 수정명을 필드값으로 수정
-			p.setThumbNail(reThumbNail.getOriginalFilename());
-			p.setContentPhoto(reContentPhoto.getOriginalFilename());
-			
-
-			p.setThumbNail("resources/uploadFiles/" + changeName);
-			p.setContentPhoto("resources/uploadFiles/" + changeName1);
 		}
-		
-		
-		int result = productService.updateProduct(p);
 
+		// 상세사진
+		//넘어온 상세사진이 있을 경우
+		if(!reContentPhoto.getOriginalFilename().equals("")) {
+			//기존의 상세사진 O / 새로운 상세사진 O
+			if(!p.getContentPhoto().equals("")) { //기존의 상세사진이 있을 경우
+				// 기존 첨부파일을 서버로부터 삭제 
+				String savePath = session.getServletContext().getRealPath(p.getContentPhoto());
+				System.out.println(savePath);
+				new File(savePath).delete();
+				System.out.println(savePath);
+				//새로운 상세사진으로 바꾸고 싶을 경우
+				String changeName1 = saveFile(reContentPhoto,session);
+
+				//p에 새로운 넘어온 상세사진 첨부파일
+				p.setContentPhoto("resources/uploadFiles/" + changeName1);
+
+			}else if(p.getContentPhoto() == null) {
+				//기존의 첨부파일 X 새로운 첨부파일 O
+				String changeName1 = saveFile(reContentPhoto,session);
+				System.out.println(changeName1);
+				p.setContentPhoto("resources/uploadFiles/" + changeName1);
+			}
+		}
+		int result = productService.updateProduct(p);
+		System.out.println("피 :" +p);
 		if(result > 0) { // 성공
 
 			session.setAttribute("alertMsg", "성공적으로 상품이 수정되었습니다.");
@@ -280,7 +323,7 @@ public class ProductController {
 	 * 
 	 * return "admin/product/review_ListView"; }
 	 */
-	
+
 	/*
 	 * // 조합형
 	 * 
@@ -297,51 +340,81 @@ public class ProductController {
 	 * 
 	 * return "product/admin_product_ListView"; }
 	 */
-	
-	
+
+	// 상품 검색 (관리자)
+	@RequestMapping("search.pr")
+	public String subMemberSearch(@RequestParam(value="cpage", defaultValue="1") int currentPage, String condition, String keyword, Model model) {
+
+		HashMap<String, String> map = new HashMap<>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+
+		// 페이징 처리를 위한 pi 객체 만들기
+		// => Pagination 클래스에 getPageInfo(listCount, currentPage, pageLimit, boardLimit) 메소드를 호출
+		int searchCount = productService.selectSearchCountFlower(map); // 현재 검색결과에 맞는 게시글의 총 갯수
+
+		int pageLimit = 10;
+		int boardLimit = 5;
+
+		PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, pageLimit, boardLimit);
+
+		// 조회 요청
+		ArrayList<Product> list = productService.selectSearchListFlower(pi, map);
+
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+
+		// 이슈 : 검색이 진행된 후 검색 조건과 검색어가 유지되지 않음
+		//		 페이징바를 눌러서 이동시 list.bo 로 요청이 들어가는 이슈
+		model.addAttribute("condition", condition);
+		model.addAttribute("keyword", keyword);
+
+		return "admin/product/admin_product_ListView";
+	}
+
 	// 이달의 꽃
 	@ResponseBody
 	@RequestMapping(value="flowerOfTheMonth.pr", produces="application/json; charset=UTF-8")
 	public String selectTagProduct(@RequestParam(value="keywords[]") ArrayList<String> keywords, HttpSession session) {
-		
+
 		System.out.println(keywords);
-		
+
 		ArrayList<String> list = keywords;
-		
+
 		ArrayList<Product> result = new ArrayList<>();
-		
-		
+
+
 		ArrayList<Product> resultP = new ArrayList<>();
-		
+
 		for(int i = 0; i < keywords.size(); i++) {
 			System.out.println(list.get(i));
-			
+
 			Product p = new Product();
-			
+
 			p.setTag(list.get(i));
-			
+
 			resultP = productService.selectTagProduct(p);
-			
+
 			result.addAll(resultP);
-			
+
 		}
-		
+
 		System.out.println(result);
-		
+
 		result.removeAll(Arrays.asList("", null));
-		
+
 		ArrayList<Product> selectList = (ArrayList<Product>) result.stream().distinct().collect(Collectors.toList());
-		
+
 		System.out.println(selectList);
-		
+
 		// session.setAttribute("selectList", selectList);
-		
+
 		return new Gson().toJson(selectList);
-		
+
 	}
-	
-	
-	
+
+
+
 
 	public String saveFile(MultipartFile thumNail, HttpSession session) {
 
@@ -378,6 +451,9 @@ public class ProductController {
 
 		return changeName;
 	}
+
+	// 에러알람을 위한 count메소드
+
 
 
 }

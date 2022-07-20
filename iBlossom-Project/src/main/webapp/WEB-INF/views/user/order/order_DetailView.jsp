@@ -101,15 +101,11 @@
                         <!-- 타이틀 -->
                         <div class="order-check">
                             <button id="CheckBtn">
-                                <p>주문내역 확인
-                                    <!-- <span>&nbsp;(2)</span> -->
-                                </p>
-                                <p><span>∨&nbsp;&nbsp;</span></p>
+                                <p>주문내역 확인</p>
+                                <p><span>∨ &nbsp;</span></p>
                             </button>
 
-                        </div>
-
-                        <hr>
+                        </div><hr>
 
                         <!-- 내용 -->
                         <div id="CheckBox" class="order-check-contentbox">
@@ -170,20 +166,18 @@
                         <!-- 타이틀 -->
                         <div class="order-orderer">
                             <button id="OrdererBtn">
-
                                 <p>주문자 정보</p>
                                 <!-- 입력내용 보여지는 태그-->
                                 <p>
                                     <c:choose>
 										<c:when test="${ (empty loginUser.phone) }">
-											<span>${ loginUser.userName },&nbsp; xxx-xxxx-xxxx</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
+											<span><span>${ loginUser.userName }, &nbsp; 000-0000-0000&nbsp;&nbsp;</span> ∨ &nbsp;</span>
 										</c:when>
 										<c:otherwise>
-											<span>${ loginUser.userName } &nbsp;&nbsp; ${ loginUser.phone }</span>&nbsp;&nbsp;&nbsp;∨&nbsp;
+											<span><span>${ loginUser.userName }, &nbsp; ${ loginUser.phone }&nbsp;&nbsp;</span> ∨ &nbsp;</span>
 										</c:otherwise>
 									</c:choose>
                                 </p>
-
                             </button>
                         </div>
 
@@ -216,7 +210,7 @@
                     <div>
                         <div class="order-sender">
                             <button id="SenderBtn">
-                                <p>발신인 이름</p><p><span>∨</span></p>
+                                <p>발신인 이름</p><p><span>∨ &nbsp;</span></p>
                             </button>
                         </div>
 
@@ -452,21 +446,24 @@
             </div>
             
             <!-- follow quick menu -->
-            <script>
-            
-	             $(window).scroll(function(){
-	                var scrollTop = $(document).scrollTop();
-	                if (scrollTop < 180) {
-	                	scrollTop = -30; 
-	                }
-	                
-	                $(".order-right").stop();
-	                $(".order-right").animate( { "top" : scrollTop }
-	                );  
-	             });
+            <script>  
        
+             $(window).scroll(function(){
+                
+                var scrollTop = $(document).scrollTop();
+                
+                if (scrollTop < 180) {
+                	scrollTop = -30; 
+                }
+                
+                $(".order-right").stop();
+                $(".order-right").animate( { "top" : scrollTop }
+                );
+                
+             });
             </script>
             
+            <!-- 상품 결제용 필요 변수들 미리 세팅 -->
             <input type="hidden" name="userNo" id="userNo" value="${ loginUser.userNo }">
             <input type="hidden" id="userName" value="${ loginUser.userName }">
             <input type="hidden" id="email" value="${ loginUser.email }">

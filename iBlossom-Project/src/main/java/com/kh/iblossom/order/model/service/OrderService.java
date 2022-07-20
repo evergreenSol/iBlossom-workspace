@@ -15,8 +15,8 @@ public interface OrderService {
 	// 리스트조회, 페이징처리
 	int selectOrderListCount();
 
-	// 주문내역 리스트 조회
-	ArrayList<Order> selectOrderList(PageInfo pi);
+	// *이슈) 페이징처리 (메소드이름은 관리자 - 전체주문내역 )
+	ArrayList<Order> adminSelectList(PageInfo pi);
 
 	// 결제 후 주문 테이블
 	int insertOrder(Order o);
@@ -50,10 +50,24 @@ public interface OrderService {
 	int updateDeliveryStatus();
 	
 	//승아
-	//리뷰
+	//리뷰(꽃다발/ 꽃대)
 	ArrayList<Order> selectOrderReview(Review r);
 
-	// 관리자 - 전체주문내역 조회용 메소드
-	ArrayList<Order> adminSelectList(int userNo);
 	
+	// ---------------------------------------------------
+	
+	
+	// 관리자 - 전체주문내역 조회용 메소드 
+	// ArrayList<Order> adminSelectList();
+	
+	// 관리자 - 개별주문내역 조회용 메소드 (상세보기)
+	ArrayList<DetailOrder> adminSelectDetail(int orderNo);
+
+	// 관리자 - 개별주문내역 조회용 메소드 (주문한개)
+	Order selectOneOrder(int orderNo);
+	
+	
+	//승아
+	//리뷰(조합형)
+	ArrayList<Order> selectComOrderReview(Review r);
 }
