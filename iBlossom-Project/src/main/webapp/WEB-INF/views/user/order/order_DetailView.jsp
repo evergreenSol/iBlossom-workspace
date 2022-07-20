@@ -394,8 +394,6 @@
 
             <!-- 사용자 주문 페이지 오른쪽 영역 -->
 
-            <br><br>
-
             <div class="order-right-wrap">
 
                 <!-- 총 주문 금액 -->
@@ -453,7 +451,7 @@
 			    	var scrollTop = $(document).scrollTop();
 			    	
 				    if (scrollTop < 180) {
-				     scrollTop = -30; 
+				     scrollTop = -20; 
 				    }
 				    
 				    $(".order-right").stop();

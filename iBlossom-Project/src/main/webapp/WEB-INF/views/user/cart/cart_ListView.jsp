@@ -178,6 +178,7 @@
    
     </div> <!-- id="cartMainOuter" -->
     
+    <br>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 
 	<!------------------------------------------------------------------->
@@ -185,7 +186,6 @@
 	<script>
 	
 		<!-- follow quick menu -->
-
 		// 스크롤 이벤트가 발생했을시
 	    $(window).scroll(function(){
 	    	
@@ -194,64 +194,14 @@
 	    	/*var scrollTop = $(window).scrollTop();*/
 	    	
 		    if (scrollTop < 180) {
-		     scrollTop = -30; 
+		     	scrollTop = -30; 
 		    }
 		    
 		    $(".cart-right").stop();
-		    $(".cart-right").animate( { "top" : scrollTop }
-		    );
+		    $(".cart-right").animate( { "top" : scrollTop } );
 		    
 	    });
-
 		
-		/*시도3
-			$(document).ready(function(){
-				var $quickMenu = $('.cart-right'); // order-right 변수
-			
-			$(window).scroll(function(){
-	        	
-				var scrollValue = $(document).scrollTop(); // 스크롤 위치 변수 선언
-				
-				var centerPosition = ( $(window).height() - $quickMenu.height() ) / 2 + (window).scrollTop();
-				
-				
-		        if (scrollValue < 100) {
-		        	$quickMenu.stop().animate({ "top" : 100 + 'px '}, 1000); 
-		        }
-		        else if (scrollValue > 100) {
-		        	$quickMenu.stop().animate({ "top" : centerPosition + 'px' }, 1000); 
-		        }
-		       
-	     	});
-		});
-		*/
-		
- 		/*
- 		시도2
- 		$(document).ready(function() { 	// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.	
- 			var floatPosition = parseInt($(".cart-right").css('top'));	// 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 ); 	
- 			$(window).scroll(function() {		// 현재 스크롤 위치를 가져온다.		
- 				var scrollTop = $(window).scrollTop();		
- 			var newPosition = scrollTop + floatPosition + "px"; 		
- 			  		
- 			$(".cart-right").stop().animate({			
- 				"top" : newPosition		
- 				}, 500); 	
- 				}).scroll(); 
- 		}
- 		*/
- 			
-		/*
-		시도1
-		$(document).ready(function(){
-			  var currentPosition = parseInt($(".cart-right").css("top"));
-			  $(window).scroll(function() {
-			    var position = $(window).scrollTop(); 
-			    $(".cart-right").stop().animate({"top":position+currentPosition+"px"},1000);
-			  });
-			});
-		*/
-	
 	</script>
 		
 	<!-- 글자수에 따라 증감 -->

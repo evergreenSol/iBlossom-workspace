@@ -38,13 +38,9 @@ hr { border-width: 1px 0px 0px 0px; }
         float: right;
         
         /* sticky*/
-        position: relative;
-        top: 20px;
-        right: 57%; 
-        margin-right:-670px;
-        /*position:absolute;
-        top: 200px;
-        */
+        position : sticky;
+        right: 2%; 
+        /*top: 20px;*/
     }
 
 	
@@ -450,8 +446,9 @@ hr { border-width: 1px 0px 0px 0px; }
         height: 100%;
         float: left;
         box-sizing: border-box;
+        
+        /* 스크롤바 */
         overflow: auto;
-
     }
 
     /* 오른쪽 섹션 */
@@ -460,10 +457,13 @@ hr { border-width: 1px 0px 0px 0px; }
         float: right;
         
         /* sticky*/
-        position: relative;
+        position : sticky;
         top: -30px;
-        right: 57%; 
-        margin-right:-670px;
+        right: 2%;
+        margin-right: 30px;
+        
+
+ 
     }
 
 	/*------------------------------------*/
@@ -759,9 +759,9 @@ hr { border-width: 1px 0px 0px 0px; }
     
     /* 전체 옵션 */
     .order-right-wrap {
-
     	background-color:white;
     	padding: 5px;
+    	margin-top: 10px;
     }
     
     /* 총 주문 금액, 배송비, 등급할인 */
