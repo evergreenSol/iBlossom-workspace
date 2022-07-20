@@ -59,9 +59,9 @@
 							<li><a href="subMemberListView.su">구독회원관리</a></li>
 							<li><a href="listView.sp">구독상품관리</a></li>
 						</ul></li>
-					<li><a href="list.pr" class="admin-navi-menu" style="font-weight: 700;"
-						>상품관리</a></li>
-					<li><a href="list.re" class="admin-navi-menu"  >리뷰관리</a></li>
+					<li><a href="list.pr" class="admin-navi-menu"
+						style="font-weight: 700;">상품관리</a></li>
+					<li><a href="list.re" class="admin-navi-menu">리뷰관리</a></li>
 					<li><a href="classList.ad " class="admin-navi-menu">클래스관리</a>
 						<ul class="admin-navi-ul">
 							<li><a href="classAddForm.ad">클래스 추가</a></li>
@@ -70,7 +70,7 @@
 					<li><a href="qnaList.ad" class="admin-navi-menu">고객센터관리</a>
 						<ul class="admin-navi-ul">
 							<li><a href="qnaList.ad">1:1 문의</a></li>
-							<li><a href="noticeList.ad">FAQ</a></li>
+							<li><a href="noticeList.ad">공지사항</a></li>
 						</ul></li>
 					<li><a href="https://dashboard.tawk.to/#/monitoring"
 						target="_blank" class="admin-navi-menu" id="admin-navi-chat">채팅관리</a></li>

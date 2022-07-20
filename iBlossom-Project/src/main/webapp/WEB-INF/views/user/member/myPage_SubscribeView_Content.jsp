@@ -194,16 +194,16 @@
 			
 			console.log(receiptId);
 			
-				console.log("클릭됨");
+				// console.log("클릭됨");
 		
 				$.ajax({
 					url : "cancelSubscribe.do",
 					type : "post",
 					success : function(data) {
-						console.log("스케줄러 중지");
+						// console.log("스케줄러 중지");
 						
 					}, error : function() {
-						console.log("cancelSubscribe fail");
+						// console.log("cancelSubscribe fail");
 					}
 				});
 				
@@ -215,18 +215,18 @@
 					type : "post",
 					success : function (result) {
 						
-							console.log("수정이 되었음");
-							console.log(result);
+							// console.log("수정이 되었음");
+							// console.log(result);
 							
 							refundPrice = result * subPrice;
-							console.log(refundPrice);
+							// console.log(refundPrice);
 						
 						$.ajax({
 							url : "goGetToken.do",
 							type : "post",
 							success : function(token) {
 								
-								console.log("token 생성됨 : " + token);
+								// console.log("token 생성됨 : " + token);
 								
 								$.ajax({
 									url : "cancelRequest.do",
@@ -246,9 +246,7 @@
 											},
 											type : "post",
 											success: function () {
-												setTimeout(function() {
 												location.reload();
-												},5000)
 											},
 											error : function () {
 												
@@ -257,19 +255,18 @@
 										});
 
 									}, error : function() {
-										console.log("안되면 집ㄱ");
 									}
 								});
 								
 								
 							}, error : function() {
-								console.log("토큰 생성 실패");
+								// console.log("토큰 생성 실패");
 							}
 						});
 						
 					},
 					error : function () {
-						console.log("실패");
+						// console.log("취소실패");
 					}
 					
 				});

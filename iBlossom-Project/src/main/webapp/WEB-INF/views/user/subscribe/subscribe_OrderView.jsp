@@ -513,7 +513,7 @@
 				numOfPay : numOfPay
 				},
 			success : function(data) {
-				alert("iBlossom 상품 구독 등록중 : 잠시만 대기해주시면 자동으로 진행됩니다");
+				alert("iBlossom 상품 구독 등록중 : 확인을 누르시고 잠시만 대기해주시면 자동으로 진행됩니다");
 				setTimeout(function() {
 					alert("iBlossom 상품 구독 등록 성공 : 매달 싱싱하고 예쁜 꽃을 보내드릴게요 :)");
 					location.href="subscribeView.me"	
