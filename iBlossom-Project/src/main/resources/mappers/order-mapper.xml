@@ -16,7 +16,6 @@
 		<result column="DELIVERY_STATUS" property="deliveryStatus"/><!-- 배송상태 -->
 		<result column="RECEIPT_ID" property="receiptId"/><!-- 결제번호 -->
 		<result column="THUMBNAIL" property="thumbnail"/> <!-- 대표사진 -->
-		<result column="DISCOUNT" property="discount"/> <!-- 할인금액 -->
 	</resultMap>
 	
 	
@@ -43,8 +42,7 @@
   							 , ORDER_STATUS
   							 , DELIVERY_STATUS
   							 , RECEIPT_ID
-  							 , THUMBNAIL
-  							 , DISCOUNT)
+  							 , THUMBNAIL)
   		VALUES(SEQ_ORDNO.NEXTVAL
 		     , #{userNo}
 		     , #{totalPrice}
@@ -57,7 +55,7 @@
 		     , #{deliveryStatus}
 		     , #{receiptId}
 		     , #{thumbnail}
-		     , #{discount})
+		     )
   	</insert>
   	
   	
@@ -81,7 +79,7 @@
 	
 	<select id="selectMyOrderList" parameterType="_int" resultMap="orderResultSet">
 		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE", TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", RECEIVE_USER, RECEIVE_PHONE, ORDER_ADDRESS
-  			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL, DISCOUNT
+  			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL
 		FROM ORDER_TBL
 		WHERE USER_NO = #{userNo}
 		  AND ORDER_STATUS = '결제완료'
@@ -92,7 +90,7 @@
 	
 	<select id="selectMyOrderCancelList" parameterType="_int" resultMap="orderResultSet">
 		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE", TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", RECEIVE_USER, RECEIVE_PHONE, ORDER_ADDRESS
-  			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL, DISCOUNT
+  			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL
 		FROM ORDER_TBL
 		WHERE USER_NO = #{userNo}
 		  AND ORDER_STATUS = '결제취소'
@@ -119,7 +117,7 @@
 	
 	<select id="selectMyOneOrder" parameterType="_int" resultMap="orderResultSet">
 		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE", TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", RECEIVE_USER, RECEIVE_PHONE, ORDER_ADDRESS
-  			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL, DISCOUNT
+  			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL
 		FROM ORDER_TBL
 		WHERE ORDER_NO = #{orderNo}
 	</select>
@@ -161,7 +159,7 @@
 	
 	<select id="selectMyOrderAllList" parameterType="_int" resultMap="orderResultSet">
 		SELECT ORDER_NO, USER_NO, TOTAL_PRICE, TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE", TO_CHAR(RECEIVE_DATE, 'YYYY-MM-DD') "RECEIVE_DATE", RECEIVE_USER, RECEIVE_PHONE, ORDER_ADDRESS
-  			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL, DISCOUNT
+  			 , POSTCODE, ORDER_STATUS, DELIVERY_STATUS, RECEIPT_ID, THUMBNAIL
 		FROM ORDER_TBL
 		WHERE USER_NO = #{userNo}
 		<!--[CDATA[

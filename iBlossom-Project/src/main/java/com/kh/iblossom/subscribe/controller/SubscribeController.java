@@ -175,7 +175,7 @@ public class SubscribeController {
 	
 	// 구독 중인 회원 검색 (관리자)
 	@RequestMapping("search.su")
-	public String subMemberSearch(@RequestParam(value="currentPage", defaultValue="1") int currentPage, String condition, String keyword, Model model) {
+	public String subMemberSearch(@RequestParam(value="cpage", defaultValue="1") int currentPage, String condition, String keyword, Model model) {
 		
 		HashMap<String, String> map = new HashMap<>();
 		map.put("condition", condition);
@@ -190,11 +190,9 @@ public class SubscribeController {
 		
 		PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, pageLimit, boardLimit);
 		
-		System.out.println(pi);
-		
 		// 조회 요청
 		ArrayList<Subscribe> list = subscribeService.selectSearchList(pi, map);
-		System.out.println(list);
+
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
 		
