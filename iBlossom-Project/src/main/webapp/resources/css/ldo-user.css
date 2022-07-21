@@ -17,8 +17,9 @@ input { outline:none;}
     /* 전체 */
     #cartMainOuter {
     	width: 1200px;
-        height: 2000px;
+        height: 1500px;
     	margin: auto;
+    	margin-bottom: 150px;
     }
      
     /* 왼쪽 섹션 */ 
