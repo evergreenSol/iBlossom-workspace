@@ -22,8 +22,8 @@ public class sendSMS {
 	@RequestMapping(value="sendOnedayClassMessage.do", produces="text/html; charset=UTF-8")
 	 public String sendOnedayClassMessage(HttpSession session, OnedayClass o) {
 		
-	    String api_key = "NCSJGXUBBQAKRK1P";
-	    String api_secret = "VMG2VLAJPBIAUAPIVNIHCPFOQKY8YZFE";
+	    String api_key = ""; // 발급받은 api
+	    String api_secret = ""; // 발급받은 api_seceret
 	    Message coolsms = new Message(api_key, api_secret);
 	    
 	    String phone = ((Member)session.getAttribute("loginUser")).getPhone();
@@ -49,8 +49,8 @@ public class sendSMS {
 	    // 4 params(to, from, type, text) are mandatory. must be filled
 	    HashMap<String, String> params = new HashMap<String, String>();
 	    params.put("to", phone);
-	    params.put("from", "01052735545");
-	    params.put("type", "LMS");
+	    params.put("from", ""); // 보내는 사람 번호
+	    params.put("type", "LMS"); // 장문의 경우 LMS
 	    params.put("text", text);
 	    params.put("app_version", "test app 1.2"); // application name and version
 
