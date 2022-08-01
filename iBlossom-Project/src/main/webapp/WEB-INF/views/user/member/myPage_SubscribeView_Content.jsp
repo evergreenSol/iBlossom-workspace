@@ -75,7 +75,7 @@
 	               </tr>
 	               
 	               <tr>
-	                   <th>주문상태</th>
+	                   <th>배송상태</th>
 	                   <td></td>
 	                   <td>${ list[i].deliverStatus }</td>
 	                   <td colspan="3" style="text-align: right; padding-right: 10px;"></td>
@@ -192,7 +192,7 @@
 			var receiptId = $(this).next().val()
 			$(this).attr("disabled", true);
 			
-			console.log(receiptId);
+			// console.log(receiptId);
 			
 				// console.log("클릭됨");
 		

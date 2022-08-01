@@ -133,12 +133,12 @@
               	                   },
               	                   success : function (result) {
               	                      alert("메일이 발송되었습니다. 확인해주세요.");
-              	                      console.log(result);
+              	                      
               	                      
               	                      key = result;
               	                   },
               	                   error: function () {
-              	                      console.log("실패");
+              	                      // console.log("실패");
               	                   }
               	                });
                 				
@@ -278,13 +278,7 @@
     });
     
     function validate() {
-       
-       console.log("이메일" + emailChk);
-       console.log("아이디" + idChk);
-       console.log("비번1" + pwdChk1);
-       console.log("비번2" + pwdChk2);
-       console.log("이름" + nameChk);
-       
+              
        
        if(emailChk * idChk * pwdChk1 * pwdChk2 * nameChk == 1) {
           return true;

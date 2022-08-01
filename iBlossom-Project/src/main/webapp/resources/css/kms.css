@@ -14,7 +14,7 @@
       .class-container {
         width: 1200px;
         margin:auto;
-        margin-top: 100px;
+        margin-top: 40px;
         margin-left: 50px;
 
     }
@@ -247,7 +247,7 @@
         height: 100%;
         margin: auto;
         margin-left: 350px;
-        margin-top: 80px;
+        margin-top: 40px;
     }
 
     /*공지 내용*/
@@ -272,7 +272,7 @@
      /*contact us 내용전체*/
      #contact{
         margin-left: 350px;
-        margin-top: 80px;
+        margin-top: 40px;
 
      }
 
@@ -310,7 +310,7 @@
     /*FAQ 전체 틀*/
     #faq{
         margin-left: 350px;
-        margin-top: 80px;
+        margin-top: 40px;
         height: 300px;
     }
 
@@ -379,7 +379,7 @@
 
     #answer-container{
     margin-left: 350px;
-    margin-top: 80px;
+    margin-top: 40px;
     height: 300px;
     }
 
@@ -709,7 +709,7 @@ height: 97%;
     padding : 0px;
    /* height : 100%;*/
     font-size: 16pt;
-    margin-top: 80px;
+    margin-top: 40px;
     position: absolute;
     left: 0px;
 }

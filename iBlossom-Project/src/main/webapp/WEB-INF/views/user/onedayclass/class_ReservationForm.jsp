@@ -161,6 +161,9 @@
     				},
     				error : function () {
     					
+    				},
+    				complete : function () {
+    					location.href='onedayClass.me';
     				}
     				
     			});

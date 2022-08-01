@@ -584,7 +584,7 @@ public class MemberController {
 			Member updateMem = memberService.login(m);
 			session.setAttribute("loginUser", updateMem);
 
-			session.setAttribute("alertMsg", "refund.me에서 결제취소가 되었습니다.");
+			session.setAttribute("alertMsg", "결제취소가 되었습니다.");
 			return "redirect:orderListView.me";
 		}
 		else {

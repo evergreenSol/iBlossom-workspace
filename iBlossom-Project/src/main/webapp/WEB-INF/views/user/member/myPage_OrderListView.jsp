@@ -213,11 +213,11 @@
 				console.log("클릭됨");
 				
 				var receiptId = $(this).next().val();
-				console.log("receipId=" + $(this).next().val());
-				console.log(receiptId)
+				//console.log("receipId=" + $(this).next().val());
+				//console.log(receiptId)
 				var refundPrice =$(this).next().next().val();
-				console.log(refundPrice);
-				console.log("refundPrice ="+ $(this).next().next().val());
+				//console.log(refundPrice);
+				//console.log("refundPrice ="+ $(this).next().next().val());
 				
 				
 				$.ajax({
@@ -252,8 +252,8 @@
 										success : function(result) {
 	
 											alert("결제가 취소되었습니다.");
-											console.log("이제 refund.me");
-											console.log(refundPrice);
+											//console.log("이제 refund.me");
+											//console.log(refundPrice);
 											
 											location.reload();
 										
