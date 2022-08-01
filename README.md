@@ -1,2 +1,2 @@
 # iBlossom-workspace
-Final Project : iBlossom-project
+KH정보교육원 Final Project : iBlossom-project
