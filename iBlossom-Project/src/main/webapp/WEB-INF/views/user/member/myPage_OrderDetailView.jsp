@@ -144,7 +144,7 @@
 							<tr>
 								<td>배 송 비</td>
 								<td></td>
-								<td><span>3000</span><span>원</span></td>
+								<td><span>3,000</span><span>원</span></td>
 							</tr>
 							<tr height="20"></tr>
 							<tr>
