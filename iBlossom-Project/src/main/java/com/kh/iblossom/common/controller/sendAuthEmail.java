@@ -43,8 +43,8 @@ public class sendAuthEmail {
 			
 		//메일 관련 정보 
 	        String host = "smtp.naver.com"; 
-	        final String username = "craft0427"; //네이버 이메일 주소중 @ naver.com 앞주소만 작성
-	        final String password = "solsol0618@"; //네이버 이메일 비밀번호를 작성
+	        final String username = ""; //네이버 이메일 주소중 @ naver.com 앞주소만 작성
+	        final String password = ""; //네이버 이메일 비밀번호를 작성
 	        int port=587;                      //네이버 STMP 포트 번호
 	        
 	        // 메일 내용
@@ -58,7 +58,7 @@ public class sendAuthEmail {
 	        String body = request.getParameter("body") + authKey 
 	        			+ "\r\n"
 	        			+ "\r\n" + "서울특별시 영등포구 선유동2로 57 이레빌딩 19층 iBlossom"
-	        		    + "\r\n" + "Tel: 010-5273-5545 / Email: craft0427@naver.com"
+	        		    + "\r\n" + "Tel:  / Email: "
 	        			+ "\r\n" + "© iBlossom | Time To Blossom ";
 	        
 	        
@@ -85,7 +85,7 @@ public class sendAuthEmail {
 	        session.setDebug(true); //for debug 
 	        
 	        Message mimeMessage = new MimeMessage(session); 
-	        mimeMessage.setFrom(new InternetAddress("craft0427@naver.com")); 
+	        mimeMessage.setFrom(new InternetAddress("______@naver.com")); // 자신의 아이디 작성
 	        mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient)); 
 	        mimeMessage.setSubject(subject); 
 	        mimeMessage.setText(body); 
@@ -114,8 +114,8 @@ public class sendAuthEmail {
 			}
 		//메일 관련 정보 
 	        String host = "smtp.naver.com"; 
-	        final String username = "craft0427"; //네이버 이메일 주소중 @ naver.com 앞주소만 작성
-	        final String password = "solsol0618@"; //네이버 이메일 비밀번호를 작성
+	        final String username = ""; //네이버 이메일 주소중 @ naver.com 앞주소만 작성
+	        final String password = ""; //네이버 이메일 비밀번호를 작성
 	        int port=587;                      //네이버 STMP 포트 번호
 	        
 	        // 메일 내용
@@ -157,7 +157,7 @@ public class sendAuthEmail {
 	        session.setDebug(true); //for debug 
 	        
 	        Message mimeMessage = new MimeMessage(session); 
-	        mimeMessage.setFrom(new InternetAddress("craft0427@naver.com")); 
+	        mimeMessage.setFrom(new InternetAddress("_____@naver.com")); // 자신의 아이디 작성
 	        mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient)); 
 	        mimeMessage.setSubject(subject); 
 	        mimeMessage.setText(body); 
@@ -178,8 +178,8 @@ public class sendAuthEmail {
 			
 		//메일 관련 정보 
 	        String host = "smtp.naver.com"; 
-	        final String username = "craft0427"; //네이버 이메일 주소중 @ naver.com 앞주소만 작성
-	        final String password = "solsol0618@"; //네이버 이메일 비밀번호를 작성
+	        final String username = ""; //네이버 이메일 주소중 @ naver.com 앞주소만 작성
+	        final String password = ""; //네이버 이메일 비밀번호를 작성
 	        int port=587;                      //네이버 STMP 포트 번호
 	        
 	        // 메일 내용
@@ -193,7 +193,7 @@ public class sendAuthEmail {
 	        String body = request.getParameter("body") + userId + request.getParameter("endBody")
 				        + "\r\n" 
 						+ "\r\n" + "서울특별시 영등포구 선유동2로 57 이레빌딩 19층 iBlossom"
-					    + "\r\n" + "Tel: 010-5273-5545 / Email: craft0427@naver.com"
+					    + "\r\n" + "Tel:  / Email: "
 						+ "\r\n" + "© iBlossom | Time To Blossom ";
 	        
 	        System.out.println(recipient);
@@ -219,7 +219,7 @@ public class sendAuthEmail {
 	        session.setDebug(true); //for debug 
 	        
 	        Message mimeMessage = new MimeMessage(session); 
-	        mimeMessage.setFrom(new InternetAddress("craft0427@naver.com")); 
+	        mimeMessage.setFrom(new InternetAddress("______@naver.com")); //자신의 아이디 작성
 	        mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient)); 
 	        mimeMessage.setSubject(subject); 
 	        mimeMessage.setText(body); 
