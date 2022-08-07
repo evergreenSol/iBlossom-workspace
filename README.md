@@ -41,6 +41,6 @@ KH정보교육원 Final Project : iBlossom-project
  - WAS: Apache Tomcat (8.5.78)
  - 협업프로그램: Slack
  - 형상관리: Github
- - API: 부트페이 API, 카카오
+ - API: 부트페이 API, 카카오 지도 API, 다음 주소 API, CoolSMS Api
  
 
