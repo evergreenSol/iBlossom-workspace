@@ -1,7 +1,7 @@
 # iBlossom-workspace
 KH정보교육원 Final Project : iBlossom-project
 
-참여자: 강민수, 김동현, 김한솔, 신혜진, 이다온, 지승아
+참여자: 강민수, 김동현, 김한솔(팀장), 신혜진, 이다온, 지승아
 
 1. 개요
 
